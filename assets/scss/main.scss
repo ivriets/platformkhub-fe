@@ -1,0 +1,109 @@
+$warna-body: #FAFAFA;
+$warna-utama: #212121;
+$warna-dua: #616161;
+$warna-tiga: #FDCE07;
+$warna-empat: #222659;
+$warna-lima: #129555;
+$warna-enam: #D10D0D;
+$warna-tujuh: #E0E0E0;
+$warna-font-tabel: #444444;
+
+$warna-under-review: #0013ff;
+$warna-draft: #ffc700;
+$warna-need-revision: #ff5c00;
+$warna-approved: #129555;
+$warna-declined: #d10d0d;
+
+body {
+    background-color: $warna-body;
+}
+
+.bg-warna-utama {
+    background: $warna-utama;
+}
+
+.bg-warna-dua {
+    background: $warna-dua;
+}
+
+.bg-warna-tiga {
+    background: $warna-tiga;
+}
+
+.bg-warna-empat {
+    background: $warna-empat;
+}
+
+.bg-warna-under-review {
+    background: $warna-under-review;
+}
+
+.bg-warna-draft {
+    background: $warna-draft;
+}
+
+.bg-warna-need-revision {
+    background: $warna-need-revision;
+}
+
+.bg-warna-approved {
+    background: $warna-approved;
+}
+
+.bg-warna-declined {
+    background: $warna-declined;
+}
+
+
+.text-warna-utama {
+    color: $warna-utama;
+}
+
+.text-warna-dua {
+    color: $warna-dua;
+}
+
+.text-warna-tiga {
+    color: $warna-tiga;
+}
+
+.text-warna-empat {
+    color: $warna-empat;
+}
+
+.text-warna-lima {
+    color: $warna-lima;
+}
+
+.text-warna-enam {
+    color: $warna-enam;
+}
+
+.text-warna-font-tabel {
+    color: $warna-font-tabel;
+}
+
+
+.border-warna-utama {
+    border-color: $warna-utama;
+}
+
+.border-warna-dua {
+    border-color: $warna-dua;
+}
+
+.border-warna-tiga {
+    border-color: $warna-tiga;
+}
+
+.border-warna-empat {
+    border-color: $warna-empat;
+}
+
+.border-warna-tujuh {
+    border-color: $warna-tujuh;
+}
+
+
+.fade-enter-active, .fade-leave-active { transition: opacity .5s; }
+.fade-enter, .fade-leave-active { opacity: 0; }
