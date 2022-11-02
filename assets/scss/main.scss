@@ -6,6 +6,8 @@ $warna-empat: #222659;
 $warna-lima: #129555;
 $warna-enam: #D10D0D;
 $warna-tujuh: #E0E0E0;
+$warna-delapan: #757575;
+$warna-sembilan: #3D3D3D;
 $warna-font-tabel: #444444;
 
 $warna-under-review: #0013ff;
@@ -77,6 +79,14 @@ body {
 
 .text-warna-enam {
     color: $warna-enam;
+}
+
+.text-warna-delapan {
+    color: $warna-delapan;
+}
+
+.text-warna-sembilan {
+    color: $warna-sembilan;
 }
 
 .text-warna-font-tabel {

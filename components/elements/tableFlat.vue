@@ -8,7 +8,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, index) in dataTable" :key="'dt'+index" class="hover:bg-gray-50">
+                    <tr v-for="(item, index) in dataTable" :key="'dt'+index" class="hover:bg-gray-50" @click="goto">
                         <td v-for="(x, index2) in masterTable" :key="index+'dt'+index2" scope="row" class="p-5">
                             <div v-if="x.value === 'emailIsVerified'">
                                 <img v-if="item[x.value] === true" class="h-[24px] w-[24px]" src="/icons/icon-status-acc.png" alt="icon-verified">
@@ -32,7 +32,7 @@
 
 <script>
 export default {
-    props: ['dataTable', 'masterTable'],
+    props: ['dataTable', 'masterTable', 'goto'],
     data() {
         return {
             

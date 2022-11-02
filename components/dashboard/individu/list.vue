@@ -43,6 +43,7 @@
             <ElementsTableFlat 
                 :dataTable="dataTable"
                 :masterTable="masterTable"
+                :goto="goto"
             />
         </div>
     </div>
@@ -165,6 +166,10 @@ export default {
 
         masterPoint() {
 
+        },
+
+        goto() {
+            this.$router.push('/verifications/individu/_id')
         }
     }
 }

@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-around">
-                        <highchart :options="pieChartOption" />
+                        <highchart :options="pieChartOption1" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-around">
-                        <highchart :options="pieChartOption" />
+                        <highchart :options="pieChartOption2" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
@@ -121,7 +121,7 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-around">
-                        <highchart :options="pieChartOption" />
+                        <highchart :options="pieChartOption1" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
@@ -160,7 +160,7 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-around">
-                        <highchart :options="pieChartOption" />
+                        <highchart :options="pieChartOption1" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
@@ -293,7 +293,7 @@
 export default {
     data() {
         return {
-            pieChartOption: {
+            pieChartOption1: {
                 chart: {
                     plotBackgroundColor: null,
                     plotBorderWidth: 0,
@@ -389,7 +389,104 @@ export default {
                         ]
                     }
                 ]
-            }
+            },
+            pieChartOption2: {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: 0,
+                    plotShadow: false,
+                    align:'right',
+                    height: '170',
+                    width: '170'
+                },
+                title: {
+                    text: '42',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 16
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                },
+                // accessibility: {
+                //     point: {
+                //         valueSuffix: '%'
+                //     }
+                // },
+                colors: [
+                    'rgba(0, 19, 255, 1)',
+                    'rgba(255, 199, 0, 1)',
+                    'rgba(255, 92, 0, 1)',
+                    'rgba(18, 149, 85, 1)',
+                    'rgba(209, 13, 13, 1)'
+                ],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            distance: -50,
+                            style: {
+                                fontWeight: 'bold',
+                                color: 'white'
+                            }
+                        },
+                        // startAngle: -90,
+                        // endAngle: 90,
+                        // center: ['50%', '75%'],
+                        size: '100%'
+                    },
+                },
+                series: [
+                    {
+                        type: 'pie',
+                        name: 'Event',
+                        innerSize: '75%',
+                        data: [
+                            {
+                                name: 'Under Review',
+                                y: 2,
+                                dataLabels: {
+                                    enabled: false
+                                }
+                            },
+                            {
+                                name: 'Draft',
+                                y: 0,
+                                dataLabels: {
+                                    enabled: false
+                                }
+                            },
+                            {
+                                name: 'Need Revision',
+                                y: 2,
+                                dataLabels: {
+                                    enabled: false
+                                }
+                            },
+                            {
+                                name: 'Approved',
+                                y: 38,
+                                dataLabels: {
+                                    enabled: false
+                                }
+                            },
+                            {
+                                name: 'Declined',
+                                y: 0,
+                                dataLabels: {
+                                    enabled: false
+                                }
+                            },
+                        ]
+                    }
+                ]
+            },
         }
     },
 }
