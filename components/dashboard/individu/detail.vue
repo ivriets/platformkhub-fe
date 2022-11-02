@@ -56,7 +56,6 @@
                                             <div>Facebook</div>
                                             <div>Instagram</div>
                                             <div>LinkedIn</div>
-                                            <div>Youtube</div>
                                         </div>
                                     </div>
                                 </div>
