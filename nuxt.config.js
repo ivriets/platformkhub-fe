@@ -45,8 +45,21 @@ export default {
   modules: [
     'cookie-universal-nuxt',
     '@nuxtjs/i18n',
+    '@nuxtjs/dayjs',
     'nuxt-highcharts',
   ],
+
+  dayjs: {
+    locales: ['id'],
+    defaultLocale: 'id',
+    defaultTimeZone: 'Asia/Jakarta',
+    plugins: [
+      'utc', // import 'dayjs/plugin/utc'
+      'timezone', // import 'dayjs/plugin/timezone'
+      'relativeTime',
+      'advancedFormat'
+    ] // Your Day.js plugin
+  },
 
   i18n: {
     strategy: 'no_prefix',

@@ -11,48 +11,40 @@
                         <img src="/images/logo.png" alt="main-image">
                     </div>
                 </div>
-                <div v-if="detailIndividu" class="col-span-8">
-                    <div class="text-xl font-bold text-warna-utama">{{ detailIndividu.nama }}</div>
+                <div v-if="detailOrganisasi" class="col-span-8">
+                    <div class="text-xl font-bold text-warna-utama">{{ detailOrganisasi.namaOrganisasi }}</div>
                     <hr class="border-warna-tujuh my-5">
                     <div class="grid grid-cols-8 gap-5">
                         <div class="col-span-4">
                             <div class="">
                                 <div class="flex items-start mb-4">
                                     <div class="text-sm text-warna-delapan font-semibold w-[180px]">User ID</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.userId }}</div>
+                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.organisasiId }}</div>
                                 </div>
                                 <div class="flex items-start mb-4">
                                     <div class="text-sm text-warna-delapan font-semibold w-[180px]">Name</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.nama }}</div>
+                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.namaOrganisasi }}</div>
                                 </div>
                                 <div class="flex items-start mb-4">
                                     <div class="text-sm text-warna-delapan font-semibold w-[180px]">Created</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ $dayjs(detailIndividu.created).format('DD MMM YYYY hh:mm A') }}</div>
+                                    <div class="text-sm text-warna-sembilan font-semibold">{{ $dayjs(detailOrganisasi.created).format('DD MMM YYYY hh:mm A') }}</div>
                                 </div>
                                 <div class="flex items-start mb-4">
                                     <div class="text-sm text-warna-delapan font-semibold w-[180px]">Updated</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ $dayjs(detailIndividu.updated).format('DD MMM YYYY hh:mm A') }}</div>
+                                    <div class="text-sm text-warna-sembilan font-semibold">{{ $dayjs(detailOrganisasi.updated).format('DD MMM YYYY hh:mm A') }}</div>
                                 </div>
                                 <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Email Verified</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.emailIsVerified === true ? 'Yes' : 'No' }}</div>
+                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Email</div>
+                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.email === true ? detailOrganisasi.email : '-' }}</div>
                                 </div>
                                 <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Account Verified</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.accountIsVerified === true ? 'Yes' : 'No' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Phone Verified</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.phoneIsVerified === true ? 'Yes' : 'No' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Sign Up Address</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.signUpAddress ? detailIndividu.signUpAddress : '-' }}</div>
+                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Phone</div>
+                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.phone === true ? detailOrganisasi.phone : '-' }}</div>
                                 </div>
                                 <div class="flex items-start mb-4">
                                     <div class="text-sm text-warna-delapan font-semibold w-[180px]">Social Media</div>
                                     <div class="text-sm text-warna-sembilan font-semibold">
-                                        <div v-for="(item, index) in detailIndividu.socialMedia" :key="index + 'sosmed'" class="mb-1">{{ item.label }}</div>
+                                        <div v-for="(item, index) in detailOrganisasi.socialMedia" :key="index + 'sosmed'" class="mb-1">{{ item.label }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -60,28 +52,12 @@
                         <div class="col-span-4">
                             <div class="">
                                 <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Organization</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.organization ? detailIndividu.organization : '-' }}</div>
+                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Total Member</div>
+                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.totalMember ? detailOrganisasi.totalMember : '-' }}</div>
                                 </div>
                                 <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Email</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.email ? detailIndividu.email : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Phone</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.phone ? detailIndividu.phone : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Institution</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.institution ? detailIndividu.institution : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Profession</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.profession ? detailIndividu.profession : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Gender</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.gender ? detailIndividu.gender : '-' }}</div>
+                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Website</div>
+                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.website ? detailOrganisasi.website : '-' }}</div>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +68,7 @@
         <div class="bg-white shadow-md rounded-xl p-6 mb-10">
             <div class="text-xl font-bold text-warna-utama">About Me</div>
             <hr class="border-warna-tujuh my-5">
-            <div class="text-sm text-warna-delapan">{{ detailIndividu.deskripsi }}</div>
+            <div class="text-sm text-warna-delapan">{{ detailOrganisasi.deskripsi }}</div>
         </div>
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
@@ -110,9 +86,9 @@
 export default {
     data() {
         return {
-            detailIndividu: {
-                userId: '51409978',
-                nama: 'Muhammad Nauval El Ghifari Saputra',
+            detailOrganisasi: {
+                organisasiId: '91123548',
+                namaOrganisasi: 'Kita Bhinneka Tunggal Ika',
                 created: new Date(),
                 updated: new Date(),
                 emailIsVerified: true,
@@ -141,12 +117,10 @@ export default {
                         url: ''
                     },
                 ],
-                organization: '',
-                email: 'nauvalelghifari@gmail.com',
+                email: 'kitabhinneka@gmail.com',
                 phone: '+6281283571474',
-                institution: 'I-KHUB BNPT',
-                profession: 'Researcher',
-                gender: 'Male',
+                totalMember: 102,
+                website: 'www.kitabhinnekatunggalika.com',
                 deskripsi: 'Nauval is currently in his final year as an International Relations student at Padjadjaran University with a strong curiosity and interest in Islamic Politics, Contemporary Islamic Movements (Salafism/Jihadism/Qutbism), Middle East Politics, Knowledge Production, and Critical Terrorism Studies. He has internship experience as a research assistant and publishing staff in various NGOs and research institutes, such as LP3ES, MAARIF Institute, & DASPR. He aspires to be an aspiring scientist who focuses on the interactions of religion, politics, state-society relations, and power relations.'
             }
         }
@@ -156,7 +130,7 @@ export default {
     },
     methods: {
         btnBack() {
-            this.$router.push('/verifications/individu')
+            this.$router.push('/verifications/organisasi')
         }
     },
 }
