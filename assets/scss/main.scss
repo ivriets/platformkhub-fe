@@ -3,25 +3,50 @@ $warna-utama: #212121;
 $warna-dua: #616161;
 $warna-tiga: #FDCE07;
 $warna-empat: #222659;
-$warna-lima: #129555;
-$warna-enam: #D10D0D;
 $warna-tujuh: #E0E0E0;
 $warna-delapan: #757575;
 $warna-sembilan: #3D3D3D;
 $warna-font-tabel: #444444;
 
-$warna-under-review: #0013ff;
+$warna-suspended: #1976D2;
 $warna-draft: #ffc700;
 $warna-need-revision: #ff5c00;
 $warna-approved: #129555;
-$warna-declined: #d10d0d;
+$warna-rejected: #D10D0D;
+$warna-need-verification: #E4BA08;
 
+
+/// BACKGROUND COLOR ///
 body {
     background-color: $warna-body;
 }
 
 .bg-warna-utama {
     background: $warna-utama;
+}
+
+.bg-warna-rejected {
+    background: $warna-rejected;
+}
+
+.bg-warna-approved {
+    background: $warna-approved;
+}
+
+.bg-warna-need-revision {
+    background: $warna-need-revision;
+}
+
+.bg-warna-suspended {
+    background: $warna-suspended;
+}
+
+.bg-warna-draft {
+    background: $warna-draft;
+}
+
+.bg-warna-need-verification {
+    background: $warna-need-verification;
 }
 
 .bg-warna-dua {
@@ -36,29 +61,34 @@ body {
     background: $warna-empat;
 }
 
-.bg-warna-under-review {
-    background: $warna-under-review;
-}
 
-.bg-warna-draft {
-    background: $warna-draft;
-}
-
-.bg-warna-need-revision {
-    background: $warna-need-revision;
-}
-
-.bg-warna-approved {
-    background: $warna-approved;
-}
-
-.bg-warna-declined {
-    background: $warna-declined;
-}
-
-
+/// TEXT COLOR ///
 .text-warna-utama {
     color: $warna-utama;
+}
+
+.text-rejected {
+    color: $warna-rejected
+}
+
+.text-approved {
+    color: $warna-approved
+}
+
+.text-need-revision {
+    color: $warna-need-revision;
+}
+
+.text-suspended {
+    color: $warna-suspended;
+}
+
+.text-draft {
+    color: $warna-draft;
+}
+
+.text-need-verification {
+    color: $warna-need-verification;
 }
 
 .text-warna-dua {
@@ -71,14 +101,6 @@ body {
 
 .text-warna-empat {
     color: $warna-empat;
-}
-
-.text-warna-lima {
-    color: $warna-lima;
-}
-
-.text-warna-enam {
-    color: $warna-enam;
 }
 
 .text-warna-delapan {
@@ -94,8 +116,33 @@ body {
 }
 
 
+/// BORDER COLOR ///
 .border-warna-utama {
     border-color: $warna-utama;
+}
+
+.border-rejected {
+    border-color: $warna-rejected
+}
+
+.border-approved {
+    border-color: $warna-approved
+}
+
+.border-need-revision {
+    border-color: $warna-need-revision;
+}
+
+.border-suspended {
+    border-color: $warna-suspended;
+}
+
+.border-draft {
+    border-color: $warna-draft;
+}
+
+.border-need-verification {
+    border-color: $warna-need-verification;
 }
 
 .border-warna-dua {

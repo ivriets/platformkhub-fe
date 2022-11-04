@@ -31,7 +31,7 @@
                         <highchart :options="pieChartOption1" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
+                                <div class="w-[11px] h-[11px] bg-warna-suspended rounded-full mr-2"></div>
                                 <div>5% - Under Review (2)</div>
                             </div>
                             <div class="flex items-center">
@@ -45,10 +45,6 @@
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-approved rounded-full mr-2"></div>
                                 <div>90% - Approved (38)</div>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-declined rounded-full mr-2"></div>
-                                <div>0% - Declined (0)</div>
                             </div>
                         </div>
                     </div>
@@ -70,7 +66,7 @@
                         <highchart :options="pieChartOption2" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
+                                <div class="w-[11px] h-[11px] bg-warna-suspended rounded-full mr-2"></div>
                                 <div>5% - Under Review (2)</div>
                             </div>
                             <div class="flex items-center">
@@ -84,10 +80,6 @@
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-approved rounded-full mr-2"></div>
                                 <div>90% - Approved (38)</div>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-declined rounded-full mr-2"></div>
-                                <div>0% - Declined (0)</div>
                             </div>
                         </div>
                     </div>
@@ -124,7 +116,7 @@
                         <highchart :options="pieChartOption1" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
+                                <div class="w-[11px] h-[11px] bg-warna-suspended rounded-full mr-2"></div>
                                 <div>5% - Under Review (2)</div>
                             </div>
                             <div class="flex items-center">
@@ -138,10 +130,6 @@
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-approved rounded-full mr-2"></div>
                                 <div>90% - Approved (38)</div>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-declined rounded-full mr-2"></div>
-                                <div>0% - Declined (0)</div>
                             </div>
                         </div>
                     </div>
@@ -163,7 +151,7 @@
                         <highchart :options="pieChartOption1" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
+                                <div class="w-[11px] h-[11px] bg-warna-suspended rounded-full mr-2"></div>
                                 <div>5% - Under Review (2)</div>
                             </div>
                             <div class="flex items-center">
@@ -177,10 +165,6 @@
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-approved rounded-full mr-2"></div>
                                 <div>90% - Approved (38)</div>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-declined rounded-full mr-2"></div>
-                                <div>0% - Declined (0)</div>
                             </div>
                         </div>
                     </div>
@@ -208,7 +192,7 @@
                     <div class="bg-white rounded-3xl shadow-md border border-gray-100 p-6">
                         <div class="flex items-center justify-between mb-4">
                             <div class="text-sm text-warna-dua">Session</div>
-                            <div class="bg-[#DFF7EB] text-warna-lima px-3 rounded font-semibold flex items-center">
+                            <div class="bg-[#DFF7EB] text-rejected px-3 rounded font-semibold flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 8l6 6H6z" fill="rgba(18,149,85,1)"/></svg>    
                                 <div>10</div>
                             </div>
@@ -218,7 +202,7 @@
                     <div class="bg-white rounded-3xl shadow-md border border-gray-100 p-6">
                         <div class="flex items-center justify-between mb-4">
                             <div class="text-sm text-warna-dua">Avg Session</div>
-                            <div class="bg-[#DFF7EB] text-warna-lima px-3 rounded font-semibold flex items-center">
+                            <div class="bg-[#DFF7EB] text-rejected px-3 rounded font-semibold flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 8l6 6H6z" fill="rgba(18,149,85,1)"/></svg>    
                                 <div>10</div>
                             </div>
@@ -378,14 +362,7 @@ export default {
                                 dataLabels: {
                                     enabled: false
                                 }
-                            },
-                            {
-                                name: 'Declined',
-                                y: 0,
-                                dataLabels: {
-                                    enabled: false
-                                }
-                            },
+                            }
                         ]
                     }
                 ]
@@ -475,14 +452,7 @@ export default {
                                 dataLabels: {
                                     enabled: false
                                 }
-                            },
-                            {
-                                name: 'Declined',
-                                y: 0,
-                                dataLabels: {
-                                    enabled: false
-                                }
-                            },
+                            }
                         ]
                     }
                 ]

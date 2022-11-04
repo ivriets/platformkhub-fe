@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto">
-        <DashboardEvent />
+        <DashboardEventList />
     </div>
 </template>
 

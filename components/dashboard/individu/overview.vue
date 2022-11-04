@@ -72,11 +72,11 @@
                             </div>
                             <div>
                                 <div class="text-warna-dua mb-2">Total User (Email is Verified)</div>
-                                <div class="text-[26px] text-warna-lima font-semibold">398</div>
+                                <div class="text-[26px] text-approved font-semibold">398</div>
                             </div>
                             <div>
                                 <div class="text-warna-dua mb-2">Total User (Email is Not Verified)</div>
-                                <div class="text-[26px] text-warna-enam font-semibold">1122</div>
+                                <div class="text-[26px] text-rejected font-semibold">1122</div>
                             </div>
                             <div>
                                 <div class="text-warna-dua mb-2">New User</div>

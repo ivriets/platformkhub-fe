@@ -15,10 +15,10 @@
                                 <img v-if="item[x.value] === false" class="h-[24px] w-[24px]" src="/icons/icon-status-need.png" alt="icon-need">
                             </div>
                             <div v-if="x.value === 'status'">
-                                <div v-if="item[x.value] === 'Accepted'" :class="item[x.value] === 'Accepted' ? 'text-warna-lima' : '' ">{{ item[x.value] }}</div>
-                                <div v-if="item[x.value] === 'Need Verification'" :class="item[x.value] === 'Need Verification' ? 'text-[#E4BA08]' : '' ">{{ item[x.value] }}</div>
-                                <div v-if="item[x.value] === 'Rejected'" :class="item[x.value] === 'Rejected' ? 'text-warna-enam' : '' ">{{ item[x.value] }}</div>
-                                <div v-if="item[x.value] === 'Suspended'" :class="item[x.value] === 'Suspended' ? 'text-[#C25D00]' : '' ">{{ item[x.value] }}</div>
+                                <div v-if="item[x.value] === 'Accepted'" :class="item[x.value] === 'Accepted' ? 'text-approved' : '' ">{{ item[x.value] }}</div>
+                                <div v-if="item[x.value] === 'Need Verification'" :class="item[x.value] === 'Need Verification' ? 'text-need-verification' : '' ">{{ item[x.value] }}</div>
+                                <div v-if="item[x.value] === 'Rejected'" :class="item[x.value] === 'Rejected' ? 'text-rejected' : '' ">{{ item[x.value] }}</div>
+                                <div v-if="item[x.value] === 'Suspended'" :class="item[x.value] === 'Suspended' ? 'text-suspended' : '' ">{{ item[x.value] }}</div>
                             </div>
                             <div v-if="!['emailIsVerified', 'status'].includes(x.value)" class="">{{ item[x.value] }}</div>
                         </td>

@@ -1,18 +1,24 @@
 <template>
-    <div class=" bg-[#212121] h-screen transition-all fixed overflow-y-auto overflow-x-hidden left-0 top-0 pt-16 text-white " :style="statusDrawer ? 'width:'+styleOpen : 'width:'+styleClose">
+    <div class=" bg-[#212121] h-screen transition-all fixed overflow-y-auto overflow-x-hidden left-0 top-0 pt-16 text-white" :style="statusDrawer ? 'width:'+styleOpen : 'width:'+styleClose">
         <!-- button -->
-        <div class="flex flex-col justify-between h-full">
+        <div class="flex flex-col justify-between h-full relative">
+            <div class="absolute top-10 right-[-15px]">
+                <div class="">
+                    <img v-if="this.statusDrawer" @click="btnToggle" class="flex items-center justify-end h-[24] w-[25] cursor-pointer" src="/icons/icon-toggle-close.png" alt="">
+                    <img v-if="!this.statusDrawer" @click="btnToggle" class="flex items-center justify-end h-[24] w-[25] cursor-pointer" src="/icons/icon-toggle-open.png" alt="">
+                </div>
+            </div>
             <div class="py-2">
                 <div v-for="(item, index) in listDrawer" :key="'drawer' + index">
                     <nuxt-link :to="item.path" :title="item.label">
-                        <div v-if="item.children.length === 0" class="px-4 cursor-pointer hover:bg-white/20">
-                            <div v-if="statusDrawer" class="flex items-center py-[10px]">
+                        <div v-if="item.children.length === 0 && statusDrawer" class="px-4 cursor-pointer hover:bg-white/20">
+                            <div class="flex items-center py-[10px]">
                                 <img class="h-[24px] w-[24px]" :src="item.icon" alt="icon-menu">
                                 <div class="ml-3">{{$t(item.label)}}</div>
                             </div>
                         </div>
                     </nuxt-link>
-                    <div v-if="item.children.length > 0" class="">
+                    <div v-if="item.children.length > 0 && statusDrawer" class="">
                         <!-- <client-only> -->
                             <ElementsCollaps :icon="item.icon" :title="$t(item.label)" :classTambahan="'px-4 cursor-pointer hover:bg-white/20'" :isDrawer="statusDrawer">
                                 <div v-for="(item2, index2) in item.children" :key="'childrendrawer' + index2" >
@@ -36,10 +42,6 @@
                     <img class="h-[24px] w-[24px]" src="/icons/icon-toggle.png" alt="icon-toggle">
                     <div v-if="statusDrawer" class="ml-3">Toolbar Toggle</div>
                 </div> -->
-                <div class="p-4">
-                    <img v-if="this.statusDrawer" @click="btnToggle" class="flex items-center justify-end z-50 h-[24] w-[25] cursor-pointer" src="/icons/icon-toggle-close.png" alt="">
-                    <img v-if="!this.statusDrawer" @click="btnToggle" class="flex items-center justify-end z-50 h-[24] w-[25] cursor-pointer" src="/icons/icon-toggle-open.png" alt="">
-                </div>
             </div>
         </div>
     </div>
