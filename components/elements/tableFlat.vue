@@ -15,10 +15,15 @@
                                 <img v-if="item[x.value] === false" class="h-[24px] w-[24px]" src="/icons/icon-status-need.png" alt="icon-need">
                             </div>
                             <div v-if="x.value === 'status'">
-                                <div v-if="item[x.value] === 'Accepted'" :class="item[x.value] === 'Accepted' ? 'text-approved' : '' ">{{ item[x.value] }}</div>
+                                <div v-if="item[x.value] === 'Accepted'" :class="item[x.value] === 'Accepted' ? 'text-approved-accepted' : '' ">{{ item[x.value] }}</div>
                                 <div v-if="item[x.value] === 'Need Verification'" :class="item[x.value] === 'Need Verification' ? 'text-need-verification' : '' ">{{ item[x.value] }}</div>
                                 <div v-if="item[x.value] === 'Rejected'" :class="item[x.value] === 'Rejected' ? 'text-rejected' : '' ">{{ item[x.value] }}</div>
                                 <div v-if="item[x.value] === 'Suspended'" :class="item[x.value] === 'Suspended' ? 'text-suspended' : '' ">{{ item[x.value] }}</div>
+
+                                <div v-if="item[x.value] === 'Approved'" :class="item[x.value] === 'Approved' ? 'text-approved-accepted' : '' ">{{ item[x.value] }}</div>
+                                <div v-if="item[x.value] === 'Need Revision'" :class="item[x.value] === 'Need Revision' ? 'text-need-revision' : '' ">{{ item[x.value] }}</div>
+                                <div v-if="item[x.value] === 'Draft'" :class="item[x.value] === 'Draft' ? 'text-draft' : '' ">{{ item[x.value] }}</div>
+                                <div v-if="item[x.value] === 'Under Review'" :class="item[x.value] === 'Under Review' ? 'text-under-review' : '' ">{{ item[x.value] }}</div>
                             </div>
                             <div v-if="!['emailIsVerified', 'status'].includes(x.value)" class="">{{ item[x.value] }}</div>
                         </td>

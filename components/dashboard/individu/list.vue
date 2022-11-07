@@ -12,8 +12,8 @@
             <div class="flex flex-grow">
                 <select name="filtertotalpage" id="filtertotalpage" class="w-[180px] outline-none border border-warna-empat rounded-md px-2 py-[6px] cursor-pointer">
                     <option value="10">10 row per page</option>
-                    <option value="20">20 row per page</option>
-                    <option value="50">50 row per page</option>
+                    <option value="20">50 row per page</option>
+                    <option value="50">100 row per page</option>
                 </select>
             </div>
             <div class="px-3 py-[6px] bg-warna-empat rounded-lg text-white flex items-center">
@@ -34,7 +34,7 @@
                     <div class="text-sm font-semibold text-[#757575]">Sort by:</div>
                     <select name="filtertotalpage" id="filtertotalpage" class="w-[120px] outline-none px-2 py-[6px] cursor-pointer">
                         <option value="10">Latest</option>
-                        <option value="20">7 days ago</option>
+                        <option value="20">Oldest</option>
                     </select>
                 </div>
             </div>
@@ -105,13 +105,13 @@ export default {
                 {
                     header: 'Email is Verified',
                     value: 'emailIsVerified',
-                    tipe: 'string',
+                    tipe: 'boolean',
                     display: true
                 },
                 {
                     header: 'Status',
                     value: 'status',
-                    tipe: 'boolean',
+                    tipe: 'string',
                     display: true
                 },
                 {

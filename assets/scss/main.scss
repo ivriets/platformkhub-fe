@@ -8,12 +8,16 @@ $warna-delapan: #757575;
 $warna-sembilan: #3D3D3D;
 $warna-font-tabel: #444444;
 
+$warna-need-verification: #E4BA08;
+$warna-rejected: #D10D0D;
 $warna-suspended: #1976D2;
+
 $warna-draft: #ffc700;
 $warna-need-revision: #ff5c00;
-$warna-approved: #129555;
-$warna-rejected: #D10D0D;
-$warna-need-verification: #E4BA08;
+$warna-approved-accepted: #129555;
+$warna-under-review: #8E7400;
+
+
 
 
 /// BACKGROUND COLOR ///
@@ -25,16 +29,12 @@ body {
     background: $warna-utama;
 }
 
+.bg-warna-need-verification {
+    background: $warna-need-verification;
+}
+
 .bg-warna-rejected {
     background: $warna-rejected;
-}
-
-.bg-warna-approved {
-    background: $warna-approved;
-}
-
-.bg-warna-need-revision {
-    background: $warna-need-revision;
 }
 
 .bg-warna-suspended {
@@ -45,8 +45,12 @@ body {
     background: $warna-draft;
 }
 
-.bg-warna-need-verification {
-    background: $warna-need-verification;
+.bg-warna-need-revision {
+    background: $warna-need-revision;
+}
+
+.bg-warna-approved-accepted {
+    background: $warna-approved-accepted;
 }
 
 .bg-warna-dua {
@@ -67,16 +71,16 @@ body {
     color: $warna-utama;
 }
 
+.text-need-verification {
+    color: $warna-need-verification;
+}
+
 .text-rejected {
     color: $warna-rejected
 }
 
-.text-approved {
-    color: $warna-approved
-}
-
-.text-need-revision {
-    color: $warna-need-revision;
+.text-approved-accepted {
+    color: $warna-approved-accepted
 }
 
 .text-suspended {
@@ -87,8 +91,12 @@ body {
     color: $warna-draft;
 }
 
-.text-need-verification {
-    color: $warna-need-verification;
+.text-under-review {
+    color: $warna-under-review;
+}
+
+.text-need-revision {
+    color: $warna-need-revision;
 }
 
 .text-warna-dua {
@@ -121,16 +129,16 @@ body {
     border-color: $warna-utama;
 }
 
+.border-need-verification {
+    border-color: $warna-need-verification;
+}
+
 .border-rejected {
     border-color: $warna-rejected
 }
 
-.border-approved {
-    border-color: $warna-approved
-}
-
-.border-need-revision {
-    border-color: $warna-need-revision;
+.border-approved-accepted {
+    border-color: $warna-approved-accepted
 }
 
 .border-suspended {
@@ -141,8 +149,12 @@ body {
     border-color: $warna-draft;
 }
 
-.border-need-verification {
-    border-color: $warna-need-verification;
+.border-need-revision {
+    border-color: $warna-need-revision;
+}
+
+.border-under-review {
+    border-color: $warna-under-review;
 }
 
 .border-warna-dua {

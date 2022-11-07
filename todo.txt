@@ -1,3 +1,7 @@
 folder middleware harus install cookie-universal-nuxt
 folder layouts > default.vue itu akan menjadi default page
 install sass sass-loader@10.1.1
+
+1. click nama program / nama organisasi baru masuk ke detail. bukan click row.
+2. dari detail program / organisasi kalo back larinya ke list, jangan ke overview.
+3. bandingkan overview individu dan overview organisasi. Total Rejected User vs Total Rejected Organization, karena panjang teks beda, jadi geser2 posisinya.

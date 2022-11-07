@@ -1,0 +1,60 @@
+<template>
+    <div class="rounded-3xl shadow-md bg-white">
+        <div class="grid grid-cols-4">
+            <div class="col-span-2">
+                <img src="/images/img-login.png" alt="image-login" width="400" class="rounded-l-3xl">
+            </div>
+            <div class="col-span-2 p-6">
+                <div class="mb-[35px] text-warna-utama">
+                    <div class="text-[26px] mb-3">Login</div>
+                    <div class="text-sm">Welcome back, please login to your account</div>
+                </div>
+                <div>
+                    <div class="mb-[10px] text-warna-utama">
+                        <div class="font-semibold mb-1">Email</div>
+                        <InputText 
+                            v-model="form.email"
+                            placeholder="Input Email"
+                            name="inputemail"
+                        />
+                    </div>
+                    <div class="mb-[28px] text-warna-utama">
+                        <div class="font-semibold mb-1">Password</div>
+                        <InputPassword 
+                            v-model="form.password"
+                            placeholder="Input Password"
+                            name="inputpassword"
+                        />
+                    </div>
+                    <button class="rounded-lg py-2 w-full bg-warna-empat text-white" @click="btnLogin">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<script>
+export default {
+    data() {
+        return {
+            form: {
+                email: '',
+                password: ''
+            }
+        }
+    },
+
+    mounted() {
+        
+    },
+
+    methods: {
+        btnLogin() {
+            this.$router.push('/')
+        }
+    },
+}
+</script>

@@ -1,13 +1,7 @@
 <template>
-    <div class=" bg-[#212121] h-screen transition-all fixed overflow-y-auto overflow-x-hidden left-0 top-0 pt-16 text-white" :style="statusDrawer ? 'width:'+styleOpen : 'width:'+styleClose">
+    <div class=" bg-[#212121] h-screen transition-all fixed overflow-y-auto left-0 top-0 pt-16 text-white" :style="statusDrawer ? 'width:'+styleOpen : 'width:'+styleClose">
         <!-- button -->
-        <div class="flex flex-col justify-between h-full relative">
-            <div class="absolute top-10 right-[-15px]">
-                <div class="">
-                    <img v-if="this.statusDrawer" @click="btnToggle" class="flex items-center justify-end h-[24] w-[25] cursor-pointer" src="/icons/icon-toggle-close.png" alt="">
-                    <img v-if="!this.statusDrawer" @click="btnToggle" class="flex items-center justify-end h-[24] w-[25] cursor-pointer" src="/icons/icon-toggle-open.png" alt="">
-                </div>
-            </div>
+        <div class="flex flex-col justify-between h-full">
             <div class="py-2">
                 <div v-for="(item, index) in listDrawer" :key="'drawer' + index">
                     <nuxt-link :to="item.path" :title="item.label">
@@ -156,10 +150,10 @@ export default {
             // this.$store.commit('setDrawer', false)
         },
 
-        btnToggle() {
-            const toggle = !this.statusDrawer
-            this.$store.commit('setDrawer', toggle);
-        }
+        // btnToggle() {
+        //     const toggle = !this.statusDrawer
+        //     this.$store.commit('setDrawer', toggle);
+        // }
     },
 }
 </script>

@@ -72,7 +72,7 @@
                             </div>
                             <div>
                                 <div class="text-warna-dua mb-2">Total User (Email is Verified)</div>
-                                <div class="text-[26px] text-approved font-semibold">398</div>
+                                <div class="text-[26px] text-approved-accepted font-semibold">398</div>
                             </div>
                             <div>
                                 <div class="text-warna-dua mb-2">Total User (Email is Not Verified)</div>

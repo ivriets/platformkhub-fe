@@ -43,7 +43,7 @@
                                 <div>5% - Need Revision (1)</div>
                             </div>
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-approved rounded-full mr-2"></div>
+                                <div class="w-[11px] h-[11px] bg-warna-approved-accepted rounded-full mr-2"></div>
                                 <div>90% - Approved (38)</div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                                 <div>5% - Need Revision (1)</div>
                             </div>
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-approved rounded-full mr-2"></div>
+                                <div class="w-[11px] h-[11px] bg-warna-approved-accepted rounded-full mr-2"></div>
                                 <div>90% - Approved (38)</div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                                 <div>5% - Need Revision (1)</div>
                             </div>
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-approved rounded-full mr-2"></div>
+                                <div class="w-[11px] h-[11px] bg-warna-approved-accepted rounded-full mr-2"></div>
                                 <div>90% - Approved (38)</div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                                 <div>5% - Need Revision (1)</div>
                             </div>
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-approved rounded-full mr-2"></div>
+                                <div class="w-[11px] h-[11px] bg-warna-approved-accepted rounded-full mr-2"></div>
                                 <div>90% - Approved (38)</div>
                             </div>
                         </div>

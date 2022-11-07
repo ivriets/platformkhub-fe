@@ -67,11 +67,11 @@
                     <div class="">
                         <div class="text-center grid grid-cols-1 gap-y-10">
                             <div>
-                                <div class="text-warna-dua mb-2">Total User</div>
+                                <div class="text-warna-dua mb-2">Total Organization</div>
                                 <div class="text-[26px] text-warna-utama font-semibold">1520</div>
                             </div>
                             <div>
-                                <div class="text-warna-dua mb-2">New User</div>
+                                <div class="text-warna-dua mb-2">New Organization</div>
                                 <div class="text-[26px] text-warna-empat font-semibold">0</div>
                             </div>
                         </div>
