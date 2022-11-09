@@ -1,5 +1,5 @@
 <template>
     <div>
-        headline
+        category list
     </div>
 </template>

@@ -20,7 +20,7 @@ export default {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
         title() {
-            return this.$t('Produk')
+            return this.$t('Publikasi')
         }
     },
     watch: {

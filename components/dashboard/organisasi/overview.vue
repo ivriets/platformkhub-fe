@@ -8,7 +8,7 @@
                             <img class="h-[102px] w-[102px]" src="/icons/individu/icon-verified.png" alt="icon-verified">
                         </div>
                         <div class="text-center">
-                            <div class="text-[45px] text-warna-utama">199</div>
+                            <div class="text-[45px] text-warna-utama">11</div>
                             <div class="text-warna-dua">Account Verified</div>
                         </div>
                     </div>
@@ -20,8 +20,8 @@
                             <img class="h-[102px] w-[102px]" src="/icons/individu/icon-rejected.png" alt="icon-rejected">
                         </div>
                         <div class="text-center">
-                            <div class="text-[45px] text-warna-utama">199</div>
-                            <div class="text-warna-dua">Total Rejected Organization</div>
+                            <div class="text-[45px] text-warna-utama">2</div>
+                            <div class="text-warna-dua">Total Rejected<br>Organization</div>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                             <img class="h-[102px] w-[102px]" src="/icons/individu/icon-need.png" alt="icon-need">
                         </div>
                         <div class="text-center">
-                            <div class="text-[45px] text-warna-utama">199</div>
+                            <div class="text-[45px] text-warna-utama">2</div>
                             <div class="text-warna-dua">Need Verification</div>
                         </div>
                     </div>
@@ -56,8 +56,8 @@
                             <img class="h-[102px] w-[102px]" src="/icons/individu/icon-suspended.png" alt="icon-suspended">
                         </div>
                         <div class="text-center">
-                            <div class="text-[45px] text-warna-utama">199</div>
-                            <div class="text-warna-dua">Total Suspended Organization</div>
+                            <div class="text-[45px] text-warna-utama">1</div>
+                            <div class="text-warna-dua">Total Suspended<br> Organization</div>
                         </div>
                     </div>
                 </div>

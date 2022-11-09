@@ -5,7 +5,7 @@
                 :listTab="listTab"
                 :selectedTab="selectedTab"
             />
-            <DashboardOrganisasiOverview />
+            <DashboardOrganisasiList />
         </div>
     </div>
 </template>
@@ -15,7 +15,7 @@
 export default {
     data() {
         return {
-            selectedTab: 'overview',
+            selectedTab: 'organisasilist',
             listTab: [
                 {
                     id: 'overview',
@@ -28,36 +28,6 @@ export default {
                     url: '/verifications/organisasi/organisasi-list'
                 }
             ]
-        }
-    },
-
-    computed: {
-        lang() {
-            return this.$i18n.locale
-        },
-        bahasa() {
-            return this.$i18n.locale === 'id' ? 0 : 1
-        },
-        title() {
-            return this.$t('Verifikasi Organisasi')
-        }
-    },
-    watch: {
-        lang() {
-            this.initialize()
-        }
-    },
-    mounted() {
-        this.initialize()
-    },
-    head() {
-        return{
-            title: this.title
-        }
-    },
-    methods: {
-        initialize() {
-            this.$store.commit('setPageTitle', this.title)
         }
     },
 }

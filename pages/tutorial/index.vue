@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto">
-        <DashboardHeadline />
+        <DashboardTutorial />
     </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
         title() {
-            return this.$t('Headline')
+            return this.$t('Tutorial')
         }
     },
     watch: {

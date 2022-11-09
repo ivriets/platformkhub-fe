@@ -41,82 +41,45 @@
                 </div>
             </div>
             <div class="grid grid-cols-12 gap-5">
-                <div class="col-span-4">
-                    <div class="w-full bg-gray-50 rounded-xl ">
+                <div class="col-span-12 lg:col-span-4">
+                    <div class="w-full bg-white shadow-md border border-gray-50 rounded-xl ">
                         <img src="/images/logo.png" alt="main-image">
                     </div>
                 </div>
-                <div v-if="detailIndividu" class="col-span-8">
+                <div v-if="detailIndividu" class="col-span-12 lg:col-span-8">
                     <div class="text-xl font-bold text-warna-utama">{{ detailIndividu.nama }}</div>
                     <hr class="border-warna-tujuh my-5">
                     <div class="grid grid-cols-8 gap-5">
                         <div class="col-span-4">
-                            <div class="">
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">User ID</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.userId }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Name</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.nama }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Created</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ $dayjs(detailIndividu.created).format('DD MMM YYYY hh:mm A') }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Updated</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ $dayjs(detailIndividu.updated).format('DD MMM YYYY hh:mm A') }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Email Verified</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.emailIsVerified === true ? 'Yes' : 'No' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Account Verified</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.accountIsVerified === true ? 'Yes' : 'No' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Phone Verified</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.phoneIsVerified === true ? 'Yes' : 'No' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Sign Up Address</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.signUpAddress ? detailIndividu.signUpAddress : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Social Media</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">
-                                        <div v-for="(item, index) in detailIndividu.socialMedia" :key="index + 'sosmed'" class="mb-1">{{ item.label }}</div>
+                            <div v-for="(item1, index1) in dataLabel" :key="'datalabel' + index1" v-show="item1.posisi==='kiri'" class="grid grid-cols-12 mb-4 break-words">
+                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
+                                <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
+                                    <div v-if="['created', 'updated'].includes(item1.value)" class="">
+                                        {{ $dayjs(detailIndividu[item1.value]).format('DD MMM YYYY hh:mm A') }}
+                                    </div>
+                                    <div v-else-if="['emailIsVerified', 'accountIsVerified'].includes(item1.value)">
+                                        {{ detailIndividu[item1.value] === true ? 'Yes' : 'No' }}
+                                    </div>
+                                    <div v-else>
+                                        {{ detailIndividu[item1.value] }}
                                     </div>
                                 </div>
                             </div>
+                            <div v-for="(item2, index2) in detailIndividu.socialMedia" :key="'datasosmed' + index2" class="grid grid-cols-12 mb-4 break-words">
+                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item2.kategoriSosialMedia }}</div>
+                                <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">{{ item2.linkSosialMedia ? item2.linkSosialMedia : '-' }}</div>
+                            </div>
                         </div>
                         <div class="col-span-4">
-                            <div class="">
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Organization</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.organization ? detailIndividu.organization : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Email</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.email ? detailIndividu.email : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Phone</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.phone ? detailIndividu.phone : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Institution</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.institution ? detailIndividu.institution : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Profession</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.profession ? detailIndividu.profession : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Gender</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailIndividu.gender ? detailIndividu.gender : '-' }}</div>
+                            <div v-for="(item1, index1) in dataLabel" :key="'dL' + index1" v-show="item1.posisi==='kanan'" class="grid grid-cols-12 mb-4 break-words">
+                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
+                                <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
+                                    <div v-if="['created', 'updated'].includes(item1.value)" class="">
+                                        {{ detailIndividu[item1.value] }}
+                                    </div>
+                                    <div v-else>
+                                        {{ detailIndividu[item1.value] }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +97,7 @@
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
                 <div class="flex gap-x-6  font-semibold">
                     <div class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
-                    <div class="px-8 py-2 bg-warna-approved rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
+                    <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
             </div>
         </div>
@@ -147,6 +110,73 @@ export default {
         return {
             flagDrop: false,
             selectedFlag: 'indonesia',
+            dataLabel: [
+                {
+                    label: 'User ID',
+                    value: 'userId',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Name',
+                    value: 'nama',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Created',
+                    value: 'created',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Updated',
+                    value: 'updated',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Email Verified',
+                    value: 'emailIsVerified',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Account Verified',
+                    value: 'accountIsVerified',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Sign Up Address',
+                    value: 'signUpAddress',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Organization',
+                    value: 'organization',
+                    posisi: 'kanan'
+                },
+                {
+                    label: 'Email',
+                    value: 'email',
+                    posisi: 'kanan'
+                },
+                {
+                    label: 'Phone',
+                    value: 'phone',
+                    posisi: 'kanan'
+                },
+                {
+                    label: 'Institution',
+                    value: 'institution',
+                    posisi: 'kanan'
+                },
+                {
+                    label: 'Profession',
+                    value: 'profession',
+                    posisi: 'kanan'
+                },
+                {
+                    label: 'Gender',
+                    value: 'gender',
+                    posisi: 'kanan'
+                },
+            ],
             detailIndividu: {
                 userId: '51409978',
                 nama: 'Muhammad Nauval El Ghifari Saputra',
@@ -154,28 +184,27 @@ export default {
                 updated: new Date(),
                 emailIsVerified: true,
                 accountIsVerified: false,
-                phoneIsVerified: false,
                 signUpAddress: '119.18.122.3',
                 socialMedia: [
                     {
                         id: 'sosmed-01',
-                        label: 'Facebook',
-                        url: ''
+                        kategoriSosialMedia: 'Instragram',
+                        linkSosialMedia: 'https://www.instagram.com/khub.id'
                     },
                     {
                         id: 'sosmed-02',
-                        label: 'Twitter',
-                        url: ''
+                        kategoriSosialMedia: 'Facebook',
+                        linkSosialMedia: 'https://www.facebook.com/PeaceGenID/'
                     },
                     {
                         id: 'sosmed-03',
-                        label: 'Youtube',
-                        url: ''
+                        kategoriSosialMedia: 'Youtube',
+                        linkSosialMedia: 'https://www.youtube.com/PeaceGenID/'
                     },
                     {
                         id: 'sosmed-04',
-                        label: 'Instagram',
-                        url: ''
+                        kategoriSosialMedia: 'Twitter',
+                        linkSosialMedia: ''
                     },
                 ],
                 organization: '',

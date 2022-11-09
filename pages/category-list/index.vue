@@ -1,16 +1,15 @@
 <template>
-  <div>
     <div class="container mx-auto">
-        <ElementsPagesMenuDashboard />
+        <DashboardCategoryList />
     </div>
-  </div>
 </template>
+
 
 <script>
 export default {
     data() {
         return {
-            
+
         }
     },
     computed: {
@@ -21,7 +20,7 @@ export default {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
         title() {
-            return this.$t('Dasbor')
+            return this.$t('Category List')
         }
     },
     watch: {

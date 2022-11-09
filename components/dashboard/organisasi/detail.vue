@@ -2,7 +2,8 @@
     <div class="py-[80px]">
         <div class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
             <div class="flex items-start justify-between mb-6">
-                <div class="px-6 py-2 bg-warna-need-verification rounded-3xl text-white ">Need Verification</div>
+                <div v-if="detailOrganisasi.statusVerification.id === 1" class="px-6 py-2 bg-warna-need-verification rounded-3xl text-white ">{{ detailOrganisasi.statusVerification.nama[0] }}</div>
+                <div v-if="detailOrganisasi.statusVerification.id === 3" class="px-6 py-2 bg-warna-approved-accepted rounded-3xl text-white ">{{ detailOrganisasi.statusVerification.nama[0] }}</div>
                 <div class="inline-flex flex-col">
                     <div>
                         <button @click="toggleDrop" class="flex items-center text-sm text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:shadow-solid">
@@ -41,76 +42,128 @@
                 </div>
             </div>
             <div class="grid grid-cols-12 gap-5">
-                <div class="col-span-4">
-                    <div class="w-full bg-gray-50 rounded-xl ">
+                <div class="col-span-12 lg:col-span-4">
+                    <div class="w-full bg-white shadow-md border border-gray-50 rounded-xl ">
                         <img src="/images/logo.png" alt="main-image">
                     </div>
+                    <hr class="border-warna-tujuh mt-6 mb-5">
+                    <div class="">
+                        <div class="mb-5 text-sm text-warna-delapan font-semibold">Location</div>
+                        <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.lokasiOrganisasi }}</div>
+                    </div>
+                    <hr class="border-warna-tujuh mt-6 mb-5">
+                    <ElementsFotoNama 
+                        :label="'Internal Branch'"
+                        :jumlah="detailOrganisasi.organisasiCabangInternal.length !== 0 ? detailOrganisasi.organisasiCabangInternal.length : 0"
+                        :fromData="detailOrganisasi.organisasiCabangInternal"
+                        :clickMore="''"
+                        :identitas="'organisasi'"
+                    />
+                    <hr class="border-warna-tujuh mt-6 mb-5">
+                    <ElementsFotoNama 
+                        :label="'Requested by Individu'"
+                        :jumlah="detailOrganisasi.requestByIndividu.length !== 0 ? detailOrganisasi.requestByIndividu.length : 0"
+                        :fromData="detailOrganisasi.requestByIndividu"
+                        :clickMore="''"
+                        :identitas="'individu'"
+                    />
+                    <hr class="border-warna-tujuh mt-6 mb-5">
+                    <ElementsFotoNama 
+                        :label="'Team Member'"
+                        :jumlah="detailOrganisasi.teamMember.length !== 0 ? detailOrganisasi.teamMember.length : 0"
+                        :fromData="detailOrganisasi.teamMember"
+                        :clickMore="''"
+                        :identitas="'individu'"
+                    />
+                    <hr class="border-warna-tujuh mt-6 mb-5">
+                    <ElementsFotoNama 
+                        :label="'Internal Partner'"
+                        :jumlah="detailOrganisasi.partnerOrganisasiInternal.length !== 0 ? detailOrganisasi.partnerOrganisasiInternal.length : 0"
+                        :fromData="detailOrganisasi.partnerOrganisasiInternal"
+                        :clickMore="''"
+                        :identitas="'organisasi'"
+                    />
                 </div>
-                <div v-if="detailOrganisasi" class="col-span-8">
+                <div v-if="detailOrganisasi" class="col-span-12 lg:col-span-8">
                     <div class="text-xl font-bold text-warna-utama">{{ detailOrganisasi.namaOrganisasi }}</div>
                     <hr class="border-warna-tujuh my-5">
                     <div class="grid grid-cols-8 gap-5">
                         <div class="col-span-4">
-                            <div class="">
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">User ID</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.organisasiId }}</div>
+                            <div v-for="(item1, index1) in dataLabel" :key="'datalabel' + index1" v-show="item1.posisi==='kiri'" class="grid grid-cols-12 mb-4 break-words gap-1">
+                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
+                                <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
+                                    <div v-if="['created', 'updated'].includes(item1.value)" class="">
+                                        {{ $dayjs(detailOrganisasi[item1.value]).format('DD MMM YYYY hh:mm A') }}
+                                    </div>
+                                    <div v-else-if="['emailIsVerified', 'accountIsVerified'].includes(item1.value)">
+                                        {{ detailOrganisasi[item1.value] === true ? 'Yes' : 'No' }}
+                                    </div>
+                                    <div v-else>
+                                        {{ detailOrganisasi[item1.value] }}
+                                    </div>
                                 </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Name</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.namaOrganisasi }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Created</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ $dayjs(detailOrganisasi.created).format('DD MMM YYYY hh:mm A') }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Updated</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ $dayjs(detailOrganisasi.updated).format('DD MMM YYYY hh:mm A') }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Email</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.email === true ? detailOrganisasi.email : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Phone</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.phone === true ? detailOrganisasi.phone : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Social Media</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">
-                                        <div v-for="(item, index) in detailOrganisasi.socialMedia" :key="index + 'sosmed'" class="mb-1">{{ item.label }}</div>
+                            </div>
+                            <div v-for="(item2, index2) in detailOrganisasi.socialMedia" :key="'datasosmed' + index2" class="grid grid-cols-12 mb-4 break-words gap-1">
+                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item2.kategoriSosialMedia }}</div>
+                                <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">{{ item2.linkSosialMedia ? item2.linkSosialMedia : '-' }}</div>
+                            </div>
+                        </div>
+                        <div class="col-span-4">
+                            <div v-for="(item1, index1) in dataLabel" :key="'dL' + index1" v-show="item1.posisi==='kanan'" class="grid grid-cols-12 mb-4 break-words">
+                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
+                                <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
+                                    <div v-if="['created', 'updated'].includes(item1.value)" class="">
+                                        {{ detailOrganisasi[item1.value] }}
+                                    </div>
+                                    <div v-else>
+                                        {{ detailOrganisasi[item1.value] }}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-span-4">
-                            <div class="">
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Total Member</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.totalMember ? detailOrganisasi.totalMember : '-' }}</div>
-                                </div>
-                                <div class="flex items-start mb-4">
-                                    <div class="text-sm text-warna-delapan font-semibold w-[180px]">Website</div>
-                                    <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.website ? detailOrganisasi.website : '-' }}</div>
-                                </div>
-                            </div>
+                    </div>
+                    <hr class="border-warna-tujuh mb-5">
+                    <div class="grid grid-cols-12 gap-y-1">
+                        <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Organization Type</div>
+                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
+                            <div v-for="(item, index) in detailOrganisasi.typeOrganisasi" :key="'tipeorganisasi' + index" class="mb-4">{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</div>
                         </div>
+                        <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Approach Type</div>
+                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
+                            <div v-for="(item, index) in detailOrganisasi.typeApproach" :key="'tipeapproach' + index" class="mb-4">{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</div>
+                        </div>
+                        <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Topic</div>
+                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
+                            <div v-for="(item, index) in detailOrganisasi.typeIssues" :key="'tipeissues' + index" class="mb-4">{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</div>
+                        </div>
+                    </div>
+                    <hr class="border-warna-tujuh mb-5">
+                    <div class="mb-5">
+                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Highlight</div>
+                        <div class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? detailOrganisasi.highlight[0] : detailOrganisasi.highlight[1] }}</div>
+                    </div>
+                    <hr class="border-warna-tujuh mb-5">
+                    <div class="mb-[36px]">
+                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Description</div>
+                        <div class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? detailOrganisasi.deskripsi[0] : detailOrganisasi.deskripsi[1] }}</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-warna-delapan font-semibold mb-[30px]">Milestone</div>
+                        <div class="text-sm text-warna-sembilan font-semibold text-center">On Going...</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="bg-white shadow-md rounded-xl p-6 mb-10">
-            <div class="text-xl font-bold text-warna-utama">About Me</div>
-            <hr class="border-warna-tujuh my-5">
-            <div class="text-sm text-warna-delapan">{{ detailOrganisasi.deskripsi }}</div>
-        </div>
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div class="flex gap-x-6  font-semibold">
+                <div v-if="detailOrganisasi.statusVerification.id === 1" class="flex gap-x-6  font-semibold">
                     <div class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
-                    <div class="px-8 py-2 bg-warna-approved rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
+                    <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
+                </div>
+                <div v-if="detailOrganisasi.statusVerification.id === 3" class="flex gap-x-6  font-semibold">
+                    <div class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
+                    <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
             </div>
         </div>
@@ -123,42 +176,295 @@ export default {
         return {
             flagDrop: false,
             selectedFlag: 'indonesia',
+            dataLabel: [
+                {
+                    label: 'Organization ID',
+                    value: 'organisasiId',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Name',
+                    value: 'namaOrganisasi',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Created',
+                    value: 'created',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Updated',
+                    value: 'updated',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Email',
+                    value: 'email',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Phone',
+                    value: 'phone',
+                    posisi: 'kiri'
+                },
+                {
+                    label: 'Total Member',
+                    value: 'totalMember',
+                    posisi: 'kanan'
+                },
+                {
+                    label: 'Website',
+                    value: 'website',
+                    posisi: 'kanan'
+                },
+                {
+                    label: 'Mission Statement',
+                    value: 'missionStatement',
+                    posisi: 'kanan'
+                },
+            ],
             detailOrganisasi: {
                 organisasiId: '91123548',
-                namaOrganisasi: 'Kita Bhinneka Tunggal Ika',
+                namaOrganisasi: 'Peace Generation Indonesia',
                 created: new Date(),
                 updated: new Date(),
                 emailIsVerified: true,
                 accountIsVerified: false,
                 phoneIsVerified: false,
                 signUpAddress: '119.18.122.3',
+                statusVerification: {
+                    id: 3,
+                    nama: [
+                        'Accepted',
+                        'Accepted'
+                    ]
+                },
                 socialMedia: [
                     {
                         id: 'sosmed-01',
-                        label: 'Facebook',
-                        url: ''
+                        kategoriSosialMedia: 'Instragram',
+                        linkSosialMedia: 'https://www.instagram.com/khub.id'
                     },
                     {
                         id: 'sosmed-02',
-                        label: 'Twitter',
-                        url: ''
+                        kategoriSosialMedia: 'Facebook',
+                        linkSosialMedia: 'https://www.facebook.com/PeaceGenID/'
                     },
                     {
                         id: 'sosmed-03',
-                        label: 'Youtube',
-                        url: ''
+                        kategoriSosialMedia: 'Youtube',
+                        linkSosialMedia: 'https://www.youtube.com/PeaceGenID/'
                     },
                     {
                         id: 'sosmed-04',
-                        label: 'Instagram',
-                        url: ''
+                        kategoriSosialMedia: 'Twitter',
+                        linkSosialMedia: ''
                     },
                 ],
-                email: 'kitabhinneka@gmail.com',
+                email: 'admin@peacegen.id',
                 phone: '+6281283571474',
                 totalMember: 102,
-                website: 'www.kitabhinnekatunggalika.com',
-                deskripsi: 'Nauval is currently in his final year as an International Relations student at Padjadjaran University with a strong curiosity and interest in Islamic Politics, Contemporary Islamic Movements (Salafism/Jihadism/Qutbism), Middle East Politics, Knowledge Production, and Critical Terrorism Studies. He has internship experience as a research assistant and publishing staff in various NGOs and research institutes, such as LP3ES, MAARIF Institute, & DASPR. He aspires to be an aspiring scientist who focuses on the interactions of religion, politics, state-society relations, and power relations.'
+                website: 'www.peacegen.id',
+                missionStatement: 'Connecting the dots',
+                lokasiOrganisasi: 'Suite 10-11 Graha DLA, Jl. Otto Iskandar Dinata No.392, Nyengseret, Kec. Astanaanyar, Kota Bandung, Jawa Barat 40242',
+                highlight: [
+                    "Layanan Data Digital Terpusat dalam Penanggulangan Ekstremisme Kekerasan di Indonesia",
+                    "Digital Data Center Platform for Preventing and Countering Violent Extremism Effort in Indonesia"
+                ],
+                deskripsi: [
+                    "Knowledge Hub (K-Hub) merupakan sebuah wahana bertukar pengetahuan dan praktik baik upaya-upaya bina damai dalam Pencegahan dan Penanggulangan Ekstremisme Kekerasan (Preventing and Countering Violence Extremism / PCVE) di Indonesia.",
+                    "Knowledge Hub (K-Hub) is a medium for exchanging knowledge and good practices about peacebuilding initiatives in the Preventing and Countering Violence Extremism (PCVE) effort in Indonesia."
+                ],
+                typeOrganisasi:[
+                    {
+                        id: 1,
+                        nama: ['Organisasi Non Pemerintahan (NGO)', 'Non Government Organization (NGO)']
+                    },
+                    {
+                        id: 2,
+                        nama: ['Organisasi Masyarakat Sipil (OMS)', 'Civil Society Organization (CSO)']
+                    }
+                ],
+                typeApproach:[
+                    {
+                        id: 1,
+                        nama: ['Pelepasan', 'Disengagement']
+                    },
+                    {
+                        id: 2,
+                        nama: ['Pencegahan', 'Prevention']
+                    }
+                ],
+                typeIssues:[
+                    {
+                        id: 1,
+                        nama: ['Gender', 'Gender']
+                    },
+                    {
+                        id: 2,
+                        nama: ['Pemuda', 'Youth']
+                    }
+                ],
+                organisasiCabangInternal: [
+                    {
+                        namaOrganisasi: 'Peace Generation Indonesia',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Wahid Foundation',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Infia Consulting',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Asosiasi Guru Pendidikan Agama Islam Indonesia',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'PUSAD Paramadina',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Indonesia Social Justice Network',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Kulavarga',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Pusat Studi Budaya dan Perubahan Sosial',
+                        image: '/images/profile.png'
+                    }
+                ],
+                requestByIndividu: [
+                    {
+                        namaIndividu: 'Gilang Baskara',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'Yanuar Septian',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'Gilang Baskara',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'Yanuar Septian',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'Gilang Baskara',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'Yanuar Septian',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    }
+                ],
+                teamMember: [
+                    {
+                        namaIndividu: 'Gilang Baskara',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'Yanuar Septian',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'Rani Shelvia',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'Gilang Baskara',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'John Doe',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'Yanuar Septian',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'Rani Shelvia',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaIndividu: 'Rani Shelvia',
+                        image: '/images/profile.png'
+                    }
+                ],
+                partnerOrganisasiInternal: [
+                    {
+                        namaOrganisasi: 'Peace Generation Indonesia',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Kulavarga',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Pusat Studi Budaya dan Perubahan Sosial',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Infia Consulting',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'PUSAD Paramadina',
+                        image: '/images/profile.png'
+                    }
+                ]
             }
         }
     },
@@ -167,7 +473,7 @@ export default {
     },
     methods: {
         btnBack() {
-            this.$router.push('/verifications/organisasi')
+            this.$router.push('/verifications/organisasi/organisasi-list')
         },
 
         toggleDrop() {

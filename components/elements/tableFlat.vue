@@ -8,8 +8,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, index) in dataTable" :key="'dt'+index" class="hover:bg-gray-50" @click="goto">
+                    <tr v-for="(item, index) in dataTable" :key="'dt'+index" class="hover:bg-gray-50">
                         <td v-for="(x, index2) in masterTable" :key="index+'dt'+index2" scope="row" class="p-5">
+                            <div v-if="x.value === 'name'" @click="goto" class="cursor-pointer hover:text-blue-700">{{ item[x.value] }}</div>
+                            <div v-if="x.value === 'title'" @click="goto" class="cursor-pointer hover:text-blue-700">{{ item[x.value] }}</div>
                             <div v-if="x.value === 'emailIsVerified'">
                                 <img v-if="item[x.value] === true" class="h-[24px] w-[24px]" src="/icons/icon-status-acc.png" alt="icon-verified">
                                 <img v-if="item[x.value] === false" class="h-[24px] w-[24px]" src="/icons/icon-status-need.png" alt="icon-need">
@@ -25,7 +27,7 @@
                                 <div v-if="item[x.value] === 'Draft'" :class="item[x.value] === 'Draft' ? 'text-draft' : '' ">{{ item[x.value] }}</div>
                                 <div v-if="item[x.value] === 'Under Review'" :class="item[x.value] === 'Under Review' ? 'text-under-review' : '' ">{{ item[x.value] }}</div>
                             </div>
-                            <div v-if="!['emailIsVerified', 'status'].includes(x.value)" class="">{{ item[x.value] }}</div>
+                            <div v-if="!['emailIsVerified', 'status', 'name', 'title'].includes(x.value)" class="">{{ item[x.value] }}</div>
                         </td>
                     </tr>
                 </tbody>

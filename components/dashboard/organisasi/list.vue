@@ -123,29 +123,29 @@ export default {
             ],
             dataTable: [
                 {
-                    name: 'Tio',
-                    email: 'tio@peacegen.id',
+                    name: 'Peace Generation Indonesia',
+                    email: 'admin@peacegen.id',
                     emailIsVerified: true,
                     status: 'Accepted',
                     created: '10 Sep 2022 04:08'
                 },
                 {
-                    name: 'Tio',
-                    email: 'tio@peacegen.id',
+                    name: 'Solo Bersimfoni',
+                    email: 'mail@solobersimfoni.org',
                     emailIsVerified: true,
                     status: 'Need Verification',
                     created: '10 Sep 2022 04:08'
                 },
                 {
-                    name: 'Tio',
-                    email: 'tio@peacegen.id',
+                    name: 'Wahid Foundation',
+                    email: 'info@wahidinstitute.org',
                     emailIsVerified: true,
                     status: 'Accepted',
                     created: '10 Sep 2022 04:08'
                 },
                 {
-                    name: 'Tio',
-                    email: 'tio@peacegen.id',
+                    name: 'Indika Foundation',
+                    email: 'milenialislami@gmail.com',
                     emailIsVerified: true,
                     status: 'Accepted',
                     created: '10 Sep 2022 04:08'
