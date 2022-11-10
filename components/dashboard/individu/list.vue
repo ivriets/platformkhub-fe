@@ -16,7 +16,7 @@
                     <option value="50">100 row per page</option>
                 </select>
             </div>
-            <div class="px-3 py-[6px] bg-warna-empat rounded-lg text-white flex items-center">
+            <div class="px-3 py-[6px] bg-warna-empat rounded-lg text-white flex items-center cursor-pointer">
                 <img class="h-4 w-4" src="/icons/icon-button-download.png" alt="icon-download">
                 <div class="ml-1">Download</div>
             </div>

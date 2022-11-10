@@ -173,6 +173,20 @@ body {
     border-color: $warna-tujuh;
 }
 
+.drawer-none-scrolling {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+}
+
+.drawer-none-scrolling::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
+
+.tr-striped:nth-last-child(even) {
+    background-color: #FAFAFA;
+}
+
 
 .fade-enter-active, .fade-leave-active { transition: opacity .5s; }
 .fade-enter, .fade-leave-active { opacity: 0; }

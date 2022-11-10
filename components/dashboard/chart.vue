@@ -10,8 +10,8 @@
                     <div class="bg-warna-tiga rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-5">
                         <div class="text-3xl">1</div>
                     </div>
-                    <div class="border border-warna-empat rounded-lg py-2 cursor-pointer">
-                        <div class="font-semibold text-center">See List</div>
+                    <div @click="$router.push('/verifications/individu')" class="border border-warna-empat rounded-lg py-2 cursor-pointer hover:bg-gray-50 text-center">
+                        <button class="font-semibold">See List</button>
                     </div>
                 </div>
             </div>
@@ -23,8 +23,8 @@
                         <div class="text-center text-xl">
                             Program
                         </div>
-                        <div class="border border-warna-empat rounded-lg py-2 px-5 cursor-pointer">
-                            <div class="font-semibold text-center">See List</div>
+                        <div @click="$router.push('/moderations/program')" class="border border-warna-empat rounded-lg py-2 px-5 cursor-pointer hover:bg-gray-50 text-center">
+                            <button class="font-semibold">See List</button>
                         </div>
                     </div>
                     <div class="flex items-center justify-around">
@@ -58,8 +58,8 @@
                         <div class="text-center text-xl">
                             Event
                         </div>
-                        <div class="border border-warna-empat rounded-lg py-2 px-5 cursor-pointer">
-                            <div class="font-semibold text-center">See List</div>
+                        <div @click="$router.push('/moderations/event')" class="border border-warna-empat rounded-lg py-2 px-5 cursor-pointer hover:bg-gray-50 text-center">
+                            <button class="font-semibold">See List</button>
                         </div>
                     </div>
                     <div class="flex items-center justify-around">
@@ -95,8 +95,8 @@
                     <div class="bg-warna-tiga rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-5">
                         <div class="text-3xl">1</div>
                     </div>
-                    <div class="border border-warna-empat rounded-lg py-2 cursor-pointer">
-                        <div class="font-semibold text-center">See List</div>
+                    <div @click="$router.push('/verifications/organisasi')" class="border border-warna-empat rounded-lg py-2 cursor-pointer hover:bg-gray-50 text-center">
+                        <div class="font-semibold">See List</div>
                     </div>
                 </div>
             </div>
@@ -108,8 +108,8 @@
                         <div class="text-center text-xl">
                             Resource
                         </div>
-                        <div class="border border-warna-empat rounded-lg py-2 px-5 cursor-pointer">
-                            <div class="font-semibold text-center">See List</div>
+                        <div @click="$router.push('/moderations/resource')" class="border border-warna-empat rounded-lg py-2 px-5 cursor-pointer hover:bg-gray-50 text-center">
+                            <button class="font-semibold">See List</button>
                         </div>
                     </div>
                     <div class="flex items-center justify-around">
@@ -143,8 +143,8 @@
                         <div class="text-center text-xl">
                             Blog
                         </div>
-                        <div class="border border-warna-empat rounded-lg py-2 px-5 cursor-pointer">
-                            <div class="font-semibold text-center">See List</div>
+                        <div @click="$router.push('/moderations/blog')" class="border border-warna-empat rounded-lg py-2 px-5 cursor-pointer hover:bg-gray-50 text-center">
+                            <button class="font-semibold">See List</button>
                         </div>
                     </div>
                     <div class="flex items-center justify-around">

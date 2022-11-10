@@ -8,7 +8,7 @@
                     <div class="text-sm font-semibold">{{ identitas === 'organisasi' ? item.namaOrganisasi : item.namaIndividu }}</div>
                 </div>
                 <div v-if="jumlah >= 7 && index === 7">
-                    <div @click="clickMore" class="underline text-sm font-semibold text-warna-empat cursor-pointer">More</div>
+                    <div @click="goTo" class="underline text-sm font-semibold text-warna-empat cursor-pointer">More</div>
                 </div>
             </div>
         </div>
@@ -22,6 +22,11 @@ export default {
     data() {
         return {
             
+        }
+    },
+    methods: {
+        goTo() {
+            this.$router.push(this.clickMore)
         }
     },
 }

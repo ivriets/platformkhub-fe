@@ -56,7 +56,7 @@
                         :label="'Internal Branch'"
                         :jumlah="detailOrganisasi.organisasiCabangInternal.length !== 0 ? detailOrganisasi.organisasiCabangInternal.length : 0"
                         :fromData="detailOrganisasi.organisasiCabangInternal"
-                        :clickMore="''"
+                        :clickMore="'/verifications/organisasi/_id/internal-branch'"
                         :identitas="'organisasi'"
                     />
                     <hr class="border-warna-tujuh mt-6 mb-5">
@@ -64,7 +64,7 @@
                         :label="'Requested by Individu'"
                         :jumlah="detailOrganisasi.requestByIndividu.length !== 0 ? detailOrganisasi.requestByIndividu.length : 0"
                         :fromData="detailOrganisasi.requestByIndividu"
-                        :clickMore="''"
+                        :clickMore="'/verifications/organisasi/_id/request-by-individu'"
                         :identitas="'individu'"
                     />
                     <hr class="border-warna-tujuh mt-6 mb-5">
@@ -72,7 +72,7 @@
                         :label="'Team Member'"
                         :jumlah="detailOrganisasi.teamMember.length !== 0 ? detailOrganisasi.teamMember.length : 0"
                         :fromData="detailOrganisasi.teamMember"
-                        :clickMore="''"
+                        :clickMore="'/verifications/organisasi/_id/team-member'"
                         :identitas="'individu'"
                     />
                     <hr class="border-warna-tujuh mt-6 mb-5">
@@ -80,7 +80,7 @@
                         :label="'Internal Partner'"
                         :jumlah="detailOrganisasi.partnerOrganisasiInternal.length !== 0 ? detailOrganisasi.partnerOrganisasiInternal.length : 0"
                         :fromData="detailOrganisasi.partnerOrganisasiInternal"
-                        :clickMore="''"
+                        :clickMore="'/verifications/organisasi/_id/internal-partner'"
                         :identitas="'organisasi'"
                     />
                 </div>
@@ -162,7 +162,7 @@
                     <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
                 <div v-if="detailOrganisasi.statusVerification.id === 3" class="flex gap-x-6  font-semibold">
-                    <div class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
+                    <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
                     <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
             </div>
@@ -233,6 +233,11 @@ export default {
                 phoneIsVerified: false,
                 signUpAddress: '119.18.122.3',
                 statusVerification: {
+                    // id: 1,
+                    // nama: [
+                    //     'Need Verification',
+                    //     'Need Verification'
+                    // ]
                     id: 3,
                     nama: [
                         'Accepted',
@@ -463,17 +468,66 @@ export default {
                     {
                         namaOrganisasi: 'PUSAD Paramadina',
                         image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Peace Generation Indonesia',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Kulavarga',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Pusat Studi Budaya dan Perubahan Sosial',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'Infia Consulting',
+                        image: '/images/profile.png'
+                    },
+                    {
+                        namaOrganisasi: 'PUSAD Paramadina',
+                        image: '/images/profile.png'
                     }
                 ]
             }
         }
     },
+    computed: {
+        lang() {
+            return this.$i18n.locale
+        },
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
+        },
+        title() {
+            return this.$t('Verifikasi Organisasi')
+        }
+    },
+    watch: {
+        lang() {
+            this.initialize()
+        }
+    },
     mounted() {
-        
+        this.initialize()
+    },
+    head() {
+        return{
+            title: this.title
+        }
     },
     methods: {
+        initialize() {
+            this.$store.commit('setPageTitle', this.title)
+        },
+
         btnBack() {
             this.$router.push('/verifications/organisasi/organisasi-list')
+        },
+
+        btnEdit() {
+            this.$router.push('/verifications/organisasi/edit')
         },
 
         toggleDrop() {
@@ -492,6 +546,10 @@ export default {
         pilihInggris() {
             this.selectedFlag = 'inggris'
             this.closeDrop()
+        },
+
+        gotoInternalBranch() {
+            this.$router.push('/verifications/organisasi/_id/internal-branch')
         }
     },
 }

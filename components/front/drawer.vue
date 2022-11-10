@@ -2,7 +2,7 @@
     <div class="h-screen transition-all fixed overflow-y-auto overflow-x-hidden left-0 top-0 pt-16 text-white w-[270px] " :class="statusDrawer ? '' : '-translate-x-[80%]'" >
         <!-- :style="statusDrawer ? 'width:'+styleOpen : 'width:'+styleClose" -->
         <!-- button -->
-        <div class="bg-[#212121] h-[calc(100vh-64px)] z-10 w-[256px]">
+        <div class="bg-[#212121] h-[calc(100vh-64px)] z-10 w-[256px] overflow-y-auto drawer-none-scrolling">
             <div class="flex flex-col justify-between h-full">
                 <div class="py-2 mr-6 pl-4">
                     <div v-for="(item, index) in listDrawer" :key="'drawer' + index" class="block">

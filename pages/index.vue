@@ -10,7 +10,7 @@
 export default {
     data() {
         return {
-            
+
         }
     },
     computed: {
@@ -24,6 +24,13 @@ export default {
             return this.$t('Dasbor')
         }
     },
+    // created() {
+    //     window.addEventListener('resize', this.handleResize);
+    //     this.handleResize();
+    // },
+    // destroyed() {
+    //     window.removeEventListener('resize', this.handleResize);
+    // },
     watch: {
         lang() {
             this.initialize()
@@ -40,7 +47,12 @@ export default {
     methods: {
         initialize() {
             this.$store.commit('setPageTitle', this.title)
-        }
+        },
+
+        // handleResize() {
+        //     this.window.width = window.innerWidth;
+        //     this.window.height = window.innerHeight;
+        // }
     },
 }
 </script>

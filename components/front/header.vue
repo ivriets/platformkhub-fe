@@ -4,7 +4,7 @@
             <div class="w-[256px] pl-5">
                 <img width="100" src="/images/logo.png" alt="">
             </div>
-            <div class="flex-grow">
+            <div class="flex-grow px-6">
                 {{pageTitle}}
             </div>
             <div class="flex items-center">
@@ -40,8 +40,8 @@
                     </div>
                     <div v-if="flagDrop" v-click-outside="closeDrop" class="relative z-10">
                         <div class="absolute bg-white shadow-md rounded-md right-0 text-sm w-40 mt-2 border border-gray-50">
-                            <div @click="pilihInggris" class="py-2 px-4 cursor-pointer hover:bg-gray-50">Bahasa Inggris</div>
-                            <div @click="pilihIndonesia" class="py-2 px-4 cursor-pointer hover:bg-gray-50">Bahasa Indonesia</div>
+                            <div @click="pilihInggris" class="py-2 px-4 cursor-pointer hover:bg-gray-50">{{$t('Bendera Australia')}}</div>
+                            <div @click="pilihIndonesia" class="py-2 px-4 cursor-pointer hover:bg-gray-50">{{$t('Bendera Indonesia')}}</div>
                         </div>
                     </div>
                 </div>

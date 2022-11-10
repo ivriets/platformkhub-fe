@@ -2,10 +2,7 @@ folder middleware harus install cookie-universal-nuxt
 folder layouts > default.vue itu akan menjadi default page
 install sass sass-loader@10.1.1
 
-1. click nama program / nama organisasi baru masuk ke detail. bukan click row. [DONE]
-2. dari detail program / organisasi kalo back larinya ke list, jangan ke overview. [DONE]
-3. bandingkan overview individu dan overview organisasi. Total Rejected User vs Total Rejected Organization, karena panjang teks beda, jadi geser2 posisinya. [DONE]
-4. beri transisi untuk button toggle drawer sidebar. [DONE]
+
 5. Dasbor > horizontal bar chart di page view: tanya pa asep, apakah mau pakai highchart (tunjukkan jsfiddle nya: https://jsfiddle.net/tuing2ing/36x1w0bn/91/ ) atau pakai cara lain ? 
 6. grafik user per day mau pakai highchart atau pakai chart lain ?
 

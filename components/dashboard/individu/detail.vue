@@ -217,12 +217,37 @@ export default {
             }
         }
     },
+    computed: {
+        lang() {
+            return this.$i18n.locale
+        },
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
+        },
+        title() {
+            return this.$t('Verifikasi Individu')
+        }
+    },
+    watch: {
+        lang() {
+            this.initialize()
+        }
+    },
     mounted() {
-        
+        this.initialize()
+    },
+    head() {
+        return{
+            title: this.title
+        }
     },
     methods: {
+        initialize() {
+            this.$store.commit('setPageTitle', this.title)
+        },
+
         btnBack() {
-            this.$router.push('/verifications/individu')
+            this.$router.push('/verifications/individu/user-list')
         },
 
         toggleDrop() {
