@@ -17,13 +17,12 @@
                 </ol>
             </nav>
         </div>
-        <div class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
+        <div class="bg-white shadow-md rounded-xl py-8 px-6 mb-[28px]">
             <div class="w-[240px]">
                 <InputDropdown 
                     v-model="kategorisasi"
-                    :name="'harihari'"
+                    :name="'kategorisasi'"
                     :opsi="kategorisasiProfileOrganisasi"
-                    :placeholder="'Pilih untuk edit'"
                 />
             </div>
             <hr class="border-warna-tujuh my-10">
@@ -34,8 +33,12 @@
                 <DashboardOrganisasiEditCabang />
             </div>
         </div>
-        
-        <pre>{{kategorisasi}}</pre>
+        <div class="bg-white shadow-md rounded-xl py-4 px-6">
+            <div class="flex items-center justify-between">
+                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
+                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -44,13 +47,18 @@
 export default {
     data() {
         return {
-            kategorisasi: '',
+            kategorisasi: 'tentang',
         }
     },
     computed: {
         kategorisasiProfileOrganisasi() {
             return this.$store.state.opsi.kategorisasiProfileOrganisasi
         },
-    }
+    },
+    methods: {
+        btnBack() {
+            this.$router.push('/verifications/organisasi/_id')
+        }
+    },
 }
 </script>

@@ -17,6 +17,15 @@ $warna-need-revision: #ff5c00;
 $warna-approved-accepted: #129555;
 $warna-under-review: #8E7400;
 
+$warna-latar-satu: #222222;
+$warna-latar-dua: #176988;
+$warna-latar-tiga: #1E784B;
+$warna-latar-empat: #753A00;
+$warna-latar-lima: #DB4339;
+$warna-latar-enam: #BC185D;
+$warna-latar-tujuh: #4B4B9D;
+
+
 
 
 
@@ -63,6 +72,34 @@ body {
 
 .bg-warna-empat {
     background: $warna-empat;
+}
+
+.bg-latar-satu {
+    background: $warna-latar-satu;
+}
+
+.bg-latar-dua {
+    background: $warna-latar-dua;
+}
+
+.bg-latar-tiga {
+    background: $warna-latar-tiga;
+}
+
+.bg-latar-empat {
+    background: $warna-latar-empat;
+}
+
+.bg-latar-lima {
+    background: $warna-latar-lima;
+}
+
+.bg-latar-enam {
+    background: $warna-latar-enam;
+}
+
+.bg-latar-tujuh {
+    background: $warna-latar-tujuh;
 }
 
 
@@ -173,6 +210,36 @@ body {
     border-color: $warna-tujuh;
 }
 
+.border-latar-satu {
+    border-color: $warna-latar-satu;
+}
+
+.border-latar-dua {
+    border-color: $warna-latar-dua;
+}
+
+.border-latar-tiga {
+    border-color: $warna-latar-tiga;
+}
+
+.border-latar-empat {
+    border-color: $warna-latar-empat;
+}
+
+.border-latar-lima {
+    border-color: $warna-latar-lima;
+}
+
+.border-latar-enam {
+    border-color: $warna-latar-enam;
+}
+
+.border-latar-tujuh {
+    border-color: $warna-latar-tujuh;
+}
+
+
+
 .drawer-none-scrolling {
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
@@ -185,6 +252,39 @@ body {
 
 .tr-striped:nth-last-child(even) {
     background-color: #FAFAFA;
+}
+
+
+// CHIP
+.chip-sm {
+    border-radius: 5px;
+    padding: 9px 8px;
+    cursor: pointer;
+    background: $warna-tujuh;
+    border: 1px solid #C2C2C2;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    .chip-label {
+        margin-left:3px;
+        color: $warna-dua;
+        font-size: small;
+    }
+    .chip-button {
+        margin-left: 10px;
+    }
+    &:hover {
+        background: lighten($warna-dua, 50%);
+        .chip-button {
+            color: #D10D0D;
+        }
+    }
+}
+
+
+.list-options.lo-aktif {
+    background: red;
+    color: #ffffff;
 }
 
 

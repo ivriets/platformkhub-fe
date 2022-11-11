@@ -1,11 +1,14 @@
 <template>
     <div>
+        <div v-if="label" class="font-medium mb-1">
+            {{label}}
+        </div>
         <input 
             type="text" 
             :name="name" 
             :id="name" 
             :ref="name"
-            class="focus:outline-none w-full border border-warna-tujuh rounded-lg px-2 py-1.5 text-sm placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
+            class="focus:outline-none w-full border border-warna-tujuh rounded-lg px-2 py-1.5 text-sm text-warna-utama placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
             :placeholder="placeholder"
             @input="handleInput"
             @change="handleInput"
