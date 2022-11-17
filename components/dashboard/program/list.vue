@@ -1,5 +1,5 @@
 <template>
-    <div class="p-6">
+    <div class="py-10 px-6">
         <div class="flex items-center mb-4">
             <div class="w-[240px] mr-4">
                 <ElementsSearchBarResponsive 
@@ -36,18 +36,21 @@
             </div>
         </div>
         <div class="bg-white rounded-lg shadow-md border border-gray-100">
-            <ElementsTableFlat 
-                :dataTable="dataTable"
+            <ElementsTableFlat
                 :masterTable="masterTable"
-                :goto="goto"
+                :dataTable="dataTable"            
+                :path="'/moderations/program/'"
+                :idValue="'programId'"
             />
         </div>
+        <pre>{{dataTable}}</pre>
     </div>
 </template>
 
 
-
 <script>
+import listProgram from '~/static/data/listprogram.json';
+
 export default {
     data() {
         return {
@@ -84,91 +87,31 @@ export default {
             masterTable: [
                 {
                     header: 'Title',
-                    value: 'title',
+                    value: 'namaProgram',
                     tipe: 'string',
-                    display: true
+                    display: true,
+                    klik: true
                 },
                 {
                     header: 'Organization',
-                    value: 'organization',
+                    value: 'namaOrganisasi',
                     tipe: 'string',
                     display: true
                 },
                 {
                     header: 'Status',
-                    value: 'status',
-                    tipe: 'string',
+                    value: 'statusSubmission',
+                    tipe: 'integer',
                     display: true
                 },
                 {
                     header: 'Created At',
-                    value: 'createdat',
+                    value: 'createdAt',
                     tipe: 'date',
                     display: true
                 },
             ],
-            dataTable: [
-                {
-                    title: 'Self-Love: Mencintai Diri Sendiri ala Peace Academy',
-                    organization: 'Admin KHUB',
-                    status: 'Draft',
-                    createdat: '10 Sep 2022 04:08'
-                },
-                {
-                    title: 'Self-Love: Mencintai Diri Sendiri ala Peace Academy',
-                    organization: 'Admin KHUB',
-                    status: 'Under Review',
-                    createdat: '10 Sep 2022 04:08'
-                },
-                {
-                    title: 'Self-Love: Mencintai Diri Sendiri ala Peace Academy',
-                    organization: 'Admin KHUB',
-                    status: 'Approved',
-                    createdat: '10 Sep 2022 04:08'
-                },
-                {
-                    title: 'Self-Love: Mencintai Diri Sendiri ala Peace Academy',
-                    organization: 'Admin KHUB',
-                    status: 'Need Revision',
-                    createdat: '10 Sep 2022 04:08'
-                },
-                {
-                    title: 'Self-Love: Mencintai Diri Sendiri ala Peace Academy',
-                    organization: 'Admin KHUB',
-                    status: 'Draft',
-                    createdat: '10 Sep 2022 04:08'
-                },
-                {
-                    title: 'Self-Love: Mencintai Diri Sendiri ala Peace Academy',
-                    organization: 'Admin KHUB',
-                    status: 'Under Review',
-                    createdat: '10 Sep 2022 04:08'
-                },
-                {
-                    title: 'Self-Love: Mencintai Diri Sendiri ala Peace Academy',
-                    organization: 'Admin KHUB',
-                    status: 'Approved',
-                    createdat: '10 Sep 2022 04:08'
-                },
-                {
-                    title: 'Self-Love: Mencintai Diri Sendiri ala Peace Academy',
-                    organization: 'Admin KHUB',
-                    status: 'Need Revision',
-                    createdat: '10 Sep 2022 04:08'
-                },
-                {
-                    title: 'Self-Love: Mencintai Diri Sendiri ala Peace Academy',
-                    organization: 'Admin KHUB',
-                    status: 'Draft',
-                    createdat: '10 Sep 2022 04:08'
-                },
-                {
-                    title: 'Self-Love: Mencintai Diri Sendiri ala Peace Academy',
-                    organization: 'Admin KHUB',
-                    status: 'Under Review',
-                    createdat: '10 Sep 2022 04:08'
-                }
-            ]
+            dataTable: []
         }
     },
     watch: {
@@ -183,12 +126,22 @@ export default {
         },
 
         masterPoint() {
-
+            // this.dataTable = listProgram
+            this.dataTable = listProgram.results.map(e => {
+                const data = {
+                    programId: e.programId,
+                    namaProgram: e.judulActivity.length > 0 ? e.judulActivity[0] : 'N/A',
+                    namaOrganisasi: e.myOrganisasi.namaOrganisasi,
+                    statusSubmission: e.submission,
+                    createdAt: e.createdAt
+                }
+                return data
+            })
         },
 
-        goto() {
-            // this.$router.push('/verifications/individu/_id')
-        }
+        // goto() {
+        //     this.$router.push('/moderations/program/_id')
+        // }
     }
 }
 </script>

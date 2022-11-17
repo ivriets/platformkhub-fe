@@ -102,11 +102,11 @@ export default {
                     children: [
                         {
                             label: 'Slider',
-                            path: ''
+                            path: '/career/slider'
                         },
                         {
                             label: 'Open Recruitment',
-                            path: ''
+                            path: '/career/open-recruitment'
                         }
                     ]
                 },

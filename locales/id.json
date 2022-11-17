@@ -23,6 +23,17 @@
     "Internal Branch": "Cabang Internal",
     "Request By Individu": "Permintaan Individu",
     "Team Member": "Member Organisasi",
+    "Partner": "Mitra",
     "Internal Partner": "Mitra Internal",
-    "Editor": "Editor"
+    "Editor": "Editor",
+
+    "Organization Name": "Nama Organisasi",
+    "Organization": "Organisasi",
+    "Name": "Nama",
+    "Title": "Judul",
+    "Email": "Surel",
+    "Email is Verified": "Surel Terverifikasi",
+    "Status": "Status",
+    "Created": "Tanggal Buat",
+    "Created At": "Tanggal Buat"
 }

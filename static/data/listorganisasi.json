@@ -1,0 +1,463 @@
+{
+    "length": 50,
+    "count": 2,
+    "results": [
+        {
+            "accountId": "6a86cbc0-8be2-48c4-8b77-c1fa3945a654",
+            "organisasiId": 81198792,
+            "createdAt": "2022-11-07T13:03:38.796104",
+            "updatedAt": "2022-11-07T13:04:32.307356",
+            "typeAccount": {
+                "id": 2,
+                "nama": [
+                    "Organisasi",
+                    "Organisasi"
+                ]
+            },
+            "email": "pixelpi.site@gmail.com",
+            "password": "pbkdf2_sha256$216000$rhOmprfeFmyq$LnJmYTYiwsb9d9To6dxnsvdzPQUw7DLguQAZ8yhTmQE=",
+            "telepon": "6285351360000",
+            "namaPenanggungjawabAccount": "A Heri Agustian",
+            "namaReferer": "Steven",
+            "organisasiReferer": "Peacegen",
+            "referenceDeclaration": "Akun ini dibuat untuk Pengetesan, Refactoring dan Finalisasi api",
+            "referalCode": 0,
+            "emailIsVerified": true,
+            "phoneIsVerified": true,
+            "accountIsVerified": true,
+            "statusVerification": 3,
+            "alasanRejectOrSuspend": null,
+            "signupIpAddress": "36.72.200.34",
+            "verificator": 0,
+            "organisasi": [
+                {
+                    "organisasiId": 81198792,
+                    "namaOrganisasi": "PixelPi",
+                    "createdAt": "2022-11-07T13:03:38.839904",
+                    "updatedAt": "2022-11-07T13:05:07.049087",
+                    "binInstitutionProfile": "/assets/file.pdf",
+                    "emailOrganisasi": "pixelpi.site@gmail.com",
+                    "teleponOrganisasi": "62895351360000",
+                    "imgLogoOrganisasi": "/assets/image.png",
+                    "imgMainImage": "/assets/image.png",
+                    "totalMember": 10,
+                    "missionStatement": "Akun ini dibuat untuk Pengetesan,Refactoring dan Finalisasi api",
+                    "sosialMedia": {
+                        "kategoriSosialMedia": null,
+                        "linkSosialMedia": null
+                    },
+                    "typeOrganisasi": [
+                        {
+                            "id": 1,
+                            "nama": [
+                                "Organisasi Non Pemerintahan (NGO)",
+                                "Non Governmental Organization (NGO)"
+                            ]
+                        },
+                        {
+                            "id": 6,
+                            "nama": [
+                                "Komunitas",
+                                "Community"
+                            ]
+                        }
+                    ],
+                    "typeAudience": [
+                        {
+                            "id": 1,
+                            "nama": [
+                                "Semua Orang",
+                                "For Everyone"
+                            ]
+                        }
+                    ],
+                    "typeApproach": [
+                        {
+                            "id": 5,
+                            "nama": [
+                                "Kerja Sama dan Kemitraan Internasional",
+                                "International Coorporation and Partnerships"
+                            ]
+                        }
+                    ],
+                    "typeIssues": [
+                        {
+                            "id": 2,
+                            "nama": [
+                                "Pemuda",
+                                "Youth"
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "nama": [
+                                "Pendidikan",
+                                "Education"
+                            ]
+                        },
+                        {
+                            "id": 6,
+                            "nama": [
+                                "Penelitian",
+                                "Research"
+                            ]
+                        }
+                    ],
+                    "statusVerification": 3,
+                    "needContentModeration": 1,
+                    "verificator": 0
+                }
+            ],
+            "wasDeleted": 0
+        },
+        {
+            "accountId": "2c894665-d7ee-45aa-9d83-43e509fe8e0d",
+            "organisasiId": 27814231,
+            "createdAt": "2021-02-02T08:19:41.395225",
+            "updatedAt": "2022-11-02T02:30:40.485033",
+            "typeAccount": {
+                "id": 2,
+                "nama": [
+                    "Organisasi",
+                    "Organisasi"
+                ]
+            },
+            "email": "khub@peacegen.id",
+            "password": "pbkdf2_sha256$216000$bMpEGUip2Hlc$F9M5iOy/yAC6rN5tJzsiFsSkPxnwtsyWR3keL6OWxWk=",
+            "telepon": "08",
+            "namaPenanggungjawabAccount": "Jawad Mughofar KH",
+            "namaReferer": "-",
+            "organisasiReferer": "-",
+            "referenceDeclaration": "-",
+            "referalCode": 0,
+            "emailIsVerified": true,
+            "phoneIsVerified": true,
+            "accountIsVerified": true,
+            "statusVerification": 3,
+            "alasanRejectOrSuspend": null,
+            "signupIpAddress": "114.142.173.32",
+            "verificator": 0,
+            "organisasi": [
+                {
+                    "organisasiId": 27814231,
+                    "namaOrganisasi": "Admin KHUB",
+                    "createdAt": "2021-02-02T08:19:41.435161",
+                    "updatedAt": "2022-11-11T12:30:06.009783",
+                    "binInstitutionProfile": "/assets/Organisasi/27814231/files/Admin_KHUB-PR_KHUB_MonthlyReport_February2021.pdf",
+                    "emailOrganisasi": "khub@peacegen.id",
+                    "teleponOrganisasi": "0227323101",
+                    "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng",
+                    "imgMainImage": "/assets/Organisasi/27814231/images/Admin_KHUB-atf.jpeg",
+                    "totalMember": 0,
+                    "missionStatement": "Connecting the dots",
+                    "sosialMedia": {
+                        "kategoriSosialMedia": null,
+                        "linkSosialMedia": null
+                    },
+                    "typeOrganisasi": [
+                        {
+                            "id": 1,
+                            "nama": [
+                                "Organisasi Non Pemerintahan (NGO)",
+                                "Non Governmental Organization (NGO)"
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "nama": [
+                                "Organisasi Masyarakat Sipil (OMS)",
+                                "Civil Society Organization (CSO)"
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "nama": [
+                                "Pemerintah Indonesia",
+                                "Government of Indonesia (GoI)"
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "nama": [
+                                "Universitas",
+                                "University"
+                            ]
+                        },
+                        {
+                            "id": 5,
+                            "nama": [
+                                "Sekolah",
+                                "School"
+                            ]
+                        },
+                        {
+                            "id": 6,
+                            "nama": [
+                                "Komunitas",
+                                "Community"
+                            ]
+                        }
+                    ],
+                    "typeAudience": [
+                        {
+                            "id": 1,
+                            "nama": [
+                                "Semua Orang",
+                                "For Everyone"
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "nama": [
+                                "Pendidik",
+                                "For Educator"
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "nama": [
+                                "Pembuat Kebijakan",
+                                "For Policy Maker"
+                            ]
+                        },
+                        {
+                            "id": 5,
+                            "nama": [
+                                "Peneliti",
+                                "For Researcher"
+                            ]
+                        },
+                        {
+                            "id": 6,
+                            "nama": [
+                                "Donor",
+                                "For Donor"
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "nama": [
+                                "Praktisi",
+                                "For Practicioners"
+                            ]
+                        }
+                    ],
+                    "typeApproach": [
+                        {
+                            "id": 2,
+                            "nama": [
+                                "Pelepasan",
+                                "Disengagement"
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "nama": [
+                                "Pencegahan",
+                                "Prevention"
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "nama": [
+                                "Pemerintahan",
+                                "Governance"
+                            ]
+                        },
+                        {
+                            "id": 5,
+                            "nama": [
+                                "Kerja Sama dan Kemitraan Internasional",
+                                "International Coorporation and Partnerships"
+                            ]
+                        },
+                        {
+                            "id": 1,
+                            "nama": [
+                                "Penegakan Hukum",
+                                "Law Enforcement"
+                            ]
+                        }
+                    ],
+                    "typeIssues": [
+                        {
+                            "id": 1,
+                            "nama": [
+                                "Gender",
+                                "Gender"
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "nama": [
+                                "Pemuda",
+                                "Youth"
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "nama": [
+                                "Pendidikan",
+                                "Education"
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "nama": [
+                                "Penguatan HAM",
+                                "Human Rights"
+                            ]
+                        },
+                        {
+                            "id": 5,
+                            "nama": [
+                                "Korban Terorisme",
+                                "Victims of Terrorism"
+                            ]
+                        },
+                        {
+                            "id": 6,
+                            "nama": [
+                                "Penelitian",
+                                "Research"
+                            ]
+                        },
+                        {
+                            "id": 7,
+                            "nama": [
+                                "Penilaian/Evaluasi",
+                                "Assessment/Evaluation"
+                            ]
+                        },
+                        {
+                            "id": 8,
+                            "nama": [
+                                "Peningkatan Kapasitas",
+                                "Capacity Building"
+                            ]
+                        },
+                        {
+                            "id": 9,
+                            "nama": [
+                                "Pemberdayaan Masyarakat",
+                                "Community Empowerment"
+                            ]
+                        }
+                    ],
+                    "statusVerification": null,
+                    "needContentModeration": 1,
+                    "verificator": 0
+                }
+            ],
+            "wasDeleted": 0
+        },
+        {
+            "accountId": "7bc20cb5-3dd1-4f0c-8afd-cd058814541c",
+            "organisasiId": 22861269,
+            "createdAt": "2021-06-11T15:29:08.685805",
+            "updatedAt": "2022-11-02T02:31:36.608954",
+            "typeAccount": {
+                "id": 2,
+                "nama": [
+                    "Organisasi",
+                    "Organisasi"
+                ]
+            },
+            "email": "info@wahidinstitute.org",
+            "password": "pbkdf2_sha256$216000$SHODx2E1jZUC$wTNyWNCnSuxKZUeVKh4NAcnMksZ2599TpS5WKzV0M0o=",
+            "telepon": "0817275943",
+            "namaPenanggungjawabAccount": "Faza",
+            "namaReferer": "N/A",
+            "organisasiReferer": "N/A",
+            "referenceDeclaration": "N/A",
+            "referalCode": 0,
+            "emailIsVerified": true,
+            "phoneIsVerified": true,
+            "accountIsVerified": true,
+            "statusVerification": 3,
+            "alasanRejectOrSuspend": null,
+            "signupIpAddress": "202.138.249.19",
+            "verificator": 0,
+            "organisasi": [
+                {
+                    "organisasiId": 22861269,
+                    "namaOrganisasi": "Wahid Foundation",
+                    "createdAt": "2021-06-11T15:29:08.747344",
+                    "updatedAt": "2021-06-12T15:58:32.059918",
+                    "binInstitutionProfile": "/assets/Organisasi/22861269/files/Wahid_Foundation-wahid.jpg",
+                    "emailOrganisasi": "info@wahidinstitute.org",
+                    "teleponOrganisasi": "0817275943",
+                    "imgLogoOrganisasi": "/assets/Organisasi/22861269/images/Wahid_Foundation-Logo_Wahid_Foundation.apng",
+                    "imgMainImage": "/assets/Organisasi/22861269/images/Wahid_Foundation-wahid.jpeg",
+                    "totalMember": 0,
+                    "missionStatement": "Kami hadir untuk membantu pencegahan ekstremisme kekerasan",
+                    "sosialMedia": {
+                        "kategoriSosialMedia": null,
+                        "linkSosialMedia": null
+                    },
+                    "typeOrganisasi": [
+                        {
+                            "id": 1,
+                            "nama": [
+                                "Organisasi Non Pemerintahan (NGO)",
+                                "Non Governmental Organization (NGO)"
+                            ]
+                        }
+                    ],
+                    "typeAudience": [
+                        {
+                            "id": 2,
+                            "nama": [
+                                "Praktisi",
+                                "For Practicioners"
+                            ]
+                        }
+                    ],
+                    "typeApproach": [
+                        {
+                            "id": 3,
+                            "nama": [
+                                "Pencegahan",
+                                "Prevention"
+                            ]
+                        }
+                    ],
+                    "typeIssues": [
+                        {
+                            "id": 2,
+                            "nama": [
+                                "Pemuda",
+                                "Youth"
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "nama": [
+                                "Pendidikan",
+                                "Education"
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "nama": [
+                                "Penguatan HAM",
+                                "Human Rights"
+                            ]
+                        },
+                        {
+                            "id": 9,
+                            "nama": [
+                                "Pemberdayaan Masyarakat",
+                                "Community Empowerment"
+                            ]
+                        }
+                    ],
+                    "statusVerification": null,
+                    "needContentModeration": 1,
+                    "verificator": 0
+                }
+            ],
+            "wasDeleted": 0
+        }
+    ]
+}

@@ -77,40 +77,52 @@
                     />
                 </div>
             </div>
-        </div>
-        <div class="">
-            <div class="font-medium mb-2">Tema Warna Latar Belakang</div>
-            <div class="flex items-center gap-x-3">
-                <!-- #222222 -->
-                <div @click="btnWarnaSatu" class="bg-white border rounded-full" :class="form.tampilan === '#222222' ? 'border-latar-satu' : 'border-white'">
-                    <div class="w-5 h-5 m-1 bg-latar-satu rounded-full cursor-pointer"></div>
+            <div class="col-span-12 md:col-span-6">
+                <div class="">
+                    <InputSelect 
+                        v-model="form.hierarki"
+                        :name="prefixName+'hierarki'"
+                        :label="'Hierarki'"
+                        :opsi="opsiHierarki"
+                        :placeholder="'Pilih'"
+                    />
                 </div>
-                <!-- #176988 -->
-                <div @click="btnWarnaDua" class="bg-white border rounded-full" :class="form.tampilan === '#176988' ? 'border-latar-dua' : 'border-white'">
-                    <div class="w-5 h-5 m-1 bg-latar-dua rounded-full cursor-pointer"></div>
-                </div>
-                <!-- #1E784B -->
-                <div @click="btnWarnaTiga" class="bg-white border rounded-full" :class="form.tampilan === '#1E784B' ? 'border-latar-tiga' : 'border-white'">
-                    <div class="w-5 h-5 m-1 bg-latar-tiga rounded-full cursor-pointer"></div>
-                </div>
-                <!-- #753A00 -->
-                <div @click="btnWarnaEmpat" class="bg-white border rounded-full" :class="form.tampilan === '#753A00' ? 'border-latar-empat' : 'border-white'">
-                    <div class="w-5 h-5 m-1 bg-latar-empat rounded-full cursor-pointer"></div>
-                </div>
-                <!-- #DB4339 -->
-                <div @click="btnWarnaLima" class="bg-white border rounded-full" :class="form.tampilan === '#DB4339' ? 'border-latar-lima' : 'border-white'">
-                    <div class="w-5 h-5 m-1 bg-latar-lima rounded-full cursor-pointer"></div>
-                </div>
-                <!-- #BC185D -->
-                <div @click="btnWarnaEnam" class="bg-white border rounded-full" :class="form.tampilan === '#BC185D' ? 'border-latar-enam' : 'border-white'">
-                    <div class="w-5 h-5 m-1 bg-latar-enam rounded-full cursor-pointer"></div>
-                </div>
-                <!-- #4B4B9D -->
-                <div @click="btnWarnaTujuh" class="bg-white border rounded-full" :class="form.tampilan === '#4B4B9D' ? 'border-latar-tujuh' : 'border-white'">
-                    <div class="w-5 h-5 m-1 bg-latar-tujuh rounded-full cursor-pointer"></div>
+            </div>
+            <div class="col-span-12 md:col-span-6">
+                <div class="font-medium mb-2">Tema Warna Latar Belakang</div>
+                <div class="flex items-center gap-x-3">
+                    <!-- #222222 -->
+                    <div @click="btnWarnaSatu" class="bg-white border rounded-full" :class="form.tampilan === '#222222' ? 'border-latar-satu' : 'border-white'">
+                        <div class="w-5 h-5 m-1 bg-latar-satu rounded-full cursor-pointer"></div>
+                    </div>
+                    <!-- #176988 -->
+                    <div @click="btnWarnaDua" class="bg-white border rounded-full" :class="form.tampilan === '#176988' ? 'border-latar-dua' : 'border-white'">
+                        <div class="w-5 h-5 m-1 bg-latar-dua rounded-full cursor-pointer"></div>
+                    </div>
+                    <!-- #1E784B -->
+                    <div @click="btnWarnaTiga" class="bg-white border rounded-full" :class="form.tampilan === '#1E784B' ? 'border-latar-tiga' : 'border-white'">
+                        <div class="w-5 h-5 m-1 bg-latar-tiga rounded-full cursor-pointer"></div>
+                    </div>
+                    <!-- #753A00 -->
+                    <div @click="btnWarnaEmpat" class="bg-white border rounded-full" :class="form.tampilan === '#753A00' ? 'border-latar-empat' : 'border-white'">
+                        <div class="w-5 h-5 m-1 bg-latar-empat rounded-full cursor-pointer"></div>
+                    </div>
+                    <!-- #DB4339 -->
+                    <div @click="btnWarnaLima" class="bg-white border rounded-full" :class="form.tampilan === '#DB4339' ? 'border-latar-lima' : 'border-white'">
+                        <div class="w-5 h-5 m-1 bg-latar-lima rounded-full cursor-pointer"></div>
+                    </div>
+                    <!-- #BC185D -->
+                    <div @click="btnWarnaEnam" class="bg-white border rounded-full" :class="form.tampilan === '#BC185D' ? 'border-latar-enam' : 'border-white'">
+                        <div class="w-5 h-5 m-1 bg-latar-enam rounded-full cursor-pointer"></div>
+                    </div>
+                    <!-- #4B4B9D -->
+                    <div @click="btnWarnaTujuh" class="bg-white border rounded-full" :class="form.tampilan === '#4B4B9D' ? 'border-latar-tujuh' : 'border-white'">
+                        <div class="w-5 h-5 m-1 bg-latar-tujuh rounded-full cursor-pointer"></div>
+                    </div>
                 </div>
             </div>
         </div>
+        
         <hr class="border-warna-tujuh my-10">
         <div class="">
             <div class="text-xl font-semibold mb-10">Tentang Organisasi</div>
@@ -186,21 +198,23 @@
                 </div>
                 <div class="col-span-12">
                     <div class="">
-                        <InputText 
+                        <InputTextArea 
                             v-model="form.deskripsi[1]"
+                            :max="500"
                             placeholder="Write here"
-                            :name="prefixName+'deskripsien'"
                             :label="'Organization Description (English)'"
+                            :name="prefixName+'deskripsien'"
                         />
                     </div>
                 </div>
                 <div class="col-span-12">
                     <div class="">
-                        <InputText 
+                        <InputTextArea 
                             v-model="form.deskripsi[0]"
+                            :max="500"
                             placeholder="Tulis disini"
-                            :name="prefixName+'deskripsiid'"
                             :label="'Deskripsi Organisasi (Indonesia)'"
+                            :name="prefixName+'deskripsiid'"
                         />
                     </div>
                 </div>
@@ -219,6 +233,7 @@ export default {
             form: {
                 namaOrganisasi: '',
                 websiteOrganisasi: '',
+                hierarki: '',
                 typeOrganisasi: [],
                 typeAudience: [],
                 typeApproach: [],
@@ -264,7 +279,7 @@ export default {
                     id: 'Sumatera Selatan',
                     label: 'Sumatera Selatan'
                 }
-            ]
+            ],
         }
     },
     computed: {
@@ -282,6 +297,10 @@ export default {
 
         typeIssues() {
             return this.$store.state.opsi.typeIssues
+        },
+
+        opsiHierarki() {
+            return this.$store.state.opsi.hierarki
         },
     },
     methods: {

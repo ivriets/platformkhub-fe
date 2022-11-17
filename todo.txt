@@ -3,6 +3,10 @@ folder layouts > default.vue itu akan menjadi default page
 install sass sass-loader@10.1.1
 
 
-5. Dasbor > horizontal bar chart di page view: tanya pa asep, apakah mau pakai highchart (tunjukkan jsfiddle nya: https://jsfiddle.net/tuing2ing/36x1w0bn/91/ ) atau pakai cara lain ? 
-6. grafik user per day mau pakai highchart atau pakai chart lain ?
+1. Dasbor > horizontal bar chart di page view: tanya pa asep, apakah mau pakai highchart (tunjukkan jsfiddle nya: https://jsfiddle.net/tuing2ing/36x1w0bn/91/ ) atau pakai cara lain ? 
+2. grafik user per day mau pakai highchart atau pakai chart lain ?
 
+
+
+
+1. lgi ongoing di pusat

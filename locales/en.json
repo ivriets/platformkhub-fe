@@ -23,6 +23,17 @@
     "Internal Branch": "Internal Branch",
     "Request By Individu": "Request By Individu",
     "Team Member": "Team Member",
+    "Partner": "Partner",
     "Internal Partner": "Internal Partner",
-    "Editor": "Editor"
+    "Editor": "Editor",
+
+    "Organization Name": "Organization Name",
+    "Organization": "Organization",
+    "Name": "Name",
+    "Title": "Title",
+    "Email": "Email",
+    "Email is Verified": "Email is Verified",
+    "Status": "Status",
+    "Created": "Created",
+    "Created At": "Created At"
 }

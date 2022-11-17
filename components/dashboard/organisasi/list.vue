@@ -43,14 +43,18 @@
             <ElementsTableFlat 
                 :masterTable="masterTable"
                 :dataTable="dataTable"
-                :goto="goto"
+                :path="'/verifications/organisasi/'"
+                :idValue="'accountId'"
             />
         </div>
+        <!-- <pre>{{dataTable}}</pre> -->
     </div>
 </template>
 
 
 <script>
+import listOrganisasi from '~/static/data/listorganisasi.json';
+
 export default {
     data() {
         return {
@@ -92,9 +96,10 @@ export default {
             masterTable: [
                 {
                     header: 'Organization Name',
-                    value: 'name',
+                    value: 'namaOrganisasi',
                     tipe: 'string',
-                    display: true
+                    display: true,
+                    klik: true
                 },
                 {
                     header: 'Email',
@@ -110,47 +115,18 @@ export default {
                 },
                 {
                     header: 'Status',
-                    value: 'status',
-                    tipe: 'string',
+                    value: 'statusVerification',
+                    tipe: 'integer',
                     display: true
                 },
                 {
                     header: 'Created',
-                    value: 'created',
+                    value: 'createdAt',
                     tipe: 'date',
                     display: true
                 },
             ],
-            dataTable: [
-                {
-                    name: 'Peace Generation Indonesia',
-                    email: 'admin@peacegen.id',
-                    emailIsVerified: true,
-                    status: 'Accepted',
-                    created: '10 Sep 2022 04:08'
-                },
-                {
-                    name: 'Solo Bersimfoni',
-                    email: 'mail@solobersimfoni.org',
-                    emailIsVerified: true,
-                    status: 'Need Verification',
-                    created: '10 Sep 2022 04:08'
-                },
-                {
-                    name: 'Wahid Foundation',
-                    email: 'info@wahidinstitute.org',
-                    emailIsVerified: true,
-                    status: 'Accepted',
-                    created: '10 Sep 2022 04:08'
-                },
-                {
-                    name: 'Indika Foundation',
-                    email: 'milenialislami@gmail.com',
-                    emailIsVerified: true,
-                    status: 'Accepted',
-                    created: '10 Sep 2022 04:08'
-                }
-            ]
+            dataTable: []
         }
     },
     watch: {
@@ -165,11 +141,18 @@ export default {
         },
 
         masterPoint() {
-
-        },
-
-        goto() {
-            this.$router.push('/verifications/organisasi/_id')
+            this.dataTable = listOrganisasi.results.map(e => {
+                const data = {
+                    accountId: e.accountId,
+                    organisasiId: e.organisasiId,
+                    namaOrganisasi: e.organisasi.length > 0 ? e.organisasi[0].namaOrganisasi : 'N/A',
+                    email: e.email,
+                    emailIsVerified: e.emailIsVerified,
+                    statusVerification: e.statusVerification,
+                    createdAt: e.createdAt
+                }
+                return data
+            })
         }
     }
 }

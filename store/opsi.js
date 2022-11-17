@@ -9,16 +9,24 @@ export const state = () => ({
             label: 'Cabang'
         },
         {
+            id: 'pusat',
+            label: 'Pusat'
+        },
+        {
             id: 'anggota',
             label: 'Anggota'
         },
         {
-            id: 'kontaklokasi',
-            label: 'Kontak & Lokasi'
+            id: 'mitra',
+            label: 'Mitra'
         },
         {
-            id: 'perjalanan',
-            label: 'Perjalanan'
+            id: 'pencapaian',
+            label: 'Pencapaian'
+        },
+        {
+            id: 'kontaklokasi',
+            label: 'Kontak & Lokasi'
         },
         {
             id: 'mediasosial',
@@ -137,4 +145,14 @@ export const state = () => ({
             label: 'Pemberdayaan Masyarakat'
         }
     ],
+    hierarki: [
+        {
+            id: 1,
+            label: 'Headquarter'
+        },
+        {
+            id: 2,
+            label: 'Branch'
+        }
+    ]
 })

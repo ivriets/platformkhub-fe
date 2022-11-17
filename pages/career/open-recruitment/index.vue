@@ -1,8 +1,6 @@
 <template>
     <div class="container mx-auto">
-        <div class="px-6">
-            <DashboardOrganisasiInternalPartner />
-        </div>
+        slider
     </div>
 </template>
 
@@ -11,7 +9,7 @@
 export default {
     data() {
         return {
-            
+
         }
     },
     computed: {
@@ -22,7 +20,7 @@ export default {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
         title() {
-            return this.$t('Internal Partner')
+            return this.$t('Open Recruitment')
         }
     },
     watch: {

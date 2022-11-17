@@ -1,0 +1,643 @@
+{
+    "accountId": "2c894665-d7ee-45aa-9d83-43e509fe8e0d",
+    "organisasiId": 27814231,
+    "createdAt": "2021-02-02T08:19:41.395225",
+    "updatedAt": "2022-11-02T02:30:40.485033",
+    "typeAccount": {
+        "id": 2,
+        "nama": [
+            "Organisasi",
+            "Organisasi"
+        ]
+    },
+    "email": "khub@peacegen.id",
+    "password": "pbkdf2_sha256$216000$bMpEGUip2Hlc$F9M5iOy/yAC6rN5tJzsiFsSkPxnwtsyWR3keL6OWxWk=",
+    "telepon": "08",
+    "namaPenanggungjawabAccount": "Jawad Mughofar KH",
+    "namaReferer": "-",
+    "organisasiReferer": "-",
+    "referenceDeclaration": "-",
+    "referalCode": 0,
+    "emailIsVerified": true,
+    "phoneIsVerified": true,
+    "accountIsVerified": true,
+    "statusVerification": 3,
+    "alasanRejectOrSuspend": null,
+    "signupIpAddress": "114.142.173.32",
+    "verificator": 0,
+    "organisasi": [
+        {
+            "organisasiId": 27814231,
+            "namaOrganisasi": "Admin KHUB",
+            "createdAt": "2021-02-02T08:19:41.435161",
+            "updatedAt": "2022-11-11T12:30:06.009783",
+            "namaLink": "adminkhub",
+            "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng",
+            "imgMainImage": "/assets/Organisasi/27814231/images/Admin_KHUB-atf.jpeg",
+            "tahunBerdiri": 2021,
+            "tampilan": "#F1993F",
+            "totalMember": 0,
+            "binInstitutionProfile": "/assets/Organisasi/27814231/files/Admin_KHUB-PR_KHUB_MonthlyReport_February2021.pdf",
+            "highlight": [
+                "Layanan Data Digital Terpusat dalam Penanggulangan Ekstremisme Kekerasan di Indonesia",
+                "Digital Data Center Platform for Preventing and Countering Violent Extremism Effort in Indonesia"
+            ],
+            "deskripsi": [
+                "Knowledge Hub (K-Hub) merupakan sebuah wahana bertukar pengetahuan dan praktik baik upaya-upaya bina damai dalam Pencegahan dan Penanggulangan Ekstremisme Kekerasan (Preventing and Countering Violence Extremism / PCVE) di Indonesia.",
+                "Knowledge Hub (K-Hub) is a medium for exchanging knowledge and good practices about peacebuilding initiatives in the Preventing and Countering Violence Extremism (PCVE) effort in Indonesia."
+            ],
+            "emailOrganisasi": "khub@peacegen.id",
+            "teleponOrganisasi": "0227323101",
+            "hierarki": "Headquarter",
+            "missionStatement": "Connecting the dots",
+            "websiteOrganisasi": "https://k-hub.id",
+            "systemRowId": "vKVfSABQ",
+            "lokasiOrganisasi": [
+                {
+                    "pkLokasiOrganisasiId": "OrgLocation27814231JfHD",
+                    "systemRowId": "keAeZbEd",
+                    "provinsi": "Jawa Barat",
+                    "kota": "Kota Bandung",
+                    "jalan": "Jl. Cijagra No. 48, Lengkong, Bandung",
+                    "pinLocation": "-6.9174639, 107.6191228",
+                    "typeVisibility": 1
+                }
+            ],
+            "milestoneOrganisasi": [
+                {
+                    "tahun": "2021",
+                    "deskripsi": [
+                        "14 Juni 2021 K-Hub meluncurkan platform",
+                        "N/A"
+                    ],
+                    "pkMilestoneId": "OrgMilestone27814231ZJeg",
+                    "systemRowId": "2020"
+                },
+                {
+                    "tahun": "2020",
+                    "deskripsi": [
+                        "K-Hub bermula",
+                        "The Project Begin"
+                    ],
+                    "pkMilestoneId": "OrgMilestone27814231vVWE",
+                    "systemRowId": "2020"
+                }
+            ],
+            "sosialMedia": [
+                {
+                    "pkSosialMediaId": "socialMedia27814231vmnr",
+                    "kategoriSosialMedia": 2,
+                    "linkSosialMedia": "https://www.instagram.com/khub_org/",
+                    "systemRowId": "YYEKfiLu",
+                    "organisasiId": "27814231"
+                },
+                {
+                    "pkSosialMediaId": "socialMedia27814231vmnr",
+                    "kategoriSosialMedia": 5,
+                    "linkSosialMedia": "",
+                    "systemRowId": "YYEKfiLu",
+                    "organisasiId": "27814231"
+                },
+                {
+                    "pkSosialMediaId": "socialMedia27814231vmnr",
+                    "kategoriSosialMedia": 3,
+                    "linkSosialMedia": "",
+                    "systemRowId": "YYEKfiLu",
+                    "organisasiId": "27814231"
+                },
+                {
+                    "pkSosialMediaId": "socialMedia27814231vmnr",
+                    "kategoriSosialMedia": 1,
+                    "linkSosialMedia": "",
+                    "systemRowId": "YYEKfiLu",
+                    "organisasiId": "27814231"
+                }
+            ],
+            "partnerOrganisasiInternal": [
+                {
+                    "systemRowId": "qsIHGuLt",
+                    "pkPartnerInternalId": "OrgPartIn27814231jmDx",
+                    "partner": 49582336
+                },
+                {
+                    "systemRowId": "HALGlNMk",
+                    "pkPartnerInternalId": "OrgPartIn27814231IUYy",
+                    "partner": 42040221
+                }
+            ],
+            "partnerOrganisasiEksternal": [
+                {
+                    "pkPartnerEksternalId": "OrgParteks61537680XYGO",
+                    "systemRowId": "BRwPTIzN",
+                    "namaPartner": "Pusat Studi Budaya dan Perubahan Sosial",
+                    "websitePartner": "",
+                    "imgLogoPartner": "/assets/image.png"
+                },
+                {
+                    "pkPartnerEksternalId": "OrgParteks61537680XYGO",
+                    "systemRowId": "BRwPTIzN",
+                    "namaPartner": "PUSAD Paramadina",
+                    "websitePartner": "",
+                    "imgLogoPartner": "/assets/image.png"
+                },
+                {
+                    "pkPartnerEksternalId": "OrgParteks61537680XYGO",
+                    "systemRowId": "BRwPTIzN",
+                    "namaPartner": "Kaluvarga",
+                    "websitePartner": "",
+                    "imgLogoPartner": "/assets/image.png"
+                },
+                {
+                    "pkPartnerEksternalId": "OrgParteks61537680XYGO",
+                    "systemRowId": "BRwPTIzN",
+                    "namaPartner": "Asosiasi Guru Pendidikan Agama Islam Indonesia",
+                    "websitePartner": "",
+                    "imgLogoPartner": "/assets/image.png"
+                },
+                {
+                    "pkPartnerEksternalId": "OrgParteks61537680XYGO",
+                    "systemRowId": "BRwPTIzN",
+                    "namaPartner": "Kementrian Agama Indonesia",
+                    "websitePartner": "",
+                    "imgLogoPartner": "/assets/image.png"
+                },
+                {
+                    "pkPartnerEksternalId": "OrgParteks61537680XYGO",
+                    "systemRowId": "BRwPTIzN",
+                    "namaPartner": "Cadar Garis Lucu",
+                    "websitePartner": "",
+                    "imgLogoPartner": "/assets/image.png"
+                },
+                {
+                    "pkPartnerEksternalId": "OrgParteks61537680XYGO",
+                    "systemRowId": "BRwPTIzN",
+                    "namaPartner": "Indonesia Social Justice Network",
+                    "websitePartner": "",
+                    "imgLogoPartner": "/assets/image.png"
+                },
+                {
+                    "pkPartnerEksternalId": "OrgParteks61537680XYGO",
+                    "systemRowId": "BRwPTIzN",
+                    "namaPartner": "UNICEF",
+                    "websitePartner": "",
+                    "imgLogoPartner": "/assets/image.png"
+                }
+            ],
+            "pendingBranchInvitations": [],
+            "pendingBranchRequested": [
+                {
+                    "organisasiId": 49582336,
+                    "namaOrganisasi": "Peace Generation Indonesia"
+                }
+            ],
+            "organisasiCabangInternal": [
+                {
+                    "organisasiId": 47963824,
+                    "namaOrganisasi": "Infia Consulting",
+                    "imgLogoOrganisasi": "/assets/image.png"
+                },
+                {
+                    "organisasiId": 47963824,
+                    "namaOrganisasi": "Infia Consulting",
+                    "imgLogoOrganisasi": "/assets/image.png"
+                },
+                {
+                    "organisasiId": 47963824,
+                    "namaOrganisasi": "Infia Consulting",
+                    "imgLogoOrganisasi": "/assets/image.png"
+                },
+                {
+                    "organisasiId": 47963824,
+                    "namaOrganisasi": "Infia Consulting",
+                    "imgLogoOrganisasi": "/assets/image.png"
+                },
+                {
+                    "organisasiId": 47963824,
+                    "namaOrganisasi": "Infia Consulting",
+                    "imgLogoOrganisasi": "/assets/image.png"
+                },
+                {
+                    "organisasiId": 47963824,
+                    "namaOrganisasi": "Infia Consulting",
+                    "imgLogoOrganisasi": "/assets/image.png"
+                },
+                {
+                    "organisasiId": 47963824,
+                    "namaOrganisasi": "Infia Consulting",
+                    "imgLogoOrganisasi": "/assets/image.png"
+                },
+                {
+                    "organisasiId": 47963824,
+                    "namaOrganisasi": "Infia Consulting",
+                    "imgLogoOrganisasi": "/assets/image.png"
+                },
+                {
+                    "organisasiId": 47963824,
+                    "namaOrganisasi": "Infia Consulting",
+                    "imgLogoOrganisasi": "/assets/image.png"
+                }
+            ],
+            "organisasiCabangEksternal": [],
+            "requestedByIndividu": [
+                {
+                    "id": 87601899,
+                    "individu": {
+                        "userId": 14150662,
+                        "namaIndividu": "Amanda",
+                        "imgFotoProfile": "/assets/Individu/14150662/images/Amanda-khub_logo.apng"
+                    },
+                    "statusRequest": {
+                        "id": 3,
+                        "nama": [
+                            "Pending"
+                        ]
+                    },
+                    "systemRowId": "sVUGZhrc"
+                },
+                {
+                    "id": 34958557,
+                    "individu": {
+                        "userId": 26919676,
+                        "namaIndividu": "mustajib Daroini",
+                        "imgFotoProfile": "/assets/image.png"
+                    },
+                    "statusRequest": {
+                        "id": 3,
+                        "nama": [
+                            "Pending"
+                        ]
+                    },
+                    "systemRowId": "ggfJjjdR"
+                },
+                {
+                    "id": 67340209,
+                    "individu": {
+                        "userId": 37874853,
+                        "namaIndividu": "Puspa Kirana",
+                        "imgFotoProfile": "/assets/image.png"
+                    },
+                    "statusRequest": {
+                        "id": 3,
+                        "nama": [
+                            "Pending"
+                        ]
+                    },
+                    "systemRowId": "ZBTjZPfJ"
+                },
+                {
+                    "id": 28506161,
+                    "individu": {
+                        "userId": 40962356,
+                        "namaIndividu": "Suri Handayani",
+                        "imgFotoProfile": "/assets/image.png"
+                    },
+                    "statusRequest": {
+                        "id": 3,
+                        "nama": [
+                            "Pending"
+                        ]
+                    },
+                    "systemRowId": "UBfUNacT"
+                },
+                {
+                    "id": 19834326,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    },
+                    "statusRequest": {
+                        "id": 1,
+                        "nama": [
+                            "Accepted",
+                            "Accepted"
+                        ]
+                    },
+                    "systemRowId": "faQJgial"
+                },
+                {
+                    "id": 67340209,
+                    "individu": {
+                        "userId": 37874853,
+                        "namaIndividu": "Puspa Kirana",
+                        "imgFotoProfile": "/assets/image.png"
+                    },
+                    "statusRequest": {
+                        "id": 3,
+                        "nama": [
+                            "Pending"
+                        ]
+                    },
+                    "systemRowId": "ZBTjZPfJ"
+                },
+                {
+                    "id": 28506161,
+                    "individu": {
+                        "userId": 40962356,
+                        "namaIndividu": "Suri Handayani",
+                        "imgFotoProfile": "/assets/image.png"
+                    },
+                    "statusRequest": {
+                        "id": 3,
+                        "nama": [
+                            "Pending"
+                        ]
+                    },
+                    "systemRowId": "UBfUNacT"
+                },
+                {
+                    "id": 19834326,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    },
+                    "statusRequest": {
+                        "id": 1,
+                        "nama": [
+                            "Accepted",
+                            "Accepted"
+                        ]
+                    },
+                    "systemRowId": "faQJgial"
+                }
+            ],
+            "teamMember": [
+                {
+                    "pkJoinedOrganizationId": 11887866,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    }
+                },
+                {
+                    "pkJoinedOrganizationId": 11887866,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    }
+                },
+                {
+                    "pkJoinedOrganizationId": 11887866,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    }
+                },
+                {
+                    "pkJoinedOrganizationId": 11887866,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    }
+                },
+                {
+                    "pkJoinedOrganizationId": 11887866,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    }
+                },
+                {
+                    "pkJoinedOrganizationId": 11887866,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    }
+                },
+                {
+                    "pkJoinedOrganizationId": 11887866,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    }
+                },
+                {
+                    "pkJoinedOrganizationId": 11887866,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    }
+                },
+                {
+                    "pkJoinedOrganizationId": 11887866,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    }
+                },
+                {
+                    "pkJoinedOrganizationId": 11887866,
+                    "individu": {
+                        "userId": 82873990,
+                        "namaIndividu": "Samuel Villarreal",
+                        "imgFotoProfile": "/assets/image.png"
+                    }
+                }
+            ],
+            "typeOrganisasi": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Organisasi Non Pemerintahan (NGO)",
+                        "Non Governmental Organization (NGO)"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Organisasi Masyarakat Sipil (OMS)",
+                        "Civil Society Organization (CSO)"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pemerintah Indonesia",
+                        "Government of Indonesia (GoI)"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Universitas",
+                        "University"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Sekolah",
+                        "School"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Komunitas",
+                        "Community"
+                    ]
+                }
+            ],
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pembuat Kebijakan",
+                        "For Policy Maker"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Donor",
+                        "For Donor"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pelepasan",
+                        "Disengagement"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pemerintahan",
+                        "Governance"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                },
+                {
+                    "id": 1,
+                    "nama": [
+                        "Penegakan Hukum",
+                        "Law Enforcement"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Korban Terorisme",
+                        "Victims of Terrorism"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                },
+                {
+                    "id": 7,
+                    "nama": [
+                        "Penilaian/Evaluasi",
+                        "Assessment/Evaluation"
+                    ]
+                },
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                }
+            ],
+            "statusVerification": null,
+            "needContentModeration": 1,
+            "verificator": 0
+        }
+    ],
+    "wasDeleted": 0
+}

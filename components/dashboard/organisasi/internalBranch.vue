@@ -1,11 +1,11 @@
 <template>
-    <div class="py-[80px]">
+    <div class="py-[40px]">
         <div class="mb-9">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li>
                         <div class="flex items-center">
-                            <a href="/verifications/organisasi/_id" class="text-sm font-medium text-warna-delapan hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Detail Organisasi</a>
+                            <a :href="'/verifications/organisasi/'+id" class="text-sm font-medium text-warna-delapan hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Detail Organisasi</a>
                         </div>
                     </li>
                     <li aria-current="page">
@@ -25,20 +25,48 @@
                 :name="'searchtext'"
             />
         </div>
-        <div class="bg-white shadow-md rounded-xl pb-9">
+        <div v-if="dataInternalBranch" class="bg-white shadow-md rounded-xl pb-9">
             <ElementsTableStriped 
                 :masterTable="masterTable"
-                :dataTable="dataTable"
+                :dataTable="dataInternalBranch"
+                :urutan="true"
+                :actions="actions"
+                :title="'Cabang Internal'"
             />
         </div>
+        <!-- <pre>{{fullUrl}}</pre> -->
     </div>
 </template>
 
 
 <script>
+import detailOrganisasi from '~/static/data/detailorganisasi.json';
+
 export default {
     data() {
         return {
+            dataInternalBranch: [],
+            actions: {
+                status: true,
+                button: {
+                    edit: {
+                        status: true,
+                        tipe: 'modal',
+                        path: ''
+                    },
+                    // path: this.fullUrl+'/edit'
+                    delete: {
+                        status: true,
+                        tipe: 'modal',
+                        path: ''
+                    },
+                    print: {
+                        status: false,
+                        tipe: 'page',
+                        path: ''
+                    }
+                }
+            },
             filter: {
                 search: ''
             },
@@ -50,41 +78,39 @@ export default {
                     tipe: 'string',
                     display: true
                 }
-            ],
-            dataTable: [
-                {
-                    namaOrganisasi: 'Peace Generation Indonesia',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaOrganisasi: 'Wahid Foundation',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaOrganisasi: 'Infia Consulting',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaOrganisasi: 'Asosiasi Guru Pendidikan Agama Islam Indonesia',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaOrganisasi: 'PUSAD Paramadina',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaOrganisasi: 'Indonesia Social Justice Network',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaOrganisasi: 'Kulavarga',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaOrganisasi: 'Pusat Studi Budaya dan Perubahan Sosial',
-                    image: '/images/profile.png'
+            ]
+        }
+    },
+    computed: {
+        fullUrl() {
+            return this.$route.path
+        },
+
+        id() {
+            return this.$route.params.id;
+        },
+
+        basePath() {
+            return process.env.BASE_URL
+        }
+    },
+    mounted() {
+        this.initialize()
+    },
+    methods: {
+        initialize() {
+            this.masterPoint()
+        },
+
+        masterPoint() {
+            this.dataInternalBranch = detailOrganisasi.organisasi[0].organisasiCabangInternal.map(e => {
+                const data = {
+                    id: e.organisasiId,
+                    namaOrganisasi: e.namaOrganisasi,
+                    image: this.basePath+e.imgLogoOrganisasi
                 }
-            ],
+                return data
+            })
         }
     }
 }

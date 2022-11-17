@@ -1,5 +1,5 @@
 <template>
-    <div class="p-6">
+    <div class="py-10 px-6">
         <div class="flex items-center mb-4">
             <div class="w-[240px] mr-4">
                 <ElementsSearchBarResponsive 

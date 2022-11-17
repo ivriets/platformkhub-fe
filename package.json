@@ -10,17 +10,21 @@
   },
   "dependencies": {
     "@nuxtjs/dayjs": "^1.4.1",
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/i18n": "^7.3.0",
     "cookie-universal-nuxt": "^2.2.2",
     "core-js": "^3.25.3",
+    "dotenv": "^16.0.3",
     "nuxt": "^2.15.8",
     "nuxt-highcharts": "^2.0.4",
+    "nuxt-tailvue": "^1.0.95",
     "sass": "^1.55.0",
     "sass-loader": "10.1.1",
     "v-click-outside": "^3.2.0",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
-    "vue-template-compiler": "^2.7.10"
+    "vue-template-compiler": "^2.7.10",
+    "vue2-datepicker": "^3.11.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^5.3.3",

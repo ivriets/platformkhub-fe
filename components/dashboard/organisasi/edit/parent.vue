@@ -1,11 +1,11 @@
 <template>
-    <div class="py-[80px]">
+    <div class="py-[40px]">
         <div class="mb-9">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li>
                         <div class="flex items-center">
-                            <a href="/verifications/organisasi/_id" class="text-sm font-medium text-warna-delapan hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Detail Organisasi</a>
+                            <a :href="'/verifications/organisasi/'+id" class="text-sm font-medium text-warna-delapan hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Detail Organisasi</a>
                         </div>
                     </li>
                     <li aria-current="page">
@@ -25,12 +25,30 @@
                     :opsi="kategorisasiProfileOrganisasi"
                 />
             </div>
-            <hr class="border-warna-tujuh my-10">
+            <hr v-if="!['cabang', 'anggota', 'pusat'].includes(kategorisasi)" class="border-warna-tujuh my-10">
             <div v-if="kategorisasi === 'tentang'">
                 <DashboardOrganisasiEditTentang />
             </div>
             <div v-else-if="kategorisasi === 'cabang'">
                 <DashboardOrganisasiEditCabang />
+            </div>
+            <div v-else-if="kategorisasi === 'pusat'">
+                <DashboardOrganisasiEditPusat />
+            </div>
+            <div v-else-if="kategorisasi === 'anggota'">
+                <DashboardOrganisasiEditAnggota />
+            </div>
+            <div v-else-if="kategorisasi === 'mitra'">
+                <DashboardOrganisasiEditMitra />
+            </div>
+            <div v-else-if="kategorisasi === 'pencapaian'">
+                <DashboardOrganisasiEditPencapaian />
+            </div>
+            <div v-else-if="kategorisasi === 'kontaklokasi'">
+                <DashboardOrganisasiEditKontakLokasi />
+            </div>
+            <div v-else-if="kategorisasi === 'mediasosial'">
+                <DashboardOrganisasiEditMediaSosial />
             </div>
         </div>
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
@@ -54,10 +72,13 @@ export default {
         kategorisasiProfileOrganisasi() {
             return this.$store.state.opsi.kategorisasiProfileOrganisasi
         },
+        id() {
+            return this.$route.params.id;
+        }
     },
     methods: {
         btnBack() {
-            this.$router.push('/verifications/organisasi/_id')
+            this.$router.push('/verifications/organisasi/'+this.id)
         }
     },
 }

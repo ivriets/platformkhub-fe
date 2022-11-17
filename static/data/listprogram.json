@@ -1,0 +1,530 @@
+{
+    "typeSensitivity": "LOW",
+    "length": 43,
+    "count": 5,
+    "results": [
+        {
+            "submission": 1,
+            "programId": 105027188,
+            "judulActivity": [
+                "K-Hub Fellowship 2022  - Bikin Narasi Positif Makin Sip! Jilid 2",
+                "K-Hub Fellowship 2022  - Bikin Narasi Positif Makin Sip! Jilid 2"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-11-10T15:31:11.654780",
+            "updatedAt": "2022-11-10T15:31:19.986130",
+            "moderator": null,
+            "imgMainImage": "/assets/Organisasi/27814231/images/Admin_KHUB-imgMainImage.apng",
+            "tanggalMulai": "2022-02-15T10:00:00",
+            "tanggalSelesai": "2022-02-15T12:00:00",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                }
+            ],
+            "catatanModerasi": null,
+            "cancelReason": null
+        },
+        {
+            "submission": 3,
+            "programId": 105554704,
+            "judulActivity": [
+                "Ujicoba",
+                "Ujicoba"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 49582336,
+                "namaOrganisasi": "Peace Generation Indonesia",
+                "imgLogoOrganisasi": "/assets/Organisasi/49582336/images/Peace_Generation-Logo-Peace-Generation.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-10-10T11:00:25.832482",
+            "updatedAt": "2022-10-10T11:01:43.935042",
+            "moderator": 42738755,
+            "imgMainImage": "/assets/placeholder/program.jpg",
+            "tanggalMulai": "2022-10-10T00:00:00",
+            "tanggalSelesai": "2022-10-29T00:00:00",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                }
+            ],
+            "catatanModerasi": "Narasi kamu xxxx",
+            "cancelReason": null
+        },
+        {
+            "submission": 4,
+            "programId": 94701185,
+            "judulActivity": [
+                "Monitoring dan Evaluasi (Monev) Uji Fungsi Module CBC",
+                "Monitoring and Evaluation (Monev) Piloting CBC Module"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 45315691,
+                "namaOrganisasi": "Yayasan Prasasti Perdamaian",
+                "imgLogoOrganisasi": "/assets/Organisasi/45315691/images/Yayasan_Prasasti_Perdamaian-logo_YPP.jpeg",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2021-12-20T11:25:21.844551",
+            "updatedAt": "2021-12-22T14:12:24.130291",
+            "moderator": 42738755,
+            "imgMainImage": "/assets/Organisasi/45315691/images/Yayasan_Prasasti_Perdamaian-full_ruangan.jpeg",
+            "tanggalMulai": "2021-12-15T00:00:00",
+            "tanggalSelesai": "2021-12-15T00:00:00",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pembuat Kebijakan",
+                        "For Policy Maker"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Donor",
+                        "For Donor"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pelepasan",
+                        "Disengagement"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pemerintahan",
+                        "Governance"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                },
+                {
+                    "id": 7,
+                    "nama": [
+                        "Penilaian/Evaluasi",
+                        "Assessment/Evaluation"
+                    ]
+                }
+            ],
+            "catatanModerasi": null,
+            "cancelReason": null
+        },
+        {
+            "submission": 4,
+            "programId": 97162991,
+            "judulActivity": [
+                "Kondisi Kebebasan Beragama/Berkeyakinan di Indonesia 2020",
+                "N/A"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 42040221,
+                "namaOrganisasi": "SETARA Institute",
+                "imgLogoOrganisasi": "/assets/Organisasi/42040221/images/SETARA_Institute-Logo_Hitam.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2021-11-08T17:26:21.819467",
+            "updatedAt": "2021-11-15T11:23:30.353476",
+            "moderator": 42738755,
+            "imgMainImage": "/assets/placeholder/program.jpg",
+            "tanggalMulai": "2019-01-01T00:00:00",
+            "tanggalSelesai": "2020-12-31T00:00:00",
+            "statusActivity": {
+                "id": 4,
+                "nama": [
+                    "Completed",
+                    "Completed"
+                ]
+            },
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pembuat Kebijakan",
+                        "For Policy Maker"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Donor",
+                        "For Donor"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Penegakan Hukum",
+                        "Law Enforcement"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pemerintahan",
+                        "Governance"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                },
+                {
+                    "id": 7,
+                    "nama": [
+                        "Penilaian/Evaluasi",
+                        "Assessment/Evaluation"
+                    ]
+                }
+            ],
+            "catatanModerasi": null,
+            "cancelReason": null
+        },
+        {
+            "submission": 4,
+            "programId": 55164870,
+            "judulActivity": [
+                "Indeks Kota Toleran (IKT) 2020",
+                "N/A"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 42040221,
+                "namaOrganisasi": "SETARA Institute",
+                "imgLogoOrganisasi": "/assets/Organisasi/42040221/images/SETARA_Institute-Logo_Hitam.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2021-11-08T17:13:35.138679",
+            "updatedAt": "2021-11-16T16:37:12.260605",
+            "moderator": 42738755,
+            "imgMainImage": "/assets/placeholder/program.jpg",
+            "tanggalMulai": "2019-11-01T00:00:00",
+            "tanggalSelesai": "2020-10-30T00:00:00",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pemerintahan",
+                        "Governance"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                },
+                {
+                    "id": 7,
+                    "nama": [
+                        "Penilaian/Evaluasi",
+                        "Assessment/Evaluation"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                }
+            ],
+            "catatanModerasi": null,
+            "cancelReason": null
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 import webpack from 'webpack'
-
+require('dotenv').config();
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -31,6 +31,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/click-outside' },
+    { src: '~/plugins/date-picker', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,7 +48,11 @@ export default {
     'cookie-universal-nuxt',
     '@nuxtjs/i18n',
     '@nuxtjs/dayjs',
+    '@nuxtjs/dotenv',
     'nuxt-highcharts',
+    ['nuxt-tailvue', {
+      modal: true
+    }],
   ],
 
   dayjs: {

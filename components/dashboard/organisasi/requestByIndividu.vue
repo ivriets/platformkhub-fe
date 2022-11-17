@@ -1,11 +1,11 @@
 <template>
-    <div class="py-[80px]">
+    <div class="py-[40px]">
         <div class="mb-9">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li>
                         <div class="flex items-center">
-                            <a href="/verifications/organisasi/_id" class="text-sm font-medium text-warna-delapan hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Detail Organisasi</a>
+                            <a :href="'/verifications/organisasi/'+id" class="text-sm font-medium text-warna-delapan hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">Detail Organisasi</a>
                         </div>
                     </li>
                     <li aria-current="page">
@@ -28,7 +28,10 @@
         <div class="bg-white shadow-md rounded-xl pb-9">
             <ElementsTableStriped 
                 :masterTable="masterTable"
-                :dataTable="dataTable"
+                :dataTable="dataRequestByIndividu"
+                :urutan="true"
+                :actions="actions"
+                :title="'Permintaan Individu'"
             />
         </div>
     </div>
@@ -36,9 +39,33 @@
 
 
 <script>
+import detailOrganisasi from '~/static/data/detailorganisasi.json';
+
 export default {
     data() {
         return {
+            dataRequestByIndividu: [],
+            actions: {
+                status: true,
+                button: {
+                    edit: {
+                        status: true,
+                        tipe: 'modal',
+                        path: ''
+                    },
+                    // path: this.fullUrl+'/edit'
+                    delete: {
+                        status: true,
+                        tipe: 'modal',
+                        path: ''
+                    },
+                    print: {
+                        status: false,
+                        tipe: 'page',
+                        path: ''
+                    }
+                }
+            },
             filter: {
                 search: ''
             },
@@ -50,73 +77,39 @@ export default {
                     tipe: 'string',
                     display: true
                 }
-            ],
-            dataTable: [
-                {
-                    namaIndividu: 'Gilang Baskara',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'John Doe',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'Yanuar Septian',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'Gilang Baskara',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'John Doe',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'Yanuar Septian',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'Gilang Baskara',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'John Doe',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'Yanuar Septian',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'John Doe',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'John Doe',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'John Doe',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'John Doe',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'John Doe',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'John Doe',
-                    image: '/images/profile.png'
-                },
-                {
-                    namaIndividu: 'John Doe',
-                    image: '/images/profile.png'
+            ]
+        }
+    },
+    computed: {
+        fullUrl() {
+            return this.$route.path
+        },
+
+        id() {
+            return this.$route.params.id;
+        },
+
+        basePath() {
+            return process.env.BASE_URL
+        }
+    },
+    mounted() {
+        this.initialize()
+    },
+    methods: {
+        initialize() {
+            this.masterPoint()
+        },
+
+        masterPoint() {
+            this.dataRequestByIndividu = detailOrganisasi.organisasi[0].requestedByIndividu.map(e => {
+                const data = {
+                    id: e.id,
+                    namaIndividu: e.individu.namaIndividu,
+                    image: this.basePath+e.individu.imgFotoProfile
                 }
-            ],
+                return data
+            })
         }
     }
 }

@@ -1,0 +1,369 @@
+{
+    "typeSensitivity": "LOW",
+    "length": 35,
+    "count": 5,
+    "results": [
+        {
+            "submission": 1,
+            "eventId": 102612900,
+            "judulActivity": [
+                "hhh",
+                "hhh"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 49582336,
+                "namaOrganisasi": "Peace Generation Indonesia",
+                "imgLogoOrganisasi": "/assets/Organisasi/49582336/images/Peace_Generation-Logo-Peace-Generation.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-10-10T15:46:39.379322",
+            "updatedAt": "2022-10-10T19:57:13.546532",
+            "moderator": 42738755,
+            "imgMainImage": "/assets/placeholder/events.jpg",
+            "tanggalMulai": "2022-10-10T20:50:00",
+            "tanggalSelesai": "2022-10-10T21:52:00",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pelepasan",
+                        "Disengagement"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                }
+            ],
+            "catatanModerasi": null,
+            "cancelReason": null
+        },
+        {
+            "submission": 1,
+            "eventId": 117726034,
+            "judulActivity": [
+                "hhh",
+                "hhh"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-10-01T16:34:33.814337",
+            "updatedAt": "2022-10-01T17:02:02.428658",
+            "moderator": 42738755,
+            "imgMainImage": "/assets/placeholder/events.jpg",
+            "tanggalMulai": "2022-10-12T20:34:00",
+            "tanggalSelesai": "2022-10-13T20:38:00",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                }
+            ],
+            "catatanModerasi": null,
+            "cancelReason": null
+        },
+        {
+            "submission": 1,
+            "eventId": 61449893,
+            "judulActivity": [
+                "Boardgame for Peace 5",
+                "Boardgame for Peace 5"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-07-25T17:51:31.488876",
+            "updatedAt": "2022-07-25T17:51:32.223247",
+            "moderator": null,
+            "imgMainImage": "/assets/placeholder/events.jpg",
+            "tanggalMulai": "2022-08-31T10:00:00",
+            "tanggalSelesai": "2022-08-31T11:00:00",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pelepasan",
+                        "Disengagement"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                }
+            ],
+            "catatanModerasi": null,
+            "cancelReason": null
+        },
+        {
+            "submission": 1,
+            "eventId": 95332280,
+            "judulActivity": [
+                "Kelas Literasi Damai untuk Generasi Z se-Indonesia (Diutamakan Wilayah Kalimantan dan Papua)",
+                "Peace Literacy Class for Generation Z in Indonesia (Kalimantan and Papua Region Preferred)"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 55392925,
+                "namaOrganisasi": "Generasi Literat",
+                "imgLogoOrganisasi": "/assets/Organisasi/55392925/images/Generasi_Literat-logo_GL_PNG_2.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-07-11T14:36:50.369029",
+            "updatedAt": "2022-07-11T14:36:51.295876",
+            "moderator": null,
+            "imgMainImage": "/assets/Organisasi/55392925/images/Generasi_Literat-WhatsApp_Image_2022-07-08_at_3.43.44_PM_p2P8sY9.jpeg",
+            "tanggalMulai": "2022-07-31T10:00:00",
+            "tanggalSelesai": "2022-08-14T14:30:00",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                }
+            ],
+            "catatanModerasi": null,
+            "cancelReason": null
+        },
+        {
+            "submission": 4,
+            "eventId": 90369799,
+            "judulActivity": [
+                "SAWALA JAKATARUB 2022",
+                "SAWALA JAKATARUB 2002"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 74603252,
+                "namaOrganisasi": "Jaringan Kerja Antar Umat Beragama (JAKATARUB)",
+                "imgLogoOrganisasi": "/assets/Organisasi/74603252/images/Jaringan_Antar_Kerja_Umat_Beragama_Jakatarub-01_Jakatarub.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-02-08T13:13:57.546755",
+            "updatedAt": "2022-02-25T12:03:02.904371",
+            "moderator": 42738755,
+            "imgMainImage": "/assets/placeholder/events.jpg",
+            "tanggalMulai": "2022-02-04T15:00:00",
+            "tanggalSelesai": "2022-02-06T12:00:00",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                },
+                {
+                    "id": 7,
+                    "nama": [
+                        "Penilaian/Evaluasi",
+                        "Assessment/Evaluation"
+                    ]
+                }
+            ],
+            "catatanModerasi": null,
+            "cancelReason": ""
+        }
+    ]
+}

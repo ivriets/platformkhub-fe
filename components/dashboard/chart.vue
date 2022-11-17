@@ -31,7 +31,7 @@
                         <highchart :options="pieChartOption1" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-suspended rounded-full mr-2"></div>
+                                <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
                                 <div>5% - Under Review (2)</div>
                             </div>
                             <div class="flex items-center">

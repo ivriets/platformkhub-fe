@@ -1,9 +1,10 @@
 <template>
     <div class="py-[80px]">
-        <div class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
+        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
             <div class="flex items-start justify-between mb-6">
-                <div v-if="detailOrganisasi.statusVerification.id === 1" class="px-6 py-2 bg-warna-need-verification rounded-3xl text-white ">{{ detailOrganisasi.statusVerification.nama[0] }}</div>
-                <div v-if="detailOrganisasi.statusVerification.id === 3" class="px-6 py-2 bg-warna-approved-accepted rounded-3xl text-white ">{{ detailOrganisasi.statusVerification.nama[0] }}</div>
+                <div v-if="dataDetail.statusVerification === 1" class="px-6 py-2 bg-warna-need-verification rounded-3xl text-white ">Need Verification</div>
+                <div v-if="dataDetail.statusVerification === 3" class="px-6 py-2 bg-warna-approved-accepted rounded-3xl text-white ">Accepted</div>
+                <!-- BENDERA -->
                 <div class="inline-flex flex-col">
                     <div>
                         <button @click="toggleDrop" class="flex items-center text-sm text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:shadow-solid">
@@ -44,67 +45,72 @@
             <div class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-4">
                     <div class="w-full bg-white shadow-md border border-gray-50 rounded-xl ">
-                        <img src="/images/logo.png" alt="main-image">
+                        <img :src="basePath+dataDetail.organisasi[0].imgLogoOrganisasi" alt="main-image">
                     </div>
                     <hr class="border-warna-tujuh mt-6 mb-5">
                     <div class="">
                         <div class="mb-5 text-sm text-warna-delapan font-semibold">Location</div>
-                        <div class="text-sm text-warna-sembilan font-semibold">{{ detailOrganisasi.lokasiOrganisasi }}</div>
+                        <div class="text-sm text-warna-sembilan font-semibold">{{ dataDetail.organisasi[0].lokasiOrganisasi[0].jalan }}, {{ dataDetail.organisasi[0].lokasiOrganisasi[0].kota }}, {{ dataDetail.organisasi[0].lokasiOrganisasi[0].provinsi }}</div>
                     </div>
                     <hr class="border-warna-tujuh mt-6 mb-5">
-                    <ElementsFotoNama 
-                        :label="'Internal Branch'"
-                        :jumlah="detailOrganisasi.organisasiCabangInternal.length !== 0 ? detailOrganisasi.organisasiCabangInternal.length : 0"
-                        :fromData="detailOrganisasi.organisasiCabangInternal"
-                        :clickMore="'/verifications/organisasi/_id/internal-branch'"
-                        :identitas="'organisasi'"
+                    <ElementsListFotoNama 
+                        :title="'Internal Branch'"
+                        :jumlah="internalBranch.length"
+                        :fromData="internalBranch"
+                        :clickMore="'/verifications/organisasi/'+id+'/internal-branch'"
+                        :maxItem="maxItem"
                     />
                     <hr class="border-warna-tujuh mt-6 mb-5">
-                    <ElementsFotoNama 
-                        :label="'Requested by Individu'"
-                        :jumlah="detailOrganisasi.requestByIndividu.length !== 0 ? detailOrganisasi.requestByIndividu.length : 0"
-                        :fromData="detailOrganisasi.requestByIndividu"
-                        :clickMore="'/verifications/organisasi/_id/request-by-individu'"
-                        :identitas="'individu'"
+                    <ElementsListFotoNama 
+                        :title="'Requested by Individu'"
+                        :jumlah="requestByIndividu.length"
+                        :fromData="requestByIndividu"
+                        :clickMore="'/verifications/organisasi/'+id+'/request-by-individu'"
+                        :maxItem="maxItem"
                     />
                     <hr class="border-warna-tujuh mt-6 mb-5">
-                    <ElementsFotoNama 
-                        :label="'Team Member'"
-                        :jumlah="detailOrganisasi.teamMember.length !== 0 ? detailOrganisasi.teamMember.length : 0"
-                        :fromData="detailOrganisasi.teamMember"
-                        :clickMore="'/verifications/organisasi/_id/team-member'"
-                        :identitas="'individu'"
+                    <ElementsListFotoNama 
+                        :title="'Team Member'"
+                        :jumlah="teamMember.length"
+                        :fromData="teamMember"
+                        :clickMore="'/verifications/organisasi/'+id+'/team-member'"
+                        :maxItem="maxItem"
                     />
                     <hr class="border-warna-tujuh mt-6 mb-5">
-                    <ElementsFotoNama 
-                        :label="'Internal Partner'"
-                        :jumlah="detailOrganisasi.partnerOrganisasiInternal.length !== 0 ? detailOrganisasi.partnerOrganisasiInternal.length : 0"
-                        :fromData="detailOrganisasi.partnerOrganisasiInternal"
-                        :clickMore="'/verifications/organisasi/_id/internal-partner'"
-                        :identitas="'organisasi'"
+                    <ElementsListFotoNama 
+                        :title="'Partner'"
+                        :jumlah="partner.length"
+                        :fromData="partner"
+                        :clickMore="'/verifications/organisasi/'+id+'/partner'"
+                        :maxItem="maxItem"
                     />
                 </div>
-                <div v-if="detailOrganisasi" class="col-span-12 lg:col-span-8">
-                    <div class="text-xl font-bold text-warna-utama">{{ detailOrganisasi.namaOrganisasi }}</div>
+                <div v-if="dataDetail" class="col-span-12 lg:col-span-8">
+                    <div class="text-xl font-bold text-warna-utama">{{ dataDetail.organisasi[0].namaOrganisasi }}</div>
                     <hr class="border-warna-tujuh my-5">
                     <div class="grid grid-cols-8 gap-5">
                         <div class="col-span-4">
                             <div v-for="(item1, index1) in dataLabel" :key="'datalabel' + index1" v-show="item1.posisi==='kiri'" class="grid grid-cols-12 mb-4 break-words gap-1">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
-                                    <div v-if="['created', 'updated'].includes(item1.value)" class="">
-                                        {{ $dayjs(detailOrganisasi[item1.value]).format('DD MMM YYYY hh:mm A') }}
+                                    <div v-if="['createdAt', 'updatedAt'].includes(item1.value)" class="">
+                                        {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY HH:mm') }} WIB
                                     </div>
-                                    <div v-else-if="['emailIsVerified', 'accountIsVerified'].includes(item1.value)">
-                                        {{ detailOrganisasi[item1.value] === true ? 'Yes' : 'No' }}
+                                    <div v-else-if="['namaOrganisasi'].includes(item1.value)">
+                                        {{ dataDetail.organisasi[0][item1.value] }}
                                     </div>
                                     <div v-else>
-                                        {{ detailOrganisasi[item1.value] }}
+                                        {{ dataDetail[item1.value] }}
                                     </div>
                                 </div>
                             </div>
-                            <div v-for="(item2, index2) in detailOrganisasi.socialMedia" :key="'datasosmed' + index2" class="grid grid-cols-12 mb-4 break-words gap-1">
-                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item2.kategoriSosialMedia }}</div>
+                            <div v-for="(item2, index2) in dataDetail.organisasi[0].sosialMedia" :key="'datasosmed' + index2" class="grid grid-cols-12 mb-4 break-words gap-1">
+                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">
+                                    <span v-if="item2.kategoriSosialMedia === 1">Twitter</span>
+                                    <span v-if="item2.kategoriSosialMedia === 2">Instagram</span>
+                                    <span v-if="item2.kategoriSosialMedia === 3">Youtube</span>
+                                    <span v-if="item2.kategoriSosialMedia === 5">Facebook</span>
+                                </div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">{{ item2.linkSosialMedia ? item2.linkSosialMedia : '-' }}</div>
                             </div>
                         </div>
@@ -112,11 +118,11 @@
                             <div v-for="(item1, index1) in dataLabel" :key="'dL' + index1" v-show="item1.posisi==='kanan'" class="grid grid-cols-12 mb-4 break-words">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
-                                    <div v-if="['created', 'updated'].includes(item1.value)" class="">
-                                        {{ detailOrganisasi[item1.value] }}
+                                    <div v-if="['totalMember', 'websiteOrganisasi', 'missionStatement', 'hierarki'].includes(item1.value)" class="">
+                                        {{ dataDetail.organisasi[0][item1.value] }}
                                     </div>
                                     <div v-else>
-                                        {{ detailOrganisasi[item1.value] }}
+                                        {{ dataDetail[item1.value] }}
                                     </div>
                                 </div>
                             </div>
@@ -126,26 +132,32 @@
                     <div class="grid grid-cols-12 gap-y-1">
                         <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Organization Type</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in detailOrganisasi.typeOrganisasi" :key="'tipeorganisasi' + index" class="mb-4">{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</div>
+                            <div v-for="(item, index) in dataDetail.organisasi[0].typeOrganisasi" :key="'tipeorganisasi' + index" class="mb-4">
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                            </div>
                         </div>
                         <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Approach Type</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in detailOrganisasi.typeApproach" :key="'tipeapproach' + index" class="mb-4">{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</div>
+                            <div v-for="(item, index) in dataDetail.organisasi[0].typeApproach" :key="'tipeapproach' + index" class="mb-4">
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                            </div>
                         </div>
                         <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Topic</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in detailOrganisasi.typeIssues" :key="'tipeissues' + index" class="mb-4">{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</div>
+                            <div v-for="(item, index) in dataDetail.organisasi[0].typeIssues" :key="'tipeissues' + index" class="mb-4">
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                            </div>
                         </div>
                     </div>
                     <hr class="border-warna-tujuh mb-5">
                     <div class="mb-5">
                         <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Highlight</div>
-                        <div class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? detailOrganisasi.highlight[0] : detailOrganisasi.highlight[1] }}</div>
+                        <div class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? dataDetail.organisasi[0].highlight[0] : dataDetail.organisasi[0].highlight[1] }}</div>
                     </div>
                     <hr class="border-warna-tujuh mb-5">
                     <div class="mb-[36px]">
                         <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Description</div>
-                        <div class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? detailOrganisasi.deskripsi[0] : detailOrganisasi.deskripsi[1] }}</div>
+                        <div class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? dataDetail.organisasi[0].deskripsi[0] : dataDetail.organisasi[0].deskripsi[1] }}</div>
                     </div>
                     <div>
                         <div class="text-sm text-warna-delapan font-semibold mb-[30px]">Milestone</div>
@@ -154,28 +166,36 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white shadow-md rounded-xl py-4 px-6">
+        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div v-if="detailOrganisasi.statusVerification.id === 1" class="flex gap-x-6  font-semibold">
+                <div v-if="dataDetail.statusVerification === 1" class="flex gap-x-6  font-semibold">
                     <div class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
                     <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
-                <div v-if="detailOrganisasi.statusVerification.id === 3" class="flex gap-x-6  font-semibold">
+                <div v-if="dataDetail.statusVerification === 3" class="flex gap-x-6  font-semibold">
                     <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
                     <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
             </div>
         </div>
+        <!-- <pre>{{dataDetail}}</pre> -->
     </div>
 </template>
 
 <script>
+import detailOrganisasi from '~/static/data/detailorganisasi.json';
+
 export default {
     data() {
         return {
             flagDrop: false,
             selectedFlag: 'indonesia',
+            internalBranch: [],
+            requestByIndividu: [],
+            teamMember: [],
+            partner: [],
+            maxItem: 7,
             dataLabel: [
                 {
                     label: 'Organization ID',
@@ -189,12 +209,12 @@ export default {
                 },
                 {
                     label: 'Created',
-                    value: 'created',
+                    value: 'createdAt',
                     posisi: 'kiri'
                 },
                 {
                     label: 'Updated',
-                    value: 'updated',
+                    value: 'updatedAt',
                     posisi: 'kiri'
                 },
                 {
@@ -204,7 +224,7 @@ export default {
                 },
                 {
                     label: 'Phone',
-                    value: 'phone',
+                    value: 'telepon',
                     posisi: 'kiri'
                 },
                 {
@@ -214,7 +234,7 @@ export default {
                 },
                 {
                     label: 'Website',
-                    value: 'website',
+                    value: 'websiteOrganisasi',
                     posisi: 'kanan'
                 },
                 {
@@ -222,275 +242,13 @@ export default {
                     value: 'missionStatement',
                     posisi: 'kanan'
                 },
-            ],
-            detailOrganisasi: {
-                organisasiId: '91123548',
-                namaOrganisasi: 'Peace Generation Indonesia',
-                created: new Date(),
-                updated: new Date(),
-                emailIsVerified: true,
-                accountIsVerified: false,
-                phoneIsVerified: false,
-                signUpAddress: '119.18.122.3',
-                statusVerification: {
-                    // id: 1,
-                    // nama: [
-                    //     'Need Verification',
-                    //     'Need Verification'
-                    // ]
-                    id: 3,
-                    nama: [
-                        'Accepted',
-                        'Accepted'
-                    ]
+                {
+                    label: 'Hierarchy',
+                    value: 'hierarki',
+                    posisi: 'kanan'
                 },
-                socialMedia: [
-                    {
-                        id: 'sosmed-01',
-                        kategoriSosialMedia: 'Instragram',
-                        linkSosialMedia: 'https://www.instagram.com/khub.id'
-                    },
-                    {
-                        id: 'sosmed-02',
-                        kategoriSosialMedia: 'Facebook',
-                        linkSosialMedia: 'https://www.facebook.com/PeaceGenID/'
-                    },
-                    {
-                        id: 'sosmed-03',
-                        kategoriSosialMedia: 'Youtube',
-                        linkSosialMedia: 'https://www.youtube.com/PeaceGenID/'
-                    },
-                    {
-                        id: 'sosmed-04',
-                        kategoriSosialMedia: 'Twitter',
-                        linkSosialMedia: ''
-                    },
-                ],
-                email: 'admin@peacegen.id',
-                phone: '+6281283571474',
-                totalMember: 102,
-                website: 'www.peacegen.id',
-                missionStatement: 'Connecting the dots',
-                lokasiOrganisasi: 'Suite 10-11 Graha DLA, Jl. Otto Iskandar Dinata No.392, Nyengseret, Kec. Astanaanyar, Kota Bandung, Jawa Barat 40242',
-                highlight: [
-                    "Layanan Data Digital Terpusat dalam Penanggulangan Ekstremisme Kekerasan di Indonesia",
-                    "Digital Data Center Platform for Preventing and Countering Violent Extremism Effort in Indonesia"
-                ],
-                deskripsi: [
-                    "Knowledge Hub (K-Hub) merupakan sebuah wahana bertukar pengetahuan dan praktik baik upaya-upaya bina damai dalam Pencegahan dan Penanggulangan Ekstremisme Kekerasan (Preventing and Countering Violence Extremism / PCVE) di Indonesia.",
-                    "Knowledge Hub (K-Hub) is a medium for exchanging knowledge and good practices about peacebuilding initiatives in the Preventing and Countering Violence Extremism (PCVE) effort in Indonesia."
-                ],
-                typeOrganisasi:[
-                    {
-                        id: 1,
-                        nama: ['Organisasi Non Pemerintahan (NGO)', 'Non Government Organization (NGO)']
-                    },
-                    {
-                        id: 2,
-                        nama: ['Organisasi Masyarakat Sipil (OMS)', 'Civil Society Organization (CSO)']
-                    }
-                ],
-                typeApproach:[
-                    {
-                        id: 1,
-                        nama: ['Pelepasan', 'Disengagement']
-                    },
-                    {
-                        id: 2,
-                        nama: ['Pencegahan', 'Prevention']
-                    }
-                ],
-                typeIssues:[
-                    {
-                        id: 1,
-                        nama: ['Gender', 'Gender']
-                    },
-                    {
-                        id: 2,
-                        nama: ['Pemuda', 'Youth']
-                    }
-                ],
-                organisasiCabangInternal: [
-                    {
-                        namaOrganisasi: 'Peace Generation Indonesia',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Wahid Foundation',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Infia Consulting',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Asosiasi Guru Pendidikan Agama Islam Indonesia',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'PUSAD Paramadina',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Indonesia Social Justice Network',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Kulavarga',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Pusat Studi Budaya dan Perubahan Sosial',
-                        image: '/images/profile.png'
-                    }
-                ],
-                requestByIndividu: [
-                    {
-                        namaIndividu: 'Gilang Baskara',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'Yanuar Septian',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'Gilang Baskara',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'Yanuar Septian',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'Gilang Baskara',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'Yanuar Septian',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    }
-                ],
-                teamMember: [
-                    {
-                        namaIndividu: 'Gilang Baskara',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'Yanuar Septian',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'Rani Shelvia',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'Gilang Baskara',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'John Doe',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'Yanuar Septian',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'Rani Shelvia',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaIndividu: 'Rani Shelvia',
-                        image: '/images/profile.png'
-                    }
-                ],
-                partnerOrganisasiInternal: [
-                    {
-                        namaOrganisasi: 'Peace Generation Indonesia',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Kulavarga',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Pusat Studi Budaya dan Perubahan Sosial',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Infia Consulting',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'PUSAD Paramadina',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Peace Generation Indonesia',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Kulavarga',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Pusat Studi Budaya dan Perubahan Sosial',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Infia Consulting',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'PUSAD Paramadina',
-                        image: '/images/profile.png'
-                    }
-                ]
-            }
+            ],
+            dataDetail: null,
         }
     },
     computed: {
@@ -502,6 +260,12 @@ export default {
         },
         title() {
             return this.$t('Verifikasi Organisasi')
+        },
+        id() {
+            return this.$route.params.id;
+        },
+        basePath() {
+            return process.env.BASE_URL
         }
     },
     watch: {
@@ -520,6 +284,47 @@ export default {
     methods: {
         initialize() {
             this.$store.commit('setPageTitle', this.title)
+            this.masterPoint()
+        },
+
+        masterPoint() {
+            this.dataDetail = detailOrganisasi
+
+            this.internalBranch = detailOrganisasi.organisasi[0].organisasiCabangInternal.map(e => {
+                const data = {
+                    id: e.organisasiId,
+                    nama: e.namaOrganisasi,
+                    image: e.imgLogoOrganisasi
+                }
+                return data
+            })
+
+            this.requestByIndividu = detailOrganisasi.organisasi[0].requestedByIndividu.map(e => {
+                const data = {
+                    id: e.id,
+                    nama: e.individu.namaIndividu,
+                    image: e.individu.imgFotoProfile
+                }
+                return data
+            })
+
+            this.teamMember = detailOrganisasi.organisasi[0].teamMember.map(e => {
+                const data = {
+                    id: e.individu.userId,
+                    nama: e.individu.namaIndividu,
+                    image: e.individu.imgFotoProfile
+                }
+                return data
+            })
+
+            this.partner = detailOrganisasi.organisasi[0].partnerOrganisasiEksternal.map(e => {
+                const data = {
+                    id: e.pkPartnerEksternalId,
+                    nama: e.namaPartner,
+                    image: e.imgLogoPartner
+                }
+                return data
+            })
         },
 
         btnBack() {
@@ -527,7 +332,7 @@ export default {
         },
 
         btnEdit() {
-            this.$router.push('/verifications/organisasi/edit')
+            this.$router.push('/verifications/organisasi/'+this.id+'/edit')
         },
 
         toggleDrop() {
