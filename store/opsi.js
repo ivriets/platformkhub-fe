@@ -1,5 +1,5 @@
 export const state = () => ({
-    kategorisasiProfileOrganisasi: [
+    kategorisasiProfileOrganisasiPusat: [
         {
             id: 'tentang',
             label: 'Tentang'
@@ -7,6 +7,32 @@ export const state = () => ({
         {
             id: 'cabang',
             label: 'Cabang'
+        },
+        {
+            id: 'anggota',
+            label: 'Anggota'
+        },
+        {
+            id: 'mitra',
+            label: 'Mitra'
+        },
+        {
+            id: 'pencapaian',
+            label: 'Pencapaian'
+        },
+        {
+            id: 'kontaklokasi',
+            label: 'Kontak & Lokasi'
+        },
+        {
+            id: 'mediasosial',
+            label: 'Media Sosial'
+        }
+    ],
+    kategorisasiProfileOrganisasiCabang: [
+        {
+            id: 'tentang',
+            label: 'Tentang'
         },
         {
             id: 'pusat',

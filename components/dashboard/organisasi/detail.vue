@@ -132,20 +132,20 @@
                     <div class="grid grid-cols-12 gap-y-1">
                         <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Organization Type</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in dataDetail.organisasi[0].typeOrganisasi" :key="'tipeorganisasi' + index" class="mb-4">
-                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                            <div v-for="(item, index) in dataDetail.organisasi[0].typeOrganisasi" :key="'tipeorganisasi' + index" class="mb-4 inline-block mr-1">
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.organisasi[0].typeOrganisasi.length">, </span>
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Approach Type</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in dataDetail.organisasi[0].typeApproach" :key="'tipeapproach' + index" class="mb-4">
-                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                            <div v-for="(item, index) in dataDetail.organisasi[0].typeApproach" :key="'tipeapproach' + index" class="mb-4 inline-block mr-1">
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.organisasi[0].typeApproach.length">, </span>
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Topic</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in dataDetail.organisasi[0].typeIssues" :key="'tipeissues' + index" class="mb-4">
-                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                            <div v-for="(item, index) in dataDetail.organisasi[0].typeIssues" :key="'tipeissues' + index" class="mb-4 inline-block mr-1">
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.organisasi[0].typeIssues.length">, </span>
                             </div>
                         </div>
                     </div>
@@ -169,13 +169,12 @@
         <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div v-if="dataDetail.statusVerification === 1" class="flex gap-x-6  font-semibold">
+                <div v-if="dataDetail.statusVerification === 1" class="flex gap-x-6 font-semibold">
                     <div class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
                     <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
-                <div v-if="dataDetail.statusVerification === 3" class="flex gap-x-6  font-semibold">
+                <div v-if="dataDetail.statusVerification === 3" class="font-semibold">
                     <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
-                    <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
             </div>
         </div>
@@ -351,10 +350,6 @@ export default {
         pilihInggris() {
             this.selectedFlag = 'inggris'
             this.closeDrop()
-        },
-
-        gotoInternalBranch() {
-            this.$router.push('/verifications/organisasi/_id/internal-branch')
         }
     },
 }

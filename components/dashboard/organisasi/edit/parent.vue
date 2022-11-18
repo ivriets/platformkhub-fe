@@ -18,12 +18,21 @@
             </nav>
         </div>
         <div class="bg-white shadow-md rounded-xl py-8 px-6 mb-[28px]">
-            <div class="w-[240px]">
-                <InputDropdown 
-                    v-model="kategorisasi"
-                    :name="'kategorisasi'"
-                    :opsi="kategorisasiProfileOrganisasi"
-                />
+            <div v-if="dataOrganisasi" class="w-[240px]">
+                <div v-if="dataOrganisasi.organisasi[0].hierarki !== 'Headquarter'">
+                    <InputDropdown 
+                        v-model="kategorisasi"
+                        :name="'kategorisasi'"
+                        :opsi="kategorisasiProfileOrganisasiCabang"
+                    />
+                </div>
+                <div v-if="dataOrganisasi.organisasi[0].hierarki !== 'Branch'">
+                    <InputDropdown 
+                        v-model="kategorisasi"
+                        :name="'kategorisasi'"
+                        :opsi="kategorisasiProfileOrganisasiPusat"
+                    />
+                </div>
             </div>
             <hr v-if="!['cabang', 'anggota', 'pusat'].includes(kategorisasi)" class="border-warna-tujuh my-10">
             <div v-if="kategorisasi === 'tentang'">
@@ -51,32 +60,50 @@
                 <DashboardOrganisasiEditMediaSosial />
             </div>
         </div>
-        <div class="bg-white shadow-md rounded-xl py-4 px-6">
+        <div v-if="kategorisasi !== 'pusat'" class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
                 <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
         </div>
+        <!-- <pre>{{dataOrganisasi}}</pre> -->
     </div>
 </template>
 
 
 <script>
+import detailOrganisasi from '~/static/data/detailorganisasi.json';
+
 export default {
     data() {
         return {
             kategorisasi: 'tentang',
+            dataOrganisasi: null
         }
     },
     computed: {
-        kategorisasiProfileOrganisasi() {
-            return this.$store.state.opsi.kategorisasiProfileOrganisasi
+        kategorisasiProfileOrganisasiPusat() {
+            return this.$store.state.opsi.kategorisasiProfileOrganisasiPusat
+        },
+        kategorisasiProfileOrganisasiCabang() {
+            return this.$store.state.opsi.kategorisasiProfileOrganisasiCabang
         },
         id() {
             return this.$route.params.id;
         }
     },
+    mounted() {
+        this.initialize()
+    },
     methods: {
+        initialize() {
+            this.masterPoint()
+        },
+
+        masterPoint() {
+            this.dataOrganisasi = detailOrganisasi
+        },
+
         btnBack() {
             this.$router.push('/verifications/organisasi/'+this.id)
         }

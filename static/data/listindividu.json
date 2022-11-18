@@ -1,0 +1,136 @@
+{
+    "count": 1263,
+    "length": 10,
+    "results": [
+        {
+            "accountId": "134d0a27-fc6d-41ae-b932-b99a769aeece",
+            "userId": 24064037,
+            "createdAt": "2022-11-07T06:46:55.478923",
+            "email": "alizzcia.ei@gmail.com",
+            "emailIsVerified": true,
+            "statusVerification": 1,
+            "individu": [
+                {
+                    "namaIndividu": "A Heri AGustian"
+                }
+            ]
+        },
+        {
+            "accountId": "e8967cc8-d251-437a-a99f-2d3e16bc5bf0",
+            "userId": 69982874,
+            "createdAt": "2022-10-29T09:46:15.015898",
+            "email": "difaameliora@gmail.com",
+            "emailIsVerified": true,
+            "statusVerification": 1,
+            "individu": [
+                {
+                    "namaIndividu": "Difa Ameliora Pujayanti"
+                }
+            ]
+        },
+        {
+            "accountId": "a10d6ef2-a704-48d8-8ed9-e5d08aad3281",
+            "userId": 98808757,
+            "createdAt": "2022-10-28T20:40:20.167486",
+            "email": "hanifahlativ@yahoo.com",
+            "emailIsVerified": true,
+            "statusVerification": 1,
+            "individu": [
+                {
+                    "namaIndividu": "Hanifah Latif M"
+                }
+            ]
+        },
+        {
+            "accountId": "92bc5ffc-0b6b-4083-b774-a766b00a9ab1",
+            "userId": 96914731,
+            "createdAt": "2022-10-28T15:49:33.331670",
+            "email": "suka.pandia@peacegen.id",
+            "emailIsVerified": true,
+            "statusVerification": 1,
+            "individu": [
+                {
+                    "namaIndividu": "Suka"
+                }
+            ]
+        },
+        {
+            "accountId": "9c94285e-847f-4962-9ffd-99334fc719a7",
+            "userId": 90945958,
+            "createdAt": "2022-10-19T17:03:38.581212",
+            "email": "lindamedsos25@gmail.com",
+            "emailIsVerified": true,
+            "statusVerification": 1,
+            "individu": [
+                {
+                    "namaIndividu": "linda"
+                }
+            ]
+        },
+        {
+            "accountId": "7f4d6b63-1f32-4d2e-a190-0102a2f9b545",
+            "userId": 4401998,
+            "createdAt": "2022-10-14T15:23:30.217040",
+            "email": "hayati@peacegen.id",
+            "emailIsVerified": true,
+            "statusVerification": 1,
+            "individu": [
+                {
+                    "namaIndividu": "Nurhayati"
+                }
+            ]
+        },
+        {
+            "accountId": "ec9e9a18-ecbd-4549-8197-9197d43fe2bf",
+            "userId": 62702588,
+            "createdAt": "2022-10-13T09:09:11.621247",
+            "email": "Dewaanom13@gmail.com",
+            "emailIsVerified": true,
+            "statusVerification": 1,
+            "individu": [
+                {
+                    "namaIndividu": "I Dewa Gede Anom Wiratmaja"
+                }
+            ]
+        },
+        {
+            "accountId": "8ec18979-bc58-4681-93b0-f1150807bb1a",
+            "userId": 94882583,
+            "createdAt": "2022-10-10T16:08:01.219937",
+            "email": "tio@peacegen.id",
+            "emailIsVerified": true,
+            "statusVerification": 3,
+            "individu": [
+                {
+                    "namaIndividu": "Tio Reza Muchtar"
+                }
+            ]
+        },
+        {
+            "accountId": "ccaf8ae3-8b0e-42e8-86e6-cbb0a47864b6",
+            "userId": 51409978,
+            "createdAt": "2022-09-14T13:33:59.173848",
+            "email": "nauvalelghifari17@gmail.com",
+            "emailIsVerified": true,
+            "statusVerification": 1,
+            "individu": [
+                {
+                    "namaIndividu": "Muhammad Nauval El Ghifari"
+                }
+            ]
+        },
+        {
+            "accountId": "2e4ec20f-7b7b-4f3c-a29f-c7986f0993fd",
+            "userId": 67974788,
+            "createdAt": "2022-09-05T11:06:42.405561",
+            "email": "mikailaditia@gmail.com",
+            "emailIsVerified": true,
+            "statusVerification": 1,
+            "individu": [
+                {
+                    "namaIndividu": "Mikail Aditia Rahman"
+                }
+            ]
+        }
+    ]
+}

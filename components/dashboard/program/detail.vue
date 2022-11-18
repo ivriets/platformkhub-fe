@@ -48,113 +48,201 @@
                 <div class="col-span-12 lg:col-span-4">
                     <div class="w-full bg-white shadow-md border border-gray-50 rounded-xl ">
                         <img src="/images/logo.png" alt="main-image">
+                        <div class="mt-4 mb-4 text-center text-warna-sembilan">Thumbnail</div>
                     </div>
-                    <hr class="border-warna-tujuh mt-6 mb-5">
-                    <div class="">
-                        <div class="mb-5 text-sm text-warna-delapan font-semibold">Location</div>
-                        <div class="text-sm text-warna-sembilan font-semibold">test</div>
+                    <div class="mt-10 w-full bg-white shadow-md border border-gray-50 rounded-xl ">
+                        <img src="/images/logo.png" alt="main-image">
+                        <div class="mt-4 mb-4 text-center text-warna-sembilan">Main Image</div>
                     </div>
-                    <hr class="border-warna-tujuh mt-6 mb-5">
-                    <!-- <ElementsFotoNama 
-                        :label="'Internal Branch'"
-                        :jumlah="detailOrganisasi.organisasiCabangInternal.length !== 0 ? detailOrganisasi.organisasiCabangInternal.length : 0"
-                        :fromData="detailOrganisasi.organisasiCabangInternal"
-                        :clickMore="'/verifications/organisasi/_id/internal-branch'"
-                        :identitas="'organisasi'"
-                    />
-                    <hr class="border-warna-tujuh mt-6 mb-5">
-                    <ElementsFotoNama 
-                        :label="'Requested by Individu'"
-                        :jumlah="dataDetail.organisasi[0].requestedByIndividu.length !== 0 ? dataDetail.organisasi[0].requestedByIndividu.length : 0"
-                        :fromData="dataDetail.organisasi[0].requestedByIndividu"
-                        :clickMore="'/verifications/organisasi/_id/request-by-individu'"
-                        :identitas="'individu'"
-                    />
-                    <hr class="border-warna-tujuh mt-6 mb-5">
-                    <ElementsFotoNama 
-                        :label="'Team Member'"
-                        :jumlah="detailOrganisasi.teamMember.length !== 0 ? detailOrganisasi.teamMember.length : 0"
-                        :fromData="detailOrganisasi.teamMember"
-                        :clickMore="'/verifications/organisasi/_id/team-member'"
-                        :identitas="'individu'"
-                    />
-                    <hr class="border-warna-tujuh mt-6 mb-5">
-                    <ElementsFotoNama 
-                        :label="'Partner'"
-                        :jumlah="detailOrganisasi.partner.length !== 0 ? detailOrganisasi.partner.length : 0"
-                        :fromData="detailOrganisasi.partner"
-                        :clickMore="'/verifications/organisasi/_id/partner'"
-                        :identitas="'organisasi'"
-                    /> -->
+                    
+                    <div class="grid grid-cols-12 gap-5">
+                        <div class="col-span-12 lg:col-span-6">
+                            <div class="mt-8 text-warna-delapan font-semibold">Officer</div>
+                            <div class="text-sm text-warna-sembilan font-semibold">
+                                <div class="mb-4">{{ dataDetail.officer }}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-span-12 lg:col-span-6">
+                            <div class="mt-8 text-warna-delapan font-semibold">Partner</div>
+                            <div class="text-sm text-warna-sembilan font-semibold">
+                                <div class="mb-4">{{ dataDetail.partnerActivityEksternal }}</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="mt-8 text-warna-delapan font-semibold">Audience Type</div>
+                    <div class="text-sm text-warna-sembilan font-semibold">
+                        <div v-for="(item, index) in dataDetail.typeAudience" :key="'tipeaudience' + index" class="mb-4">
+                            <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-warna-delapan font-semibold">Approach</div>
+                    <div class="text-sm text-warna-sembilan font-semibold">
+                         <div v-for="(item, index) in dataDetail.typeApproach" :key="'tipeapproach' + index" class="mb-4">
+                            <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-warna-delapan font-semibold">Issue</div>
+                    <div class="text-sm text-warna-sembilan font-semibold">
+                         <div v-for="(item, index) in dataDetail.typeIssue" :key="'tipeissue' + index" class="mb-4">
+                            <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-warna-delapan font-semibold">Tag</div>
+                    <div class="text-sm text-warna-sembilan font-semibold">
+                         <div v-for="(item, index) in dataDetail.tag" :key="'tag' + index" class="mb-4">
+                            <span>{{ selectedFlag === 'indonesia' ? item.pilihanTagId.nama[0] : item.pilihanTagId.nama[1] }}</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-warna-delapan font-semibold">Moderation Note</div>
+                    <div class="text-sm text-warna-sembilan font-semibold">
+                        <div class="mb-4">{{ dataDetail.catatanModerasi }}</div>
+                    </div>
+
+
+
+
+
+
+
                 </div>
-                <div v-if="detailOrganisasi" class="col-span-12 lg:col-span-8">
-                    <div class="text-xl font-bold text-warna-utama"></div>
+                <div v-if="dataDetail" class="col-span-12 lg:col-span-8">
+                    <div class="text-xl font-bold text-warna-utama">
+                        logo organisasi dan nama organisasi 
+                    </div>
                     <hr class="border-warna-tujuh my-5">
                     <div class="grid grid-cols-8 gap-5">
                         <div class="col-span-4">
-                            
-                            <!-- <div v-for="(item1, index1) in dataLabel" :key="'datalabel' + index1" v-show="item1.posisi==='kiri'" class="grid grid-cols-12 mb-4 break-words gap-1">
+                            <div v-for="(item1, index1) in dataLabel" :key="'datalabel' + index1" v-show="item1.posisi==='kiri'" class="grid grid-cols-12 mb-4 break-words gap-1">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
-                                    <div v-if="['created', 'updated'].includes(item1.value)" class="">
-                                        {{ $dayjs(detailOrganisasi[item1.value]).format('DD MMM YYYY hh:mm A') }}
-                                    </div>
-                                    <div v-else-if="['emailIsVerified', 'accountIsVerified'].includes(item1.value)">
-                                        {{ detailOrganisasi[item1.value] === true ? 'Yes' : 'No' }}
+                                    <div v-if="['createdAt', 'updatedAt'].includes(item1.value)" class="">
+                                        {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY hh:mm A') }}
                                     </div>
                                     <div v-else>
-                                        {{ detailOrganisasi[item1.value] }}
+                                        {{ dataDetail[item1.value] }}
                                     </div>
                                 </div>
                             </div>
-                            <div v-for="(item2, index2) in detailOrganisasi.socialMedia" :key="'datasosmed' + index2" class="grid grid-cols-12 mb-4 break-words gap-1">
-                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item2.kategoriSosialMedia }}</div>
-                                <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">{{ item2.linkSosialMedia ? item2.linkSosialMedia : '-' }}</div>
-                            </div> -->
                         </div>
-                        <!-- <div class="col-span-4">
+                        <div class="col-span-4">
                             <div v-for="(item1, index1) in dataLabel" :key="'dL' + index1" v-show="item1.posisi==='kanan'" class="grid grid-cols-12 mb-4 break-words">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
-                                    <div v-if="['created', 'updated'].includes(item1.value)" class="">
-                                        {{ detailOrganisasi[item1.value] }}
+                                    <div v-if="['start', 'end'].includes(item1.value)" class="">
+                                        {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY hh:mm A') }}
                                     </div>
                                     <div v-else>
-                                        {{ detailOrganisasi[item1.value] }}
+                                        {{ dataDetail[item1.value] }}
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
-                    </div>
-                    <!-- <hr class="border-warna-tujuh mb-5">
-                    <div class="grid grid-cols-12 gap-y-1">
-                        <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Organization Type</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in detailOrganisasi.typeOrganisasi" :key="'tipeorganisasi' + index" class="mb-4">{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</div>
-                        </div>
-                        <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Approach Type</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in detailOrganisasi.typeApproach" :key="'tipeapproach' + index" class="mb-4">{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</div>
-                        </div>
-                        <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Topic</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in detailOrganisasi.typeIssues" :key="'tipeissues' + index" class="mb-4">{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</div>
                         </div>
                     </div>
+
                     <hr class="border-warna-tujuh mb-5">
                     <div class="mb-5">
-                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Highlight</div>
-                        <div class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? detailOrganisasi.highlight[0] : detailOrganisasi.highlight[1] }}</div>
+                        <div class="text-base text-warna-sembilan font-semibold mb-[18px]">About</div>
+                        <div class="col-span-12 md:col-span-10 lg:col-span-10 pl-4 bg-warna-lima text-sm text-warna-sembilan font-normal">
+                            <div class="mb-4">{{ selectedFlag === 'indonesia' ? dataDetail.deskripsiPanjang[0] : dataDetail.deskripsiPanjang[1] }}</div>
+                        </div>
                     </div>
+                        
                     <hr class="border-warna-tujuh mb-5">
-                    <div class="mb-[36px]">
-                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Description</div>
-                        <div class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? detailOrganisasi.deskripsi[0] : detailOrganisasi.deskripsi[1] }}</div>
+                    
+                     <div class="mb-5">
+                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Gallery</div>
+                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
+                            gambar-gambar ada 5. kalo lebih dari lima? mungkin pakai carousel saja.
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-sm text-warna-delapan font-semibold mb-[30px]">Milestone</div>
-                        <div class="text-sm text-warna-sembilan font-semibold text-center">On Going...</div>
-                    </div> -->
+                    
+                    <hr class="border-warna-tujuh mb-5">
+
+                    <div class="mb-5">
+                        <div class="text-warna-delapan font-semibold mb-[16px]">Beneficiaries</div>
+
+                            <div class="grid grid-cols-12 gap-5">
+                                <div class="col-span-12 lg:col-span-6">
+                                    <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Beneficiaries by Gender</div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Male</div>
+                                        <div class="text-warna-sembilan">2315</div>
+                                    </div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Female</div>
+                                        <div class="text-warna-sembilan">2315</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-span-12 lg:col-span-6">
+                                    <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Beneficiaries by Disability</div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Male</div>
+                                        <div class="text-warna-sembilan">2315</div>
+                                    </div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Female</div>
+                                        <div class="text-warna-sembilan">2315</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                    
+                     <hr class="border-warna-tujuh mb-5">
+
+                     <div class="mb-5">
+                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Retention</div>
+                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
+                            info terkait retention
+                        </div>
+                    </div>
+                    
+                     <hr class="border-warna-tujuh mb-5">
+
+                     <div class="mb-5">
+                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Satisfaction</div>
+                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
+                            info terkait satisfaction
+                        </div>
+                    </div>
+                    
+                     <hr class="border-warna-tujuh mb-5">
+
+                     <div class="mb-5">
+                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Customer</div>
+                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
+                            info terkait customer
+                        </div>
+                    </div>
+                    
+                     <hr class="border-warna-tujuh mb-5">
+
+                     <div class="mb-5">
+                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Net Promotor Score</div>
+                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
+                            info terkait NPS
+                        </div>
+                    </div>
+                    
+                     <hr class="border-warna-tujuh mb-5">
+
+                     <div class="mb-5">
+                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Journey</div>
+                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
+                            info terkait journey
+                        </div>
+                    </div>
+                    
+
                 </div>
             </div>
         </div>
@@ -211,16 +299,6 @@ export default {
                     posisi: 'kiri'
                 },
                 {
-                    label: 'Participant',
-                    value: 'participant',
-                    posisi: 'kiri'
-                },
-                {
-                    label: 'Registration',
-                    value: 'registration',
-                    posisi: 'kiri'
-                },
-                {
                     label: 'Activity',
                     value: 'activity',
                     posisi: 'kanan'
@@ -251,225 +329,7 @@ export default {
             milestone: [],
             report: [],
             journey: [],
-            activityResult: null,
-            detailProgram: {
-                programId: '91123548',
-                createdAt: 'Peace Generation Indonesia',
-                updatedAt: new Date(),
-                submission: 3,
-                moderator: new Date(),
-                url: true,
-                participant: false,
-                registration: false,
-                activity: {
-				    id: 1,
-				    nama: [
-                        "Pre Activity",
-                        "Pre Activity"
-                    ]
-	    		},
-                visibility: {
-                    id: 1,
-                    nama: [
-                        'For Public',
-                        'For Public'
-                    ]
-                },
-                start: new Date(),
-                end: new Date(),
-                lokasi: [
-                    {
-                        "provinsi": "Bandung",
-                        "kota": "Soreang",
-                        "jalan": "Soreang",
-                        "pinLocation": "12345",
-                        "typeVisibility": 1
-                    },
-                    {
-                        "provinsi": "Jakarta",
-                        "kota": "Jakarta",
-                        "jalan": "Jakarta",
-                        "pinLocation": "13242",
-                        "typeVisibility": 1
-                    }
-                ],
-                about: ["Deskripsi Panjang", "Long Description"],
-
-                officer: 'www.peacegen.id',
-                typeAudience:[
-                    {
-                        "id": 1,
-                        "nama": [
-                            "Semua Orang",
-                            "For Everyone"
-                        ]
-                    }
-                ],
-                partner: [
-                    {
-                        namaOrganisasi: 'Peace Generation Indonesia',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Kulavarga',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Pusat Studi Budaya dan Perubahan Sosial',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Infia Consulting',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'PUSAD Paramadina',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Peace Generation Indonesia',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Kulavarga',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Pusat Studi Budaya dan Perubahan Sosial',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'Infia Consulting',
-                        image: '/images/profile.png'
-                    },
-                    {
-                        namaOrganisasi: 'PUSAD Paramadina',
-                        image: '/images/profile.png'
-                    }
-                ],
-                typeApproach:[
-                    {
-                        id: 1,
-                        nama: ['Pelepasan', 'Disengagement']
-                    },
-                    {
-                        id: 2,
-                        nama: ['Pencegahan', 'Prevention']
-                    }
-                ],
-                typeIssues:[
-                    {
-                        id: 1,
-                        nama: ['Gender', 'Gender']
-                    },
-                    {
-                        id: 2,
-                        nama: ['Pemuda', 'Youth']
-                    }
-                ],
-                tag:[
-                    {
-                        id: 1,
-                        nama: ['Gender', 'Gender']
-                    },
-                    {
-                        id: 2,
-                        nama: ['Pemuda', 'Youth']
-                    }
-                ],
-                moderationNote: '', 
-                fase: [
-                    {
-                        faseId: "AMGPViKG",
-                        nomorUrut: 1,
-                        deskripsi: [
-                            "deskripsi fase 1",
-                            "Description phase 1"
-                        ],
-                        resources: 65831748,
-                        binFaseFile: "/assets/Organisasi/61537680/files/sadmoba-Daftar_Emiten_LQ45_Bursa_Efek_Indonesia__BEI__Periode__k0khsJ7.pdf",
-                        isDone: false,
-                        systemRowId: "WsVOpKCE"
-                    }
-                ],
-                files: [
-                    {
-                        pkFileId: 4202268,
-                        systemRowId: "PymcEPiO",
-                        binFile: "/assets/Organisasi/61537680/files/sadmoba-Daftar_Emiten_LQ45_Bursa_Efek_Indonesia__BEI__Periode__73eeLSK.pdf",
-                        deskripsiFile: [
-                            "deksripsi files",
-                            "files descripstions"
-                        ],
-                        isLimitedaccess: 1,
-                        typeVisibility: {
-                            "id": 1,
-                            "nama": [
-                                "For Public",
-                                "For Public"
-                            ]
-                        }
-                    }
-                ],
-                galleries: [
-                    {
-                        pkGalleryId: 81725737,
-                        imgGambar: "/assets/Organisasi/61537680/images/sadmoba---cute-batman-baby-batman_qM4n2to.jpeg",
-                        deskripsiGambar: [
-                            "deksripsi gallery",
-                            "galleries descripstions"
-                        ],
-                        typeVisibility: {
-                            "id": 1,
-                            "nama": [
-                                "For Public",
-                                "For Public"
-                            ]
-                        },
-                        systemRowId: "uwYbjySZ"
-                    }
-                ],
-                activityResult: {
-                    beneficiariesMen: 10,
-                    beneficiariesWomen: 11,
-                    beneficiariesMenDifable: 20,
-                    beneficiariesWomenDifable: 20,
-                    retentionSaatProgramMen: 10,
-                    retentionSaatProgramWomen: 9,
-                    retentionPascaProgramMen: 8,
-                    retentionPascaProgramWomen: 10,
-                    satisfactionSangatTidakPuas: 17,
-                    satisfactionTidakPuas: 15,
-                    satisfactionNetral: 13,
-                    satisfactionPuas: 12,
-                    satisfactionSangatPuas: 10,
-                    customerAcquisitionScore: 8,
-                    netPromotorScore2: 30,
-                    netPromotorScore1: 7,
-                    netPromotorScore3: 0,
-                    netPromotorScore4: 0,
-                    netPromotorScore5: 0,
-                    netPromotorScore6: 0,
-                    netPromotorScore7: 0,
-                    netPromotorScore8: 0,
-                    netPromotorScore9: 0,
-                    netPromotorScore10: 6
-                },
-                journey: [
-                    {
-                        nomorUrut: 1,
-                        judulJourney: ["Judul", "Title"],
-                        deskripsi: ["Deskripsi", "Description"],
-                        image: '/images/profile.png'
-                    },
-                    {
-                        nomorUrut: 2,
-                        judulJourney: ["Judul2", "Title2"],
-                        deskripsi: ["Deskripsi2", "Description2"],
-                        image: '/images/profile.png'
-                    }
-                ],
-            }
+            activityResult: null
         }
     },
     computed: {

@@ -46,7 +46,7 @@ export default {
         return {
             dataTeamMember: [],
             actions: {
-                status: true,
+                status: false,
                 button: {
                     edit: {
                         status: true,

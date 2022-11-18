@@ -55,7 +55,7 @@ export default {
     data() {
         return {
             flagDrop: false,
-            selectedFlag: 'indonesia',
+            selectedFlag: 'inggris',
         }
     },
     computed: {

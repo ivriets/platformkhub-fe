@@ -41,9 +41,10 @@
         </div>
         <div class="bg-white rounded-lg shadow-md border border-gray-100">
             <ElementsTableFlat 
-                :dataTable="dataTable"
                 :masterTable="masterTable"
-                :goto="goto"
+                :dataTable="dataTable"
+                :path="'/verifications/individu/'"
+                :idValue="'accountId'"
             />
         </div>
     </div>
@@ -51,9 +52,12 @@
 
 
 <script>
+import listIndividu from '~/static/data/listindividu.json';
+
 export default {
     data() {
         return {
+            dataTable: [],
             filter: {
                 search: '',
             },
@@ -92,9 +96,10 @@ export default {
             masterTable: [
                 {
                     header: 'Name',
-                    value: 'name',
+                    value: 'namaIndividu',
                     tipe: 'string',
-                    display: true
+                    display: true,
+                    klik: true
                 },
                 {
                     header: 'Email',
@@ -110,46 +115,16 @@ export default {
                 },
                 {
                     header: 'Status',
-                    value: 'status',
-                    tipe: 'string',
+                    value: 'statusVerification',
+                    tipe: 'integer',
                     display: true
                 },
                 {
                     header: 'Created',
-                    value: 'created',
+                    value: 'createdAt',
                     tipe: 'date',
                     display: true
                 },
-            ],
-            dataTable: [
-                {
-                    name: 'Tio',
-                    email: 'tio@peacegen.id',
-                    emailIsVerified: true,
-                    status: 'Accepted',
-                    created: '10 Sep 2022 04:08'
-                },
-                {
-                    name: 'Steven',
-                    email: 'steven@peacegen.id',
-                    emailIsVerified: true,
-                    status: 'Need Verification',
-                    created: '10 Sep 2022 04:08'
-                },
-                {
-                    name: 'Jawad',
-                    email: 'jawad@peacegen.id',
-                    emailIsVerified: true,
-                    status: 'Rejected',
-                    created: '10 Sep 2022 04:08'
-                },
-                {
-                    name: 'Fira',
-                    email: 'fira@peacegen.id',
-                    emailIsVerified: false,
-                    status: 'Suspended',
-                    created: '10 Sep 2022 04:08'
-                }
             ]
         }
     },
@@ -165,11 +140,18 @@ export default {
         },
 
         masterPoint() {
-
-        },
-
-        goto() {
-            this.$router.push('/verifications/individu/_id')
+            this.dataTable = listIndividu.results.map(e => {
+                const data = {
+                    accountId: e.accountId,
+                    userId: e.userId,
+                    namaIndividu: e.individu.length > 0 ? e.individu[0].namaIndividu : 'N/A',
+                    email: e.email,
+                    emailIsVerified: e.emailIsVerified,
+                    statusVerification: e.statusVerification,
+                    createdAt: e.createdAt
+                }
+                return data
+            })
         }
     }
 }

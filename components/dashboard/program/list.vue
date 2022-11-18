@@ -43,7 +43,7 @@
                 :idValue="'programId'"
             />
         </div>
-        <pre>{{dataTable}}</pre>
+        <!-- <pre>{{dataTable}}</pre> -->
     </div>
 </template>
 
@@ -100,7 +100,7 @@ export default {
                 },
                 {
                     header: 'Status',
-                    value: 'statusSubmission',
+                    value: 'submission',
                     tipe: 'integer',
                     display: true
                 },
@@ -132,7 +132,7 @@ export default {
                     programId: e.programId,
                     namaProgram: e.judulActivity.length > 0 ? e.judulActivity[0] : 'N/A',
                     namaOrganisasi: e.myOrganisasi.namaOrganisasi,
-                    statusSubmission: e.submission,
+                    submission: e.submission,
                     createdAt: e.createdAt
                 }
                 return data

@@ -53,7 +53,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="text-center text-warna-empat cursor-pointer underline">Change Position</div>
+                                <div @click="btnGantiPosisi" class="text-center text-warna-empat cursor-pointer underline">Change Position</div>
                             </td>
                             <td class="font-normal p-5">
                                 <div class="flex items-center justify-end gap-x-6">
@@ -182,6 +182,28 @@
                 </table>
             </div>
         </div>
+
+        <ElementsModal 
+            v-model="modalAction"
+            :title="modalTitle"
+            :width="modalWidth"
+            :key="keyModal+'changeposition'"
+            :persistent="persistent"
+        >
+            <div class="p-6">
+                <div class="mb-5">
+                    <InputText 
+                        v-model="form.gantiPosisi"
+                        placeholder="Tulis posisi untuk member"
+                        :name="prefixName+'gantiposisi'"
+                        :label="'Position'"
+                    />
+                </div>
+                <div class="flex justify-end">
+                    <div class="text-center hover:bg-blue-900 bg-warna-empat text-white rounded-lg py-3 px-4 cursor-pointer">Ganti Posisi</div>
+                </div>
+            </div>
+        </ElementsModal>
     </div>
 </template>
 
@@ -190,7 +212,17 @@
 export default {
     data() {
         return {
+            // KEPERLUAN MODAL CHANGE POSITION //
+            modalAction: false,
+            modalTitle: 'Change Position',
+            modalWidth: '',
+            keyModal: 0,
+            persistent: true,
+            // ========== //
+
             selectedTab: 'anggota',
+            prefixName: 'anggota',
+
             filterAnggota: {
                 search: ''
             },
@@ -200,9 +232,15 @@ export default {
             filterPermintaan: {
                 search: ''
             },
+
+
             formUndangan: {
                 cariUser: ''
             },
+            form: {
+                gantiPosisi: ''
+            },
+
             masterTableAnggota: [
                 {
                     header: 'Anggota',
@@ -298,7 +336,18 @@ export default {
             ]
         }
     },
+    mounted() {
+        this.initialize()
+    },
     methods: {
+        initialize() {
+            this.masterPoint()
+        },
+
+        masterPoint() {
+
+        },
+
         btnTabAnggota() {
             this.selectedTab = 'anggota'
         },
@@ -309,7 +358,12 @@ export default {
 
         btnTabPermintaan() {
             this.selectedTab = 'permintaan'
-        }
+        },
+
+        btnGantiPosisi() {
+            this.modalAction = true
+            this.keyModal += 1
+        },
     },
 }
 </script>

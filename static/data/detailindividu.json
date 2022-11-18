@@ -1,0 +1,142 @@
+{
+    "accountId": "0489c3b9-5127-4737-b474-a50fadfbf4f9",
+    "userId": 82873990,
+    "createdAt": "2022-09-02T10:42:26.740316",
+    "updatedAt": "2022-11-18T12:49:23.218876",
+    "typeAccount": {
+        "id": 1,
+        "nama": [
+            "Individu",
+            "Individu"
+        ]
+    },
+    "email": "samu3lvillar123@gmail.com",
+    "password": "pbkdf2_sha256$216000$yEnAe3SIsJf5$HFBCtUAKvyfjio9actdcpEW7CZd1/Lm5ABBwtTNGFDs=",
+    "telepon": null,
+    "namaPenanggungjawabAccount": "Samuel Villarreal",
+    "namaReferer": null,
+    "organisasiReferer": null,
+    "referenceDeclaration": null,
+    "referalCode": 0,
+    "emailIsVerified": true,
+    "requestVerificatedUser": 1,
+    "phoneIsVerified": false,
+    "accountIsVerified": false,
+    "statusVerification": 1,
+    "alasanRejectOrSuspend": null,
+    "signupIpAddress": "113.11.180.25",
+    "verificator": 0,
+    "individu": [
+        {
+            "userId": 82873990,
+            "createdAt": "2022-09-02T10:42:26.766597",
+            "updatedAt": "2022-11-18T15:09:37.422564",
+            "namaIndividu": "Samuel Villarreal",
+            "imgFotoProfile": "/assets/Individu/82873990/images/Samuel_Villarreal-Smol_Reece_20220627123555.apng",
+            "institusi": "ASD",
+            "tentangSaya": "<p>ayas gnatnet inI</p>",
+            "email": "samu3lvillar123@gmail.com",
+            "telepon": "0882638746",
+            "pekerjaan": {
+                "id": 28,
+                "nama": [
+                    "Desainer",
+                    "Designer"
+                ]
+            },
+            "typeGender": {
+                "id": 1,
+                "nama": [
+                    "Laki-laki",
+                    "Men"
+                ],
+                "sorter": "1",
+                "active": true
+            },
+            "typeDifable": {
+                "id": 0,
+                "nama": [
+                    "Tidak",
+                    "Tidak"
+                ],
+                "sorter": "1",
+                "active": true
+            },
+            "sosialMedia": [
+                {
+                    "pkSosialMediaId": "socialMedia82873990xxTI",
+                    "kategoriSosialMedia": {
+                        "id": 5,
+                        "nama": [
+                            "Facebook",
+                            "Facebook"
+                        ]
+                    },
+                    "linkSosialMedia": "https://facebook.com",
+                    "systemRowId": "fLhxZyVX"
+                },
+                {
+                    "pkSosialMediaId": "socialMedia82873990Xykh",
+                    "kategoriSosialMedia": {
+                        "id": 2,
+                        "nama": [
+                            "Instagram",
+                            "Instagram"
+                        ]
+                    },
+                    "linkSosialMedia": "https://instagram.com/rkie.real",
+                    "systemRowId": "UzVkwtRC"
+                },
+                {
+                    "pkSosialMediaId": "socialMedia82873990sOVW",
+                    "kategoriSosialMedia": {
+                        "id": 1,
+                        "nama": [
+                            "Twitter",
+                            "Twitter"
+                        ]
+                    },
+                    "linkSosialMedia": "https://twitter.com",
+                    "systemRowId": "EVutmoWx"
+                },
+                {
+                    "pkSosialMediaId": "socialMedia82873990RAEL",
+                    "kategoriSosialMedia": {
+                        "id": 3,
+                        "nama": [
+                            "Youtube",
+                            "Youtube"
+                        ]
+                    },
+                    "linkSosialMedia": "https://youtube.com",
+                    "systemRowId": "DqajGVBo"
+                }
+            ],
+            "myOrganizations": [
+                {
+                    "pkJoinedOrganizationId": 23845963,
+                    "organisasi": {
+                        "organisasiId": 47963824,
+                        "namaOrganisasi": "Infia Consulting"
+                    }
+                },
+                {
+                    "pkJoinedOrganizationId": 23845963,
+                    "organisasi": {
+                        "organisasiId": 49582336,
+                        "namaOrganisasi": "Peace Generation Indonesia"
+                    }
+                }
+            ],
+            "statusIndividu": {
+                "id": 2,
+                "nama": [
+                    "Verified User",
+                    "Verified User"
+                ]
+            },
+            "systemRowId": "CNBDadqs"
+        }
+    ],
+    "wasDeleted": 0
+}

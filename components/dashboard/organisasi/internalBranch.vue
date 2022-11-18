@@ -47,7 +47,7 @@ export default {
         return {
             dataInternalBranch: [],
             actions: {
-                status: true,
+                status: false,
                 button: {
                     edit: {
                         status: true,

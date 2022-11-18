@@ -1,8 +1,10 @@
 <template>
     <div class="py-[80px]">
-        <div class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
+        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
             <div class="flex items-center justify-between mb-6">
-                <div class="px-6 py-2 bg-warna-need-verification rounded-3xl text-white ">Need Verification</div>
+                <div v-if="dataDetail.statusVerification === 1" class="px-6 py-2 bg-warna-need-verification rounded-3xl text-white ">Need Verification</div>
+                <div v-if="dataDetail.statusVerification === 3" class="px-6 py-2 bg-warna-approved-accepted rounded-3xl text-white ">Accepted</div>
+                <!-- BENDERA -->
                 <div class="inline-flex flex-col">
                     <div>
                         <button @click="toggleDrop" class="flex items-center text-sm text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:shadow-solid">
@@ -43,30 +45,38 @@
             <div class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-4">
                     <div class="w-full bg-white shadow-md border border-gray-50 rounded-xl ">
-                        <img src="/images/logo.png" alt="main-image">
+                        <img :src="basePath+dataDetail.individu[0].imgFotoProfile" alt="main-image">
                     </div>
                 </div>
-                <div v-if="detailIndividu" class="col-span-12 lg:col-span-8">
-                    <div class="text-xl font-bold text-warna-utama">{{ detailIndividu.nama }}</div>
+                <div class="col-span-12 lg:col-span-8">
+                    <div class="text-xl font-bold text-warna-utama">{{ dataDetail.individu[0].namaIndividu }}</div>
                     <hr class="border-warna-tujuh my-5">
                     <div class="grid grid-cols-8 gap-5">
                         <div class="col-span-4">
                             <div v-for="(item1, index1) in dataLabel" :key="'datalabel' + index1" v-show="item1.posisi==='kiri'" class="grid grid-cols-12 mb-4 break-words">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
-                                    <div v-if="['created', 'updated'].includes(item1.value)" class="">
-                                        {{ $dayjs(detailIndividu[item1.value]).format('DD MMM YYYY hh:mm A') }}
+                                    <div v-if="['createdAt', 'updatedAt'].includes(item1.value)" class="">
+                                        {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY hh:mm') }} WIB
                                     </div>
                                     <div v-else-if="['emailIsVerified', 'accountIsVerified'].includes(item1.value)">
-                                        {{ detailIndividu[item1.value] === true ? 'Yes' : 'No' }}
+                                        {{ dataDetail[item1.value] === true ? 'Yes' : 'No' }}
+                                    </div>
+                                    <div v-else-if="['namaIndividu'].includes(item1.value)">
+                                        {{ dataDetail.individu[0][item1.value] }}
                                     </div>
                                     <div v-else>
-                                        {{ detailIndividu[item1.value] }}
+                                        {{ dataDetail[item1.value] }}
                                     </div>
                                 </div>
                             </div>
-                            <div v-for="(item2, index2) in detailIndividu.socialMedia" :key="'datasosmed' + index2" class="grid grid-cols-12 mb-4 break-words">
-                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item2.kategoriSosialMedia }}</div>
+                            <div v-for="(item2, index2) in dataDetail.individu[0].sosialMedia" :key="'datasosmed' + index2" class="grid grid-cols-12 mb-4 break-words gap-1">
+                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">
+                                    <span v-if="item2.kategoriSosialMedia.id === 1">Twitter</span>
+                                    <span v-if="item2.kategoriSosialMedia.id === 2">Instagram</span>
+                                    <span v-if="item2.kategoriSosialMedia.id === 3">Youtube</span>
+                                    <span v-if="item2.kategoriSosialMedia.id === 5">Facebook</span>
+                                </div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">{{ item2.linkSosialMedia ? item2.linkSosialMedia : '-' }}</div>
                             </div>
                         </div>
@@ -74,11 +84,22 @@
                             <div v-for="(item1, index1) in dataLabel" :key="'dL' + index1" v-show="item1.posisi==='kanan'" class="grid grid-cols-12 mb-4 break-words">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
-                                    <div v-if="['created', 'updated'].includes(item1.value)" class="">
-                                        {{ detailIndividu[item1.value] }}
+                                    <div v-if="['telepon', 'institusi'].includes(item1.value)" class="">
+                                        {{ dataDetail.individu[0][item1.value] }}
+                                    </div>
+                                    <div v-else-if="['pekerjaan'].includes(item1.value)">
+                                        {{ selectedFlag === 'indonesia' ? dataDetail.individu[0].pekerjaan.nama[0] : dataDetail.individu[0].pekerjaan.nama[1] }}
+                                    </div>
+                                    <div v-else-if="['gender'].includes(item1.value)">
+                                        {{ selectedFlag === 'indonesia' ? dataDetail.individu[0].typeGender.nama[0] : dataDetail.individu[0].typeGender.nama[1] }}
+                                    </div>
+                                    <div v-else-if="['myOrganizations'].includes(item1.value)">
+                                        <div v-for="(item, index) in dataDetail.individu[0].myOrganizations" :key="'myorganizations' + index">
+                                            <span>{{ item.organisasi.namaOrganisasi }}</span><span v-if="index+1 < dataDetail.individu[0].myOrganizations.length">, </span>
+                                        </div>
                                     </div>
                                     <div v-else>
-                                        {{ detailIndividu[item1.value] }}
+                                        {{ dataDetail[item1.value] }}
                                     </div>
                                 </div>
                             </div>
@@ -87,29 +108,34 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white shadow-md rounded-xl p-6 mb-10">
+        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl p-6 mb-10">
             <div class="text-xl font-bold text-warna-utama">About Me</div>
             <hr class="border-warna-tujuh my-5">
-            <div class="text-sm text-warna-delapan">{{ detailIndividu.deskripsi }}</div>
+            <div class="text-sm text-warna-delapan">{{ dataDetail.individu[0].tentangSaya }}</div>
         </div>
-        <div class="bg-white shadow-md rounded-xl py-4 px-6">
+        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div class="flex gap-x-6  font-semibold">
+                <div v-if="dataDetail.statusVerification === 1" class="flex gap-x-6  font-semibold">
                     <div class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
                     <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
             </div>
         </div>
+        <!-- <pre>{{dataDetail}}</pre> -->
     </div>
 </template>
 
 <script>
+import detailIndividu from '~/static/data/detailindividu.json';
+
 export default {
     data() {
         return {
             flagDrop: false,
             selectedFlag: 'indonesia',
+            dataDetail: null,
+            dataMyOrganisasi: [],
             dataLabel: [
                 {
                     label: 'User ID',
@@ -118,17 +144,17 @@ export default {
                 },
                 {
                     label: 'Name',
-                    value: 'nama',
+                    value: 'namaIndividu',
                     posisi: 'kiri'
                 },
                 {
                     label: 'Created',
-                    value: 'created',
+                    value: 'createdAt',
                     posisi: 'kiri'
                 },
                 {
                     label: 'Updated',
-                    value: 'updated',
+                    value: 'updatedAt',
                     posisi: 'kiri'
                 },
                 {
@@ -143,12 +169,12 @@ export default {
                 },
                 {
                     label: 'Sign Up Address',
-                    value: 'signUpAddress',
+                    value: 'signupIpAddress',
                     posisi: 'kiri'
                 },
                 {
                     label: 'Organization',
-                    value: 'organization',
+                    value: 'myOrganizations',
                     posisi: 'kanan'
                 },
                 {
@@ -158,17 +184,17 @@ export default {
                 },
                 {
                     label: 'Phone',
-                    value: 'phone',
+                    value: 'telepon',
                     posisi: 'kanan'
                 },
                 {
                     label: 'Institution',
-                    value: 'institution',
+                    value: 'institusi',
                     posisi: 'kanan'
                 },
                 {
                     label: 'Profession',
-                    value: 'profession',
+                    value: 'pekerjaan',
                     posisi: 'kanan'
                 },
                 {
@@ -176,45 +202,7 @@ export default {
                     value: 'gender',
                     posisi: 'kanan'
                 },
-            ],
-            detailIndividu: {
-                userId: '51409978',
-                nama: 'Muhammad Nauval El Ghifari Saputra',
-                created: new Date(),
-                updated: new Date(),
-                emailIsVerified: true,
-                accountIsVerified: false,
-                signUpAddress: '119.18.122.3',
-                socialMedia: [
-                    {
-                        id: 'sosmed-01',
-                        kategoriSosialMedia: 'Instragram',
-                        linkSosialMedia: 'https://www.instagram.com/khub.id'
-                    },
-                    {
-                        id: 'sosmed-02',
-                        kategoriSosialMedia: 'Facebook',
-                        linkSosialMedia: 'https://www.facebook.com/PeaceGenID/'
-                    },
-                    {
-                        id: 'sosmed-03',
-                        kategoriSosialMedia: 'Youtube',
-                        linkSosialMedia: 'https://www.youtube.com/PeaceGenID/'
-                    },
-                    {
-                        id: 'sosmed-04',
-                        kategoriSosialMedia: 'Twitter',
-                        linkSosialMedia: ''
-                    },
-                ],
-                organization: '',
-                email: 'nauvalelghifari@gmail.com',
-                phone: '+6281283571474',
-                institution: 'I-KHUB BNPT',
-                profession: 'Researcher',
-                gender: 'Male',
-                deskripsi: 'Nauval is currently in his final year as an International Relations student at Padjadjaran University with a strong curiosity and interest in Islamic Politics, Contemporary Islamic Movements (Salafism/Jihadism/Qutbism), Middle East Politics, Knowledge Production, and Critical Terrorism Studies. He has internship experience as a research assistant and publishing staff in various NGOs and research institutes, such as LP3ES, MAARIF Institute, & DASPR. He aspires to be an aspiring scientist who focuses on the interactions of religion, politics, state-society relations, and power relations.'
-            }
+            ]
         }
     },
     computed: {
@@ -226,6 +214,12 @@ export default {
         },
         title() {
             return this.$t('Verifikasi Individu')
+        },
+        id() {
+            return this.$route.params.id;
+        },
+        basePath() {
+            return process.env.BASE_URL
         }
     },
     watch: {
@@ -244,6 +238,20 @@ export default {
     methods: {
         initialize() {
             this.$store.commit('setPageTitle', this.title)
+            this.masterPoint()
+        },
+
+        masterPoint() {
+            this.dataDetail = detailIndividu
+
+            this.dataMyOrganisasi = detailIndividu.individu[0].myOrganizations.map(e => {
+                const data = {
+                    id: e.pkJoinedOrganizationId,
+                    organisasiId: e.organisasiId,
+                    namaOrganisasi: e.namaOrganisasi
+                }
+                return data
+            })
         },
 
         btnBack() {

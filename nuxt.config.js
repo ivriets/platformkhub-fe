@@ -85,7 +85,7 @@ export default {
       },
     ],
     lazy: true,
-    defaultLocale: 'id',
+    defaultLocale: 'en',
     langDir: 'locales/',
   },
 

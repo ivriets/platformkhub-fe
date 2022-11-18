@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto">
-        <div class="p-6">
+        <div class="px-6 py-11">
             <ElementsTab 
                 :listTab="listTab"
                 :selectedTab="selectedTab"

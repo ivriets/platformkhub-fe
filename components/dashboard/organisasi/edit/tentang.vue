@@ -67,13 +67,13 @@
                 <div class="">
                     <InputAutocompleteMulti 
                         v-model="form.typeIssues"
-                        :name="prefixName+'tipeissues'"
+                        :name="prefixName+'topik'"
                         :placeholder="'Tulis disini'"
-                        :label="'Tipe Issues'"
+                        :label="'Topik'"
                         :opsi="typeIssues"
                         :itemValue="'id'"
                         :itemLabel="'label'"
-                        :key="prefixName+'tipeissues'"
+                        :key="prefixName+'topik'"
                     />
                 </div>
             </div>

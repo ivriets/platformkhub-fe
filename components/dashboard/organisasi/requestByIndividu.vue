@@ -46,7 +46,7 @@ export default {
         return {
             dataRequestByIndividu: [],
             actions: {
-                status: true,
+                status: false,
                 button: {
                     edit: {
                         status: true,

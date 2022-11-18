@@ -9,4 +9,10 @@ install sass sass-loader@10.1.1
 
 
 
-1. lgi ongoing di pusat
+1. lagi ongoing di pusat
+
+steven, 
+1. please help, dashboard/program/detail -> saya mau masukin value nya activity tapi dia pakai typeActivity.id=1 (Pre Activity).
+gw ga tau gmn caranya karena bagian itu di dalem <div v-for="(item1, index1) in dataLabel"
+
+2. :key buat apa sih ?
