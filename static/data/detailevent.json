@@ -1,0 +1,167 @@
+{
+    "submission": 1,
+    "updatedAt": "2022-07-25T17:51:32.223247",
+    "moderator": null,
+    "catatanModerasi": null,
+    "eventId": 61449893,
+    "myOrganisasi": {
+        "organisasiId": 27814231,
+        "namaOrganisasi": "Admin KHUB",
+        "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng"
+    },
+    "judulActivity": [
+        "Boardgame for Peace 5",
+        "Boardgame for Peace 5"
+    ],
+    "imgThumbnail": "/assets/placeholder/events.jpg",
+    "imgMainImage": "/assets/placeholder/events.jpg",
+    "deskripsiPendek": [
+        "N/A",
+        "This is so cool"
+    ],
+    "deskripsiPanjang": [
+        "N/A",
+        "This is so cool"
+    ],
+    "tanggalMulai": "2022-08-31T10:00:00",
+    "tanggalSelesai": "2022-08-31T11:00:00",
+    "cancelReason": null,
+    "archieved": [],
+    "typeActivity": {
+        "id": 2,
+        "nama": [
+            "Acara",
+            "Event"
+        ]
+    },
+    "statusActivity": {
+        "id": 1,
+        "nama": [
+            "Pre Activity",
+            "Pre Activity"
+        ]
+    },
+    "typeSensitivity": {
+        "id": 1,
+        "nama": [
+            "Low",
+            "Low"
+        ]
+    },
+    "typeAudience": [
+        {
+            "id": 1,
+            "nama": [
+                "Semua Orang",
+                "For Everyone"
+            ]
+        }
+    ],
+    "typeApproach": [
+        {
+            "id": 2,
+            "nama": [
+                "Pelepasan",
+                "Disengagement"
+            ]
+        }
+    ],
+    "typeIssues": [
+        {
+            "id": 1,
+            "nama": [
+                "Gender",
+                "Gender"
+            ]
+        }
+    ],
+    "typeVisibility": {
+        "id": 1,
+        "nama": [
+            "For Public",
+            "For Public"
+        ]
+    },
+    "systemRowId": "LOqkfbUh",
+    "lokasi": [
+        {
+            "pkLokasiActivityId": "BVrvaFKE",
+            "provinsi": "Jawa Barat",
+            "kota": "Kabupaten Karawang",
+            "jalan": "karawang",
+            "pinLocation": "-6.3083526, 107.3065582",
+            "typeVisibility": {
+                "id": 1,
+                "nama": [
+                    "For Public",
+                    "For Public"
+                ]
+            },
+            "systemRowId": "LKCVTeUz"
+        }
+    ],
+    "fase": [],
+    "partnerActivityInternal": [],
+    "partnerActivityEksternal": [],
+    "files": [],
+    "activityOrganizing": [
+        {
+            "pkActivityOrganizingId": "TFRHqhqK",
+            "urlRegistrasiEksternal": "N/A",
+            "participantSeat": 10,
+            "tanggalMulai": "2022-08-31T10:00:00",
+            "tanggalSelesai": "2022-08-31T11:00:00",
+            "registrationStartDate": "2022-07-25T19:00:00",
+            "registrationEndDate": "2022-07-31T20:00:00",
+            "rescheduleNote": null,
+            "statusActivity": {
+                "id": 2,
+                "nama": [
+                    "In Activity",
+                    "In Activity"
+                ]
+            },
+            "createdAt": "2022-07-25T17:51:31.677436",
+            "typeVisibility": {
+                "id": 1,
+                "nama": [
+                    "For Public",
+                    "For Public"
+                ]
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "activityParticipantEksternal": [],
+            "activityParticipantInternal": [],
+            "systemRowId": "FvJtOiYI"
+        }
+    ],
+    "tag": [
+        {
+            "pkTagId": 24383304,
+            "pilihanTagId": {
+                "id": 332,
+                "nama": [
+                    "Agama",
+                    "Agama"
+                ]
+            }
+        },
+        {
+            "pkTagId": 9572828,
+            "pilihanTagId": {
+                "id": 366,
+                "nama": [
+                    "game",
+                    "game"
+                ]
+            }
+        }
+    ],
+    "galleries": []
+}

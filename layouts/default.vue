@@ -1,7 +1,11 @@
 <template>
     <div>
-        <FrontHeader />
-        <div class="">
+        <FrontHeader 
+            v-if="loader"
+            :currentUser="currentUser"
+            :key="'header'+keyHeader"
+        />
+        <div v-if="loader" class="">
             <FrontDrawer />
             <div class="pt-16 transition-all" :style="statusDrawer ? 'padding-left:'+styleOpen : 'padding-left:'+styleClose">
                 <Nuxt />
@@ -13,9 +17,12 @@
 
 <script>
 export default {
+    // middleware: ['general'],
     data() {
         return {
-            
+            loader: false,
+            currentUser: null,
+            keyHeader: 0
         }
     },
     computed: {
@@ -31,12 +38,41 @@ export default {
         styleClose() {
             const widthDrawer = this.$store.state.drawerClose;
             return widthDrawer +'px'
+        },
+
+        currentUrl() {
+            // console.log(this.$route.path)
+            return this.$route.path
         }
     },
+    watch: {
+        currentUrl(val) {
+            this.getCurrentUser()
+        }
+    },
+    mounted() {
+        this.initialize()
+    },
     methods: {
+        initialize() {
+            this.getCurrentUser()
+        },
+
         btnToggle() {
             const toggle = !this.statusDrawer
             this.$store.commit('setDrawer', toggle);
+        },
+
+        async getCurrentUser() {
+            await this.$apiBase.get('accounts/').then(res => {
+                // console.log(res.data)
+                this.loader = true
+                this.currentUser = res.data.results
+                this.keyHeader += 1
+            }).catch(err => {
+                this.$router.push('/clear')
+                // window.location.href="/clear"
+            })
         }
     },
 }

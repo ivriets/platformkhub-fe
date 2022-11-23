@@ -62,113 +62,163 @@ export const state = () => ({
     typeOrganisasi: [
         {
             id: 1,
-            label: 'Organisasi Non Pemerintahan (NGO)'
+            label: ['Organisasi Non Pemerintahan (NGO)','Non Governmental Organization (NGO)']
         },
         {
             id: 2,
-            label: 'Organisasi Masyarakat Sipil (OMS)'
+            label: ['Organisasi Masyarakat Sipil (OMS)', 'Civil Society Organization (CSO)']
         },
         {
             id: 3,
-            label: 'Pemerintah Indonesia'
+            label: ['Pemerintah Indonesia', 'Government of Indonesia (GoI)']
         },
         {
             id: 4,
-            label: 'Univesitas'
+            label: ['Univesitas', 'University']
         },
         {
             id: 5,
-            label: 'Sekolah'
+            label: ['Sekolah', 'School']
         },
         {
             id: 6,
-            label: 'Komunitas'
+            label: ['Komunitas', 'Community']
         }
     ],
     typeAudience: [
         {
             id: 1,
-            label: 'Semua Orang'
+            label: ['Semua Orang', 'For Everyone']
         },
         {
             id: 2,
-            label: 'Praktisi'
+            label: ['Praktisi', 'For Practicioners']
         },
         {
             id: 3,
-            label: 'Pendidik'
+            label: ['Pendidik', 'For Educator']
         },
         {
             id: 4,
-            label: 'Pembuat Kebijakan'
+            label: ['Pembuat Kebijakan', 'For Policy Maker']
         },
         {
             id: 5,
-            label: 'Peneliti'
+            label: ['Peneliti', 'For Researcher']
         },
         {
             id: 6,
-            label: 'Donor'
+            label: ['Donor', 'For Donor']
         }
     ],
     typeApproach: [
         {
             id: 1,
-            label: 'Penegakan Hukum'
+            label: ['Penegakan Hukum', 'Law Enforcement']
         },
         {
             id: 2,
-            label: 'Pelepasan'
+            label: ['Pelepasan', 'Disengagement']
         },
         {
             id: 3,
-            label: 'Pencegahan'
+            label: ['Pencegahan', 'Prevention']
         },
         {
             id: 4,
-            label: 'Pemerintahan'
+            label: ['Pemerintahan', 'Governance']
         },
         {
             id: 5,
-            label: 'Kerja Sama dan Kemitraan Internasional'
+            label: ['Kerja Sama dan Kemitraan Internasional', 'International Coorporation and Partnerships']
         }
     ],
     typeIssues: [
         {
             id: 1,
-            label: 'Gender'
+            label: ['Gender', 'Gender']
         },
         {
             id: 2,
-            label: 'Pemuda'
+            label: ['Pemuda', 'Youth']
         },
         {
             id: 3,
-            label: 'Pendidikan'
+            label: ['Pendidikan', 'Education']
         },
         {
             id: 4,
-            label: 'Penguatan HAM'
+            label: ['Penguatan HAM', 'Human Rights']
         },
         {
             id: 5,
-            label: 'Korban Terorisme'
+            label: ['Korban Terorisme', 'Victims of Terrorism']
         },
         {
             id: 6,
-            label: 'Penelitian'
+            label: ['Penelitian', 'Research']
         },
         {
             id: 7,
-            label: 'Penilaian/Evaluasi'
+            label: ['Penilaian/Evaluasi', 'Assessment/Evaluation']
         },
         {
             id: 8,
-            label: 'Peningkatan Kapasitas'
+            label: ['Peningkatan Kapasitas', 'Capacity Building']
         },
         {
             id: 9,
-            label: 'Pemberdayaan Masyarakat'
+            label: ['Pemberdayaan Masyarakat', 'Community Empowerment']
+        }
+    ],
+    kategoriArtikel: [
+        {
+            id: 15,
+            label: ['Artikel', 'Article']
+        },
+        {
+            id: 16,
+            label: ['Berita', 'News']
+        },
+        {
+            id: 17,
+            label: ['Cerita Perubahan', 'Story of Change']
+        },
+        {
+            id: 18,
+            label: ['Feature', 'Feature']
+        },
+        {
+            id: 19,
+            label: ['Opini', 'Opinion']
+        },
+        {
+            id: 20,
+            label: ['Investigasi', 'Investigation']
+        },
+        {
+            id: 21,
+            label: ['Interpretasi', 'Interpretative']
+        },
+        {
+            id: 22,
+            label: ['Laporan', 'Report']
+        },
+        {
+            id: 23,
+            label: ['Penelitian', 'Research']
+        },
+        {
+            id: 24,
+            label: ['Tips dan Trik', 'Tips and Tricks']
+        },
+        {
+            id: 25,
+            label: ['Hibah', 'Grants']
+        },
+        {
+            id: 26,
+            label: ['Informasi', 'Information']
         }
     ],
     hierarki: [

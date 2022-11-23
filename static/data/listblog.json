@@ -1,0 +1,508 @@
+{
+    "typeSensitivity": "LOW",
+    "count": 81,
+    "length": 5,
+    "results": [
+        {
+            "submission": 3,
+            "blogId": 33443788,
+            "judulArtikel": [
+                "Self-Love: Mencintai Diri Sendiri ala Peace Academy",
+                "Self-Love: How to Love Yourself a la Peace Academy"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-04-28T15:33:06.624388",
+            "datePublish": "2022-04-28T15:33:06.624426",
+            "moderator": "Admin KHUB",
+            "imgMainImage": "/assets/placeholder/blog.jpg",
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Korban Terorisme",
+                        "Victims of Terrorism"
+                    ]
+                },
+                {
+                    "id": 7,
+                    "nama": [
+                        "Penilaian/Evaluasi",
+                        "Assessment/Evaluation"
+                    ]
+                },
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                }
+            ],
+            "catatanModerasi": "lorem ipsum dolor sit amet"
+        },
+        {
+            "submission": 4,
+            "blogId": 125961390,
+            "judulArtikel": [
+                "Penculikan Pengantin, Praktik Kekerasan Patriarkis di Kyrgyzstan",
+                "Bride Kidnapping, A Patriarchal Violent Practice in Kyrgyzstan"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-04-28T14:24:53.580717",
+            "datePublish": "2022-04-28T14:24:53.580758",
+            "moderator": "Admin KHUB",
+            "imgMainImage": "/assets/Organisasi/27814231/images/Admin_KHUB-20220401_Tradisi_Bride-Kidnapping-01_KlvaHO8.apng",
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Penegakan Hukum",
+                        "Law Enforcement"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                }
+            ],
+            "catatanModerasi": null
+        },
+        {
+            "submission": 4,
+            "blogId": 51593435,
+            "judulArtikel": [
+                "Memaknai Tagar #BreakTheBias yang Sejalan dengan Nilai-Nilai Perdamaian",
+                "Meaning of #BreakTheBias Hashtag which is in Line with Peace Values"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-03-12T09:19:05.218331",
+            "datePublish": "2022-03-12T09:19:05.218368",
+            "moderator": "Admin KHUB",
+            "imgMainImage": "/assets/Organisasi/27814231/images/Admin_KHUB-Memaknai_Tagar_BreakTheBias_yang_Sejalan_dengan_N_jpCZkKL.apng",
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pembuat Kebijakan",
+                        "For Policy Maker"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Donor",
+                        "For Donor"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                }
+            ],
+            "catatanModerasi": null
+        },
+        {
+            "submission": 4,
+            "blogId": 42073812,
+            "judulArtikel": [
+                "Mendorong Perdamaian Melalui Makanan: Belajar dari Diplomasi Gastronomi ala Sukarno",
+                "Encouraging Peace Through Food: Learning from Sukarno's Gastronomic Diplomacy"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-03-04T17:19:04.239552",
+            "datePublish": "2022-03-04T17:19:04.239580",
+            "moderator": "Admin KHUB",
+            "imgMainImage": "/assets/Organisasi/27814231/images/Admin_KHUB-Mendorong_Perdamaian_Melalui_Makanan_Belajar_dari_Y6vsiUL.apng",
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pembuat Kebijakan",
+                        "For Policy Maker"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Donor",
+                        "For Donor"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pemerintahan",
+                        "Governance"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                }
+            ],
+            "catatanModerasi": null
+        },
+        {
+            "submission": 4,
+            "blogId": 67692352,
+            "judulArtikel": [
+                "Berkisah untuk Menginspirasi: Hikmah dari Puzzle Kisah Orang Muda untuk Perdamaian",
+                "Telling Stories to Inspire Wisdom from the Puzzles of Young People for Peace"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-03-02T16:26:00.035902",
+            "datePublish": "2022-03-02T16:26:00.035938",
+            "moderator": "Admin KHUB",
+            "imgMainImage": "/assets/Organisasi/27814231/images/Admin_KHUB-Berkisah_untuk_Menginspirasi_Hikmah_dari_Puzzle_K_cn0NHQP.apng",
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pembuat Kebijakan",
+                        "For Policy Maker"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Donor",
+                        "For Donor"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Penegakan Hukum",
+                        "Law Enforcement"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pemerintahan",
+                        "Governance"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                }
+            ],
+            "catatanModerasi": null
+        }
+    ]
+}

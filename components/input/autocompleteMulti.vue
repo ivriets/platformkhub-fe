@@ -34,7 +34,7 @@
                     @click="pilihItem(i)"
                     :disabled="selectedValue.map(e=>e.id).includes(i.id)"
                     >
-                        {{i.label}}
+                        {{i.label[bahasa]}}
                 </button>
             </div>
         </div>
@@ -62,6 +62,14 @@ export default {
         newVal(val) {
              this.getApi(val);
         }
+    },
+    computed: {
+        lang() {
+            return this.$i18n.locale
+        },
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
+        },
     },
     mounted() {
         this.initialize()

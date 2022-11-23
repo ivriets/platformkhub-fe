@@ -10,12 +10,13 @@ export default function ({ $axios, redirect, app }, inject) {
   
     apiBase.interceptors.request.use(config => {
       // const token = app.$cookiz.get('t12')
-      const bytes = CryptoJS.AES.decrypt(app.$cookiz.get('t12'), process.env.SECRET_KEY_TOKEN);
-      var token = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      // const bytes = CryptoJS.AES.decrypt(app.$cookiz.get('t12'), process.env.SECRET_KEY_TOKEN);
+      // var token = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      var token = app.$cookies.get('jtoken')
 
       if (token) {
-        // config.headers['Authorization'] = `JWT ${token}`
-        config.headers['X-Auth-Token'] = token
+        config.headers['Authorization'] = `JWT ${token}`
+        // config.headers['X-Auth-Token'] = token
       }
       return config
     })
@@ -29,10 +30,7 @@ export default function ({ $axios, redirect, app }, inject) {
       }
     })
   
-    const local = process.env.DEV_URL + '/api/'
-    const server = process.env.PROD_URL + '/api/'
-  
-    const endPoint = process.env.TIPE === 'dev' ?  local : server;
+    const endPoint = 'https://base.api.k-hub.org/a3/'
     apiBase.setBaseURL(endPoint)
   
     // Inject to context as $api

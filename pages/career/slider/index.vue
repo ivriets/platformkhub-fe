@@ -1,12 +1,15 @@
 <template>
     <div class="container mx-auto">
-        slider
+        <div class="px-6 py-10">
+            <DashboardSlider />
+        </div>
     </div>
 </template>
 
 
 <script>
 export default {
+    middleware: ['general'],
     data() {
         return {
 

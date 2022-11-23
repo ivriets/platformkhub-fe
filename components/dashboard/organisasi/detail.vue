@@ -107,9 +107,9 @@
                             <div v-for="(item2, index2) in dataDetail.organisasi[0].sosialMedia" :key="'datasosmed' + index2" class="grid grid-cols-12 mb-4 break-words gap-1">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">
                                     <span v-if="item2.kategoriSosialMedia === 1">Twitter</span>
-                                    <span v-if="item2.kategoriSosialMedia === 2">Instagram</span>
-                                    <span v-if="item2.kategoriSosialMedia === 3">Youtube</span>
-                                    <span v-if="item2.kategoriSosialMedia === 5">Facebook</span>
+                                    <span v-else-if="item2.kategoriSosialMedia === 2">Instagram</span>
+                                    <span v-else-if="item2.kategoriSosialMedia === 3">Youtube</span>
+                                    <span v-else-if="item2.kategoriSosialMedia === 5">Facebook</span>
                                 </div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">{{ item2.linkSosialMedia ? item2.linkSosialMedia : '-' }}</div>
                             </div>

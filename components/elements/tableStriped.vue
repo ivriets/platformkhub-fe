@@ -20,6 +20,7 @@
                                     <div v-if="item[x.value] === 2" class="text-approved-accepted">Bergabung</div>
                                     <div v-if="item[x.value] === 3" class="text-rejected">Menolak</div>
                                 </div>
+                                <div v-if="x.value === 'label'">{{ item[x.value][bahasa] }}</div>
                                 <div v-else>{{ item[x.value] }}</div>
                             </div>
                         </td>
@@ -74,6 +75,14 @@ export default {
             //         }
             //     }
             // }
+        }
+    },
+    computed: {
+        lang() {
+            return this.$i18n.locale
+        },
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
         }
     },
     mounted() {

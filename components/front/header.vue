@@ -8,7 +8,20 @@
                 {{pageTitle}}
             </div>
             <div class="flex items-center">
-                <div class="">icon</div>
+                <div @click="toggleLogoutDrop" class="w-10 h-10 bg-green-200 rounded-full cursor-pointer"></div>
+                <div v-if="logoutDrop" v-click-outside="closeLogoutDrop" class="relative z-10">
+                    <div class="absolute bg-white shadow-md rounded-md right-0 text-sm mt-6 border border-gray-50">
+                        <div v-if="currentUser" class="py-2 px-8">
+                            <div class="text-sm font-semibold mb-1">{{currentUser[0].namaPenanggungjawabAccount}}</div>
+                            <div class="text-xs text-gray-400">{{currentUser[0].email}}</div>
+                        </div>
+                        <hr class="border-warna-tujuh">
+                        <div class="px-8 py-2 flex gap-x-2">
+                            <div @click="btnTutup" class="cursor-pointer bg-white text-gray-600 hover:bg-gray-200 text-sm rounded-lg py-1.5 text-center w-20">{{$t('Close')}}</div>
+                            <div @click="btnLogout" class="cursor-pointer bg-warna-empat text-white text-sm rounded-lg py-1.5 text-center w-20">{{$t('Logout')}}</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="inline-flex flex-col ml-8">
                     <div>
                         <button @click="toggleDrop" class="flex items-center text-sm text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:shadow-solid">
@@ -52,10 +65,12 @@
 
 <script>
 export default {
+    props: ['currentUser'],
     data() {
         return {
             flagDrop: false,
             selectedFlag: 'inggris',
+            logoutDrop: false
         }
     },
     computed: {
@@ -101,6 +116,29 @@ export default {
             this.selectedFlag = 'inggris'
             this.gantiBahasa('en')
             this.closeDrop()
+        },
+
+        toggleLogoutDrop() {
+            this.logoutDrop = !this.logoutDrop
+        },
+
+        closeLogoutDrop() {
+            this.logoutDrop = false
+        },
+
+        btnLogout() {
+            this.$cookies.removeAll();
+                localStorage.clear();
+                this.$nextTick(() => {
+                // $nuxt.$emit('refreshPage')
+                // window.location.href="/login"
+                this.$router.push('/clear')
+
+            })
+        },
+
+        btnTutup() {
+            this.closeLogoutDrop()
         }
     },
 }

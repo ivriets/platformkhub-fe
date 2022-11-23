@@ -2,10 +2,13 @@
      <div class="py-[80px]">
         <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
             <div class="flex items-start justify-between mb-6">
-                <div v-if="dataDetail.submission === 1" class="px-6 py-2 bg-warna-under-review rounded-3xl text-white ">Under Review</div>
-                <div v-if="dataDetail.submission === 3" class="px-6 py-2 bg-warna-need-revision rounded-3xl text-white ">Need Revision</div>
-                <div v-if="dataDetail.submission === 4" class="px-6 py-2 bg-warna-approved-accepted rounded-3xl text-white ">Approved</div>
-                <div v-if="dataDetail.submission === 2" class="px-6 py-2 bg-warna-draft rounded-3xl text-white ">Draft</div>
+                <div>
+                    <div class="font-medium mb-4">{{ selectedFlag === 'indonesia' ? dataDetail.judulActivity[0] : dataDetail.judulActivity[1] }}</div>
+                    <div v-if="dataDetail.submission === 1" class="py-2 w-[150px] text-center bg-warna-under-review rounded-3xl text-white ">Under Review</div>
+                    <div v-if="dataDetail.submission === 3" class="py-2 w-[150px] text-center bg-warna-need-revision rounded-3xl text-white ">Need Revision</div>
+                    <div v-if="dataDetail.submission === 4" class="py-2 w-[150px] text-center bg-warna-approved-accepted rounded-3xl text-white ">Approved</div>
+                    <div v-if="dataDetail.submission === 2" class="py-2 w-[150px] text-center bg-warna-draft rounded-3xl text-white ">Draft</div>
+                </div>
                 <!-- BENDERA -->
                 <div class="inline-flex flex-col">
                     <div>
@@ -57,14 +60,14 @@
                     
                     <div class="grid grid-cols-12 gap-5">
                         <div class="col-span-12 lg:col-span-6">
-                            <div class="mt-8 text-warna-delapan font-semibold">Officer</div>
+                            <div class="mt-8 text-sm text-warna-delapan font-semibold">Officer</div>
                             <div class="text-sm text-warna-sembilan font-semibold">
                                 <div class="mb-4">{{ dataDetail.officer }}</div>
                             </div>
                         </div>
 
                         <div class="col-span-12 lg:col-span-6">
-                            <div class="mt-8 text-warna-delapan font-semibold">Partner</div>
+                            <div class="mt-8 text-sm text-warna-delapan font-semibold">Partner</div>
                             <div class="text-sm text-warna-sembilan font-semibold">
                                 <div class="mb-4">{{ dataDetail.partnerActivityEksternal }}</div>
                             </div>
@@ -73,35 +76,47 @@
                     </div>
 
 
-                    <div class="mt-8 text-warna-delapan font-semibold">Audience Type</div>
+                    <div class="mt-5 text-sm text-warna-delapan font-semibold">Audience Type</div>
                     <div class="text-sm text-warna-sembilan font-semibold">
-                        <div v-for="(item, index) in dataDetail.typeAudience" :key="'tipeaudience' + index" class="mb-4">
-                            <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                        <div v-if="dataDetail.typeAudience.length == 0">-</div>
+                        <div v-else>
+                            <div v-for="(item, index) in dataDetail.typeAudience" :key="'tipeaudience' + index" class="mb-4 inline-block mr-1">
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.typeAudience.length">, </span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="mt-8 text-warna-delapan font-semibold">Approach</div>
+                    <div class="mt-5 text-sm text-warna-delapan font-semibold">Approach</div>
                     <div class="text-sm text-warna-sembilan font-semibold">
-                         <div v-for="(item, index) in dataDetail.typeApproach" :key="'tipeapproach' + index" class="mb-4">
-                            <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                        <div v-if="dataDetail.typeApproach.length == 0">-</div>
+                        <div v-else>
+                            <div v-for="(item, index) in dataDetail.typeApproach" :key="'tipeapproach' + index" class="mb-4 inline-block mr-1">    
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.typeApproach.length">, </span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="mt-8 text-warna-delapan font-semibold">Issue</div>
+                    <div class="mt-5 text-sm text-warna-delapan font-semibold">Issues</div>
                     <div class="text-sm text-warna-sembilan font-semibold">
-                         <div v-for="(item, index) in dataDetail.typeIssue" :key="'tipeissue' + index" class="mb-4">
-                            <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span>
+                        <div v-if="dataDetail.typeIssues.length == 0">-</div>
+                        <div v-else>
+                            <div v-for="(item, index) in dataDetail.typeIssues" :key="'tipeapproach' + index" class="mb-4 inline-block mr-1">    
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.typeIssues.length">, </span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="mt-8 text-warna-delapan font-semibold">Tag</div>
+                    <div class="mt-5 text-sm text-warna-delapan font-semibold">Tag</div>
                     <div class="text-sm text-warna-sembilan font-semibold">
-                         <div v-for="(item, index) in dataDetail.tag" :key="'tag' + index" class="mb-4">
-                            <span>{{ selectedFlag === 'indonesia' ? item.pilihanTagId.nama[0] : item.pilihanTagId.nama[1] }}</span>
+                        <div v-if="dataDetail.tag.length == 0">-</div>
+                        <div v-else>
+                            <div v-for="(item, index) in dataDetail.tag" :key="'tag' + index" class="mb-4 inline-block mr-1">
+                                <span>{{ selectedFlag === 'indonesia' ? item.pilihanTagId.nama[0] : item.pilihanTagId.nama[1] }}</span><span v-if="index+1 < dataDetail.tag.length">, </span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="mt-8 text-warna-delapan font-semibold">Moderation Note</div>
+                    <div class="mt-5 text-sm text-warna-delapan font-semibold">Moderation Note</div>
                     <div class="text-sm text-warna-sembilan font-semibold">
                         <div class="mb-4">{{ dataDetail.catatanModerasi }}</div>
                     </div>
@@ -114,9 +129,10 @@
 
                 </div>
                 <div v-if="dataDetail" class="col-span-12 lg:col-span-8">
-                    <div class="text-xl font-bold text-warna-utama">
-                        logo organisasi dan nama organisasi 
-                    </div>
+                    <ElementsFotoNama 
+                        :logo="basePath+dataDetail.myOrganisasi.imgLogoOrganisasi"
+                        :label="dataDetail.myOrganisasi.namaOrganisasi"
+                    />
                     <hr class="border-warna-tujuh my-5">
                     <div class="grid grid-cols-8 gap-5">
                         <div class="col-span-4">
@@ -136,7 +152,15 @@
                             <div v-for="(item1, index1) in dataLabel" :key="'dL' + index1" v-show="item1.posisi==='kanan'" class="grid grid-cols-12 mb-4 break-words">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
-                                    <div v-if="['start', 'end'].includes(item1.value)" class="">
+                                    <div v-if="['statusActivity', 'typeVisibility'].includes(item1.value)" class="">
+                                        {{selectedFlag === 'indonesia' ? dataDetail[item1.value].nama[0] : dataDetail[item1.value].nama[1]}}
+                                        <!-- <span v-if="item1.id === 1">Twitter</span> -->
+                                    </div>
+                                    <div v-else-if="['lokasi'].includes(item1.value)" class="">
+                                        {{dataDetail[item1.value][0].jalan}}, {{dataDetail[item1.value][0].kota}}, {{dataDetail[item1.value][0].provinsi}}
+                                    </div>
+                                    
+                                    <div v-else-if="['tanggalMulai', 'tanggalSelesai'].includes(item1.value)" class="">
                                         {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY hh:mm A') }}
                                     </div>
                                     <div v-else>
@@ -149,16 +173,16 @@
 
                     <hr class="border-warna-tujuh mb-5">
                     <div class="mb-5">
-                        <div class="text-base text-warna-sembilan font-semibold mb-[18px]">About</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 pl-4 bg-warna-lima text-sm text-warna-sembilan font-normal">
-                            <div class="mb-4">{{ selectedFlag === 'indonesia' ? dataDetail.deskripsiPanjang[0] : dataDetail.deskripsiPanjang[1] }}</div>
+                        <div class="text-warna-sembilan font-semibold mb-[16px]">About</div>
+                        <div class="col-span-12 md:col-span-10 lg:col-span-10 p-3 bg-warna-body text-sm text-warna-sembilan font-normal">
+                            <div class="">{{ selectedFlag === 'indonesia' ? dataDetail.deskripsiPanjang[0] : dataDetail.deskripsiPanjang[1] }}</div>
                         </div>
                     </div>
                         
                     <hr class="border-warna-tujuh mb-5">
                     
-                     <div class="mb-5">
-                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Gallery</div>
+                    <div class="mb-5">
+                        <div class="text-warna-sembilan font-semibold mb-[16px]">Gallery</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
                             gambar-gambar ada 5. kalo lebih dari lima? mungkin pakai carousel saja.
                         </div>
@@ -167,18 +191,18 @@
                     <hr class="border-warna-tujuh mb-5">
 
                     <div class="mb-5">
-                        <div class="text-warna-delapan font-semibold mb-[16px]">Beneficiaries</div>
+                        <div class="text-warna-sembilan font-semibold mb-[16px]">Beneficiaries</div>
 
                             <div class="grid grid-cols-12 gap-5">
                                 <div class="col-span-12 lg:col-span-6">
                                     <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Beneficiaries by Gender</div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Male</div>
-                                        <div class="text-warna-sembilan">2315</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.beneficiariesMen}}</div>
                                     </div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Female</div>
-                                        <div class="text-warna-sembilan">2315</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.beneficiariesWomen}}</div>
                                     </div>
                                 </div>
 
@@ -186,11 +210,11 @@
                                     <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Beneficiaries by Disability</div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Male</div>
-                                        <div class="text-warna-sembilan">2315</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.beneficiariesMenDifable}}</div>
                                     </div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Female</div>
-                                        <div class="text-warna-sembilan">2315</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.beneficiariesWomenDifable}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -200,43 +224,136 @@
                      <hr class="border-warna-tujuh mb-5">
 
                      <div class="mb-5">
-                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Retention</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            info terkait retention
-                        </div>
+                        <div class="text-warna-sembilan font-semibold mb-[16px]">Retention</div>
+
+                            <div class="grid grid-cols-12 gap-5">
+                                <div class="col-span-12 lg:col-span-6">
+                                    <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Program Retention</div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Male</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.retentionSaatProgramMen}}</div>
+                                    </div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Female</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.retentionSaatProgramWomen}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-span-12 lg:col-span-6">
+                                    <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Post-Program Retention</div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Male</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.retentionPascaProgramMen}}</div>
+                                    </div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Female</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.retentionPascaProgramWomen}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                    
+                    <hr class="border-warna-tujuh mb-5">
+
+                     <div class="mb-8">
+                        <div class="text-warna-sembilan font-semibold mb-[16px]">Satisfaction</div>
+
+                            <div class="mb-3 flex items-center font-semibold text-sm">
+                                <div class="w-40 text-warna-delapan">Totally Satisfied</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult.satisfactionSangatPuas}}</div>
+                            </div>
+                            <div class="mb-3 flex items-center font-semibold text-sm">
+                                <div class="w-40 text-warna-delapan">Satisfied</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult.satisfactionPuas}}</div>
+                            </div>
+                            <div class="mb-3 flex items-center font-semibold text-sm">
+                                <div class="w-40 text-warna-delapan">Neutral</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult.satisfactionNetral}}</div>
+                            </div>
+                            <div class="mb-3 flex items-center font-semibold text-sm">
+                                <div class="w-40 text-warna-delapan">Not Satisfied</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult.satisfactionTidakPuas}}</div>
+                            </div>
+                            <div class="mb-3 flex items-center font-semibold text-sm">
+                                <div class="w-40 text-warna-delapan">Totally Unsatisfied</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult.satisfactionSangatTidakPuas}}</div>
+                            </div>
+
+                    </div>
+
+
+
+                    
+                    <hr class="border-warna-tujuh mb-5">
+
+                     <div class="mb-8">
+                        <div class="text-warna-sembilan font-semibold mb-[16px]">Customer</div>
+                            <div class="mb-3 flex items-center font-semibold text-sm">
+                                <div class="w-64 text-warna-delapan">Customer Acquisition Score</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult.customerAcquisitionScore}}</div>
+                            </div>
                     </div>
                     
                      <hr class="border-warna-tujuh mb-5">
 
-                     <div class="mb-5">
-                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Satisfaction</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            info terkait satisfaction
-                        </div>
+                    <div class="mb-8">
+                        <div class="text-warna-sembilan font-semibold mb-[16px]">Net Promotor Score</div>
+
+                            <div class="grid grid-cols-12 gap-5 text-sm font-semibold">
+                                <div class="col-span-12 lg:col-span-6">
+                                    <div class="mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Score 1</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore1}}</div>
+                                    </div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Score 2</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore2}}</div>
+                                    </div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Score 3</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore3}}</div>
+                                    </div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Score 4</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore4}}</div>
+                                    </div>
+                                    <div class="text-sm font-semibold mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Score 5</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore5}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-span-12 lg:col-span-6">
+                                    <div class="mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Score 6</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore6}}</div>
+                                    </div>
+                                    <div class="mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Score 7</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore7}}</div>
+                                    </div>
+                                    <div class="mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Score 8</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore8}}</div>
+                                    </div>
+                                    <div class="mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Score 9</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore9}}</div>
+                                    </div>
+                                    <div class="mb-3 flex items-center">
+                                        <div class="w-24 text-warna-delapan">Score 10</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore10}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
                     </div>
                     
                      <hr class="border-warna-tujuh mb-5">
 
-                     <div class="mb-5">
-                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Customer</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            info terkait customer
-                        </div>
-                    </div>
-                    
-                     <hr class="border-warna-tujuh mb-5">
-
-                     <div class="mb-5">
-                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Net Promotor Score</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            info terkait NPS
-                        </div>
-                    </div>
-                    
-                     <hr class="border-warna-tujuh mb-5">
-
-                     <div class="mb-5">
-                        <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Journey</div>
+                     <div class="mb-8">
+                        <div class="text-warna-sembilan font-semibold mb-[16px]">Journey</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
                             info terkait journey
                         </div>
@@ -253,13 +370,13 @@
                     <div class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
                     <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
-                <div v-if="dataDetail.submission === 3" class="flex gap-x-6  font-semibold">
+                <div v-if="dataDetail.submission === 4" class="flex gap-x-6  font-semibold">
                     <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
                     <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
             </div>
         </div>
-        <pre>{{dataDetail}}</pre>
+        <!-- <pre>{{dataDetail}}</pre> -->
     </div>
 </template>
 
@@ -294,28 +411,23 @@ export default {
                     posisi: 'kiri'
                 },
                 {
-                    label: 'URL',
-                    value: 'url',
-                    posisi: 'kiri'
-                },
-                {
                     label: 'Activity',
-                    value: 'activity',
+                    value: 'statusActivity',
                     posisi: 'kanan'
                 },
                 {
                     label: 'Visibility',
-                    value: 'visibility',
+                    value: 'typeVisibility',
                     posisi: 'kanan'
                 },
                 {
                     label: 'Start',
-                    value: 'start',
+                    value: 'tanggalMulai',
                     posisi: 'kanan'
                 },
                 {
                     label: 'End',
-                    value: 'end',
+                    value: 'tanggalSelesai',
                     posisi: 'kanan'
                 },
                 {
@@ -328,8 +440,7 @@ export default {
             gallery: [],
             milestone: [],
             report: [],
-            journey: [],
-            activityResult: null
+            journey: []
         }
     },
     computed: {
@@ -344,6 +455,9 @@ export default {
         },
         id() {
             return this.$route.params.id;
+        },
+        basePath() {
+            return process.env.BASE_URL
         }
     },
     watch: {
@@ -374,7 +488,7 @@ export default {
         },
 
         btnEdit() {
-            this.$router.push('/moderations/program/1/edit')
+            this.$router.push('/moderations/program/'+this.id+'/edit')
         },
 
         toggleDrop() {

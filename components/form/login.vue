@@ -10,25 +10,27 @@
                     <div class="text-sm">Welcome back, please login to your account</div>
                 </div>
                 <div>
-                    <div class="mb-[10px] text-warna-utama">
-                        <div class="font-semibold mb-1">Email</div>
-                        <InputText 
-                            v-model="form.email"
-                            placeholder="Input Email"
-                            name="inputemail"
-                        />
-                    </div>
-                    <div class="mb-[28px] text-warna-utama">
-                        <div class="font-semibold mb-1">Password</div>
-                        <InputPassword 
-                            v-model="form.password"
-                            placeholder="Input Password"
-                            name="inputpassword"
-                        />
-                    </div>
-                    <button class="rounded-lg py-2 w-full bg-warna-empat text-white" @click="btnLogin">
-                        Login
-                    </button>
+                    <form @submit.prevent="userLogin">
+                        <div class="mb-[10px] text-warna-utama">
+                            <div class="font-semibold mb-1">Email</div>
+                            <InputText 
+                                v-model="form.email"
+                                placeholder="Input Email"
+                                name="inputemail"
+                            />
+                        </div>
+                        <div class="mb-[28px] text-warna-utama">
+                            <div class="font-semibold mb-1">Password</div>
+                            <InputPassword 
+                                v-model="form.password"
+                                placeholder="Input Password"
+                                name="inputpassword"
+                            />
+                        </div>
+                        <button class="rounded-lg py-2 w-full bg-warna-empat text-white" type="submit">
+                            Login
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -52,8 +54,21 @@ export default {
     },
 
     methods: {
-        btnLogin() {
-            this.$router.push('/')
+        // btnLogin() {
+        //     this.$router.push('/')
+        // }
+
+        async userLogin() {
+            try {
+                await this.$auth.loginWith('local', { data: this.form }).then(res => {
+                    console.log(res.data.token)
+                    const tokenCookiz = res.data.token
+                    this.$cookies.set('jtoken', tokenCookiz)
+                    window.location.href="/signed"
+                })
+            } catch (err) {
+                console.log(err)
+            }
         }
     },
 }

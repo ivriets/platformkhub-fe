@@ -1,5 +1,5 @@
 {
-    "submission": 1,
+    "submission": 4,
     "updatedAt": "2022-11-10T15:31:19.986130",
     "moderator": "myModerator",
     "catatanModerasi": null,
@@ -113,14 +113,106 @@
         ]
     },
     "systemRowId": "mWAttwqJ",
-    "officer": [],
-    "journey": [],
-    "activityResult": [],
+    "officer": [45658504,75805264],
+    "journey": [
+        {
+            "pkJourneyId": "rPPrSiYK",
+            "nomorUrut": 0,
+            "judulJourney": [
+                "Wawancara lapangan",
+                "N/A"
+            ],
+            "deskripsi": [
+                "Melakukan wawancara lapangan untuk mendapat data dan informasi terkait penelitian Kondisi Kebebasan Beragama/Berkeyakinan.",
+                "N/A"
+            ],
+            "imgThumbnailJourney": "/assets/placeholder/journey.jpg",
+            "systemRowId": "taHstkFN"
+        }
+    ],
+    "activityResult": {
+        "pkActivityResultId": "NTBDtrHu",
+        "beneficiariesMen": 10,
+        "beneficiariesWomen": 11,
+        "beneficiariesMenDifable": 20,
+        "beneficiariesWomenDifable": 20,
+        "retentionSaatProgramMen": 10,
+        "retentionSaatProgramWomen": 9,
+        "retentionPascaProgramMen": 8,
+        "retentionPascaProgramWomen": 10,
+        "satisfactionSangatTidakPuas": 17,
+        "satisfactionTidakPuas": 15,
+        "satisfactionNetral": 13,
+        "satisfactionPuas": 12,
+        "satisfactionSangatPuas": 10,
+        "customerAcquisitionScore": 8,
+        "netPromotorScore1": 7,
+        "netPromotorScore2": 30,
+        "netPromotorScore3": 40,
+        "netPromotorScore4": 50,
+        "netPromotorScore5": 60,
+        "netPromotorScore6": 70,
+        "netPromotorScore7": 80,
+        "netPromotorScore8": 90,
+        "netPromotorScore9": 110,
+        "netPromotorScore10": 6,
+        "baselineEndlineSurvey": [
+            {
+                "pkBaselineEndlineSurveyId": "wVSRJfdB",
+                "variablePerubahan": {
+                    "id": 69,
+                    "kategori": [
+                        "steven1",
+                        "steven1"
+                    ],
+                    "nama": [
+                        "yudi1",
+                        "yudi1"
+                    ]
+                },
+                "pretest": 10,
+                "posttest": 10,
+                "systemRowId": "SnTjYwoy"
+            },
+            {
+                "pkBaselineEndlineSurveyId": "lxWNLpfh",
+                "variablePerubahan": {
+                    "id": 70,
+                    "kategori": [
+                        "steven1",
+                        "steven1"
+                    ],
+                    "nama": [
+                        "yudi2",
+                        "yudi2"
+                    ]
+                },
+                "pretest": 20,
+                "posttest": 20,
+                "systemRowId": "HhvNHKny"
+            }
+        ],
+        "systemRowId": "IPaEUPNG"
+    },
     "coOwner": [],
-    "lokasi": [],
+    "lokasi": [
+        {
+            "pkLokasiActivityId": "LyFYfUVW",
+            "provinsi": "DKI Jakarta",
+            "kota": "Jakarta Pusat",
+            "jalan": "jalan sudirman no 80",
+            "pinLocation": "VW25+RP",
+            "systemRowId": "sFlsjzvO"
+        }
+    ],
     "fase": [],
     "partnerActivityInternal": [],
-    "partnerActivityEksternal": [],
+    "partnerActivityEksternal": [
+        {
+            "namaPartner": "PT.Jaya-Baya",
+            "websitePartner": "https://www.websitenya.com"
+        }
+    ],
     "files": [],
     "events": [],
     "subProgram": [],

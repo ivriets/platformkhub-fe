@@ -35,5 +35,14 @@
     "Email is Verified": "Surel Terverifikasi",
     "Status": "Status",
     "Created": "Tanggal Buat",
-    "Created At": "Tanggal Buat"
+    "Created At": "Tanggal Buat",
+
+    "Audience Type": "Tipe Audience",
+    "Blog Type": "Tipe Blog",
+    "Approach": "Pendekatan",
+    "Topic": "Topik",
+    "Tag": "Tag",
+
+    "Logout": "Keluar",
+    "Close": "Tutup"
 }

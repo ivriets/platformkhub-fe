@@ -83,6 +83,10 @@ body {
     background: $warna-lima;
 }
 
+.bg-warna-body {
+    background: $warna-body;
+}
+
 .bg-latar-satu {
     background: $warna-latar-satu;
 }
@@ -249,6 +253,12 @@ body {
 
 .border-latar-tujuh {
     border-color: $warna-latar-tujuh;
+}
+
+
+/// RING COLOR ///
+.ring-warna-empat {
+    --tw-ring-color: $warna-empat;
 }
 
 

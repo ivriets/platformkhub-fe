@@ -35,5 +35,14 @@
     "Email is Verified": "Email is Verified",
     "Status": "Status",
     "Created": "Created",
-    "Created At": "Created At"
+    "Created At": "Created At",
+
+    "Audience Type": "Audience Type",
+    "Blog Type": "Blog Type",
+    "Approach": "Approach",
+    "Topic": "Topic",
+    "Tag": "Tag",
+
+    "Logout": "Logout",
+    "Close": "Close"
 }

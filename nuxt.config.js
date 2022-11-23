@@ -48,8 +48,12 @@ export default {
     'cookie-universal-nuxt',
     '@nuxtjs/i18n',
     '@nuxtjs/dayjs',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     '@nuxtjs/dotenv',
     'nuxt-highcharts',
+    // ['cookie-universal-nuxt', { alias: 'cookiz' }],
+    'cookie-universal-nuxt',
     ['nuxt-tailvue', {
       modal: true
     }],
@@ -87,6 +91,61 @@ export default {
     lazy: true,
     defaultLocale: 'en',
     langDir: 'locales/',
+  },
+
+  // router: {
+  //   middleware: ['general']
+  // },
+
+  axios: {
+    baseURL: 'https://base.api.k-hub.org',
+    headers: {
+      "Content-Type": "application/json",
+    }
+  },
+
+  auth: {
+    redirect: {
+      // login: '/login',
+      home: false,
+      // logout: '/login'
+      callback: '/callback',
+    },
+    strategies: {
+      local: {
+        scheme: 'refresh',
+        token: {
+          property: 'token',
+          maxAge: 1800,
+          type: 'JWT'
+        },
+        user: {
+          property: false,
+          autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/a3/auth/', method: 'post', propertyName: 'token' },
+          logout: false,
+          user: { url: '/a3/accounts/', method: 'get' }
+        },
+        tokenRequired: true,
+        tokenType: 'JWT',
+        globalToken: true,
+        // globalToken: true,
+        // autoFetchUser: true
+      },
+    },
+    plugins: [
+      { src: "~/plugins/apiBase", mode: "client" },
+      { src: "~/plugins/apiPlatform", mode: "client" },
+      // { src: "~/plugins/axios", mode: "client" },
+    ],
+    cookie: {
+      options: {
+        sameSite: 'lax',
+      },
+    },
+
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

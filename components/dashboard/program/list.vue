@@ -126,7 +126,6 @@ export default {
         },
 
         masterPoint() {
-            // this.dataTable = listProgram
             this.dataTable = listProgram.results.map(e => {
                 const data = {
                     programId: e.programId,
@@ -138,10 +137,6 @@ export default {
                 return data
             })
         },
-
-        // goto() {
-        //     this.$router.push('/moderations/program/_id')
-        // }
     }
 }
 </script>

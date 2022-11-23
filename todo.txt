@@ -7,12 +7,5 @@ install sass sass-loader@10.1.1
 2. grafik user per day mau pakai highchart atau pakai chart lain ?
 
 
-
-
-1. lagi ongoing di pusat
-
 steven, 
-1. please help, dashboard/program/detail -> saya mau masukin value nya activity tapi dia pakai typeActivity.id=1 (Pre Activity).
-gw ga tau gmn caranya karena bagian itu di dalem <div v-for="(item1, index1) in dataLabel"
-
-2. :key buat apa sih ?
+1. breadcrumb di Blog > Detail > Editor, kalo bisa pas kata "Detail" dihover itu warnanya jadi lebih tua juga. kaya yang kata "Blog". [DONE]

@@ -1,12 +1,15 @@
 <template>
     <div class="container mx-auto">
-        <DashboardTutorial />
+        <div class="px-6 py-10">
+            <DashboardTutorial />
+        </div>
     </div>
 </template>
 
 
 <script>
 export default {
+    middleware: ['general'],
     data() {
         return {
 
