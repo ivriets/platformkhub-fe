@@ -12,7 +12,7 @@
                 :editable="false"
                 :input-attr="{name:name, id:name}"
                 :disabled="disabled"
-                class="w-[300px]"
+                class=""
             />
         </client-only>
     </div>

@@ -1,5 +1,12 @@
 <template>
-     <div class="py-[80px]">
+     <div class="py-[48px]">
+        <div class="mb-6">
+            <ElementsBreadcrumb 
+                :parent="'Programs'"
+                :linkParent="'/moderations/program'"
+                :child="childBreadcrumb"
+            />
+        </div>
         <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
             <div class="flex items-start justify-between mb-6">
                 <div>
@@ -69,7 +76,9 @@
                         <div class="col-span-12 lg:col-span-6">
                             <div class="mt-8 text-sm text-warna-delapan font-semibold">Partner</div>
                             <div class="text-sm text-warna-sembilan font-semibold">
-                                <div class="mb-4">{{ dataDetail.partnerActivityEksternal }}</div>
+                                <div v-for="(item, index) in dataDetail.partnerActivityEksternal" :key="'partner' + index" class="mb-4 inline-block mr-1">
+                                    <span>{{ item.namaPartner}}</span><span v-if="index+1 < dataDetail.partnerActivityEksternal.length">, </span>
+                                </div>
                             </div>
                         </div>
 
@@ -183,8 +192,19 @@
                     
                     <div class="mb-5">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Gallery</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            gambar-gambar ada 5. kalo lebih dari lima? mungkin pakai carousel saja.
+                        <div class="flex items-center lg:gap-4 gap-2">
+                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
+                                <img class="h-16" src="/images/logo.png" alt="main-image">
+                            </div>
+                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
+                                <img class="h-16" src="/images/logo.png" alt="main-image">
+                            </div>
+                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
+                                <img class="h-16" src="/images/logo.png" alt="main-image">
+                            </div>
+                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
+                                <img class="h-16" src="/images/logo.png" alt="main-image">
+                            </div>
                         </div>
                     </div>
                     
@@ -366,17 +386,23 @@
         <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div v-if="dataDetail.submission === 1" class="flex gap-x-6  font-semibold">
-                    <div class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
-                    <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
-                </div>
-                <div v-if="dataDetail.submission === 4" class="flex gap-x-6  font-semibold">
+                <div class="flex gap-x-6  font-semibold">
                     <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
-                    <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
+                    <div class="relative">
+                        <select id="btnneedrevision" name="buttonneedrevision" v-model="buttonSubmission"
+                            class="cursor-pointer appearance-none w-[180px] focus:outline-none border border-warna-tujuh rounded-lg px-4 py-2 text-white" :class="color">
+                                <option v-for="(i, index) in opsiButton" :key="'opsi'+index" :value="i.id">
+                                    {{i.label}}
+                                </option>
+                        </select>
+                        <div class="absolute top-0 right-0 h-full items-center flex px-2">                
+                            <img src="/icons/icon-arrow-down-white.png" alt="arrow-down" class="w-4 h-4">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- <pre>{{dataDetail}}</pre> -->
+        <pre>{{dataDetail}}</pre> 
     </div>
 </template>
 
@@ -389,6 +415,27 @@ export default {
         return {
             flagDrop: false,
             selectedFlag: 'indonesia',
+            childBreadcrumb: [],
+            dataDetail: null,
+            buttonSubmission: null,
+            opsiButton: [
+                {
+                    id: 1,
+                    label: 'Under Review'
+                },
+                {
+                    id: 2,
+                    label: 'Draft'
+                },
+                {
+                    id: 3,
+                    label: 'Need Revision'
+                },
+                {
+                    id: 4,
+                    label: 'Approved'
+                }
+            ],
             dataLabel: [
                 {
                     label: 'Program ID',
@@ -436,7 +483,6 @@ export default {
                     posisi: 'kanan'
                 },
             ],
-            dataDetail: null,
             gallery: [],
             milestone: [],
             report: [],
@@ -463,6 +509,17 @@ export default {
     watch: {
         lang() {
             this.initialize()
+        },
+        buttonSubmission() {
+            if (this.buttonSubmission === 1) {
+                this.color = 'bg-warna-under-review'
+            } else if (this.buttonSubmission === 2) {
+                this.color = 'bg-warna-draft'
+            } else if (this.buttonSubmission === 3) {
+                this.color = 'bg-warna-need-revision'
+            } else {
+                this.color = 'bg-warna-approved-accepted'
+            }
         }
     },
     mounted() {
@@ -477,10 +534,13 @@ export default {
         initialize() {
             this.$store.commit('setPageTitle', this.title)
             this.masterPoint()
+            this.setBreadcrumb()
         },
 
         masterPoint() {
-            this.dataDetail = detailProgram
+            var vA = detailProgram
+            this.dataDetail = vA
+            this.buttonSubmission = vA.submission
         },
 
         btnBack() {
@@ -508,6 +568,14 @@ export default {
             this.selectedFlag = 'inggris'
             this.closeDrop()
         },
+        setBreadcrumb() {
+            this.childBreadcrumb = [
+                {
+                    label: 'Detail',
+                    link: ''
+                }
+            ]
+        }
 
     },
 }

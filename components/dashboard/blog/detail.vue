@@ -110,7 +110,7 @@
                     </div>
 
                     <div class="text-sm font-semibold">
-                        <div class="text-warna-delapan">Modetaion Notes</div>
+                        <div class="text-warna-delapan">Moderation Notes</div>
                         <!-- <div v-for="(item, index) in dataDetail.blogsTag" :key="'tag' + index" class="text-warna-sembilan inline-block mr-1">
                             <span>{{ selectedFlag === 'indonesia' ? item.pilihanTagId.nama[0] : item.pilihanTagId.nama[1] }}</span><span v-if="index+1 < dataDetail.blogsTag.length">, </span>
                         </div> -->

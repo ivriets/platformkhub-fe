@@ -54,6 +54,18 @@
                                 :name="prefixName+'deskripsien'"
                             />
                         </div>
+
+                    <div class="grid grid-cols-12 gap-5 mt-3">
+                        <div class="col-span-12 lg:col-span-6">
+                             <div class="text-center bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto cursor-pointer">+ image</div>
+                        </div>
+
+                        <div class="col-span-12 lg:col-span-6">
+                              <div class="text-center bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto cursor-pointer">+ text</div>
+                        </div>
+
+                    </div>
+
                     </div>
 
                 </div>

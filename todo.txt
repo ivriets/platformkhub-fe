@@ -6,6 +6,12 @@ install sass sass-loader@10.1.1
 1. Dasbor > horizontal bar chart di page view: tanya pa asep, apakah mau pakai highchart (tunjukkan jsfiddle nya: https://jsfiddle.net/tuing2ing/36x1w0bn/91/ ) atau pakai cara lain ? 
 2. grafik user per day mau pakai highchart atau pakai chart lain ?
 
+steven,
+1. blog content, UX nya berubah jadi ada "add image" dan "add text". 
+2. coba tanya pa asep, untuk blog detail, bagian content, itu kan ada tag html nya. gmn supaya bisa render html.
+3. program edit, bagian location, itu minta tolong ya, gw ga bisa. kalo bagian testimony nya bakal mirip, gpp aku kerjain. kalo bakal beda, minta tolong juga. 
+4. kalo gallery itu kan isi 5. gmn ya? pakai grid ato pakai apa....
 
-steven, 
-1. breadcrumb di Blog > Detail > Editor, kalo bisa pas kata "Detail" dihover itu warnanya jadi lebih tua juga. kaya yang kata "Blog". [DONE]
+5. program edit, startdate enddate, kalau browsernya dikecilin, textbox nya tembus.
+6. program edit, button submit, kalau browsernya dikecili, buttonnya jadi tembus.
+7. di program edit, bagian mana aja yang harus dibuat component?

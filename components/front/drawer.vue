@@ -123,6 +123,12 @@ export default {
                     children: []
                 },
                 {
+                    icon: '/icons/icon-outlook.png',
+                    label: 'Outlook',
+                    path: '/outlook',
+                    children: []
+                },
+                {
                     icon: '/icons/icon-log.png',
                     label: 'Activity Log',
                     path: '/activity-log',

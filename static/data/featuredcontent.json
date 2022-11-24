@@ -1,0 +1,1098 @@
+{
+    "featuredProgram": [
+        {
+            "programId": 10864857,
+            "judulActivity": [
+                "MERIT Indonesia",
+                "MERIT Indonesia"
+            ],
+            "imgThumbnail": "/assets/Organisasi/7496777/images/PPIM_UIN_Jakarta-MERIT_INDONESIA.apng",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "deskripsiPendek": [
+                "Media and Religious Trend (MERIT) merupakan program yang diinisiasi oleh PPIM UIN Jakarta bekerja sama dengan Kedutaan Besar Kerajaan Belanda di Jakarta. Program ini berfokus pada isu-isu terkait keberagamaan baik di media lama maupun media baru. MERIT bertujuan utama mendorong penerapan prinsip-prinsip Moderasi Beragama untuk melawan paham Konservatisme Agama dengan menghasilkan pengetahuan berbasis bukti dan mengadakan capacity building dalam kampanye moderasi agama. Di tahun pertama program ini, kegiatan yang dilakukan berpusat pada kajian strategis terkait media lama dan baru dengan mengadakan penelitian mengenai diseminasi paham keagamaan di media sosial, televisi dan radio.",
+                "N/A"
+            ],
+            "tanggalMulai": "2001-06-11T00:00:00",
+            "tanggalSelesai": "2022-12-12T00:00:00",
+            "createdAt": "2021-06-12T17:12:28.049392",
+            "typeApproach": [
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pemerintahan",
+                        "Governance"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                }
+            ],
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pembuat Kebijakan",
+                        "For Policy Maker"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                }
+            ],
+            "myOrganisasi": {
+                "organisasiId": 7496777,
+                "namaOrganisasi": "PPIM UIN Jakarta",
+                "imgLogoOrganisasi": "/assets/Organisasi/7496777/images/PPIM_UIN_Jakarta-logo-ppim-HD.apng"
+            }
+        },
+        {
+            "programId": 171543420,
+            "judulActivity": [
+                "Bandung Lautan Damai (BaLaD)",
+                "Bandung Lautan Damai (BaLaD)"
+            ],
+            "imgThumbnail": "/assets/Organisasi/74603252/images/Jaringan_Antar_Kerja_Umat_Beragama_Jakatarub-Logoo_balad.jpeg",
+            "statusActivity": {
+                "id": 2,
+                "nama": [
+                    "In Activity",
+                    "In Activity"
+                ]
+            },
+            "deskripsiPendek": [
+                "Bandung Lautan Damai (BaLaD) merupakan ekspresi masyarakat Bandung Raya dalam merayakan Hari Toleransi Internasional. Program yang berarti \"sahabat\" dalam bahasa Sunda ini, dikerjakan sejak 2012 dengan mengusung tema tertentu. \n\nBaLaD konsisten mengkampanyekan edukasi publik, lewat berbagai cara kreatif, demi menumbuhkembangkan sikap toleransi dan penghargaan terhadap keberagaman. BaLaD diinisiasi oleh Jaringan Kerja Antar Umat Beragama (JAKATARUB) bersama sejumlah komunitas keagamaan dan komunitas budaya di",
+                "N/A"
+            ],
+            "tanggalMulai": "2012-11-15T00:00:00",
+            "tanggalSelesai": "2021-12-15T00:00:00",
+            "createdAt": "2021-06-13T16:20:41.034714",
+            "typeApproach": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pelepasan",
+                        "Disengagement"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                }
+            ],
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "myOrganisasi": {
+                "organisasiId": 74603252,
+                "namaOrganisasi": "Jaringan Kerja Antar Umat Beragama (JAKATARUB)",
+                "imgLogoOrganisasi": "/assets/Organisasi/74603252/images/Jaringan_Antar_Kerja_Umat_Beragama_Jakatarub-01_Jakatarub.apng"
+            }
+        },
+        {
+            "programId": 83518598,
+            "judulActivity": [
+                "Sekolah Perempuan Perdamaian: Menguatkan Peran Perempuan dalam Upaya Bina Damai",
+                "School of Women Peacebuilders: Strengthening the Role of Women in Peacebuilding"
+            ],
+            "imgThumbnail": "/assets/Organisasi/27814231/images/Admin_KHUB-aman_indonesia_sekolah_perdamaian_peremuan.jpeg",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "deskripsiPendek": [
+                "Ketika radikalisme dan kekerasan berbasis gender dan agama, perempuan dan anak merupakan korban paling rentan, ditambah naiknya peran perempuan dalam aksi terorisme. The Asian Muslim Action Network (AMAN) berpendapat bahwa isu radikalisasi dan ekstrimisme tidak bisa dipisahkan dalam kerja-kerja berbasis perdamaian. AMAN melihat ekstrimisme berdampak pada keamanan perempuan dan kekerasan berbasis gender. Oleh karena itu, AMAN membentuk kerja-kerja pencegahan ekstremise yang dikonsep untuk mencapai perdamaian di beberapa wilayah rawan dan paska konflik. \nSalah satunya adalah program Sekolah Perdamaian untuk Perempuan yang dilaksanakan di 7 provinsi, serta bertujuan membentuk perempuan sebagai pemimpin baru dengan inisiatif membangun ketahanan komunitas dari radikalisme dan kekerasan berbasis agama dan gender. Program ini memberikan para pesertanya penguatan kesadaran dan berpikir kritis tentang persoalan sosial, ekonomi, budaya, politik, dan lingkungan. Beberapa jenis perubahan yang ingin diwujudkan dalam Sekolah Perempuan untuk Perdamaian adalah, seperti transformasi individu, transformasi relasional yang lebih baik dalam keluarga, transformasi struktural bagi penguatan komitmen pemerintah desa bagi partisipasi perempuan dalam pengambilan kebijakan, transformasi kultural untuk mendorong mekanisme penyelesaian masalah dan budaya peduli dan cinta satu sama lain. Hingga saat ini, Sekolah Perempuan untuk Perdamaian telah menjalin kerja sama dengan 33 lembaga atau  komunitas dengan visi sama untuk perempuan, toleransi, dan perdamaian.\n\nSumber :  https://amanindonesia.org/what-we-do/ketahanan-komunitas-oleh-perempuan/",
+                "N/A"
+            ],
+            "tanggalMulai": "2021-02-26T00:00:00",
+            "tanggalSelesai": "2021-02-26T00:00:00",
+            "createdAt": "2021-02-26T15:34:11.554875",
+            "typeApproach": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pelepasan",
+                        "Disengagement"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pemerintahan",
+                        "Governance"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                },
+                {
+                    "id": 1,
+                    "nama": [
+                        "Penegakan Hukum",
+                        "Law Enforcement"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Korban Terorisme",
+                        "Victims of Terrorism"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                },
+                {
+                    "id": 7,
+                    "nama": [
+                        "Penilaian/Evaluasi",
+                        "Assessment/Evaluation"
+                    ]
+                },
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                }
+            ],
+            "typeAudience": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pembuat Kebijakan",
+                        "For Policy Maker"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Donor",
+                        "For Donor"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                }
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng"
+            }
+        }
+    ],
+    "featuredEvent": [
+        {
+            "eventId": 130048980,
+            "judulActivity": [
+                "Pelatihan Resolusi Konflik Menggunakan Permainan Papan (Board Game)",
+                "Training Conflict Resolution"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 49582336,
+                "namaOrganisasi": "Peace Generation Indonesia",
+                "imgLogoOrganisasi": "/assets/Organisasi/49582336/images/Peace_Generation-Logo-Peace-Generation.apng"
+            },
+            "imgThumbnail": "/assets/Organisasi/49582336/images/Peace_Generation_Indonesia-PeaceBaker.jpeg",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "deskripsiPendek": [
+                "Orang hebat adalah ia yang bisa menyelesaikan semua konflik dan masalah dengan damai!\n\n𝗦𝗲𝘁𝗶𝗮𝗽 𝗵𝗮𝗿𝗶 𝗮𝗱𝗮 𝗺𝗮𝘀𝗮𝗹𝗮𝗵. 𝗦𝗲𝘁𝗶𝗮𝗽 𝗵𝗮𝗿𝗶 𝗮𝗱𝗮 𝗸𝗼𝗻𝗳𝗹𝗶𝗸.\n\nSo, Problem solving & Conflict resolution skill itu sangaat penting!\n\nSayangnya, skill penting begini ga diajarin di sekolah 😞\nPadahal kesehatan mental, kesuksesan, kebahagiaan dan ketenangan hidup bergantung di skill penting ini!\nYa, kan?\n\nGimana cara supaya bisa menyelesaikan konflik dengan damai?\nGimana cara memecahkan masalah dengan kreatif?\nGimana biar bisa bernegosiasi untuk kasih win/win solution?\n\nPeace Academy sudah buatin training khusus buat kamu untuk jadi 𝗣𝗥𝗢𝗕𝗟𝗘𝗠 𝗦𝗢𝗟𝗩𝗘𝗥 𝗞𝗘𝗥𝗘𝗡!\n\n𝗠𝗮𝗿𝗶 𝗚𝗮𝗯𝘂𝗻𝗴 𝗧𝗿𝗮𝗶𝗻𝗶𝗻𝗴 𝗞𝗢𝗡𝗙𝗟𝗜𝗞 𝗕𝗜𝗞𝗜𝗡 𝗞𝗔𝗠𝗨 𝗠𝗔𝗞𝗜𝗡 𝗘𝗣𝗜𝗞\n\n𝗗𝗮𝗽𝗮𝘁𝗸𝗮𝗻 𝗕𝗘𝗔𝗦𝗜𝗦𝗪𝗔 𝗧𝗥𝗔𝗜𝗡𝗜𝗡𝗚 𝘀𝗲𝗵𝗮𝗿𝗴𝗮 𝗥𝗽.𝟱𝟬𝟬,𝟬𝟬𝟬!\n\nKamu akan belajar skill2 keren ini\n⭐ Memahami konflik\n⭐ Kebutuhan dasar manusia\n⭐ Merespon konflik dengan keren\n⭐ Keterampilan negosiasi\n⭐ Keterampilan mediasi\n\n🗓️Pelaksanaan training : 1-10 September 2021\n📲Media pembelajaran via Zoom, Website, WA & board game\n\n🎲𝗚𝗿𝗮𝘁𝗶𝘀 𝗕𝗼𝗮𝗿𝗱𝗴𝗮𝗺𝗲 𝗣𝗲𝗮𝗰𝗲𝗯𝗮𝗸𝗲𝗿 𝘀𝗲𝗵𝗮𝗿𝗴𝗮 𝟭𝟱𝟬,𝟬𝟬𝟬\n(hanya dengan membayar ONGKIR sendiri)\n\n👥Target Peserta: 80 orang (𝗦𝗶𝗮𝗽𝗮 𝗰𝗲𝗽𝗮𝘁 𝗱𝗶𝗮 𝗱𝗮𝗽𝗮𝘁) Quota tinggal 30 org lagi!!\n\n📌Pendaftaran sampai 27 Agustus 2021\n\n🌍Link pendaftaran: 𝗵𝘁𝘁𝗽𝘀://𝗯𝗶𝘁.𝗹𝘆/𝗞𝗼𝗻𝗳𝗹𝗶𝗸𝗯𝗶𝗸𝗶𝗻𝗸𝗮𝗺𝘂𝗘𝗽𝗶𝗸\nSebelum daftar, pastikan kamu sudah memesan Boardgame Peacebaker di website dengan menggunakan voucher, agar bisa diklaim gratis. Lalu kemudian Screenshoot pembayaran ongkirnya.\n*untuk voucher, silahkan japri ke CP nya, ya.\n\n📢Organized by PeaceAcademy dan PeaceGen",
+                "N/A"
+            ],
+            "tanggalMulai": "2021-09-01T09:00:00",
+            "tanggalSelesai": "2021-09-10T16:00:00",
+            "createdAt": "2021-08-26T10:52:20.754291",
+            "typeApproach": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                }
+            ],
+            "typeAudience": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                }
+            ]
+        },
+        {
+            "eventId": 122175471,
+            "judulActivity": [
+                "Ujaran Kebencian dan Penodaan Agama",
+                "N/A"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 42040221,
+                "namaOrganisasi": "SETARA Institute",
+                "imgLogoOrganisasi": "/assets/Organisasi/42040221/images/SETARA_Institute-Logo_Hitam.apng"
+            },
+            "imgThumbnail": "/assets/Organisasi/42040221/images/SETARA_Institute-Diskusi_Ujaran_Kebencian.jpeg",
+            "statusActivity": {
+                "id": 1,
+                "nama": [
+                    "Pre Activity",
+                    "Pre Activity"
+                ]
+            },
+            "deskripsiPendek": [
+                "Hukum penodaan agama yang multitafsir cenderung disalahgunakan untuk melindungi agama mayoritas dan mendiskriminasi agama minoritas maupun aliran kepercayaan, yang mana bertentangan dengan kebebasan beragama/berkeyakinan.\n\nUpaya untuk uji materi UU Penodaan Agama beberapa kali ditolak oleh Mahkamah Konstitusi, seperti yang diajukan oleh gabungan LSM (Imparsial, ELSAM, PBHI, Demos, Setara Institute, Yayaasan Desantara, YLBHI) pada tahun 2010 dan Zico Leonard Djagardo Simanjuntak dan Aisyah Sharifa pada tahun 2018.\n\nMK berpandangan bahwa pemidanaan terhadap penyalahgunaan agama dan penodaan agama adalah penting karena keduanya adalah tindakan yang tidak dapat dibenarkan dalam pandangan hukum.\n\nTak hanya MK, lembaga pemerintah dan organisasi masyarakat juga ingin mempertahankan hukum penodaan agama, seperti yang terlihat dari upaya DPR meminta MK menolak uji materi UU penodaan agama dan pernyataan MUI mengenai pentingnya UU penodaan agama.\n\nTerkait hal ini, Mantan Menteri Agama Suryadharma Ali juga menyatakan apabila penodaan agama tidak diatur, maka dikhawatirkan dapat menimbulkan konflik horizontal, memicu keresahan dan disintegrasi bangsa.\n\nUntuk membahas perihal di atas lebih jauh, SETARA Institute mengajak Kawan Setara sekalian untuk turut hadir dan berdiskusi seputar Ujaran Kebencian dan Penodaan Agama bersama narasumber:\n\n1. Al Hanif, S.H., M.A., LL.M., PhD. (Akademisi Universitas Jember/Ketua Sepaham)\n2. Bonar Tigor Naipospos (Wakil Ketua SETARA Institute)\n\nHost: Syera Anggreini Buntara (Peneliti Kebebasan Beragama/Berkeyakinan SETARA Institute)\n\nKapan?\n\nHari, tanggal: Senin, 6 September 2021\nWaktu: 14.00 – 16.00 WIB\nTempat: Online via Zoom dan disiarkan langsung ke Youtube SETARA Institute\n\nMeeting ID: 898 7659 7674\nPasscode: 371037\n\nInformasi selengkapnya sila hubungi Sahbani di 082299153872\n\nHadir ya! 😊\n\n#ujarankebencian #penodaanagama #diskusisenja #KitaSetara #muhammadkace #yahyawaloni #happyweekend",
+                "N/A"
+            ],
+            "tanggalMulai": "2021-09-06T14:00:00",
+            "tanggalSelesai": "2021-09-06T16:00:00",
+            "createdAt": "2021-11-08T12:12:44.541730",
+            "typeApproach": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                },
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                }
+            ],
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ]
+        }
+    ],
+    "featuredResource": [
+        {
+            "resourceId": 36192275,
+            "kategoriArtikel": [
+                {
+                    "id": 27,
+                    "kategori": [
+                        "Resource"
+                    ],
+                    "nama": [
+                        "Sorotan",
+                        "Highlight"
+                    ]
+                }
+            ],
+            "judulArtikel": [
+                "Strategi Kontranarasi Radikalisasi Daring dari Pakar PCVE",
+                "Counternarrative Strategy for Online Radicalization from a PCVE Expert"
+            ],
+            "imgThumbnail": "/assets/Organisasi/27814231/images/Admin_KHUB-radikalisme.apng",
+            "deskripsiPendek": [
+                "<p>Berapa waktu yang dibutuhkan bagi seseorang untuk mengalami radikalisasi penuh secara daring (online)? 3 tahun? 5 tahun? Atau 10 tahun? Jawabannya mengejutkan.</p><p>Penelitian Indonesia Strategic Policy Institute (ISPI) bersama pakar PCVE",
+                "Solahudin Hartman",
+                "menemukan bahwa proses radikalisasi daring kini hanya membutuhkan waktu kurang dari satu tahun. Hal ini terbilang sangat cepat mengingat proses radikalisasi di masa lalu membutuhkan waktu 6-10 tahun.</p><p>Salah satu contoh kasus radikalisasi daring yang menggegerkan adalah kasus Anggi Indah Kusuma",
+                "seorang buruh migran Indonesia di Hongkong yang ditangkap karena merencanakan aksi pemboman di Bandung. Anggi berbaiat kepada ISIS kurang dari satu tahun sejak ia mengenal ISIS melalui grup telegram.</p><p>Hal ini tentu mengkhawatirkan. Bagaimana ISIS mampu menjebak masyarakat awam secara daring untuk melalukan teror? Bagaimana strategi terbaik bagi publik dan organisasi PCVE untuk melakukan kontranarasi terhadap hal tersebut?</p><p>Solahudin Hartman menjawab langsung pertanyaan tersebut pada acara K-Hub Fellowship 2022 (15/2) lalu.&nbsp;</p><p>Apa strateginya?<br />Simak selengkapnya melalui materi berikut",
+                "Rekan K-Hub!</p>",
+                "<p>N/A</p>"
+            ],
+            "createdAt": "2022-03-25T11:43:26.743294",
+            "typeApproach": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Penegakan Hukum",
+                        "Law Enforcement"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pelepasan",
+                        "Disengagement"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pemerintahan",
+                        "Governance"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Korban Terorisme",
+                        "Victims of Terrorism"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                },
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                }
+            ],
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng"
+            },
+            "datePublish": "2022-03-25T11:43:26.743333"
+        },
+        {
+            "resourceId": 103727306,
+            "kategoriArtikel": [
+                {
+                    "id": 27,
+                    "kategori": [
+                        "Resource"
+                    ],
+                    "nama": [
+                        "Sorotan",
+                        "Highlight"
+                    ]
+                }
+            ],
+            "judulArtikel": [
+                "Zen RS dan Propaganda Radikalisme di Media Massa",
+                "Zen RS Radicalism Propaganda on Mass Media"
+            ],
+            "imgThumbnail": "/assets/Organisasi/27814231/images/Admin_KHUB-ZenRS.apng",
+            "deskripsiPendek": [
+                "<p>Bayangkan ini tahun 2014. Koran",
+                "televisi",
+                "hingga internet dipenuhi oleh satu topik yang sama. Topik yang jadi perdebatan di ruang kelas",
+                "meja kerja",
+                "hingga warung pinggir jalan. Apa topiknya?</p><p>Ya",
+                "ISIS.</p><p>Zen RS",
+                "seorang jurnalis terkemuka di Tanah Air",
+                "mengungkapkan efek pemberitaan ISIS terhadap masyarakat pada kegiatan K-Hub Fellowship 2022 (15/2).</p><p>Ia mengatakan",
+                "topik seputar ISIS berhasil menciptakan propaganda baru radikalisme. Sebab",
+                "saat ISIS mulai muncul dan menguasai wilayah-wilayah di Timur Tengah",
+                "media massa bahu-membahu memberitakan berita tersebut secara besar-besaran. Tak pelak",
+                "hal ini menghidupkan simpati dan mengaktifkan keberpihakan. Lebih jauh",
+                "membangkitkan keinginan publik untuk ikut berperang bersama ISIS.</p><p>Sejujurnya",
+                "bagaimana jurnalisme berperan dalam memberitakan radikalisme? Apa itu propaganda media? Apa efek propaganda media terkait radikalisme terhadap masyarakat luas?</p><p>Simak selengkapnya melalui materi berikut",
+                "Rekan K-Hub.<br />Video presentasi lengkap mengenai materi ini dapat dilihat di:</p><p><a href=\"https://www.youtube.com/watch?v=NHTUGbQv2Cc&amp;t=1719s\">Youtube - Rekaman Webinar K-Hub Fellowship 2022</a></p><p>***</p>",
+                "<p>N/A</p>"
+            ],
+            "createdAt": "2022-03-25T17:08:31.701690",
+            "typeApproach": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Penegakan Hukum",
+                        "Law Enforcement"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Korban Terorisme",
+                        "Victims of Terrorism"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                },
+                {
+                    "id": 7,
+                    "nama": [
+                        "Penilaian/Evaluasi",
+                        "Assessment/Evaluation"
+                    ]
+                },
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                }
+            ],
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng"
+            },
+            "datePublish": "2022-03-25T17:08:31.701733"
+        }
+    ],
+    "featuredBlog": [
+        {
+            "blogId": 104774203,
+            "judulArtikel": [
+                "Sekolah Moderasi Beragama, Jalan Menjadi Indonesia yang Bineka",
+                "School of Religious Moderation, the Way to Be a Diversified Indonesia"
+            ],
+            "imgThumbnail": "/assets/Organisasi/58530412/images/Fahmina_Institute-20211115_Cover_Website_Fahmnia_Institute_S_LeJzR9q.jpeg",
+            "kategoriArtikel": [
+                {
+                    "id": 15,
+                    "kategori": [
+                        "Blog"
+                    ],
+                    "nama": [
+                        "Artikel",
+                        "Article"
+                    ]
+                },
+                {
+                    "id": 16,
+                    "kategori": [
+                        "Blog"
+                    ],
+                    "nama": [
+                        "Berita",
+                        "News"
+                    ]
+                },
+                {
+                    "id": 18,
+                    "kategori": [
+                        "Blog"
+                    ],
+                    "nama": [
+                        "Feature",
+                        "Feature"
+                    ]
+                },
+                {
+                    "id": 26,
+                    "kategori": [
+                        "Blog"
+                    ],
+                    "nama": [
+                        "Informasi",
+                        "Information"
+                    ]
+                }
+            ],
+            "deskripsiPendek": [
+                "<p><strong>Oleh: Abdullah Fikri Ashri</strong></p>\n<p>Pimpinan Cabang Ikatan Pelajar Perempuan Nahdlatul Ulama Kabupaten Cirebon dan Fahmina Institute menggelar Sekolah Moderasi Beragama via daring, Minggu-Jumat (5-10/9/2021). Turut serta 30 orang dari beragam keyakinan.</p>\n<p>&rdquo;Kebinekaan milik Indonesia. Meniadakannya adalah meniadakan Indonesia. Menjadi Indonesia adalah menjadi bineka.&rdquo;</p>\n<p>Ungkapan itu disampaikan KH Husein Muhammad, Pengasuh Pondok Pesantren Dar al-Tauhid Arjawinangun, Cirebon, Jawa Barat, saat menjadi pembicara kunci dalam pembukaan Sekolah Moderasi Beragama via daring, Minggu (5/9/2021) sore. Sebanyak 30 partisipan dari 15 komunitas beragam keyakinan turut serta.</p>\n<p>Kegiatan itu digelar Pimpinan Cabang Ikatan Pelajar Perempuan Nahdlatul Ulama (IPPNU) Kabupaten Cirebon dan Fahmina Institute, organisasi nirlaba yang bergerak pada isu keindonesiaan, kemanusiaan, dan keadilan. Sekolah berlangsung hingga Jumat (10/9/2021).</p>\n<p>Menurut Buya Husein, sapaannya, sudah berabad-abad masyarakat di Indonesia hidup dalam kebinekaan. Perbedaan suku, agama, bahasa, dan latar belakang lainnya tidak menjadi persoalan. Bahkan, semboyan negeri ini adalah Bhinneka Tunggal Ika: berbeda-beda tetapi tetap satu jua.</p>\n<p>Meski demikian, lanjutnya, tantangan keberagaman saat ini juga kian kompleks. Mulai dari ujaran kebencian, radikalisme, hingga terorisme. Kasus teranyar, Masjid Jemaah Ahmadiyah di Sintang, Kalimantan Barat, dirusak dan dibakar sejumlah orang, Jumat (3/9).</p>\n<p>&rdquo;Rasa duka mendalam terhadap teman-teman Ahmadiyah. Peristiwa itu tidak memiliki adab. Saya atas nama Fahmina mengecam penyerbuan Masjid Ahmadiyah di Sintang,&rdquo; kata Buya Husein, juga Ketua Yayasan Fahmina Institute.</p>\n<p>Kejadian itu menunjukkan belum semua orang paham agama. &rdquo;Agama itu cahaya yang menerangi kegelapan hati dan menenangkan pikiran. Agama bukan membikin hati jadi gelap dan pikiran jadi beku,&rdquo; ungkap Doktor Kehormatan Universitas Islam Negeri (UIN) Walisongo ini.</p>\n<blockquote>\n<h5>Keberagaman dan kebinekaan itu kehendak Tuhan. Melawan itu berarti melawan kehendak Tuhan.</h5>\n</blockquote>\n<p>Menurut Buya Husein, tidak ada agama atau kepercayaan yang mengajarkan diskriminasi, kekerasan, teror, dan penindasan kepada siapa pun. Justru, katanya, Tuhan menciptakan manusia dengan beragam latar belakang agar mereka menghargai perbedaan.</p>\n<p>Padahal, Tuhan bisa saja menciptakan manusia dengan kesamaan agama, suku, dan lainnya.&nbsp; &rdquo;Keberagaman dan kebinekaan itu kehendak Tuhan. Melawan itu berarti melawan kehendak Tuhan,&rdquo; ucap mantan Komisioner Komnas Perempuan tersebut.</p>\n<p><strong>Nalar moderat</strong></p>\n<p>Buya Husein memaparkan, terdapat tujuh nalar moderat yang perlu dimiliki warga Indonesia. Pertama, nalar yang memberikan ruang bagi yang berbeda pandangan. Kedua, menghargai pilihan dan pandangan hidup seseorang.</p>\n<p>Selanjutnya, tidak mengabsolutkan kebenaran sendiri lalu menyalahkan pendapat yang lain. Keempat, tidak membenarkan tindak kekerasan atas nama apa pun, apalagi agama. Kelima, menolak pemaknaan tunggal atas teks.</p>\n<p>&rdquo;Teks Tuhan tidak bisa dibatasi hanya satu makna,&rdquo; ucapnya.</p>\n<p>Keenam, nalar moderat terbuka atas kritik konstruktif. Terakhir, berpikir moderat pasti mencari pandangan yang adil untuk kemaslahatan bersama. Pancasila, lanjutnya, telah menyerukan hal itu dengan jalan musyawarah.</p>\n<p>Direktur Fahmina Institute Rosidin menambahkan, ada tiga pendekatan melihat keberagaman. Pertama, pendekatan yang memandang keberagaman hanya sebagai eksistensi agama atau suku yang berbeda. Pendekatan ini dinilai belum cukup menumbuhkan kehidupan yang saling menghargai.</p>\n<p>&rdquo;Perlu pendekatan kedua, yakni bagaimana entitas yang berbeda ini menyampaikan aspirasi atau pandangannya sehingga bisa dipahami entitas lain,&rdquo; katanya.</p>\n<p>Akan tetapi, masih diperlukan upaya lebih agar kehidupan antarumat lebih harmonis. &rdquo;Kita harus mendorong pendekatan kerja sama di antara entitas berbeda, seperti yang dilakukan saat ini melalui Sekolah Moderasi Beragama,&rdquo; ungkapnya.</p>\n<p>Bagi Fahmina Institute, ini kali kedua digelar sekolah moderasi. Sebelumnya, acara serupa dilaksanakan di Kuningan, tetangga Cirebon. Fahmina juga berusaha membangun kader moderasi di lima kecamatan di Cirebon, yakni Jamblang, Weru, Arjawinangun, Gebang, dan Losari.</p>\n<p>Adapun untuk PC IPPNU Kabupaten Cirebon, sekolah tersebut merupakan yang pertama. &rdquo;Sekolah ini untuk menguatkan cara pandang yang moderat dan menanamkan nilai-nilai toleransi beragama,&rdquo; kata Ketua PC IPPNU Cirebon Devi Farida (21).</p>\n<p>Apalagi, jejak intoleransi di Cirebon masih membekas. Pada 15 April 2011, masjid Kepolisian Resor Cirebon Kota dibom. Sedikitnya 28 orang terluka, polisi jadi korban paling banyak. Puluhan warga di Cirebon dan sekitarnya juga pernah ditangkap Densus Antiteror 88.</p>\n<p>Sekolah Moderasi Beragama diharapkan menjadi jalan bagi anak muda seperti Devi merawat kebinekaan di Cirebon dan Indonesia. Seperti diungkapkan Buya Husein, menjadi Indonesia adalah menjadi bineka.</p>\n<p>Tulisan ini pertamakali dimuat di&nbsp;<strong><a href=\"https://www.kompas.id/baca/dikbud/2021/09/06/sekolah-moderasi-beragama-jalan-menjadi-indonesia-yang-bineka/\" target=\"_blank\" rel=\"noopener\">kompas.id</a></strong></p>",
+                "<p>N/A</p>"
+            ],
+            "createdAt": "2021-11-03T10:23:22.264764",
+            "typeApproach": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pelepasan",
+                        "Disengagement"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pemerintahan",
+                        "Governance"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Korban Terorisme",
+                        "Victims of Terrorism"
+                    ]
+                },
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                }
+            ],
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pembuat Kebijakan",
+                        "For Policy Maker"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Donor",
+                        "For Donor"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                }
+            ],
+            "myOrganisasi": {
+                "organisasiId": 58530412,
+                "namaOrganisasi": "Fahmina Institute",
+                "imgLogoOrganisasi": "/assets/Organisasi/58530412/images/Fahmina_Institute-230587720_10161137280623146_156646143633089001_n.jpeg"
+            },
+            "datePublish": "2021-11-03T10:23:22.264791"
+        },
+        {
+            "blogId": 68807104,
+            "judulArtikel": [
+                "Geliat Pemuda Gaungkan Moderasi Beragama Dari Bincang Keragaman Hingga Berbagi dengan Sesama",
+                "Youth stretches echo religious moderation from discussing diversity to sharing with others"
+            ],
+            "imgThumbnail": "/assets/placeholder/blog.jpg",
+            "kategoriArtikel": [
+                {
+                    "id": 15,
+                    "kategori": [
+                        "Blog"
+                    ],
+                    "nama": [
+                        "Artikel",
+                        "Article"
+                    ]
+                },
+                {
+                    "id": 16,
+                    "kategori": [
+                        "Blog"
+                    ],
+                    "nama": [
+                        "Berita",
+                        "News"
+                    ]
+                },
+                {
+                    "id": 26,
+                    "kategori": [
+                        "Blog"
+                    ],
+                    "nama": [
+                        "Informasi",
+                        "Information"
+                    ]
+                }
+            ],
+            "deskripsiPendek": [
+                "<p><strong>Oleh: Zaenal Abidin</strong></p>\n<p><em><strong>&ldquo;Perdamaian itu sikap saling menghargai, mau berbaur, dan tidak anti perbedaan&rdquo;</strong></em></p>\n<p>Dalam rangka memperingati hari perdamaian dunia yang jatuh pada tanggal 21 September, sejumlah pemuda yang tergabung dalam organisasi PC. Kopri Kabupaten Kuningan dan Forum Komunikasi Lintas Iman (Forkolin) Cirebon Timur mengadakan kegiatan bincang keragaman dan berbagi dengan sesama lintas agama. Senin, 21 September 2021.</p>\n<p>Kegiatan bincang keragaman yang digagas PC. Korpri dilakukan dengan kunjungan ke Gua Maria Sawer Rahmat di Desa Cisantana, Cigugur Kuningan. Bagi umat Katolik goa yang terletak di lereng Gunung Ciremai pada ketinggian 700 Mdpl ini merupakan gambaran prosesi jalan salib yang dilakukan oleh Yesus.</p>\n<p>Jalan salib di sini terdapat 16 tempat perhentian. Tiap-tiap perhentian mengisahkan riwayat Yesus, mulai dari ketika Dia dijatuhi hukuman hingga dimakamkan. Pada tiap perhentian itu pula dibangun altar yang digunakan umat untuk berdoa dan menyalakan lilin.</p>\n<p>Para peserta yang terdiri dari pemuda muslim, Katolik dan Hindu ini menyusuri anak tangga sambil berbincang mengenai potret keragaman yang ada di Kuningan.</p>\n<p>Di areal ini juga terdapat komplek pemakaman umat Katolik dan umat Islam, dapat dilihat dari ciri khas bentuk nisannya. Hal ini menggambarkan keharmonisan umat beragama di Kuningan.</p>\n<p>&ldquo;Perdamaian itu sikap saling menghargai, mau berbaur, dan tidak anti perbedaan,&rdquo; ungkap Sri Melynda kordinator kegiatan.</p>\n<p>&ldquo;Pertemuan&nbsp; ini selayaknya sebuah lingkaran perkawanan yang menepis&nbsp; segala perbedaan dengan menjaga adab dan toleran pada&nbsp; sesama,&rdquo; pungkas Melynda.</p>\n<p><strong>Forum komunikasi lintas iman berbagi dengan sesama</strong></p>\n<p>Di tempat berbeda, pemuda&nbsp; yang tergabung dalam Forum Komunikasi Lintas Iman (Forkolin) Cirebon Timur, melakukan cara yang berbeda untuk memaknai hari perdamaian dunia kali ini.</p>\n<p>Mereka mengisinya dengan kegiatan sosial, yakni berbagi makanan kepada warga di sekitar Kelenteng Lok Pin Tong yang terletak di Desa Ciledug Kulon, Kecamatan Ciledug, Kabupaten Cirebon.</p>\n<p>&ldquo;Kami ingin adanya kami (Forkolin) dalam keberagaman ini berdampak positif untuk masyarakat khususnya sekitar kelenteng dengan berbagi sedikit apa yang kami punya,&rdquo; ungkap Kordinator Forkolin, Devi Farida.</p>\n<p>Setelah pembagian paket makanan, Devi dan anggota lainnya berbincang bersama dengan umat Budhis dan warga Tionghoa yang sedang memperingati hari Cap Go atau biasa disebut Sembahyang Kue Bulan.</p>\n<p>&ldquo;Kami pun dijelaskan tentang setiap ornamen yang ada diklenteng. Setiap ornamen yang ada baik patung ataupun lainnya merupakan simbol yang menjadi tolak ukur mereka dalam penghambaanya kepada Tuhan. Bukan berarti simbol-simbol tersebut Tuhan yang disembah,&rdquo; pungkasnya.</p>\n<p>Acara ini dihadiri belasan pemuda dari berbagai organisasi seperti IPPNU, IPNU, IPM, AMSA, OMK, Warga Tionghoa Ciledug dan Pemuda Protestan.</p>\n<p>Para pemuda di dua kabupaten ini merupakan alumni Sekolah Moderasi Beragama yang digelar oleh Fahmina Intitute bekerjasama dengan PC. Korpri Kabupaten Kuningan dan PC. IPPNU Kabupaten Cirebon yang dilaksanakan secara daring pada bulan Agustus yang lalu. []</p>",
+                "N/A"
+            ],
+            "createdAt": "2021-11-03T09:39:18.890940",
+            "typeApproach": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pemerintahan",
+                        "Governance"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pemuda",
+                        "Youth"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Korban Terorisme",
+                        "Victims of Terrorism"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                },
+                {
+                    "id": 7,
+                    "nama": [
+                        "Penilaian/Evaluasi",
+                        "Assessment/Evaluation"
+                    ]
+                },
+                {
+                    "id": 8,
+                    "nama": [
+                        "Peningkatan Kapasitas",
+                        "Capacity Building"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                }
+            ],
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Pembuat Kebijakan",
+                        "For Policy Maker"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Peneliti",
+                        "For Researcher"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Donor",
+                        "For Donor"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "nama": [
+                        "Praktisi",
+                        "For Practicioners"
+                    ]
+                }
+            ],
+            "myOrganisasi": {
+                "organisasiId": 58530412,
+                "namaOrganisasi": "Fahmina Institute",
+                "imgLogoOrganisasi": "/assets/Organisasi/58530412/images/Fahmina_Institute-230587720_10161137280623146_156646143633089001_n.jpeg"
+            },
+            "datePublish": "2021-11-03T09:39:18.890967"
+        }
+    ]
+}
