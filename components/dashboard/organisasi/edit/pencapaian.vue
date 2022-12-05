@@ -7,10 +7,11 @@
             </div>
         </div>
         <div>
-            <ElementsTablePencapaian 
+            <ElementsTableWithoutHeader 
                 v-model="tablePencapaian"
                 :dataTable="dataTable"
                 :title="'Pencapaian'"
+                :untuk="'milestoneorganisasi'"
             >
                 <template v-slot:edit >
                     <div class="p-6">
@@ -44,7 +45,7 @@
                         </div>
                     </div>
                 </template>
-            </ElementsTablePencapaian>
+            </ElementsTableWithoutHeader>
         </div>
         <ElementsModal 
             v-model="modalAction"

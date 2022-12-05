@@ -8,7 +8,7 @@
                             <img class="h-[102px] w-[102px]" src="/icons/individu/icon-verified.png" alt="icon-verified">
                         </div>
                         <div class="text-center">
-                            <div class="text-[45px] text-warna-utama">11</div>
+                            <div class="text-[45px] text-warna-utama">{{ totalAccepted }}</div>
                             <div class="text-warna-dua">Account Verified</div>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                             <img class="h-[102px] w-[102px]" src="/icons/individu/icon-rejected.png" alt="icon-rejected">
                         </div>
                         <div class="text-center">
-                            <div class="text-[45px] text-warna-utama">2</div>
+                            <div class="text-[45px] text-warna-utama">{{ totalRejected }}</div>
                             <div class="text-warna-dua">Total Rejected User</div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                             <img class="h-[102px] w-[102px]" src="/icons/individu/icon-need.png" alt="icon-need">
                         </div>
                         <div class="text-center">
-                            <div class="text-[45px] text-warna-utama">2</div>
+                            <div class="text-[45px] text-warna-utama">{{ totalNeedVerification }}</div>
                             <div class="text-warna-dua">Need Verification</div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                             <img class="h-[102px] w-[102px]" src="/icons/individu/icon-suspended.png" alt="icon-suspended">
                         </div>
                         <div class="text-center">
-                            <div class="text-[45px] text-warna-utama">1</div>
+                            <div class="text-[45px] text-warna-utama">{{ totalSuspended }}</div>
                             <div class="text-warna-dua">Total Suspended User</div>
                         </div>
                     </div>
@@ -68,19 +68,19 @@
                         <div class="text-center grid grid-cols-1 gap-y-10">
                             <div>
                                 <div class="text-warna-dua mb-2">Total User</div>
-                                <div class="text-[26px] text-warna-utama font-semibold">1520</div>
+                                <div class="text-[26px] text-warna-utama font-semibold">{{ totalUser }}</div>
                             </div>
                             <div>
                                 <div class="text-warna-dua mb-2">Total User (Email is Verified)</div>
-                                <div class="text-[26px] text-approved-accepted font-semibold">398</div>
+                                <div class="text-[26px] text-approved-accepted font-semibold">{{ totalEmailVerified }}</div>
                             </div>
                             <div>
                                 <div class="text-warna-dua mb-2">Total User (Email is Not Verified)</div>
-                                <div class="text-[26px] text-rejected font-semibold">1122</div>
+                                <div class="text-[26px] text-rejected font-semibold">{{ totalEmailNotVerified }}</div>
                             </div>
                             <div>
                                 <div class="text-warna-dua mb-2">New User</div>
-                                <div class="text-[26px] text-warna-empat font-semibold">0</div>
+                                <div class="text-[26px] text-warna-empat font-semibold">{{ totalNewUser }}</div>
                             </div>
                         </div>
                     </div>
@@ -95,8 +95,42 @@
 export default {
     data() {
         return {
-            
+            totalUser: '',
+            totalNeedVerification: '',
+            totalSuspended: '',
+            totalRejected: '',
+            totalAccepted: '',
+            totalEmailVerified: '',
+            totalEmailNotVerified: '',
+            totalNewUser: ''
         }
     },
+    mounted() {
+        this.initialize();
+    },
+    methods: {
+        initialize() {
+            this.masterPoint()
+        },
+
+        async masterPoint() {
+            this.loaderLog = false
+
+            await this.$apiPlatform.get('verificator/log_user/').then(res => {
+                // console.log(res.data)
+                const data = res.data
+
+                this.totalUser = data.totalUser
+                this.totalNewUser = data.totalNewUser
+                this.totalNeedVerification = data.totalPendingUserEmailVerified
+                // + data.totalPendingUserEmailNotVerified
+                this.totalSuspended = data.totalSuspendedUser
+                this.totalRejected = data.totalRejectedUser
+                this.totalAccepted = data.totalVerifiedUserEmailVerified + data.totalVerifiedUserEmailNotVerified
+                this.totalEmailVerified = data.totalVerifiedUserEmailVerified + data.totalPendingUserEmailVerified
+                this.totalEmailNotVerified = data.totalVerifiedUserEmailNotVerified + data.totalPendingUserEmailNotVerified
+            })
+        }
+    }
 }
 </script>

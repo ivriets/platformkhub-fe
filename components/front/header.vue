@@ -8,7 +8,9 @@
                 {{pageTitle}}
             </div>
             <div class="flex items-center">
-                <div @click="toggleLogoutDrop" class="w-10 h-10 bg-green-200 rounded-full cursor-pointer"></div>
+                <div v-if="currentUser" @click="toggleLogoutDrop" class="bg-no-repeat bg-center rounded-full shadow cursor-pointer" style="height: 40px; width: 40px; background-size: 60%; background-color: rgb(248, 248, 248);" :style="'background-image: url('+basePath+currentUser[0].individu[0].imgFotoProfile+');'">
+                    <!-- <img :src="basePath+currentUser[0].individu[0].imgFotoProfile" alt=""> -->
+                </div>
                 <div v-if="logoutDrop" v-click-outside="closeLogoutDrop" class="relative z-10">
                     <div class="absolute bg-white shadow-md rounded-md right-0 text-sm mt-6 border border-gray-50">
                         <div v-if="currentUser" class="py-2 px-8">
@@ -82,6 +84,9 @@ export default {
         },
         pageTitle() {
             return this.$store.state.pageTitle
+        },
+        basePath() {
+            return process.env.BASE_URL
         }
     },
     mounted() {

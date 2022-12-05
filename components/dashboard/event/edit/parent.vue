@@ -103,9 +103,9 @@
                     </div>
 
                     <div class="text-xl text-warna-utama mb-[28px]">Event Location</div>
-                    <div class="grid grid-cols-12 gap-2">
+                    <div class="grid grid-cols-12 gap-2 mb-10">
                         <div class="col-span-12 lg:col-span-6 mr-5 md:mr-0">
-                            <InputDate
+                            <InputSelect
                                 v-model="form.provinsi"
                                 placeholder="Tulis disini"
                                 :label="'Province'"
@@ -113,7 +113,7 @@
                             />
                         </div>
                             <div class="col-span-12 lg:col-span-6 ml-5 md:ml-0">
-                            <InputDate
+                            <InputSelect
                                 v-model="form.kota"
                                 placeholder="Tulis disini"
                                 :label="'City'"
@@ -122,6 +122,53 @@
                         </div>
                     </div>
 
+                    <div class="mb-10">
+                        <InputText
+                            v-model="form.address"
+                            placeholder="Tulis disini"
+                            :label="'Address'"
+                            :name="prefixName+'address'"
+                        />
+                    </div>
+
+                    <div class="mb-5">
+                        <div class="text-xl mb-1">Gallery</div>
+                        <div class="border-dashed border-2 border-warna-tujuh pt-[25px] pb-[25px] rounded-lg text-center">
+                            <div class="text-xs text-[#BABABA] mb-2">
+                                <div>You can choose multiple images.</div>
+                                <div>JPG, GIF, PNG no larger than 1 MB.</div>
+                            </div>
+                            <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[195px] mx-auto cursor-pointer">Choose File</div>
+                        </div>
+                    </div>
+
+
+                    <div class="flex items-center lg:gap-4 gap-2 mb-10">
+                        <div class="bg-white shadow-md border border-gray-50 rounded-xl">
+                            <img class="h-16" src="/images/logo.png" alt="main-image">
+                        </div>
+                        <div class="bg-white shadow-md border border-gray-50 rounded-xl">
+                            <img class="h-16" src="/images/logo.png" alt="main-image">
+                        </div>
+                        <div class="bg-white shadow-md border border-gray-50 rounded-xl">
+                            <img class="h-16" src="/images/logo.png" alt="main-image">
+                        </div>
+                        <div class="bg-white shadow-md border border-gray-50 rounded-xl">
+                            <img class="h-16" src="/images/logo.png" alt="main-image">
+                        </div>
+                    </div>
+
+
+                    <div class="">
+                        <div class="flex items-center mb-3">
+                            <div class="flex flex-grow text-xl mb-1">Testimony</div>
+                            <div class="text-sm text-warna-empat font-medium cursor-pointer underline">+ Add Testimony</div>
+                        </div>
+                        <div class="text-xs text-warna-delapan mb-3">Choose Testimony</div>
+                        <div class="">
+                            tabel
+                        </div>
+                    </div>
 
                 </div>
                 <div class="col-span-12 lg:col-span-3">
@@ -136,7 +183,7 @@
                                 <div class="ml-1">3123</div>
                             </div>
                         </div>
-                        <div class="bg-warna-empat text-white rounded-lg w-[240px] py-4 text-center mx-auto cursor-pointer hover:bg-blue-900">Submit</div>
+                        <div class="bg-warna-empat text-white rounded-lg w-[240px] py-4 text-center mx-0 cursor-pointer hover:bg-blue-900">Submit</div>
                     </div>
 
                     <div class="">
@@ -221,6 +268,12 @@
                 </div>
             </div>
         </div>
+        <div class="bg-white shadow-md rounded-xl py-4 px-6">
+            <div class="flex items-center justify-between">
+                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
+                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+            </div>
+        </div>
         <pre>{{form}}</pre>
         
     </div>
@@ -246,6 +299,7 @@ export default {
                 tanggalSelesai: [],
                 provinsi:[],
                 kota:[],
+                address:[],
                 
             },
             opsiRadio: [],
@@ -317,6 +371,10 @@ export default {
                     link: ''
                 }
             ]
+        },
+
+        btnBack() {
+            this.$router.push('/moderations/event/'+this.id)
         }
     }
 }

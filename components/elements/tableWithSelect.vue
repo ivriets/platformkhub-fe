@@ -1,19 +1,25 @@
 <template>
     <div>
         <div class="relative overflow-x-auto">
-            <table class="w-full rounded-xl">
+            <table class="w-full rounded-xl table-padding border-collapse">
                 <tbody>
                     <tr v-for="(item, index) in dataTable" :key="'dt'+index" class="tr-striped-even">
                         <td class="p-5">
-                            <div class="mb-5 font-semibold">{{ $dayjs(item.tahun).format("DD MMMM YYYY") }}</div>
-                            <div class="mb-5">
-                                <div class="text-xs text-warna-lima mb-1">English</div>
-                                <div class="font-semibold">{{ item.deskripsi[1] }}</div>
-                            </div>
-                            <div class="mb-5">
-                                <div class="text-xs text-warna-lima mb-1">Indonesia</div>
-                                <div class="font-semibold">{{ item.deskripsi[0] }}</div>
-                            </div>
+                            <input 
+                                type="radio" 
+                                :id="item.pkLokasiActivityId+'selectLoc'" 
+                                v-model="valRadio"
+                                class="w-4 h-4 text-warna-empat bg-gray-100 border-gray-300 focus:ring-warna-empat focus:ring-0 "
+                            >
+                        </td>
+                        <td class="p-5">
+                            <div class="text-sm">{{ item.provinsi }}</div>
+                        </td>
+                        <td class="p-5">
+                            <div class="text-sm">{{ item.kota }}</div>
+                        </td>
+                        <td class="p-5">
+                            <div class="text-sm">{{ item.jalan }}</div>
                         </td>
                         <td class="p-5 align-top">
                             <div class="flex items-center justify-end gap-x-6">
@@ -65,7 +71,13 @@ export default {
                         tipe: 'page'
                     }
                 }
-            }
+            },
+            valRadio: '',
+        }
+    },
+    watch: {
+        valRadio(val) {
+            this.$emit('input',val)
         }
     },
     mounted() {
@@ -74,6 +86,9 @@ export default {
     methods: {
         initialize() {
             this.modalAction = false
+            if (this.value !== '') {
+                this.valRadio = this.value
+            }
         },
 
         editItem(item) {

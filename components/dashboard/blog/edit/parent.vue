@@ -7,7 +7,7 @@
                 :child="childBreadcrumb"
             />
         </div>
-        <div class="bg-white shadow-md rounded-xl py-8 px-6 mb-[28px]">
+        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-[28px]">
             <div class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-9">
                     <div class="mb-6">
@@ -36,7 +36,7 @@
 
                     <div>
                         <div class="text-xl text-warna-utama mb-[28px]">Content</div>
-                        <div class="mb-6">
+                        <!-- <div class="mb-6">
                             <InputTextArea 
                                 v-model="form.deskripsiPanjang[0]"
                                 :max="500"
@@ -53,46 +53,45 @@
                                 :label="'Content (Indonesia)'"
                                 :name="prefixName+'deskripsien'"
                             />
-                        </div>
+                        </div> -->
 
-                    <div class="grid grid-cols-12 gap-5 mt-3">
-                        <div class="col-span-12 lg:col-span-6">
-                             <div class="text-center bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto cursor-pointer">+ image</div>
-                        </div>
+                        <InputContentSection 
+                            v-model="form.deskripsi"
+                        />
 
-                        <div class="col-span-12 lg:col-span-6">
-                              <div class="text-center bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto cursor-pointer">+ text</div>
-                        </div>
-
-                    </div>
+                        <pre>{{form.deskripsi}}</pre>
 
                     </div>
 
                 </div>
                 <div class="col-span-12 lg:col-span-3">
                     <div class="bg-[#FAFAFA] p-5 rounded-lg mb-[28px]">
-                        <div class="mb-6">
+                        <div class="">
                             <div class="flex items-center text-sm">
                                 <div class="text-warna-sembilan">Status:</div>
-                                <div class="text-approved-accepted ml-1">Approved</div>
+                                <div v-if="dataDetail.submission === 1" class="text-under-review ml-1">Under Review</div>
+                                <div v-if="dataDetail.submission === 2" class="text-draft ml-1">Draft</div>
+                                <div v-if="dataDetail.submission === 3" class="text-need-revision ml-1">Need Revision</div>
+                                <div v-if="dataDetail.submission === 4" class="text-approved-accepted ml-1">Approved</div>
                             </div>
                             <div class="flex items-center text-sm text-warna-sembilan">
                                 <div class="">Bookmark by: </div>
-                                <div class="ml-1">3123</div>
+                                <div class="ml-1">-</div>
                             </div>
                         </div>
-                        <div class="bg-warna-empat text-white rounded-lg w-[240px] py-4 text-center mx-auto cursor-pointer hover:bg-blue-900">Submit</div>
                     </div>
 
                     <div class="">
-                        <div class="font-medium">Thumbnail</div>
-                        <div class="border-dashed border-2 border-warna-tujuh pt-[9px] pb-[25px] rounded-lg text-center">
-                            <div class="text-xs text-[#BABABA] mb-2">
-                                <div>jpg or png no larger than 25MB.</div>
-                            </div>
-                            <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[145px] mx-auto cursor-pointer">Pilih File</div>
-                        </div>
+                        <InputFileUpload 
+                            :label="'Thumbnail'"
+                            v-model="form.imgThumbnail"
+                            :accept="'.png, .jpg, .jpeg'"
+                            :multiple="false"
+                            :maxSize="5"
+                        />
                     </div>
+
+                    
 
                     <hr class="border-warna-tujuh my-[28px]">
 
@@ -169,7 +168,13 @@
                 </div>
             </div>
         </div>
-        <pre>{{form}}</pre>
+        <div class="bg-white shadow-md rounded-xl py-4 px-6">
+            <div class="flex items-center justify-between">
+                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
+                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+            </div>
+        </div>
+        <pre>{{dataDetail}}</pre>
     </div>
 </template>
 
@@ -180,15 +185,18 @@ export default {
         return {
             prefixName: 'blog',
             maxTitle: 80,
+            dataDetail: null,
             childBreadcrumb: [],
             form: {
                 judulArtikel: ['',''],
                 deskripsiPanjang: ['',''],
+                imgThumbnail: {},
                 kategoriArtikel: [],
                 typeAudience: [],
                 typeApproach: [],
                 typeIssues: [],
-                tag: []
+                tag: [],
+                deskripsi: []
             },
             opsiRadio: [],
             opsiTag: [
@@ -230,7 +238,7 @@ export default {
             return this.$t('Blog')
         },
         id() {
-            return this.$route.params.id;
+            return this.$route.params.id
         },
         basePath() {
             return process.env.BASE_URL
@@ -241,12 +249,21 @@ export default {
     },
     methods: {
         initialize() {
+            this.setBreadcrumb()
+            this.opsiRadio = this.kategoriArtikel
             this.masterPoint()
         },
 
-        masterPoint() {
-            this.setBreadcrumb()
-            this.opsiRadio = this.kategoriArtikel
+        async masterPoint() {
+            await this.$apiPlatform.get('moderator/blogs/'+this.id+'/').then(res => {
+                console.log(res.data)
+                const data = res.data
+
+                this.dataDetail = data
+                this.form.judulArtikel = data.judulArtikel
+            }).catch(err => {
+                console.log(err)
+            })
         },
 
         setBreadcrumb() {
@@ -260,6 +277,10 @@ export default {
                     link: ''
                 }
             ]
+        },
+
+         btnBack() {
+            this.$router.push('/moderations/blog/'+this.id)
         }
     }
 }

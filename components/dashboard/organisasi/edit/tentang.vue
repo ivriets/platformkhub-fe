@@ -189,6 +189,7 @@
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
                         <InputText 
+                            v-if="form.highlight !== null"
                             v-model="form.highlight[0]"
                             placeholder="Tulis disini"
                             :name="prefixName+'highlightid'"
@@ -199,6 +200,7 @@
                 <div class="col-span-12">
                     <div class="">
                         <InputTextArea 
+                            v-if="form.highlight !== null"
                             v-model="form.deskripsi[1]"
                             :max="500"
                             placeholder="Write here"
@@ -220,16 +222,21 @@
                 </div>
             </div>
         </div>
-        <pre>{{form}}</pre>
+        <!-- <pre>{{form}}</pre> -->
+        <!-- <pre>{{form}}</pre> -->
     </div>
 </template>
 
 
 <script>
+import detailOrganisasi from '~/static/data/detailorganisasi.json';
+
 export default {
+    // props: ['dataOrganisasi'],
     data() {
         return {
             prefixName: 'tentang',
+            loaderDetail: false,
             form: {
                 namaOrganisasi: '',
                 websiteOrganisasi: '',
@@ -302,8 +309,56 @@ export default {
         opsiHierarki() {
             return this.$store.state.opsi.hierarki
         },
+
+        id() {
+            return this.$route.params.id;
+        },
+    },
+    mounted() {
+        this.initialize()
     },
     methods: {
+        initialize() {
+            this.masterPoint()
+        },
+
+        async masterPoint() {
+            this.loaderDetail = false
+
+            await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
+                console.log(res.data.organisasi[0])
+                const data = res.data.organisasi[0]
+
+                this.form = data
+
+                // this.form = {
+                //     namaOrganisasi: data.namaOrganisasi,
+                //     websiteOrganisasi: data.websiteOrganisasi,
+                //     hierarki: '',
+                //     typeOrganisasi: [data.typeOrganisasi],
+                //     typeAudience: [data.typeAudience],
+                //     typeApproach: [data.typeApproach],
+                //     typeIssues: [data.typeIssues],
+                //     tampilan: data.tampilan,
+                //     lokasiOrganisasi: [
+                //         {
+                //             provinsi: '',
+                //             kota: '',
+                //             jalan: '',
+                //             pinLocation: ''
+                //         }
+                //     ],
+                //     highlight:[data.highlight[0], data.highlight[1]],
+                //     deskripsi:[data.deskripsi[0], data.deskripsi[1]]
+                // }
+
+            }).catch(err => {
+                console.log(err)
+            })
+
+            // this.form = detailOrganisasi.organisasi[0]
+        },
+
         btnWarnaSatu() {
             this.form.tampilan = '#222222'
         },

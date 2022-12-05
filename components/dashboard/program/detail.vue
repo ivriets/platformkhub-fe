@@ -7,8 +7,8 @@
                 :child="childBreadcrumb"
             />
         </div>
-        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
-            <div class="flex items-start justify-between mb-6">
+        <div v-if="loaderDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10 min-w-min">
+            <div v-if="dataDetail" class="flex items-start justify-between mb-6">
                 <div>
                     <div class="font-medium mb-4">{{ selectedFlag === 'indonesia' ? dataDetail.judulActivity[0] : dataDetail.judulActivity[1] }}</div>
                     <div v-if="dataDetail.submission === 1" class="py-2 w-[150px] text-center bg-warna-under-review rounded-3xl text-white ">Under Review</div>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-5">
+            <div v-if="dataDetail" class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-4">
                     <div class="w-full bg-white shadow-md border border-gray-50 rounded-xl ">
                         <img src="/images/logo.png" alt="main-image">
@@ -76,7 +76,7 @@
                         <div class="col-span-12 lg:col-span-6">
                             <div class="mt-8 text-sm text-warna-delapan font-semibold">Partner</div>
                             <div class="text-sm text-warna-sembilan font-semibold">
-                                <div v-for="(item, index) in dataDetail.partnerActivityEksternal" :key="'partner' + index" class="mb-4 inline-block mr-1">
+                                <div v-for="(item, index) in dataDetail.partnerActivityEksternal" :key="'partner' + index" class="text-warna-sembilan inline-block mr-1">
                                     <span>{{ item.namaPartner}}</span><span v-if="index+1 < dataDetail.partnerActivityEksternal.length">, </span>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                     <div class="text-sm text-warna-sembilan font-semibold">
                         <div v-if="dataDetail.typeAudience.length == 0">-</div>
                         <div v-else>
-                            <div v-for="(item, index) in dataDetail.typeAudience" :key="'tipeaudience' + index" class="mb-4 inline-block mr-1">
+                            <div v-for="(item, index) in dataDetail.typeAudience" :key="'tipeaudience' + index" class="text-warna-sembilan inline-block mr-1">
                                 <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.typeAudience.length">, </span>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                     <div class="text-sm text-warna-sembilan font-semibold">
                         <div v-if="dataDetail.typeApproach.length == 0">-</div>
                         <div v-else>
-                            <div v-for="(item, index) in dataDetail.typeApproach" :key="'tipeapproach' + index" class="mb-4 inline-block mr-1">    
+                            <div v-for="(item, index) in dataDetail.typeApproach" :key="'tipeapproach' + index" class="text-warna-sembilan inline-block mr-1">    
                                 <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.typeApproach.length">, </span>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                     <div class="text-sm text-warna-sembilan font-semibold">
                         <div v-if="dataDetail.typeIssues.length == 0">-</div>
                         <div v-else>
-                            <div v-for="(item, index) in dataDetail.typeIssues" :key="'tipeapproach' + index" class="mb-4 inline-block mr-1">    
+                            <div v-for="(item, index) in dataDetail.typeIssues" :key="'tipeapproach' + index" class="text-warna-sembilan inline-block mr-1">    
                                 <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.typeIssues.length">, </span>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                     <div class="text-sm text-warna-sembilan font-semibold">
                         <div v-if="dataDetail.tag.length == 0">-</div>
                         <div v-else>
-                            <div v-for="(item, index) in dataDetail.tag" :key="'tag' + index" class="mb-4 inline-block mr-1">
+                            <div v-for="(item, index) in dataDetail.tag" :key="'tag' + index" class="text-warna-sembilan inline-block mr-1">
                                 <span>{{ selectedFlag === 'indonesia' ? item.pilihanTagId.nama[0] : item.pilihanTagId.nama[1] }}</span><span v-if="index+1 < dataDetail.tag.length">, </span>
                             </div>
                         </div>
@@ -129,10 +129,6 @@
                     <div class="text-sm text-warna-sembilan font-semibold">
                         <div class="mb-4">{{ dataDetail.catatanModerasi }}</div>
                     </div>
-
-
-
-
 
 
 
@@ -218,11 +214,11 @@
                                     <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Beneficiaries by Gender</div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Male</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.beneficiariesMen}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].beneficiariesMen}}</div>
                                     </div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Female</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.beneficiariesWomen}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].beneficiariesWomen}}</div>
                                     </div>
                                 </div>
 
@@ -230,11 +226,11 @@
                                     <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Beneficiaries by Disability</div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Male</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.beneficiariesMenDifable}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].beneficiariesMenDifable}}</div>
                                     </div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Female</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.beneficiariesWomenDifable}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].beneficiariesWomenDifable}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -251,11 +247,11 @@
                                     <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Program Retention</div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Male</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.retentionSaatProgramMen}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].retentionSaatProgramMen}}</div>
                                     </div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Female</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.retentionSaatProgramWomen}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].retentionSaatProgramWomen}}</div>
                                     </div>
                                 </div>
 
@@ -263,11 +259,11 @@
                                     <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Post-Program Retention</div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Male</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.retentionPascaProgramMen}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].retentionPascaProgramMen}}</div>
                                     </div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Female</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.retentionPascaProgramWomen}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].retentionPascaProgramWomen}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -281,23 +277,23 @@
 
                             <div class="mb-3 flex items-center font-semibold text-sm">
                                 <div class="w-40 text-warna-delapan">Totally Satisfied</div>
-                                <div class="text-warna-sembilan">{{dataDetail.activityResult.satisfactionSangatPuas}}</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult[0].satisfactionSangatPuas}}</div>
                             </div>
                             <div class="mb-3 flex items-center font-semibold text-sm">
                                 <div class="w-40 text-warna-delapan">Satisfied</div>
-                                <div class="text-warna-sembilan">{{dataDetail.activityResult.satisfactionPuas}}</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult[0].satisfactionPuas}}</div>
                             </div>
                             <div class="mb-3 flex items-center font-semibold text-sm">
                                 <div class="w-40 text-warna-delapan">Neutral</div>
-                                <div class="text-warna-sembilan">{{dataDetail.activityResult.satisfactionNetral}}</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult[0].satisfactionNetral}}</div>
                             </div>
                             <div class="mb-3 flex items-center font-semibold text-sm">
                                 <div class="w-40 text-warna-delapan">Not Satisfied</div>
-                                <div class="text-warna-sembilan">{{dataDetail.activityResult.satisfactionTidakPuas}}</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult[0].satisfactionTidakPuas}}</div>
                             </div>
                             <div class="mb-3 flex items-center font-semibold text-sm">
                                 <div class="w-40 text-warna-delapan">Totally Unsatisfied</div>
-                                <div class="text-warna-sembilan">{{dataDetail.activityResult.satisfactionSangatTidakPuas}}</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult[0].satisfactionSangatTidakPuas}}</div>
                             </div>
 
                     </div>
@@ -311,7 +307,7 @@
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Customer</div>
                             <div class="mb-3 flex items-center font-semibold text-sm">
                                 <div class="w-64 text-warna-delapan">Customer Acquisition Score</div>
-                                <div class="text-warna-sembilan">{{dataDetail.activityResult.customerAcquisitionScore}}</div>
+                                <div class="text-warna-sembilan">{{dataDetail.activityResult[0].customerAcquisitionScore}}</div>
                             </div>
                     </div>
                     
@@ -324,46 +320,46 @@
                                 <div class="col-span-12 lg:col-span-6">
                                     <div class="mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Score 1</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore1}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].netPromotorScore1}}</div>
                                     </div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Score 2</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore2}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].netPromotorScore2}}</div>
                                     </div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Score 3</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore3}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].netPromotorScore3}}</div>
                                     </div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Score 4</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore4}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].netPromotorScore4}}</div>
                                     </div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Score 5</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore5}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].netPromotorScore5}}</div>
                                     </div>
                                 </div>
 
                                 <div class="col-span-12 lg:col-span-6">
                                     <div class="mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Score 6</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore6}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].netPromotorScore6}}</div>
                                     </div>
                                     <div class="mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Score 7</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore7}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].netPromotorScore7}}</div>
                                     </div>
                                     <div class="mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Score 8</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore8}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].netPromotorScore8}}</div>
                                     </div>
                                     <div class="mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Score 9</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore9}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].netPromotorScore9}}</div>
                                     </div>
                                     <div class="mb-3 flex items-center">
                                         <div class="w-24 text-warna-delapan">Score 10</div>
-                                        <div class="text-warna-sembilan">{{dataDetail.activityResult.netPromotorScore10}}</div>
+                                        <div class="text-warna-sembilan">{{dataDetail.activityResult[0].netPromotorScore10}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -374,12 +370,16 @@
 
                      <div class="mb-8">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Journey</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            info terkait journey
+                        <div v-if="dataDetail.journey.length == 0">-</div>
+                        <div v-else>
+                            <div v-for="(item, index) in dataDetail.journey" :key="'journey' + index" class="text-warna-sembilan mr-1">
+                                <span>No Urut: {{item.nomorUrut}}</span>
+                                <span>Judul: {{ selectedFlag === 'indonesia' ? item.judulJourney[0] : item.judulJourney[1] }}</span>
+                                <span>Deskripsi: {{ selectedFlag === 'indonesia' ? item.deskripsi[0] : item.deskripsi[1] }}</span>
+                            </div>
                         </div>
                     </div>
-                    
-
+                
                 </div>
             </div>
         </div>
@@ -388,7 +388,9 @@
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
                 <div class="flex gap-x-6  font-semibold">
                     <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
-                    <div class="relative">
+                    <div v-if="[1, 3, 4].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-need-revision rounded-lg text-white border border-need-revision cursor-pointer hover:bg-orange-700 font-semibold">Need Revision</div>
+                    <div v-if="[1, 3].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white border border-approved-accepted cursor-pointer hover:bg-green-700 font-semibold">Approve</div>
+                    <!-- <div class="relative">
                         <select id="btnneedrevision" name="buttonneedrevision" v-model="buttonSubmission"
                             class="cursor-pointer appearance-none w-[180px] focus:outline-none border border-warna-tujuh rounded-lg px-4 py-2 text-white" :class="color">
                                 <option v-for="(i, index) in opsiButton" :key="'opsi'+index" :value="i.id">
@@ -398,7 +400,7 @@
                         <div class="absolute top-0 right-0 h-full items-center flex px-2">                
                             <img src="/icons/icon-arrow-down-white.png" alt="arrow-down" class="w-4 h-4">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -408,15 +410,16 @@
 
 
 <script>
-import detailProgram from '~/static/data/detailprogram.json';
 
 export default {
     data() {
         return {
+            loaderDetail: false,
             flagDrop: false,
             selectedFlag: 'indonesia',
             childBreadcrumb: [],
             dataDetail: null,
+            color: '',
             buttonSubmission: null,
             opsiButton: [
                 {
@@ -537,10 +540,23 @@ export default {
             this.setBreadcrumb()
         },
 
-        masterPoint() {
-            var vA = detailProgram
-            this.dataDetail = vA
-            this.buttonSubmission = vA.submission
+
+        async masterPoint() {
+            this.loaderDetail = false
+
+            await this.$apiPlatform.get('moderator/programs/'+this.id+'/').then(res => {
+                // console.log(res.data)
+                const data = res.data
+
+                this.dataDetail = data
+                this.buttonSubmission = data.submission
+
+                this.$nextTick(() => {
+                    this.loaderDetail = true
+                })
+            }).catch(err => {
+                console.log(err)
+            })
         },
 
         btnBack() {

@@ -7,7 +7,7 @@
                 :child="childBreadcrumb"
             />
         </div>
-        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
+        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10 min-w-min">
             <div class="flex items-start justify-between mb-6">
                 <div>
                     <div class="font-medium mb-4">{{ selectedFlag === 'indonesia' ? dataDetail.judulActivity[0] : dataDetail.judulActivity[1] }}</div>
@@ -69,7 +69,7 @@
                     <div class="text-sm text-warna-sembilan font-semibold">
                         <div v-if="dataDetail.typeAudience.length == 0">-</div>
                         <div v-else>
-                            <div v-for="(item, index) in dataDetail.typeAudience" :key="'tipeaudience' + index" class="mb-4 inline-block mr-1">
+                            <div v-for="(item, index) in dataDetail.typeAudience" :key="'tipeaudience' + index" class="text-warna-sembilan inline-block mr-1">
                                 <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.typeAudience.length">, </span>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                     <div class="text-sm text-warna-sembilan font-semibold">
                         <div v-if="dataDetail.typeApproach.length == 0">-</div>
                         <div v-else>
-                            <div v-for="(item, index) in dataDetail.typeApproach" :key="'tipeaudience' + index" class="mb-4 inline-block mr-1">
+                            <div v-for="(item, index) in dataDetail.typeApproach" :key="'tipeaudience' + index" class="text-warna-sembilan inline-block mr-1">
                                 <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.typeApproach.length">, </span>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                     <div class="text-sm text-warna-sembilan font-semibold">
                         <div v-if="dataDetail.typeIssues.length == 0">-</div>
                         <div v-else>
-                            <div v-for="(item, index) in dataDetail.typeIssues" :key="'tipeaudience' + index" class="mb-4 inline-block mr-1">
+                            <div v-for="(item, index) in dataDetail.typeIssues" :key="'tipeaudience' + index" class="text-warna-sembilan inline-block mr-1">
                                 <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.typeIssues.length">, </span>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                     <div class="text-sm text-warna-sembilan font-semibold">
                         <div v-if="dataDetail.tag.length == 0">-</div>
                         <div v-else>
-                            <div v-for="(item, index) in dataDetail.tag" :key="'tag' + index" class="mb-4 inline-block mr-1">
+                            <div v-for="(item, index) in dataDetail.tag" :key="'tag' + index" class="text-warna-sembilan inline-block mr-1">
                                 <span>{{ selectedFlag === 'indonesia' ? item.pilihanTagId.nama[0] : item.pilihanTagId.nama[1] }}</span><span v-if="index+1 < dataDetail.tag.length">, </span>
                             </div>
                         </div>
@@ -202,17 +202,8 @@
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
                 <div class="flex gap-x-6  font-semibold">
                     <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
-                    <div class="relative">
-                        <select id="btnneedrevision" name="buttonneedrevision" v-model="buttonSubmission"
-                            class="cursor-pointer appearance-none w-[180px] focus:outline-none border border-warna-tujuh rounded-lg px-4 py-2 text-white" :class="color">
-                                <option v-for="(i, index) in opsiButton" :key="'opsi'+index" :value="i.id">
-                                    {{i.label}}
-                                </option>
-                        </select>
-                        <div class="absolute top-0 right-0 h-full items-center flex px-2">                
-                            <img src="/icons/icon-arrow-down-white.png" alt="arrow-down" class="w-4 h-4">
-                        </div>
-                    </div>
+                    <div v-if="[1, 3, 4].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-need-revision rounded-lg text-white border border-need-revision cursor-pointer hover:bg-orange-700 font-semibold">Need Revision</div>
+                    <div v-if="[1, 3].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white border border-approved-accepted cursor-pointer hover:bg-green-700 font-semibold">Approve</div>
                 </div>
             </div>
         </div>
@@ -227,8 +218,11 @@ import detailEvent from '~/static/data/detailevent.json';
 export default {
     data() {
         return {
+            loaderDetail: false,
             flagDrop: false,
             selectedFlag: 'indonesia',
+            dataDetail: null,
+            color: '',
             childBreadcrumb: [],
             buttonSubmission: null,
             opsiButton: [
@@ -319,7 +313,7 @@ export default {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
         title() {
-            return this.$t('Event')
+            return this.$t('Acara')
         },
         id() {
             return this.$route.params.id;
@@ -359,11 +353,24 @@ export default {
             this.setBreadcrumb()
         },
 
-        masterPoint() {
-            var vA = detailEvent
-            this.dataDetail = vA
-            this.buttonSubmission = vA.submission
+        async masterPoint() {
+            this.loaderDetail = false
+
+            await this.$apiPlatform.get('moderator/events/'+this.id+'/').then(res => {
+                // console.log(res.data)
+                const data = res.data
+
+                this.dataDetail = data
+                this.buttonSubmission = data.submission
+
+                this.$nextTick(() => {
+                    this.loaderDetail = true
+                })
+            }).catch(err => {
+                console.log(err)
+            })
         },
+
 
         btnBack() {
             this.$router.push('/moderations/event')

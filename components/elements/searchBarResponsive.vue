@@ -38,7 +38,18 @@ export default {
         },
         updateValue(val) {
             this.$emit('input', val)
-        }
+        },
+        // keyup(event) {
+        //     // console.log('key',event)
+        //     if (event.key==='ArrowDown') {
+        //         const data = {
+        //             key: event.key,
+        //             value: ''
+        //         }
+
+        //         this.$emit('keyup',data)
+        //     }
+        // },
     }
 }
 </script>

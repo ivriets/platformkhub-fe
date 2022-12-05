@@ -205,12 +205,51 @@
             "systemRowId": "sFlsjzvO"
         }
     ],
-    "fase": [],
+    "fase": [
+        {
+            "faseId": "bGLmvyZq",
+            "nomorUrut": 0,
+            "deskripsi": [
+                "Selesai mendaki Gunung Semeru",
+                "Finished climbing Mount Semeru"
+            ],
+            "resources": null,
+            "binFaseFile": "",
+            "isDone": false,
+            "systemRowId": "HVLdKEjv"
+        },
+        {
+            "faseId": "bGLmvyZq",
+            "nomorUrut": 0,
+            "deskripsi": [
+                "Selesai mendaki Gunung Gede",
+                "Finished climbing Mount Gede"
+            ],
+            "resources": null,
+            "binFaseFile": "",
+            "isDone": false,
+            "systemRowId": "HVLdKEjv"
+        }
+    ],
     "partnerActivityInternal": [],
     "partnerActivityEksternal": [
         {
             "namaPartner": "PT.Jaya-Baya",
             "websitePartner": "https://www.websitenya.com"
+        }
+    ],
+    "testimoniNonUser": [
+        {
+            "pkTestimoniNonUserId": 72765018,
+            "nama": "Ujang Oyan",
+            "imgFoto": "/assets/image.png",
+            "deskripsi": "terbaik"
+        },
+        {
+            "pkTestimoniNonUserId": 72765018,
+            "nama": "Hendra Setiawan",
+            "imgFoto": "/assets/image.png",
+            "deskripsi": "mantap programnya"
         }
     ],
     "files": [],

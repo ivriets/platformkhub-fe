@@ -1,9 +1,11 @@
 <template>
     <div class="py-[80px]">
-        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
-            <div class="flex items-start justify-between mb-6">
+        <div v-if="loaderDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
+            <div v-if="dataDetail" class="flex items-start justify-between mb-6">
                 <div v-if="dataDetail.statusVerification === 1" class="px-6 py-2 bg-warna-need-verification rounded-3xl text-white ">Need Verification</div>
+                <div v-if="dataDetail.statusVerification === 2" class="px-6 py-2 bg-warna-rejected rounded-3xl text-white ">Rejected</div>
                 <div v-if="dataDetail.statusVerification === 3" class="px-6 py-2 bg-warna-approved-accepted rounded-3xl text-white ">Accepted</div>
+                <div v-if="dataDetail.statusVerification === 4" class="px-6 py-2 bg-warna-suspended rounded-3xl text-white ">Suspended</div>
                 <!-- BENDERA -->
                 <div class="inline-flex flex-col">
                     <div>
@@ -42,10 +44,12 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-5">
+            <div v-if="dataDetail" class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-4">
-                    <div class="w-full bg-white shadow-md border border-gray-50 rounded-xl ">
-                        <img :src="basePath+dataDetail.organisasi[0].imgLogoOrganisasi" alt="main-image">
+                    <div 
+                        class="w-full bg-no-repeat bg-contain bg-center shadow-md border border-gray-50 rounded-xl p-2 h-[200px] lg:h-[320px]" 
+                        :style="'background-image: url('+basePath+dataDetail.organisasi[0].imgLogoOrganisasi+');'"
+                    >
                     </div>
                     <hr class="border-warna-tujuh mt-6 mb-5">
                     <div class="">
@@ -152,12 +156,12 @@
                     <hr class="border-warna-tujuh mb-5">
                     <div class="mb-5">
                         <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Highlight</div>
-                        <div class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? dataDetail.organisasi[0].highlight[0] : dataDetail.organisasi[0].highlight[1] }}</div>
+                        <div v-if="dataDetail.organisasi[0].highlight !== null" class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? dataDetail.organisasi[0].highlight[0] : dataDetail.organisasi[0].highlight[1] }}</div>
                     </div>
                     <hr class="border-warna-tujuh mb-5">
                     <div class="mb-[36px]">
                         <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Description</div>
-                        <div class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? dataDetail.organisasi[0].deskripsi[0] : dataDetail.organisasi[0].deskripsi[1] }}</div>
+                        <div v-if="dataDetail.organisasi[0].deskripsi !== null" class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? dataDetail.organisasi[0].deskripsi[0] : dataDetail.organisasi[0].deskripsi[1] }}</div>
                     </div>
                     <div>
                         <div class="text-sm text-warna-delapan font-semibold mb-[30px]">Milestone</div>
@@ -170,14 +174,54 @@
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
                 <div v-if="dataDetail.statusVerification === 1" class="flex gap-x-6 font-semibold">
-                    <div class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
-                    <div class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
+                    <div @click="btnRejectOrganisasi" class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
+                    <div @click="btnAccept" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
                 <div v-if="dataDetail.statusVerification === 3" class="font-semibold">
                     <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
                 </div>
             </div>
         </div>
+
+        <ElementsModal 
+            v-model="modalAction"
+            :title="modalTitle"
+            :width="modalWidth"
+            :key="keyModal+'rejectorganisasi'"
+            :persistent="persistent"
+        >
+            <div v-if="dataDetail" class="p-6">
+                <div class="grid grid-cols-12 gap-x-5 gap-y-3 mb-4">
+                    <div class="col-span-12 md:col-span-3">
+                        <div class="text-sm text-warna-delapan font-semibold">Organisasi ID</div>
+                    </div>
+                    <div class="col-span-12 md:col-span-9">
+                        <div class="text-sm text-warna-sembilan font-semibold">{{dataDetail.organisasiId}}</div>
+                    </div>
+                    <div class="col-span-12 md:col-span-3">
+                        <div class="text-sm text-warna-delapan font-semibold">Nama</div>
+                    </div>
+                    <div class="col-span-12 md:col-span-9">
+                        <div class="text-sm text-warna-sembilan font-semibold">{{dataDetail.organisasi[0].namaOrganisasi}}</div>
+                    </div>
+                    <div class="col-span-12 md:col-span-3">
+                        <div class="text-sm text-warna-delapan font-semibold">Alasan Reject</div>
+                    </div>
+                    <div class="col-span-12 md:col-span-9">
+                        <InputTextArea 
+                            v-model="form.alasanRejectOrSuspend"
+                            :max="500"
+                            placeholder="Tulis disini"
+                            :name="'alasanreject'"
+                        />
+                    </div>
+                </div>
+                <div class="flex items-center justify-end">
+                    <div @click="btnModalBatal" class="text-center bg-white border border-warna-empat hover:bg-blue-50 text-warna-empat rounded-lg py-1 px-4 cursor-pointer mr-4">Batal</div>
+                    <div @click="btnReject" class="text-center hover:bg-red-700 bg-warna-rejected border border-rejected hover:border-red-700 text-white rounded-lg py-1 px-4 cursor-pointer">Reject</div>
+                </div>
+            </div>
+        </ElementsModal>
         <!-- <pre>{{dataDetail}}</pre> -->
     </div>
 </template>
@@ -188,6 +232,7 @@ import detailOrganisasi from '~/static/data/detailorganisasi.json';
 export default {
     data() {
         return {
+            loaderDetail: false,
             flagDrop: false,
             selectedFlag: 'indonesia',
             internalBranch: [],
@@ -195,6 +240,10 @@ export default {
             teamMember: [],
             partner: [],
             maxItem: 7,
+            dataDetail: null,
+            form: {
+                alasanRejectOrSuspend: ''
+            },
             dataLabel: [
                 {
                     label: 'Organization ID',
@@ -247,7 +296,13 @@ export default {
                     posisi: 'kanan'
                 },
             ],
-            dataDetail: null,
+            // KEPERLUAN MODAL REJECT //
+            modalAction: false,
+            modalTitle: 'Alasan Reject',
+            modalWidth: '',
+            keyModal: 0,
+            persistent: true,
+            // ========== //
         }
     },
     computed: {
@@ -286,43 +341,88 @@ export default {
             this.masterPoint()
         },
 
-        masterPoint() {
-            this.dataDetail = detailOrganisasi
+        async masterPoint() {
+            this.loaderDetail = false
 
-            this.internalBranch = detailOrganisasi.organisasi[0].organisasiCabangInternal.map(e => {
-                const data = {
-                    id: e.organisasiId,
-                    nama: e.namaOrganisasi,
-                    image: e.imgLogoOrganisasi
-                }
-                return data
+            await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
+                // console.log(res.data)
+                const data = res.data
+
+                this.dataDetail = data
+
+                this.internalBranch = data.organisasi[0].organisasiCabangInternal.map(e => {
+                    const data = {
+                        id: e.organisasiId,
+                        nama: e.namaOrganisasi,
+                        image: e.imgLogoOrganisasi
+                    }
+                    return data
+                })
+
+                this.requestByIndividu = data.organisasi[0].requestedByIndividu.map(e => {
+                    const data = {
+                        id: e.id,
+                        nama: e.individu.namaIndividu,
+                        image: e.individu.imgFotoProfile
+                    }
+                    return data
+                })
+
+                this.teamMember = data.organisasi[0].teamMember.map(e => {
+                    const data = {
+                        id: e.individu.userId,
+                        nama: e.individu.namaIndividu,
+                        image: e.individu.imgFotoProfile
+                    }
+                    return data
+                })
+
+                this.partner = data.organisasi[0].partnerOrganisasiEksternal.map(e => {
+                    const data = {
+                        id: e.pkPartnerEksternalId,
+                        nama: e.namaPartner,
+                        image: e.imgLogoPartner
+                    }
+                    return data
+                })
+
+                this.$nextTick(() => {
+                    this.loaderDetail = true
+                })
+                
+            }).catch(err => {
+                console.log(err)
             })
+        },
 
-            this.requestByIndividu = detailOrganisasi.organisasi[0].requestedByIndividu.map(e => {
-                const data = {
-                    id: e.id,
-                    nama: e.individu.namaIndividu,
-                    image: e.individu.imgFotoProfile
-                }
-                return data
+        async btnAccept() {
+
+            const data = {
+                accountId: this.id,
+                statusVerification: 3
+            }
+
+            await this.$apiPlatform.post('verificator/organisasi/', data).then(res => {
+                console.log('Accept Verification Organization')
+                this.btnBack()
+            }).catch(err => {
+                console.log(err)
             })
+        },
 
-            this.teamMember = detailOrganisasi.organisasi[0].teamMember.map(e => {
-                const data = {
-                    id: e.individu.userId,
-                    nama: e.individu.namaIndividu,
-                    image: e.individu.imgFotoProfile
-                }
-                return data
-            })
+        async btnReject() {
 
-            this.partner = detailOrganisasi.organisasi[0].partnerOrganisasiEksternal.map(e => {
-                const data = {
-                    id: e.pkPartnerEksternalId,
-                    nama: e.namaPartner,
-                    image: e.imgLogoPartner
-                }
-                return data
+            const data = {
+                accountId: this.id,
+                statusVerification: 2,
+                alasanRejectOrSuspend: this.form.alasanRejectOrSuspend
+            }
+
+            await this.$apiPlatform.post('verificator/organisasi/', data).then(res => {
+                console.log('Reject Verification Organization')
+                this.btnBack()
+            }).catch(err => {
+                console.log(err)
             })
         },
 
@@ -340,6 +440,16 @@ export default {
 
         closeDrop() {
             this.flagDrop = false
+        },
+
+        btnRejectOrganisasi() {
+            this.modalAction = true
+            this.keyModal += 1
+        },
+
+        btnModalBatal() {
+            this.modalAction = false
+            this.keyModal += 1
         },
 
         pilihIndonesia() {

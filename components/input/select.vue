@@ -15,7 +15,7 @@
                         v-for="(i, index) in opsi" :key="name+'opsi'+index" 
                         :value="i[itemValue] ? i[itemValue] : i.id"
                     >
-                    {{i[itemLabel] ? i[itemLabel]: i.label}}
+                    {{i[itemLabel] ? i[itemLabel][bahasa]: i.label[bahasa]}}
                     </option>
             </select>
             <div class="absolute top-0 right-0 h-[34px] items-center flex px-2 text-gray-500">                
@@ -30,6 +30,14 @@ export default {
     data() {
         return {
             valueSelect: '',
+        }
+    },
+    computed: {
+        lang() {
+            return this.$i18n.locale
+        },
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
         }
     },
     watch: {

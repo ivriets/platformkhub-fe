@@ -1,0 +1,333 @@
+{
+    "typeSensitivity": "LOW",
+    "length": 139,
+    "count": 5,
+    "results": [
+        {
+            "submission": 1,
+            "resourceId": 84847094,
+            "judulArtikel": [
+                "Liburan",
+                "Holiday"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 47963824,
+                "namaOrganisasi": "Infia Consulting",
+                "imgLogoOrganisasi": "/assets/image.png",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-11-22T12:42:13.850428",
+            "datePublish": "2022-11-22T12:42:13.850589",
+            "moderator": null,
+            "imgMainImage": "/assets/placeholder/resources.jpg",
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidik",
+                        "For Educator"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 2,
+                    "nama": [
+                        "Pelepasan",
+                        "Disengagement"
+                    ]
+                },
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "nama": [
+                        "Penguatan HAM",
+                        "Human Rights"
+                    ]
+                }
+            ],
+            "catatanModerasi": null
+        },
+        {
+            "submission": 1,
+            "resourceId": 72219596,
+            "judulArtikel": [
+                "Tes Publikasi",
+                "Test Resource"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 47963824,
+                "namaOrganisasi": "Infia Consulting",
+                "imgLogoOrganisasi": "/assets/image.png",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-11-21T17:14:32.343287",
+            "datePublish": "2022-11-21T17:14:32.343339",
+            "moderator": "Admin KHUB",
+            "imgMainImage": "/assets/placeholder/resources.jpg",
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 5,
+                    "nama": [
+                        "Korban Terorisme",
+                        "Victims of Terrorism"
+                    ]
+                }
+            ],
+            "catatanModerasi": null
+        },
+        {
+            "submission": 1,
+            "resourceId": 41479739,
+            "judulArtikel": [
+                "Ujicoba",
+                "Ujicoba"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 27814231,
+                "namaOrganisasi": "Admin KHUB",
+                "imgLogoOrganisasi": "/assets/Organisasi/27814231/images/Admin_KHUB-Logo_K-HUB.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-07-25T19:13:32.499288",
+            "datePublish": "2022-07-25T19:13:32.499412",
+            "moderator": null,
+            "imgMainImage": "/assets/Organisasi/27814231/images/Admin_KHUB-Screenshot_2022-06-07_at_10.09.56.apng",
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 5,
+                    "nama": [
+                        "Kerja Sama dan Kemitraan Internasional",
+                        "International Coorporation and Partnerships"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 5,
+                    "nama": [
+                        "Korban Terorisme",
+                        "Victims of Terrorism"
+                    ]
+                }
+            ],
+            "catatanModerasi": null
+        },
+        {
+            "submission": 4,
+            "resourceId": 40396468,
+            "judulArtikel": [
+                "ISU-ISU KEBERAGAM(A)AN DI INDONESIA-APRIL 2022",
+                "CRCS MONTHLY UPDATE ON RELIGIOUS ISSUES IN INDONESIA-APRIL 2022"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 5060844,
+                "namaOrganisasi": "Center for Religious and Cross-cultural Studies, Pusat Studi Agama dan Lintas Budaya, Sekolah Pascasarjana, Universitas Gadjah Mada",
+                "imgLogoOrganisasi": "/assets/Organisasi/5060844/images/Center_for_Religious_and_Cross-cultural_Studies_Pusat_Studi_A_QlhPgmr.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-07-19T11:09:08.842916",
+            "datePublish": "2022-07-19T11:09:08.842961",
+            "moderator": "Admin KHUB",
+            "imgMainImage": "/assets/Organisasi/5060844/images/Center_for_Religious_and_Cross-cultural_Studies_Pusat_Studi_Agama_dan_Lintas_Budaya_Sekolah_Pascasarjana_Universitas_Gadjah_Mada-IGAPR_dyKmf3t.jpeg",
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                },
+                {
+                    "id": 6,
+                    "nama": [
+                        "Penelitian",
+                        "Research"
+                    ]
+                }
+            ],
+            "catatanModerasi": null
+        },
+        {
+            "submission": 4,
+            "resourceId": 51356608,
+            "judulArtikel": [
+                "ISU-ISU KEBERAGAM(A)AN DI INDONESIA-MARET 2022",
+                "CRCS MONTHLY UPDATE ON RELIGIOUS ISSUES IN INDONESIA-MARET 2022"
+            ],
+            "myOrganisasi": {
+                "organisasiId": 5060844,
+                "namaOrganisasi": "Center for Religious and Cross-cultural Studies, Pusat Studi Agama dan Lintas Budaya, Sekolah Pascasarjana, Universitas Gadjah Mada",
+                "imgLogoOrganisasi": "/assets/Organisasi/5060844/images/Center_for_Religious_and_Cross-cultural_Studies_Pusat_Studi_A_QlhPgmr.apng",
+                "organizationIsAccepted": true,
+                "emailIsVerified": true
+            },
+            "typeSensitivity": {
+                "id": 1,
+                "nama": [
+                    "Low",
+                    "Low"
+                ]
+            },
+            "createdAt": "2022-07-19T11:04:53.488527",
+            "datePublish": "2022-07-19T11:04:53.488645",
+            "moderator": "Admin KHUB",
+            "imgMainImage": "/assets/Organisasi/5060844/images/Center_for_Religious_and_Cross-cultural_Studies_Pusat_Studi_Agama_dan_Lintas_Budaya_Sekolah_Pascasarjana_Universitas_Gadjah_Mada-IGMAR_MqorTKO.jpeg",
+            "typeAudience": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Semua Orang",
+                        "For Everyone"
+                    ]
+                }
+            ],
+            "typeApproach": [
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pencegahan",
+                        "Prevention"
+                    ]
+                }
+            ],
+            "typeIssues": [
+                {
+                    "id": 1,
+                    "nama": [
+                        "Gender",
+                        "Gender"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "nama": [
+                        "Pendidikan",
+                        "Education"
+                    ]
+                },
+                {
+                    "id": 9,
+                    "nama": [
+                        "Pemberdayaan Masyarakat",
+                        "Community Empowerment"
+                    ]
+                },
+                {
+                    "id": 7,
+                    "nama": [
+                        "Penilaian/Evaluasi",
+                        "Assessment/Evaluation"
+                    ]
+                }
+            ],
+            "catatanModerasi": null
+        }
+    ]
+}

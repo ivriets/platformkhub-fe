@@ -18,6 +18,7 @@
             :disabled="disabled?disabled:false"
             @keyup.enter="keyEnter"
             @keyup.esc="keyEsc"
+            @keyup="keyup"
         >
     </div>
 </template>
@@ -56,7 +57,18 @@ export default {
             this.$emit('keyup',data)
             this.$emit('input', '')
 
-        }
+        },
+        keyup(event) {
+            // console.log('key',event)
+            if (event.key==='ArrowDown') {
+                const data = {
+                    key: event.key,
+                    value: ''
+                }
+
+                this.$emit('keyup',data)
+            }
+        },
 
     },
 }

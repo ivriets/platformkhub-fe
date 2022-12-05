@@ -7,11 +7,34 @@ install sass sass-loader@10.1.1
 2. grafik user per day mau pakai highchart atau pakai chart lain ?
 
 steven,
-1. blog content, UX nya berubah jadi ada "add image" dan "add text". 
-2. coba tanya pa asep, untuk blog detail, bagian content, itu kan ada tag html nya. gmn supaya bisa render html.
-3. program edit, bagian location, itu minta tolong ya, gw ga bisa. kalo bagian testimony nya bakal mirip, gpp aku kerjain. kalo bakal beda, minta tolong juga. 
-4. kalo gallery itu kan isi 5. gmn ya? pakai grid ato pakai apa....
+1. number.vue belum selesai. kalo tambah keluar error di console. kalo tambah 0.1 suka jadi banyak trailing zero.
+2. program: baseline endline survey, sama satisfaction, pakai tabel apa?
 
-5. program edit, startdate enddate, kalau browsernya dikecilin, textbox nya tembus.
-6. program edit, button submit, kalau browsernya dikecili, buttonnya jadi tembus.
-7. di program edit, bagian mana aja yang harus dibuat component?
+CATATAN STEVEN
+
+Overview Individu: DONE
+List Individu: DONE
+Detail Individu: DONE
+Overview Organisasi: DONE
+List Organisasi: DONE
+Detail Organisasi: DONE
+
+List Program: DONE
+List Event: DONE
+List Resource: DONE
+Detail Resource: DONE
+List Blog: DONE
+Detail Blog: DONE
+
+
+
+Detail Program:
+- masih ada error (jalan, beneficieries) perlu digawangin
+- action accept/need revision
+
+Detail Event:
+- action accept/need revision
+
+Edit Blog:
+- integrasi (GET)
+- update (PUT nunggu a3)

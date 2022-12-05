@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="relative overflow-x-auto">
-            <table class="w-full rounded-xl">
+            <table class="w-full rounded-xl table-padding border-collapse">
                 <thead class="">
                     <tr class="text-sm text-left text-warna-sembilan border-b border-warna-tujuh">
                         <th v-if="urutan && urutan === true" class="font-normal py-5 px-5 w-[200px]">No.</th>

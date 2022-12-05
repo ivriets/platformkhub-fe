@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="relative overflow-x-auto">
-            <table class="text-sm w-full text-warna-font-tabel">
+        <div v-if="dataTable.length > 0" class="relative overflow-x-auto">
+            <table class="text-sm w-full text-warna-font-tabel table-padding border-collapse">
                 <thead class="border-b border-[#9E9E9E]">
                     <tr>
-                        <th v-for="(i, index) in masterTable" :key="'th'+index" scope="col" class="font-normal text-left p-5">{{$t(i.header)}}</th>
+                        <th v-for="(i, index) in masterTable" :key="'th'+index" scope="col" class="font-normal text-left">{{$t(i.header)}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,6 +38,7 @@
                 </tbody>
             </table>
         </div>
+        <div v-else class="p-5 text-center text-warna-empat">Tidak ada data</div>
     </div>
 </template>
 

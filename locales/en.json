@@ -45,6 +45,8 @@
     "Topic": "Topic",
     "Tag": "Tag",
 
+    "Deskripsi": "Description",
+
     "Logout": "Logout",
     "Close": "Close"
 }

@@ -223,6 +223,10 @@ body {
     border-color: $warna-empat;
 }
 
+.border-warna-lima {
+    border-color: $warna-lima;
+}
+
 .border-warna-tujuh {
     border-color: $warna-tujuh;
 }
@@ -261,7 +265,11 @@ body {
     --tw-ring-color: $warna-empat;
 }
 
-
+.table-padding {
+    td, th {
+        padding: 20px !important;
+    }
+}
 
 .drawer-none-scrolling {
     -ms-overflow-style: none; /* for Internet Explorer, Edge */

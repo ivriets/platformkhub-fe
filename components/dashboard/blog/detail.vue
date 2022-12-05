@@ -7,8 +7,8 @@
                 :child="childBreadcrumb"
             />
         </div>
-        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
-            <div class="flex items-start justify-between mb-6">
+        <div v-if="loaderDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10 min-w-min">
+            <div v-if="dataDetail" class="flex items-start justify-between mb-6">
                 <div>
                     <div class="font-medium mb-4">{{ selectedFlag === 'indonesia' ? dataDetail.judulArtikel[0] : dataDetail.judulArtikel[1] }}</div>
                     <div v-if="dataDetail.submission === 1" class="py-2 w-[150px] text-center bg-warna-under-review rounded-3xl text-white ">Under Review</div>
@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-12 gap-5">
+            <div v-if="dataDetail" class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-4">
                     <div class="w-full bg-white shadow-md border border-gray-50 rounded-xl mb-8">
                         <img :src="basePath+dataDetail.imgThumbnail" alt="main-image" class="rounded-[5px]">
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="text-sm font-semibold mb-5">
-                        <div class="text-warna-delapan">Category</div>
+                        <div class="text-warna-delapan">Blog Category</div>
                         <div v-for="(item, index) in dataDetail.kategoriArtikel" :key="'kategoriartikel' + index" class="text-warna-sembilan inline-block mr-1">
                             <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.kategoriArtikel.length">, </span>
                         </div>
@@ -111,9 +111,7 @@
 
                     <div class="text-sm font-semibold">
                         <div class="text-warna-delapan">Moderation Notes</div>
-                        <!-- <div v-for="(item, index) in dataDetail.blogsTag" :key="'tag' + index" class="text-warna-sembilan inline-block mr-1">
-                            <span>{{ selectedFlag === 'indonesia' ? item.pilihanTagId.nama[0] : item.pilihanTagId.nama[1] }}</span><span v-if="index+1 < dataDetail.blogsTag.length">, </span>
-                        </div> -->
+                        <div class="text-warna-sembilan">{{ dataDetail.catatanModerasi }}</div>
                     </div>
                 </div>
                 <div class="col-span-12 lg:col-span-8">
@@ -162,14 +160,21 @@
                     <div class="mb-6">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Content</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 p-3 bg-warna-body rounded-lg text-sm text-warna-sembilan font-normal">
-                            <div class="">{{ selectedFlag === 'indonesia' ? dataDetail.deskripsiPanjang[0] : dataDetail.deskripsiPanjang[1] }}</div>
+                            <div v-html="selectedFlag === 'indonesia' ? dataDetail.deskripsiPanjang[0] : dataDetail.deskripsiPanjang[1]" class=""></div>
                         </div>
                     </div>
 
                     <div class="">
                         <div class="text-warna-sembilan font-semibold mb-4">Gallery</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            gambar-gambar ada 5. kalo lebih dari lima? mungkin pakai carousel saja.
+                        <div class="grid grid-cols-12 gap-4 bg-warna-body rounded-lg p-3">
+                            <div v-for="(item, index) in dataDetail.blogsGalleries" :key="'resourcegallery' + index" class="col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
+                                <div 
+                                    class="bg-no-repeat bg-center bg-contain rounded-[5px] bg-white" 
+                                    style="height: 119px;" 
+                                    :style="'background-image: url('+basePath+item.imgGambar+');'"
+                                >
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -181,29 +186,48 @@
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
                 <div class="flex gap-x-6  font-semibold">
                     <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
-                    <div class="relative">
-                        <select id="btnneedrevision" name="buttonneedrevision" v-model="buttonSubmission"
-                            class="cursor-pointer appearance-none w-[180px] focus:outline-none border border-warna-tujuh rounded-lg px-4 py-2 text-white" :class="color">
-                                <option v-for="(i, index) in opsiButton" :key="'opsi'+index" :value="i.id">
-                                    {{i.label}}
-                                </option>
-                        </select>
-                        <div class="absolute top-0 right-0 h-full items-center flex px-2">                
-                            <img src="/icons/icon-arrow-down-white.png" alt="arrow-down" class="w-4 h-4">
-                        </div>
-                    </div>
+                    <div @click="btnNeedRevisionBlog" v-if="[1, 3, 4].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-need-revision rounded-lg text-white border border-need-revision cursor-pointer hover:bg-orange-700 font-semibold">Need Revision</div>
+                    <div @click="btnApprove" v-if="[1, 3].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white border border-approved-accepted cursor-pointer hover:bg-green-700 font-semibold">Approve</div>
                 </div>
             </div>
-            <!-- <ElementsFooterActions 
-                :actionEdit="btnEdit"
-                :actionBack="btnBack"
-                :value="buttonSubmission"
-                :opsi="opsiButton"
-                :warna="color"
-            /> -->
         </div>
+
+        <ElementsModal 
+            v-model="modalAction"
+            :title="modalTitle"
+            :width="modalWidth"
+            :key="keyModal+'revisiblog'"
+            :persistent="persistent"
+        >
+            <div v-if="dataDetail" class="p-6">
+                <div class="grid grid-cols-12 gap-x-5 gap-y-3 mb-1">
+                    <div class="col-span-12 md:col-span-3">
+                        <div class="text-sm text-warna-delapan font-semibold">Judul Blog</div>
+                    </div>
+                    <div class="col-span-12 md:col-span-9">
+                        <div class="text-sm text-warna-sembilan font-semibold">{{dataDetail.judulArtikel[bahasa]}}</div>
+                    </div>
+                    <div class="col-span-12 md:col-span-3">
+                        <div class="text-sm text-warna-delapan font-semibold">Catatan Revisi</div>
+                    </div>
+                    <div class="col-span-12 md:col-span-9">
+                        <InputTextArea 
+                            v-model="form.catatanModerasi"
+                            :max="500"
+                            placeholder="Tulis disini"
+                            :name="'catatanmoderasi'"
+                        />
+                    </div>
+                </div>
+                <div class="text-xs italic text-warna-sembilan mb-4">*Klik OK untuk konfirmasi</div>
+                <div class="flex items-center justify-end">
+                    <div @click="btnModalBatal" class="text-center bg-white border border-warna-empat hover:bg-blue-50 text-warna-empat rounded-lg py-1 px-4 cursor-pointer mr-4">Batal</div>
+                    <div @click="btnRevisi" class="text-center hover:bg-orange-700 bg-warna-need-revision border border-need-revision text-white rounded-lg py-1 px-4 cursor-pointer">OK</div>
+                </div>
+            </div>
+        </ElementsModal>
         
-        <!-- <pre>{{buttonSubmission}}</pre> -->
+        <!-- <pre>{{dataDetail}}</pre> -->
     </div>
 </template>
 
@@ -214,12 +238,16 @@ import detailBlog from '~/static/data/detailblog.json';
 export default {
     data() {
         return {
+            loaderDetail: false,
             flagDrop: false,
             selectedFlag: 'indonesia',
             dataDetail: null,
             buttonSubmission: null,
             color: '',
             childBreadcrumb: [],
+            form: {
+                catatanModerasi: ''
+            },
             opsiButton: [
                 {
                     id: 1,
@@ -265,6 +293,13 @@ export default {
                     posisi: 'kanan'
                 }
             ],
+            // KEPERLUAN MODAL NEED REVISION //
+            modalAction: false,
+            modalTitle: 'Konfirmasi Revisi',
+            modalWidth: '',
+            keyModal: 0,
+            persistent: true,
+            // ========== //
         }
     },
     computed: {
@@ -278,7 +313,7 @@ export default {
             return this.$t('Blog')
         },
         id() {
-            return this.$route.params.id;
+            return this.$route.params.id
         },
         basePath() {
             return process.env.BASE_URL
@@ -316,10 +351,53 @@ export default {
             this.setBreadcrumb()
         },
 
-        masterPoint() {
-            var vA = detailBlog
-            this.dataDetail = vA
-            this.buttonSubmission = vA.submission
+        async masterPoint() {
+            this.loaderDetail = false
+
+            await this.$apiPlatform.get('moderator/blogs/'+this.id+'/').then(res => {
+                // console.log(res.data)
+                const data = res.data
+
+                this.dataDetail = data
+                this.buttonSubmission = data.submission
+
+                this.$nextTick(() => {
+                    this.loaderDetail = true
+                })
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+
+        async btnApprove() {
+
+            const data = {
+                blogId: this.id,
+                submission: 4
+            }
+
+            await this.$apiPlatform.post('moderator/blogs/', data).then(res => {
+                console.log('Approve Moderation Blog')
+                this.btnBack()
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+
+        async btnRevisi() {
+
+            const data = {
+                blogId: this.id,
+                submission: 3,
+                catatanModerasi: this.form.catatanModerasi
+            }
+
+            await this.$apiPlatform.post('moderator/blogs/', data).then(res => {
+                console.log('Revision Moderation Blog')
+                this.btnBack()
+            }).catch(err => {
+                console.log(err)
+            })
         },
 
         btnBack() {
@@ -336,6 +414,16 @@ export default {
 
         closeDrop() {
             this.flagDrop = false
+        },
+
+        btnNeedRevisionBlog() {
+            this.modalAction = true
+            this.keyModal += 1
+        },
+
+        btnModalBatal() {
+            this.modalAction = false
+            this.keyModal += 1
         },
 
         pilihIndonesia() {
@@ -356,6 +444,6 @@ export default {
                 }
             ]
         }
-    },
+    }
 }
 </script>
