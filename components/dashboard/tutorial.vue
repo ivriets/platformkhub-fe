@@ -16,7 +16,7 @@
                     <div class="text-xs text-[#BABABA] mb-2">
                         <div>PDF maximum 25MB.</div>
                     </div>
-                    <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[145px] mx-auto cursor-pointer">Select File</div>
+                    <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] text-[#45A6FF] py-2 w-[145px] mx-auto cursor-pointer">Select File</div>
                 </div>
             </div>
         </div>

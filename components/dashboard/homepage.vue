@@ -76,12 +76,13 @@
                 <div class="">
                     <div class="grid grid-cols-12 gap-x-6 gap-y-[28px]">
                         <div class="col-span-12 md:col-span-6">
-                            <div class="font-medium mb-1">Document</div>
+                            <div class="font-medium mb-1">Background</div>
                             <div class="border-dashed border-2 border-warna-tujuh pt-[9px] pb-[25px] rounded-lg text-center">
                                 <div class="text-xs text-[#BABABA] mb-2">
+                                    <div>16 : 9</div>
                                     <div>PDF maximum 25MB.</div>
                                 </div>
-                                <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[145px] mx-auto cursor-pointer">Select File</div>
+                                <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] text-[#45A6FF] py-2 w-[145px] mx-auto cursor-pointer">Choose File</div>
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-6">
@@ -205,12 +206,13 @@
                 <div class="">
                     <div class="grid grid-cols-12 gap-x-6 gap-y-[28px]">
                         <div class="col-span-12 md:col-span-6">
-                            <div class="font-medium mb-1">Document</div>
+                            <div class="font-medium mb-1">Background</div>
                             <div class="border-dashed border-2 border-warna-tujuh pt-[9px] pb-[25px] rounded-lg text-center">
                                 <div class="text-xs text-[#BABABA] mb-2">
+                                    <div>16 : 9</div>
                                     <div>PDF maximum 25MB.</div>
                                 </div>
-                                <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[145px] mx-auto cursor-pointer">Select File</div>
+                                <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] text-[#45A6FF] py-2 w-[145px] mx-auto cursor-pointer">Choose File</div>
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-6">
