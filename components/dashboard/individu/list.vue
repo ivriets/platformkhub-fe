@@ -99,27 +99,27 @@ export default {
                 {
                     id: 'all',
                     label: 'All',
-                    endpoint: 'user'
+                    endpoint: 'katalogIndividu'
                 },
                 {
                     id: 'needverification',
                     label: 'Need Verification',
-                    endpoint: 'pending_user'
+                    endpoint: 'pendingIndividu'
                 },
                 {
                     id: 'accepted',
                     label: 'Accepted',
-                    endpoint: 'verified_user'
+                    endpoint: 'verifiedIndividu'
                 },
                 {
                     id: 'suspended',
                     label: 'Suspended',
-                    endpoint: 'suspended_user'
+                    endpoint: 'suspendedIndividu'
                 },
                 {
                     id: 'rejected',
                     label: 'Rejected',
-                    endpoint: 'rejected_user'
+                    endpoint: 'rejectedIndividu'
                 }
             ],
             opsiShowRow:[
@@ -220,7 +220,6 @@ export default {
 
             this.loaderPage = false
             this.startIndex = (this.currentPage - 1) * this.limit
-
             await this.$apiPlatform.get('verificator/'+item.endpoint+'/?limit='+this.limit+'&offset='+this.startIndex+'&title='+this.filter.search+'&sortbycreatedat='+this.sorter.createdAt).then(res => {
                 // console.log(res.data)
 
@@ -228,7 +227,7 @@ export default {
                     const data = {
                         accountId: e.accountId,
                         userId: e.userId,
-                        namaIndividu: e.individu.length > 0 ? e.individu[0].namaIndividu : 'N/A',
+                        namaIndividu: e.namaIndividu !== '' ? e.namaIndividu : 'N/A',
                         email: e.email,
                         emailIsVerified: e.emailIsVerified,
                         statusVerification: e.statusVerification,
@@ -236,7 +235,7 @@ export default {
                     }
                     return data
                 })
-                this.totalPage = Math.ceil(res.data.length / this.limit)
+                this.totalPage = Math.ceil(res.data.count / this.limit)
                 this.keyPage += 1
 
                 this.$nextTick(() => {
@@ -248,7 +247,7 @@ export default {
         async getLogUser() {
             this.loaderLog = false
 
-            await this.$apiPlatform.get('verificator/log_user/').then(res => {
+            await this.$apiPlatform.get('verificator/logIndividu/').then(res => {
                 // console.log(res.data)
 
                 const data = res.data
@@ -256,35 +255,34 @@ export default {
                     {
                         id: 'all',
                         label: 'All',
-                        length: data.totalUser - data.totalPendingUserEmailNotVerified,
-                        endpoint: 'user'
+                        length: data.totalIndividu,
+                        endpoint: 'katalogIndividu'
                     },
                     {
                         id: 'needverification',
                         label: 'Need Verification',
-                        length: data.totalPendingUserEmailVerified,
-                        endpoint: 'pending_user'
+                        length: data.totalPendingIndividu,
+                        endpoint: 'pendingIndividu'
                     },
                     {
                         id: 'accepted',
                         label: 'Accepted',
-                        length: data.totalVerifiedUserEmailVerified + data.totalVerifiedUserEmailNotVerified,
-                        endpoint: 'verified_user'
+                        length: data.totalVerifiedIndividu,
+                        endpoint: 'verifiedIndividu'
                     },
                     {
                         id: 'suspended',
                         label: 'Suspended',
-                        length: data.totalSuspendedUser,
-                        endpoint: 'suspended_user'
+                        length: data.totalSuspendedIndividu,
+                        endpoint: 'suspendedIndividu'
                     },
                     {
                         id: 'rejected',
                         label: 'Rejected',
-                        length: data.totalRejectedUser,
-                        endpoint: 'rejected_user'
+                        length: data.totalRejectedIndividu,
+                        endpoint: 'rejectedIndividu'
                     }
                 ]
-
                 this.$nextTick(() => {
                     this.loaderLog = true
                 })

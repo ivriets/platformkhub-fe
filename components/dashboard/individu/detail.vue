@@ -1,7 +1,7 @@
 <template>
     <div class="py-[80px]">
-        <div v-if="loaderDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
-            <div v-if="dataDetail" class="flex items-center justify-between mb-6">
+        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
+            <div class="flex items-center justify-between mb-6">
                 <div v-if="dataDetail.statusVerification === 1" class="px-6 py-2 bg-warna-need-verification rounded-3xl text-white ">Need Verification</div>
                 <div v-if="dataDetail.statusVerification === 2" class="px-6 py-2 bg-warna-rejected rounded-3xl text-white ">Rejected</div>
                 <div v-if="dataDetail.statusVerification === 3" class="px-6 py-2 bg-warna-approved-accepted rounded-3xl text-white ">Accepted</div>
@@ -140,7 +140,7 @@
                         <div class="text-sm text-warna-delapan font-semibold">User ID</div>
                     </div>
                     <div class="col-span-12 md:col-span-9">
-                        <div class="text-sm text-warna-sembilan font-semibold">{{dataDetail.userId}}</div>
+                        <div class="text-sm text-warna-sembilan font-semibold">{{dataDetail.individu[0].userId}}</div>
                     </div>
                     <div class="col-span-12 md:col-span-3">
                         <div class="text-sm text-warna-delapan font-semibold">Nama</div>
@@ -171,7 +171,7 @@
 </template>
 
 <script>
-import detailIndividu from '~/static/data/detailindividu.json';
+// import detailIndividu from '~/static/data/detailindividu.json';
 
 export default {
     data() {
@@ -299,12 +299,11 @@ export default {
         async masterPoint() {
             this.loaderDetail = false
 
-            await this.$apiPlatform.get('verificator/user/'+this.id+'/').then(res => {
-                // console.log(res.data)
-                const data = res.data
+            await this.$apiPlatform.get('verificator/accounts/'+this.id+'/').then(res => {
+                
+                const data = res.data.results[0]
 
                 this.dataDetail = data
-
                 this.dataMyOrganisasi = data.individu[0].myOrganizations.map(e => {
                     const data = {
                         id: e.pkJoinedOrganizationId,
@@ -313,10 +312,10 @@ export default {
                     }
                     return data
                 })
-
-                this.$nextTick(() => {
-                    this.loaderDetail = true
-                })
+                this.loaderDetail = true
+                // this.$nextTick(() => {
+                //     this.loaderDetail = true
+                // })
 
             }).catch(err => {
                 console.log(err)

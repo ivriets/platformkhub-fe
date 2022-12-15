@@ -62,7 +62,10 @@ export default {
       modal: true
     }],
   ],
-
+  server: {
+      host: "0.0.0.0",
+      port: 3333,
+  },
   dayjs: {
     locales: ['id'],
     defaultLocale: 'id',

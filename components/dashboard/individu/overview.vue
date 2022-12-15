@@ -102,7 +102,7 @@ export default {
             totalAccepted: '',
             totalEmailVerified: '',
             totalEmailNotVerified: '',
-            totalNewUser: ''
+            totalNewUser: 10
         }
     },
     mounted() {
@@ -116,19 +116,17 @@ export default {
         async masterPoint() {
             this.loaderLog = false
 
-            await this.$apiPlatform.get('verificator/log_user/').then(res => {
-                // console.log(res.data)
+            await this.$apiPlatform.get('verificator/logIndividu/').then(res => {
+                console.log(res.data)
                 const data = res.data
 
-                this.totalUser = data.totalUser
-                this.totalNewUser = data.totalNewUser
-                this.totalNeedVerification = data.totalPendingUserEmailVerified
-                // + data.totalPendingUserEmailNotVerified
-                this.totalSuspended = data.totalSuspendedUser
-                this.totalRejected = data.totalRejectedUser
-                this.totalAccepted = data.totalVerifiedUserEmailVerified + data.totalVerifiedUserEmailNotVerified
-                this.totalEmailVerified = data.totalVerifiedUserEmailVerified + data.totalPendingUserEmailVerified
-                this.totalEmailNotVerified = data.totalVerifiedUserEmailNotVerified + data.totalPendingUserEmailNotVerified
+                this.totalUser = data.totalIndividu + data.totalUnverifiedEmailIndividu
+                this.totalNeedVerification = data.totalPendingIndividu
+                this.totalSuspended = data.totalSuspendedIndividu
+                this.totalRejected = data.totalRejectedIndividu
+                this.totalAccepted = data.totalVerifiedIndividu
+                this.totalEmailVerified = data.totalIndividu
+                this.totalEmailNotVerified = data.totalUnverifiedEmailIndividu
             })
         }
     }
