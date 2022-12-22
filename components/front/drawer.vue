@@ -169,7 +169,7 @@ export default {
     },
     methods: {
         initialize() {
-            console.log(this.statusDrawer)
+            // console.log(this.statusDrawer)
             // this.$store.commit('setDrawer', false)
         },
 

@@ -30,7 +30,7 @@ export default function ({ $axios, redirect, app }, inject) {
       }
     })
   
-    const endPoint = 'https://base.api.k-hub.org/a3/'
+    const endPoint = 'https://base.api.k-hub.org/a1/'
     api1.setBaseURL(endPoint)
   
     // Inject to context as $api

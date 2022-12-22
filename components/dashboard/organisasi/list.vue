@@ -74,7 +74,6 @@
 
 
 <script>
-import listOrganisasi from '~/static/data/listorganisasi.json';
 
 export default {
     data() {
@@ -100,32 +99,32 @@ export default {
                 {
                     id: 'all',
                     label: 'All',
-                    endpoint: 'organisasi'
+                    endpoint: 'katalogOrganisasi'
                 },
                 {
                     id: 'needverification',
                     label: 'Need Verification',
-                    endpoint: 'pending_organizations'
+                    endpoint: 'pendingOrganizations'
                 },
                 {
                     id: 'accepted',
                     label: 'Accepted',
-                    endpoint: 'verified_organizations'
+                    endpoint: 'verifiedOrganizations'
                 },
                 {
                     id: 'suspended',
                     label: 'Suspended',
-                    endpoint: 'suspended_organizations'
+                    endpoint: 'suspendedOrganizations'
                 },
                 {
                     id: 'rejected',
                     label: 'Rejected',
-                    endpoint: 'rejected_organizations'
+                    endpoint: 'rejectedOrganizations'
                 },
                 {
                     id: 'deleted',
                     label: 'Deleted',
-                    endpoint: 'deleted_organizations'
+                    endpoint: 'deletedOrganizations'
                 }
             ],
             opsiShowRow:[
@@ -227,16 +226,16 @@ export default {
             this.loaderPage = false
             this.startIndex = (this.currentPage - 1) * this.limit
 
+            // await this.$api1.get('verificator/'+item.endpoint+'/?limit='+this.limit+'&offset='+this.startIndex+'&title='+this.filter.search+'&sortbycreatedat='+this.sorter.createdAt).then(res => {
             await this.$apiPlatform.get('verificator/'+item.endpoint+'/?limit='+this.limit+'&offset='+this.startIndex+'&title='+this.filter.search+'&sortbycreatedat='+this.sorter.createdAt).then(res => {
-                // console.log(res.data)
-
                 this.dataTable = res.data.results.map(e => {
                     const data = {
                         accountId: e.accountId,
                         organisasiId: e.organisasiId,
-                        namaOrganisasi: e.organisasi.length > 0 ? e.organisasi[0].namaOrganisasi : 'N/A',
+                        namaOrganisasi: e.namaOrganisasi !== "" ? e.namaOrganisasi : 'N/A',
                         email: e.email,
-                        emailIsVerified: e.emailIsVerified,
+                        // emailIsVerified: e.emailIsVerified,
+                        emailIsVerified: true,
                         statusVerification: e.statusVerification,
                         createdAt: e.createdAt
                     }
@@ -254,45 +253,46 @@ export default {
         async getLogOrganisasi() {
             this.loaderLog = false
 
-            await this.$apiPlatform.get('verificator/log_organisasi/').then(res => {
-                // console.log(res.data)
+            await this.$apiPlatform.get('verificator/logOrganisasi/').then(res => {
+                console.log(res.data)
 
                 const data = res.data
+                this.kapsul = 
                 this.kapsul = [
                     {
                         id: 'all',
                         label: 'All',
-                        length: data.totalOrganizations,
+                        length: data.totalOrganisasi,
                         endpoint: 'organisasi'
                     },
                     {
                         id: 'needverification',
                         label: 'Need Verification',
-                        length: data.totalPendingOrganizationsEmailVerified + data.totalPendingOrganizationsEmailNotVerified,
+                        length: data.totalPendingOrganisasi,
                         endpoint: 'pending_organizations'
                     },
                     {
                         id: 'accepted',
                         label: 'Accepted',
-                        length: data.totalVerifiedOrganizationsEmailVerified + data.totalVerifiedOrganizationsEmailNotVerified,
+                        length: data.totalVerifiedOrganisasi,
                         endpoint: 'verified_organizations'
                     },
                     {
                         id: 'suspended',
                         label: 'Suspended',
-                        length: data.totalSuspendedOrganizations,
+                        length: data.totalSuspendedOrganisasi,
                         endpoint: 'suspended_organizations'
                     },
                     {
                         id: 'rejected',
                         label: 'Rejected',
-                        length: data.totalRejectedOrganizations,
+                        length: data.totalRejectedOrganisasi,
                         endpoint: 'rejected_organizations'
                     },
                     {
                         id: 'deleted',
                         label: 'Deleted',
-                        length: data.totalDeletedOrganizations,
+                        length: data.totalDeletedOrganisasi,
                         endpoint: 'deleted_organizations'
                     }
                 ]

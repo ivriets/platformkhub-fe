@@ -48,13 +48,13 @@
                 <div class="col-span-12 lg:col-span-4">
                     <div 
                         class="w-full bg-no-repeat bg-contain bg-center shadow-md border border-gray-50 rounded-xl p-2 h-[200px] lg:h-[320px]" 
-                        :style="'background-image: url('+basePath+dataDetail.organisasi[0].imgLogoOrganisasi+');'"
+                        :style="'background-image: url('+basePath+dataDetail.organisasi.imgLogoOrganisasi+');'"
                     >
                     </div>
                     <hr class="border-warna-tujuh mt-6 mb-5">
                     <div class="">
                         <div class="mb-5 text-sm text-warna-delapan font-semibold">Location</div>
-                        <div class="text-sm text-warna-sembilan font-semibold">{{ dataDetail.organisasi[0].lokasiOrganisasi[0].jalan }}, {{ dataDetail.organisasi[0].lokasiOrganisasi[0].kota }}, {{ dataDetail.organisasi[0].lokasiOrganisasi[0].provinsi }}</div>
+                        <div class="text-sm text-warna-sembilan font-semibold">{{ dataDetail.organisasi.lokasiOrganisasi[0].jalan }}, {{ dataDetail.organisasi.lokasiOrganisasi[0].kota }}, {{ dataDetail.organisasi.lokasiOrganisasi[0].provinsi }}</div>
                     </div>
                     <hr class="border-warna-tujuh mt-6 mb-5">
                     <ElementsListFotoNama 
@@ -90,7 +90,7 @@
                     />
                 </div>
                 <div v-if="dataDetail" class="col-span-12 lg:col-span-8">
-                    <div class="text-xl font-bold text-warna-utama">{{ dataDetail.organisasi[0].namaOrganisasi }}</div>
+                    <div class="text-xl font-bold text-warna-utama">{{ dataDetail.organisasi.namaOrganisasi }}</div>
                     <hr class="border-warna-tujuh my-5">
                     <div class="grid grid-cols-8 gap-5">
                         <div class="col-span-4">
@@ -101,14 +101,14 @@
                                         {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY HH:mm') }} WIB
                                     </div>
                                     <div v-else-if="['namaOrganisasi'].includes(item1.value)">
-                                        {{ dataDetail.organisasi[0][item1.value] }}
+                                        {{ dataDetail.organisasi[item1.value] }}
                                     </div>
                                     <div v-else>
                                         {{ dataDetail[item1.value] }}
                                     </div>
                                 </div>
                             </div>
-                            <div v-for="(item2, index2) in dataDetail.organisasi[0].sosialMedia" :key="'datasosmed' + index2" class="grid grid-cols-12 mb-4 break-words gap-1">
+                            <div v-for="(item2, index2) in dataDetail.organisasi.sosialMedia" :key="'datasosmed' + index2" class="grid grid-cols-12 mb-4 break-words gap-1">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">
                                     <span v-if="item2.kategoriSosialMedia === 1">Twitter</span>
                                     <span v-else-if="item2.kategoriSosialMedia === 2">Instagram</span>
@@ -123,7 +123,7 @@
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
                                     <div v-if="['totalMember', 'websiteOrganisasi', 'missionStatement', 'hierarki'].includes(item1.value)" class="">
-                                        {{ dataDetail.organisasi[0][item1.value] }}
+                                        {{ dataDetail.organisasi[item1.value] }}
                                     </div>
                                     <div v-else>
                                         {{ dataDetail[item1.value] }}
@@ -136,32 +136,32 @@
                     <div class="grid grid-cols-12 gap-y-1">
                         <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Organization Type</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in dataDetail.organisasi[0].typeOrganisasi" :key="'tipeorganisasi' + index" class="mb-4 inline-block mr-1">
-                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.organisasi[0].typeOrganisasi.length">, </span>
+                            <div v-for="(item, index) in dataDetail.organisasi.typeOrganisasi" :key="'tipeorganisasi' + index" class="mb-4 inline-block mr-1">
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.organisasi.typeOrganisasi.length">, </span>
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Approach Type</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in dataDetail.organisasi[0].typeApproach" :key="'tipeapproach' + index" class="mb-4 inline-block mr-1">
-                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.organisasi[0].typeApproach.length">, </span>
+                            <div v-for="(item, index) in dataDetail.organisasi.typeApproach" :key="'tipeapproach' + index" class="mb-4 inline-block mr-1">
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.organisasi.typeApproach.length">, </span>
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-2 lg:col-span-2 text-sm text-warna-delapan font-semibold">Topic</div>
                         <div class="col-span-12 md:col-span-10 lg:col-span-10 text-sm text-warna-sembilan font-semibold">
-                            <div v-for="(item, index) in dataDetail.organisasi[0].typeIssues" :key="'tipeissues' + index" class="mb-4 inline-block mr-1">
-                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.organisasi[0].typeIssues.length">, </span>
+                            <div v-for="(item, index) in dataDetail.organisasi.typeIssues" :key="'tipeissues' + index" class="mb-4 inline-block mr-1">
+                                <span>{{ selectedFlag === 'indonesia' ? item.nama[0] : item.nama[1] }}</span><span v-if="index+1 < dataDetail.organisasi.typeIssues.length">, </span>
                             </div>
                         </div>
                     </div>
                     <hr class="border-warna-tujuh mb-5">
                     <div class="mb-5">
                         <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Highlight</div>
-                        <div v-if="dataDetail.organisasi[0].highlight !== null" class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? dataDetail.organisasi[0].highlight[0] : dataDetail.organisasi[0].highlight[1] }}</div>
+                        <div v-if="dataDetail.organisasi.highlight !== null" class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? dataDetail.organisasi.highlight[0] : dataDetail.organisasi.highlight[1] }}</div>
                     </div>
                     <hr class="border-warna-tujuh mb-5">
                     <div class="mb-[36px]">
                         <div class="text-sm text-warna-delapan font-semibold mb-[18px]">Description</div>
-                        <div v-if="dataDetail.organisasi[0].deskripsi !== null" class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? dataDetail.organisasi[0].deskripsi[0] : dataDetail.organisasi[0].deskripsi[1] }}</div>
+                        <div v-if="dataDetail.organisasi.deskripsi !== null" class="text-sm text-warna-sembilan font-semibold">{{ selectedFlag === 'indonesia' ? dataDetail.organisasi.deskripsi[0] : dataDetail.organisasi.deskripsi[1] }}</div>
                     </div>
                     <div>
                         <div class="text-sm text-warna-delapan font-semibold mb-[30px]">Milestone</div>
@@ -178,7 +178,7 @@
                     <div @click="btnAccept" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>
                 <div v-if="dataDetail.statusVerification === 3" class="font-semibold">
-                    <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
+                    <div @click="btnEdit(dataDetail.organisasi.organisasiId)" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
                 </div>
             </div>
         </div>
@@ -202,7 +202,7 @@
                         <div class="text-sm text-warna-delapan font-semibold">Nama</div>
                     </div>
                     <div class="col-span-12 md:col-span-9">
-                        <div class="text-sm text-warna-sembilan font-semibold">{{dataDetail.organisasi[0].namaOrganisasi}}</div>
+                        <div class="text-sm text-warna-sembilan font-semibold">{{dataDetail.organisasi.namaOrganisasi}}</div>
                     </div>
                     <div class="col-span-12 md:col-span-3">
                         <div class="text-sm text-warna-delapan font-semibold">Alasan Reject</div>
@@ -227,7 +227,6 @@
 </template>
 
 <script>
-import detailOrganisasi from '~/static/data/detailorganisasi.json';
 
 export default {
     data() {
@@ -344,13 +343,13 @@ export default {
         async masterPoint() {
             this.loaderDetail = false
 
-            await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
-                // console.log(res.data)
-                const data = res.data
-
+            await this.$apiPlatform.get('verificator/accounts/'+this.id+'/').then(res => {
+                
+                const data = res.data.results
+                console.log(data)
                 this.dataDetail = data
 
-                this.internalBranch = data.organisasi[0].organisasiCabangInternal.map(e => {
+                this.internalBranch = data.organisasi.organisasiCabangInternal.map(e => {
                     const data = {
                         id: e.organisasiId,
                         nama: e.namaOrganisasi,
@@ -359,7 +358,7 @@ export default {
                     return data
                 })
 
-                this.requestByIndividu = data.organisasi[0].requestedByIndividu.map(e => {
+                this.requestByIndividu = data.organisasi.requestedByIndividu.map(e => {
                     const data = {
                         id: e.id,
                         nama: e.individu.namaIndividu,
@@ -368,7 +367,7 @@ export default {
                     return data
                 })
 
-                this.teamMember = data.organisasi[0].teamMember.map(e => {
+                this.teamMember = data.organisasi.teamMember.map(e => {
                     const data = {
                         id: e.individu.userId,
                         nama: e.individu.namaIndividu,
@@ -377,14 +376,14 @@ export default {
                     return data
                 })
 
-                this.partner = data.organisasi[0].partnerOrganisasiEksternal.map(e => {
-                    const data = {
-                        id: e.pkPartnerEksternalId,
-                        nama: e.namaPartner,
-                        image: e.imgLogoPartner
-                    }
-                    return data
-                })
+                // this.partner = data.organisasi.partnerOrganisasiEksternal.map(e => {
+                //     const data = {
+                //         id: e.pkPartnerEksternalId,
+                //         nama: e.namaPartner,
+                //         image: e.imgLogoPartner
+                //     }
+                //     return data
+                // })
 
                 this.$nextTick(() => {
                     this.loaderDetail = true
@@ -430,8 +429,8 @@ export default {
             this.$router.push('/verifications/organisasi/organisasi-list')
         },
 
-        btnEdit() {
-            this.$router.push('/verifications/organisasi/'+this.id+'/edit')
+        btnEdit(orgId) {
+            this.$router.push('/verifications/organisasi/'+orgId+'/edit')
         },
 
         toggleDrop() {

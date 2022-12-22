@@ -77,10 +77,9 @@ export default {
     methods: {
         initialize() {
             this.listing = this.opsi
-
-            if (this.value && this.value.length > 0) {
+            if (this.listing.length > 0 && this.value && this.value.length > 0) {
                 this.value.forEach(e => {
-                    const cari = this.opsi.filter(x => x[this.itemValue] === e);
+                    const cari = this.listing.filter(x => x[this.itemValue] === e);
                     if (cari && cari.length > 0) {
                         this.selectedValue.push({
                             id: e,

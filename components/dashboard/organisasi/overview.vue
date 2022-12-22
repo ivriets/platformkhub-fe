@@ -106,16 +106,16 @@ export default {
         async masterPoint() {
             this.loaderLog = false
 
-            await this.$apiPlatform.get('verificator/log_organisasi/').then(res => {
-                // console.log(res.data)
+            await this.$apiPlatform.get('verificator/logOrganisasi/').then(res => {
+                console.log(res.data)
                 const data = res.data
 
-                this.totalOrganizations = data.totalOrganizations
-                this.totalNewOrganizations = data.totalNewOrganizations
-                this.totalNeedVerification = data.totalPendingOrganizationsEmailVerified + data.totalPendingOrganizationsEmailNotVerified
-                this.totalSuspended = data.totalSuspendedOrganizations
-                this.totalRejected = data.totalRejectedOrganizations
-                this.totalAccepted = data.totalVerifiedOrganizationsEmailVerified + data.totalVerifiedOrganizationsEmailNotVerified
+                this.totalOrganizations = data.totalOrganisasi
+                this.totalNewOrganizations = 10
+                this.totalNeedVerification = data.totalPendingOrganisasi
+                this.totalSuspended = data.totalSuspendedOrganisasi
+                this.totalRejected = data.totalRejectedOrganisasi
+                this.totalAccepted = data.totalVerifiedOrganisasi
             })
         }
     }
