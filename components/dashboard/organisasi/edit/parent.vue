@@ -60,12 +60,6 @@
                 <DashboardOrganisasiEditMediaSosial />
             </div>
         </div>
-        <div v-if="kategorisasi !== 'pusat'" class="bg-white shadow-md rounded-xl py-4 px-6">
-            <div class="flex items-center justify-between">
-                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
-            </div>
-        </div>
         <!-- <pre>{{dataOrganisasi}}</pre> -->
     </div>
 </template>
@@ -103,10 +97,6 @@ export default {
         masterPoint() {
             this.dataOrganisasi = detailOrganisasi
         },
-
-        btnBack() {
-            this.$router.push('/verifications/organisasi/'+this.id)
-        }
     },
 }
 </script>

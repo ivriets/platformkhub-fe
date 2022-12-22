@@ -26,10 +26,11 @@
 </template>
 <script>
 export default {
-    props: ['value','name', 'placeholder', 'label', 'opsi', 'itemValue', 'itemLabel', 'disabled', "provinsi"],
+    props: ['value','name', 'placeholder', 'label', 'itemValue', 'itemLabel', 'disabled', "provinsi"],
     data() {
         return {
             valueSelect: '',
+            opsi: [],
         }
     },
     computed: {
@@ -50,9 +51,17 @@ export default {
     },
     methods: {
         initialize() {
-            // if (this.value !== '') {
-                this.valueSelect = this.value
-            // }
+            this.valueSelect = this.value
+            this.masterPoint()
+        },
+        async masterPoint() {
+            await this.$apiBase.get('kotakab?provinsi='+ this.provinsi).then(res => {
+                const data = res.data
+                console.log(data)
+                this.opsi = _.map(data, function(o){
+                    return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
+                })
+            })
         },
         handleInput(event) {
             this.$emit('input', event.target.value)

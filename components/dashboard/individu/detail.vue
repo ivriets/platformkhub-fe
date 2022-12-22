@@ -301,8 +301,8 @@ export default {
 
             await this.$apiPlatform.get('verificator/accounts/'+this.id+'/').then(res => {
                 
-                const data = res.data.results[0]
-
+                const data = res.data.results
+                console.log(data)
                 this.dataDetail = data
                 this.dataMyOrganisasi = data.individu[0].myOrganizations.map(e => {
                     const data = {

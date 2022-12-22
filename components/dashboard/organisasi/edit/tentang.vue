@@ -159,11 +159,12 @@
                             :name="prefixName+'kota'"
                             :label="'Kota'"
                         /> -->
-                        <kotaKab 
+                        <InputKotaKab 
                             v-model="lokasi.kota"
                             :name="prefixName+'kota'"
                             :label="'Kota'"
                             :provinsi="lokasi.provinsi"
+                            :value="lokasi.kota"
                             :placeholder="lokasi.kota"
                         />
                     </div>
@@ -244,7 +245,13 @@
                 </div>
             </div>
         </div>
-        <pre>{{form}}</pre>
+        
+        <div class="bg-white shadow-md rounded-xl py-4 px-6 mt-10">
+            <div class="flex items-center justify-between">
+                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
+                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -272,25 +279,6 @@ export default {
         }
     },
     computed: {
-        // typeOrganisasi() {
-        //     return this.$store.state.opsi.typeOrganisasi
-        // },
-
-        // typeAudience() {
-        //     return this.$store.state.opsi.typeAudience
-        // },
-
-        // typeApproach() {
-        //     return this.$store.state.opsi.typeApproach
-        // },
-
-        // typeIssues() {
-        //     return this.$store.state.opsi.typeIssues
-        // },
-
-        // opsiHierarki() {
-        //     return this.$store.state.opsi.hierarki
-        // },
         id() {
             return this.$route.params.id;
         }, 
@@ -330,7 +318,6 @@ export default {
             await this.$apiPlatform.get('daftarList/kategori?kategori1=pilihanHierarchy').then(res => {this.opsiHierarki = _.map(res.data.results, function(o){return {'id':parseInt(o.id), 'label':o.nama}})}).catch(err => {console.log(err)})
             await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
                 const data = res.data
-                console.log(data)
                 this.form = {
                     namaOrganisasi: data.namaOrganisasi,
                     websiteOrganisasi: data.websiteOrganisasi,
@@ -377,6 +364,10 @@ export default {
 
         btnWarnaTujuh() {
             this.form.tampilan = '#4B4B9D'
+        },
+        
+        btnBack() {
+            this.$router.push('/verifications/organisasi/'+this.id)
         }
     },
 }
