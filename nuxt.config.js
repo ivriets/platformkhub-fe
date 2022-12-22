@@ -1,5 +1,14 @@
 import webpack from 'webpack'
+import path from 'path'
 require('dotenv').config();
+import fs from 'fs'
+const _ = require('lodash')
+
+// const {BetaAnalyticsDataClient} = require('@google-analytics/data');
+
+// const analyticsDataClient = new BetaAnalyticsDataClient();
+
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -19,7 +28,17 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: "https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" },
-    ]
+    ],
+    script: [
+      {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-XZNG8PQKQG",
+          async: true,
+      },
+
+        { src: "/js/ga.js"}
+      ],
+
+
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -35,7 +54,8 @@ export default {
     {
       src: "~/plugins/tinymce.js",
       mode: "client", 
-    }
+    },
+    // {  src: "~/plugins/gaReport.js"}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -63,8 +83,12 @@ export default {
     }],
   ],
   server: {
-      host: "0.0.0.0",
-      port: 3333,
+    // https: {
+    //   key: fs.readFileSync(path.resolve(__dirname, '/etc/letsencrypt/live/api.k-hub.org/privkey.pem')),
+    //   cert: fs.readFileSync(path.resolve(__dirname, '/etc/letsencrypt/live/api.k-hub.org/fullchain.pem'))
+    // },
+    host: "0.0.0.0",
+    port: 3333,
   },
   dayjs: {
     locales: ['id'],
@@ -137,7 +161,7 @@ export default {
         },
         tokenRequired: true,
         tokenType: 'JWT',
-        globalToken: true,
+        globalToken: true, 
         // globalToken: true,
         // autoFetchUser: true
       },
@@ -145,6 +169,7 @@ export default {
     plugins: [
       { src: "~/plugins/apiBase", mode: "client" },
       { src: "~/plugins/apiPlatform", mode: "client" },
+      { src: "~/plugins/api1", mode: "client" },
       // { src: "~/plugins/axios", mode: "client" },
     ],
     cookie: {
@@ -157,6 +182,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        // global modules
+        _: 'lodash',
+        // analyticsDataClient: BetaAnalyticsDataClient
+      })
+    ],
+
     postcss: {
       plugins: {
         tailwindcss: {},
