@@ -65,6 +65,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/google-analytics',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -127,7 +128,9 @@ export default {
   // router: {
   //   middleware: ['general']
   // },
-
+  googleAnalytics: {
+    id: "G-DTPETM8Z78"
+  },
   axios: {
     baseURL: 'https://base.api.k-hub.org',
     headers: {

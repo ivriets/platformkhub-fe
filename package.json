@@ -35,6 +35,7 @@
     "webpack": "4.46.0"
   },
   "devDependencies": {
+    "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/tailwindcss": "^5.3.3",
     "postcss": "^8.4.17"
   },

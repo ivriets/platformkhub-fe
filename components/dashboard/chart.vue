@@ -41,19 +41,19 @@
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
-                                <div>5% - Under Review (2)</div>
+                                <div>{{ ((logProgram.underReview/logProgram.all)*100).toFixed() }}% - Under Review ({{logProgram.underReview}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-draft rounded-full mr-2"></div>
-                                <div>0% - Draft (0)</div>
+                                <div>{{ ((logProgram.draft/logProgram.all)*100).toFixed() }}% - Draft ({{logProgram.draft}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-need-revision rounded-full mr-2"></div>
-                                <div>5% - Need Revision (1)</div>
+                                <div>{{ ((logProgram.needRevision/logProgram.all)*100).toFixed() }}% - Need Revision ({{logProgram.needRevision}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-approved-accepted rounded-full mr-2"></div>
-                                <div>90% - Approved (38)</div>
+                                <div>{{ ((logProgram.approved/logProgram.all)*100).toFixed() }}% - Approved ({{logProgram.approved}})</div>
                             </div>
                         </div>
                     </div>
@@ -75,20 +75,20 @@
                         <highchart :options="pieChartEvent" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-suspended rounded-full mr-2"></div>
-                                <div>5% - Under Review (2)</div>
+                                <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
+                                <div>{{ ((logEvent.underReview/logEvent.all)*100).toFixed() }}% - Under Review ({{logEvent.underReview}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-draft rounded-full mr-2"></div>
-                                <div>0% - Draft (0)</div>
+                                <div>{{ ((logEvent.draft/logEvent.all)*100).toFixed() }}% - Draft ({{logEvent.draft}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-need-revision rounded-full mr-2"></div>
-                                <div>5% - Need Revision (1)</div>
+                                <div>{{ ((logEvent.needRevision/logEvent.all)*100).toFixed() }}% - Need Revision ({{logEvent.needRevision}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-approved-accepted rounded-full mr-2"></div>
-                                <div>90% - Approved (38)</div>
+                                <div>{{ ((logEvent.approved/logEvent.all)*100).toFixed() }}% - Approved ({{logEvent.approved}})</div>
                             </div>
                         </div>
                     </div>
@@ -125,20 +125,20 @@
                         <highchart :options="pieChartResource" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-suspended rounded-full mr-2"></div>
-                                <div>5% - Under Review (2)</div>
+                                <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
+                                <div>{{ ((logResources.underReview/logResources.all)*100).toFixed() }}% - Under Review ({{logResources.underReview}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-draft rounded-full mr-2"></div>
-                                <div>0% - Draft (0)</div>
+                                <div>{{ ((logResources.draft/logResources.all)*100).toFixed() }}% - Draft ({{logResources.draft}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-need-revision rounded-full mr-2"></div>
-                                <div>5% - Need Revision (1)</div>
+                                <div>{{ ((logResources.needRevision/logResources.all)*100).toFixed() }}% - Need Revision ({{logResources.needRevision}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-approved-accepted rounded-full mr-2"></div>
-                                <div>90% - Approved (38)</div>
+                                <div>{{ ((logResources.approved/logResources.all)*100).toFixed() }}% - Approved ({{logResources.approved}})</div>
                             </div>
                         </div>
                     </div>
@@ -160,20 +160,20 @@
                         <highchart :options="pieChartBlog" />
                         <div class="text-xs text-warna-dua grid grid-cols-1 gap-y-3">
                             <div class="flex items-center">
-                                <div class="w-[11px] h-[11px] bg-warna-suspended rounded-full mr-2"></div>
-                                <div>5% - Under Review (2)</div>
+                                <div class="w-[11px] h-[11px] bg-warna-under-review rounded-full mr-2"></div>
+                                <div>{{ ((logBlog.underReview/logBlog.all)*100).toFixed() }}% - Under Review ({{logBlog.underReview}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-draft rounded-full mr-2"></div>
-                                <div>0% - Draft (0)</div>
+                                <div>{{ ((logBlog.draft/logBlog.all)*100).toFixed() }}% - Draft ({{logBlog.draft}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-need-revision rounded-full mr-2"></div>
-                                <div>5% - Need Revision (1)</div>
+                                <div>{{ ((logBlog.needRevision/logBlog.all)*100).toFixed() }}% - Need Revision ({{logBlog.needRevision}})</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="w-[11px] h-[11px] bg-warna-approved-accepted rounded-full mr-2"></div>
-                                <div>90% - Approved (38)</div>
+                                <div>{{ ((logBlog.approved/logBlog.all)*100).toFixed() }}% - Approved ({{logBlog.approved}})</div>
                             </div>
                         </div>
                     </div>
