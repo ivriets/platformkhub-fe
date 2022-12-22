@@ -404,7 +404,7 @@
                 </div>
             </div>
         </div>
-        <pre>{{dataDetail}}</pre> 
+        <!-- <pre>{{dataDetail}}</pre>  -->
     </div>
 </template>
 
