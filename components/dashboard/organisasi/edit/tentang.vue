@@ -173,29 +173,29 @@
             <div class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9">
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
-                        <div class="flex items-start mb-1">
-                            <div class="font-medium">Photo/Picture</div>
-                            <div class="text-[#DF4B61] ml-1">*</div>
-                        </div>
-                        <div class="border-dashed border-2 border-warna-tujuh pt-[9px] pb-[25px] rounded-lg text-center">
-                            <div class="text-xs text-[#BABABA] mb-2">
-                                <div>288x288 px (square)<br>JPG, GIF or PNG maksimum 1MB.</div>
-                            </div>
-                            <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[145px] mx-auto cursor-pointer">Select File</div>
+                        <div class="">
+                            <InputFileUpload 
+                                :label="'Logo Organisasi'"
+                                v-model="form.imgLogoOrganisasi"
+                                :accept="'.png, .jpg, .jpeg'"
+                                :value="form.imgLogoOrganisasi"
+                                :multiple="false"
+                                :maxSize="5"
+                            />
                         </div>
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
-                        <div class="flex items-start mb-1">
-                            <div class="font-medium">Foto/Gambar</div>
-                            <div class="text-[#DF4B61] ml-1">*</div>
-                        </div>
-                        <div class="border-dashed border-2 border-warna-tujuh pt-[9px] pb-[25px] rounded-lg text-center">
-                            <div class="text-xs text-[#BABABA] mb-2">
-                                <div>288x288 px (square)<br>JPG, GIF or PNG maksimum 1MB.</div>
-                            </div>
-                            <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[145px] mx-auto cursor-pointer">Select File</div>
+                        <div class="">
+                            <InputFileUpload 
+                                :label="'Main Image'"
+                                v-model="form.imgMainImage"
+                                :accept="'.png, .jpg, .jpeg'"
+                                :value="form.imgMainImage"
+                                :multiple="false"
+                                :maxSize="5"
+                            />
                         </div>
                     </div>
                 </div>
@@ -291,13 +291,18 @@ export default {
             immediate: true,
             deep: true,
             handler(newValue, oldValue) {
-                console.log(this.form)
+                if (oldValue && newValue){
+                    if (oldValue.imgLogoOrganisasi && newValue.imgLogoOrganisasi){
+                        console.log(oldValue.imgLogoOrganisasi.displayImage)
+                        console.log(newValue.imgLogoOrganisasi.displayImage)
+                    }
+                }
             }
         }
     },
     methods: {
         initialize() {
-            this.masterPoint()
+            this.masterPoint() 
         },
         
         async masterPoint() {
@@ -318,6 +323,7 @@ export default {
             await this.$apiPlatform.get('daftarList/kategori?kategori1=pilihanHierarchy').then(res => {this.opsiHierarki = _.map(res.data.results, function(o){return {'id':parseInt(o.id), 'label':o.nama}})}).catch(err => {console.log(err)})
             await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
                 const data = res.data
+                console.log(data)
                 this.form = {
                     namaOrganisasi: data.namaOrganisasi,
                     websiteOrganisasi: data.websiteOrganisasi,
@@ -327,6 +333,9 @@ export default {
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
                     tampilan: data.tampilan,
+                    imgLogoOrganisasi: data.imgLogoOrganisasi,
+                    imgMainImage: data.imgMainImage,
+                    binInstitutionProfile: data.binInstitutionProfile,
                     lokasiOrganisasi: data.lokasiOrganisasi,
                     highlight:[data.highlight[0], data.highlight[1]],
                     deskripsi:[data.deskripsi[0], data.deskripsi[1]]

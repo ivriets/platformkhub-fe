@@ -1,7 +1,10 @@
 <template>
     <div>
-        <div v-if="label" class="font-medium mb-1">
-            {{label}}
+        <div class="flex items-start mb-1">
+            <div v-if="label" class="font-medium mb-1">
+                {{label}}
+            </div>
+            <div class="text-[#DF4B61] ml-1">*</div>
         </div>
         <div class="list-files">
             <div v-for="(i, index) in listFiles" :key="'listfiles'+index" class="relative">
@@ -65,7 +68,7 @@ export default {
     },
     computed: {
         baseUrl() {
-            return process.env.TIPE === 'dev' ? process.env.DEV_IMAGE + '/avatar/thumbnail/' :  process.env.PROD_IMAGE + '/avatar/thumbnail/'
+            return process.env.TIPE === 'dev' ? process.env.DEV_IMAGE  :  process.env.PROD_IMAGE 
         }
     },
     methods: {

@@ -165,7 +165,11 @@
                     </div>
                     <div>
                         <div class="text-sm text-warna-delapan font-semibold mb-[30px]">Milestone</div>
-                        <div class="text-sm text-warna-sembilan font-semibold text-center">On Going...</div>
+                        <!-- <div class="text-sm text-warna-sembilan font-semibold text-center">On Going.xx..</div> -->
+                        <DashboardOrganisasiMilestone 
+                            :dataMilestone="dataDetail.organisasi.milestoneOrganisasi"
+                        />
+                        <!-- <pre>{{ dataDetail }}</pre> -->
                     </div>
                 </div>
             </div>
@@ -174,8 +178,8 @@
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
                 <div v-if="dataDetail.statusVerification === 1" class="flex gap-x-6 font-semibold">
-                    <div @click="btnRejectOrganisasi" class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
-                    <div @click="btnAccept" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
+                    <button @click="btnRejectOrganisasi" class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</button>
+                    <button @click="btnAccept" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</button>
                 </div>
                 <div v-if="dataDetail.statusVerification === 3" class="font-semibold">
                     <div @click="btnEdit(dataDetail.organisasi.organisasiId)" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
@@ -217,7 +221,7 @@
                     </div>
                 </div>
                 <div class="flex items-center justify-end">
-                    <div @click="btnModalBatal" class="text-center bg-white border border-warna-empat hover:bg-blue-50 text-warna-empat rounded-lg py-1 px-4 cursor-pointer mr-4">Batal</div>
+                    <div @click="btnModalBatal" class="text-center bg-white border border-warna-empat hover:bg-blue-50 text-warna-empat rounded-lg py-1 px-4 cursor-pointer mr-4">Batal</div> 
                     <div @click="btnReject" class="text-center hover:bg-red-700 bg-warna-rejected border border-rejected hover:border-red-700 text-white rounded-lg py-1 px-4 cursor-pointer">Reject</div>
                 </div>
             </div>

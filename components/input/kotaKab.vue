@@ -57,7 +57,6 @@ export default {
         async masterPoint() {
             await this.$apiBase.get('kotakab?provinsi='+ this.provinsi).then(res => {
                 const data = res.data
-                console.log(data)
                 this.opsi = _.map(data, function(o){
                     return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
                 })
