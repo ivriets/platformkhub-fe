@@ -32,7 +32,6 @@
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
     "vue2-datepicker": "^3.11.0",
-    "vuejs-clipper": "^4.1.0",
     "webpack": "4.46.0"
   },
   "devDependencies": {

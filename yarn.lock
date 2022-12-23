@@ -3237,11 +3237,6 @@ core-js@^3.25.3:
   resolved "https://registry.npmjs.org/core-js/-/core-js-3.25.5.tgz"
   integrity sha512-nbm6eZSjm+ZuBQxCUPQKQCoUEfFOXjUZ8dTTyikyKaWrTYmAVbykQfwsKE5dBK88u3QCkCrzsx/PPlKfhsvgpw==
 
-core-js@^3.6.4:
-  version "3.26.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.26.1.tgz#7a9816dabd9ee846c1c0fe0e8fcad68f3709134e"
-  integrity sha512-21491RRQVzUn0GGM9Z1Jrpr6PNPxPi+Za8OM9q4tksTSnlbXXGKK1nXNg/QvwFYettXvSX6zWKCtHHfjN4puyA==
-
 core-util-is@~1.0.0:
   version "1.0.3"
   resolved "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.3.tgz"
@@ -4154,11 +4149,6 @@ execa@^5.0.0:
     onetime "^5.1.2"
     signal-exit "^3.0.3"
     strip-final-newline "^2.0.0"
-
-exif-js@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/exif-js/-/exif-js-2.3.0.tgz#9d10819bf571f873813e7640241255ab9ce1a814"
-  integrity sha512-1Og9pAzG2FZRVlaavH8bB8BTeHcjMdJhKmeQITkX+uLRCD0xPtKAdZ2clZmQdJ56p9adXtJ8+jwrGp/4505lYg==
 
 exit@^0.1.2:
   version "0.1.2"
@@ -9695,14 +9685,6 @@ vue@^2.6.12, vue@^2.7.10:
   dependencies:
     "@vue/compiler-sfc" "2.7.13"
     csstype "^3.1.0"
-
-vuejs-clipper@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/vuejs-clipper/-/vuejs-clipper-4.1.0.tgz#5c30582be6961702d270c381164a69b65fe270c8"
-  integrity sha512-VvHWq5+IL2yrbHueJFwPSqTRfD9nDgAd30Hglz3gcJoOO51+NZycMWFJywOEsQNPZtGCHauEoVmQFPhvRAttbw==
-  dependencies:
-    core-js "^3.6.4"
-    exif-js "^2.3.0"
 
 vuex@^3.6.2:
   version "3.6.2"
