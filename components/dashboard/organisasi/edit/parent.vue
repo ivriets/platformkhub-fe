@@ -86,17 +86,52 @@ export default {
             return this.$route.params.id;
         }
     },
-    mounted() {
+    created() {
         this.initialize()
     },
     methods: {
         initialize() {
-            this.masterPoint()
+            this.masterPoint() 
         },
+        
+        async masterPoint() {
+            await this.$apiBase.get('provinsi/').then(res => {
+                const data = res.data
+                this.opsiProvinsi = _.map(data, function(o){
+                    return {'id':o.provinsi, 'label':[o.provinsi, o.provinsi]}
+                })
 
-        masterPoint() {
-            this.dataOrganisasi = detailOrganisasi
+            }).catch(err => {
+                console.log(err)
+            })
+
+            await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
+                const data = res.data
+                console.log(data)
+                this.accountId = data.accountId
+                this.organisasiId = data.organisasiId
+                this.form = {
+                    namaOrganisasi: data.namaOrganisasi,
+                    websiteOrganisasi: data.websiteOrganisasi,
+                    hierarki: data.hierarchy.id,
+                    typeOrganisasi: _.flatMap(data.typeOrganisasi, "id"),
+                    typeAudience: _.flatMap(data.typeAudience, "id"),
+                    typeApproach: _.flatMap(data.typeApproach, "id"),
+                    typeIssues: _.flatMap(data.typeIssues, "id"),
+                    tampilan: data.tampilan,
+                    imgLogoOrganisasi: data.imgLogoOrganisasi,
+                    imgMainImage: data.imgMainImage,
+                    binInstitutionProfile: data.binInstitutionProfile,
+                    lokasiOrganisasi: data.lokasiOrganisasi,
+                    highlight:[data.highlight[0], data.highlight[1]],
+                    deskripsi:[data.deskripsi[0], data.deskripsi[1]]
+                }
+                
+            }).catch(err => {
+                console.log(err)
+            })
+            this.loaderDetail = false
         },
-    },
+    }
 }
 </script>

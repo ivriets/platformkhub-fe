@@ -275,16 +275,15 @@ export default {
             typeAudience: [],
             typeApproach: [],
             typeIssues: [],
-            opsiHierarki: []
+            opsiHierarki: [],
+            organisasiId: "",
+            accountId: "", 
         }
     },
     computed: {
         id() {
             return this.$route.params.id;
         }, 
-    },
-    created() {
-        this.initialize()
     },
     watch: {
         form : {
@@ -299,6 +298,9 @@ export default {
                 }
             }
         }
+    },
+    created() {
+        this.initialize()
     },
     methods: {
         initialize() {
@@ -324,6 +326,8 @@ export default {
             await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
                 const data = res.data
                 console.log(data)
+                this.accountId = data.accountId
+                this.organisasiId = data.organisasiId
                 this.form = {
                     namaOrganisasi: data.namaOrganisasi,
                     websiteOrganisasi: data.websiteOrganisasi,
@@ -376,7 +380,7 @@ export default {
         },
         
         btnBack() {
-            this.$router.push('/verifications/organisasi/'+this.id)
+            this.$router.push('/verifications/organisasi/'+this.accountId)
         }
     },
 }
