@@ -648,8 +648,27 @@ export default {
             this.masterPoint()
         },
 
-        masterPoint() {
+        async masterPoint() {
             this.setBreadcrumb()
+            await this.$apiPlatform.get('moderator/programs/'+this.id+'/').then(res => {
+                var data = res.data
+                this.form = {
+                    judulActivity: data.judulActivity,
+                    deskripsiPanjang: data.deskripsiPanjang,
+                    tanggalMulai: data.tanggalMulai,
+                    tanggalSelesai: data.tanggalSelesai,
+                    officer:data.tanggalSelesai,
+                    partner:data.tanggalSelesai,
+                    typeAudience: data.typeAudience,
+                    typeApproach: data.typeApproach,
+                    typeIssues: data.typeIssues,
+                    tag: data.tag,
+                    tambahTestimony:[],
+                    namaTestimony:[],
+                    retentionSaatProgramMen:'',
+                }
+            })
+
         },
 
         setBreadcrumb() {

@@ -93,6 +93,7 @@
                 <div class="">
                     <InputSelect 
                         v-model="form.hierarki"
+                        disabled
                         :name="prefixName+'hierarki'"
                         :label="'Hierarki'"
                         :opsi="opsiHierarki"
@@ -153,20 +154,26 @@
                 </div>
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
-                        <!-- <InputText 
-                            v-model="lokasi.kota"
-                            placeholder="Tulis disini"
-                            :name="prefixName+'kota'"
-                            :label="'Kota'"
-                        /> -->
-                        <InputKotaKab 
-                            v-model="lokasi.kota"
-                            :name="prefixName+'kota'"
-                            :label="'Kota'"
-                            :provinsi="lokasi.provinsi"
-                            :value="lokasi.kota"
-                            :placeholder="lokasi.kota"
-                        />
+                        <div v-if="opsiKota.length > 0">
+                            <div class="font-medium mb-1"> Kota </div>
+                            <div class="relative">
+                                <select 
+                                    v-model="lokasi.kota" 
+                                    class="cursor-pointer appearance-none w-full focus:outline-none border border-warna-tujuh rounded-lg px-2 py-1.5 text-sm placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
+                                >
+                                    <option selected disabled value="">{{lokasi.kota}}</option>
+                                    <option
+                                        v-for="(i, index2) in opsiKota[index]" :key="index2" 
+                                        :value="i.id"
+                                    >
+                                    {{i.label[bahasa]}}
+                                    </option>
+                                </select>
+                                <div class="absolute top-0 right-0 h-[34px] items-center flex px-2 text-gray-500">                
+                                    <img src="/icons/icon-arrow-down-grey.png" alt="arrow-down" class="w-4 h-4">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -176,7 +183,7 @@
                         <div class="">
                             <InputFileUpload 
                                 :label="'Logo Organisasi'"
-                                v-model="form.imgLogoOrganisasi"
+                                v-model="imgLogoOrganisasi"
                                 :accept="'.png, .jpg, .jpeg'"
                                 :value="form.imgLogoOrganisasi"
                                 :multiple="false"
@@ -190,7 +197,7 @@
                         <div class="">
                             <InputFileUpload 
                                 :label="'Main Image'"
-                                v-model="form.imgMainImage"
+                                v-model="imgMainImage"
                                 :accept="'.png, .jpg, .jpeg'"
                                 :value="form.imgMainImage"
                                 :multiple="false"
@@ -249,7 +256,7 @@
         <div class="bg-white shadow-md rounded-xl py-4 px-6 mt-10">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+                <div @click="save" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
         </div>
     </div>
@@ -278,22 +285,205 @@ export default {
             opsiHierarki: [],
             organisasiId: "",
             accountId: "", 
+            imgLogoOrganisasi: "",
+            imgMainImage: "",
+            currentLocation: {},
+            locationsVisibleOnMap: "",
+            locations: [
+                {
+                lat: -6.2642904,
+                lng: 106.802237,
+                name: "Zagreb",
+                },
+            ],
+            pins: {
+                selected:
+                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHUSURBVHgB5VU7SwNBEJ7LmZBgMC+UdKKx0MZCG2srwcbCB2glpFDQ3to/IegvSAIWPrBJIySlipUKKqYLaHJ3iWIelzu/DTk8j71H7MQPltmZnflmZ3b3juivQ3BzCIfDI4FAYBvTRV3XR7tBglCCOIP9oFwuv/46QSwWWwfZIaaDNi7vGOlqtZqhfhPE4/EViAy5V6ljE8uVSuXYc4JkMjncarUeMR0ib5Db7fZEvV6vWBd8PG+Q73LIFYyj3lAsa1G/37/D4+JWgPbcQkybd9jpdGYVRXlmSiQSSYmieMWmhgMuwI0kSTPkpQJgzKJnDfJuKYryBJH7sVNBSPGI7BKoFl3n+GguMY4JHiz6GtoybiisRczmEtPFAM+Ifl6i5DmTKYqeX+Nssj19lUz9N2J4XNxDTiQSkwi4oz6ADU3hLdxb7dwW9RyL5B0FHrltAgZUsEce4eRrmwB3ugCRJ3fk4VvsOwEDHtcWxKeDy4emaWmHdRKdFpvNphQKhdhFmOet42D3sftTJw7X/wHgw/U8h1ywkJ/gYJeI/wi/g8kdmqqqG5Alk62Er+emG7nXBFSr1aroNSNknwOVzZnNS6xIHtFoNF6CweAbpheyLOfo3+ALfrSuzJ1F8EsAAAAASUVORK5CYII=",
+                notSelected:
+                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABHElEQVR42uVVyw4BMRQdC98lsbPwG5YSH+BzWFtLZilh0oQgFh6J54IwBmGYtrfaBREdcTvDhpM0adrec3rb+7Csn8fRdrLg7VzBubhDzmHrudRuZ2KRs/miLd6AThfNaOTTGRFIsMm8bkSuXBeGoLVaGi0g39wLI4GTf1EjdE/+E1pAAGgEAenkb/tBo1vQFUDgBbSbny6al77uSQwB/6wJSNHoAo8xj30iaYMW4Lv9wfSTpc0eH6atXtE4TKWNUS4AY2hyddY4k/lwVEZncm9QilQuBGPwnp1B5GIXGi3P0eU0c7EqKrje5hU5d7fr2P2AEJIESkNqB1XJkvhI0/GrTuqZX619tLMF/VHlfnk5/0r7ZMvVWA3rr3AF6LIMZ7PmSlUAAAAASUVORK5CYII=",
+            },
+            clusterStyle: [
+                {
+                url:
+                    "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png",
+                width: 56,
+                height: 56,
+                textColor: "#fff",
+                },
+            ],
+            mapStyle: [
+                {
+                featureType: "all",
+                elementType: "labels.text.fill",
+                stylers: [
+                    {
+                    color: "#ffffff",
+                    },
+                ],
+                },
+                {
+                featureType: "all",
+                elementType: "labels.text.stroke",
+                stylers: [
+                    {
+                    visibility: "on",
+                    },
+                    {
+                    color: "#3e606f",
+                    },
+                    {
+                    weight: 2,
+                    },
+                    {
+                    gamma: 0.84,
+                    },
+                ],
+                },
+                {
+                featureType: "all",
+                elementType: "labels.icon",
+                stylers: [
+                    {
+                    visibility: "off",
+                    },
+                ],
+                },
+                {
+                featureType: "administrative",
+                elementType: "geometry",
+                stylers: [
+                    {
+                    weight: 0.6,
+                    },
+                    {
+                    color: "#313536",
+                    },
+                ],
+                },
+                {
+                featureType: "landscape",
+                elementType: "geometry",
+                stylers: [
+                    {
+                    color: "#44a688",
+                    },
+                ],
+                },
+                {
+                featureType: "poi",
+                elementType: "geometry",
+                stylers: [
+                    {
+                    color: "#13876c",
+                    },
+                ],
+                },
+                {
+                featureType: "poi.attraction",
+                elementType: "geometry.stroke",
+                stylers: [
+                    {
+                    color: "#f5e4e4",
+                    },
+                    {
+                    visibility: "off",
+                    },
+                ],
+                },
+                {
+                featureType: "poi.attraction",
+                elementType: "labels",
+                stylers: [
+                    {
+                    visibility: "on",
+                    },
+                    {
+                    lightness: "14",
+                    },
+                ],
+                },
+                {
+                featureType: "poi.park",
+                elementType: "geometry",
+                stylers: [
+                    {
+                    color: "#13876c",
+                    },
+                    {
+                    visibility: "simplified",
+                    },
+                ],
+                },
+                {
+                featureType: "road",
+                elementType: "geometry",
+                stylers: [
+                    {
+                    color: "#067372",
+                    },
+                    {
+                    lightness: "-20",
+                    },
+                ],
+                },
+                {
+                featureType: "transit",
+                elementType: "geometry",
+                stylers: [
+                    {
+                    color: "#357374",
+                    },
+                ],
+                },
+                {
+                featureType: "water",
+                elementType: "geometry",
+                stylers: [
+                    {
+                    color: "#004757",
+                    },
+                ],
+                },
+            ],
+            provinsi: [],
+            opsiKota: []
         }
     },
     computed: {
         id() {
             return this.$route.params.id;
         }, 
+        lang() {
+            return this.$i18n.locale
+        },
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
+        }
     },
+    
     watch: {
         form : {
             immediate: true,
             deep: true,
             handler(newValue, oldValue) {
                 if (oldValue && newValue){
-                    if (oldValue.imgLogoOrganisasi && newValue.imgLogoOrganisasi){
-                        console.log(oldValue.imgLogoOrganisasi.displayImage)
-                        console.log(newValue.imgLogoOrganisasi.displayImage)
+                    if (oldValue.lokasiOrganisasi && newValue.lokasiOrganisasi){
+                        let _this = this
+                        if (_.flatMap(this.form.lokasiOrganisasi, "provinsi") !== this.provinsi){
+                            this.provinsi =  _.flatMap(this.form.lokasiOrganisasi, "provinsi")
+                            if (_.flatMap(this.form.lokasiOrganisasi, "provinsi").length > 0){
+                                // 
+                                _.flatMap(this.form.lokasiOrganisasi, "provinsi").forEach(o => {
+                                    this.$apiBase.get('kotakab?provinsi='+ o).then(res => {
+                                        var indexKota = _.flatMap(this.form.lokasiOrganisasi, "provinsi").indexOf(o)
+                                        var daftarKota = _.map(res.data, function(o){
+                                            return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
+                                        })
+                                        _this.$set(_this.opsiKota, indexKota, daftarKota)
+                                    }) 
+                                })
+                            }
+                        }
                     }
                 }
             }
@@ -325,7 +515,6 @@ export default {
             await this.$apiPlatform.get('daftarList/kategori?kategori1=pilihanHierarchy').then(res => {this.opsiHierarki = _.map(res.data.results, function(o){return {'id':parseInt(o.id), 'label':o.nama}})}).catch(err => {console.log(err)})
             await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
                 const data = res.data
-                console.log(data)
                 this.accountId = data.accountId
                 this.organisasiId = data.organisasiId
                 this.form = {
@@ -337,20 +526,42 @@ export default {
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
                     tampilan: data.tampilan,
-                    imgLogoOrganisasi: data.imgLogoOrganisasi,
-                    imgMainImage: data.imgMainImage,
                     binInstitutionProfile: data.binInstitutionProfile,
                     lokasiOrganisasi: data.lokasiOrganisasi,
                     highlight:[data.highlight[0], data.highlight[1]],
                     deskripsi:[data.deskripsi[0], data.deskripsi[1]]
                 }
+                this.provinsi =  _.flatMap(data.lokasiOrganisasi, "provinsi")
+                const _this = this;
+                if (this.provinsi.length > 0){
+                    this.provinsi.forEach(o => {
+                        this.$apiBase.get('kotakab?provinsi='+ o).then(res => {
+                            _this.opsiKota.push(_.map(res.data, function(o){
+                                return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
+                            }))
+                        }) 
+                    })
+                }
+                this.imgLogoOrganisasi= data.imgLogoOrganisasi
+                this.imgMainImage= data.imgMainImage
                 
             }).catch(err => {
                 console.log(err)
             })
             this.loaderDetail = false
         },
-
+        save() {
+            this.putData() 
+        },
+        async putData() {
+            await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', this.form).then(res => {
+                const data = res.data
+                alert(data.message)
+                this.initialize()
+            }).catch(err => {
+                console.log(err)
+            })
+        },
         btnWarnaSatu() {
             this.form.tampilan = '#222222'
         },

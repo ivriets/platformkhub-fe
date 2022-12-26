@@ -40,8 +40,9 @@
                                 :label="'Deskripsi (Bahasa)'"
                             />
                         </div>
-                        <div class="flex justify-end">
-                            <div class="px-[28px] py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Simpan</div>
+                        <div class="flex justify-between">
+                            <div @click="hapusPencapaian(tablePencapaian)" class="px-[28px] py-2 bg-red-900 rounded-lg text-white cursor-pointer hover:bg-red-600 font-semibold">Hapus</div>
+                            <div @click="editPencapaian(tablePencapaian)" class="px-[28px] py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Simpan</div>
                         </div>
                     </div>
                 </template>
@@ -81,7 +82,7 @@
                             />
                         </div>
                         <div class="flex justify-end">
-                            <div class="px-[28px] py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Simpan</div>
+                            <div @click="tambahPencapaian" class="px-[28px] py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Simpan</div>
                         </div>
                     </div>
         </ElementsModal>
@@ -108,43 +109,66 @@ export default {
                 tanggal: '',
                 deskripsi: ['', '']
             },
-            dataTable: [
-                {
-                    id: '1',
-                    tanggal: '2020-05-01 03:59:51.968Z',
-                    deskripsi: [
-                        'Deskripsi milestone bahasa indonesia tahun 2020',
-                        'Description of Indonesian milestones in 2020'
-                    ]
-                },
-                {
-                    id: '2',
-                    tanggal: '2021-08-19 03:59:51.968Z',
-                    deskripsi: [
-                        'Deskripsi milestone bahasa indonesia tahun 2021',
-                        'Description of Indonesian milestones in 2021'
-                    ]
-                },
-                {
-                    id: '3',
-                    tanggal: '2022-02-12 03:59:51.968Z',
-                    deskripsi: [
-                        'Deskripsi milestone bahasa indonesia tahun 2022',
-                        'Description of Indonesian milestones in 2022'
-                    ]
-                },
-                {
-                    id: '4',
-                    tanggal: '2022-10-08 03:59:51.968Z',
-                    deskripsi: [
-                        'Deskripsi milestone bahasa indonesia tahun 2022',
-                        'Description of Indonesian milestones in 2022'
-                    ]
-                }
-            ]
+            dataTable: []
+        }
+    },    
+    computed: {
+        id() {
+            return this.$route.params.id;
+        }, 
+        basePath() {
+            return process.env.BASE_URL
         }
     },
+    created() {
+        this.initialize()
+    },
     methods: {
+        initialize() {
+            this.masterPoint()
+        },
+
+        async masterPoint() {
+            this.dataTable = []
+            await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
+                this.dataTable =  _.map(res.data.milestoneOrganisasi.sort((a, b)=> new Date(a.tanggal)-new Date(b.tanggal)), function(o){
+                if (o){
+                    return {
+                        id: o.pkMilestoneId,
+                        tanggal: o.tanggal,
+                        deskripsi: o.deskripsi
+                }}})
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+
+        
+        async updateData(data) {           
+            await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
+                const data = res.data
+                this.message = data.message
+                alert(this.message)
+                this.masterPoint()
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+        tambahPencapaian() {
+            this.form.tanggal = new Date(this.form.tanggal)
+            this.updateData({"milestoneOrganisasi":this.form})
+            this.modalAction = false
+            this.keyModal += 1
+        },
+        editPencapaian(data) {
+            data.tanggal = new Date(data.tanggal)
+            this.updateData({"updateMilestone":data})
+        },
+        hapusPencapaian(data) {
+            if (confirm('hapus pencapaian '+ data.tanggal+' ?')) {
+                this.updateData({"deleteMilestone":data.id})
+            }
+        },
         btnTambahPencapaian() {
             this.modalAction = true
             this.keyModal += 1

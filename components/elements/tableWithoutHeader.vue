@@ -5,7 +5,7 @@
                 <tbody>
                     <tr v-for="(item, index) in dataTable" :key="'dt'+index" class="tr-striped-even">
                         <td class="p-5">
-                            <div v-if="untuk === 'milestoneorganisasi'" class="mb-5 font-semibold">{{ $dayjs(item.tahun).format("DD MMMM YYYY") }}</div>
+                            <div v-if="untuk === 'milestoneorganisasi'" class="mb-5 font-semibold">{{ $dayjs(item.tanggal).format("DD MMMM YYYY") }}</div>
                             <div v-if="untuk === 'faseprogram'" class="mb-5 font-semibold" :class="item.isDone === true ? 'text-approved-accepted' : 'text-warna-dua'">{{ item.isDone === true ? 'Completed' : 'Incompleted' }}</div>
                             <div v-if="untuk === 'journeyprogram'" class="flex gap-6">
                                 <div class="bg-no-repeat bg-center bg-cover rounded-full shadow" style="height: 36px; width: 36px; background-color: rgb(248, 248, 248);" :style="'background-image: url('+basePath+item.imgThumbnailJourney+');'"></div>
@@ -36,7 +36,7 @@
                         <td class="p-5 align-top">
                             <div class="flex items-center justify-end gap-x-6">
                                 <button @click="editItem(item)" v-if="actions.button.edit.status" ><img class="" src="/icons/icon-edit.png" :alt="'icon-edit'"></button>
-                                <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
+                                <!-- <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button> -->
                             </div>
                         </td>
                     </tr>
@@ -101,7 +101,6 @@ export default {
         },
 
         editItem(item) {
-            console.log(item)
             this.modalAction = true
             this.modalTitle = 'Edit ' + this.title
             this.selectedModal = 'edit'

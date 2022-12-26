@@ -14,43 +14,43 @@
 
 
         <!-- TAB PUSAT -->
-        <div v-if="selectedTab === 'pusat'">
-            <div v-if="dataOrganisasi" class="bg-white rounded-lg shadow-md p-6 border border-gray-50 mb-10">
+        <div v-if="selectedTab === 'pusat' && dataHeadquarter">
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-50 mb-10">
                 <div class="flex items-center gap-x-6 mb-6">
                     <div class="">
-                        <img class="w-16 h-16 rounded-full" :src="basePath+dataOrganisasi.organisasi[0].imgLogoOrganisasi" alt="image description">
+                        <img class="w-16 h-16 rounded-full" :src="basePath+dataHeadquarter.imgLogoOrganisasi" alt="image description">
                     </div>
-                    <div class="font-semibold">{{dataOrganisasi.organisasi[0].namaOrganisasi}}</div>
+                    <div class="font-semibold">{{dataHeadquarter.namaOrganisasi}}</div>
                 </div>
                 <div class="grid grid-cols-4 gap-6">
                     <div class="col-span-2">
                         <div class="font-medium text-warna-lima mb-1">Lokasi</div>
-                        <div v-for="(i, index) in dataLokasi" :key="'lo'+index" class="text-warna-sembilan">{{i.jalan}}, {{i.kota}}, {{i.provinsi}}</div>
+                        <div v-for="(i, index) in dataHeadquarter.lokasiOrganisasi" :key="'lo'+index" class="text-warna-sembilan">{{i.jalan}}, {{i.kota}}, {{i.provinsi}}</div>
                     </div>
-                    <div v-if="dataTypeOrganisasi" class="col-span-2 text-sm">
+                    <div v-if="dataHeadquarter.typeOrganisasi" class="col-span-2 text-sm">
                         <div class="font-medium text-warna-lima mb-1">Tipe</div>
-                        <div v-for="(i, index) in dataTypeOrganisasi" :key="'to'+index" class="text-warna-sembilan inline-block mr-1">
-                            <span>{{i.nama[0]}}</span><span v-if="index+1 < dataTypeOrganisasi.length">, </span>
+                        <div v-for="(i, index) in dataHeadquarter.typeOrganisasi" :key="'to'+index" class="text-warna-sembilan inline-block mr-1">
+                            <span>{{i.nama[0]}}</span><span v-if="index+1 < dataHeadquarter.typeOrganisasi.length">, </span>
                         </div>
                     </div>
-                    <div v-if="dataTypeApproach" class="col-span-2 text-sm">
+                    <div v-if="dataHeadquarter.typeApproach" class="col-span-2 text-sm">
                         <div class="font-medium text-warna-lima mb-1">Pendekatan</div>
-                        <div v-for="(i, index) in dataTypeApproach" :key="'ta'+index" class="text-warna-sembilan inline-block mr-1">
-                            <span>{{i.nama[0]}}</span><span v-if="index+1 < dataTypeApproach.length">, </span>
+                        <div v-for="(i, index) in dataHeadquarter.typeApproach" :key="'ta'+index" class="text-warna-sembilan inline-block mr-1">
+                            <span>{{i.nama[0]}}</span><span v-if="index+1 < dataHeadquarter.typeApproach.length">, </span>
                         </div>
                     </div>
-                    <div v-if="dataTypeIssues" class="col-span-2 text-sm">
+                    <div v-if="dataHeadquarter.typeIssues" class="col-span-2 text-sm">
                         <div class="font-medium text-warna-lima mb-1">Topik</div>
-                        <div v-for="(i, index) in dataTypeIssues" :key="'ti'+index" class="text-warna-sembilan inline-block mr-1">
-                            <span>{{i.nama[0]}}</span><span v-if="index+1 < dataTypeIssues.length">, </span>
+                        <div v-for="(i, index) in dataHeadquarter.typeIssues" :key="'ti'+index" class="text-warna-sembilan inline-block mr-1">
+                            <span>{{i.nama[0]}}</span><span v-if="index+1 < dataHeadquarter.typeIssues.length">, </span>
                         </div>
                     </div>
                 </div>
+                <div class="flex justify-end mt-10">
+                    <div @click="btnKeluarDariPusat()" class="w-[165px] border border-warna-empat text-warna-empat text-center font-medium rounded-lg p-4 cursor-pointer hover:bg-blue-50 ">Keluar dari Pusat</div>
+                </div>
             </div>
-            <div class="flex justify-end">
-                <div @click="btnKeluarDariPusat" class="w-[165px] border border-warna-empat text-warna-empat text-center font-medium rounded-lg p-4 cursor-pointer hover:bg-blue-50 ">Keluar dari Pusat</div>
-            </div>
-            <!-- <pre>{{dataOrganisasi}}</pre> -->
+            
         </div>
 
 
@@ -89,8 +89,8 @@
                             </td>
                             <td>
                                 <div v-if="item.status === 1" class="flex items-center gap-x-6">
-                                    <div @click="btnTerimaUndangan" class="w-[99px] text-center bg-warna-empat hover:bg-blue-900 text-white rounded-lg py-2 cursor-pointer">Terima</div>
-                                    <div class="w-[99px] text-center bg-warna-rejected hover:bg-red-700 text-white rounded-lg py-2 cursor-pointer">Tolak</div>
+                                    <div @click="btnTerimaUndangan(item)" class="w-[99px] text-center bg-warna-empat hover:bg-blue-900 text-white rounded-lg py-2 cursor-pointer">Terima</div>
+                                    <div @click="btnTolakUndangan(item)" class="w-[99px] text-center bg-warna-rejected hover:bg-red-700 text-white rounded-lg py-2 cursor-pointer">Tolak</div>
                                 </div>
                                 <div v-else></div>
                             </td>
@@ -111,7 +111,7 @@
                 <div class="text-center text-[34px] mb-12">Apakah kamu yakin keluar sebagai cabang dari organisasi ini?</div>
                 <div class="flex items-center gap-x-6">
                     <div @click="btnBatalKeluar" class="w-full text-center bg-white border border-warna-empat hover:bg-blue-50 text-warna-empat rounded-lg py-3 cursor-pointer">Batal</div>
-                    <div class="w-full text-center bg-warna-rejected hover:bg-red-700 text-white rounded-lg py-3 cursor-pointer">Keluar</div>
+                    <div @click="btnYakinKeluar" class="w-full text-center bg-warna-rejected hover:bg-red-700 text-white rounded-lg py-3 cursor-pointer">Keluar</div>
                 </div>
             </div>
         </ElementsModal>
@@ -123,12 +123,12 @@
             :key="keyModalJoin+'bergabung'"
             :persistent="persistentJoin"
         >
-            <div class="p-6">
-                <div class="text-center text-warna-utama text-[34px] mb-6">Apakah kamu yakin bergabung sebagai cabang dari organisasi ini?</div>
+            <div v-if="calonHeadquarter" class="p-6">
+                <div class="text-center text-warna-utama text-[34px] mb-6">Apakah kamu yakin bergabung sebagai cabang dari organisasi {{calonHeadquarter.namaOrganisasi}}?</div>
                 <div class="text-center text-warna-dua mb-12">Dengan menjadi cabang dari suatu organisasi, Anda tidak dapat menjadi cabang dari organisasi lain.</div>
                 <div class="flex items-center gap-x-6">
                     <div @click="btnBatalBergabung" class="w-full text-center bg-white border border-warna-empat hover:bg-blue-50 text-warna-empat rounded-lg py-3 cursor-pointer">Batal</div>
-                    <div class="w-full text-center hover:bg-blue-900 bg-warna-empat text-white rounded-lg py-3 cursor-pointer">Bergabung</div>
+                    <div @click="btnYakinBergabung" class="w-full text-center hover:bg-blue-900 bg-warna-empat text-white rounded-lg py-3 cursor-pointer">Bergabung</div>
                 </div>
             </div>
         </ElementsModal>
@@ -160,6 +160,7 @@ export default {
 
             selectedTab: 'pusat',
             dataOrganisasi: null,
+            dataHeadquarter: undefined,
             dataLokasi: [],
             dataTypeOrganisasi: [],
             dataTypeApproach: [],
@@ -187,52 +188,19 @@ export default {
                     display: true
                 }
             ],
-            dataTableUndangan: [
-                {
-                    organisasiId: 49582336,
-                    namaOrganisasi: 'Peace Generation Indonesia',
-                    kota: 'Bandung',
-                    status: 1 // 1.Tertunda 2.Bergabung 3.Menolak
-                },
-                {
-                    organisasiId: 22556633,
-                    namaOrganisasi: 'Pecinta Alam',
-                    kota: 'Cirebon',
-                    status: 1
-                },
-                {
-                    organisasiId: 33322211,
-                    namaOrganisasi: 'Kaluvarga',
-                    kota: 'Jakarta',
-                    status: 1
-                },
-                {
-                    organisasiId: 49582336,
-                    namaOrganisasi: 'Peace Generation Indonesia',
-                    kota: 'Bandung',
-                    status: 1
-                },
-                {
-                    organisasiId: 22556633,
-                    namaOrganisasi: 'Pecinta Alam',
-                    kota: 'Cirebon',
-                    status: 1
-                },
-                {
-                    organisasiId: 49582336,
-                    namaOrganisasi: 'Peace Generation Indonesia',
-                    kota: 'Bandung',
-                    status: 1
-                }
-            ]
+            dataTableUndangan: [],
+            calonHeadquarter: undefined,
         }
     },
     computed: {
+        id() {
+            return this.$route.params.id;
+        }, 
         basePath() {
             return process.env.BASE_URL
         }
     },
-    mounted() {
+    created() {
         this.initialize()
     },
     methods: {
@@ -240,44 +208,61 @@ export default {
             this.masterPoint()
         },
 
-        masterPoint() {
-            this.dataOrganisasi = detailOrganisasi
-
-            this.dataLokasi = detailOrganisasi.organisasi[0].lokasiOrganisasi.map(e => {
-                const data = {
-                    id: e.pkLokasiOrganisasiId,
-                    provinsi: e.provinsi,
-                    kota: e.kota,
-                    jalan: e.jalan
-                }
-                return data
-            })
-
-            this.dataTypeOrganisasi = detailOrganisasi.organisasi[0].typeOrganisasi.map(e => {
-                const data = {
-                    id: e.id,
-                    nama: e.nama
-                }
-                return data
-            })
-
-            this.dataTypeApproach = detailOrganisasi.organisasi[0].typeApproach.map(e => {
-                const data = {
-                    id: e.id,
-                    nama: e.nama
-                }
-                return data
-            })
-
-            this.dataTypeIssues = detailOrganisasi.organisasi[0].typeIssues.map(e => {
-                const data = {
-                    id: e.id,
-                    nama: e.nama
-                }
-                return data
+        async masterPoint() {
+            this.dataHeadquarter = []
+            this.dataTableUndangan = []
+            await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
+                this.dataHeadquarter = _.map(res.data.headquarter.filter(e => e.confirmed == 2), "headquarter")[0]
+                this.dataTableUndangan =  _.map(res.data.headquarter.filter(e => e.typePengiriman == 0), function(o){
+                if (o){
+                    return {
+                    "organisasiId": o.headquarter.organisasiId,
+                    "namaOrganisasi": o.headquarter.namaOrganisasi,
+                    "kota": _.map(o.headquarter.lokasiOrganisasi, "kota").toString(),
+                    "status": o.confirmed
+                }}})
+            }).catch(err => {
+                console.log(err)
             })
         },
 
+        
+        async updateData(data) {           
+            await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
+                const data = res.data         
+                this.message = data.message
+                alert(this.message)
+                this.masterPoint()
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+ 
+        btnTerimaUndangan(data) {
+            if(!this.dataHeadquarter){
+                this.calonHeadquarter = data
+                this.modalActionJoin = true
+                this.keyModalJoin += 1
+            } else {
+                alert("organisasi hanya dapat memiliki 1 Pusat")
+            }
+        },
+        btnTolakUndangan(data) {
+            if (confirm('tolak undangan '+ data.namaOrganisasi+' ?')) {
+                this.updateData({"rejectHeadquarter":data.organisasiId})
+            }
+        },
+        btnYakinBergabung () {
+            this.modalActionJoin = false
+            this.keyModalJoin += 1
+            this.updateData({"acceptHeadquarter":this.calonHeadquarter.organisasiId})
+        },
+        
+        btnYakinKeluar() {
+            this.modalAction = false
+            this.keyModal += 1
+            this.updateData({"leaveHeadquarter":this.dataHeadquarter.organisasiId})
+        },
         btnTabPusat() {
             this.selectedTab = 'pusat'
         },
@@ -285,15 +270,9 @@ export default {
         btnTabUndangan() {
             this.selectedTab = 'undangan'
         },
-
         btnKeluarDariPusat() {
             this.modalAction = true
             this.keyModal += 1
-        },
-
-        btnTerimaUndangan() {
-            this.modalActionJoin = true
-            this.keyModalJoin += 1
         },
 
         btnBatalKeluar() {

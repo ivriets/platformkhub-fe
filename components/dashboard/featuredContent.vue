@@ -33,7 +33,7 @@
                         <div class="text-warna-empat font-medium">Edit Program List</div>
                     </div>
                     <div v-else class="flex items-center gap-x-6">
-                        <div class="flex items-center gap-x-1 py-2 px-3 border border-warna-empat rounded-lg cursor-pointer">
+                        <div @click="btnAddProgram" class="flex items-center gap-x-1 py-2 px-3 border border-warna-empat rounded-lg cursor-pointer">
                             <img class="w-4 h-4" src="/icons/icon-plus.png" alt="icon-add">
                             <div class="text-warna-empat font-medium">Add Program List</div>
                         </div>
@@ -65,7 +65,7 @@
                         <div class="text-warna-empat font-medium">Edit Event List</div>
                     </div>
                     <div v-else class="flex items-center gap-x-6">
-                        <div class="flex items-center gap-x-1 py-2 px-3 border border-warna-empat rounded-lg cursor-pointer">
+                        <div @click="btnAddEvent" class="flex items-center gap-x-1 py-2 px-3 border border-warna-empat rounded-lg cursor-pointer">
                             <img class="w-4 h-4" src="/icons/icon-plus.png" alt="icon-add">
                             <div class="text-warna-empat font-medium">Add Event List</div>
                         </div>
@@ -97,7 +97,7 @@
                         <div class="text-warna-empat font-medium">Edit Resource List</div>
                     </div>
                     <div v-else class="flex items-center gap-x-6">
-                        <div class="flex items-center gap-x-1 py-2 px-3 border border-warna-empat rounded-lg cursor-pointer">
+                        <div @click="btnAddResource" class="flex items-center gap-x-1 py-2 px-3 border border-warna-empat rounded-lg cursor-pointer">
                             <img class="w-4 h-4" src="/icons/icon-plus.png" alt="icon-add">
                             <div class="text-warna-empat font-medium">Add Resource List</div>
                         </div>
@@ -129,7 +129,7 @@
                         <div class="text-warna-empat font-medium">Edit Blog List</div>
                     </div>
                     <div v-else class="flex items-center gap-x-6">
-                        <div class="flex items-center gap-x-1 py-2 px-3 border border-warna-empat rounded-lg cursor-pointer">
+                        <div @click="btnAddBlog" class="flex items-center gap-x-1 py-2 px-3 border border-warna-empat rounded-lg cursor-pointer">
                             <img class="w-4 h-4" src="/icons/icon-plus.png" alt="icon-add">
                             <div class="text-warna-empat font-medium">Add Blog List</div>
                         </div>
@@ -220,17 +220,213 @@
                 </div>
             </div>
         </ElementsModal>
+
+
+        <!-- MODAL ADD -->
+        <ElementsModal 
+            v-model="modalAddProgram"
+            :title="modalTitleAddProgram"
+            :width="modalWidthAddProgram"
+            :key="keyModalAddProgram+'program'"
+            :persistent="persistentAddProgram"
+        >
+            <div class="p-6">
+                <div class="mb-5">
+                    <div class="mb-5">
+                        <div class="font-semibold text-warna-utama mb-1">Search Title</div>
+                        <div class="w-full">
+                            <ElementsSearchBar 
+                                v-model="filter.searchProgram"
+                                placeholder="Write here"
+                                :name="'searchtext'"
+                            />
+                        </div>
+                    </div>
+                    <div v-if="featuredProgram" class="border border-[#C2C2C2] rounded-lg bg-white p-3 mb-5">
+                        <div class="text-xl text-warna-utama text-center font-bold mb-3">Latest</div>
+                        <div v-for="(item, index) in featuredProgram" :key="'addblog' + index">
+                            <div class="flex justify-between text-sm ">
+                                <div class="flex-auto text-warna-utama line-clamp-2">{{item.judulActivity[bahasa]}}</div>
+                                <button  @click="pilihProgram(item)" class="flex-none text-warna-empat font-semibold">+ Add</button>
+                            </div>
+                            <hr class="border-warna-tujuh my-3">
+                        </div>
+                    </div>
+                    <div v-if="addedProgram.length > 0" class="">
+                        <div class="text-warna-utama font-semibold mb-5">Added Content</div>
+                        <div v-for="(item, index) in addedProgram" :key="'added'+index" class="flex mb-4">
+                            <div class="text-sm mr-1">{{item.judulActivity[bahasa]}}</div>
+                            <button @click="removeAddedProgram(item)"><img src="/icons/ic-cancel-dark.png" alt="cancel"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-warna-delapan">You can add {{addedProgram.length}} Content</div>
+                    <div class="text-center hover:bg-blue-900 bg-warna-empat text-white rounded-lg py-3 px-10 cursor-pointer">Add</div>               
+                </div>
+                <!-- <pre>{{addedBlog}}</pre> -->
+            </div>
+        </ElementsModal>
+
+        <ElementsModal 
+            v-model="modalAddEvent"
+            :title="modalTitleAddEvent"
+            :width="modalWidthAddEvent"
+            :key="keyModalAddEvent+'event'"
+            :persistent="persistentAddEvent"
+        >
+            <div class="p-6">
+                <div class="mb-5">
+                    <div class="mb-5">
+                        <div class="font-semibold text-warna-utama mb-1">Search Title</div>
+                        <div class="w-full">
+                            <ElementsSearchBar 
+                                v-model="filter.searchEvent"
+                                placeholder="Write here"
+                                :name="'searchtext'"
+                            />
+                        </div>
+                    </div>
+                    <div v-if="featuredEvent" class="border border-[#C2C2C2] rounded-lg bg-white p-3 mb-5">
+                        <div class="text-xl text-warna-utama text-center font-bold mb-3">Latest</div>
+                        <div v-for="(item, index) in featuredEvent" :key="'addblog' + index">
+                            <div class="flex justify-between text-sm ">
+                                <div class="flex-auto text-warna-utama line-clamp-2">{{item.judulActivity[bahasa]}}</div>
+                                <button  @click="pilihEvent(item)" class="flex-none text-warna-empat font-semibold">+ Add</button>
+                            </div>
+                            <hr class="border-warna-tujuh my-3">
+                        </div>
+                    </div>
+                    <div v-if="addedEvent.length > 0" class="">
+                        <div class="text-warna-utama font-semibold mb-5">Added Content</div>
+                        <div v-for="(item, index) in addedEvent" :key="'added'+index" class="flex mb-4">
+                            <div class="text-sm mr-1">{{item.judulActivity[bahasa]}}</div>
+                            <button @click="removeAddedEvent(item)"><img src="/icons/ic-cancel-dark.png" alt="cancel"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-warna-delapan">You can add {{addedEvent.length}} Content</div>
+                    <div class="text-center hover:bg-blue-900 bg-warna-empat text-white rounded-lg py-3 px-10 cursor-pointer">Add</div>               
+                </div>
+                <!-- <pre>{{addedBlog}}</pre> -->
+            </div>
+        </ElementsModal>
+
+        <ElementsModal 
+            v-model="modalAddResource"
+            :title="modalTitleAddResource"
+            :width="modalWidthAddResource"
+            :key="keyModalAddResource+'resource'"
+            :persistent="persistentAddResource"
+        >
+            <div class="p-6">
+                <div class="mb-5">
+                    <div class="mb-5">
+                        <div class="font-semibold text-warna-utama mb-1">Search Title</div>
+                        <div class="w-full">
+                            <ElementsSearchBar 
+                                v-model="filter.searchResource"
+                                placeholder="Write here"
+                                :name="'searchtext'"
+                            />
+                        </div>
+                    </div>
+                    <div v-if="featuredResource" class="border border-[#C2C2C2] rounded-lg bg-white p-3 mb-5">
+                        <div class="text-xl text-warna-utama text-center font-bold mb-3">Latest</div>
+                        <div v-for="(item, index) in featuredResource" :key="'addblog' + index">
+                            <div class="flex justify-between text-sm ">
+                                <div class="flex-auto text-warna-utama line-clamp-2">{{item.judulArtikel[bahasa]}}</div>
+                                <button  @click="pilihResource(item)" class="flex-none text-warna-empat font-semibold">+ Add</button>
+                            </div>
+                            <hr class="border-warna-tujuh my-3">
+                        </div>
+                    </div>
+                    <div v-if="addedResource.length > 0" class="">
+                        <div class="text-warna-utama font-semibold mb-5">Added Content</div>
+                        <div v-for="(item, index) in addedResource" :key="'added'+index" class="flex mb-4">
+                            <div class="text-sm mr-1">{{item.judulArtikel[bahasa]}}</div>
+                            <button @click="removeAddedResource(item)"><img src="/icons/ic-cancel-dark.png" alt="cancel"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-warna-delapan">You can add {{addedResource.length}} Content</div>
+                    <div class="text-center hover:bg-blue-900 bg-warna-empat text-white rounded-lg py-3 px-10 cursor-pointer">Add</div>               
+                </div>
+                <!-- <pre>{{addedBlog}}</pre> -->
+            </div>
+        </ElementsModal>
+
+        <ElementsModal 
+            v-model="modalAddBlog"
+            :title="modalTitleAddBlog"
+            :width="modalWidthAddBlog"
+            :key="keyModalAddBlog+'blog'"
+            :persistent="persistentAddBlog"
+        >
+            <div class="p-6">
+                <div class="mb-5">
+                    <div class="mb-5">
+                        <div class="font-semibold text-warna-utama mb-1">Search Title</div>
+                        <div class="w-full">
+                            <ElementsSearchBar 
+                                v-model="filter.searchBlog"
+                                placeholder="Write here"
+                                :name="'searchtext'"
+                            />
+                        </div>
+                    </div>
+                    <div v-if="featuredBlog" class="border border-[#C2C2C2] rounded-lg bg-white p-3 mb-5">
+                        <div class="text-xl text-warna-utama text-center font-bold mb-3">Latest</div>
+                        <div v-for="(item, index) in featuredBlog" :key="'addblog' + index">
+                            <div class="flex justify-between text-sm ">
+                                <div class="flex-auto text-warna-utama line-clamp-2">{{item.judulArtikel[bahasa]}}</div>
+                                <button  @click="pilihBlog(item)" class="flex-none text-warna-empat font-semibold">+ Add</button>
+                            </div>
+                            <hr class="border-warna-tujuh my-3">
+                        </div>
+                    </div>
+                    <div v-if="addedBlog.length > 0" class="">
+                        <div class="text-warna-utama font-semibold mb-5">Added Content</div>
+                        <div v-for="(item, index) in addedBlog" :key="'added'+index" class="flex mb-4">
+                            <div class="text-sm mr-1">{{item.judulArtikel[bahasa]}}</div>
+                            <button @click="removeAddedBlog(item)"><img src="/icons/ic-cancel-dark.png" alt="cancel"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-warna-delapan">You can add {{addedBlog.length}} Content</div>
+                    <div class="text-center hover:bg-blue-900 bg-warna-empat text-white rounded-lg py-3 px-10 cursor-pointer">Add</div>               
+                </div>
+                <!-- <pre>{{addedBlog}}</pre> -->
+            </div>
+        </ElementsModal>
+
     </div>
 </template>
 
 
 <script>
-import featuredContent from '~/static/data/featuredcontent.json';
+// import featuredContent from '~/static/data/featuredcontent.json';
 
 export default {
     data() {
         return {
             selectedTab: 'program',
+
+            filter: {
+                searchProgram: '',
+                searchEvent: '',
+                searchResource: '',
+                searchBlog: '',
+            },
+
+            addedProgram: [],
+            addedEvent: [],
+            addedResource: [],
+            addedBlog: [],
+
             featuredProgram: [],
             featuredEvent: [],
             featuredResource: [],
@@ -271,9 +467,48 @@ export default {
             keyModalEmptyBlog: 0,
             persistentEmptyBlog: true,
             // ========== //
+
+
+            // KEPERLUAN MODAL ADD PROGRAM //
+            modalAddProgram: false,
+            modalTitleAddProgram: 'Add Blog',
+            modalWidthAddProgram: '',
+            keyModalAddProgram: 0,
+            persistentAddProgram: true,
+            // ========== //
+
+            // KEPERLUAN MODAL ADD EVENT //
+            modalAddEvent: false,
+            modalTitleAddEvent: 'Add Blog',
+            modalWidthAddEvent: '',
+            keyModalAddEvent: 1,
+            persistentAddEvent: true,
+            // ========== //
+
+            // KEPERLUAN MODAL ADD RESOURCE //
+            modalAddResource: false,
+            modalTitleAddResource: 'Add Blog',
+            modalWidthAddResource: '',
+            keyModalAddResource: 1,
+            persistentAddResource: true,
+            // ========== //
+
+            // KEPERLUAN MODAL ADD BLOG //
+            modalAddBlog: false,
+            modalTitleAddBlog: 'Add Blog',
+            modalWidthAddBlog: '',
+            keyModalAddBlog: 1,
+            persistentAddBlog: true,
+            // ========== //
         }
     },
     computed: {
+        lang() {
+            return this.$i18n.locale
+        },
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
+        },
         basePath() {
             return process.env.BASE_URL
         }
@@ -286,13 +521,38 @@ export default {
             this.masterPoint()
         },
 
-        masterPoint() {
-            this.featuredProgram = featuredContent.featuredProgram
-            this.featuredEvent = featuredContent.featuredEvent
-            this.featuredResource = featuredContent.featuredResource
-            this.featuredBlog = featuredContent.featuredBlog
+        async masterPoint() {
+            this.dataTable = []
+            await this.$apiBase.get('featuredcontent//').then(res => {
+                var featuredContent = res.data
+                this.featuredProgram = featuredContent.featuredProgram
+                this.featuredEvent = featuredContent.featuredEvent
+                this.featuredResource = featuredContent.featuredResource
+                this.featuredBlog = featuredContent.featuredBlog
+            }).catch(err => {
+                console.log(err)
+            })
         },
 
+        async updateData(data) {           
+            await this.$apiBase.put('featuredcontent/', data).then(res => {
+                const data = res.data         
+                this.message = data.message
+                alert("Data berhasil disimpan.")
+                this.masterPoint()
+            }).catch(err => {
+                console.log(err)
+            })
+        }, 
+        updateFeatureContent () {
+            var dataUpdate = {
+                featuredProgram: this.featuredProgram,
+                featuredEvent: this.featuredEvent,
+                featuredResource: this.featuredResource,
+                featuredBlog: this.featuredBlog
+            }
+            this.updateData(dataUpdate)
+        },
         btnTabProgram() {
             this.selectedTab = 'program'
         },
@@ -343,6 +603,83 @@ export default {
 
         btnCancelEditBlog() {
             this.toggleEditBlog = false
+        },
+
+
+        // ADD PROGRAM //
+        btnAddProgram() {
+            this.modalAddProgram = true
+            this.keyModalAddProgram += 1
+        },
+
+        pilihProgram(item) {
+            this.addedProgram.push(item)
+        },
+
+        removeAddedProgram(value){
+            // console.log(value)
+            const posisi = this.addedProgram.indexOf(value)
+            this.addedProgram.splice(posisi, 1)
+            // this.$nextTick(() => {
+            //     this.updateValue();
+            // })
+        },
+
+        // ADD EVENT //
+        btnAddEvent() {
+            this.modalAddEvent = true
+            this.keyModalAddEvent += 1
+        },
+
+        pilihEvent(item) {
+            this.addedEvent.push(item)
+        },
+
+        removeAddedEvent(value){
+            // console.log(value)
+            const posisi = this.addedEvent.indexOf(value)
+            this.addedEvent.splice(posisi, 1)
+            // this.$nextTick(() => {
+            //     this.updateValue();
+            // })
+        },
+
+        // ADD RESOURCE //
+        btnAddResource() {
+            this.modalAddResource = true
+            this.keyModalAddResource += 1
+        },
+
+        pilihResource(item) {
+            this.addedResource.push(item)
+        },
+
+        removeAddedResource(value){
+            // console.log(value)
+            const posisi = this.addedResource.indexOf(value)
+            this.addedResource.splice(posisi, 1)
+            // this.$nextTick(() => {
+            //     this.updateValue();
+            // })
+        },
+
+        // ADD BLOG //
+        btnAddBlog() {
+            this.modalAddBlog = true
+            this.keyModalAddBlog += 1
+        },
+
+        pilihBlog(item) {
+            this.addedBlog.push(item)
+        },
+
+        removeAddedBlog(value){
+            // console.log(value)
+            const posisi = this.addedBlog.indexOf(value)
+            this.addedBlog.splice(posisi, 1)
+            // this.$nextTick(() => {
+            //     this.updateValue();
+            // })
         },
 
 

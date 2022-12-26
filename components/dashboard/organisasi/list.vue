@@ -208,7 +208,6 @@ export default {
         },
 
         keyUp(event) {
-            // console.log(event)
             if (event.key === 'enter') {
                 this.masterPoint()
             }
@@ -222,7 +221,7 @@ export default {
 
         async masterPoint() {
             const item = this.selectedKapsul
-
+            console.log(item)
             this.loaderPage = false
             this.startIndex = (this.currentPage - 1) * this.limit
 
@@ -254,46 +253,44 @@ export default {
             this.loaderLog = false
 
             await this.$apiPlatform.get('verificator/logOrganisasi/').then(res => {
-                console.log(res.data)
 
                 const data = res.data
-                this.kapsul = 
                 this.kapsul = [
                     {
                         id: 'all',
                         label: 'All',
                         length: data.totalOrganisasi,
-                        endpoint: 'organisasi'
+                        endpoint: 'katalogOrganisasi'
                     },
                     {
                         id: 'needverification',
                         label: 'Need Verification',
                         length: data.totalPendingOrganisasi,
-                        endpoint: 'pending_organizations'
+                        endpoint: 'pendingOrganisasi'
                     },
                     {
                         id: 'accepted',
                         label: 'Accepted',
                         length: data.totalVerifiedOrganisasi,
-                        endpoint: 'verified_organizations'
+                        endpoint: 'verifiedOrganisasi'
                     },
                     {
                         id: 'suspended',
                         label: 'Suspended',
                         length: data.totalSuspendedOrganisasi,
-                        endpoint: 'suspended_organizations'
+                        endpoint: 'suspendedOrganisasi'
                     },
                     {
                         id: 'rejected',
                         label: 'Rejected',
                         length: data.totalRejectedOrganisasi,
-                        endpoint: 'rejected_organizations'
+                        endpoint: 'rejectedOrganisasi'
                     },
                     {
                         id: 'deleted',
                         label: 'Deleted',
                         length: data.totalDeletedOrganisasi,
-                        endpoint: 'deleted_organizations'
+                        endpoint: 'deletedOrganisasi'
                     }
                 ]
 

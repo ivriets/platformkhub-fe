@@ -39,7 +39,7 @@ export default {
     },
     methods: {
         initialize() {
-            // console.log(this.value)
+            console.log(this.value)
             if (this.value) {
                 this.tanggal = this.$dayjs(this.value).format('YYYY-MM-DD');
 

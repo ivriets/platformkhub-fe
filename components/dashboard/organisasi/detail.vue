@@ -54,7 +54,7 @@
                     <hr class="border-warna-tujuh mt-6 mb-5">
                     <div class="">
                         <div class="mb-5 text-sm text-warna-delapan font-semibold">Location</div>
-                        <div class="text-sm text-warna-sembilan font-semibold">{{ dataDetail.organisasi.lokasiOrganisasi[0].jalan }}, {{ dataDetail.organisasi.lokasiOrganisasi[0].kota }}, {{ dataDetail.organisasi.lokasiOrganisasi[0].provinsi }}</div>
+                        <div v-for="(lokasi, index) in dataDetail.organisasi.lokasiOrganisasi" :key="index" class="text-sm text-warna-sembilan font-semibold">{{ lokasi.jalan }}, {{ lokasi.kota }}, {{ lokasi.provinsi }}, </div>
                     </div>
                     <hr class="border-warna-tujuh mt-6 mb-5">
                     <ElementsListFotoNama 
@@ -167,6 +167,7 @@
                         <div class="text-sm text-warna-delapan font-semibold mb-[30px]">Milestone</div>
                         <!-- <div class="text-sm text-warna-sembilan font-semibold text-center">On Going.xx..</div> -->
                         <DashboardOrganisasiMilestone 
+                            v-if="dataDetail.organisasi.milestoneOrganisasi && dataDetail.organisasi.milestoneOrganisasi.length > 0"
                             :dataMilestone="dataDetail.organisasi.milestoneOrganisasi"
                         />
                         <!-- <pre>{{ dataDetail }}</pre> -->
@@ -405,7 +406,7 @@ export default {
                 statusVerification: 3
             }
 
-            await this.$apiPlatform.post('verificator/organisasi/', data).then(res => {
+            await this.$apiPlatform.post('verificator/verificationProcess/', data).then(res => {
                 console.log('Accept Verification Organization')
                 this.btnBack()
             }).catch(err => {
@@ -421,7 +422,7 @@ export default {
                 alasanRejectOrSuspend: this.form.alasanRejectOrSuspend
             }
 
-            await this.$apiPlatform.post('verificator/organisasi/', data).then(res => {
+            await this.$apiPlatform.post('verificator/verificationProcess/', data).then(res => {
                 console.log('Reject Verification Organization')
                 this.btnBack()
             }).catch(err => {

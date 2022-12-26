@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="list">
         <div class="flex items-center justify-between mb-4">
             <div class="w-[240px]">
                 <div>
@@ -13,10 +13,12 @@
                     </div>
                 </div>
             </div>
-            <div class="px-3 py-[6px] bg-warna-empat rounded-lg text-white flex items-center cursor-pointer">
-                <img src="/icons/icon-button-download.png" alt="icon-download">
-                <div class="ml-1">New Loker</div>
-            </div>
+            <a href="/career/open-recruitment/new/">
+                <button class="px-3 py-[6px] bg-warna-empat rounded-lg text-white flex items-center cursor-pointer">
+                    <img src="/icons/icon-button-download.png" alt="icon-download">
+                    <div class="ml-1">New Loker</div>
+                </button>
+            </a>
         </div>
         <div>
             <div class="flex items-center justify-end border border-[#A1A2B7] rounded-lg bg-white mb-5">
@@ -43,232 +45,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="hover:bg-gray-50">
+                                <tr v-for="(i, index) in list" :key="index" class="hover:bg-gray-50">
                                     <td scope="row" class="p-5">
                                         <div class="cursor-pointer hover:text-blue-700">
                                             <div>
-                                                <div>We are looking do IT Geek, is that you?</div>
+                                                <div>{{i.judul}}</div>
                                             </div>
                                         </div>
                                     </td>
                                      <td scope="row" class="p-5">
                                         <div class="cursor-pointer">
                                             <div>
-                                                <div>IT Support</div>
+                                                <div>{{i.kategori}}</div>
                                             </div>
                                         </div>
                                     </td>
                                      <td scope="row" class="p-5">
                                         <div>
                                             <div class="flex items-center justify-end gap-x-6">
-                                                <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer hover:text-blue-700">
-                                            <div>
-                                                <div>We are looking do IT Geek, is that you?</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                     <td scope="row" class="p-5">
-                                        <div class="cursor-pointer">
-                                            <div>
-                                                <div>IT Support</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                     <td scope="row" class="p-5">
-                                        <div>
-                                            <div class="flex items-center justify-end gap-x-6">
-                                                <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer hover:text-blue-700">
-                                            <div>
-                                                <div>We are looking do IT Geek, is that you?</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                     <td scope="row" class="p-5">
-                                        <div class="cursor-pointer">
-                                            <div>
-                                                <div>IT Support</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                     <td scope="row" class="p-5">
-                                        <div>
-                                            <div class="flex items-center justify-end gap-x-6">
-                                                <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer hover:text-blue-700">
-                                            <div>
-                                                <div>We are looking do IT Geek, is that you?</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                     <td scope="row" class="p-5">
-                                        <div class="cursor-pointer">
-                                            <div>
-                                                <div>IT Support</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                     <td scope="row" class="p-5">
-                                        <div>
-                                            <div class="flex items-center justify-end gap-x-6">
-                                                <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer hover:text-blue-700">
-                                            <div>
-                                                <div>We are looking do IT Geek, is that you?</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                     <td scope="row" class="p-5">
-                                        <div class="cursor-pointer">
-                                            <div>
-                                                <div>IT Support</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                     <td scope="row" class="p-5">
-                                        <div>
-                                            <div class="flex items-center justify-end gap-x-6">
-                                                <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer hover:text-blue-700">
-                                            <div>
-                                                <div>We are looking do IT Geek, is that you?</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                     <td scope="row" class="p-5">
-                                        <div class="cursor-pointer">
-                                            <div>
-                                                <div>IT Support</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                     <td scope="row" class="p-5">
-                                        <div>
-                                            <div class="flex items-center justify-end gap-x-6">
-                                                <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer hover:text-blue-700">
-                                            <div>
-                                                <div>We are looking do IT Geek, is that you?</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer">
-                                            <div>
-                                                <div>IT Support</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td scope="row" class="p-5">
-                                        <div>
-                                            <div class="flex items-center justify-end gap-x-6">
-                                                <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer hover:text-blue-700">
-                                            <div>
-                                                <div>We are looking do IT Geek, is that you?</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer">
-                                            <div>
-                                                <div>IT Support</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td scope="row" class="p-5">
-                                        <div>
-                                            <div class="flex items-center justify-end gap-x-6">
-                                                <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer hover:text-blue-700">
-                                            <div>
-                                                <div>We are looking do IT Geek, is that you?</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer">
-                                            <div>
-                                                <div>IT Support</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td scope="row" class="p-5">
-                                        <div>
-                                            <div class="flex items-center justify-end gap-x-6">
-                                                <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer hover:text-blue-700">
-                                            <div>
-                                                <div>We are looking do IT Geek, is that you?</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td scope="row" class="p-5">
-                                        <div class="cursor-pointer">
-                                            <div>
-                                                <div>IT Support</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td scope="row" class="p-5">
-                                        <div>
-                                            <div class="flex items-center justify-end gap-x-6">
-                                                <button><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
+                                                <button @click="deleteRecruitment(i.pkDaftarLoker)"><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
                                             </div>
                                         </div>
                                     </td>
@@ -278,40 +73,55 @@
                     </div>
                 </div>
             </div>
-            <div class="pagination-area text-center mt-6">
-                <nav aria-label="Page navigation">
-                    <ul class="inline-flex items-center overflow-hidden">
-                        <li class="mr-3">
-                            <button class="h-8 w-9 flex items-center justify-center bg-white hover:bg-gray-100 disabled:text-gray-200 disabled:hover:bg-gray-50 border border-warna-lima rounded">
-                                <i class="ri-arrow-left-s-line"></i>
-                            </button>
-                        </li>
-                        <li class="mr-3">
-                            <button class="h-8 px-3 text-sm flex items-center justify-center bg-warna-empat text-white border border-warna-lima rounded"> 1 </button>
-                        </li>
-                        <li class="mr-3">
-                            <button class="h-8 px-3 text-sm flex items-center justify-center bg-white text-warna-empat hover:bg-warna-empat/30 border border-warna-lima rounded"> 2 </button>
-                        </li>
-                        <li class="mr-3">
-                            <button class="h-8 px-3 text-sm flex items-center justify-center bg-white text-warna-empat hover:bg-warna-empat/30 border border-warna-lima rounded"> 3 </button>
-                        </li>
-                        <li class="mr-3">
-                            <button class="h-8 px-3 text-sm flex items-center justify-center bg-white text-warna-empat border border-warna-lima rounded"> ... </button>
-                        </li>
-                        <li class="mr-3">
-                            <button class="h-8 px-3 text-sm flex items-center justify-center bg-white text-warna-empat border border-warna-lima rounded"> 5 </button>
-                        </li>
-                        <li class="mr-3">
-                            <button class="h-8 px-3 text-sm flex items-center justify-center bg-white text-warna-empat border border-warna-lima rounded"> 6 </button>
-                        </li>
-                        <li class="overflow-hidden">
-                            <button class="text-sm h-8 w-9 flex items-center justify-center bg-white hover:bg-gray-100 disabled:text-gray-200 disabled:hover:bg-gray-50 border border-warna-lima rounded">
-                                <i class="ri-arrow-right-s-line">
-                                </i>
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
         </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            list: undefined,
+
+        }
+    },
+    computed: {
+        id() {
+            return this.$route.params.id;
+        }, 
+        basePath() {
+            return process.env.BASE_URL
+        }
+    },
+    mounted() {
+        this.initialize()
+    },
+    methods: {
+        initialize() {
+            this.masterPoint()
+        },
+
+        async masterPoint() {
+            await this.$apiBase.get('daftarloker/').then(res => {
+                this.list = res.data.results
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+
+        async deleteData(id) {           
+            await this.$apiBase.delete('sliderloker/'+id).then(res => {
+                data = res.data
+                this.message = data.message
+                alert("Data berhasil disimpan.")
+                this.masterPoint()
+            }).catch(err => {
+                console.log(err)
+            })
+        }, 
+        
+        deleteRecruitment(id) {
+            this.deleteData(id)
+        }
+    },
+}
+</script>

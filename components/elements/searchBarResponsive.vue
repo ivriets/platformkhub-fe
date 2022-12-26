@@ -17,7 +17,7 @@
 
 <script>
 export default {
-    props: ['value','placeholder','gaya'],
+    props: ['value','placeholder','gaya', 'list'],
     data() {
         return {
             defVal: ''
@@ -30,7 +30,19 @@ export default {
     },
     methods: {
         performSearch() {
-            this.updateValue(this.defVal)
+            if (this.list){
+                if (this.list.length > 0){
+                    var nama = this.list.filter(e => {return e.toLowerCase().includes(this.defVal.toLowerCase())})[0]
+                    if (nama){
+                        this.defVal = nama.toString()
+                    } 
+                    this.updateValue(this.defVal)
+                } else {
+                    this.updateValue(this.defVal)
+                }
+            } else {
+                this.updateValue(this.defVal)
+            }
         },
         clearSearch() {
             this.defVal = '';
@@ -39,17 +51,6 @@ export default {
         updateValue(val) {
             this.$emit('input', val)
         },
-        // keyup(event) {
-        //     // console.log('key',event)
-        //     if (event.key==='ArrowDown') {
-        //         const data = {
-        //             key: event.key,
-        //             value: ''
-        //         }
-
-        //         this.$emit('keyup',data)
-        //     }
-        // },
     }
 }
 </script>

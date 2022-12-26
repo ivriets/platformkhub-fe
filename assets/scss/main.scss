@@ -393,3 +393,273 @@ body {
         display:block;
     }
 }
+
+
+.milestone-graph {
+    position: relative;
+    .milestone-area {
+        .milestone-item:has(:not(.mi-null)) {
+            text-align: center;
+            padding: 20px 10px;
+            position: relative;
+            border-bottom: 4px solid #A1A2B7;
+            h3 {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 29px;
+                color: #616161;
+            }
+            p {
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+                color: #616161;
+            }
+        
+            .mi-inside:not(.mi-null)  {
+                padding-top: 15px ;
+                &::after {
+                    content: '';
+                    height: 15px;
+                    width: 15px;
+                    border-radius: 100%;
+                    background: #222659;
+                    display:block;
+                    margin: 10px auto -10px;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    z-index: 5;
+                }
+            }
+
+        }
+        // .milestone-item.last-milestone-item.first-milestone-item {
+        //     border-bottom: none !important;
+        //     &::before {
+        //         content: '';
+        //         background: #FFFFFF !important;
+        //         height: 5px;
+        //         // border-bottom: 5px solid green !important;
+        //         width: 100%;
+        //         display:block;
+        //         position: absolute;
+        //         bottom:0;
+        //         left:0;
+        //         margin-bottom: -5px;
+        //         z-index: 3;
+        //     }
+
+        // }
+
+
+    }
+    .milestone-area:has(.last-milestone-item.first-milestone-item) {
+        // background: red;
+        &::before {
+            content: '';
+            background: #FFFFFF !important;
+            height: 5px;
+            // border-bottom: 5px solid green !important;
+            width: 100%;
+            display:block;
+            position: absolute;
+            bottom:0;
+            left:0;
+            right:0;
+            margin-bottom: 0px;
+            z-index:4;
+        }
+
+    }
+
+
+    .milestone-area:nth-child(odd) {
+        .milestone-item.mi-satu {
+            border-left: 4px solid  #A1A2B7;
+            &::after {
+                content: '';
+                background: url('/images/curve-bl.svg') no-repeat left top /contain #ffffff;
+                height: 30px;
+                width: 30px;
+                display: block;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                margin-bottom:-4px;
+                margin-left: -4px;
+                z-index: 2;
+            }
+        }
+        .milestone-item.mi-tiga {
+            &::after {
+                content: '';
+                background: url('/images/curve-tr.svg') no-repeat right bottom /contain #ffffff;
+                height: 30px;
+                width: 30px;
+                display: block;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                margin-bottom: -30px;
+                z-index: 2;
+            }
+        }
+    }
+    .milestone-area:nth-child(even) {
+        .milestone-item.mi-satu {
+            &::after {
+                content: '';
+                background: url('/images/curve-tl.svg') no-repeat left top /contain #ffffff;
+                height: 30px;
+                width: 30px;
+                display: block;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                margin-bottom:-30px;
+                margin-left: 0px;
+                z-index: 2;
+            }
+        }
+        .milestone-item.mi-tiga {
+            border-right: 4px solid #A1A2B7;
+
+            &::after {
+                content: '';
+                background: url('/images/curve-br.svg') no-repeat right top /contain #ffffff;
+                height: 30px;
+                width: 30px;
+                display: block;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                margin-bottom:-4px;
+                margin-right: -4px;
+                z-index: 2;
+            }
+        }
+
+    }
+    .milestone-area:nth-child(1) {
+        .milestone-item:nth-child(1) {
+            border-left: none !important;
+            &::before {
+                content: '';
+                background: #FFFFFF !important;
+                height: 5px;
+                // border-bottom: 5px solid green !important;
+                width: 50%;
+                display:block;
+                position: absolute;
+                bottom:0;
+                left:0;
+                margin-bottom: -5px;
+            }
+            &::after{
+                background: transparent !important;
+            }
+
+        }
+    }
+    .milestone-area.ma-akhir {
+        .milestone-item.last-milestone-item:not(.flex-row-reverse)  {
+            &::before {
+                content: '';
+                background: #FFFFFF !important;
+                height: 5px;
+                // border-bottom: 5px solid green !important;
+                width: 50%;
+                display:block;
+                position: absolute;
+                bottom:0;
+                right:0;
+                margin-bottom: -5px;
+                z-index: 3;
+            }
+        }
+        .milestone-item.last-milestone-item.mi-tiga {
+            &::after {
+                background: none;
+            }
+        }
+
+    }
+    .milestone-area.ma-akhir.flex-row-reverse {
+        .milestone-item.last-milestone-item.mi-tiga {
+            &::before {
+                content: '';
+                background: #FFFFFF !important;
+                height: 5px;
+                // border-bottom: 5px solid green !important;
+                width: 50%;
+                display:block;
+                position: absolute;
+                bottom:0;
+                left:0;
+                margin-bottom: -5px;
+                z-index: 3;
+            }
+            &::after {
+                content: '';
+                background: url('/images/curve-br.svg') no-repeat right top /contain #ffffff;
+                height: 30px;
+                width: 30px;
+                display: block;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                margin-bottom:-4px;
+                margin-right: -4px;
+                z-index: 2;
+            }
+
+        }
+        .milestone-item.last-milestone-item.mi-satu {
+            &::after {
+                background: none;
+            }
+            &::before {
+                content: '';
+                background: #FFFFFF !important;
+                height: 5px;
+                // border-bottom: 5px solid green !important;
+                width: 50%;
+                display:block;
+                position: absolute;
+                bottom:0;
+                left:0;
+                margin-bottom: -5px;
+                z-index: 3;
+            }
+        }
+
+        .milestone-item.last-milestone-item.mi-dua {
+            &::after {
+                background: none;
+            }
+            &::before {
+                content: '';
+                background: #FFFFFF !important;
+                height: 5px;
+                // border-bottom: 5px solid green !important;
+                width: 50%;
+                display:block;
+                position: absolute;
+                bottom:0;
+                left:0;
+                margin-bottom: -5px;
+                z-index: 3;
+            }
+        }
+
+    }
+
+
+
+}

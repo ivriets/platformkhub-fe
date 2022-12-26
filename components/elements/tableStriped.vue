@@ -14,7 +14,7 @@
                         <td v-if="urutan && urutan === true" class="font-normal p-5">{{ index+1 }}.</td>
                         <td v-for="(x, index2) in masterTable" :key="index+'dt'+index2" scope="row" class="font-normal p-5">
                             <div class="flex items-center gap-2">
-                                <img v-if="x.foto" :src="item[x.foto]" alt="img" class="rounded-full w-6 h-6 bg-green-200">
+                                <img v-if="x.foto" :src="baseUrl+item[x.foto]" alt="img" class="rounded-full w-6 h-6 bg-green-200">
                                 <div v-if="x.value === 'status'">
                                     <div v-if="item[x.value] === 1" class="text-[#444]">Tertunda</div>
                                     <div v-if="item[x.value] === 2" class="text-approved-accepted">Bergabung</div>
@@ -83,6 +83,9 @@ export default {
         },
         bahasa() {
             return this.$i18n.locale === 'id' ? 0 : 1
+        },
+        baseUrl() {
+            return process.env.TIPE === 'dev' ? process.env.DEV_IMAGE  :  process.env.PROD_IMAGE 
         }
     },
     mounted() {

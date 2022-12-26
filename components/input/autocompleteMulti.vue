@@ -100,7 +100,9 @@ export default {
             if (val === '' || val === undefined) {
                 listingFilter = this.opsi
             } else {
-                listingFilter = this.opsi.filter(e => e[this.itemLabel].toLowerCase().includes(val.toLowerCase()))
+                listingFilter = this.opsi.filter(e => { 
+                    return e[this.itemLabel].toString().toLowerCase().includes(val.toLowerCase())
+                })
             }
             this.statusDropdown = listingFilter.length > 0 ? true : false
             this.listing = listingFilter
