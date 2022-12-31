@@ -77,16 +77,36 @@ export default {
     methods: {
         initialize() {
             this.listing = this.opsi
-            if (this.listing.length > 0 && this.value && this.value.length > 0) {
-                this.value.forEach(e => {
-                    const cari = this.listing.filter(x => x[this.itemValue] === e);
-                    if (cari && cari.length > 0) {
-                        this.selectedValue.push({
-                            id: e,
-                            label: cari[0][this.itemLabel] 
-                        })
-                    }
-                })
+            if (this.itemValue === "userId"){
+                if (this.listing.length > 0 && this.value && this.value.length > 0) {
+                    this.value.forEach(e => {
+                        const cari = this.listing.filter(x => x.userId === e.userId);
+                        if (cari && cari.length > 0) {
+                            this.selectedValue.push(e)
+                        }
+                    })
+                }
+            } else if (this.itemValue === "organisasiId") {
+                if (this.listing.length > 0 && this.value && this.value.length > 0) {
+                    this.value.forEach(e => {
+                        const cari = this.listing.filter(x => x.organisasiId === e.organisasiId);
+                        if (cari && cari.length > 0) {
+                            this.selectedValue.push(e)
+                        }
+                    })
+                }
+            } else if (this.itemValue === "id"){ 
+                if (this.listing.length > 0 && this.value && this.value.length > 0) {
+                    this.value.forEach(e => {
+                        const cari = this.listing.filter(x => x.id === e);
+                        if (cari && cari.length > 0) {
+                            this.selectedValue.push({
+                                id: e,
+                                label: cari[0][this.itemLabel] 
+                            })
+                        }
+                    })
+                }
             }
         },
 

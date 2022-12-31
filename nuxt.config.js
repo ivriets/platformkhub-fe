@@ -29,14 +29,14 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: "https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" },
     ],
-    script: [
-      {
-          src: "https://www.googletagmanager.com/gtag/js?id=G-XZNG8PQKQG",
-          async: true,
-      },
+    // script: [
+    //   {
+    //       src: "https://www.googletagmanager.com/gtag/js?id=G-XZNG8PQKQG",
+    //       async: true,
+    //   },
 
-        { src: "/js/ga.js"}
-      ],
+    //     { src: "/js/ga.js"}
+    //   ],
 
 
   },
@@ -55,11 +55,14 @@ export default {
       src: "~/plugins/tinymce.js",
       mode: "client", 
     },
+    {src: '~/plugins/gmap', mode: 'client'},
+
     // {  src: "~/plugins/gaReport.js"}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
+  loading: false,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -192,7 +195,10 @@ export default {
         // analyticsDataClient: BetaAnalyticsDataClient
       })
     ],
-
+    transpile: [
+      /^gmap-vue($|\/)/, 
+      // /^vue2-gmap-custom-marker($|\/)/
+    ],
     postcss: {
       plugins: {
         tailwindcss: {},

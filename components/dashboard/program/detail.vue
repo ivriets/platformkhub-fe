@@ -57,11 +57,11 @@
             <div v-if="dataDetail" class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-4">
                     <div class="w-full bg-white shadow-md border border-gray-50 rounded-xl ">
-                        <img src="/images/logo.png" alt="main-image">
+                        <img :src="basePath+dataDetail.imgThumbnail" alt="main-image">
                         <div class="mt-4 mb-4 text-center text-warna-sembilan">Thumbnail</div>
                     </div>
                     <div class="mt-10 w-full bg-white shadow-md border border-gray-50 rounded-xl ">
-                        <img src="/images/logo.png" alt="main-image">
+                        <img :src="basePath+dataDetail.imgMainImage" alt="main-image">
                         <div class="mt-4 mb-4 text-center text-warna-sembilan">Main Image</div>
                     </div>
                     
@@ -69,7 +69,7 @@
                         <div class="col-span-12 lg:col-span-6">
                             <div class="mt-8 text-sm text-warna-delapan font-semibold">Officer</div>
                             <div class="text-sm text-warna-sembilan font-semibold">
-                                <div class="mb-4">{{ dataDetail.officer }}</div>
+                                <div v-for="(item, index) in dataDetail.officer" :key="'officer' + index"  class="mb-4">{{ item.namaIndividu }}</div>
                             </div>
                         </div>
 
@@ -129,9 +129,6 @@
                     <div class="text-sm text-warna-sembilan font-semibold">
                         <div class="mb-4">{{ dataDetail.catatanModerasi }}</div>
                     </div>
-
-
-
                 </div>
                 <div v-if="dataDetail" class="col-span-12 lg:col-span-8">
                     <ElementsFotoNama 
@@ -157,19 +154,21 @@
                             <div v-for="(item1, index1) in dataLabel" :key="'dL' + index1" v-show="item1.posisi==='kanan'" class="grid grid-cols-12 mb-4 break-words">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
-                                    <div v-if="['statusActivity', 'typeVisibility'].includes(item1.value)" class="">
+                                    <!-- <div v-if="['statusActivity', 'typeVisibility'].includes(item1.value)" class=""> -->
+                                    <div v-if="['statusActivity'].includes(item1.value)" class="">
                                         {{selectedFlag === 'indonesia' ? dataDetail[item1.value].nama[0] : dataDetail[item1.value].nama[1]}}
-                                        <!-- <span v-if="item1.id === 1">Twitter</span> -->
                                     </div>
-                                    <div v-else-if="['lokasi'].includes(item1.value)" class="">
-                                        {{dataDetail[item1.value][0].jalan}}, {{dataDetail[item1.value][0].kota}}, {{dataDetail[item1.value][0].provinsi}}
-                                    </div>
-                                    
                                     <div v-else-if="['tanggalMulai', 'tanggalSelesai'].includes(item1.value)" class="">
                                         {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY hh:mm A') }}
                                     </div>
+                                    
+                                    <div v-else-if="['lokasi'].includes(item1.value) && dataDetail[item1.value].length > 0" class="">
+                                        <div v-for="(i, index2) in dataDetail[item1.value]" :key="'lokasi' + index2">
+                                            {{i.jalan}}, {{i.kota}}, {{i.provinsi}}
+                                        </div>
+                                    </div>
                                     <div v-else>
-                                        {{ dataDetail[item1.value] }}
+                                        -
                                     </div>
                                 </div>
                             </div>
@@ -179,27 +178,24 @@
                     <hr class="border-warna-tujuh mb-5">
                     <div class="mb-5">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">About</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 p-3 bg-warna-body text-sm text-warna-sembilan font-normal">
+                        <div v-if="dataDetail.deskripsi && dataDetail.deskripsi.length > 0" class="col-span-12 md:col-span-10 lg:col-span-10 p-3 bg-warna-body text-sm text-warna-sembilan font-normal">
+                            <div v-for="(i, index) in dataDetail[item1.value]" :key="'deskripsi' + index" >
+                                <div v-if="i.typeDeskripsi.id == 1">{{selectedFlag === 'indonesia' ? i.paragraf[0] : i.paragraf[1]}}</div>
+                                <div v-else><img :src="basePath+i.imgDeskripsi_large" alt="deskripsi"></div>
+                            </div>
+                        </div>
+                        <div v-else class="col-span-12 md:col-span-10 lg:col-span-10 p-3 bg-warna-body text-sm text-warna-sembilan font-normal">
                             <div class="">{{ selectedFlag === 'indonesia' ? dataDetail.deskripsiPanjang[0] : dataDetail.deskripsiPanjang[1] }}</div>
                         </div>
                     </div>
                         
                     <hr class="border-warna-tujuh mb-5">
                     
-                    <div class="mb-5">
+                    <div  class="mb-5">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Gallery</div>
                         <div class="flex items-center lg:gap-4 gap-2">
-                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
-                                <img class="h-16" src="/images/logo.png" alt="main-image">
-                            </div>
-                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
-                                <img class="h-16" src="/images/logo.png" alt="main-image">
-                            </div>
-                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
-                                <img class="h-16" src="/images/logo.png" alt="main-image">
-                            </div>
-                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
-                                <img class="h-16" src="/images/logo.png" alt="main-image">
+                            <div v-for="(i, index) in dataDetail.galleries" :key="'galeri' + index"  class="bg-white shadow-md border border-gray-50 rounded-xl">
+                                <img class="h-16" :src="basePath+i.imgGambar" alt="main-image">
                             </div>
                         </div>
                     </div>
@@ -209,7 +205,7 @@
                     <div class="mb-5">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Beneficiaries</div>
 
-                            <div class="grid grid-cols-12 gap-5">
+                            <div v-if="dataDetail.activityResult.length > 0" class="grid grid-cols-12 gap-5">
                                 <div class="col-span-12 lg:col-span-6">
                                     <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Beneficiaries by Gender</div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
@@ -242,7 +238,7 @@
                      <div class="mb-5">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Retention</div>
 
-                            <div class="grid grid-cols-12 gap-5">
+                            <div v-if="dataDetail.activityResult.length > 0" class="grid grid-cols-12 gap-5">
                                 <div class="col-span-12 lg:col-span-6">
                                     <div class="text-xs text-warna-delapan font-semibold mb-[16px]">Program Retention</div>
                                     <div class="text-sm font-semibold mb-3 flex items-center">
@@ -272,9 +268,8 @@
                     
                     <hr class="border-warna-tujuh mb-5">
 
-                     <div class="mb-8">
+                     <div  v-if="dataDetail.activityResult && dataDetail.activityResult.length > 0" class="mb-8">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Satisfaction</div>
-
                             <div class="mb-3 flex items-center font-semibold text-sm">
                                 <div class="w-40 text-warna-delapan">Totally Satisfied</div>
                                 <div class="text-warna-sembilan">{{dataDetail.activityResult[0].satisfactionSangatPuas}}</div>
@@ -295,15 +290,11 @@
                                 <div class="w-40 text-warna-delapan">Totally Unsatisfied</div>
                                 <div class="text-warna-sembilan">{{dataDetail.activityResult[0].satisfactionSangatTidakPuas}}</div>
                             </div>
-
                     </div>
 
-
-
-                    
                     <hr class="border-warna-tujuh mb-5">
 
-                     <div class="mb-8">
+                    <div v-if="dataDetail.activityResult.length > 0" class="mb-8">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Customer</div>
                             <div class="mb-3 flex items-center font-semibold text-sm">
                                 <div class="w-64 text-warna-delapan">Customer Acquisition Score</div>
@@ -313,7 +304,7 @@
                     
                      <hr class="border-warna-tujuh mb-5">
 
-                    <div class="mb-8">
+                    <div v-if="dataDetail.activityResult.length > 0" class="mb-8">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Net Promotor Score</div>
 
                             <div class="grid grid-cols-12 gap-5 text-sm font-semibold">
@@ -370,13 +361,13 @@
 
                      <div class="mb-8">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Journey</div>
-                        <div v-if="dataDetail.journey.length == 0">-</div>
+                        <div v-if="dataDetail.journey.length === 0">-</div>
                         <div v-else>
-                            <div v-for="(item, index) in dataDetail.journey" :key="'journey' + index" class="text-warna-sembilan mr-1">
-                                <span>No Urut: {{item.nomorUrut}}</span>
-                                <span>Judul: {{ selectedFlag === 'indonesia' ? item.judulJourney[0] : item.judulJourney[1] }}</span>
-                                <span>Deskripsi: {{ selectedFlag === 'indonesia' ? item.deskripsi[0] : item.deskripsi[1] }}</span>
-                            </div>
+                            <DashboardProgramJourney 
+                                v-if="dataDetail.journey.length > 0"
+                                :journey="dataDetail.journey"
+                                :selectedFlag="selectedFlag"
+                            />
                         </div>
                     </div>
                 
@@ -465,11 +456,11 @@ export default {
                     value: 'statusActivity',
                     posisi: 'kanan'
                 },
-                {
-                    label: 'Visibility',
-                    value: 'typeVisibility',
-                    posisi: 'kanan'
-                },
+                // {
+                //     label: 'Visibility',
+                //     value: 'typeVisibility',
+                //     posisi: 'kanan'
+                // },
                 {
                     label: 'Start',
                     value: 'tanggalMulai',
@@ -545,7 +536,7 @@ export default {
             this.loaderDetail = false
 
             await this.$apiPlatform.get('moderator/programs/'+this.id+'/').then(res => {
-                // console.log(res.data)
+                console.log(res.data)
                 const data = res.data
 
                 this.dataDetail = data

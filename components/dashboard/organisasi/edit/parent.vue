@@ -60,7 +60,6 @@
                 <DashboardOrganisasiEditMediaSosial />
             </div>
         </div>
-        <!-- <pre>{{dataOrganisasi}}</pre> -->
     </div>
 </template>
 

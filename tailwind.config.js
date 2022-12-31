@@ -16,15 +16,16 @@ module.exports = {
         }
       },
       extend: {
-        // colors: {
-        //   'bc': '#FEF7E4',
-        //   'utama': '#A63521',
-        //   'dua': '#00600F',
-        //   'tiga': '#F47704',
-        //   'empat': '#00B6F0',
-        //   'lima': '#FFC700',
-        //   'enam': '#B5B5B5'
-        // },
+        colors: {
+          'bc': '#FEF7E4',
+          'utama': '#A63521',
+          'dua': '#00600F',
+          'tiga': '#F47704',
+          'empat': '#00B6F0',
+          'lima': '#FFC700',
+          'enam': '#B5B5B5',
+          'tujuh': '#E0E0E0'
+        },
       },
     },
     plugins: [require("@tailwindcss/line-clamp")],

@@ -38,10 +38,11 @@
 </template>
 <script>
 export default {
-    props: ['dataMilestone'],
+    props: ['dataMilestoneSrc'],
     data() {
         return {
             firstRow: [],
+            dataMilestone: [],
             secondRow: [],
             baris: 0,
             lastRow: [],
@@ -83,19 +84,13 @@ export default {
                 this.initRow()
         },
         initRow() {
-            this.dataMilestone = this.dataMilestone.map((e,index) => {
+            this.dataMilestone = this.dataMilestoneSrc.map((e,index) => {
                 e.posisi = index + 1
                 return e;
             });
             const totalItem = this.dataMilestone.length;
 
-            // this.firstRow = _.cloneDeep(this.dataMilestone).slice(0,3);
-            // this.secondRow = _.cloneDeep(this.dataMilestone).slice(3);
-            // if (totalItem <=3) {
-            //     this.baris = 1
-            // } else if (totalItem > 3) {
-            //     this.baris = Math.ceil(totalItem / 3) - 1
-            // }
+
             this.baris = Math.ceil(totalItem / 3) - 1
             this.guideBaris = {
                 barisKiri: _.range(1,totalItem,3),
@@ -149,7 +144,12 @@ export default {
             }
         },
         itemClassAkhir(index, rowItem, item) {
-
+            // const cek = parseInt(rowItem) % 2 === 0 ? 'reverse' : 'normal' 
+            // if (this.guideBaris.barisKiri.includes(index) ) {
+            //     return 'mi-awal'
+            // } else if (this.guideBaris.barisKanan.includes(index) ) {
+            //     return 'mi-akhir'
+            // }
             const awal = item.posisi === 1 ? ' first-milestone-item '  : ''
             const akhir = this.dataMilestone.length === item.posisi ? 'last-milestone-item' : ''
             const biasa = this.itemClass(index, rowItem);

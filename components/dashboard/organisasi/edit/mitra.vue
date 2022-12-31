@@ -36,14 +36,23 @@
                             />
                         </div>
                         <div class="mb-5">
-                            <InputFileUpload 
+                            <!-- <InputFileUpload 
                                 :label="'Logo Partner'"
                                 v-model="tableMitra.image"
                                 :accept="'.png, .jpg, .jpeg'"
                                 :value="tableMitra.image"
                                 :multiple="false"
                                 :maxSize="5"
-                            />
+                            /> -->
+                            
+                            <div class="">
+                                <InputImageCrop 
+                                    :label="'Main Image'"
+                                    v-model="tableMitra.imgLogoPartner"
+                                    :accept="'.png, .jpg, .jpeg'"
+                                    :maxSize="5"
+                                />
+                            </div>
                         </div>
                         <div class="flex justify-end">
                             <div @click="editPartner(tableMitra)" class="px-[28px] py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Simpan</div>
@@ -68,7 +77,7 @@
                         :label="'Nama Partner'"
                     />
                 </div>
-                <div class="mb-5">
+                <!-- <div class="mb-5">
                     <div class="font-medium mb-1">Logo/Simbol/Foto</div>
                     <div class="border-dashed border-2 border-warna-tujuh pt-[9px] pb-[25px] rounded-lg text-center">
                         <div class="text-xs text-[#BABABA] mb-2">
@@ -76,7 +85,18 @@
                         </div>
                         <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[145px] mx-auto cursor-pointer">Select File</div>
                     </div>
-                </div>
+                </div> -->
+                
+                <!-- <div class="mb-5">
+                    <div class="">
+                        <InputImageCrop 
+                            :label="'Logo/Simbol/Foto'"
+                            v-model="form.imgLogoPartner"
+                            :accept="'.png, .jpg, .jpeg'"
+                            :maxSize="5"
+                        />
+                    </div>
+                </div> -->
                 <div class="flex justify-end">
                     <div @click="tambahPartner" class="px-[28px] py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Tambah</div>
                 </div>
@@ -91,7 +111,7 @@
 export default {
     data() {
         return {
-            tableMitra: null,
+            tableMitra: undefined,
             prefixName: 'partner',
 
             // KEPERLUAN MODAL TAMBAH PARTNER //
@@ -104,7 +124,10 @@ export default {
 
             form: {
                 namaOrganisasi: '',
-                logoOrganisasi: ''
+                imgLogoPartner: {
+                    displayImage: '/assets/image.png',
+                    file: null
+                },
             },
             actions: {
                 status: true,
@@ -150,6 +173,21 @@ export default {
             return process.env.BASE_URL
         }
     },
+    watch : {
+        tableMitra : {
+            immediate: true,
+            deep: true,
+            handler(newValue, oldValue) {
+                if (oldValue && newValue){
+                        if (oldValue.imgLogoPartner && newValue.imgLogoPartner){
+                        //     if (this.oldImgLogoOrganisasi.displayImage !== this.imgLogoOrganisasi.displayImage){
+                                this.uploadImage(this.tableMitra.id, newValue.imgLogoPartner.file)
+                        //     }
+                        }
+                }
+            }
+        }
+    },
     mounted() {
         this.initialize()
     },
@@ -169,7 +207,11 @@ export default {
                     return {
                             id: o.pkPartnerEksternalId,
                             namaOrganisasi: o.namaPartner,
-                            image: o.imgLogoPartner
+                            imgLogoPartner: {
+                                displayImage: o.imgLogoPartner,
+                                file: null
+                            },
+                            image:  o.imgLogoPartner,
                     }
                 })
             }).catch(err => {
@@ -177,23 +219,42 @@ export default {
             })
         },
 
-        async updateData(data) {           
-            await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
-                const data = res.data         
+        async updateData(form) {           
+            await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', form).then(res => {
+                const data = res.data     
                 this.message = data.message
-                console.log(res.data)
                 alert(this.message)
                 this.masterPoint()
             }).catch(err => {
                 console.log(err)
             })
         },
+        async uploadImage (id, image){
+            if (image instanceof Blob){
+                var dataImage = new FormData();
+                dataImage.append('imgLogoPartner', image);
+                await this.$apiBase.put('organizations/partnerorganisasieksternal/'+id+'/', dataImage).then(res2 => {
+                    console.clear()
+                }).catch(err => {
+                    console.clear()
+                })
+            }
+        },
         
         editPartner (data){
             this.updateData({"update_partner":{"id":data.id, "namaOrganisasi":data.namaOrganisasi}})
         },
+        async deletePartner(data){
+            if (confirm('tolak '+ data.namaOrganisasi+' sebagai cabang?')) {
+                await this.$apiBase.delete('organizations/partnerorganisasieksternal/'+data.id+'/').then(res => {
+                    this.masterPoint()
+                })
+            }
+            
+        },
         tambahPartner (){
             this.updateData({"partner":this.form.namaOrganisasi})
+
             this.modalAction = false
             this.keyModal += 1
         },

@@ -48,5 +48,9 @@
     "Deskripsi": "Description",
 
     "Logout": "Logout",
-    "Close": "Close"
+    "Close": "Close",
+    "Type address here": "Type address here",
+    "jpg or png no larger than": "jpg or png no larger than",
+    "Save": "Save",
+    "Cancel": "Batal"
 }

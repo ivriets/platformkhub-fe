@@ -51,7 +51,7 @@
 
 <script>
 export default {
-    props: ['value'],
+    props: ['value', 'list'],
     data() {
         return {
             defaultData: {
@@ -80,7 +80,17 @@ export default {
             deep:true //
         }
     },
+    mounted() {
+        this.initialize()
+    },
     methods: {
+        initialize() {
+            
+            if (this.list){
+                this.listContent = this.list
+                
+            }
+        },
         addSection(typeDeskripsi) {
             const vA = {
                 typeDeskripsi: typeDeskripsi,

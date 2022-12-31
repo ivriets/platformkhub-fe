@@ -174,51 +174,111 @@ export const state = () => ({
     kategoriArtikel: [
         {
             id: 15,
-            label: ['Artikel', 'Article']
+            label: ["Artikel", "Article"]
         },
         {
             id: 16,
-            label: ['Berita', 'News']
+            label: ["Berita", "News"]
+        },
+        {
+            id: 1,
+            label: ["Buku", "Book"]
+        },
+        {
+            id: 2,
+            label: ["Buletin", "Bulletin"]
         },
         {
             id: 17,
-            label: ['Cerita Perubahan', 'Story of Change']
+            label: ["Cerita Perubahan", "Story of Change"]
+        },
+        {
+            id: 3,
+            label: ["Esai", "Essay"]
         },
         {
             id: 18,
-            label: ['Feature', 'Feature']
-        },
-        {
-            id: 19,
-            label: ['Opini', 'Opinion']
-        },
-        {
-            id: 20,
-            label: ['Investigasi', 'Investigation']
-        },
-        {
-            id: 21,
-            label: ['Interpretasi', 'Interpretative']
-        },
-        {
-            id: 22,
-            label: ['Laporan', 'Report']
-        },
-        {
-            id: 23,
-            label: ['Penelitian', 'Research']
-        },
-        {
-            id: 24,
-            label: ['Tips dan Trik', 'Tips and Tricks']
+            label: ["Feature", "Feature"]
         },
         {
             id: 25,
-            label: ['Hibah', 'Grants']
+            label: ["Hibah", "Grants"]
+        },
+        {
+            id: 4,
+            label: ["Infografis", "Infographic"]
         },
         {
             id: 26,
-            label: ['Informasi', 'Information']
+            label: ["Informasi", "Information"]
+        },
+        {
+            id: 21,
+            label: ["Interpretasi", "Interpretative"]
+        },
+        {
+            id: 20,
+            label: ["Investigasi", "Investigation"]
+        },
+        {
+            id: 5,
+            label: ["Jurnal", "Journal"]
+        },
+        {
+            id: 7,
+            label: ["Kebijakan", "Policy"]
+        },
+        {
+            id: 6,
+            label: ["Komik", "Comic"]
+        },
+        {
+            id: 8,
+            label: ["Laporan", "Report"]
+        },
+        {
+            id: 22,
+            label: ["Laporan", "Report"]
+        },
+        {
+            id: 9,
+            label: ["Majalah", "Magazine"]
+        },
+        {
+            id: 10,
+            label: ["Modul", "Module"]
+        },
+        {
+            id: 11,
+            label: ["Nawala", "Newsletter"]
+        },
+        {
+            id: 19,
+            label: ["Opini", "Opinion"]
+        },
+        {
+            id: 12,
+            label: ["Panduan", "Guideline"]
+        },
+        {
+            id: 13,
+            label: ["Penelitian", "Research"]
+        },
+        {
+            id: 23,
+            label: ["Penelitian", "Research"]
+        },
+        {
+            id: 14,
+            label: ["Siniar", "Podcast"]
+        },
+        {
+            id: 27,
+            label: ["Sorotan", "Highlight"]
+        },
+        {
+            id: 24,
+            label: ["Tips dan Trik", "Tips and Tricks"]
         }
     ],
     hierarki: [

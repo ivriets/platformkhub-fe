@@ -6,7 +6,7 @@
         aria-hidden="true" 
         class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 bottom-0 z-50 w-full md:inset-0 h-modal md:h-full flex  justify-center bg-gray-800/[.7] "
     >
-        <div v-click-outside="persistentAction" :class="width ? width : 'w-full md:w-1/2' " class="fixed p-4 translate-y-1/4 z-20    md:h-auto " >
+        <div v-click-outside="persistentAction" :class="width ? width : 'w-full md:w-1/2' " class="fixed p-4 z-20    md:h-auto " >
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow ">
                 <div class="flex justify-between items-start p-4 rounded-t border-b ">

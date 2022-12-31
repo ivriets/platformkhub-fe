@@ -54,14 +54,14 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-5">
+            <div v-if="dataDetail" class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-4">
                     <div class="w-full bg-white shadow-md border border-gray-50 rounded-xl ">
-                        <img src="/images/logo.png" alt="main-image">
+                        <img :src="basePath+dataDetail.imgThumbnail" alt="main-image">
                         <div class="mt-4 mb-4 text-center text-warna-sembilan">Thumbnail</div>
                     </div>
                     <div class="mt-10 w-full bg-white shadow-md border border-gray-50 rounded-xl ">
-                        <img src="/images/logo.png" alt="main-image">
+                        <img :src="basePath+dataDetail.imgMainImage" alt="main-image">
                         <div class="mt-4 mb-4 text-center text-warna-sembilan">Main Image</div>
                     </div>
 
@@ -138,9 +138,9 @@
                                     <div v-if="['statusActivity'].includes(item1.value)" class="">
                                         {{selectedFlag === 'indonesia' ? dataDetail[item1.value].nama[0] : dataDetail[item1.value].nama[1]}}
                                     </div>
-                                    <div v-else-if="['typeVisibility'].includes(item1.value)" class="">
+                                    <!-- <div v-else-if="['typeVisibility'].includes(item1.value)" class="">
                                         {{selectedFlag === 'indonesia' ? dataDetail[item1.value].nama[0] : dataDetail[item1.value].nama[1]}}
-                                    </div>
+                                    </div> -->
                                     
                                     <div v-else-if="['start', 'end'].includes(item1.value)" class="">
                                         {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY hh:mm A') }}
@@ -167,17 +167,8 @@
 
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Gallery</div>
                         <div class="flex items-center lg:gap-4 gap-2">
-                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
-                                <img class="h-16" src="/images/logo.png" alt="main-image">
-                            </div>
-                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
-                                <img class="h-16" src="/images/logo.png" alt="main-image">
-                            </div>
-                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
-                                <img class="h-16" src="/images/logo.png" alt="main-image">
-                            </div>
-                            <div class="bg-white shadow-md border border-gray-50 rounded-xl">
-                                <img class="h-16" src="/images/logo.png" alt="main-image">
+                            <div v-for="(i, index) in dataDetail.galleries" :key="'galeri' + index"  class="bg-white shadow-md border border-gray-50 rounded-xl">
+                                <img class="h-16" :src="basePath+i.imgGambar" alt="main-image">
                             </div>
                         </div>
 
@@ -279,11 +270,11 @@ export default {
                     value: 'statusActivity',
                     posisi: 'kanan'
                 },
-                {
-                    label: 'Visibility',
-                    value: 'typeVisibility',
-                    posisi: 'kanan'
-                },
+                // {
+                //     label: 'Visibility',
+                //     value: 'typeVisibility',
+                //     posisi: 'kanan'
+                // },
                 {
                     label: 'Start',
                     value: 'start',
@@ -357,7 +348,7 @@ export default {
             this.loaderDetail = false
 
             await this.$apiPlatform.get('moderator/events/'+this.id+'/').then(res => {
-                // console.log(res.data)
+                console.log(res.data)
                 const data = res.data
 
                 this.dataDetail = data

@@ -122,8 +122,14 @@
                             <div v-for="(item1, index1) in dataLabel" :key="'dL' + index1" v-show="item1.posisi==='kanan'" class="grid grid-cols-12 mb-4 break-words">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
-                                    <div v-if="['totalMember', 'websiteOrganisasi', 'missionStatement', 'hierarki'].includes(item1.value)" class="">
+                                    <div v-if="['websiteOrganisasi', 'missionStatement'].includes(item1.value)" class="">
                                         {{ dataDetail.organisasi[item1.value] }}
+                                    </div>
+                                    <div v-else-if="['totalMember'].includes(item1.value)" class="">
+                                        <span v-if="dataDetail.organisasi.teamMember" >{{ dataDetail.organisasi.teamMember.length }}</span>
+                                    </div>
+                                    <div v-else-if="['hierarchy'].includes(item1.value)" class="">
+                                        <span v-if="dataDetail.organisasi[item1.value]" >{{ selectedFlag === 'indonesia' ? dataDetail.organisasi[item1.value].nama[0] : dataDetail.organisasi[item1.value].nama[1] }}</span>
                                     </div>
                                     <div v-else>
                                         {{ dataDetail[item1.value] }}
@@ -167,8 +173,8 @@
                         <div class="text-sm text-warna-delapan font-semibold mb-[30px]">Milestone</div>
                         <!-- <div class="text-sm text-warna-sembilan font-semibold text-center">On Going.xx..</div> -->
                         <DashboardOrganisasiMilestone 
-                            v-if="dataDetail.organisasi.milestoneOrganisasi && dataDetail.organisasi.milestoneOrganisasi.length > 0"
-                            :dataMilestone="dataDetail.organisasi.milestoneOrganisasi"
+                        v-if="dataDetail.organisasi.milestoneOrganisasi && dataDetail.organisasi.milestoneOrganisasi.length > 0"
+                            :dataMilestoneSrc="dataDetail.organisasi.milestoneOrganisasi"
                         />
                         <!-- <pre>{{ dataDetail }}</pre> -->
                     </div>
@@ -296,7 +302,7 @@ export default {
                 },
                 {
                     label: 'Hierarchy',
-                    value: 'hierarki',
+                    value: 'hierarchy',
                     posisi: 'kanan'
                 },
             ],
@@ -351,18 +357,16 @@ export default {
             await this.$apiPlatform.get('verificator/accounts/'+this.id+'/').then(res => {
                 
                 const data = res.data.results
-                console.log(data)
                 this.dataDetail = data
 
                 this.internalBranch = data.organisasi.organisasiCabangInternal.map(e => {
                     const data = {
-                        id: e.organisasiId,
-                        nama: e.namaOrganisasi,
-                        image: e.imgLogoOrganisasi
+                        id: e.pkOrganisasiCabangInternalId,
+                        nama: e.branch.namaOrganisasi,
+                        image: e.branch.imgLogoOrganisasi
                     }
                     return data
                 })
-
                 this.requestByIndividu = data.organisasi.requestedByIndividu.map(e => {
                     const data = {
                         id: e.id,
@@ -381,14 +385,14 @@ export default {
                     return data
                 })
 
-                // this.partner = data.organisasi.partnerOrganisasiEksternal.map(e => {
-                //     const data = {
-                //         id: e.pkPartnerEksternalId,
-                //         nama: e.namaPartner,
-                //         image: e.imgLogoPartner
-                //     }
-                //     return data
-                // })
+                this.partner = data.organisasi.partnerOrganisasiEksternal.map(e => {
+                    const data = {
+                        id: e.pkPartnerEksternalId,
+                        nama: e.namaPartner,
+                        image: e.imgLogoPartner
+                    }
+                    return data
+                })
 
                 this.$nextTick(() => {
                     this.loaderDetail = true

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="loaderDetail" role="status">
+    <div v-if="!form && loaderDetail" role="status">
         <div class="flex items-center justify-center text-center">
             <svg aria-hidden="true" class="mr-2 w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
@@ -8,7 +8,7 @@
         </div>
     </div>
     <div v-else>
-        <div class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-5 md:mb-10">
+        <div v-if="form" class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-5 md:mb-10">
             <div class="col-span-12 md:col-span-6">
                 <div class="mb-2">
                     <InputText 
@@ -137,7 +137,7 @@
         </div>
         
         <hr class="border-warna-tujuh my-10">
-        <div class="">
+        <div v-if="form" class="">
             <div class="text-xl font-semibold mb-10">Tentang Organisasi</div>
             
             <div v-for="(lokasi, index) in form.lokasiOrganisasi" :key="index" class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-10">
@@ -181,12 +181,10 @@
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
                         <div class="">
-                            <InputFileUpload 
+                            <InputImageCrop 
                                 :label="'Logo Organisasi'"
                                 v-model="imgLogoOrganisasi"
                                 :accept="'.png, .jpg, .jpeg'"
-                                :value="form.imgLogoOrganisasi"
-                                :multiple="false"
                                 :maxSize="5"
                             />
                         </div>
@@ -195,12 +193,10 @@
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
                         <div class="">
-                            <InputFileUpload 
+                            <InputImageCrop 
                                 :label="'Main Image'"
                                 v-model="imgMainImage"
                                 :accept="'.png, .jpg, .jpeg'"
-                                :value="form.imgMainImage"
-                                :multiple="false"
                                 :maxSize="5"
                             />
                         </div>
@@ -285,8 +281,10 @@ export default {
             opsiHierarki: [],
             organisasiId: "",
             accountId: "", 
-            imgLogoOrganisasi: "",
+            imgLogoOrganisasi: undefined,
+            oldImgLogoOrganisasi: undefined,
             imgMainImage: "",
+            oldImgMainImage: "",
             currentLocation: {},
             locationsVisibleOnMap: "",
             locations: [
@@ -467,7 +465,8 @@ export default {
             deep: true,
             handler(newValue, oldValue) {
                 if (oldValue && newValue){
-                    if (oldValue.lokasiOrganisasi && newValue.lokasiOrganisasi){
+                    
+                    if (oldValue.displayImage && newValue.displayImage){
                         let _this = this
                         if (_.flatMap(this.form.lokasiOrganisasi, "provinsi") !== this.provinsi){
                             this.provinsi =  _.flatMap(this.form.lokasiOrganisasi, "provinsi")
@@ -483,6 +482,32 @@ export default {
                                     }) 
                                 })
                             }
+                        }
+                    }
+                }
+            }
+        },
+        imgLogoOrganisasi : {
+            immediate: true,
+            deep: true,
+            handler(newValue, oldValue) {
+                if (oldValue && newValue){
+                    if (oldValue.displayImage && newValue.displayImage){
+                        if (this.oldImgLogoOrganisasi.displayImage !== this.imgLogoOrganisasi.displayImage){
+                            this.uploadImage(this.imgLogoOrganisasi.file, "imgLogoOrganisasi")
+                        }
+                    }
+                }
+            }
+        },
+        imgMainImage : {
+            immediate: true,
+            deep: true,
+            handler(newValue, oldValue) {
+                if (oldValue && newValue){
+                    if (oldValue.displayImage && newValue.displayImage){
+                        if (this.oldImgMainImage.displayImage !== this.imgMainImage.displayImage){
+                            this.uploadImage(this.imgMainImage.file, "imgMainImage")
                         }
                     }
                 }
@@ -517,6 +542,7 @@ export default {
                 const data = res.data
                 this.accountId = data.accountId
                 this.organisasiId = data.organisasiId
+                console.log(data)
                 this.form = {
                     namaOrganisasi: data.namaOrganisasi,
                     websiteOrganisasi: data.websiteOrganisasi,
@@ -528,8 +554,14 @@ export default {
                     tampilan: data.tampilan,
                     binInstitutionProfile: data.binInstitutionProfile,
                     lokasiOrganisasi: data.lokasiOrganisasi,
-                    highlight:[data.highlight[0], data.highlight[1]],
-                    deskripsi:[data.deskripsi[0], data.deskripsi[1]]
+                    highlight: ["", ""],
+                    deskripsi:["", ""]
+                }
+                if (data.highlight && data.highlight.length > 0){
+                    this.form.highlight = [data.highlight[0], data.highlight[1]]
+                }
+                if (data.deskripsi && data.deskripsi.length > 0){
+                    this.form.deskripsi = [data.deskripsi[0], data.deskripsi[1]]
                 }
                 this.provinsi =  _.flatMap(data.lokasiOrganisasi, "provinsi")
                 const _this = this;
@@ -542,19 +574,44 @@ export default {
                         }) 
                     })
                 }
-                this.imgLogoOrganisasi= data.imgLogoOrganisasi
-                this.imgMainImage= data.imgMainImage
+                this.imgLogoOrganisasi= {
+                    displayImage: data.imgLogoOrganisasi,
+                    file: null
+                }
+                this.oldImgLogoOrganisasi= {
+                    displayImage: data.imgLogoOrganisasi,
+                    file: null
+                }
+                this.imgMainImage= {
+                    displayImage: data.imgMainImage,
+                    file: null
+                }
+                this.oldimgMainImage= {
+                    displayImage: data.imgMainImage,
+                    file: null
+                }
                 
             }).catch(err => {
                 console.log(err)
             })
             this.loaderDetail = false
         },
-        save() {
-            this.putData() 
+        async uploadImage(image, untuk) {
+            if (image instanceof Blob){
+                var data = new FormData();
+                data.append(untuk, image);
+                await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
+                    this.initialize()
+                }).catch(err => {
+                    console.clear()
+                })
+            }
         },
-        async putData() {
-            await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', this.form).then(res => {
+        save() {
+            this.putData(this.form) 
+        },
+        async putData(data) {
+            await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
                 const data = res.data
                 alert(data.message)
                 this.initialize()

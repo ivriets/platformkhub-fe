@@ -69,12 +69,12 @@
                         </div>
                     </div>
                     <div class="col-span-12 md:col-span-6">
-                        <div class="">
-                            <InputText 
+                        <div class="font-medium mb-1">
+                            Pin Location
+                        </div>
+                        <div>
+                            <InputPinLocation
                                 v-model="lokasi.pinLocation"
-                                placeholder="Tulis disini"
-                                :name="prefixName+'Pin Lokasi'"
-                                :label="'Pin Lokasi'"
                             />
                         </div>
                     </div>
