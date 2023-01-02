@@ -38,13 +38,6 @@
             </div>
         </div>
         <div class="bg-white shadow-md rounded-xl pb-9">
-            <!-- <ElementsTableStriped 
-                :masterTable="masterTable"
-                :dataTable="dataTable"
-                :urutan="false"
-                :actions="action"
-                :title="'Activity Log'"
-            /> -->
             <div class="relative overflow-x-auto">
                 <table class="w-full rounded-xl">
                     <thead class="">
