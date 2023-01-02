@@ -44,6 +44,7 @@
                     image-class="cropper__image"
                     ref="imagecropper"
                     :stencil-props="{
+                        previewClass: 'preview',
                         movable: false,
                         scalable: false,
                         aspectRatio: 1,
@@ -66,6 +67,9 @@
                     image-restriction="stencil"
                     :auto-zoom="true"
                     @change="imageChange"
+
+                    stencil-component="circle-stencil"
+
                 ></cropper>
                     <!-- <button  title="delete" @click="deleteImage()" class="absolute top-0 right-0 text-lg bg-gray-500 text-white h-5 w-5 mt-1 mr-1 rounded-full flex items-center justify-center"><i class="ri-close-fill"></i></button> -->
                     <button  v-if="displayReset" title="Reset" @click="resetImage()" class="absolute bottom-0 left-0 bg-gray-500/80 hover:bg-gray-500 border border-white/80 text-white px-3 py-2 text-sm rounded mb-1 ml-1" >Reset</button>
@@ -362,4 +366,8 @@ export default {
     opacity: 1;
   }
 }
+.preview {
+	border: dashed 1px rgba(255,255,255, 0.25);
+}
+
 </style>

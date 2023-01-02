@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!form && loaderDetail" role="status">
+    <div v-if="!form.namaOrganisasi && loaderDetail" role="status">
         <div class="flex items-center justify-center text-center">
             <svg aria-hidden="true" class="mr-2 w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
@@ -8,7 +8,7 @@
         </div>
     </div>
     <div v-else>
-        <div v-if="form" class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-5 md:mb-10">
+        <div class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-5 md:mb-10">
             <div class="col-span-12 md:col-span-6">
                 <div class="mb-2">
                     <InputText 
@@ -137,22 +137,21 @@
         </div>
         
         <hr class="border-warna-tujuh my-10">
+        
         <div v-if="form" class="">
             <div class="text-xl font-semibold mb-10">Tentang Organisasi</div>
             
             <div v-for="(lokasi, index) in form.lokasiOrganisasi" :key="index" class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-10">
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
-                        <InputSelect 
-                            v-model="lokasi.provinsi"
-                            :name="prefixName+'provinsi'"
-                            :label="'Provinsi'"
-                            :opsi="opsiProvinsi"
-                            :placeholder="lokasi.provinsi"
+                        <InputLokasiOrganisasi 
+                            :typeForm=1
+                            :opsiProvinsi="opsiProvinsi"
+                            :lokasi="lokasi"
                         />
                     </div>
                 </div>
-                <div class="col-span-12 md:col-span-6">
+                <!-- <div class="col-span-12 md:col-span-6">
                     <div class="">
                         <div v-if="opsiKota.length > 0">
                             <div class="font-medium mb-1"> Kota </div>
@@ -175,7 +174,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9">
                 <div class="col-span-12 md:col-span-6">
@@ -271,7 +270,9 @@ export default {
             typeOrganisasiId: [],
             typeAudienceId: [],
             typeIssuesId: [],
-            form: undefined,
+            form: {
+                lokasiOrganisasi:undefined
+            },
             opsiProvinsi: [],
             typeInModule: [],
             typeOrganisasi: [],
@@ -460,58 +461,35 @@ export default {
     },
     
     watch: {
-        form : {
-            immediate: true,
-            deep: true,
-            handler(newValue, oldValue) {
-                if (oldValue && newValue){
-                    
-                    if (oldValue.displayImage && newValue.displayImage){
-                        let _this = this
-                        if (_.flatMap(this.form.lokasiOrganisasi, "provinsi") !== this.provinsi){
-                            this.provinsi =  _.flatMap(this.form.lokasiOrganisasi, "provinsi")
-                            if (_.flatMap(this.form.lokasiOrganisasi, "provinsi").length > 0){
-                                // 
-                                _.flatMap(this.form.lokasiOrganisasi, "provinsi").forEach(o => {
-                                    this.$apiBase.get('kotakab?provinsi='+ o).then(res => {
-                                        var indexKota = _.flatMap(this.form.lokasiOrganisasi, "provinsi").indexOf(o)
-                                        var daftarKota = _.map(res.data, function(o){
-                                            return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
-                                        })
-                                        _this.$set(_this.opsiKota, indexKota, daftarKota)
-                                    }) 
-                                })
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        imgLogoOrganisasi : {
-            immediate: true,
-            deep: true,
-            handler(newValue, oldValue) {
-                if (oldValue && newValue){
-                    if (oldValue.displayImage && newValue.displayImage){
-                        if (this.oldImgLogoOrganisasi.displayImage !== this.imgLogoOrganisasi.displayImage){
-                            this.uploadImage(this.imgLogoOrganisasi.file, "imgLogoOrganisasi")
-                        }
-                    }
-                }
-            }
-        },
-        imgMainImage : {
-            immediate: true,
-            deep: true,
-            handler(newValue, oldValue) {
-                if (oldValue && newValue){
-                    if (oldValue.displayImage && newValue.displayImage){
-                        if (this.oldImgMainImage.displayImage !== this.imgMainImage.displayImage){
-                            this.uploadImage(this.imgMainImage.file, "imgMainImage")
-                        }
-                    }
-                }
-            }
+        'form.lokasiOrganisasi' (val) {
+            console.log(val) // multiple soalna pa lokasi na google meet her
+            if (_.flatMap(val, "provinsi") !== this.provinsi){
+                _.flatMap(val, "provinsi").forEach(o => {
+                this.$apiBase.get('kotakab?provinsi='+ o).then(res => {
+                    var indexKota = _.flatMap(val, "provinsi").indexOf(o)
+                    var daftarKota = _.map(res.data, function(o){
+                        return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
+                    })
+                    this.$set(this.opsiKota, indexKota, daftarKota)
+                }) 
+            }) 
+        }
+            // let _this = this
+            // if (_.flatMap(this.form.lokasiOrganisasi, "provinsi") !== this.provinsi){
+            //     this.provinsi =  _.flatMap(this.form.lokasiOrganisasi, "provinsi")
+            //     if (_.flatMap(this.form.lokasiOrganisasi, "provinsi").length > 0){
+            //         // 
+            //         _.flatMap(this.form.lokasiOrganisasi, "provinsi").forEach(o => {
+            //             this.$apiBase.get('kotakab?provinsi='+ o).then(res => {
+            //                 var indexKota = _.flatMap(this.form.lokasiOrganisasi, "provinsi").indexOf(o)
+            //                 var daftarKota = _.map(res.data, function(o){
+            //                     return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
+            //                 })
+            //                 _this.$set(_this.opsiKota, indexKota, daftarKota)
+            //             }) 
+            //         })
+            //     }
+            // }
         }
     },
     created() {
@@ -596,14 +574,14 @@ export default {
             })
             this.loaderDetail = false
         },
-        async uploadImage(image, untuk) {
+        async uploadImage(image, untuk, name) {
             if (image instanceof Blob){
                 var data = new FormData();
-                data.append(untuk, image);
+                data.append(untuk, image, name);
                 await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
-                    this.initialize()
+                    console.log(res.data)
                 }).catch(err => {
-                    console.clear()
+                    console.log(err)
                 })
             }
         },
@@ -614,7 +592,18 @@ export default {
             await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
                 const data = res.data
                 alert(data.message)
-                this.initialize()
+                    //imgLogoOrganisasi hehehe kuduna didieu
+                    if (this.imgLogoOrganisasi.file !== null) {
+                        this.uploadImage(this.imgLogoOrganisasi.file, "imgLogoOrganisasi", this.imgLogoOrganisasi.name)
+                    }
+                    if (this.imgMainImage.file !== null) {
+                        this.uploadImage(this.imgMainImage.file, "imgMainImage", this.imgMainImage.name)
+                    }
+                    this.$nextTick(() => {
+                        //pas initialize kabeh bakal ka clear. jadi disimpen paling akhir
+                        this.initialize()
+                    })
+
             }).catch(err => {
                 console.log(err)
             })
