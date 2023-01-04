@@ -148,6 +148,7 @@
                             :typeForm=1
                             :opsiProvinsi="opsiProvinsi"
                             :lokasi="lokasi"
+                            v-model = "form.lokasiOrganisasi[index]"
                         />
                     </div>
                 </div>
