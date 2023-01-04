@@ -19,14 +19,14 @@
             <div class="absolute top-0 right-0 h-[34px] items-center flex px-2 text-gray-500">                
                 <img src="/icons/icon-arrow-down-grey.png" alt="arrow-down" class="w-4 h-4">
             </div> -->
-            <!-- <div v-for="(lokasi, index) in form.lokasiOrganisasi" :key="index" class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-10">
+            <!-- <div v-for="(lokasi, index) in form.lokasiOrganisasi" :key="index" class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-10"> -->
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
                         <div class="font-medium mb-1">
                             Provinsi
                         </div>
                         <select 
-                            :id="nameProvinsi" 
+                            :id="lokasi.pkLokasiOrganisasiId" 
                             :name="nameProvinsi" 
                             v-model="valueSelectProvinsi" 
                             :disabled="disabled && disabled === true ? true : false" 
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-span-12 md:col-span-6">
+                <!-- <div class="col-span-12 md:col-span-6">
                     <div v-if="opsiKota.length > 0">
                         
                         <div class="font-medium mb-1">
@@ -104,8 +104,8 @@
                             v-model="lokasi.pinLocation"
                         />
                     </div>
-                </div>
-            </div>  -->
+                </div> -->
+            <!-- </div>  -->
         </div>
     </div>
 </template>
@@ -115,10 +115,8 @@ export default {
     data() {
         return {
             valueSelectProvinsi: '',
-            opsiProvinsi: [],
             valueSelectKotaKab: '',
             valueProvinsi: "",
-            placeholderKotaKab: '',
             opsiKotaKab: [],
             pinLokasi: false
         }
@@ -144,7 +142,8 @@ export default {
             console.log(this.lokasi)
             console.log(this.opsiProvinsi)
             console.log(this.typeForm)
-            // this.valueSelect = this.value
+            this.valueSelectProvinsi = this.lokasi.provinsi
+            this.valueSelectKotaKab = this.lokasi.kota
             // this.masterPoint()
         },
         async masterPoint() {
