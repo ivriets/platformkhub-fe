@@ -144,10 +144,14 @@
             <div v-for="(lokasi, index) in form.lokasiOrganisasi" :key="index" class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-10">
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
-                        <InputLokasiOrganisasi 
+                        <!-- <InputLokasiOrganisasi 
                             :typeForm=1
                             :opsiProvinsi="opsiProvinsi"
                             :lokasi="lokasi"
+                            v-model = "form.lokasiOrganisasi[index]"
+                        /> -->
+
+                        <InputLokasiOrganisasi 
                             v-model = "form.lokasiOrganisasi[index]"
                         />
                     </div>
@@ -462,19 +466,19 @@ export default {
     },
     
     watch: {
-        'form.lokasiOrganisasi' (val) {
-            console.log(val) // multiple soalna pa lokasi na google meet her
-            if (_.flatMap(val, "provinsi") !== this.provinsi){
-                _.flatMap(val, "provinsi").forEach(o => {
-                this.$apiBase.get('kotakab?provinsi='+ o).then(res => {
-                    var indexKota = _.flatMap(val, "provinsi").indexOf(o)
-                    var daftarKota = _.map(res.data, function(o){
-                        return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
-                    })
-                    this.$set(this.opsiKota, indexKota, daftarKota)
-                }) 
-            }) 
-        }
+        // 'form.lokasiOrganisasi' (val) {
+        //     console.log(val) // multiple soalna pa lokasi na google meet her
+        //     if (_.flatMap(val, "provinsi") !== this.provinsi){
+        //         _.flatMap(val, "provinsi").forEach(o => {
+        //         this.$apiBase.get('kotakab?provinsi='+ o).then(res => {
+        //             var indexKota = _.flatMap(val, "provinsi").indexOf(o)
+        //             var daftarKota = _.map(res.data, function(o){
+        //                 return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
+        //             })
+        //             this.$set(this.opsiKota, indexKota, daftarKota)
+        //         }) 
+        //     }) 
+        // }
             // let _this = this
             // if (_.flatMap(this.form.lokasiOrganisasi, "provinsi") !== this.provinsi){
             //     this.provinsi =  _.flatMap(this.form.lokasiOrganisasi, "provinsi")
@@ -491,7 +495,7 @@ export default {
             //         })
             //     }
             // }
-        }
+        // }
     },
     created() {
         this.initialize()
@@ -502,15 +506,15 @@ export default {
         },
         
         async masterPoint() {
-            await this.$apiBase.get('provinsi/').then(res => {
-                const data = res.data
-                this.opsiProvinsi = _.map(data, function(o){
-                    return {'id':o.provinsi, 'label':[o.provinsi, o.provinsi]}
-                })
+            // await this.$apiBase.get('provinsi/').then(res => {
+            //     const data = res.data
+            //     this.opsiProvinsi = _.map(data, function(o){
+            //         return {'id':o.provinsi, 'label':[o.provinsi, o.provinsi]}
+            //     })
 
-            }).catch(err => {
-                console.log(err)
-            })
+            // }).catch(err => {
+            //     console.log(err)
+            // })
 
             await this.$apiPlatform.get('daftarList/kategori?kategori1=typeOrganisasi').then(res => {this.typeOrganisasi = _.map(res.data.results, function(o){return {'id':parseInt(o.id), 'label':o.nama}})}).catch(err => {console.log(err)})
             await this.$apiPlatform.get('daftarList/kategori?kategori1=typeAudience').then(res => {this.typeAudience = _.map(res.data.results, function(o){return {'id':parseInt(o.id), 'label':o.nama}})}).catch(err => {console.log(err)})

@@ -142,7 +142,7 @@
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
                                     <div v-if="['typeVisibility'].includes(item1.value)" class="">
-                                        {{selectedFlag === 'indonesia' ? dataDetail[item1.value].nama[0] : dataDetail[item1.value].nama[1]}}
+                                        <!-- {{selectedFlag === 'indonesia' ? dataDetail[item1.value].nama[0] : dataDetail[item1.value].nama[1]}} -->
                                         <!-- <span v-if="item1.id === 1">Twitter</span> -->
                                     </div>
                                     <div v-else-if="['datePublish'].includes(item1.value)" class="">
@@ -292,11 +292,11 @@ export default {
                     value: 'moderator',
                     posisi: 'kiri'
                 },
-                {
-                    label: 'Visibility',
-                    value: 'typeVisibility',
-                    posisi: 'kanan'
-                },
+                // {
+                //     label: 'Visibility',
+                //     value: 'typeVisibility',
+                //     posisi: 'kanan'
+                // },
                 {
                     label: 'Date Publish',
                     value: 'datePublish',

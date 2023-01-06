@@ -174,7 +174,7 @@
                 <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
         </div>
-        <pre>{{dataDetail}}</pre>
+        <!-- <pre>{{dataDetail}}</pre> -->
     </div>
 </template>
 

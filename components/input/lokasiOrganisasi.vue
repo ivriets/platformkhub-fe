@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <div v-if="loader">
         <div class="relative">
-            <pre>{{lokasi}}</pre>
             <!-- <select 
                 :id="name" 
                 :name="name" 
@@ -22,10 +21,7 @@
             <!-- <div v-for="(lokasi, index) in form.lokasiOrganisasi" :key="index" class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-10"> -->
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
-                        <div class="font-medium mb-1">
-                            Provinsi
-                        </div>
-                        <select 
+                        <!-- <select 
                             :id="lokasi.pkLokasiOrganisasiId" 
                             :name="nameProvinsi" 
                             v-model="valueSelectProvinsi" 
@@ -38,13 +34,17 @@
                                 >
                                 {{i.provinsi}}
                                 </option>
-                        </select>
+                        </select> -->
+                        <!-- <InputSelect 
+                            v-model="newVal.provinsi"
+                            :label="'Provinsi'"
+                            :opsi="opsiProvinsi"
+                        /> -->
                         
-                        <div class="absolute top-0 right-0 h-[34px] items-center flex px-2 text-gray-500">                
-                            <img src="/icons/icon-arrow-down-grey.png" alt="arrow-down" class="w-4 h-4">
-                        </div>
+
                     </div>
                 </div>
+                {{ opsiProvinsi }}
                 <!-- <div class="col-span-12 md:col-span-6">
                     <div v-if="opsiKota.length > 0">
                         
@@ -111,14 +111,19 @@
 </template>
 <script>
 export default {
-    props: ['lokasi', 'disabled', 'opsiProvinsi', 'typeForm'],
+    props: ['value','disabled'],
     data() {
         return {
             valueSelectProvinsi: '',
             valueSelectKotaKab: '',
             valueProvinsi: "",
+            opsiProvinsi: [],
             opsiKotaKab: [],
-            pinLokasi: false
+            pinLokasi: false,
+            newVal: null,
+            loader: false,
+            keyProvinsi: 0,
+            keyKota: 0
         }
     },
     computed: {
@@ -139,24 +144,40 @@ export default {
     },
     methods: {
         initialize() {
-            console.log(this.lokasi)
-            console.log(this.opsiProvinsi)
-            console.log(this.typeForm)
-            this.valueSelectProvinsi = this.lokasi.provinsi
-            this.valueSelectKotaKab = this.lokasi.kota
+            this.loader = false
+            // console.log(this.lokasi)
+            // console.log(this.opsiProvinsi)
+            // console.log(this.typeForm)
+            // this.valueSelectProvinsi = this.lokasi.provinsi
+            // this.valueSelectKotaKab = this.lokasi.kota
+            this.getProv()
+            this.newVal = this.value
             // this.masterPoint()
         },
-        async masterPoint() {
-            await this.$apiBase.get('kotakab?provinsi='+ this.provinsi).then(res => {
+        async getProv() {
+            await this.$apiBase.get('provinsi/').then(res => {
                 const data = res.data
-                this.opsi = _.map(data, function(o){
-                    return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
+                this.opsiProvinsi =data
+                this.$nextTick(() => {
+                    this.loader = true
                 })
+
+            }).catch(err => {
+                console.log(err)
             })
         },
-        handleInput(event) {
-            this.$emit('input', event.target.value)
-        }
+
+        // async masterPoint() {
+        //     await this.$apiBase.get('kotakab?provinsi='+ this.provinsi).then(res => {
+        //         const data = res.data
+        //         this.opsi = _.map(data, function(o){
+        //             return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
+        //         })
+        //     })
+        // },
+        // handleInput(event) {
+        //     this.$emit('input', event.target.value)
+        // }
     }
     
 }
