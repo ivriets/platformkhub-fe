@@ -142,11 +142,11 @@
                                         {{selectedFlag === 'indonesia' ? dataDetail[item1.value].nama[0] : dataDetail[item1.value].nama[1]}}
                                     </div> -->
                                     
-                                    <div v-else-if="['start', 'end'].includes(item1.value)" class="">
+                                    <div v-else-if="['tanggalMulai', 'tanggalSelesai'].includes(item1.value)" class="">
                                         {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY hh:mm A') }}
                                     </div>
                                     <div v-else>
-                                        {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY hh:mm A') }}
+                                        {{ dataDetail[item1.value]}}
                                     </div>
                                 </div>
                             </div>
