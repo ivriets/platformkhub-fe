@@ -146,7 +146,7 @@
                                         {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY hh:mm A') }}
                                     </div>
                                     <div v-else>
-                                        {{ dataDetail[item1.value] }}
+                                        {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY hh:mm A') }}
                                     </div>
                                 </div>
                             </div>
@@ -277,12 +277,12 @@ export default {
                 // },
                 {
                     label: 'Start',
-                    value: 'start',
+                    value: 'tanggalMulai',
                     posisi: 'kanan'
                 },
                 {
                     label: 'End',
-                    value: 'end',
+                    value: 'tanggalSelesai',
                     posisi: 'kanan'
                 },
                 {
