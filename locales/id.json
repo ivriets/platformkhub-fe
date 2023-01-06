@@ -52,5 +52,12 @@
     "Type address here": "Ketikan alamat disini",
     "jpg or png no larger than": "jpg atau png tidak lebih dari",
     "Save": "Simpan",
-    "Cancel": "Batal"
+    "Cancel": "Batal",
+    "Provinsi": "Provinsi",
+    "Kota": "Kota", 
+    "KotaKab": "Kota / Kabupaten",
+    "Pin Location": "Pin Lokasi",
+    "Jalan": "Jalan",
+    "Pilih Kota / Kabupaten":"Pilih Kota / Kabupaten"
+
 }

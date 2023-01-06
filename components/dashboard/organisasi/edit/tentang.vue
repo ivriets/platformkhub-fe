@@ -141,45 +141,12 @@
         <div v-if="form" class="">
             <div class="text-xl font-semibold mb-10">Tentang Organisasi</div>
             
-            <div v-for="(lokasi, index) in form.lokasiOrganisasi" :key="index" class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-10">
-                <div class="col-span-12 md:col-span-6">
-                    <div class="">
-                        <!-- <InputLokasiOrganisasi 
-                            :typeForm=1
-                            :opsiProvinsi="opsiProvinsi"
-                            :lokasi="lokasi"
-                            v-model = "form.lokasiOrganisasi[index]"
-                        /> -->
+            <div v-for="(lokasi, index) in form.lokasiOrganisasi" :key="index" class="">
 
                         <InputLokasiOrganisasi 
                             v-model = "form.lokasiOrganisasi[index]"
+                            :prefixName="prefixName+index"
                         />
-                    </div>
-                </div>
-                <!-- <div class="col-span-12 md:col-span-6">
-                    <div class="">
-                        <div v-if="opsiKota.length > 0">
-                            <div class="font-medium mb-1"> Kota </div>
-                            <div class="relative">
-                                <select 
-                                    v-model="lokasi.kota" 
-                                    class="cursor-pointer appearance-none w-full focus:outline-none border border-warna-tujuh rounded-lg px-2 py-1.5 text-sm placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
-                                >
-                                    <option selected disabled value="">{{lokasi.kota}}</option>
-                                    <option
-                                        v-for="(i, index2) in opsiKota[index]" :key="index2" 
-                                        :value="i.id"
-                                    >
-                                    {{i.label[bahasa]}}
-                                    </option>
-                                </select>
-                                <div class="absolute top-0 right-0 h-[34px] items-center flex px-2 text-gray-500">                
-                                    <img src="/icons/icon-arrow-down-grey.png" alt="arrow-down" class="w-4 h-4">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
             <div class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9">
                 <div class="col-span-12 md:col-span-6">
@@ -259,6 +226,7 @@
                 <div @click="save" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
         </div>
+        <!-- <pre>{{ form }}</pre> -->
     </div>
 </template>
 

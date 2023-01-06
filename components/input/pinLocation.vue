@@ -1,27 +1,31 @@
 <template>
     <div>
-      
+      <div v-if="label" class="font-medium mb-1">
+            {{label}}
+        </div>
         <input type="text" v-model="pinLocation" readonly  class="hidden" />
         <client-only class="">
             <!-- <label class="block text-sm font-medium text-gray-700">{{ $t('find address') }}</label> -->
         
-        <div class="flex items-center mb-5">
+
+        </client-only>
+        <div class="relative">
+          <div class="absolute w-full md:w-3/5 top-0 pl-2 pt-2 left-0 z-10 flex items-center">
             <label class="w-full ">
             <gmap-autocomplete
                 :placeholder="this.$t('Type address here')"
                 ref="gmapauto"
                 @place_changed="setPlace"
-                class="focus:outline-none w-full  border overflow-hidden border-warna-tujuh rounded-lg text-sm text-warna-utama placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
+                class="focus:outline-none w-full shadow border overflow-hidden border-warna-tujuh rounded-lg text-sm text-warna-utama placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
                 style="width:100%"
                 :options="autocompleteOptions"
                 :value="valuegmap"
                 >
             </gmap-autocomplete>
-            
             </label>
         </div>
-        </client-only>
-        <client-only>
+
+          <client-only>
             <GmapMap
                 :center="changingCenter" 
                 :zoom="changingZoom"
@@ -41,15 +45,12 @@
                 
                 />
             </GmapMap>
-
         </client-only>
+      </div>
 
-        <!-- <label for="pin-location" class="block text-sm font-medium text-gray-700">Pin Location</label>
-        <input  v-model="lokasi.pinLocation" readonly @change="updateValue"  ref="pin-location" type="text" name="pin-location" id="pin-location"  class="filled mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full  shadow-sm sm:text-sm border-gray-300 rounded-md">
-        <small>{{ $t('hintPinLocation') }}</small> -->
-        <div class="text-gray-500 text-xs">
+        <!-- <div class="text-gray-500 text-xs">
             {{pinLocation}}
-        </div>
+        </div> -->
 
 
 
@@ -62,7 +63,7 @@
 // import * as GmapVue from '~/node_modules/gmap-vue'
 
 export default {
-    props: ['value'],
+    props: ['value', 'label'],
     data() {
         return {
             formMode: 'post',

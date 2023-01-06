@@ -52,5 +52,12 @@
     "Type address here": "Type address here",
     "jpg or png no larger than": "jpg or png no larger than",
     "Save": "Save",
-    "Cancel": "Batal"
+    "Cancel": "Batal",
+    "provinsi": "pronvince",
+    "Kota": "City", 
+    "KotaKab": "City",
+    "Pin Location": "Pin Location",
+    "Jalan": "Street",
+    "Pilih Kota / Kabupaten": "Select City"
+
 }
