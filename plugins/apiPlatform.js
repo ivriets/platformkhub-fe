@@ -22,7 +22,7 @@ export default function ({ $axios, redirect, app }, inject) {
     })
     apiPlatform.onError(error => {
       const dataError = { ...error.response }
-      // console.log(JSON.stringify(dataError.status))
+      console.log(JSON.stringify(dataError.status))
       if (dataError) {
         if (dataError.status == 401) {
           // redirect('/logout')
