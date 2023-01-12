@@ -31,6 +31,10 @@
                             Login
                         </button>
                     </form>
+                        <button @click="loginGoogle" class="rounded-md py-2.5 w-full bg-warna-empat text-white mt-10">
+                            Sign In with Google
+                        </button>
+
                 </div>
             </div>
         </div>
@@ -61,7 +65,6 @@ export default {
         async userLogin() {
             try {
                 await this.$auth.loginWith('local', { data: this.form }).then(res => {
-                    console.log(res.data.token)
                     const tokenCookiz = res.data.token
                     this.$cookies.set('jtoken', tokenCookiz)
                     window.location.href="/signed"
@@ -69,6 +72,9 @@ export default {
             } catch (err) {
                 console.log(err)
             }
+        },
+        loginGoogle() {
+            this.$auth.loginWith('google', { params: { prompt: "select_account" } })
         }
     },
 }

@@ -171,6 +171,26 @@ export default {
         // globalToken: true,
         // autoFetchUser: true
       },
+
+      google: {
+        clientId: '981430623670-alri43dk2knfrc7j9rlg269mi5td3n1o.apps.googleusercontent.com',
+        // clientId: '742071215441-jth0fh7nnnbco6rklc6rstcutunn46na.apps.googleusercontent.com',
+        // clientSecret: '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',
+        codeChallengeMethod: '',
+        responseType: 'code',
+        // grantType:'authorization_code',
+        // accessType: 'offline',
+        // refreshToken: {
+        //   property: 'refresh_token',
+        //   maxAge: 60 * 60 * 1
+        // },
+        endpoints: {
+          token: 'http://172.104.167.45:8090/a3/authGoogle/',
+          userInfo: 'https://www.googleapis.com/oauth2/v3/userinfo',
+          // userInfo: 'https://base.api.k-hub.org/a3/auth/user/'
+        }
+      },
+
     },
     plugins: [
       { src: "~/plugins/apiBase", mode: "client" },
