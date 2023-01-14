@@ -51,6 +51,7 @@ export default {
   plugins: [
     { src: '~/plugins/click-outside' },
     { src: '~/plugins/date-picker', ssr: false },
+    { src: '~/plugins/vue2-filters' },
     {
       src: "~/plugins/tinymce.js",
       mode: "client", 
@@ -83,7 +84,18 @@ export default {
     // ['cookie-universal-nuxt', { alias: 'cookiz' }],
     'cookie-universal-nuxt',
     ['nuxt-tailvue', {
-      modal: true
+      modal: true,
+      toast: { 
+        defaultProps: { 
+            timeout: 5,
+            classToast: 'bg-gray-500 z-50',
+            classTitle: 'text-white',
+            classMessage: 'text-white',
+            classClose: 'text-white',
+            classTimeout: 'bg-gray-300',
+        } 
+    }
+
     }],
   ],
   server: {
@@ -174,20 +186,11 @@ export default {
 
       google: {
         clientId: '981430623670-alri43dk2knfrc7j9rlg269mi5td3n1o.apps.googleusercontent.com',
-        // clientId: '742071215441-jth0fh7nnnbco6rklc6rstcutunn46na.apps.googleusercontent.com',
-        // clientSecret: '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',
         codeChallengeMethod: '',
         responseType: 'code',
-        // grantType:'authorization_code',
-        // accessType: 'offline',
-        // refreshToken: {
-        //   property: 'refresh_token',
-        //   maxAge: 60 * 60 * 1
-        // },
         endpoints: {
-          token: 'http://172.104.167.45:8090/a3/authGoogle/',
+          token: 'https://base.api.k-hub.org/a3/authGoogle/',
           userInfo: 'https://www.googleapis.com/oauth2/v3/userinfo',
-          // userInfo: 'https://base.api.k-hub.org/a3/auth/user/'
         }
       },
 

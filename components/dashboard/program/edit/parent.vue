@@ -17,8 +17,9 @@
                             :name="prefixName+'titleid'"
                             :label="'Title (Bahasa Indonesia)'"
                             :max="maxTitle"
+                            :counter="true"
                         />
-                        <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[0].length}}/{{maxTitle}}</div>
+                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[0].length}}/{{maxTitle}}</div> -->
                     </div>
 
                     <div class="mb-6">
@@ -28,44 +29,27 @@
                             :name="prefixName+'titleen'"
                             :label="'Title (English)'"
                             :max="maxTitle"
+                            :counter="true"
                         />
-                        <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[1].length}}/{{maxTitle}}</div>
+                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[1].length}}/{{maxTitle}}</div> -->
                     </div>
 
-                    <div class="">
-                        <div class="font-medium mb-1">Main Image</div>
-                        <div class="border-dashed border-2 border-warna-tujuh pt-[25px] pb-[25px] rounded-lg text-center">
-                            <div class="text-xs text-[#BABABA] mb-2">
-                                <div>200 x 150px</div>
-                                <div>JPG, GIF, PNG no larger than 1 MB</div>
-                            </div>
-                            <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[195px] mx-auto cursor-pointer">Choose File</div>
-                        </div>
+                    <div>
+                        <InputImageUploadSingle 
+                            :label="$t('gambarUtama')"
+                            v-model="imgMainImage"
+                            :accept="'.png, .jpg, .jpeg'"
+                            :maxSize="1"
+                            :useCrop="true"
+                            :cropRatio="4/3"
+                            v-if="imageLoader"
+                            :key="'imgmainimage'+imageKey"
+                        />
                     </div>
-
                     <hr class="border-warna-tujuh my-10">
 
                     <div>
-                        <div class="text-xl text-warna-utama mb-[28px]">Content</div>
-                        <!-- <div class="mb-6">
-                            <InputTextArea 
-                                v-model="form.deskripsiPanjang[0]"
-                                :max="2000"
-                                placeholder="Tulis disini"
-                                :label="'Content (English)'"
-                                :name="prefixName+'deskripsiid'"
-                            />
-                        </div>
-                        <div>
-                            <InputTextArea 
-                                v-model="form.deskripsiPanjang[1]"
-                                :max="2000"
-                                placeholder="Tulis disini"
-                                :label="'Content (Indonesia)'"
-                                :name="prefixName+'deskripsien'"
-                            />
-                        </div> -->
-                        
+                        <div class="text-xl text-warna-utama mb-[28px]">Content</div>                       
                         <InputContentSection 
                             v-if="form.deskripsi"
                             v-model="form.deskripsi"
@@ -78,29 +62,36 @@
                     <div class="mb-10">
                         <div class="text-xl text-warna-utama mb-[28px]">Date & Location</div>
                         <div class="grid grid-cols-12 gap-4">
-                            <div v-if=form.tanggalMulai class="col-span-12 lg:col-span-6">
+                            <div  class="col-span-12 lg:col-span-6">
                                 <InputDate
                                     v-model="form.tanggalMulai"
                                     :value="form.tanggalMulai"
                                     :label="'Start Date'"
                                     :name="prefixName+'tanggalmulai'"
+                                    :key="'tglmulai'+keyTanggal"
                                 />
                             </div>
-                             <div v-if=form.tanggalSelesai class="col-span-12 lg:col-span-6">
+                             <div  class="col-span-12 lg:col-span-6">
                                 <InputDate
                                     v-model="form.tanggalSelesai"
                                     :value="form.tanggalSelesai"
                                     :label="'End Date'"
                                     :name="prefixName+'tanggalselesai'"
+                                    :key="'tglselesai'+keyTanggal"
+                                    :disabledBefore="disBefore"
+                                    :disabledDate="disDate"
                                 />
                             </div>
                         </div>
                     </div>
 
                     <div>
-                        <div class="flex items-center justify-between mb-3">
+                        <DashboardProgramEditParent 
+                            v-model="form.lokasi"
+                        />
+                        <!-- <div class="flex items-center justify-between mb-3">
                             <div class="">Location</div>
-                            <div @click="btnAddLokasi" class="text-sm text-warna-empat font-medium cursor-pointer underline">+ Add Location</div>
+                            <button class="btn-tambah text-sm" @click="btnAddLokasi">Add Location</button>
                         </div>
                         <div class="text-xs text-warna-delapan mb-4">Choose Active Location</div>
                         <div>
@@ -111,7 +102,7 @@
                             >
 
                             </ElementsTableWithSelect>
-                        </div>
+                        </div> -->
                     </div>
 
                     <hr class="border-warna-tujuh my-10">
@@ -601,6 +592,7 @@
                 </div>
             </div>
         </ElementsModal>
+        <pre>{{ form }}</pre>
     </div>
 </template>
 
@@ -609,13 +601,18 @@
 export default {
     data() {
         return {
+            keyMaster: 0,
+            keyTanggal: 0,
+            disBefore: false,
+            disDate: '',
+
             // MODAL TESTIMONI
             modalAction: false,
             modalTitle: 'Testimoni',
             modalWidth: '',
             keyModal:0,
             persistent: true,
-            //
+            // kenapa gak dibuat object aja
 
             // MODAL LOKASI
             modalActionLokasi: false,
@@ -660,6 +657,12 @@ export default {
                     image: ''
                 }
             },
+            imgMainImage: {
+                file: null,
+                image: ''
+            },
+            imageLoader: false,
+            imageKey: 0,
 
             opsiProvinsi: [],
             opsiKota: [],
@@ -786,11 +789,27 @@ export default {
             return process.env.BASE_URL
         }
     },
-    created() {
+    watch: {
+        'form.tanggalMulai'(val) {
+            if (val !== '') {
+                this.disBefore = true
+                this.disDate = val
+                this.keyTanggal +=1
+            } else {
+                this.disBefore = false
+                this.disDate = ''
+                this.keyTanggal +=1
+            }
+        }
+    },
+
+    mounted() {
         this.initialize()
     },
     methods: {
         initialize() {
+            this.imageLoader = false;
+
             this.masterPoint()
             this.setBreadcrumb()
         },
@@ -852,6 +871,7 @@ export default {
                     fase: data.fase,
                     journey : data.journey
                 }
+                this.imgMainImage.image = data.imgMainImage;
                 this.daftarGalleri = data.galleries
                 this.activityResult = data.activityResult[0]
                 this.totalBookmark = data.totalBookmark
@@ -859,6 +879,11 @@ export default {
                     this.form.deskripsi = []
                     this.form.deskripsi.push({"typeDeskripsi": 2,"imgDeskripsi": "","caption": ["-","-"],"paragraf": data.deskripsiPanjang, "sorter": 0})
                 }
+                this.$nextTick(() => {
+                    this.imageLoader = true;
+                    this.imageKey +=1
+                    this.keyTanggal +=1
+                })
             })
 
         },

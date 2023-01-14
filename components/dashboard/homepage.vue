@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="form">
         <div class="bg-white rounded-xl shadow-md p-5 mb-9 w-full">
             <div>
                 <div class="text-xl font-medium mb-[28px]">Hero</div>
@@ -9,7 +9,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.judulIndonesia"
+                                    v-model="form.heroTitle[0]"
                                     placeholder="Tulis disini"
                                     :name="prefixName+'judul'"
                                     :label="'Judul'"
@@ -19,7 +19,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.subJudulAtas"
+                                    v-model="form.heroSubtitleTop[0]"
                                     placeholder="Tulis disini"
                                     :name="prefixName+'subjudulatas'"
                                     :label="'Sub Judul Atas'"
@@ -29,7 +29,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.subJudulBawah"
+                                    v-model="form.heroSubtitleBottom[0]"
                                     placeholder="Tulis disini"
                                     :name="prefixName+'subjudulbawah'"
                                     :label="'Sub Judul Bawah'"
@@ -44,9 +44,9 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.judulEnglish"
+                                    v-model="form.heroTitle[1]"
                                     placeholder="Write here"
-                                    :name="prefixName+'title'"
+                                    :name="prefixName+'judul'"
                                     :label="'Title'"
                                 />
                             </div>
@@ -54,20 +54,20 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.topSubtitle"
+                                    v-model="form.heroSubtitleTop[1]"
                                     placeholder="Write here"
-                                    :name="prefixName+'topsubtitle'"
-                                    :label="'Top Sub Title'"
+                                    :name="prefixName+'subtitletop'"
+                                    :label="'Sub Title Top'"
                                 />
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.bottomSubtitle"
+                                    v-model="form.heroSubtitleBottom[1]"
                                     placeholder="Write here"
-                                    :name="prefixName+'bottomsubtitle'"
-                                    :label="'Bottom Subtitle'"
+                                    :name="prefixName+'subtitlebottom'"
+                                    :label="'Sub Title Bottom'"
                                 />
                             </div>
                         </div>
@@ -76,19 +76,17 @@
                 <div class="">
                     <div class="grid grid-cols-12 gap-x-6 gap-y-[28px]">
                         <div class="col-span-12 md:col-span-6">
-                            <div class="font-medium mb-1">Background</div>
-                            <div class="border-dashed border-2 border-warna-tujuh pt-[9px] pb-[25px] rounded-lg text-center">
-                                <div class="text-xs text-[#BABABA] mb-2">
-                                    <div>16 : 9</div>
-                                    <div>PDF maximum 25MB.</div>
-                                </div>
-                                <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] text-[#45A6FF] py-2 w-[145px] mx-auto cursor-pointer">Choose File</div>
-                            </div>
+                            <InputImageCrop 
+                                :label="'Background'"
+                                v-model="heroBackground"
+                                :accept="'.png, .jpg, .jpeg'"
+                                :maxSize="5"
+                            />
                         </div>
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.altBackground"
+                                    v-model="form.heroAltBackground"
                                     placeholder="Write here"
                                     :name="prefixName+'altbackground'"
                                     :label="'Alt Background'"
@@ -98,7 +96,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.textButtonEn"
+                                    v-model="form.heroButtonText[1]"
                                     placeholder="Write here"
                                     :name="prefixName+'textbuttonen'"
                                     :label="'Button Text (Eng)'"
@@ -108,7 +106,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.textButtonId"
+                                    v-model="form.heroButtonText[0]"
                                     placeholder="Tulis disini"
                                     :name="prefixName+'textbuttonid'"
                                     :label="'Tombol Text (Bahasa)'"
@@ -118,7 +116,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.actionLink"
+                                    v-model="form.heroActionLink"
                                     placeholder="Write here"
                                     :name="prefixName+'actionlink'"
                                     :label="'Call to Action Link'"
@@ -139,7 +137,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.invJudulId"
+                                    v-model="form.invitationTitle[0]"
                                     placeholder="Tulis disini"
                                     :name="prefixName+'invjudulid'"
                                     :label="'Judul'"
@@ -149,7 +147,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.invSubJudulId"
+                                    v-model="form.invitationSubtitleBottom[0]"
                                     placeholder="Tulis disini"
                                     :name="prefixName+'invsubjudulid'"
                                     :label="'Sub Judul'"
@@ -159,7 +157,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.invButtonTextId"
+                                    v-model="form.invitationButtonText[0]"
                                     placeholder="Tulis disini"
                                     :name="prefixName+'invbuttontextid'"
                                     :label="'Tombol Teks (Bahasa)'"
@@ -174,7 +172,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.invJudulEn"
+                                    v-model="form.invitationTitle"
                                     placeholder="Write here"
                                     :name="prefixName+'invjudulen'"
                                     :label="'Title'"
@@ -184,7 +182,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.invSubJudulEn"
+                                    v-model="form.invitationSubtitleBottom"
                                     placeholder="Write here"
                                     :name="prefixName+'invsubjudulen'"
                                     :label="'Sub Title'"
@@ -194,7 +192,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.invButtonTextEn"
+                                    v-model="form.invitationButtonText"
                                     placeholder="Write here"
                                     :name="prefixName+'invbuttontexten'"
                                     :label="'Button Text (Eng)'"
@@ -206,19 +204,17 @@
                 <div class="">
                     <div class="grid grid-cols-12 gap-x-6 gap-y-[28px]">
                         <div class="col-span-12 md:col-span-6">
-                            <div class="font-medium mb-1">Background</div>
-                            <div class="border-dashed border-2 border-warna-tujuh pt-[9px] pb-[25px] rounded-lg text-center">
-                                <div class="text-xs text-[#BABABA] mb-2">
-                                    <div>16 : 9</div>
-                                    <div>PDF maximum 25MB.</div>
-                                </div>
-                                <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] text-[#45A6FF] py-2 w-[145px] mx-auto cursor-pointer">Choose File</div>
-                            </div>
+                            <InputImageCrop 
+                                :label="'Background'"
+                                v-model="invitationBackground"
+                                :accept="'.png, .jpg, .jpeg'"
+                                :maxSize="5"
+                            />
                         </div>
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.invAltBackground"
+                                    v-model="form.invitationAltBackground"
                                     placeholder="Write here"
                                     :name="prefixName+'invaltbackground'"
                                     :label="'Alt Background'"
@@ -234,7 +230,7 @@
             <div class="flex items-center justify-between">
                 <div></div>
                 <!-- <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div> -->
-                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+                <div @click="putData(form)" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
         </div>
     </div>
@@ -246,26 +242,78 @@ export default {
     data() {
         return {
             prefixName: 'homepage',
-            form: {
-                judulIndonesia: '',
-                subJudulAtas: '',
-                subJudulBawah: '',
-                judulEnglish: '',
-                topSubtitle: '',
-                bottomSubtitle: '',
-                altBackground: '',
-                textButtonId: '',
-                textButtonEn: '',
-                actionLink: '',
-                invJudulId: '',
-                invJudulEn: '',
-                invSubJudulId: '',
-                invSubJudulEn: '',
-                invButtonTextId: '',
-                invButtonTextEn: '',
-                invAltBackground: ''
-            },
+            form: undefined,
+            heroBackground: "",
+            invitationBackground: "",
         }
     },
+    computed: {
+        lang() {
+            return this.$i18n.locale
+        },
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
+        },
+        basePath() {
+            return process.env.BASE_URL
+        }
+    },
+    mounted() {
+        this.initialize()
+    },
+    methods: {
+        initialize() {
+            this.masterPoint()
+        },
+
+        async masterPoint() {
+            await this.$apiBase.get('homepages/').then(res => {
+                this.heroBackground= {
+                    displayImage: res.data.heroBackground,
+                    file: null
+                }
+                this.invitationBackground= {
+                    displayImage: res.data.invitationBackground,
+                    file: null
+                }
+                this.form =  res.data
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+        
+        async uploadImage(image, untuk, name) {
+            if (image instanceof Blob){
+                var data = new FormData();
+                data.append(untuk, image, name);
+                await this.$apiBase.put('homepages/', data).then(res => {
+                    console.log(res.data)
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+        },
+        save() {
+            this.putData(this.form) 
+        },
+        async putData(data) {
+            await this.$apiBase.put('homepages/', data).then(res => {
+                const data = res.data
+                alert(data.message)
+                if (this.heroBackground.file !== null) {
+                    this.uploadImage(this.heroBackground.file, "heroBackground", this.heroBackground.name)
+                }
+                if (this.invitationBackground.file !== null) {
+                    this.uploadImage(this.invitationBackground.file, "invitationBackground", this.invitationBackground.name)
+                }
+                this.$nextTick(() => {
+                    this.initialize()
+                })
+
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+    }
 }
 </script>

@@ -9759,6 +9759,11 @@ vue2-datepicker@^3.11.0:
   dependencies:
     date-format-parse "^0.2.7"
 
+vue2-filters@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/vue2-filters/-/vue2-filters-0.14.0.tgz#f6cd4643f6af806d11d9eab8320c5b7eb2381d9c"
+  integrity sha512-2tFWC6gx1SVIr+6VXoufkL+bZa8Gn0/P09T/bnGjOEAGH1+eVT05bPm/VF2V/nL/HMyWkLdlvxKh9JNqpfFlyw==
+
 vue@^2.6.12, vue@^2.7.10:
   version "2.7.13"
   resolved "https://registry.npmjs.org/vue/-/vue-2.7.13.tgz"

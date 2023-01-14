@@ -12,7 +12,7 @@
                 :editable="false"
                 :input-attr="{name:name, id:name}"
                 :disabled="disabled"
-                class=""
+                :disabled-date="disabledRange"
             />
         </client-only>
     </div>
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-    props: ['value','name', 'placeholder', 'label', 'disabled', 'format'],
+    props: ['value','name', 'placeholder', 'label', 'disabled', 'format',,'disabledBefore','disabledDate'],
     data() {
         return {
             tanggal: '',
@@ -41,11 +41,17 @@ export default {
         initialize() {
             // console.log(this.value)
             if (this.value) {
-                // console.log(this.value)
                 this.tanggal = this.$dayjs(this.value).format('YYYY-MM-DD');
-                // console.log(this.tanggal)
+            }
+        },
+        disabledRange(date) {
+            if (this.disabledBefore && this.disabledBefore === true) {
+                var hariIni = this.disabledDate ? new Date(this.disabledDate) :  new Date()
+                var kemarin = hariIni.setDate(hariIni.getDate() - 1)
+                return date <= kemarin
             }
         }
+
     }
 }
 </script>

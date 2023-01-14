@@ -120,7 +120,7 @@
         <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div v-if="dataDetail.statusVerification === 1" class="flex gap-x-6  font-semibold">
+                <div v-if="dataDetail.statusVerification.id === 1" class="flex gap-x-6  font-semibold">
                     <div @click="btnRejectIndividu" class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
                     <div @click="btnAccept" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
                 </div>

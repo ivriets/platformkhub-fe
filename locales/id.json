@@ -53,11 +53,14 @@
     "jpg or png no larger than": "jpg atau png tidak lebih dari",
     "Save": "Simpan",
     "Cancel": "Batal",
+    "provinsi": "provinsi",
     "Provinsi": "Provinsi",
     "Kota": "Kota", 
     "KotaKab": "Kota / Kabupaten",
     "Pin Location": "Pin Lokasi",
     "Jalan": "Jalan",
-    "Pilih Kota / Kabupaten":"Pilih Kota / Kabupaten"
+    "Pilih Kota / Kabupaten":"Pilih Kota / Kabupaten",
+    "gambarUtama": "Gambar Utama",
+    "tidak melebihi": "tidak melebihi"
 
 }

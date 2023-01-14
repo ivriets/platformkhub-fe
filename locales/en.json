@@ -54,10 +54,14 @@
     "Save": "Save",
     "Cancel": "Batal",
     "provinsi": "pronvince",
+    "Provinsi": "Pronvince",
     "Kota": "City", 
     "KotaKab": "City",
     "Pin Location": "Pin Location",
     "Jalan": "Street",
-    "Pilih Kota / Kabupaten": "Select City"
+    "Pilih Kota / Kabupaten": "Select City",
+    "gambarUtama": "Main Image",
+    "tidak melebihi": "no larger than"
+
 
 }

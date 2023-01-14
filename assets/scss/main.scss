@@ -33,6 +33,7 @@ $warna-latar-tujuh: #4B4B9D;
 /// BACKGROUND COLOR ///
 body {
     background-color: $warna-body;
+    margin: 0 !important;
 }
 
 .bg-warna-utama {
@@ -735,4 +736,22 @@ body {
         color: #444;
     }
 
+}
+.btn-tambah {
+    color: $warna-empat;
+    font-weight: 500;
+    text-decoration: underline;
+    display: inline-block;
+    transition: all 0.25s ease-in-out;
+    &::before {
+        content: '+';
+        display: inline-block;
+        text-decoration: none;
+        font-weight: 700;
+        vertical-align: middle;
+        margin-right: 3px;
+    }
+    &:hover {
+        color: lighten($warna-empat, 50%);
+    }
 }

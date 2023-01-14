@@ -20,13 +20,14 @@
             @keyup.esc="keyEsc"
             @keyup="keyup"
         >
+        <div v-if="counter && counter === true && max && parseInt(max) > 0" class="text-xs text-warna-dua mt-1">{{value.length}}/{{max}}</div>
     </div>
 </template>
 
 
 <script>
 export default {
-    props: ['value','name', 'placeholder', 'label', 'max','disabled'],
+    props: ['value','name', 'placeholder', 'label', 'max','disabled', 'counter'],
     data() {
         return {
             

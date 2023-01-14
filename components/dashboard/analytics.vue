@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="font-semibold text-warna-dua cursor-pointer">Morea</div>
+                <div class="font-semibold text-warna-dua cursor-pointer">More</div>
             </div>
             <div class="col-span-6 p-3">
                 <div class="bg-white rounded-3xl shadow-md border border-gray-100 p-6 text-warna-dua">

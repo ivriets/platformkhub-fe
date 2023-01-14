@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <div class="h-screen">
         verifing ....
-        {{codeToken}}
     </div>
 </template>
 <script>
