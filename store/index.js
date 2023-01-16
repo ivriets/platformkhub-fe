@@ -16,7 +16,7 @@ export const state = () => {
   }
   export const actions = {
     nuxtServerInit ({ commit }, { req }) {
-      let pageTitle = null
+      let pageTitle = ''
       commit('setPageTitle', pageTitle)
     },
     // nuxtServerInit ({ commit }, { req }) {

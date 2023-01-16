@@ -154,7 +154,6 @@
                             <div v-for="(item1, index1) in dataLabel" :key="'dL' + index1" v-show="item1.posisi==='kanan'" class="grid grid-cols-12 mb-4 break-words">
                                 <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
-                                    <!-- <div v-if="['statusActivity', 'typeVisibility'].includes(item1.value)" class=""> -->
                                     <div v-if="['statusActivity'].includes(item1.value)" class="">
                                         {{selectedFlag === 'indonesia' ? dataDetail[item1.value].nama[0] : dataDetail[item1.value].nama[1]}}
                                     </div>
@@ -177,17 +176,30 @@
 
                     <hr class="border-warna-tujuh mb-5">
                     <div class="mb-5">
+                        <!-- {{   dataDetail.deskripsi }} -->
+                        
+
                         <div class="text-warna-sembilan font-semibold mb-[16px]">About</div>
-                        <div v-if="dataDetail.deskripsi && dataDetail.deskripsi.length > 0" class="col-span-12 md:col-span-10 lg:col-span-10 p-3 bg-warna-body text-sm text-warna-sembilan font-normal">
-                            <div v-for="(i, index) in dataDetail[item1.value]" :key="'deskripsi' + index" >
-                                <div v-if="i.typeDeskripsi.id == 1">{{selectedFlag === 'indonesia' ? i.paragraf[0] : i.paragraf[1]}}</div>
+                        <div class="text-warna-sembilan bg-warna-body text-sm font-normal rounded">
+                            <ElementsDisplayDeskripsi 
+                                :list="dataDetail.deskripsi"
+                                :selectedFlag="selectedFlag"
+                                v-if="dataDetail.deskripsi"
+                            />
+                        </div>
+
+
+                        <!-- <div v-if="dataDetail.deskripsi && dataDetail.deskripsi.length > 0" class="col-span-12 md:col-span-10 lg:col-span-10 p-3 bg-warna-body text-sm text-warna-sembilan font-normal">
+                            <div v-for="(i, index) in dataDetail.deskripsi" :key="'deskripsi' + index" >
+                                <div v-if="i.typeDeskripsi == 2">{{selectedFlag === 'indonesia' ? i.paragraf[0] : i.paragraf[1]}}</div>
                                 <div v-else><img :src="basePath+i.imgDeskripsi_large" alt="deskripsi"></div>
                             </div>
                         </div>
                         <div v-else class="col-span-12 md:col-span-10 lg:col-span-10 p-3 bg-warna-body text-sm text-warna-sembilan font-normal">
                             <div class="">{{ selectedFlag === 'indonesia' ? dataDetail.deskripsiPanjang[0] : dataDetail.deskripsiPanjang[1] }}</div>
-                        </div>
+                        </div> -->
                     </div>
+                    <!-- <pre>{{ dataDetai }}</pre> -->
                         
                     <hr class="border-warna-tujuh mb-5">
                     
@@ -540,6 +552,7 @@ export default {
                 const data = res.data
 
                 this.dataDetail = data
+                // this.dataDetail.deskripsi = _.orderBy(this.dataDetail.deskripsi, 'sorter')
                 this.buttonSubmission = data.submission
 
                 this.$nextTick(() => {

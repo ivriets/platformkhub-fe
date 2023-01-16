@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .button-standar {
+        @apply px-8 py-2 bg-[#222659] rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold;
+    }
+}
+

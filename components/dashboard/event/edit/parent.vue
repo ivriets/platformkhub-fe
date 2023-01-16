@@ -186,13 +186,12 @@
                     </div>
 
                     <div class="">
-                        <div class="font-medium">Thumbnail</div>
-                        <div class="border-dashed border-2 border-warna-tujuh pt-[9px] pb-[25px] rounded-lg text-center">
-                            <div class="text-xs text-[#BABABA] mb-2">
-                                <div>JPG or PNG no larger than 1MB.</div>
-                            </div>
-                            <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[145px] mx-auto cursor-pointer">Pilih File</div>
-                        </div>
+                        <InputImageCrop 
+                            :label="'Logo Organisasi'"
+                            v-model="imgThumbnail"
+                            :accept="'.png, .jpg, .jpeg'"
+                            :maxSize="5"
+                        />
                     </div>
 
                     <hr class="border-warna-tujuh my-[28px]">
@@ -267,7 +266,6 @@
                 <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
         </div>
-        
     </div>
 </template>
 
@@ -309,7 +307,8 @@ export default {
             listTag: undefined,
             opsiProvinsi: [],
             provinsi: [],
-            opsiKota: []
+            opsiKota: [],
+            imgThumbnail: undefined,
 
         }
     },
@@ -412,11 +411,13 @@ export default {
                     typeIssues: _.flatMap(data.typeIssues, "id"),
                     tag: _.flatMap(_.map(data.tag, function(o){return o.pilihanTagId}), "id"),
                     lokasi:data.lokasi,
+                    deskripsi: data.deskripsi,
                 },
                 this.daftarGalleri = data.galleries
-                if (!data.deskripsi || data.deskripsi.length == 0){
-                    this.form.deskripsi = []
-                    this.form.deskripsi.push({"typeDeskripsi": 2,"imgDeskripsi": "","caption": ["-","-"],"paragraf": data.deskripsiPanjang, "sorter": 0})
+                
+                this.imgThumbnail= {
+                    displayImage: data.imgThumbnail,
+                    file: null
                 }
                 this.provinsi = data.lokasi[0].provinsi
                 const _this = this;

@@ -755,3 +755,116 @@ body {
         color: lighten($warna-empat, 50%);
     }
 }
+.table-standar {
+
+    background: #ffffff;
+    padding: 10px;
+  
+    thead {
+      margin-bottom: 10px;
+      th {
+        text-align: left !important;
+      }
+      border-bottom: 1px solid #444;
+      td, th {
+        padding: 10px;
+      }
+  
+    }
+    tbody {
+      td {
+        transition: all 0.1s ease-in-out;
+        padding: 10px !important;
+        // cursor: pointer;
+      }
+ 
+      
+      tr.tr-aktif {
+        td {
+          background: rgba(0, 0, 0, 0.05);
+          // color: #ffffff;
+          input {
+            color: #000000;
+          }
+        }
+      }
+    }
+    tfoot {
+      td {
+        background: $warna-utama;
+        color: #ffffff;
+        padding: 5px 10px;
+  
+  
+      }
+    }
+    td.text-center-important, th.text-center-important {
+      text-align: center !important;
+    }
+  }
+  .table-vertical-top {
+    td {
+        vertical-align: top !important;
+    }
+  }
+  
+
+  .table-zebra {
+    tbody {
+      td {
+        transition: all 0.1s ease-in-out;
+      }
+      tr {
+        // border-bottom: 1px solid #eaeaea;
+        &:hover {
+          td {
+            background: rgba(0, 0, 0, 0.05);
+          }
+        }
+      }
+      tr:nth-child(odd) {
+        td {
+            background: #FAFAFA;
+        }
+      }
+      tr:nth-child(even) {
+        td {
+            background: #FFFFFF;
+        }
+      }
+  
+    }
+  }
+
+.input-radio-1 {
+    vertical-align: middle;
+    border: 1px solid $warna-empat;
+    accent-color: $warna-empat;
+    cursor: pointer;
+
+}
+.button-edit {
+    background: url('/icons/icon-edit.png') no-repeat center center /contain;
+    transition: all 0.25s ease-in-out;
+    opacity: 1;
+    &:hover {
+        opacity: 0.5;
+    }
+}
+.button-delete {
+    background: url('/icons/icon-delete.png') no-repeat center center /contain;
+    transition: all 0.25s ease-in-out;
+    opacity: 1;
+    &:hover {
+        opacity: 0.5;
+    }
+
+}
+.zebra {
+    .zebra-item:nth-child(even) {
+        background: #fff;
+    }
+    .zebra-item:nth-child(odd) {
+        background: rgba(0, 0, 0, 0.05);
+    }
+}

@@ -287,7 +287,11 @@ export default {
                 console.log(err)
             })
         },
-
+        async putData(data) {
+            await this.$apiPlatform.put('moderator/resources/'+this.id+'/', data).then(res => {
+                console.log(res)
+            })
+        },
         setBreadcrumb() {
             this.childBreadcrumb = [
                 {

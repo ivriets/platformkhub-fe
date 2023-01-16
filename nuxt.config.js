@@ -15,7 +15,9 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Dashboard - KHUB Platform',
+    title: 'Dashboard - KHUB SuperAdmin',
+    titleTemplate: '%s | KHUB SuperAdmin',
+
     htmlAttrs: {
       lang: 'en'
     },
@@ -52,6 +54,7 @@ export default {
     { src: '~/plugins/click-outside' },
     { src: '~/plugins/date-picker', ssr: false },
     { src: '~/plugins/vue2-filters' },
+    { src: '~/plugins/drag', ssr:false },
     {
       src: "~/plugins/tinymce.js",
       mode: "client", 

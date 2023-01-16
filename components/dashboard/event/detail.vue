@@ -145,6 +145,11 @@
                                     <div v-else-if="['tanggalMulai', 'tanggalSelesai'].includes(item1.value)" class="">
                                         {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY hh:mm A') }}
                                     </div>
+                                    <div v-else-if="['lokasi'].includes(item1.value) && dataDetail[item1.value].length > 0" class="">
+                                        <div v-for="(i, index2) in dataDetail[item1.value]" :key="'lokasi' + index2">
+                                            {{i.jalan}}, {{i.kota}}, {{i.provinsi}}
+                                        </div>
+                                    </div>
                                     <div v-else>
                                         {{ dataDetail[item1.value]}}
                                     </div>
@@ -193,8 +198,8 @@
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
                 <div class="flex gap-x-6  font-semibold">
                     <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
-                    <div v-if="[1, 3, 4].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-need-revision rounded-lg text-white border border-need-revision cursor-pointer hover:bg-orange-700 font-semibold">Need Revision</div>
-                    <div v-if="[1, 3].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white border border-approved-accepted cursor-pointer hover:bg-green-700 font-semibold">Approve</div>
+                    <div  @click="btnRevisi" v-if="[1, 3, 4].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-need-revision rounded-lg text-white border border-need-revision cursor-pointer hover:bg-orange-700 font-semibold">Need Revision</div>
+                    <div  @click="btnApprove" v-if="[1, 3].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white border border-approved-accepted cursor-pointer hover:bg-green-700 font-semibold">Approve</div>
                 </div>
             </div>
         </div>
@@ -348,7 +353,6 @@ export default {
             this.loaderDetail = false
 
             await this.$apiPlatform.get('moderator/events/'+this.id+'/').then(res => {
-                console.log(res.data)
                 const data = res.data
 
                 this.dataDetail = data
@@ -362,6 +366,34 @@ export default {
             })
         },
 
+        async btnApprove() {
+            var data = {
+                "submission": 4,
+                "eventId": this.id
+            }
+            await this.$apiPlatform.post('moderator/events/', data).then(res => {                
+                this.$nextTick(() => {
+                    this.initialize()
+                })
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+        async btnRevisi() {
+            var data = {
+                "submission": 3,
+                "eventId": this.id,
+                "catatanModerasi": "content memerlukan revisi"
+            }
+            await this.$apiPlatform.post('moderator/events/', data).then(res => {
+                this.$nextTick(() => {
+                    this.initialize()
+                })
+            }).catch(err => {
+                console.log(err)
+            })
+
+        },
 
         btnBack() {
             this.$router.push('/moderations/event')
