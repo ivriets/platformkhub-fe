@@ -132,8 +132,16 @@
                             :prefixName="prefixName"
                         />
                     </div>
+                    <hr class="border-warna-tujuh my-10">
 
-                    <div class="text-xl mb-8 text-warna-utama">Impact</div>
+                    <div class="text-xl mb-8 text-warna-utama">Penerimaan Manfaat</div>
+
+                    <DashboardProgramEditActivityResult 
+                        v-model="activityResult"
+                    />
+                    <hr class="border-warna-tujuh my-10">
+
+
 
                     <div class="mb-10">
                         <div class="flex items-center mb-3">

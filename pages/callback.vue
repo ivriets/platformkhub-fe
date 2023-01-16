@@ -41,7 +41,13 @@ export default {
                     this.$cookies.set('jtoken', tokenCookiz)
                     window.location.href="/"
 
-            }).catch(err => console.log(err))
+            }).catch(err => 
+                this.$modal.show({
+                    type: 'warning',
+                    title: 'warning',
+                    body: 'Terdapat error pada komunikasi google, mohon login memakai username dan login'
+                })
+            )
         },
 
     }

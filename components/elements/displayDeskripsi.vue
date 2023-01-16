@@ -6,7 +6,7 @@
                     v-html="i.paragraf[tempBahasa]"
                 ></div>
                 <div v-else>
-                    <img :src="basePath+i.imgDeskripsiLarge" :alt="deskripsi">
+                    <img :src="basePath+i.imgDeskripsiLarge" :alt="i.caption[tempBahasa]">
                     <div class="mb-3" v-html="i.caption[tempBahasa]"></div>
                 </div>
             </div>

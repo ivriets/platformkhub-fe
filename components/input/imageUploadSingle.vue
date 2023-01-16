@@ -165,7 +165,7 @@ export default {
           if (this.value && (this.value.displayImage !== '' && this.value.displayImage !== undefined)) {
             // this.$emit('input', this.dataImage)
             // this.dataImage = this.value.image
-            console.log('valImage',this.value.displayImage)
+            // console.log('valImage',this.value.displayImage)
             const forPath = this.value.displayImage.substring(0,1) === '/' ? this.basePath : ''
             this.dataImage.displayImage = forPath + this.value.displayImage
           } else {
