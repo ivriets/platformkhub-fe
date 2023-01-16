@@ -157,7 +157,7 @@
                                 v-model="imgLogoOrganisasi"
                                 :accept="'.png, .jpg, .jpeg'"
                                 :maxSize="5"
-                            />
+                            /> 
                         </div>
                     </div>
                 </div>
