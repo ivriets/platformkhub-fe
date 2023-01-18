@@ -52,6 +52,7 @@
     "Type address here": "Type address here",
     "jpg or png no larger than": "jpg or png no larger than",
     "Save": "Save",
+    "Updating": "Updating",
     "Cancel": "Batal",
     "provinsi": "pronvince",
     "Provinsi": "Pronvince",
@@ -66,7 +67,11 @@
     "tidak melebihi": "no larger than",
     "Add": "Add",
     "Variable": "Variable",
-    "Dampak": "Impact"
+    "Dampak": "Impact",
+    "titleIdBlank": "Title (Bahasa Indonesia) still empty",
+    "titleEnBlank": "Title (English) still empty",
+    "tulisDisini": "Write Here",
+    "Pilih": "Select"
 
 
 }

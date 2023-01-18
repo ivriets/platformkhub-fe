@@ -27,32 +27,33 @@
         </div>
         <div class="relative " v-if="statusDropdown">
             <div class="bg-white absolute top-0 left-0 right-0 z-10 rounded-md shadow-md border border-warna-tujuh overflow-x-hidden overflow-y-auto max-h-96 " >
-                <button 
-                    v-for="(i, index) in listing"
-                    :key="name+'list'+index"
-                    class="list-options block w-full text-left text-sm py-0.5 px-2 bg-white text-black hover:bg-blue-500  hover:text-white disabled:hover:bg-white disabled:hover:text-gray-400 disabled:text-gray-400 cursor-pointer disabled:cursor-default"
-                    @click="pilihItem(i)"
-                    :disabled="selectedValue.map(e=>e[parseId]).includes(i[parseId])"
-                    >
-                        <span v-if="multilang && multilang === true">{{i[parseLabel][bahasa]}}</span>
-                        <span v-else>{{i[parseLabel]}}</span>
-                        
-                </button>
+                    <div v-if="(addNew && addNew === true) && newVal !== ''" class="text-sm text-gray-600 py-0.5 px-2">Press enter to make new {{ label }}</div>
+                    <button 
+                        v-for="(i, index) in listing"
+                        :key="name+'list'+index"
+                        class="list-options block w-full text-left text-sm py-0.5 px-2 bg-white  hover:bg-blue-500  hover:text-white disabled:hover:bg-white disabled:hover:text-gray-400 disabled:text-gray-400 cursor-pointer disabled:cursor-default"
+                        @click="pilihItem(i)"
+                        :class="i[parseId]==='listbaru' ? 'text-blue-500' : 'text-black' "
+                        :disabled="selectedValue.map(e=>e[parseId]).includes(i[parseId])"
+                        >
+                            <span v-if="multilang && multilang === true">{{i[parseLabel][bahasa]}}</span>
+                            <span v-else>{{i[parseLabel]}}</span>
+                            
+                    </button>
             </div>
         </div>
         <div class="chip-container mt-2 flex items-center flex-wrap gap-2">
+            <div v-for="(item, index) in selectedValue" :key="'listSel'+name+index" @click="removeChip(index)">
             <ElementsChip 
-                v-for="(item, index) in selectedValue" :key="'listSel'+name+index"
-                :item="item"
-                @click="removeChip"
+                :item="item[parseLabel][bahasa]"
             />
-            <!-- {{selectedValue}} -->
+            </div>
         </div>
     </div>
 </template>
 <script>
 export default {
-    props: ['value', 'label', 'name', 'disabled', 'placeholder', 'opsi', 'itemValue', 'itemLabel', 'multilang'],
+    props: ['value', 'label', 'name', 'disabled', 'placeholder', 'opsi', 'itemValue', 'itemLabel', 'multilang', 'addNew'],
     data() {
         return {
             statusDropdown: false,
@@ -86,51 +87,52 @@ export default {
     methods: {
         initialize() {
             this.listing = this.opsi
-            // if (this.value && this.value.length > 0) {
-            //     this.value.every((e,index) => {
-            //         // this.getItemApi(e)
-            //         const cari = this.opsi.filter(x => x[this.parseId]=== e)
-            //         if (cari && cari.length > 0) this.selectedValue.push(e)
-            //         if (this.value.length === index + 1) {
-            //             return false
-            //         } else {
-            //             return true;
-            //         }
-            //     })
-            // }
-
-
-            if (this.itemValue === "userId"){
-                if (this.listing.length > 0 && this.value && this.value.length > 0) {
-                    this.value.forEach(e => {
-                        const cari = this.listing.filter(x => x.userId === e.userId);
-                        if (cari && cari.length > 0) {
-                            this.selectedValue.push(e)
-                        }
-                    })
-                }
-            } else if (this.itemValue === "organisasiId") {
-                if (this.listing.length > 0 && this.value && this.value.length > 0) {
-                    this.value.forEach(e => {
-                        const cari = this.listing.filter(x => x.organisasiId === e.organisasiId);
-                        if (cari && cari.length > 0) {
-                            this.selectedValue.push(e)
-                        }
-                    })
-                }
-            } else if (this.itemValue === "id"){ 
-                if (this.listing.length > 0 && this.value && this.value.length > 0) {
-                    this.value.forEach(e => {
-                        const cari = this.listing.filter(x => x.id === e);
-                        if (cari && cari.length > 0) {
-                            this.selectedValue.push({
-                                id: e,
-                                label: cari[0][this.itemLabel] 
-                            })
-                        }
-                    })
-                }
+            if (this.value && this.value.length > 0) {
+                const unik = _.uniq(this.value)
+                unik.every((e,index) => {
+                    // this.getItemApi(e)
+                    const cari = this.listing.filter(x => x[this.parseId]=== e)
+                    if (cari && cari.length > 0) this.selectedValue.push(cari[0])
+                    if (this.value.length === index + 1) {
+                        return false
+                    } else {
+                        return true;
+                    }
+                })
             }
+
+
+            // if (this.itemValue === "userId"){
+            //     if (this.listing.length > 0 && this.value && this.value.length > 0) {
+            //         this.value.forEach(e => {
+            //             const cari = this.listing.filter(x => x.userId === e.userId);
+            //             if (cari && cari.length > 0) {
+            //                 this.selectedValue.push(e)
+            //             }
+            //         })
+            //     }
+            // } else if (this.itemValue === "organisasiId") {
+            //     if (this.listing.length > 0 && this.value && this.value.length > 0) {
+            //         this.value.forEach(e => {
+            //             const cari = this.listing.filter(x => x.organisasiId === e.organisasiId);
+            //             if (cari && cari.length > 0) {
+            //                 this.selectedValue.push(e)
+            //             }
+            //         })
+            //     }
+            // } else if (this.itemValue === "id"){ 
+            //     if (this.listing.length > 0 && this.value && this.value.length > 0) {
+            //         this.value.forEach(e => {
+            //             const cari = this.listing.filter(x => x.id === e);
+            //             if (cari && cari.length > 0) {
+            //                 this.selectedValue.push({
+            //                     id: e,
+            //                     label: cari[0][this.itemLabel] 
+            //                 })
+            //             }
+            //         })
+            //     }
+            // }
         },
 
         focusText() {
@@ -141,13 +143,22 @@ export default {
         async getApi(val) {
             var listingFilter = []
             if (val === '' || val === undefined) {
-                listingFilter = this.opsi
+                listingFilter = this.listing
             } else {
                 listingFilter = this.opsi.filter(e => { 
                     return e[this.itemLabel].toString().toLowerCase().includes(val.toLowerCase())
                 })
             }
-            this.statusDropdown = listingFilter.length > 0 ? true : false
+            // this.statusDropdown = listingFilter.length > 0 ? true : false
+            this.statusDropdown = true
+            // if (this.addNew && this.addNew == true) {
+            //     const addNew = {
+            //         [this.parseId] : 'listbaru',
+            //         [this.parseLabel]: this.multilang && this.multilang === true ?  ['Baru', 'Baru'] : 'Baru'
+            //     }
+            //     listingFilter.unshift(addNew)
+            // }
+
             this.listing = listingFilter
         },
 
@@ -156,11 +167,22 @@ export default {
         },
 
         submitOpsi() {
-            if (this.listing.length > 0) {
-                const pertama = this.listing[0]
-                const reduceListing = this.selectedValue.map(e=>e[this.parseId]).includes(pertama[this.parseId])
-                if (!reduceListing) this.pilihItem(pertama)
-                // this.pilihItem(this.listing[0])
+            console.log('dienter')
+            // if (this.listing.length > 0) {
+            //     const pertama = this.listing[0]
+            //     const reduceListing = this.selectedValue.map(e=>e[this.parseId]).includes(pertama[this.parseId])
+            //     if (!reduceListing) this.pilihItem(pertama)
+            // }
+            if (this.addNew && this.addNew === true) {
+                const addNew = {
+                    [this.parseId] : this.newVal,
+                    [this.parseLabel]: this.multilang && this.multilang === true ?  [this.newVal, this.newVal] : this.newVal
+                }
+                this.selectedValue.push(addNew)
+                this.$nextTick(() => {
+                    this.newVal = ''
+                    this.updateValue()
+                })
             }
         },
 
@@ -186,24 +208,30 @@ export default {
         },
 
         updateValue() {
-             this.$emit('input',this.selectedValue.map(e=> e[this.itemValue]))
+            const unikval = _.uniq(this.selectedValue.map(e=> e[this.itemValue]))
+             this.$emit('input', unikval)
         },
 
-        removeChip(value){
+        removeChip(index){
             // console.log(value)
-            const posisi = this.selectedValue.indexOf(value)
-            this.selectedValue.splice(posisi, 1)
+            // const posisi = this.selectedValue.indexOf(value)
+            // this.selectedValue.splice(posisi, 1)
+            // this.$nextTick(() => {
+            //     this.updateValue();
+            // })
+           this.selectedValue.splice(index, 1);
+            this.selectedValue = _.uniq(this.selectedValue)
             this.$nextTick(() => {
-                this.updateValue();
+                this.updateValue()
             })
         },
 
         keyTab(event) {
-            const newLabel = this.label && this.label !== '' ? this.label : 'isian '
-            if (this.listing.length === 0) {
-                this.$toast.warning(newLabel + ' mohon diisi')
-                event.preventDefault()
-            } 
+            // const newLabel = this.label && this.label !== '' ? this.label : 'isian '
+            // if (this.listing.length === 0) {
+            //     this.$toast.warning(newLabel + ' mohon diisi')
+            //     event.preventDefault()
+            // } 
         }
     }
 }

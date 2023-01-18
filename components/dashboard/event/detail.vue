@@ -1,7 +1,7 @@
 <template>
      <div class="py-[48px]">
         <div class="mb-6">
-            <ElementsBreadcrumb 
+            <ElementsBreadcrumbBaru 
                 :parent="'Events'"
                 :linkParent="'/moderations/event'"
                 :child="childBreadcrumb"
@@ -316,7 +316,17 @@ export default {
         },
         basePath() {
             return process.env.BASE_URL
+        },
+        childBreadcrumb() {
+            return [
+                {
+                    label: 'Detail',
+                    link: ''
+                }
+            ]
         }
+
+
     },
     watch: {
         lang() {
@@ -346,7 +356,7 @@ export default {
         initialize() {
             this.$store.commit('setPageTitle', this.title)
             this.masterPoint()
-            this.setBreadcrumb()
+            // this.setBreadcrumb()
         },
 
         async masterPoint() {
@@ -421,14 +431,14 @@ export default {
             this.closeDrop()
         },
 
-         setBreadcrumb() {
-            this.childBreadcrumb = [
-                {
-                    label: 'Detail',
-                    link: ''
-                }
-            ]
-        }
+        //  setBreadcrumb() {
+        //     this.childBreadcrumb = [
+        //         {
+        //             label: 'Detail',
+        //             link: ''
+        //         }
+        //     ]
+        // }
 
     },
 }

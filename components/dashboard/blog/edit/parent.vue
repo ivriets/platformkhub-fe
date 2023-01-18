@@ -59,11 +59,11 @@
                             />
                         </div> -->
 
-                        <InputContentSection2 
+                        <InputContentSectionBaru
                             v-if="deskripsi"
                             v-model="deskripsi"
                         />
-                      <pre> diluar:  {{ deskripsi }} </pre>
+                      <!-- <pre> diluar:  {{ deskripsi }} </pre> -->
                     </div>
 
                 </div>
@@ -72,10 +72,9 @@
                         <div class="">
                             <div class="flex items-center text-sm">
                                 <div class="text-warna-sembilan">Status:</div>
-                                <div v-if="dataDetail.submission === 1" class="text-under-review ml-1">Under Review</div>
-                                <div v-if="dataDetail.submission === 2" class="text-draft ml-1">Draft</div>
-                                <div v-if="dataDetail.submission === 3" class="text-need-revision ml-1">Need Revision</div>
-                                <div v-if="dataDetail.submission === 4" class="text-approved-accepted ml-1">Approved</div>
+                                <ElementsDisplayStatus 
+                                    :submission="dataDetail.submission"
+                                />
                             </div>
                             <div class="flex items-center text-sm text-warna-sembilan">
                                 <div class="">Bookmark by: </div>
@@ -92,16 +91,16 @@
                             :multiple="false"
                             :maxSize="5"
                         /> -->
-                        <!-- <InputImageUploadSingle 
+                        <InputImageUploadSingle 
                             :label="'Thumbnail'"
                             v-model="imgThumbnail"
                             :accept="'.png, .jpg, .jpeg'"
                             :maxSize="1"
                             :useCrop="true"
-                            :cropRatio="1"
+                            :cropRatio="4/3"
                             v-if="imageThumbnailLoader"
                             :key="'imgthumbnail'+imageThumbnailKey"
-                        /> -->
+                        />
 
 
                     </div>
@@ -180,20 +179,23 @@
                             :itemLabel="'label'"
                             :key="prefixName+'tag'"
                             :multilang="true"
+                            :addNew="true"
 
                         />
                     </div>
+                    <!-- {{form.blogsTag}} -->
+
 
                 </div>
             </div>
         </div>
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
-                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div @click="simpan" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+                <button @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</button>
+                <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
-        <pre>{{   form }}</pre>
+        <!-- <pre>{{   form }}</pre> -->
     </div>
 </template>
 
@@ -202,6 +204,7 @@
 export default {
     data() {
         return {
+            btnText: 'Save',
             prefixName: 'blog',
             maxTitle: 80,
             dataDetail: null,
@@ -222,17 +225,13 @@ export default {
                 tag: undefined,
             },
             opsiRadio: [],
-            imgThumbnail: undefined, 
-            opsiTag: [
-                {
-                    id: 1,
-                    label: ['Pembelajaran', 'Pembelajaran']
-                },
-                {
-                    id: 2,
-                    label: ['Kekerasan', 'Kekerasan']
-                }
-            ],
+            imgThumbnail: {
+                file: null,
+                displayImage: ''
+            },
+            imageThumbnailLoader: false,
+            imageThumbnailKey: 0,
+            opsiTag: [],
             listTag: undefined, 
         }
     },
@@ -291,8 +290,9 @@ export default {
     methods: {
         initialize() {
             // this.setBreadcrumb()
+            this.btnText = 'Save'
+
             this.opsiRadio = this.kategoriArtikel
-            console.log(this.typeOrganisasi)
             this.masterPoint()
         },
 
@@ -317,50 +317,92 @@ export default {
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
-                    blogsTag: _.flatMap(data.blogsTag, "id"),
+                    blogsTag: _.flatMap(data.blogsTag, "pilihanTagId.id"),
                 }
-                this.imgThumbnail = data.imgThumbnail
+                this.imgThumbnail.displayImage = data.imgThumbnail
                 this.deskripsi.list = this.form.deskripsi
-                if (!data.deskripsi || data.deskripsi.length == 0){
-                    forDeskripsi = []
-                    forDeskripsi.push({"typeDeskripsi": 2,"imgDeskripsi": "","caption": ["-","-"],"paragraf": data.deskripsiPanjang, "sorter": 0})
-                    this.form.deskripsi = forDeskripsi
-                } else {
-                    this.form.deskripsi = data.deskripsi
-                }
+
+                this.$nextTick(() => {
+                    this.imageThumbnailLoader = true
+                    this.imageThumbnailKey +=1
+                })
+                
+                // if (!data.deskripsi || data.deskripsi.length == 0){
+                //     forDeskripsi = []
+                //     forDeskripsi.push({"typeDeskripsi": 2,"imgDeskripsi": "","caption": ["-","-"],"paragraf": data.deskripsiPanjang, "sorter": 0})
+                //     this.form.deskripsi = forDeskripsi
+                // } else {
+                //     this.form.deskripsi = data.deskripsi
+                // }
             }).catch(err => {
                 console.log(err)
             })
         },
-
+        errorNotif(msg) {
+            this.$toast.show({
+                type: 'danger',
+                title: 'Error',
+                message: msg,
+            })
+        },
+        focusField(id) {
+            document.getElementById(this.prefixName + id).focus()
+        },
+        errorField(msg, id) {
+            this.errorNotif(msg);
+            this.focusField(id)
+        },
         simpan() {
-            console.log(this.form)
 
-            this.putData()
+
+            console.log(this.form)
+            console.log(this.deskripsi)
+            if (this.form.judulArtikel[0] === '') {
+                this.errorField(this.$t('titleIdBlank'), 'titleid')
+            } else if (this.form.judulArtikel[1]==='') {
+                this.errorField(this.$t('titleEnBlank'), 'titleen')
+            } else {
+                this.putData()
+            }
+
         },
 
         async putData() {
-            this.form.kategoriArtikel = [this.form.kategoriArtikel]
-            await this.$apiPlatform.put('moderator/blogs/'+this.id+'/', this.form).then(res => {
+            this.btnText = 'Updating'
+
+            const forSimpan = _.cloneDeep(this.form)
+            forSimpan.kategoriArtikel = [forSimpan.kategoriArtikel]
+            // forSimpan.deskripsi = this.deskripsi
+
+            await this.$apiPlatform.put('moderator/blogs/'+this.id+'/', forSimpan).then(res => {
+
+            if (this.imgThumbnail.file !== null) {
+                this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
+            } else {
                 console.log(res)
+                this.btnText = 'Save'
+
                 this.$toast.show('Blog updated successfuly')
                 this.initialize()
+            }
+
+
+
+            }).catch(err => {
+                this.btnText = 'Save'
             })
         },
-        // setBreadcrumb() {
-        //     this.childBreadcrumb = [
-        //         {
-        //             label: 'Detail',
-        //             link: '/moderations/blog/'+this.id
-        //         },
-        //         {
-        //             label: 'Editor',
-        //             link: ''
-        //         }
-        //     ]
-        // },
-
- 
+         async uploadImage(image, untuk, name) {
+            if (image instanceof Blob){
+                var data = new FormData();
+                data.append(untuk, image, name);
+                await this.$apiPlatform.put('moderator/blog/'+this.id+'/', data).then(res => {
+                    console.log(res.data)
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+        },
         btnBack() {
             this.$router.push('/moderations/blog/'+this.id)
         }

@@ -9,7 +9,6 @@
                             :name="prefixName+'provinsi'"
                             :opsi="opsiProvinsi"
                             :key="'prov'+keyProvinsi"
-                            :placeholder="$t('Pilih Provinsi')"
                         />
                     </div>
                 </div>
@@ -21,7 +20,6 @@
                         :opsi="opsiKotaKab"
                         :key="'kota'+keyKota"
                         :disabled="newVal.provinsi===''?true:false"
-                        :placeholder="$t('Pilih Kota / Kabupaten')"
                     />
                 </div>
                 <div class="col-span-12 ">
@@ -32,7 +30,7 @@
                             :label="$t('Jalan')"
                         />
                 </div>
-                <div class="col-span-12 ">
+                <div class="col-span-12 " v-if="map && map === true">
                     <InputPinLocation
                             v-model="newVal.pinLocation"
                             :label="$t('Pin Location')"
@@ -49,7 +47,7 @@
 </template>
 <script>
 export default {
-    props: ['value','disabled','prefixName', 'colClass', 'btnText'],
+    props: ['value','disabled','prefixName', 'colClass', 'btnText', 'map'],
     data() {
         return {
             // btnText: 'Tambahkan',

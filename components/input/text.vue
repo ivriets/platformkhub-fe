@@ -9,7 +9,7 @@
             :id="name" 
             :ref="name"
             class="focus:outline-none w-full border border-warna-tujuh rounded-lg px-2 py-1.5 text-sm text-warna-utama placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
-            :placeholder="placeholder"
+            :placeholder="placeholder ? placeholder : $t('tulisDisini') "
             @input="handleInput"
             @change="handleInput"
             :value="value"

@@ -52,6 +52,7 @@
     "Type address here": "Ketikan alamat disini",
     "jpg or png no larger than": "jpg atau png tidak lebih dari",
     "Save": "Simpan",
+    "Updating": "Memperbaharui",
     "Cancel": "Batal",
     "provinsi": "provinsi",
     "Provinsi": "Provinsi",
@@ -65,7 +66,15 @@
     "tidak melebihi": "tidak melebihi",
     "Add": "Tambah",
     "Variable": "Variabel",
-    "Dampak": "Dampak"
+    "Dampak": "Dampak",
+    "titleIdBlank": "Judul (Bahasa Indonesia) masih kosong",
+    "titleEnBlank": "Judul (English) masih kosong",
+    "tulisDisini": "Tulis di sini",
+    "Pilih": "Pilih",
+    "Event": "Acara"
+
+
+
 
 
 }

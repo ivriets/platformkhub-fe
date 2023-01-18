@@ -5,7 +5,7 @@
         </div>
         <client-only>
             <date-picker
-                :placeholder="placeholder"
+                :placeholder="placeholder ? placeholder : $t('tulisDisini')"
                 :format="format ? format : 'DD MMMM YYYY'"
                 v-model="tanggal" 
                 value-type="YYYY-MM-DD"
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-    props: ['value','name', 'placeholder', 'label', 'disabled', 'format',,'disabledBefore','disabledDate'],
+    props: ['value','name', 'placeholder', 'label', 'disabled', 'format','disabledBefore','disabledDate'],
     data() {
         return {
             tanggal: '',

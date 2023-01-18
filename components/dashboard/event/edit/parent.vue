@@ -1,9 +1,9 @@
 <template>
     <div v-if="form" class="py-[48px]">
         <div class="mb-6">
-            <ElementsBreadcrumb 
+            <ElementsBreadcrumbBaru 
                 :parent="'Events'"
-                :linkParent="'/moderations/eventent'"
+                :linkParent="'/moderations/event'"
                 :child="childBreadcrumb"
             />
         </div>
@@ -17,8 +17,9 @@
                             :name="prefixName+'titleid'"
                             :label="'Title (Bahasa Indonesia)'"
                             :max="maxTitle"
+                            :counter="true"
                         />
-                        <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[0].length}}/{{maxTitle}}</div>
+                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[0].length}}/{{maxTitle}}</div> -->
                     </div>
 
                     <div class="">
@@ -28,32 +29,41 @@
                             :name="prefixName+'titleen'"
                             :label="'Title (English)'"
                             :max="maxTitle"
+                            :counter="true"
                         />
-                        <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[1].length}}/{{maxTitle}}</div>
+                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[1].length}}/{{maxTitle}}</div> -->
                     </div>
                     
                     <hr class="border-warna-tujuh my-10">
 
-                    <div class="text-warna-utama mb-[28px]">Registration Type</div>
-
+                    <!-- <div class="text-warna-utama mb-[28px]">Registration Type</div> -->
+                    <div class="text-xl text-warna-utama mb-[28px]">Registration Type</div>
+                        <InputRadio 
+                            v-model="form.kategoriArtikel"
+                            :label="''"
+                            :opsiRadio="opsiRadio"
+                            :name="prefixName+'kategoriartikel'"
+                            :orientasi="'horizontal'"
+                        />
                     <hr class="border-warna-tujuh my-10">
 
                     <div class="text-xl text-warna-utama mb-[28px]">Registration Date</div>
                     <div class="grid grid-cols-12 gap-2">
-                        <div v-if="form.tanggalMulai" class="col-span-12 lg:col-span-6 mr-5 md:mr-0">
+                        <div  class="col-span-12 md:col-span-6 ">
                             <InputDate
-                                v-model="form.tanggalMulai"
-                                :value="form.tanggalMulai"
+                                v-model="form.registrationStartDate"
                                 :label="'Start Date'"
                                 :name="prefixName+'tanggalmulai'"
                             />
                         </div>
-                        <div v-if="form.tanggalSelesai" class="col-span-12 lg:col-span-6 ml-5 md:ml-0">
+                        <div  class="col-span-12 md:col-span-6">
                             <InputDate
-                                v-model="form.tanggalSelesai"
-                                :value="form.tanggalSelesai"
+                                v-model="form.registrationEndDate"
                                 :label="'End Date'"
                                 :name="prefixName+'tanggalselesai'"
+                                :disabledBefore="true"
+                                :disabledDate="form.registrationStartDate"
+
                             />
                         </div>
                     </div>
@@ -62,7 +72,7 @@
 
                     <div class="text-xl text-warna-utama mb-[28px]">Event Date</div>
                     <div class="grid grid-cols-12 gap-2">
-                        <div v-if="form.tanggalMulai" class="col-span-12 lg:col-span-6 mr-5 md:mr-0">
+                        <div  class="col-span-12 lg:col-span-6 mr-5 md:mr-0">
                             <InputDate
                                 v-model="form.tanggalMulai"
                                 :value="form.tanggalMulai"
@@ -70,35 +80,89 @@
                                 :name="prefixName+'tanggalmulai'"
                             />
                         </div>
-                        <div v-if="form.tanggalSelesai" class="col-span-12 lg:col-span-6 ml-5 md:ml-0">
+                        <div  class="col-span-12 lg:col-span-6 ml-5 md:ml-0">
                             <InputDate
                                 v-model="form.tanggalSelesai"
                                 :value="form.tanggalSelesai"
                                 :label="'End Date'"
                                 :name="prefixName+'tanggalselesai'"
+                                :disabledBefore="true"
+                                :disabledDate="form.tanggalMulai"
+
                             />
                         </div>
                     </div>
 
                     <hr class="border-warna-tujuh my-10">
 
-                    <div class="text-xl text-warna-utama mb-[28px]">About</div>
-                    <InputContentSection 
+                    <div class="text-xl text-warna-utama mb-[28px]">Content</div>
+                        <InputContentSectionBaru
+                            v-if="deskripsi"
+                            v-model="deskripsi"
+                        />
+
+                    <!-- <InputContentSection 
                         v-if="form.deskripsi"
                         v-model="form.deskripsi"
                         :list="form.deskripsi"
-                    />
-                    <div class="text-xl text-warna-utama mb-[28px]">Event Location</div>
+                    /> -->
+                    <hr class="border-warna-tujuh my-10">
+
+                    <div class="text-xl text-warna-utama mb-[28px]">Kontak Acara</div>
+
+                    <div class="grid grid-cols-12 gap-5 mb-10">
+                        <div class="col-span-12 md:col-span-6">
+                            <InputText 
+                                v-model="form.kontakEmail"
+                                :label="'Surel'"
+                                :placeholder="'Tulis di sini'"
+                                :name="prefixName+'kontakemail'"
+                            />
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <InputText 
+                                v-model="form.kontakNama"
+                                :label="'Kontak'"
+                                :placeholder="'Tulis di sini'"
+                                :name="prefixName+'kontaknama'"
+                            />
+                        </div>
+                    </div>
+                    <div class="text-xl text-warna-utama mb-1">Tipe Acara</div>
+                        <div class="mb-8">
+                            <InputSelect 
+                                v-model="tipeAcara"
+                                :opsi="opsiTipeAcara"
+                            />
+                        </div>
+                    <div v-if="[3,1].includes(tipeAcara)">
+                        <div class="text-xl text-warna-utama mb-1">Lokasi Online</div>
+                        <div class="mb-8">
+                            <FormLokasiOnline 
+                                v-model="form.lokasiOnline[0]"
+                                :prefixName="prefixName"
+                                v-if="loaderAll"
+                                :key="'lokasionline'+keyMaster"
+                            />
+                        </div>
+                    </div>
+
+                    <div v-if="[2,1].includes(tipeAcara)">
+                        <div class="text-xl text-warna-utama mb-1">Lokasi Offline</div>
+                        <FormLokasi 
+                            v-model="form.lokasi[0]"
+                            :prefixName="prefixName"
+                            v-if="loaderAll"
+                            :key="'lokasi'+keyMaster"
+                            :map="false"
+
+                        />
+                    </div>
+
+
+                    <!-- <div class="text-xl text-warna-utama mb-[28px]">Event Location</div>
                     <div class="grid grid-cols-12 gap-2 mb-10">
                         <div class="col-span-12 lg:col-span-6 mr-5 md:mr-0">
-                            <InputSelect 
-                                v-model="form.lokasi[0].provinsi"
-                                :name="prefixName+'provinsi'"
-                                :label="'Provinsi'"
-                                :opsi="opsiProvinsi"
-                                :placeholder="form.lokasi[0].provinsi"
-
-                            />
                         </div>
                             <div class="col-span-12 lg:col-span-6 ml-5 md:ml-0">
                             
@@ -125,49 +189,23 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="mb-10">
-                        <InputText
+                        <!-- <InputText
                             v-model="form.lokasi[0].jalan"
                             placeholder="Tulis disini"
                             :label="'Address'"
                             :name="prefixName+'address'"
+                        /> -->
+                    </div>
+
+                    <div class="my-10">
+                        <InputGalleries 
+                            v-model="daftarGalleri"
                         />
                     </div>
 
-                    <div class="mb-5">
-                        <div class="text-xl mb-1">Gallery</div>
-                        <div class="border-dashed border-2 border-warna-tujuh pt-[25px] pb-[25px] rounded-lg text-center">
-                            <div class="text-xs text-[#BABABA] mb-2">
-                                <div>You can choose multiple images.</div>
-                                <div>JPG, GIF, PNG no larger than 1 MB.</div>
-                            </div>
-                            <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[195px] mx-auto cursor-pointer">Choose File</div>
-                        </div>
-                    </div>
-
-
-                    <div class="flex items-center lg:gap-4 gap-2">
-                        <div v-for="(item, index) in daftarGalleri" :key="'galleri'+index" class="relative bg-white shadow-md border border-gray-50 rounded-xl">
-                            <img class="h-16" :src="basePath+item.imgGambar" alt="main-image">
-                            <div class="absolute top-0 right-0 bg-white rounded-full p-1 cursor-pointer flex items-center mr-2 mt-2 hover:bg-gray-100">
-                                <img class="w-[10px] h-[10px]" src="/icons/icon-close.png" alt="icon-delete">
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="">
-                        <div class="flex items-center mb-3">
-                            <div class="flex flex-grow text-xl mb-1">Testimony</div>
-                            <div class="text-sm text-warna-empat font-medium cursor-pointer underline">+ Add Testimony</div>
-                        </div>
-                        <div class="text-xs text-warna-delapan mb-3">Choose Testimony</div>
-                        <div class="">
-                            tabel
-                        </div>
-                    </div>
 
                 </div>
                 <div class="col-span-12 lg:col-span-3">
@@ -175,7 +213,9 @@
                         <div class="mb-6">
                             <div class="flex items-center text-sm">
                                 <div class="text-warna-sembilan">Status:</div>
-                                <div class="text-approved-accepted ml-1">Approved</div>
+                                <ElementsDisplayStatus 
+                                    :submission="form.submission"
+                                />
                             </div>
                             <div class="flex items-center text-sm text-warna-sembilan">
                                 <div class="">Bookmark by: </div>
@@ -266,6 +306,7 @@
                 <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
         </div>
+        <pre> {{ form }}</pre>
     </div>
 </template>
 
@@ -274,22 +315,42 @@
 export default {
     data() {
         return {
-            prefixName: 'blog',
+            prefixName: 'event',
             maxTitle: 80,
-            childBreadcrumb: [],
             form: {
-                judulActivity: undefined,
-                deskripsi: undefined,
-                typeAudience: undefined,
-                typeApproach: undefined,
-                typeIssues: undefined,
-                statusActivity: undefined,
-                tag: undefined,
-                tanggalMulai: undefined,
-                tanggalSelesai: undefined,
-                lokasi: undefined
+                judulActivity: ['',''],
+                deskripsi: ['',''],
+                typeAudience: ['',''],
+                typeApproach: ['',''],
+                typeIssues: ['',''],
+                statusActivity: {id:'', nama: ['','']},
+                tag: ['',''],
+                tanggalMulai: '',
+                tanggalSelesai: '',
+                lokasi: '',
+                registrationStartDate: '',
+                registrationEndDate: '',
+                kontakEmail: '',
+                kontakNama: ''
+                
             },
-            opsiRadio: [],
+            deskripsi: {
+                list: [],
+                deleted: [],
+                updated: [],
+                new: []
+            },
+
+            opsiRadio: [
+                {
+                    id: 1,
+                    label: ['KHUB (Gratis)', 'KHUB (Free)']
+                },
+                {
+                    id: 2,
+                    label: ['Tautan Eksternal', 'External Link']
+                }
+            ],
             opsiTag: [
                 {
                     id: 1,
@@ -309,6 +370,38 @@ export default {
             provinsi: [],
             opsiKota: [],
             imgThumbnail: undefined,
+            lokasi: {
+                    lokasiId: '',
+                  provinsi: '',
+                  kota: '',
+                  jalan: '',
+                  pinLocation: ''
+            },
+            lokasiOnline: {
+                lokasiOnlineId: '',
+                typeChannel: null,
+                url: '',
+                jadwal: '',
+                contactPerson: '',
+                telpReservasi: ''
+            },
+            tipeAcara: 1,
+            opsiTipeAcara: [
+                {
+                    id: 1,
+                    label: ['Luring & Daring','Offline & Online']
+                },
+                {
+                    id: 2,
+                    label: ['Luring','Offline']
+                },
+                {
+                    id: 3,
+                    label: ['Daring','Online']
+                }
+            ],
+            loaderAll: false,
+            keyMaster: 0
 
         }
     },
@@ -339,53 +432,74 @@ export default {
         },
         basePath() {
             return process.env.BASE_URL
+        },
+        childBreadcrumb() {
+            return [
+                {
+                    label: 'Detail',
+                    link: '/moderations/event/'+this.$route.params.id
+                },
+                {
+                    label: 'Editor',
+                    link: ''
+                }
+            ]
         }
+        
     },
     watch: {
-        form : {
-            immediate: true,
-            deep: true,
-            handler(newValue, oldValue) {
-                if (oldValue && newValue){
-                    if (oldValue.lokasi && newValue.lokasi){
-                        let _this = this
-                        if (this.form.lokasi[0].provinsi !== this.provinsi){
-                            this.provinsi = this.form.lokasi[0].provinsi
-                            this.$apiBase.get('kotakab?provinsi='+ this.form.lokasi[0].provinsi).then(res => {
-                                _this.opsiKota = _.map(res.data, function(o){
-                                    return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
-                                })
-                            }) 
-                        }
-                    }
-                }
+        tipeAcara(val) {
+            if (val === 2) {
+                this.form.lokasiOnline = [];
+                this.form.lokasi = [_.cloneDeep(this.lokasi)]
+            } else if (val === 3) {
+                this.form.lokasi = []
+                this.form.lokasiOnline = [_.cloneDeep(this.lokasiOnline)]
             }
         }
     },
+
+    // watch: {
+    //     form : {
+    //         immediate: true,
+    //         deep: true,
+    //         handler(newValue, oldValue) {
+    //             if (oldValue && newValue){
+    //                 if (oldValue.lokasi && newValue.lokasi){
+    //                     let _this = this
+    //                     if (this.form.lokasi[0].provinsi !== this.provinsi){
+    //                         this.provinsi = this.form.lokasi[0].provinsi
+    //                         this.$apiBase.get('kotakab?provinsi='+ this.form.lokasi[0].provinsi).then(res => {
+    //                             _this.opsiKota = _.map(res.data, function(o){
+    //                                 return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
+    //                             })
+    //                         }) 
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // },
     mounted() {
         this.initialize()
     },
     methods: {
         initialize() {
+            this.loaderAll = false
             this.masterPoint()
         },
 
         async masterPoint() {
-            this.setBreadcrumb()
-            await this.$apiBase.get('provinsi/').then(res => {
-                const data = res.data
-                this.opsiProvinsi = _.map(data, function(o){
-                    return {'id':o.provinsi, 'label':[o.provinsi, o.provinsi]}
-                })
+            // await this.$apiBase.get('provinsi/').then(res => {
+            //     const data = res.data
+            //     this.opsiProvinsi = _.map(data, function(o){
+            //         return {'id':o.provinsi, 'label':[o.provinsi, o.provinsi]}
+            //     })
 
-            }).catch(err => {
-                console.log(err)
-            })
-            await this.$apiPlatform.get('verificator/listIndividu/').then(res => {
-                this.listIndividu = res.data
-            }).catch(err => {
-                console.log(err)
-            })
+            // }).catch(err => {
+            //     console.log(err)
+            // })
+
             await this.$apiPlatform.get('verificator/listOrganisasi/').then(res => {
                 this.listOrganisasi = res.data
             }).catch(err => {
@@ -401,6 +515,7 @@ export default {
             await this.$apiPlatform.get('moderator/events/'+this.id+'/').then(res => {
                 var data = res.data
                 this.form = {
+                    submission: data.submission,
                     judulActivity: data.judulActivity,
                     deskripsi: data.deskripsi,
                     tanggalMulai: data.tanggalMulai,
@@ -410,38 +525,52 @@ export default {
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
                     tag: _.flatMap(_.map(data.tag, function(o){return o.pilihanTagId}), "id"),
-                    lokasi:data.lokasi,
+                    lokasi:data.lokasi && data.lokasi.length > 0 ? data.lokasi : [_.cloneDeep(this.lokasi)],
+                    lokasiOnline: data.lokasiOnline && data.lokasiOnline.length > 0 ? data.lokasiOnline : [_.cloneDeep(this.lokasiOnline)],
                     deskripsi: data.deskripsi,
+                    registrationStartDate: data.registrationStartDate ? data.registrationStartDate : '',
+                    registrationEndDate: data.registrationEndDate ? data.registrationEndDate: '',
+
+                    tipeRegistrasi: '',
+                    kontakEmail: '',
+                    kontakNama: ''
+
+
+
                 },
                 this.daftarGalleri = data.galleries
+                this.deskripsi.list = this.form.deskripsi
                 
                 this.imgThumbnail= {
                     displayImage: data.imgThumbnail,
                     file: null
                 }
-                this.provinsi = data.lokasi[0].provinsi
-                const _this = this;
-                this.$apiBase.get('kotakab?provinsi='+ this.provinsi).then(res => {
-                    _this.opsiKota = _.map(res.data, function(o){
-                        return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
-                    })
-                }) 
-                console.log(this.opsiKota)
+                // this.provinsi = data.lokasi[0].provinsi
+                // this.$apiBase.get('kotakab?provinsi='+ this.provinsi).then(res => {
+                //     _this.opsiKota = _.map(res.data, function(o){
+                //         return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
+                //     })
+                // }) 
+                // console.log(this.opsiKota)
+                this.$nextTick(() => {
+                    this.loaderAll = true
+                    this.keyMaster +=1
+                })
             })
         },
 
-        setBreadcrumb() {
-            this.childBreadcrumb = [
-                {
-                    label: 'Detail',
-                    link: '/moderations/event/'+this.id
-                },
-                {
-                    label: 'Editor',
-                    link: ''
-                }
-            ]
-        },
+        // setBreadcrumb() {
+        //     this.childBreadcrumb = [
+        //         {
+        //             label: 'Detail',
+        //             link: '/moderations/event/'+this.id
+        //         },
+        //         {
+        //             label: 'Editor',
+        //             link: ''
+        //         }
+        //     ]
+        // },
 
         btnBack() {
             this.$router.push('/moderations/event/'+this.id)

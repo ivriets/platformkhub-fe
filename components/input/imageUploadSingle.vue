@@ -151,10 +151,6 @@ export default {
   methods: {
       initialize() {
         this.stencilProps.aspectRatio = this.cropRatio && this.cropRatio !== '' ? this.cropRatio : 1;
-        // if (this.useCircle && this.useCircle === true) {
-        //   this.stencilProps['stencil-component']="circle-stencil"
-        //   this.stencilProps['previewClass'] = 'preview'
-        // }
           this.displayResetCounter = 0;
           // this.dataImage =  {
           //   displayImage: '',
@@ -163,11 +159,15 @@ export default {
           // }
 
           if (this.value && (this.value.displayImage !== '' && this.value.displayImage !== undefined)) {
-            // this.$emit('input', this.dataImage)
-            // this.dataImage = this.value.image
-            // console.log('valImage',this.value.displayImage)
+
             const forPath = this.value.displayImage.substring(0,1) === '/' ? this.basePath : ''
             this.dataImage.displayImage = forPath + this.value.displayImage
+          } else if (this.value !== '') {
+            const forPath = this.value.substring(0,1) === '/' ? this.basePath : ''
+            this.dataImage = {
+              displayImage: forPath + this.value,
+              file: null
+            }
           } else {
             this.dataImage = {
               displayImage: '',
