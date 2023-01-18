@@ -1,25 +1,52 @@
 <template>
     <div>
-        <div class="grid grid-cols-12 gap-5">
-            <div class="col-span-12 md:col-span-6">
-                <div class="mb-10 font-semibold">Berdasarkan Gender</div>
-                <div class="grid grid-cols-12 ">
-                    <div class="col-span-6">Laki-Laki</div>
-                    <div class="col-span-6">
-                        <InputNumber
-                            v-model="newVal.retentionSaatProgramMen"
-                            :name="prefixName+'retentionsaatprogrammen'"
-                            :label="'Men'"
-                            :step=0.1
-                        />
-                    </div>
-                </div>
+        <div class="text-xl mb-8 text-warna-utama">Penerimaan Manfaat</div>
+        <DashboardProgramEditArPenerimaManfaat 
+            v-model="newVal"
+            :prefixName="prefixName"
+        />
+        <hr class="border-warna-tujuh my-10">
+
+        <div class="text-xl my-8 text-warna-utama">{{ $t('Dampak') }}</div>
+        <DashboardProgramEditArBes 
+            v-model="newVal.baselineEndlineSurvey"
+            :prefixName="prefixName"
+        />
+        <hr class="border-warna-tujuh my-10">
+        <div class="text-xl mt-8 mb-3 text-warna-utama">Skor Pengukuran</div>
+        <DashboardProgramEditArSkorPengukuran 
+            v-model="newVal"
+            :prefixName="prefixName"
+        />
+        <hr class="border-warna-tujuh my-10">
+        <div class="text-lg font-semibold mb-8">Kepuasan</div>
+
+        <DashboardProgramEditArKepuasan 
+            v-model="newVal"
+            :prefixName="prefixName"
+        />
+        <hr class="border-warna-tujuh my-10">
+        <div class="text-xl mt-8 mb-3 text-warna-utama">Customer Acquisition Score (CAC)</div>
+        <div class="text-xs mb-5 text-gray-400">CAC = Total Biaya program/total penerima manfaat</div>
+        <div class="flex items-center mb-8">
+            <div class="w-56 ">
+                <InputNumber2 
+                    v-model="newVal.customerAcquisitionScore"
+                    :label="''"
+                    :name="'cac'+prefixName"
+                    :prefix="'IDR'"
+                />
             </div>
-            <div class="col-span-12 md:col-span-6">
-                <div class="mb-10 font-semibold">Berdasarkan Gender Difabel</div>
-            </div>
+            <div class="warna-dua ml-3">/ Penerima Manfaat</div>
         </div>
-        <pre>{{ newVal }}</pre>
+        <hr class="border-warna-tujuh my-10">
+        <div class="text-lg font-semibold mb-8">Net Promotor Score (NPS)</div>
+            <DashboardProgramEditArNps 
+                v-model="newVal"
+                :prefixName="prefixName"
+            />
+<!-- <pre>{{newVal}} </pre> -->
+
     </div>
 </template>
 <script>
@@ -27,7 +54,7 @@ export default {
     props: ['value', 'prefixName'],
     data() {
         return {
-
+            item: 1
         }
     },
     computed: {

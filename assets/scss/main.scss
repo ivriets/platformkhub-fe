@@ -308,9 +308,11 @@ body {
     }
     .chip-button {
         margin-left: 10px;
+        color: #D10D0D;
     }
     &:hover {
-        background: lighten($warna-dua, 50%);
+        color: $warna-utama;
+        background: #F1F1F1;
         .chip-button {
             color: #D10D0D;
         }
@@ -865,6 +867,17 @@ body {
         background: #fff;
     }
     .zebra-item:nth-child(odd) {
+        background: rgba(0, 0, 0, 0.05);
+    }
+}
+.ul-zebra {
+    li {
+        padding: 10px;
+    }
+    li:nth-child(even) {
+        background: #fff;
+    }
+    li:nth-child(odd) {
         background: rgba(0, 0, 0, 0.05);
     }
 }

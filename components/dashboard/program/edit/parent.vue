@@ -134,94 +134,14 @@
                     </div>
                     <hr class="border-warna-tujuh my-10">
 
-                    <div class="text-xl mb-8 text-warna-utama">Penerimaan Manfaat</div>
 
                     <DashboardProgramEditActivityResult 
                         v-model="activityResult"
+                        :prefixName="prefixName"
+                        v-if="activityResult"
                     />
                     <hr class="border-warna-tujuh my-10">
 
-
-
-                    <div class="mb-10">
-                        <div class="flex items-center mb-3">
-                            <div class="flex flex-grow font-semibold mb-1">Baseline-Endline Survey</div>
-                            <div class="flex items-center gap-x-1 py-2 px-3 cursor-pointer">
-                                <img class="w-4 h-4" src="/icons/icon-plus.png" alt="icon-add">
-                                <div class="text-sm text-warna-empat font-medium cursor-pointer underline">Add</div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-grow font-semibold mb-1">Variable Pengukuran</div>                        
-
-                    </div>
-
-
-                    <div v-if="activityResult" class="">
-                        <div class="flex flex-grow font-semibold mb-1 text-warna-utama">Retention</div>
-                            <div class="grid grid-cols-12 gap-5">
-                                <div class="col-span-12 lg:col-span-6">
-                                    <div class="my-6 text-warna-utama font-semibold">During the Program</div>
-                                    <div class="max-w-[250px]">
-                                        <div class="mb-5">
-                                            <InputNumber
-                                                v-model="activityResult.retentionSaatProgramMen"
-                                                :value="activityResult.retentionSaatProgramMen"
-                                                :name="prefixName+'retentionsaatprogrammen'"
-                                                :label="'Men'"
-                                                :step=0.1
-                                            />
-                                        </div>
-
-                                        <div class="mb-5">
-                                            <InputNumber
-                                                v-model="activityResult.retentionSaatProgramWomen"
-                                                :name="prefixName+'retentionsaatprogramwomen'"
-                                                :label="'Women'"
-                                                :step=1
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-span-12 lg:col-span-6">
-                                    <div class="my-6 text-warna-utama font-semibold">Post-Program</div>
-                                    <div class="max-w-[250px]">
-                                        <div class="mb-5">
-                                            <InputNumber
-                                                v-model="activityResult.retentionPascaProgramMen"
-                                                :name="prefixName+'retentionpascaprogrammen'"
-                                                :label="'Men'"
-                                                :step=1
-                                            />
-                                        </div>
-
-                                        <div class="mb-5">
-                                            <InputNumber
-                                                v-model="activityResult.retentionPascaProgramMen"
-                                                :name="prefixName+'retentionpasceprogramwomen'"
-                                                :label="'Women'"
-                                                :step=1
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-
-                    <hr class="border-warna-tujuh my-10">
-
-                    <div class="">
-                        <div class="font-semibold mb-1 text-warna-utama">Satisfaction</div>
-                    </div>
-
-
-
-                    <hr class="border-warna-tujuh my-10">
-
-                    <div class="">
-                        <div class="font-semibold mb-1 text-warna-utama">Customer Acquisition Score (CAC)</div>
-                    </div>
 
                 </div>
 
@@ -232,7 +152,9 @@
                         <div class="mb-6">
                             <div class="flex items-center text-sm">
                                 <div class="text-warna-sembilan">Status:</div>
-                                <div class="text-approved-accepted ml-1">Approved</div>
+                                <div class="text-approved-accepted ml-1">
+                                    <span>{{ originalResult.statusActivity.nama[bahasa] }}</span>
+                                </div>
                             </div>
                             <div class="flex items-center text-sm text-warna-sembilan">
                                 <div class="">Bookmark by: </div>
@@ -268,19 +190,35 @@
 
                     
 
-                    <div v-if="listIndividu && form.officer" class="mb-6">
-                        <InputAutocompleteMulti 
+                    <div  class="mb-6">
+                        <!-- <InputAutocompleteMulti 
                             v-model="form.officer"
                             :name="prefixName+'officer'"
                             :placeholder="'Tulis disini'"
                             :label="$t('Officer')"
                             :opsi="listIndividu"
-                            :value="form.officer"
                             :itemValue="'userId'"
-                            :itemLabel="'label'"
-                            :key="prefixName+'officer'"
+                            :itemLabel="'namaIndividu'"
+                            :multilang="false"
+                        /> -->
+
+                        <InputAutocompleteApiMulti 
+                            v-model="form.officer"
+                            :name="prefixName+'partner'"
+                            :placeholder="'Tulis disini'"
+                            :label="$t('Officer')"
+                            :endPoint="'verificator/listIndividu/?limit=10&offset=0'"
+                            :searchQuery="'title'"
+                            :itemValue="'userId'"
+                            :itemLabel="'namaIndividu'"
+                            :key="'formoficer'+keyMaster"
+
+
                         />
+
+
                     </div>
+                    <!-- {{listOrganisasi}} -->
                     <div v-if="listOrganisasi && form.partner" class="mb-6">
                         <InputAutocompleteMulti 
                             v-model="form.partner"
@@ -288,12 +226,18 @@
                             :placeholder="'Tulis disini'"
                             :label="$t('Partner')"
                             :opsi="listOrganisasi"
-                            :value="form.partner"
                             :itemValue="'organisasiId'"
-                            :itemLabel="'label'"
-                            :key="prefixName+'partner'"
+                            :itemLabel="'namaOrganisasi'"
+                            :multilang="false"
+
                         />
+
+
+
                     </div>
+
+
+
                     <div v-if="typeAudience && form.typeAudience" class="mb-6">
                         <InputAutocompleteMulti 
                             v-model="form.typeAudience"
@@ -301,10 +245,10 @@
                             :placeholder="'Tulis disini'"
                             :label="'Tipe Audience'"
                             :opsi="typeAudience"
-                            :value="form.typeAudience"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tipeaudience'"
+                            :multilang="true"
+
                         />
                     </div>
                     <div v-if="typeApproach && form.typeApproach" class="mb-6">
@@ -314,10 +258,10 @@
                             :placeholder="'Tulis disini'"
                             :label="'Tipe Approach'"
                             :opsi="typeApproach"
-                            :value="form.typeApproach"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tipeapproach'"
+                            :multilang="true"
+
                         />
                     </div>
                     <div v-if="typeIssues && form.typeIssues" class="mb-6">
@@ -327,10 +271,10 @@
                             :placeholder="'Tulis disini'"
                             :label="'Topik'"
                             :opsi="typeIssues"
-                            :value="form.typeIssues"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'topik'"
+                            :multilang="true"
+
                         />
                     </div>
 
@@ -343,17 +287,18 @@
                             :opsi="listTag"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tag'"
+                            :multilang="true"
+
                         />
                     </div>
-
+                    <!-- {{form.tag}} -->
                 </div>
             </div>
         </div>
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+                <div @click="simpan" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
         </div>
 
@@ -502,7 +447,12 @@ export default {
             listIndividu: undefined,
             listOrganisasi: undefined,
             listTag: undefined, 
-            daftarReport: []
+            daftarReport: [],
+            originalResult: {
+                statusActivity: {
+                    nama: ['','']
+                }
+            }
         }
     },
     computed: {
@@ -589,11 +539,11 @@ export default {
             })
 
 
-            await this.$apiPlatform.get('verificator/listIndividu/').then(res => {
-                this.listIndividu = res.data
-            }).catch(err => {
-                console.log(err)
-            })
+            // await this.$apiPlatform.get('verificator/listIndividu/?limit=10&offset=0').then(res => {
+            //     this.listIndividu = res.data
+            // }).catch(err => {
+            //     console.log(err)
+            // })
 
 
             await this.$apiPlatform.get('verificator/listOrganisasi/').then(res => {
@@ -614,14 +564,14 @@ export default {
 
             await this.$apiPlatform.get('moderator/programs/'+this.id+'/').then(res => {
                 var data = res.data
-                
-                console.log(data)
+                this.originalResult = data
+                // console.log(data)
                 this.form = {
                     judulActivity: data.judulActivity,
                     deskripsi: data.deskripsi,
                     tanggalMulai: data.tanggalMulai,
                     tanggalSelesai: data.tanggalSelesai,
-                    officer: data.officer,
+                    officer: data.officer.map(e=> e.userId),
                     partner: _.map(data.partnerActivityInternal, function(o){return o.partner}),
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),
@@ -652,36 +602,39 @@ export default {
             })
 
         },
+        simpan() {
+            console.log(this.form)
+        },
 
 
         btnBack() {
             this.$router.push('/moderations/program/'+this.id)
         },
 
-        btnAddTestimony() {
-            this.modalAction = true
-            this.keyModal += 1
-        },
+        // btnAddTestimony() {
+        //     this.modalAction = true
+        //     this.keyModal += 1
+        // },
 
-        btnAddLokasi() {
-            this.modalActionLokasi = true
-            this.keyModalLokasi += 1
-        },
+        // btnAddLokasi() {
+        //     this.modalActionLokasi = true
+        //     this.keyModalLokasi += 1
+        // },
 
-        btnAddMilestone() {
-            this.modalActionMilestone = true
-            this.keyModalMilestone += 1
-        },
+        // btnAddMilestone() {
+        //     this.modalActionMilestone = true
+        //     this.keyModalMilestone += 1
+        // },
 
-        btnAddReport() {
-            this.modalActionReport = true
-            this.keyModalReport += 1
-        },
+        // btnAddReport() {
+        //     this.modalActionReport = true
+        //     this.keyModalReport += 1
+        // },
 
-        btnAddJourney() {
-            this.modalActionJourney = true
-            this.keyModalJourney += 1
-        },
+        // btnAddJourney() {
+        //     this.modalActionJourney = true
+        //     this.keyModalJourney += 1
+        // },
     }
 }
 </script>

@@ -18,7 +18,7 @@ module.exports = {
       extend: {
         colors: {
           'bc': '#FEF7E4',
-          'utama': '#A63521',
+          'utama': '#212121',
           'dua': '#00600F',
           'tiga': '#F47704',
           'empat': '#00B6F0',

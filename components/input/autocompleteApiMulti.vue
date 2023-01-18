@@ -21,17 +21,17 @@
                 @keydown.tab="keyTab"
             >
             <div class="absolute top-0 right-0 h-[34px] items-center flex px-2 text-gray-500">
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" preserveAspectRatio="xMidYMid meet" viewBox="0 0 12 12"><path fill="currentColor" d="M5.214 10.541a.903.903 0 0 0 1.572 0l4.092-7.169C11.226 2.762 10.789 2 10.09 2H1.91c-.698 0-1.135.762-.787 1.372l4.092 7.17Z"/></svg> -->
-                <img :class="statusDropdown ? 'rotate-180 ' : '' " src="/icons/icon-arrow-down-grey.png" alt="arrow-down" class="w-4 h-4 transition-all">
+                <img src="/icons/icon-arrow-down-grey.png" alt="arrow-down" class="w-4 h-4">
             </div>
         </div>
-        <div class="relative " v-if="statusDropdown">
+        <div class="relative " v-if="statusDropdown" @keyup="keyUpDrop" tabindex="2">
             <div class="bg-white absolute top-0 left-0 right-0 z-10 rounded-md shadow-md border border-warna-tujuh overflow-x-hidden overflow-y-auto max-h-96 " >
                 <button 
                     v-for="(i, index) in listing"
                     :key="name+'list'+index"
                     class="list-options block w-full text-left text-sm py-0.5 px-2 bg-white text-black hover:bg-blue-500  hover:text-white disabled:hover:bg-white disabled:hover:text-gray-400 disabled:text-gray-400 cursor-pointer disabled:cursor-default"
                     @click="pilihItem(i)"
+                    :class="selectedItemIndex===index ? ' bg-red-700 ': '' "
                     :disabled="selectedValue.map(e=>e[parseId]).includes(i[parseId])"
                     >
                         <span v-if="multilang && multilang === true">{{i[parseLabel][bahasa]}}</span>
@@ -46,24 +46,41 @@
                 :item="item"
                 @click="removeChip"
             />
-            <!-- {{selectedValue}} -->
         </div>
     </div>
 </template>
 <script>
 export default {
-    props: ['value', 'label', 'name', 'disabled', 'placeholder', 'opsi', 'itemValue', 'itemLabel', 'multilang'],
+    props: [
+        'value', // v-model Array
+        'label', // opt string
+        'name', //req, takut double dengan yg lain string
+        'disabled', // opt boolean
+        'placeholder', //opt string
+        // 'opsi', 
+        'itemValue', // req string
+        'itemLabel', // req string
+        'multilang', // opt boolean | belum dicoba dengan res api multilang
+        'endPoint',  // req string
+        'searchQuery', // req string | 
+        'itemEndPoint', //opt string | endpoint untuk ngambil detail. kalau tidak maka akan mensplice dari endPoint, 
+        ],
     data() {
         return {
             statusDropdown: false,
             listing: [],
             newVal: '',
-            selectedValue: []
+            selectedValue: [],
+            debounceTimeout: null,
+            selectedItemIndex: null
         }
     },
     watch: {
-        newVal(val) {
-             this.getApi(val);
+        newVal() {
+            if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
+            this.debounceTimeout = setTimeout(() => {
+                this.getApi();
+            },300)
         }
     },
     computed: {
@@ -85,70 +102,49 @@ export default {
     },
     methods: {
         initialize() {
-            this.listing = this.opsi
-            // if (this.value && this.value.length > 0) {
-            //     this.value.every((e,index) => {
-            //         // this.getItemApi(e)
-            //         const cari = this.opsi.filter(x => x[this.parseId]=== e)
-            //         if (cari && cari.length > 0) this.selectedValue.push(e)
-            //         if (this.value.length === index + 1) {
-            //             return false
-            //         } else {
-            //             return true;
-            //         }
-            //     })
-            // }
-
-
-            if (this.itemValue === "userId"){
-                if (this.listing.length > 0 && this.value && this.value.length > 0) {
-                    this.value.forEach(e => {
-                        const cari = this.listing.filter(x => x.userId === e.userId);
-                        if (cari && cari.length > 0) {
-                            this.selectedValue.push(e)
-                        }
-                    })
-                }
-            } else if (this.itemValue === "organisasiId") {
-                if (this.listing.length > 0 && this.value && this.value.length > 0) {
-                    this.value.forEach(e => {
-                        const cari = this.listing.filter(x => x.organisasiId === e.organisasiId);
-                        if (cari && cari.length > 0) {
-                            this.selectedValue.push(e)
-                        }
-                    })
-                }
-            } else if (this.itemValue === "id"){ 
-                if (this.listing.length > 0 && this.value && this.value.length > 0) {
-                    this.value.forEach(e => {
-                        const cari = this.listing.filter(x => x.id === e);
-                        if (cari && cari.length > 0) {
-                            this.selectedValue.push({
-                                id: e,
-                                label: cari[0][this.itemLabel] 
-                            })
-                        }
-                    })
-                }
+            //set exsisting value
+            //diasumsikan value adalah array (karena ini multi)
+            if (this.value && this.value.length > 0) {
+                this.value.every((e,index) => {
+                    this.getItemApi(e)
+                    if (this.value.length === index + 1) {
+                        return false
+                    } else {
+                        return true;
+                    }
+                })
             }
         },
+        async getItemApi(e) {
+            const potong = this.endPoint.split('/').slice(0,-1);
+            const gabung = potong.join('/') + '/'
+            const endPoint = this.itemEndPoint ? this.itemEndPoint : gabung
+            this.$apiPlatform.get(endPoint + e).then(res => {
+                this.selectedValue.push(res.data)
+            })
+        },
+
 
         focusText() {
             this.getApi()
             this.statusDropdown = true
         },
         
-        async getApi(val) {
-            var listingFilter = []
-            if (val === '' || val === undefined) {
-                listingFilter = this.opsi
-            } else {
-                listingFilter = this.opsi.filter(e => { 
-                    return e[this.itemLabel].toString().toLowerCase().includes(val.toLowerCase())
-                })
-            }
-            this.statusDropdown = listingFilter.length > 0 ? true : false
-            this.listing = listingFilter
+        async getApi() {
+            // if (val === '' || val === undefined) {
+            //     listingFilter = this.opsi
+            // } else {
+            //     listingFilter = this.opsi.filter(e => { 
+            //         return e[this.itemLabel].toString().toLowerCase().includes(val.toLowerCase())
+            //     })
+            // }
+            // this.statusDropdown = listingFilter.length > 0 ? true : false
+            // this.listing = listingFilter
+            const endPoint = this.endPoint + '&' + this.searchQuery + '=' + this.newVal
+            this.$apiPlatform.get(endPoint).then(res => {
+                this.listing = res.data
+            })
+
         },
 
         closeDropdown() {
@@ -204,7 +200,22 @@ export default {
                 this.$toast.warning(newLabel + ' mohon diisi')
                 event.preventDefault()
             } 
-        }
+        },
+        keyUpDrop(e) {
+            if (this.dropDownFocus) {
+                const currentIndex = this.selectedItemIndex ? this.selectedItemIndex : 0;
+                if (e.key==='ArrowDown' && currentIndex < this.list.length - 1) {
+                    this.selectedItemIndex = parseInt(currentIndex) + 1
+                } else if (e.key==='ArrowUp' && currentIndex > 0) {
+                    this.selectedItemIndex = parseInt(currentIndex) - 1
+                } else if (e.key==='Enter') {
+                    const item = this.list[currentIndex]
+                    this.pilihItem(item)
+                    // console.log(item)
+                }
+            }
+        },
+
     }
 }
 </script>

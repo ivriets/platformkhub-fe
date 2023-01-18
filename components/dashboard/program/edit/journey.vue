@@ -117,7 +117,7 @@ export default {
                 {
                     header: '',
                     itemValue: 'avatar',
-                    type: 'w-2/12',
+                    itemClass: 'w-2/12',
                 },
                 {
                     header: '',
