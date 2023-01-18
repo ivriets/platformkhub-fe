@@ -20,7 +20,7 @@
             @keyup.esc="keyEsc"
             @keyup="keyup"
         >
-        <div v-if="counter && counter === true && max && parseInt(max) > 0" class="text-xs text-warna-dua mt-1">{{value.length}}/{{max}}</div>
+        <div v-if="counter && counter === true && max && parseInt(max) > 0" class="text-xs text-warna-dua mt-1 ml-1">{{value.length}}/{{max}}</div>
     </div>
 </template>
 
@@ -74,3 +74,4 @@ export default {
     },
 }
 </script>
+

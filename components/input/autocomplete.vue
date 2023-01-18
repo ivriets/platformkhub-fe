@@ -148,10 +148,13 @@ export default {
                     listingFilter = this.opsi.filter(e => e[this.parseLabel].toLowerCase().includes(val.toLowerCase()))
                 }
             }
-            this.statusDropdown = listingFilter.length > 0 ? true : false
-            // console.log(listingFilter)
-            // this.stateClick = false
             this.listing = listingFilter
+
+            if (listingFilter.length > 0) {
+                this.statusDropdown = listingFilter.length > 0 ? true : false
+            } else {
+                // this.
+            }
         },
         closeDropdown() {
             this.statusDropdown = false

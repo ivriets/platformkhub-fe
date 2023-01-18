@@ -1,10 +1,12 @@
 <template>
     <div class="py-[48px]">
         <div class="mb-6">
-            <ElementsBreadcrumb 
+            <ElementsBreadcrumbBaru 
                 :parent="'Blog'"
                 :linkParent="'/moderations/blog'"
                 :child="childBreadcrumb"
+                v-if="childBreadcrumb && childBreadcrumb.length > 0"
+
             />
         </div>
         <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-[28px]">
@@ -17,8 +19,9 @@
                             :name="prefixName+'titleid'"
                             :label="'Title (Bahasa Indonesia)'"
                             :max="maxTitle"
+                            :counter="true"
                         />
-                        <div class="text-xs text-warna-dua mt-1">{{form.judulArtikel[0].length}}/{{maxTitle}}</div>
+                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulArtikel[0].length}}/{{maxTitle}}</div> -->
                     </div>
 
                     <div class="">
@@ -28,8 +31,9 @@
                             :name="prefixName+'titleen'"
                             :label="'Title (English)'"
                             :max="maxTitle"
+                            :counter="true"
                         />
-                        <div class="text-xs text-warna-dua mt-1">{{form.judulArtikel[1].length}}/{{maxTitle}}</div>
+                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulArtikel[1].length}}/{{maxTitle}}</div> -->
                     </div>
 
                     <hr class="border-warna-tujuh my-10">
@@ -55,11 +59,11 @@
                             />
                         </div> -->
 
-                        <InputContentSection 
-                            v-if="form.deskripsi"
-                            v-model="form.deskripsi"
-                            :list="form.deskripsi"
+                        <InputContentSection2 
+                            v-if="deskripsi"
+                            v-model="deskripsi"
                         />
+                      <pre> diluar:  {{ deskripsi }} </pre>
                     </div>
 
                 </div>
@@ -81,13 +85,25 @@
                     </div>
 
                     <div class="">
-                        <InputFileUpload 
+                        <!-- <InputFileUpload 
                             :label="'Thumbnail'"
                             v-model="form.imgThumbnail"
                             :accept="'.png, .jpg, .jpeg'"
                             :multiple="false"
                             :maxSize="5"
-                        />
+                        /> -->
+                        <!-- <InputImageUploadSingle 
+                            :label="'Thumbnail'"
+                            v-model="imgThumbnail"
+                            :accept="'.png, .jpg, .jpeg'"
+                            :maxSize="1"
+                            :useCrop="true"
+                            :cropRatio="1"
+                            v-if="imageThumbnailLoader"
+                            :key="'imgthumbnail'+imageThumbnailKey"
+                        /> -->
+
+
                     </div>
 
                     
@@ -97,10 +113,9 @@
                     <div>
                         <InputRadio 
                             v-model="form.kategoriArtikel"
-                            :label="$t('blog Type')"
+                            :label="$t('Blog Type')"
                             :opsiRadio="opsiRadio"
                             :name="prefixName+'kategoriartikel'"
-                            :value="form.kategoriArtikel"
                             :orientasi="'vertikal'"
                         />
                     </div>
@@ -118,6 +133,7 @@
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="prefixName+'tipeaudience'"
+                            :multilang="true"
                         />
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
@@ -132,6 +148,8 @@
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="prefixName+'tipeapproach'"
+                            :multilang="true"
+
                         />
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
@@ -146,12 +164,14 @@
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="prefixName+'topik'"
+                            :multilang="true"
+
                         />
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
-                    <div v-if="listTag && form.tag">
+                    <div v-if="listTag && form.blogsTag">
                         <InputAutocompleteMulti 
-                            v-model="form.tag"
+                            v-model="form.blogsTag"
                             :name="prefixName+'tag'"
                             :placeholder="'Tulis disini'"
                             :label="$t('Tag')"
@@ -159,6 +179,8 @@
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="prefixName+'tag'"
+                            :multilang="true"
+
                         />
                     </div>
 
@@ -171,6 +193,7 @@
                 <div @click="simpan" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
         </div>
+        <pre>{{   form }}</pre>
     </div>
 </template>
 
@@ -182,7 +205,13 @@ export default {
             prefixName: 'blog',
             maxTitle: 80,
             dataDetail: null,
-            childBreadcrumb: [],
+            // childBreadcrumb: [],
+            deskripsi: {
+                list: [],
+                deleted: [],
+                updated: [],
+                new: []
+            },
             form: {
                 judulArtikel: undefined,
                 deskripsi: undefined,
@@ -241,6 +270,19 @@ export default {
         },
         basePath() {
             return process.env.BASE_URL
+        },
+        childBreadcrumb() {
+            const vA = [
+                {
+                    label: 'Detail',
+                    link: '/moderations/blog/'+this.id
+                },
+                {
+                    label: 'Editor',
+                    link: ''
+                }
+            ]
+            return vA
         }
     },
     mounted() {
@@ -248,7 +290,7 @@ export default {
     },
     methods: {
         initialize() {
-            this.setBreadcrumb()
+            // this.setBreadcrumb()
             this.opsiRadio = this.kategoriArtikel
             console.log(this.typeOrganisasi)
             this.masterPoint()
@@ -275,9 +317,10 @@ export default {
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
-                    tag: _.flatMap(data.tag, "id"),
+                    blogsTag: _.flatMap(data.blogsTag, "id"),
                 }
                 this.imgThumbnail = data.imgThumbnail
+                this.deskripsi.list = this.form.deskripsi
                 if (!data.deskripsi || data.deskripsi.length == 0){
                     forDeskripsi = []
                     forDeskripsi.push({"typeDeskripsi": 2,"imgDeskripsi": "","caption": ["-","-"],"paragraf": data.deskripsiPanjang, "sorter": 0})
@@ -289,28 +332,35 @@ export default {
                 console.log(err)
             })
         },
-        async putData() {
-            var data = this.form
-            console.log(data)
-            await this.$apiPlatform.put('moderator/blogs/'+this.id+'/', data).then(res => {
-                console.log(res)
-            })
-        },
-        setBreadcrumb() {
-            this.childBreadcrumb = [
-                {
-                    label: 'Detail',
-                    link: '/moderations/blog/'+this.id
-                },
-                {
-                    label: 'Editor',
-                    link: ''
-                }
-            ]
-        },
+
         simpan() {
             console.log(this.form)
+
+            this.putData()
         },
+
+        async putData() {
+            this.form.kategoriArtikel = [this.form.kategoriArtikel]
+            await this.$apiPlatform.put('moderator/blogs/'+this.id+'/', this.form).then(res => {
+                console.log(res)
+                this.$toast.show('Blog updated successfuly')
+                this.initialize()
+            })
+        },
+        // setBreadcrumb() {
+        //     this.childBreadcrumb = [
+        //         {
+        //             label: 'Detail',
+        //             link: '/moderations/blog/'+this.id
+        //         },
+        //         {
+        //             label: 'Editor',
+        //             link: ''
+        //         }
+        //     ]
+        // },
+
+ 
         btnBack() {
             this.$router.push('/moderations/blog/'+this.id)
         }
