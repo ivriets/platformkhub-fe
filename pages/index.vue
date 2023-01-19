@@ -2,6 +2,10 @@
   <div>
     <div class="container mx-auto">
         <ElementsPagesMenuDashboard />
+        <div class="hidden">
+            <div class="text-tujuh"></div>
+            <div class="text-empat button-kapsul"></div>
+        </div>
     </div>
   </div>
 </template>

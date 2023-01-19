@@ -20,9 +20,9 @@ module.exports = {
           'bc': '#FEF7E4',
           'utama': '#212121',
           'dua': '#00600F',
-          'tiga': '#F47704',
-          'empat': '#00B6F0',
-          'lima': '#FFC700',
+          'tiga': '#FDCE07',
+          'empat': '#222659',
+          'lima': '#9E9E9E',
           'enam': '#B5B5B5',
           'tujuh': '#E0E0E0'
         },

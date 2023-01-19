@@ -66,13 +66,17 @@
                       <!-- <pre> diluar:  {{ deskripsi }} </pre> -->
                     </div>
 
+                    <hr class="border-warna-tujuh my-10">
+                        <InputGalleries 
+                            v-model="daftarGalleri"
+                        />
                 </div>
                 <div class="col-span-12 lg:col-span-3">
                     <div class="bg-[#FAFAFA] p-5 rounded-lg mb-[28px]">
                         <div class="">
                             <div class="flex items-center text-sm">
                                 <div class="text-warna-sembilan">Status:</div>
-                                <ElementsDisplayStatus 
+                                <ElementsDisplayStatusSubmission 
                                     :submission="dataDetail.submission"
                                 />
                             </div>
@@ -172,7 +176,6 @@
                         <InputAutocompleteMulti 
                             v-model="form.blogsTag"
                             :name="prefixName+'tag'"
-                            :placeholder="'Tulis disini'"
                             :label="$t('Tag')"
                             :opsi="listTag"
                             :itemValue="'id'"
@@ -183,7 +186,19 @@
 
                         />
                     </div>
-                    <!-- {{form.blogsTag}} -->
+
+                        <!-- <InputAutocompleteApiMulti 
+                            v-model="form.blogsTag"
+                            :name="prefixName+'tag'"
+                            :label="$t('Tag')"
+                            :endPoint="'daftarList/tag/?limit=10&offset=0'"
+                            :itemEndPoint="'daftarList/tag/?id='"
+                            :searchQuery="'nama'"
+                            :itemValue="'id'"
+                            :itemLabel="'nama'"
+                            :key="'tag'+keyMaster"
+                        /> -->
+
 
 
                 </div>
@@ -195,7 +210,6 @@
                 <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
-        <!-- <pre>{{   form }}</pre> -->
     </div>
 </template>
 
@@ -206,6 +220,7 @@ export default {
         return {
             btnText: 'Save',
             prefixName: 'blog',
+            daftarGalleri: [],
             maxTitle: 80,
             dataDetail: null,
             // childBreadcrumb: [],
@@ -216,7 +231,7 @@ export default {
                 new: []
             },
             form: {
-                judulArtikel: undefined,
+                judulArtikel: ['',''],
                 deskripsi: undefined,
                 kategoriArtikel: undefined,
                 typeAudience: undefined,
@@ -291,6 +306,7 @@ export default {
         initialize() {
             // this.setBreadcrumb()
             this.btnText = 'Save'
+            
 
             this.opsiRadio = this.kategoriArtikel
             this.masterPoint()
@@ -321,6 +337,7 @@ export default {
                 }
                 this.imgThumbnail.displayImage = data.imgThumbnail
                 this.deskripsi.list = this.form.deskripsi
+                this.daftarGalleri = data.blogsGalleries
 
                 this.$nextTick(() => {
                     this.imageThumbnailLoader = true
@@ -379,7 +396,6 @@ export default {
             if (this.imgThumbnail.file !== null) {
                 this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
             } else {
-                console.log(res)
                 this.btnText = 'Save'
 
                 this.$toast.show('Blog updated successfuly')
@@ -396,8 +412,11 @@ export default {
             if (image instanceof Blob){
                 var data = new FormData();
                 data.append(untuk, image, name);
-                await this.$apiPlatform.put('moderator/blog/'+this.id+'/', data).then(res => {
-                    console.log(res.data)
+                await this.$apiPlatform.put('moderator/blogs/'+this.id+'/', data).then(res => {
+                    this.btnText = 'Save'
+
+                    this.$toast.show('Blog updated successfuly')
+                    this.initialize()
                 }).catch(err => {
                     console.log(err)
                 })

@@ -152,9 +152,9 @@
                         <div class="mb-6">
                             <div class="flex items-center text-sm">
                                 <div class="text-warna-sembilan">Status:</div>
-                                <div class="text-approved-accepted ml-1">
-                                    <span>{{ originalResult.statusActivity.nama[bahasa] }}</span>
-                                </div>
+                                <ElementsDisplayStatusSubmission 
+                                    :submission="form.submission"
+                                />
                             </div>
                             <div class="flex items-center text-sm text-warna-sembilan">
                                 <div class="">Bookmark by: </div>
@@ -212,8 +212,6 @@
                             :itemValue="'userId'"
                             :itemLabel="'namaIndividu'"
                             :key="'formoficer'+keyMaster"
-
-
                         />
 
 
@@ -408,6 +406,7 @@ export default {
                 tambahTestimony:[],
                 namaTestimony:[],
                 retentionSaatProgramMen:'',
+                submission: 1
             },
             opsiTag: [
                 {
@@ -581,7 +580,8 @@ export default {
                     retentionSaatProgramMen:'',
                     fase: data.fase,
                     // journey : data.journey,
-                    testimoniNonUser: data.testimoniNonUser
+                    testimoniNonUser: data.testimoniNonUser,
+                    submission: data.submission
                 }
                 this.imgMainImage.displayImage = data.imgMainImage;
                 this.imgThumbnail.displayImage = data.imgThumbnail

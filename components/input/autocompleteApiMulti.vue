@@ -43,10 +43,11 @@
         <div class="chip-container mt-2 flex items-center flex-wrap gap-2">
             <ElementsChip 
                 v-for="(item, index) in selectedValue" :key="'listSel'+name+index"
-                :item="item"
+                :item="item[parseLabel]"
                 @click="removeChip"
             />
         </div>
+       <!-- <pre> {{selectedValue}} </pre> -->
     </div>
 </template>
 <script>

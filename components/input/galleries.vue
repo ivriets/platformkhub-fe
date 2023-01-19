@@ -8,7 +8,7 @@
                 :accept="'.png, .jpg, .jpeg'"
                 :key="'key1'+imageKey"
             />
-            <div class="flex items-center lg:gap-4 gap-2">
+            <div class="flex flex-wrap items-center lg:gap-4 gap-2 mt-10">
                 <div v-for="(item, index) in newVal" :key="'galleri'+index" class="relative bg-white shadow-md border border-gray-50 rounded-xl">
                     <img class="h-16" :src="item.type && item.type !=='' ? item.imgGambar : basePath+item.imgGambar" alt="gallery-image">
                     <button @click="deleteImage(index)" class="absolute top-0 right-0 bg-white rounded-full p-1 cursor-pointer flex items-center mr-2 mt-2 hover:bg-gray-100">

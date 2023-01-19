@@ -92,7 +92,7 @@ export default {
       toast: { 
         defaultProps: { 
             timeout: 5,
-            classToast: 'bg-gray-500 z-50',
+            classToast: 'bg-utama z-50',
             classTitle: 'text-white',
             classMessage: 'text-white',
             classClose: 'text-white',

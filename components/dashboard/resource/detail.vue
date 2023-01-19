@@ -1,7 +1,7 @@
 <template>
     <div class="py-[48px]">
         <div class="mb-6">
-            <ElementsBreadcrumb 
+            <ElementsBreadcrumbBaru 
                 :parent="'Resources'"
                 :linkParent="'/moderations/resource'"
                 :child="childBreadcrumb"
@@ -160,8 +160,11 @@
 
                     <div class="mb-6">
                         <div class="text-warna-sembilan font-semibold mb-[16px]">Content</div>
-                        <div class="col-span-12 md:col-span-10 lg:col-span-10 p-3 bg-warna-body rounded-lg text-sm text-warna-sembilan font-normal">
-                            <div v-html="selectedFlag === 'indonesia' ? dataDetail.deskripsiPanjang[0] : dataDetail.deskripsiPanjang[1]" class=""></div>
+                        <div class="bg-warna-body rounded-lg text-sm text-warna-sembilan font-normal">
+                            <ElementsDisplayDeskripsi 
+                                :list="dataDetail.deskripsi"
+                                :selectedFlag="selectedFlag"
+                            />
                         </div>
                     </div>
 
@@ -254,7 +257,6 @@ export default {
             dataDetail: null,
             buttonSubmission: null,
             color: '',
-            childBreadcrumb: [],
             form: {
                 catatanModerasi: ''
             },
@@ -327,7 +329,16 @@ export default {
         },
         basePath() {
             return process.env.BASE_URL
+        },
+        childBreadcrumb() {
+            return [
+                {
+                    label: 'Detail',
+                    link: ''
+                }
+            ]
         }
+
     },
     watch: {
         lang() {
@@ -358,7 +369,6 @@ export default {
         initialize() {
             this.$store.commit('setPageTitle', this.title)
             this.masterPoint()
-            this.setBreadcrumb()
         },
 
         async masterPoint() {
@@ -446,14 +456,7 @@ export default {
             this.closeDrop()
         },
 
-        setBreadcrumb() {
-            this.childBreadcrumb = [
-                {
-                    label: 'Detail',
-                    link: ''
-                }
-            ]
-        }
+
     }
 }
 </script>

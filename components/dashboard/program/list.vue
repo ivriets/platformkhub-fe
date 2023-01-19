@@ -37,22 +37,40 @@
                 </div>
             </div>
         </div>
-        <div v-if="loaderPage" class="bg-white rounded-lg shadow-md border border-gray-100">
-            <ElementsTableFlat
+        <div class="bg-white rounded-xl shadow-md border border-gray-100 text-sm overflow-hidden relative">
+            <ElementsTable
+                :tableDetail="tableDetail"
+                v-model="dataTable"
+            >
+                <template v-slot:namaProgram="{item}">
+                    <NuxtLink class="hover:text-blue-700" :to="'/moderations/program/'+item.programId" >{{item.namaProgram[bahasa]}}</NuxtLink>
+                </template>
+                <template v-slot:submission="{ item }">
+                    <ElementsDisplayStatusSubmission :submission="item.submission" />
+                </template>
+
+            </ElementsTable>
+            <div v-if="!loaderPage" class="absolute top-0 right-0 left-0 bottom-0 bg-white/80 flex items-center justify-center">
+                <img class=" w-10 h-10" src="/images/animated-loading.svg" alt="loading-animasi">
+            </div>
+
+
+            <!-- <ElementsTableFlat
                 :masterTable="masterTable"
                 :dataTable="dataTable"            
                 :path="'/moderations/program/'"
                 :idValue="'programId'"
-            />
+            /> -->
         </div>
-        <div v-if="!loaderPage" class="flex items-center justify-center mt-6">
+        <!-- <div v-if="!loaderPage" class="flex items-center justify-center mt-6">
             <img class=" w-10 h-10" src="/images/animated-loading.svg" alt="loading-animasi">
-        </div>
-        <div v-if="loaderPage" class="pagination-area text-center mt-6">
+        </div> -->
+        <div  class="pagination-area text-center mt-6">
             <ElementsPaginasiSpa 
                 v-model="currentPage"
                 :totalPage="totalPage"
                 :totalVisible="totalVisible"
+                :loaderPage="!loaderPage"
                 :key="'pageset'+keyPage"
             />
         </div>
@@ -156,7 +174,37 @@ export default {
                     tipe: 'date',
                     display: true
                 },
+            ],
+            tableDetail: [
+                {
+                    header: 'Title',
+                    itemValue: 'namaProgram'
+                },
+                {
+                    header: 'Organization',
+                    itemValue: 'namaOrganisasi',
+                    itemClass: 'w-2/12'
+
+                },
+                {
+                    header: 'Status',
+                    itemValue: 'submission',
+                    itemClass: 'w-2/12'
+
+                },
+                {
+                    header: 'Created At',
+                    itemValue: 'createdAt',
+                    type: 'date',
+                    format: 'DD MMM YYYY HH:ss',
+                    itemClass: 'w-2/12'
+                }
             ]
+        }
+    },
+    computed: {
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
         }
     },
     watch: {
@@ -172,6 +220,9 @@ export default {
         showRow(val) {
             this.limit = val
             this.masterPoint()
+        },
+        loaderPage() {
+            this.keyPage +=1
         }
     },
     mounted() {
@@ -208,7 +259,7 @@ export default {
                 this.dataTable = res.data.results.map(e => {
                     const data = {
                         programId: e.programId,
-                        namaProgram: e.judulActivity.length > 0 ? e.judulActivity[0] : 'N/A',
+                        namaProgram: e.judulActivity,
                         namaOrganisasi: e.myOrganisasi.namaOrganisasi,
                         submission: e.submission,
                         createdAt: e.createdAt

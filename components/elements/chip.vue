@@ -1,7 +1,7 @@
 <template>
     <div 
         class="chip-sm">
-        {{item}}
+        {{newChipLabel}}
         <!-- <div v-if="item.namaOrganisasi" class="chip-label">{{ item.namaOrganisasi }}</div>
         <div v-else-if="item.namaIndividu" class="chip-label">{{ item.namaIndividu }}</div>
         <div v-else class="chip-label">{{ item.label[bahasa] }}</div> -->
@@ -25,6 +25,11 @@ export default {
         bahasa() {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
+        newChipLabel: {
+            get() {
+                return _.truncate(this.item, {'length': 15})
+            }
+        } 
     },
 }
 </script>

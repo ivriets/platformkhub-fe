@@ -1,46 +1,81 @@
 <template>
+    <div v-if="loader">
+        <nav aria-label="Page navigation" class="" v-if="!loaderPage">
+            <ul class="inline-flex items-center overflow-hidden ">
+                <li class="mr-3">
+                    <button 
+                        :disabled="value===1" @click="prev" 
+                        class="h-8 w-9 flex items-center justify-center bg-white hover:bg-gray-100  disabled:text-gray-200 disabled:hover:bg-gray-50 border border-warna-lima rounded " >
+                        <i class="ri-arrow-left-s-line"></i>
+                    </button>
+                </li>
+                <li
+                    v-for="(item, index) in range" :key="'paginasi'+ index"
+                    class="mr-3"
+                >
+                    <button v-if="item.val === value && item.type==='number'" disabled class="h-8 px-3 text-sm flex items-center justify-center bg-warna-empat text-white border border-warna-lima rounded">
+                        {{item.val}}
+                    </button>
+                    <button  v-else-if="item.val !== value && item.type==='number'" @click="clickPage(item.val)" class="h-8 px-3 text-sm flex items-center justify-center bg-white text-warna-empat hover:bg-warna-empat/30 border border-warna-lima rounded">
+                        {{item.val}}
+                    </button>
+                    <button  v-else-if="item.val !== value && item.type==='dots'" disabled  class="h-8 px-3 text-sm flex items-center justify-center bg-white text-warna-empat border border-warna-lima rounded">
+                        {{item.val}}
+                    </button>
 
-    <nav aria-label="Page navigation" class="" v-if="loader">
-        <ul class="inline-flex items-center overflow-hidden ">
-            <li class="mr-3">
-                <button 
-                    :disabled="value===1" @click="prev" 
-                    class="h-8 w-9 flex items-center justify-center bg-white hover:bg-gray-100  disabled:text-gray-200 disabled:hover:bg-gray-50 border border-warna-lima rounded " >
-                    <i class="ri-arrow-left-s-line"></i>
-                </button>
-            </li>
-            <li
-                v-for="(item, index) in range" :key="'paginasi'+ index"
-                class="mr-3"
-            >
-                <button v-if="item.val === value && item.type==='number'" disabled class="h-8 px-3 text-sm flex items-center justify-center bg-warna-empat text-white border border-warna-lima rounded">
-                    {{item.val}}
-                </button>
-                <button  v-else-if="item.val !== value && item.type==='number'" @click="clickPage(item.val)" class="h-8 px-3 text-sm flex items-center justify-center bg-white text-warna-empat hover:bg-warna-empat/30 border border-warna-lima rounded">
-                    {{item.val}}
-                </button>
-                <button  v-else-if="item.val !== value && item.type==='dots'" disabled  class="h-8 px-3 text-sm flex items-center justify-center bg-white text-warna-empat border border-warna-lima rounded">
-                    {{item.val}}
-                </button>
+                </li>
+                <li class=" overflow-hidden">
+                    <button 
+                        @click="next" 
+                        :disabled="value===totalPage" 
+                        class="text-sm h-8 w-9 flex items-center justify-center bg-white hover:bg-gray-100 disabled:text-gray-200 disabled:hover:bg-gray-50 border border-warna-lima rounded ">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        <nav aria-label="Page navigation" class="animate-pulse" v-else>
+            <ul class="inline-flex items-center overflow-hidden ">
+                <li class="mr-3">
+                    <button 
+                        disabled
+                        class="h-8 w-9 flex items-center justify-center bg-gray-200  disabled:text-gray-200  border border-transparent rounded " >
+                        <!-- <i class="ri-arrow-left-s-line"></i> -->
+                    </button>
+                </li>
+                <li
+                    v-for="(item, index) in range" :key="'paginasi'+ index"
+                    class="mr-3"
+                >
+                    <button v-if="item.val === value && item.type==='number'" disabled class="h-8 w-8 px-3 text-sm flex items-center justify-center bg-gray-200 text-white border border-transparent rounded">
+                        <!-- {{item.val}} -->
+                    </button>
+                    <button  v-else-if="item.val !== value && item.type==='number'"  class="h-8 w-8 px-3 text-sm flex items-center justify-center bg-gray-200 text-white border border-transparent rounded">
+                        <!-- {{item.val}} -->
+                    </button>
+                    <button  v-else-if="item.val !== value && item.type==='dots'" disabled  class="h-8 w-8 px-3 text-sm flex items-center justify-center bg-gray-200 text-white border border-transparent rounded">
+                        <!-- {{item.val}} -->
+                    </button>
 
-            </li>
-            <li class=" overflow-hidden">
-                <button 
-                    @click="next" 
-                    :disabled="value===totalPage" 
-                    class="text-sm h-8 w-9 flex items-center justify-center bg-white hover:bg-gray-100 disabled:text-gray-200 disabled:hover:bg-gray-50 border border-warna-lima rounded ">
-                    <i class="ri-arrow-right-s-line"></i>
-                </button>
-            </li>
-        </ul>
-    </nav>
+                </li>
+                <li class=" overflow-hidden">
+                    <button 
+                        class="text-sm h-8 w-9 flex items-center justify-center bg-gray-200 disabled:text-gray-200  border border-transparent rounded ">
+                        <!-- <i class="ri-arrow-right-s-line"></i> -->
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+
+    </div>
 
 </template>
 
 
 <script>
 export default {
-    props: ['value', 'totalPage', 'totalVisible'],
+    props: ['value', 'totalPage', 'totalVisible', 'loaderPage'],
     // props: ['value'],
     data() {
         return {

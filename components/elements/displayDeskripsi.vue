@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="display-deskripsi">
         <div  class=" ">
             <div class="w-full font-normal p-3" v-for="(i, index) in dataDesk" :key="'deskripsi' + index" >
                 <div class="mb-3" v-if="i.typeDeskripsi === 2"

@@ -6,5 +6,11 @@
     .button-standar {
         @apply px-8 py-2 bg-[#222659] rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold disabled:bg-gray-300 disabled:inset-5 disabled:text-gray-500 disabled:cursor-wait;
     }
+    .button-outline {
+        @apply border-utama text-utama border rounded-md bg-white hover:bg-utama/30 transition-all duration-75 ;
+    }
+    .button-kapsul {
+        @apply text-sm font-semibold border text-empat rounded-2xl px-3 py-[6px] hover:bg-gray-50 cursor-pointer;
+    }
 }
 

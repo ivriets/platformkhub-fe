@@ -213,7 +213,7 @@
                         <div class="mb-6">
                             <div class="flex items-center text-sm">
                                 <div class="text-warna-sembilan">Status:</div>
-                                <ElementsDisplayStatus 
+                                <ElementsDisplayStatusSubmission 
                                     :submission="form.submission"
                                 />
                             </div>
@@ -222,15 +222,19 @@
                                 <div class="ml-1">{{ totalBookmark }}</div>
                             </div>
                         </div>
-                        <div class="bg-warna-empat text-white rounded-lg w-[240px] py-4 text-center mx-0 cursor-pointer hover:bg-blue-900">Submit</div>
+                        <button class="bg-warna-empat text-white rounded-lg w-full py-4 text-center mx-0 cursor-pointer hover:bg-blue-900">Submit</button>
                     </div>
 
                     <div class="">
-                        <InputImageCrop 
-                            :label="'Logo Organisasi'"
+                        <InputImageUploadSingle 
+                            :label="'Thumbnail'"
                             v-model="imgThumbnail"
                             :accept="'.png, .jpg, .jpeg'"
-                            :maxSize="5"
+                            :maxSize="1"
+                            :useCrop="true"
+                            :cropRatio="4/3"
+                            v-if="loaderAll"
+                            :key="'imgthumbnail'+keyMaster"
                         />
                     </div>
 
@@ -242,10 +246,10 @@
                             :placeholder="'Tulis disini'"
                             :label="'Tipe Audience'"
                             :opsi="typeAudience"
-                            :value="form.typeAudience"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tipeaudience'"
+                            :key="'tipeaufda'+keyMaster"
+                            :multilang="true"
                         />
                     </div>
                     <div v-if="typeApproach && form.typeApproach" class="mb-6">
@@ -255,10 +259,11 @@
                             :placeholder="'Tulis disini'"
                             :label="'Tipe Approach'"
                             :opsi="typeApproach"
-                            :value="form.typeApproach"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tipeapproach'"
+                            :key="'tipeapproach'+keyMaster"
+                            :multilang="true"
+                            
                         />
                     </div>
                     <div v-if="typeIssues && form.typeIssues" class="mb-6">
@@ -271,7 +276,8 @@
                             :value="form.typeIssues"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'topik'"
+                            :key="'topik'+keyMaster"
+                            :multilang="true"
                         />
                     </div>
 
@@ -284,10 +290,12 @@
                             :opsi="listTag"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tag'"
+                            :key="'tag'+keyMaster"
+                            :multilang="true"
+                            :addNew="true"
                         />
                     </div>
-
+                    <hr class="border-warna-tujuh my-[28px]">
 
                     <div class="mb-1">Event Status</div>
                     <div>
@@ -296,6 +304,8 @@
                     <div class="text-xs text-warna-dua">Event Status will change when event is finished</div>
                     
                     <hr class="border-warna-tujuh my-[28px]">
+                    <button class="button-outline text-md py-3 w-full text-center mb-5">Download Report</button>
+                    <button class="button-outline text-md py-3 w-full text-center ">Export ke Program</button>
 
                 </div>
             </div>
@@ -341,26 +351,8 @@ export default {
                 new: []
             },
 
-            opsiRadio: [
-                {
-                    id: 1,
-                    label: ['KHUB (Gratis)', 'KHUB (Free)']
-                },
-                {
-                    id: 2,
-                    label: ['Tautan Eksternal', 'External Link']
-                }
-            ],
-            opsiTag: [
-                {
-                    id: 1,
-                    label: ['Pembelajaran', 'Pembelajaran']
-                },
-                {
-                    id: 2,
-                    label: ['Kekerasan', 'Kekerasan']
-                }
-            ],
+            opsiRadio: [],
+            opsiTag: [],
             daftarGalleri: [],
             totalBookmark: 0,
             listIndividu: undefined,
@@ -369,7 +361,7 @@ export default {
             opsiProvinsi: [],
             provinsi: [],
             opsiKota: [],
-            imgThumbnail: undefined,
+            imgThumbnail: null,
             lokasi: {
                     lokasiId: '',
                   provinsi: '',
@@ -401,7 +393,8 @@ export default {
                 }
             ],
             loaderAll: false,
-            keyMaster: 0
+            keyMaster: 0,
+            imageThumbnailLoader: false
 
         }
     },

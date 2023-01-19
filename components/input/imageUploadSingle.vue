@@ -58,7 +58,7 @@
                   <button  v-if="displayReset" title="Reset" @click="resetImage()" class="absolute bottom-0 left-0 bg-gray-500/80 hover:bg-gray-500 border border-white/80 text-white px-3 py-2 text-sm rounded mb-1 ml-1" >Reset</button>
           </div>
           <div class="mt-5 mb-5 flex justify-end items-center">
-              <button @click="batal" class="btn-text">{{ $t('Cancel') }}</button>
+              <!-- <button @click="batal" class="btn-text">{{ $t('Cancel') }}</button> -->
               <button @click="simpan" class="btn-save ml-1">{{ $t('Save') }}</button>
           </div>
 
@@ -238,6 +238,8 @@ export default {
         const { canvas } = this.$refs.imagecropper.getResult();
         this.dataImage.displayImage = canvas.toDataURL();
         this.dataImage.status = 'belumUpload'
+        this.dataImage.name = this.dataCrop.name
+        this.dataImage.type = this.dataCrop.type
         canvas.toBlob(async blob => {
               // await this.$apiBase.post('upload/media', formData).then(res => {
               //     this.saveToCollection(res.data.result)

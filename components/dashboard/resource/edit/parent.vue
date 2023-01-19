@@ -7,7 +7,7 @@
                 :child="childBreadcrumb"
             />
         </div>
-        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-[28px]">
+        <div  class="bg-white shadow-md rounded-xl py-8 px-6 mb-[28px]">
             <div class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-9">
                     <div class="mb-6">
@@ -17,8 +17,8 @@
                             :name="prefixName+'titleid'"
                             :label="'Title (Bahasa Indonesia)'"
                             :max="maxTitle"
+                            :counter="true"
                         />
-                        <div class="text-xs text-warna-dua mt-1">{{form.judulArtikel[0].length}}/{{maxTitle}}</div>
                     </div>
 
                     <div class="">
@@ -28,8 +28,8 @@
                             :name="prefixName+'titleen'"
                             :label="'Title (English)'"
                             :max="maxTitle"
+                            :counter="true"
                         />
-                        <div class="text-xs text-warna-dua mt-1">{{form.judulArtikel[1].length}}/{{maxTitle}}</div>
                     </div>
 
                     <hr class="border-warna-tujuh my-10">
@@ -55,10 +55,9 @@
                             />
                         </div> -->
 
-                        <InputContentSection 
-                            v-if="form.deskripsi"
-                            v-model="form.deskripsi"
-                            :list="form.deskripsi"
+                        <InputContentSectionBaru 
+                            v-if="deskripsi"
+                            v-model="deskripsi"
                         />
                     </div>
 
@@ -68,10 +67,9 @@
                         <div class="">
                             <div class="flex items-center text-sm">
                                 <div class="text-warna-sembilan">Status:</div>
-                                <div v-if="dataDetail.submission === 1" class="text-under-review ml-1">Under Review</div>
-                                <div v-if="dataDetail.submission === 2" class="text-draft ml-1">Draft</div>
-                                <div v-if="dataDetail.submission === 3" class="text-need-revision ml-1">Need Revision</div>
-                                <div v-if="dataDetail.submission === 4" class="text-approved-accepted ml-1">Approved</div>
+                                <ElementsDisplayStatusSubmission 
+                                    :submission="form.submission"
+                                />
                             </div>
                             <div class="flex items-center text-sm text-warna-sembilan">
                                 <div class="">Bookmark by: </div>
@@ -171,6 +169,7 @@
                 <div @click="simpan" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
         </div>
+        <pre>{{ form }}</pre>
     </div>
 </template>
 
@@ -184,16 +183,17 @@ export default {
             dataDetail: null,
             childBreadcrumb: [],
             form: {
-                judulArtikel: undefined,
-                deskripsi: undefined,
-                kategoriArtikel: undefined,
-                typeAudience: undefined,
-                typeApproach: undefined,
-                typeIssues: undefined,
-                tag: undefined,
+                submission: 1,
+                judulArtikel: ['',''],
+                deskripsi:  ['',''],
+                kategoriArtikel: [],
+                typeAudience: [],
+                typeApproach: [],
+                typeIssues: [],
+                tag: [],
             },
             opsiRadio: [],
-            imgThumbnail: undefined, 
+            imgThumbnail: null, 
             opsiTag: [
                 {
                     id: 1,
@@ -204,7 +204,14 @@ export default {
                     label: ['Kekerasan', 'Kekerasan']
                 }
             ],
-            listTag: undefined, 
+            listTag: null,
+            deskripsi: {
+                list: [],
+                deleted: [],
+                updated: [],
+                new: []
+            },
+            
         }
     },
     computed: {
@@ -269,6 +276,7 @@ export default {
                 this.form.judulArtikel = data.judulArtikel
                 var forDeskripsi = data.deskripsi
                 this.form = {
+                    submission: data.submission,
                     judulArtikel: data.judulArtikel,
                     deskripsi: data.deskripsi,
                     kategoriArtikel: _.flatMap(data.kategoriArtikel, "id")[0],
@@ -277,6 +285,10 @@ export default {
                     typeIssues: _.flatMap(data.typeIssues, "id"),
                     tag: _.flatMap(data.tag, "id"),
                 }
+
+                this.deskripsi.list = this.form.deskripsi
+
+
                 this.imgThumbnail = data.imgThumbnail
                 if (!data.deskripsi || data.deskripsi.length == 0){
                     forDeskripsi = []

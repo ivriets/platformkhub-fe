@@ -24,7 +24,9 @@
                 <button 
                     v-for="(item, index) in kapsul" :key="'kapsul' + index"
                     @click="selectKapsul(item)"
-                    class="text-sm font-semibold border border-warna-tujuh text-warna-empat rounded-2xl px-3 py-[6px] hover:bg-gray-50 cursor-pointer;"
+                    :disabled="selectedKapsul.id === item.id"
+                    :class="selectedKapsul.id === item.id ? 'border-warna-empat' : ' border-warna-tujuh'"
+                    class="button-kapsul"
                 >
                 {{item.label}} ({{item.length}})
                 </button>
@@ -39,23 +41,30 @@
                 </div>
             </div>
         </div>
-        <div v-if="loaderPage" class="bg-white rounded-lg shadow-md border border-gray-100">
-            <ElementsTableFlat
-                :masterTable="masterTable"
-                :dataTable="dataTable"
-                :path="'/moderations/blog/'"
-                :idValue="'blogId'"
-            />
+        <div class="bg-white rounded-xl shadow-md border border-gray-100 text-sm overflow-hidden relative">
+            <ElementsTable
+                :tableDetail="tableDetail"
+                v-model="dataTable"
+            >
+                <template v-slot:namaBlog="{item}">
+                    <NuxtLink class="hover:text-blue-700" :to="'/moderations/blog/'+item.blogId" >{{item.namaBlog[bahasa]}}</NuxtLink>
+                </template>
+                <template v-slot:submission="{ item }">
+                    <ElementsDisplayStatusSubmission :submission="item.submission" />
+                </template>
+
+            </ElementsTable>
+            <div v-if="!loaderPage" class="absolute top-0 right-0 left-0 bottom-0 bg-white/80 flex items-center justify-center">
+                <img class=" w-10 h-10" src="/images/animated-loading.svg" alt="loading-animasi">
+            </div>
         </div>
-        <div v-if="!loaderPage" class="flex items-center justify-center mt-6">
-            <img class=" w-10 h-10" src="/images/animated-loading.svg" alt="loading-animasi">
-        </div>
-        <div v-if="loaderPage" class="pagination-area text-center mt-6">
+        <div  class="pagination-area text-center mt-6">
             <ElementsPaginasiSpa 
                 v-model="currentPage"
                 :totalPage="totalPage"
                 :totalVisible="totalVisible"
-                :key="'pagset'+keyPage"
+                :loaderPage="!loaderPage"
+                :key="'pageset'+keyPage"
             />
         </div>
     </div>
@@ -158,7 +167,33 @@ export default {
                     tipe: 'date',
                     display: true
                 },
+            ],
+            tableDetail: [
+                {
+                    header: 'Title',
+                    itemValue: 'namaBlog'
+                },
+                {
+                    header: 'Organization',
+                    itemValue: 'namaOrganisasi',
+                    itemClass: 'w-3/12'
+
+                },
+                {
+                    header: 'Status',
+                    itemValue: 'submission',
+                    itemClass: 'w-2/12'
+
+                },
+                {
+                    header: 'Created At',
+                    itemValue: 'createdAt',
+                    type: 'date',
+                    format: 'DD MMM YYYY HH:ss',
+                    itemClass: 'w-2/12'
+                }
             ]
+
         }
     },
     watch: {
@@ -176,6 +211,13 @@ export default {
             this.masterPoint()
         }
     },
+    computed: {
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
+        }
+    },
+
+
     mounted() {
         this.initialize()
     },
@@ -210,7 +252,7 @@ export default {
                 this.dataTable = res.data.results.map(e => {
                     const data = {
                         blogId: e.blogId,
-                        namaBlog: e.judulArtikel.length > 0 ? e.judulArtikel[0] : 'N/A',
+                        namaBlog: e.judulArtikel,
                         namaOrganisasi: e.myOrganisasi.namaOrganisasi,
                         submission: e.submission,
                         createdAt: e.createdAt
