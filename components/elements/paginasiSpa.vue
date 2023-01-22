@@ -16,7 +16,7 @@
                     <button v-if="item.val === value && item.type==='number'" disabled class="h-8 px-3 text-sm flex items-center justify-center bg-warna-empat text-white border border-warna-lima rounded">
                         {{item.val}}
                     </button>
-                    <button  v-else-if="item.val !== value && item.type==='number'" @click="clickPage(item.val)" class="h-8 px-3 text-sm flex items-center justify-center bg-white text-warna-empat hover:bg-warna-empat/30 border border-warna-lima rounded">
+                    <button  v-else-if="item.val !== value && item.type==='number'" @click="clickPage(item.val)" class="h-8 px-3 text-sm flex items-center justify-center bg-white text-empat hover:bg-empat/30 border border-warna-lima rounded">
                         {{item.val}}
                     </button>
                     <button  v-else-if="item.val !== value && item.type==='dots'" disabled  class="h-8 px-3 text-sm flex items-center justify-center bg-white text-warna-empat border border-warna-lima rounded">

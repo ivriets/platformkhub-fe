@@ -5,7 +5,7 @@
         </div>
         <textarea 
             :id="name" 
-            :placeholder="placeholder"
+            :placeholder="placeholder ? placeholder : $t('tulisDisini')"
             @input="handleInput"
             :value="value ? value : ''"
             :disabled="disabled ? disabled : false"

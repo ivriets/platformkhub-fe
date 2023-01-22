@@ -6,8 +6,10 @@
                     v-html="i.paragraf[tempBahasa]"
                 ></div>
                 <div v-else>
-                    <img :src="basePath+i.imgDeskripsiLarge" :alt="i.caption[tempBahasa]">
-                    <div class="mb-3" v-html="i.caption[tempBahasa]"></div>
+                    <!-- <img :src="basePath+i.imgDeskripsiLarge" :alt="i.caption[tempBahasa]"> -->
+                    <!-- <img :src="basePath+i.imgDeskripsiLarge" :alt="i.caption[tempBahasa]"> -->
+                    <!-- <div class="mb-3" v-html="i.caption[tempBahasa]"></div> -->
+                    <nuxt-img format="webp" :src="basePath+i.imgDeskripsiLarge" loading="lazy" />
                 </div>
             </div>
         </div>

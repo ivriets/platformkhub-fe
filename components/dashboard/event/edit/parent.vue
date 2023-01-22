@@ -38,13 +38,22 @@
 
                     <!-- <div class="text-warna-utama mb-[28px]">Registration Type</div> -->
                     <div class="text-xl text-warna-utama mb-[28px]">Registration Type</div>
+                        <div class="mb-5">
                         <InputRadio 
-                            v-model="form.kategoriArtikel"
+                            v-model="form.tipeRegistrasi"
                             :label="''"
-                            :opsiRadio="opsiRadio"
-                            :name="prefixName+'kategoriartikel'"
+                            :opsiRadio="opsiTipeRegistransi"
+                            :name="prefixName+'tipeRegistrasi'"
                             :orientasi="'horizontal'"
                         />
+                        </div>
+                        <div>
+                            <InputText 
+                                v-model="form.registrasiExternalLink"
+                                :label="''"
+                                :name="prefixName+'registrasiExtrenalLink'"
+                            />
+                        </div>
                     <hr class="border-warna-tujuh my-10">
 
                     <div class="text-xl text-warna-utama mb-[28px]">Registration Date</div>
@@ -232,7 +241,7 @@
                             :accept="'.png, .jpg, .jpeg'"
                             :maxSize="1"
                             :useCrop="true"
-                            :cropRatio="4/3"
+                            :cropRatio="1"
                             v-if="loaderAll"
                             :key="'imgthumbnail'+keyMaster"
                         />
@@ -341,7 +350,8 @@ export default {
                 registrationStartDate: '',
                 registrationEndDate: '',
                 kontakEmail: '',
-                kontakNama: ''
+                kontakNama: '',
+                registrasiExternalLink: ''
                 
             },
             deskripsi: {
@@ -351,7 +361,16 @@ export default {
                 new: []
             },
 
-            opsiRadio: [],
+            opsiTipeRegistransi: [
+                {
+                    id:1,
+                    label: ['KHUB (GRATIS)', 'KHUB (FREE)']
+                },
+                {
+                    id:2,
+                    label: ['Tautan Eksternal', 'External Link']
+                }
+            ],
             opsiTag: [],
             daftarGalleri: [],
             totalBookmark: 0,
@@ -526,7 +545,8 @@ export default {
 
                     tipeRegistrasi: '',
                     kontakEmail: '',
-                    kontakNama: ''
+                    kontakNama: '',
+                    registrasiExternalLink: ''
 
 
 

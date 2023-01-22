@@ -1,10 +1,6 @@
 <template>
     <div>
-        <div v-for="(item, index) in newVal.list" :key="'list'+index" class="mb-10">
-            <!-- <InputContentSectionItem 
-                v-model="newVal.list[index]"
-                :index="index"
-            /> -->
+        <div v-for="(item, index) in newVal.list" :key="'list'+index" class="mb-10 transition-all" :class="'content-section-'+index">
             <div v-if="item.typeDeskripsi === 1">
                 <div class="mb-7">
                     <InputImageUploadSingle 
@@ -23,6 +19,8 @@
                         <InputTextEditor 
                             v-model="newVal.list[index].paragraf[0]"
                             :name="'paragrafid'+index"
+                            :max="2500"
+                            :counter="true"
                         />
                     </div>
                     <div>
@@ -30,6 +28,9 @@
                         <InputTextEditor 
                             v-model="newVal.list[index].paragraf[1]"
                             :name="'paragrafen'+index"
+                            :max="2500"
+                            :counter="true"
+
                         />
                     </div>
                 </div>
@@ -98,6 +99,7 @@ export default {
             this.newVal = this.value
             this.keyImage+=1
         },
+
         deleteSection(item, index) {
             // console.log(item)
             if (item.typeDeskripsi === 1) {
@@ -112,6 +114,13 @@ export default {
             this.newVal.list.splice(index,1)
         }, 
         addSection(typeDeskripsi) {
+            // const indexAkhir = this.newVal.list.length - 1
+            // this.newVal.list[indexAkhir].caption = ['N/A', 'N/A']
+            // this.newVal.list[indexAkhir].paragraf[0] = this.newVal.list[indexAkhir].paragraf[0] === '' ? 'N/A' : this.newVal.list[indexAkhir].paragraf[0]
+            // this.newVal.list[indexAkhir].paragraf[1] = this.newVal.list[indexAkhir].paragraf[1] === '' ? 'N/A' : this.newVal.list[indexAkhir].paragraf[1]
+
+
+
             const vA = {
                 typeDeskripsi: typeDeskripsi,
                 imgDeskripsi: '',
@@ -122,6 +131,11 @@ export default {
             }
 
             this.newVal.list.push(vA)
+            const index = this.newVal.list.length - 1 
+            setTimeout(() => {
+                // this.$gsap.to('.content-section-1', { duration: 2})
+                    this.$scrollTo('.content-section-' + index, 250, {easing: 'ease-in-out', offset: -80})
+            },200)
         },
         updateValue() {
             this.keyImage+=1

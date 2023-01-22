@@ -4,15 +4,20 @@
             :api-key="apiKey"
             :id="name"
             :init="init"
+            model-events="change keydown blur focus paste"
+            @keydown="onKeyDown"
+            @selectionChange="handlerFunction"
             v-model="model"
         />
+        <div v-if="counter && counter === true && max && parseInt(max) > 0" class="text-xs text-warna-dua mt-1 ml-1">{{value.length}}/{{max}} (html tag included)</div>
+
     </div>
 </template>
 
 <script>
 import Editor from '@tinymce/tinymce-vue';
 export default {
-    props: ['name','value'],
+    props: ['name','value', 'max', 'counter'],
    components: {
      'editor': Editor
    },
@@ -24,6 +29,7 @@ export default {
             init: {
                 skin:false,
                 content_css: false,
+                statusbar: false,
                 height: 400,
                 menubar: false,
                 plugins: ['advlist','autolink', 'lists','link', 'image', 'charmap', 'preview', 'code', 'table', 'codesample', 'fullscreen'],
@@ -40,6 +46,8 @@ export default {
         }
     },
 
+
+
     computed: {
         model: {
             get() {
@@ -50,6 +58,21 @@ export default {
             }
         },
     },
+    watch: {
+        model(val) {
+            // console.log(val.length)
+        }
+    },
+    methods: {
+        onKeyDown(event) {
+            console.log(event);
+            event.preventDefault();
+        },
+        handlerFunction(event, editor) {
+            console.log(event)
+            console.log(editor)
+        }
+    }
 
 }
 </script>

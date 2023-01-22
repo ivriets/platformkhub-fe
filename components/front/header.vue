@@ -19,8 +19,8 @@
                         </div>
                         <hr class="border-warna-tujuh">
                         <div class="px-8 py-2 flex gap-x-2">
-                            <div @click="btnTutup" class="cursor-pointer bg-white text-gray-600 hover:bg-gray-200 text-sm rounded-lg py-1.5 text-center w-20">{{$t('Close')}}</div>
-                            <div @click="btnLogout" class="cursor-pointer bg-warna-empat text-white text-sm rounded-lg py-1.5 text-center w-20">{{$t('Logout')}}</div>
+                            <button @click="btnTutup" class=" bg-white text-gray-600 hover:bg-gray-200 text-sm rounded-lg py-1.5 text-center w-20">{{$t('Close')}}</button>
+                            <button @click="btnLogout" class=" bg-warna-empat text-white text-sm rounded-lg py-1.5 text-center w-20">{{$t('Logout')}}</button>
                         </div>
                     </div>
                 </div>
@@ -55,8 +55,8 @@
                     </div>
                     <div v-if="flagDrop" v-click-outside="closeDrop" class="relative z-10">
                         <div class="absolute bg-white shadow-md rounded-md right-0 text-sm w-40 mt-2 border border-gray-50">
-                            <div @click="pilihInggris" class="py-2 px-4 cursor-pointer hover:bg-gray-50">{{$t('Bendera Australia')}}</div>
-                            <div @click="pilihIndonesia" class="py-2 px-4 cursor-pointer hover:bg-gray-50">{{$t('Bendera Indonesia')}}</div>
+                            <button @click="pilihInggris" class="w-full text-left py-2 px-4  hover:bg-gray-50">{{$t('Bendera Australia')}}</button>
+                            <button @click="pilihIndonesia" class="w-full text-left py-2 px-4  hover:bg-gray-50">{{$t('Bendera Indonesia')}}</button>
                         </div>
                     </div>
                 </div>
@@ -87,6 +87,9 @@ export default {
         },
         basePath() {
             return process.env.BASE_URL
+        },
+        bahasaStore() {
+            return this.$store.state.selectedBahasa
         }
     },
     mounted() {
@@ -94,13 +97,13 @@ export default {
     },
     methods: {
         initialize() {
-
+            // console.log(this.bahasaStore)
+            // this.gantiBahasa(this.bahasaStore)
         },
 
         gantiBahasa(lang) {
-        //    this.switchLocalePath('id')
             this.$i18n.setLocale(lang)
-            // this.$refs.tbahasa.blur()
+            this.$store.commit('setSelectedBahasa', lang)
         },
 
         toggleDrop() {

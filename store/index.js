@@ -3,7 +3,12 @@ export const state = () => {
       pageTitle: '',
       drawer: true,
       drawerOpen: 256,
-      drawerClose: 60
+      drawerClose: 60,
+      halamanBlog: null,
+      halamanResource: null,
+      halamanEvent: null,
+      halamanProgram: null,
+      selectedBahasa: 'en'
     }
   }
   export const mutations = {
@@ -12,7 +17,23 @@ export const state = () => {
     },
     setDrawer (state, drawer) {
       state.drawer = drawer
+    },
+    setHalamanBlog(state, halamanBlog) {
+      state.halamanBlog = halamanBlog
+    },
+    setHalamanResource(state, halamanResource) {
+      state.halamanResource = halamanResource
+    },
+    setHalamanEvent(state, halamanEvent) {
+      state.halamanEvent = halamanEvent
+    },
+    setHalamanProgram(state, halamanProgram) {
+      state.halamanProgram = halamanProgram
+    },
+    setSelectedBahasa(state, selectedBahasa) {
+      state.selectedBahasa = selectedBahasa
     }
+
   }
   export const actions = {
     nuxtServerInit ({ commit }, { req }) {

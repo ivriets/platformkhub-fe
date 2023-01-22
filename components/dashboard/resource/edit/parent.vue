@@ -1,8 +1,8 @@
 <template>
     <div class="py-[48px]">
         <div class="mb-6">
-            <ElementsBreadcrumb 
-                :parent="'resources'"
+            <ElementsBreadcrumbBaru 
+                :parent="$t('Resources')"
                 :linkParent="'/moderations/resource'"
                 :child="childBreadcrumb"
             />
@@ -13,7 +13,6 @@
                     <div class="mb-6">
                         <InputText 
                             v-model="form.judulArtikel[0]"
-                            placeholder="Tulis disini"
                             :name="prefixName+'titleid'"
                             :label="'Title (Bahasa Indonesia)'"
                             :max="maxTitle"
@@ -24,7 +23,6 @@
                     <div class="">
                         <InputText 
                             v-model="form.judulArtikel[1]"
-                            placeholder="Write here"
                             :name="prefixName+'titleen'"
                             :label="'Title (English)'"
                             :max="maxTitle"
@@ -33,28 +31,15 @@
                     </div>
 
                     <hr class="border-warna-tujuh my-10">
+                        <DashboardResourceEditFile 
+                            v-model="form.resourcesFiles"
+                            :key="'resourcetype'+keyMaster"
+                        />
+
+                    <hr class="border-warna-tujuh my-10">
 
                     <div>
-                        <div class="text-xl text-warna-utama mb-[28px]">Content</div>
-                        <!-- <div class="mb-6">
-                            <InputTextArea 
-                                v-model="form.deskripsiPanjang[0]"
-                                :max="500"
-                                placeholder="Tulis disini"
-                                :label="'Content (English)'"
-                                :name="prefixName+'deskripsiid'"
-                            />
-                        </div>
-                        <div>
-                            <InputTextArea 
-                                v-model="form.deskripsiPanjang[1]"
-                                :max="500"
-                                placeholder="Tulis disini"
-                                :label="'Content (Indonesia)'"
-                                :name="prefixName+'deskripsien'"
-                            />
-                        </div> -->
-
+                        <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Content') }}</div>
                         <InputContentSectionBaru 
                             v-if="deskripsi"
                             v-model="deskripsi"
@@ -79,12 +64,15 @@
                     </div>
 
                     <div class="">
-                        <InputFileUpload 
+                        <InputImageUploadSingle 
                             :label="'Thumbnail'"
-                            v-model="form.imgThumbnail"
+                            v-model="imgThumbnail"
                             :accept="'.png, .jpg, .jpeg'"
-                            :multiple="false"
-                            :maxSize="5"
+                            :maxSize="1"
+                            :useCrop="true"
+                            :cropRatio="4/3"
+                            v-if="imageThumbnailLoader"
+                            :key="'imgthumbnail'+imageThumbnailKey"
                         />
                     </div>
 
@@ -95,17 +83,17 @@
                     <div>
                         <InputRadio 
                             v-model="form.kategoriArtikel"
-                            :label="$t('resource Type')"
+                            :label="$t('Kategori Publikasi')"
                             :opsiRadio="opsiRadio"
                             :name="prefixName+'kategoriartikel'"
-                            :value="form.kategoriArtikel"
                             :orientasi="'vertikal'"
+                            :key="'kategoriartikel'+keyMaster"
                         />
                     </div>
 
                     <hr class="border-warna-tujuh my-[28px]">
 
-                    <div v-if="typeAudience && form.typeAudience">
+                    <div >
                         <InputAutocompleteMulti 
                             v-model="form.typeAudience"
                             :name="prefixName+'tipeaudience'"
@@ -115,48 +103,54 @@
                             :value="form.typeAudience"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tipeaudience'"
+                            :key="'tipeaudience'+keyMaster"
+                            :multilang="true"
+
                         />
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
-                    <div v-if="typeApproach && form.typeApproach">
+                    <div >
                         <InputAutocompleteMulti 
                             v-model="form.typeApproach"
                             :name="prefixName+'tipeapproach'"
-                            :placeholder="'Tulis disini'"
                             :label="'Tipe Approach'"
                             :opsi="typeApproach"
                             :value="form.typeApproach"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tipeapproach'"
+                            :key="'tipeapproach'+keyMaster"
+                            :multilang="true"
+
                         />
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
-                    <div v-if="typeIssues && form.typeIssues">
+                    <div >
                         <InputAutocompleteMulti 
                             v-model="form.typeIssues"
                             :name="prefixName+'topik'"
-                            :placeholder="'Tulis disini'"
                             :label="'Topik'"
                             :opsi="typeIssues"
                             :value="form.typeIssues"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'topik'"
+                            :key="'typeIssues'+keyMaster"
+                            :multilang="true"
+
                         />
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
-                    <div v-if="listTag && form.tag">
+                    <div >
                         <InputAutocompleteMulti 
-                            v-model="form.tag"
+                            v-model="form.resourcesTag"
                             :name="prefixName+'tag'"
-                            :placeholder="'Tulis disini'"
                             :label="$t('Tag')"
                             :opsi="listTag"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tag'"
+                            :key="'tag'+keyMaster"
+                            :multilang="true"
+                            :addNew="true"
+
                         />
                     </div>
 
@@ -166,10 +160,10 @@
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div @click="simpan" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+                <div @click="simpan" class="button-standar">{{ $t(btnText) }}</div>
             </div>
         </div>
-        <pre>{{ form }}</pre>
+        <!-- <pre>{{ form }}</pre> -->
     </div>
 </template>
 
@@ -178,10 +172,12 @@
 export default {
     data() {
         return {
+            btnText: 'Save',
             prefixName: 'resource',
+            keyMaster: 0,
             maxTitle: 80,
             dataDetail: null,
-            childBreadcrumb: [],
+            // childBreadcrumb: [],
             form: {
                 submission: 1,
                 judulArtikel: ['',''],
@@ -190,7 +186,14 @@ export default {
                 typeAudience: [],
                 typeApproach: [],
                 typeIssues: [],
-                tag: [],
+                resourcesTag: [],
+                resourcesFiles: {
+                        pkFileId: '',
+                        typeResources: '',
+                        embedLink: '',
+                        deskripsiFile: ['',''],
+                        typeVisibility: 1
+                }
             },
             opsiRadio: [],
             imgThumbnail: null, 
@@ -211,6 +214,13 @@ export default {
                 updated: [],
                 new: []
             },
+            imgThumbnail: {
+                file: null,
+                displayImage: ''
+            },
+            imageThumbnailLoader: false,
+            imageThumbnailKey: 0,
+
             
         }
     },
@@ -248,6 +258,24 @@ export default {
         },
         basePath() {
             return process.env.BASE_URL
+        },
+        childBreadcrumb() {
+            return  [
+                {
+                    label: this.$t('Detail'),
+                    link: '/moderations/resource/'+this.id
+                },
+                {
+                    label: this.$t('Editor'),
+                    link: ''
+                }
+            ]
+        }
+        
+    },
+    watch: {
+        imageThumbnailLoader() {
+            this.imageThumbnailKey +=1
         }
     },
     mounted() {
@@ -255,13 +283,15 @@ export default {
     },
     methods: {
         initialize() {
-            this.setBreadcrumb()
             this.opsiRadio = this.kategoriArtikel
-            console.log(this.typeOrganisasi)
-            this.masterPoint()
+            this.getTag();
+            this.imageThumbnailLoader = false
+            this.$nextTick(() => {
+                this.masterPoint()
+            })
+            
         },
-
-        async masterPoint() {
+        async getTag() {
             await this.$apiPlatform.get('daftarList/tag/').then(res => {
                 this.listTag = _.flatMap(res.data.results, function(o){
                     return {"id":o.id, 'label':o.nama}
@@ -269,6 +299,9 @@ export default {
             }).catch(err => {
                 console.log(err)
             })
+        },
+        async masterPoint() {
+
             await this.$apiPlatform.get('moderator/resources/'+this.id+'/').then(res => {
                 const data = res.data
 
@@ -283,10 +316,25 @@ export default {
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
-                    tag: _.flatMap(data.tag, "id"),
+                    resourcesTag: _.flatMap(data.resourcesTag, "pilihanTagId.id"),
+                    resourcesFiles: data.resourcesFiles ? {
+                        pkFileId: data.resourcesFiles.pkFileId,
+                        binFile: data.resourcesFiles.binFile === '/assets/file.pdf' ? '' : data.resourcesFiles.binFile,
+                        typeResources: data.resourcesFiles.typeResources.id,
+                        embedLink: data.resourcesFiles.embedLink === 'https://' ? '' : data.resourcesFiles.embedLink,
+                        deskripsiFile: data.resourcesFiles.deskripsiFile,
+                        typeVisibility: data.resourcesFiles.typeVisibility
+                    } : {
+                        pkFileId: '',
+                        binFile: '',
+                        typeResources: '',
+                        embedLink: '',
+                        deskripsiFile: ['',''],
+                        typeVisibility: 1
+                    }
                 }
-
                 this.deskripsi.list = this.form.deskripsi
+                this.imgThumbnail.displayImage = data.imgThumbnail
 
 
                 this.imgThumbnail = data.imgThumbnail
@@ -295,6 +343,12 @@ export default {
                     forDeskripsi.push({"typeDeskripsi": 2,"imgDeskripsi": "","caption": ["-","-"],"paragraf": data.deskripsiPanjang, "sorter": 0})
                     this.form.deskripsi = forDeskripsi
                 }
+
+                this.$nextTick(() => {
+                    this.imageThumbnailLoader = true
+                    this.keyMaster +=1
+                })
+
             }).catch(err => {
                 console.log(err)
             })
@@ -304,18 +358,7 @@ export default {
                 console.log(res)
             })
         },
-        setBreadcrumb() {
-            this.childBreadcrumb = [
-                {
-                    label: 'Detail',
-                    link: '/moderations/resource/'+this.id
-                },
-                {
-                    label: 'Editor',
-                    link: ''
-                }
-            ]
-        },
+
         simpan() {
             console.log(this.form)
         },

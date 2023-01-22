@@ -72,7 +72,64 @@
     "titleEnBlank": "Title (English) still empty",
     "tulisDisini": "Write Here",
     "Pilih": "Select",
-    "resource Type": "Resource Type"
+    "resource Type": "Resource Type",
+    "Resources": "Resources",
+    "Detail":"Detail",
+    "Resource Type": "Resource Type",
+    "Pilih File": "Choose File",
+    "Kategori Publikasi": "Resource Category",
+    "Event": "Event",
+    "Content": "Konten",
+    "Thumbnail": "Thumbnail",
+    "Category": "Category",
+    "Issue": "Issue",
+    "Gallery": "Gallery",
+    "Search": "Search",
+    "Moderation Notes": "Moderation Notes",
+    "Main Image": "Main Image",
+    "Event ID":"Event ID",
+    "Updated At" : "Updated At",
+    "Moderator": "Moderator",
+    "Participant": "Participant",
+    "Registration": "Registration",
+    "Activity": "Activity",
+    "Start": "Start",
+    "End": "End",
+    "Location": "Location",
+    "Lokasi Offline" : "Offline Location",
+    "URL": "URL",
+    "View More": "View More",
+    "Download Data": "Download Data",
+    "Phone" : "Phone",
+    "Gender" : "Gender",
+    "Downloading":"Downloading",
+    "Sort by":"Sort by",
+    "Latest": "Latest",
+    "Oldest": "Oldest",
+    "Issues": "Issues",
+    "Program ID": "Program ID",
+    "Revision Note" : "Revision Note",
+    "Title (Bahasa Indonesia)": "Title (Bahasa Indonesia)",
+    "Title (English)": "Title (English)",
+    "Back": "Back",
+    "Blog ID": "Blog ID",
+    "Date Publish": "Date Publish",
+    "Edit": "Edit",
+    "Change Note": "Change Note",
+    "Bookmarked by:" : "Bookmarked by:",
+    "File": "File",
+    "Resource Category": "Resource Category"
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

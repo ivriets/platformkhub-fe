@@ -17,7 +17,7 @@
                     name="inputfiles" id="inputfiles" class="hidden" 
                     @change="prosesFiles()">
 
-                  <button @click="$refs.inputfiles.click()" title="Upload Image"  class="bg-white border border-warna-tujuh rounded-md hover:bg-gray-200 hover:shadow-md transition-all shadow shadow-[#45a6ff33] py-2 w-[145px] text-center mx-auto cursor-pointer">Pilih File</button>
+                  <button @click="$refs.inputfiles.click()" title="Upload Image"  class="button-upload">{{ $t('Pilih File') }}</button>
               </div>
           </div>
       </div>
@@ -159,15 +159,10 @@ export default {
           // }
 
           if (this.value && (this.value.displayImage !== '' && this.value.displayImage !== undefined)) {
-
+            console.log('satu')
             const forPath = this.value.displayImage.substring(0,1) === '/' ? this.basePath : ''
             this.dataImage.displayImage = forPath + this.value.displayImage
-          } else if (this.value !== '') {
-            const forPath = this.value.substring(0,1) === '/' ? this.basePath : ''
-            this.dataImage = {
-              displayImage: forPath + this.value,
-              file: null
-            }
+
           } else {
             this.dataImage = {
               displayImage: '',

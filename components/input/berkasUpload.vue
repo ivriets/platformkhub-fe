@@ -1,26 +1,30 @@
 <template>
     <div>
         <div class="flex items-start mb-1">
-            <div v-if="label" class="font-medium mb-1">
+            <div v-if="label" class="font-medium mb-1 text-sm">
                 {{label}}
             </div>
         </div>
         <div class="list-files zebra">
-            <div v-for="(i, index) in listFiles" :key="'listfiles'+index" class="flex items-center justify-between zebra-item p-2">
-                <div>{{i.name}}</div>
+            <div v-for="(i, index) in listFiles" :key="'listfiles'+index" class="flex items-center justify-between zebra-item p-2 text-sm">
+                <ViewerMaster 
+                    :label="i.name"
+                    :url="i.fileUrl"
+                    :type="'modal'"
+                />
                 <button title="Delete" @click="deleteSelected(index)" class="w-5 h-5 button-delete"></button>
             </div>
         </div>
         <div v-if="multiple && listFiles.length > 0" class="mt-2 button-more-wrapper">
             <button @click="$refs.inputfiles.click()" class="text-utama text-sm font-semibold">Tambah File</button>
         </div>
-        <div v-if="listFiles.length === 0"  class="image-area cursor-pointer" @dragover="dragOver" @dragleave="dragLeave" @drop="drop">
+        <div v-if="listFiles.length === 0"  class="image-area " @dragover="dragOver" @dragleave="dragLeave" @drop="drop">
             <div class="w-full border-dashed border-2 border-warna-tujuh rounded-lg pt-[9px] pb-[25px] flex items-center justify-center">
                 <div class="text-center">
                     <div class="text-xs text-[#BABABA] mb-2 text-center">
                         <div><span class="uppercase">{{ accept }}</span> {{ $t('tidak melebihi') }} {{ maxSize }} MB</div>
                     </div>
-                    <button @click="$refs.inputfiles.click()" class="bg-white border border-warna-tujuh rounded-md hover:bg-gray-200 hover:shadow-md transition-all shadow shadow-[#45a6ff33] py-2 w-[145px] text-center mx-auto cursor-pointer">Pilih File</button>
+                    <button :disabled="disabled" @click="$refs.inputfiles.click()" class="bg-white border border-warna-tujuh rounded-md hover:bg-gray-200 hover:shadow-md transition-all shadow shadow-[#45a6ff33] py-2 w-[145px] text-center mx-auto disabled:bg-gray-200 disabled:text-gray-400 disabled:inset-7 disabled:shadow-none disabled:hover:shadow-none ">{{ $t('Pilih File') }}</button>
                 </div>
             </div>
         </div>
@@ -39,7 +43,7 @@
 
 <script>
 export default {
-    props:['value','label', 'maxSize', 'accept', 'multiple'],
+    props:['value','label', 'maxSize', 'accept', 'multiple', 'disabled'],
     data() {
         return {
             imagePreview: '',

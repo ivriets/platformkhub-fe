@@ -3,7 +3,6 @@
         <FrontHeader 
             v-if="loader"
             :currentUser="currentUser"
-            :key="'header'+keyHeader"
         />
         <div v-if="loader" class="">
             <FrontDrawer />

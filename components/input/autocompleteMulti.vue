@@ -10,7 +10,7 @@
                 :id="name" 
                 :ref="name"
                 class="focus:outline-none w-full border border-warna-tujuh rounded-lg px-2 py-1.5 text-sm placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
-                :placeholder="placeholder"
+                :placeholder="placeholder ? placeholder : $t('tulisDisini')"
                 v-model="newVal"
                 autocomplete="off"
                 :disabled="disabled?disabled:false"
@@ -101,38 +101,6 @@ export default {
                 })
             }
 
-
-            // if (this.itemValue === "userId"){
-            //     if (this.listing.length > 0 && this.value && this.value.length > 0) {
-            //         this.value.forEach(e => {
-            //             const cari = this.listing.filter(x => x.userId === e.userId);
-            //             if (cari && cari.length > 0) {
-            //                 this.selectedValue.push(e)
-            //             }
-            //         })
-            //     }
-            // } else if (this.itemValue === "organisasiId") {
-            //     if (this.listing.length > 0 && this.value && this.value.length > 0) {
-            //         this.value.forEach(e => {
-            //             const cari = this.listing.filter(x => x.organisasiId === e.organisasiId);
-            //             if (cari && cari.length > 0) {
-            //                 this.selectedValue.push(e)
-            //             }
-            //         })
-            //     }
-            // } else if (this.itemValue === "id"){ 
-            //     if (this.listing.length > 0 && this.value && this.value.length > 0) {
-            //         this.value.forEach(e => {
-            //             const cari = this.listing.filter(x => x.id === e);
-            //             if (cari && cari.length > 0) {
-            //                 this.selectedValue.push({
-            //                     id: e,
-            //                     label: cari[0][this.itemLabel] 
-            //                 })
-            //             }
-            //         })
-            //     }
-            // }
         },
 
         focusText() {
@@ -167,7 +135,6 @@ export default {
         },
 
         submitOpsi() {
-            console.log('dienter')
             // if (this.listing.length > 0) {
             //     const pertama = this.listing[0]
             //     const reduceListing = this.selectedValue.map(e=>e[this.parseId]).includes(pertama[this.parseId])

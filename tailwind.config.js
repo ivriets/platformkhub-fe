@@ -24,7 +24,14 @@ module.exports = {
           'empat': '#222659',
           'lima': '#9E9E9E',
           'enam': '#B5B5B5',
-          'tujuh': '#E0E0E0'
+          'tujuh': '#E0E0E0',
+          'sembilan': '#3D3D3D',
+          '444': '#444444',
+          'need-revision': '#C25D00',
+          'approved': '#129555',
+          'under-review': '#8E7400',
+          'draft': '#9E9E9E'
+
         },
       },
     },

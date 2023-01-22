@@ -15,9 +15,8 @@
                     <div class="mb-6">
                         <InputText 
                             v-model="form.judulActivity[0]"
-                            placeholder="Tulis disini"
                             :name="prefixName+'titleid'"
-                            :label="'Title (Bahasa Indonesia)'"
+                            :label="$t('Title (Bahasa Indonesia)')"
                             :max="maxTitle"
                             :counter="true"
                         />
@@ -27,9 +26,8 @@
                     <div class="mb-6">
                         <InputText 
                             v-model="form.judulActivity[1]"
-                            placeholder="Write here"
                             :name="prefixName+'titleen'"
-                            :label="'Title (English)'"
+                            :label="$t('Title (English)')"
                             :max="maxTitle"
                             :counter="true"
                         />
@@ -41,7 +39,7 @@
                             :label="$t('gambarUtama')"
                             v-model="imgMainImage"
                             :accept="'.png, .jpg, .jpeg'"
-                            :maxSize="1"
+                            :maxSize="10"
                             :useCrop="true"
                             :cropRatio="4/3"
                             v-if="imageLoader"
@@ -51,7 +49,7 @@
                     <hr class="border-warna-tujuh my-10">
 
                     <div>
-                        <div class="text-xl text-warna-utama mb-[28px]">Content</div>                       
+                        <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Content') }}</div>                       
                         <InputContentSection 
                             v-if="form.deskripsi"
                             v-model="form.deskripsi"
@@ -62,13 +60,12 @@
                     <hr class="border-warna-tujuh my-10">
                     
                     <div class="mb-10">
-                        <div class="text-xl text-warna-utama mb-[28px]">Date & Location</div>
+                        <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Date & Location') }}</div>
                         <div class="grid grid-cols-12 gap-4">
                             <div  class="col-span-12 lg:col-span-6">
                                 <InputDate
                                     v-model="form.tanggalMulai"
-                                    :value="form.tanggalMulai"
-                                    :label="'Start Date'"
+                                    :label="$t('Start Date')"
                                     :name="prefixName+'tanggalmulai'"
                                     :key="'tglmulai'+keyTanggal"
                                 />
@@ -76,8 +73,7 @@
                              <div  class="col-span-12 lg:col-span-6">
                                 <InputDate
                                     v-model="form.tanggalSelesai"
-                                    :value="form.tanggalSelesai"
-                                    :label="'End Date'"
+                                    :label="$t('End Date')"
                                     :name="prefixName+'tanggalselesai'"
                                     :key="'tglselesai'+keyTanggal"
                                     :disabledBefore="disBefore"
@@ -157,23 +153,15 @@
                                 />
                             </div>
                             <div class="flex items-center text-sm text-warna-sembilan">
-                                <div class="">Bookmark by: </div>
+                                <div class="">{{ $t('Bookmarked by:') }} </div>
                                 <div class="ml-1">{{totalBookmark}}</div>
                             </div>
                         </div>
-                        <div class="bg-warna-empat text-white rounded-lg py-4 text-center mx-0 cursor-pointer hover:bg-blue-900">Submit</div>
                     </div>
 
                     <div class="">
-                        <!-- <div class="font-medium">Thumbnail</div>
-                        <div class="border-dashed border-2 border-warna-tujuh pt-[9px] pb-[25px] rounded-lg text-center">
-                            <div class="text-xs text-[#BABABA] mb-2">
-                                <div>jpg or png no larger than 25MB.</div>
-                            </div>
-                            <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[145px] mx-auto cursor-pointer">Pilih File</div>
-                        </div> -->
                         <InputImageUploadSingle 
-                            :label="'Thumbnail'"
+                            :label="$t('Thumbnail')"
                             v-model="imgThumbnail"
                             :accept="'.png, .jpg, .jpeg'"
                             :maxSize="1"
@@ -191,21 +179,9 @@
                     
 
                     <div  class="mb-6">
-                        <!-- <InputAutocompleteMulti 
-                            v-model="form.officer"
-                            :name="prefixName+'officer'"
-                            :placeholder="'Tulis disini'"
-                            :label="$t('Officer')"
-                            :opsi="listIndividu"
-                            :itemValue="'userId'"
-                            :itemLabel="'namaIndividu'"
-                            :multilang="false"
-                        /> -->
-
                         <InputAutocompleteApiMulti 
                             v-model="form.officer"
                             :name="prefixName+'partner'"
-                            :placeholder="'Tulis disini'"
                             :label="$t('Officer')"
                             :endPoint="'verificator/listIndividu/?limit=10&offset=0'"
                             :searchQuery="'title'"
@@ -217,11 +193,10 @@
 
                     </div>
                     <!-- {{listOrganisasi}} -->
-                    <div v-if="listOrganisasi && form.partner" class="mb-6">
+                    <div  class="mb-6">
                         <InputAutocompleteMulti 
                             v-model="form.partner"
                             :name="prefixName+'partner'"
-                            :placeholder="'Tulis disini'"
                             :label="$t('Partner')"
                             :opsi="listOrganisasi"
                             :itemValue="'organisasiId'"
@@ -229,31 +204,22 @@
                             :multilang="false"
 
                         />
-
-
-
                     </div>
-
-
-
                     <div v-if="typeAudience && form.typeAudience" class="mb-6">
                         <InputAutocompleteMulti 
                             v-model="form.typeAudience"
                             :name="prefixName+'tipeaudience'"
-                            :placeholder="'Tulis disini'"
                             :label="'Tipe Audience'"
                             :opsi="typeAudience"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :multilang="true"
-
                         />
                     </div>
                     <div v-if="typeApproach && form.typeApproach" class="mb-6">
                         <InputAutocompleteMulti 
                             v-model="form.typeApproach"
                             :name="prefixName+'tipeapproach'"
-                            :placeholder="'Tulis disini'"
                             :label="'Tipe Approach'"
                             :opsi="typeApproach"
                             :itemValue="'id'"
@@ -280,7 +246,6 @@
                         <InputAutocompleteMulti 
                             v-model="form.tag"
                             :name="prefixName+'tag'"
-                            :placeholder="'Tulis disini'"
                             :label="$t('Tag')"
                             :opsi="listTag"
                             :itemValue="'id'"
@@ -295,8 +260,8 @@
         </div>
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
-                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div @click="simpan" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+                <button @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">{{ $t('Back') }}</button>
+                <button @click="simpan" class="button-standar">{{ $t('Save') }}</button>
             </div>
         </div>
 
@@ -604,9 +569,44 @@ export default {
         },
         simpan() {
             console.log(this.form)
+            this.submitToApi()
+        },
+        async submitToApi() {
+            this.form.tanggalMulai = new Date(this.form.tanggalMulai)
+            this.form.tanggalSelesai = new Date(this.form.tanggalSelesai)
+            await this.$apiPlatform.put('moderator/programs/'+this.id+'/', this.form).then(res => {
+                console.log(res.data)
+                this.$toast.show('Program ' + this.form.judulActivity[this.bahasa] +' Updated')
+
+            if (this.imgThumbnail.file !== null) {
+                this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
+            } else {
+                this.btnText = 'Save'
+                this.$nextTick(() => {
+                    this.initialize()
+                })
+            }
+
+
+
+
+            })
         },
 
+         async uploadImage(image, untuk, name) {
+            if (image instanceof Blob){
+                var data = new FormData();
+                data.append(untuk, image, name);
+                await this.$apiPlatform.put('moderator/programs/'+this.id+'/', data).then(res => {
+                    this.btnText = 'Save'
 
+                    this.$toast.show('Blog updated successfuly')
+                    this.initialize()
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+        },
         btnBack() {
             this.$router.push('/moderations/program/'+this.id)
         },

@@ -1,33 +1,43 @@
 <template>
     <div>
-            <div class="text-xl mb-1">Gallery</div>
+            <div class="text-xl mb-1">{{ $t('Gallery') }}</div>
             <InputImageUploadMulti 
                 v-model="newImages"
                 :label="''"
                 :maxSize="1"
                 :accept="'.png, .jpg, .jpeg'"
-                :key="'key1'+imageKey"
+                :maxFiles="maxTotalFiles"
+                :useCrop="true"
+                :cropRatio="4/3"
+                :disabled="disUpload"
             />
+
             <div class="flex flex-wrap items-center lg:gap-4 gap-2 mt-10">
                 <div v-for="(item, index) in newVal" :key="'galleri'+index" class="relative bg-white shadow-md border border-gray-50 rounded-xl">
                     <img class="h-16" :src="item.type && item.type !=='' ? item.imgGambar : basePath+item.imgGambar" alt="gallery-image">
+
                     <button @click="deleteImage(index)" class="absolute top-0 right-0 bg-white rounded-full p-1 cursor-pointer flex items-center mr-2 mt-2 hover:bg-gray-100">
                         <img class="w-[10px] h-[10px]" src="/icons/icon-close.png" alt="icon-delete">
                     </button>
                 </div>
             </div> 
-    <!-- {{newVal}} -->
+
     </div>
-    </template>
-    
-    <script>
-    export default {
-        props: ['value'],
+</template>
+
+<script>
+export default {
+    props: ['value'],
         data() {
             return {
+                disUpload: false,
                 newImages: [],
-                // newVal: []
                 imageKey:0,
+                // maxTotalFiles: 5,
+                newImage: {
+                    file: null,
+                    displayImage: ''
+                }
             }
         },
         computed: {
@@ -44,6 +54,14 @@
             },
             itemsLength() {
                 return this.newImages.length
+            },
+            newValLength() {
+                return this.newVal.length
+            },
+            maxTotalFiles() {
+                //5
+                const defaultMax = 5
+                return defaultMax - this.newVal.length 
             }
     
     
@@ -51,14 +69,23 @@
         watch: {
             itemsLength(val) {
                 const image = _.cloneDeep(this.newImages)
-                const images = image.map(e => {
-                    e.deskripsiGambar = ['','']
+                const images = image.map((e,index) => {
+                    e.deskripsiGambar = ['khub' + index,'khub' + index],
+                    e.imgGambar = e.displayImage
                     return e;
                 })
                 this.newVal = this.newVal.concat(images)
                 this.newImages = [];
                 this.imageKey +=1
+            },
+            maxTotalFiles(val) {
+                if (val < 1 ) {
+                    this.disUpload = true
+                } else {
+                    this.disUpload = false
+                }
             }
+
             // newImages(val) {
             //     this.newVal.push(val);
             //     this.$nextTick(() => {
@@ -71,5 +98,6 @@
                 this.newVal.splice(index, 1)
             }
         }
-    }
-    </script>
+}
+</script>
+

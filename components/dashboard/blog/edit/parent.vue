@@ -40,25 +40,6 @@
 
                     <div>
                         <div class="text-xl text-warna-utama mb-[28px]">Content</div>
-                        <!-- <div class="mb-6">
-                            <InputTextArea 
-                                v-model="form.deskripsiPanjang[0]"
-                                :max="500"
-                                placeholder="Tulis disini"
-                                :label="'Content (English)'"
-                                :name="prefixName+'deskripsiid'"
-                            />
-                        </div>
-                        <div>
-                            <InputTextArea 
-                                v-model="form.deskripsiPanjang[1]"
-                                :max="500"
-                                placeholder="Tulis disini"
-                                :label="'Content (Indonesia)'"
-                                :name="prefixName+'deskripsien'"
-                            />
-                        </div> -->
-
                         <InputContentSectionBaru
                             v-if="deskripsi"
                             v-model="deskripsi"
@@ -81,22 +62,15 @@
                                 />
                             </div>
                             <div class="flex items-center text-sm text-warna-sembilan">
-                                <div class="">Bookmark by: </div>
+                                <div class="">{{ $t('Bookmarked by:') }} </div>
                                 <div class="ml-1">-</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="">
-                        <!-- <InputFileUpload 
-                            :label="'Thumbnail'"
-                            v-model="form.imgThumbnail"
-                            :accept="'.png, .jpg, .jpeg'"
-                            :multiple="false"
-                            :maxSize="5"
-                        /> -->
                         <InputImageUploadSingle 
-                            :label="'Thumbnail'"
+                            :label="$t('Thumbnail')"
                             v-model="imgThumbnail"
                             :accept="'.png, .jpg, .jpeg'"
                             :maxSize="1"
@@ -108,8 +82,6 @@
 
 
                     </div>
-
-                    
 
                     <hr class="border-warna-tujuh my-[28px]">
 
@@ -129,13 +101,10 @@
                         <InputAutocompleteMulti 
                             v-model="form.typeAudience"
                             :name="prefixName+'tipeaudience'"
-                            :placeholder="'Tulis disini'"
-                            :label="'Tipe Audience'"
+                            :label="$t('Audience Type')"
                             :opsi="typeAudience"
-                            :value="form.typeAudience"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tipeaudience'"
                             :multilang="true"
                         />
                     </div>
@@ -144,13 +113,10 @@
                         <InputAutocompleteMulti 
                             v-model="form.typeApproach"
                             :name="prefixName+'tipeapproach'"
-                            :placeholder="'Tulis disini'"
-                            :label="'Tipe Approach'"
+                            :label="$t('Approach')"
                             :opsi="typeApproach"
-                            :value="form.typeApproach"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tipeapproach'"
                             :multilang="true"
 
                         />
@@ -160,13 +126,10 @@
                         <InputAutocompleteMulti 
                             v-model="form.typeIssues"
                             :name="prefixName+'topik'"
-                            :placeholder="'Tulis disini'"
-                            :label="'Topik'"
+                            :label="$t('Issues')"
                             :opsi="typeIssues"
-                            :value="form.typeIssues"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'topik'"
                             :multilang="true"
 
                         />
@@ -180,7 +143,6 @@
                             :opsi="listTag"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="prefixName+'tag'"
                             :multilang="true"
                             :addNew="true"
 
@@ -206,7 +168,7 @@
         </div>
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
-                <button @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</button>
+                <button @click="btnBack" class="button-standar-outline">{{ $t('Back') }}</button>
                 <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
@@ -306,6 +268,7 @@ export default {
         initialize() {
             // this.setBreadcrumb()
             this.btnText = 'Save'
+            this.imageThumbnailLoader = false
             
 
             this.opsiRadio = this.kategoriArtikel

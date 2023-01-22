@@ -11,8 +11,9 @@
                     v-model="valRadio"
                     :value="i.id"  
                     class="w-4 h-4 text-warna-empat bg-gray-100 border-gray-300 focus:ring-warna-empat focus:ring-0 "
+                    :disabled="disabled?disabled:false"
                 >
-                <label :for="'cc'+name+i.id" class="ml-2 text-sm text-warna-sembilan cursor-pointer" >{{ i.label[bahasa] }}</label>
+                <label :for="'cc'+name+i.id" class="ml-2 text-sm text-warna-sembilan " :class="disabled?'' : 'cursor-pointer'" >{{ i.label[bahasa] }}</label>
             </div>
         </div>
     </div>
@@ -21,7 +22,7 @@
 
 <script>
 export default {
-    props: ['label', 'opsiRadio', 'value', 'name', 'orientasi'],
+    props: ['label', 'opsiRadio', 'value', 'name', 'orientasi', 'disabled'],
     data() {
         return {
             valRadio: '',

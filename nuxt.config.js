@@ -74,11 +74,21 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/google-analytics',
+    'nuxt-gsap-module'
   ],
-
+  gsap: {
+    extraPlugins: {
+      scrollTo: true,
+      scrollTrigger: true
+    },
+    extraEases: {
+      expoScaleEase: true
+    }
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     'cookie-universal-nuxt',
+    '@nuxt/image',
     '@nuxtjs/i18n',
     '@nuxtjs/dayjs',
     '@nuxtjs/axios',
@@ -87,6 +97,7 @@ export default {
     'nuxt-highcharts',
     // ['cookie-universal-nuxt', { alias: 'cookiz' }],
     'cookie-universal-nuxt',
+    'vue-scrollto/nuxt',
     ['nuxt-tailvue', {
       modal: true,
       toast: { 

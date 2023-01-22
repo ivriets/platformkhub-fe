@@ -887,3 +887,7 @@ body {
     }
     word-break: break-word;
 }
+input[type="radio"]:checked {
+    border: 1px solid $warna-empat;
+    accent-color: $warna-empat;
+}

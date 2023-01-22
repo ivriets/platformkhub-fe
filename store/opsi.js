@@ -323,4 +323,31 @@ export const state = () => ({
             label: 'Project'
         }
     ],
+    typeResources: [
+        {
+            id: 3,
+            label: ['PDF', 'PDF']
+        },
+        {
+            id: 4,
+            label: ['Video', 'Video']
+        },
+        {
+            id: 5,
+            label: ['Audio', 'Audio']
+
+        },
+
+        {
+            id: 2,
+            label: ['File Lainnya', 'Other FIles']
+        },
+        // {
+        //     id:1,
+        //     label: ['Tautan Eksternal', 'External Link']
+        // },
+
+
+
+    ]
 })
