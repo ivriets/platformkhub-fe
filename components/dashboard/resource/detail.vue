@@ -1,5 +1,5 @@
 <template>
-    <div class="py-[48px]">
+    <div v-if="loaderDetail" class="py-[48px]">
         <div class="mb-6">
             <ElementsBreadcrumbBaru 
                 :parent="'Resources'"
@@ -190,7 +190,22 @@ export default {
             loaderDetail: false,
             flagDrop: false,
             selectedFlag: 0,
-            dataDetail: null,
+            dataDetail: {
+                resourcesFiles: {
+                    typeResources: {
+                        id: '',
+                        nama: ['','']
+                    }
+                }
+            },
+            default: {
+                resourcesFiles: {
+                    typeResources: {
+                        id: '',
+                        nama: ['-','-']
+                    }
+                }
+            },
             buttonSubmission: null,
             color: '',
             form: {
@@ -313,10 +328,11 @@ export default {
                 // console.log(res.data)
                 const data = res.data
                 this.dataDetail = data
+                this.dataDetail.resourcesFiles = this.dataDetail.resourcesFiles === null ? _.cloneDeep(this.default.resourcesFiles) : this.dataDetail.resourcesFiles
                 this.buttonSubmission = data.submission
                 this.form.catatanModerasi = this.dataDetail.catatanModerasi
 
-
+                console.log(this.dataDetail)
                 this.$nextTick(() => {
                     this.loaderDetail = true
                 })

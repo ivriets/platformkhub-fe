@@ -2,7 +2,11 @@
     <div class="text-sm font-semibold mb-5">
         <div class="text-warna-delapan">{{ title }}</div>
         <div class="text-warna-sembilan" >
-            <slot>{{content}}</slot>
+            <slot>
+                <div v-if="content && content !== null">
+                {{content}}
+                </div>
+            </slot>
         </div>
     </div>
 </template>
