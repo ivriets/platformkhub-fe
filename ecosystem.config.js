@@ -12,12 +12,12 @@ module.exports = {
       // "production" is the environment name
         production : {
             user: 'root',
-            host: '172.104.77.135',
+            host: ['172.104.77.135'],
             ref: 'origin/main',
             repo: 'git@github.com:steven1218026/platformkhub-fe.git',
             ssh_options: ['ForwardAgent=yes'],
             path: '/var/www/superadmin.k-hub.org',
-            'post-deploy' : 'pm2 yarn && yarn build && pm2 startOrRestart ecosystem.config.js --env production'
+            'post-deploy' : 'yarn build && pm2 startOrRestart ecosystem.config.js --env production'
         }
     }
 }
