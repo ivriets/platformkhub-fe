@@ -17,7 +17,7 @@ module.exports = {
             repo: 'git@github.com:steven1218026/platformkhub-fe.git',
             ssh_options: ['ForwardAgent=yes'],
             path: '/var/www/superadmin.k-hub.org',
-            'post-deploy' : 'pm2 start yarn build && pm2 startOrRestart ecosystem.config.js --env production'
+            'post-deploy' : 'yarn && yarn build && pm2 startOrRestart ecosystem.config.js --env production'
         }
     }
 }

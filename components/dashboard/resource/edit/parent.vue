@@ -159,8 +159,7 @@
                 <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
-        {{imgThumbnail}}
-        <pre>{{ form }}</pre>
+
     </div>
 </template>
 

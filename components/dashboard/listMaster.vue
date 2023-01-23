@@ -14,6 +14,7 @@
                         v-model="showRow"
                         :opsi="opsiShowRow"
                         :name="prefixName+'showrow'"
+                        :key="'ks'+keyShow"
                     />
                 </div>
             </div>
@@ -48,7 +49,9 @@
                 :key="'keytable'+keyTable"
             >
                 <template v-slot:title="{item}">
-                    <NuxtLink class="hover:text-blue-700" :to="'/moderations/'+ model +'/'+item.id" >{{item.title[bahasa]}}</NuxtLink>
+                    <NuxtLink class="hover:text-blue-700" :to="'/moderations/'+ model +'/'+item.id" >
+                        <span @click="setStore">{{item.title[bahasa]}}</span>
+                    </NuxtLink>
                 </template>
                 <template v-slot:submission="{ item }">
                     <ElementsDisplayStatusSubmission :submission="item.submission" />
@@ -79,6 +82,9 @@ export default {
     data() {
         return {
             // prefixName: 'listblog',
+            statusStore: false,
+            keyShow: 0,
+
             keyTable:0,
             loaderPage: false,
             loaderLog: false,
@@ -149,26 +155,34 @@ export default {
     },
     watch: {
         currentPage(val) {
-            this.$store.commit(this.storeCommit, val)
-            this.masterPoint()
+            if (!this.statusStore) this.masterPoint()
         },
 
         'sorter.createdAt'() {
-            this.currentPage = 1;
-            this.masterPoint()
+            if (!this.statusStore) {
+                this.currentPage = 1;
+                this.masterPoint()
+            }
+
         },
 
         showRow(val) {
-            this.limit = val
-            this.masterPoint()
+            if (!this.statusStore) {
+                this.limit = val
+                this.masterPoint()
+            }
+
         },
         'filter.search'(val) {
-            this.currentPage = 1
-            this.masterPoint()
+            if (!this.statusStore) {
+                this.currentPage = 1
+                this.masterPoint()
+            }
+
         },
-        bahasa() {
-            this.keyTable +=1
-        },
+        // bahasa() {
+        //     this.keyTable +=1
+        // },
 
 
 
@@ -221,9 +235,21 @@ export default {
         initialize() {
             this.dataTable = []
             this.getLogBlog()
-            this.selectKapsul(this.kapsul[0])
-            this.currentPage = this.halamanStore ? this.halamanStore : 1
-            // this.masterPoint()
+            if (this.halamanStore) {
+                this.statusStore = true
+                this.selectedKapsul = this.halamanStore.kapsul
+                this.filter.search = this.halamanStore.search
+                this.showRow = this.halamanStore.row
+                this.currentPage = this.halamanStore.page
+                this.keyShow+=1
+                this.$nextTick(() => {
+                    this.masterPoint();
+                })
+
+            } else {
+                this.statusStore = false
+                this.selectKapsul(this.kapsul[0])
+            }
         },
 
         keyUp(event) {
@@ -262,10 +288,23 @@ export default {
 
                 this.$nextTick(() => {
                     this.loaderPage = true
+                    this.$store.commit(this.storeCommit, null)
+                    this.statusStore = false;
+
                 })
             })
         },
+        setStore() {
 
+            const forStore = {
+                page: this.currentPage,
+                search: this.filter.search,
+                kapsul: this.selectedKapsul,
+                row: this.showRow
+            }
+            // console.log(forStore)
+            this.$store.commit(this.storeCommit, forStore)
+        },
         async getLogBlog() {
             this.loaderLog = false;
             

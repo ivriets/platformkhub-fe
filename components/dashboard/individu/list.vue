@@ -14,6 +14,7 @@
                         v-model="showRow"
                         :opsi="opsiShowRow"
                         :name="prefixName+'showrow'"
+                        :key="'adf'+keyShow"
                     />
                 </div>
             </div>
@@ -52,7 +53,9 @@
                 :key="'keytable'+keyTable"
             >
                 <template v-slot:name="{item}">
-                    <NuxtLink class="hover:text-blue-700" :to="'/verifications/individu/'+item.accountId" >{{item.namaIndividu}}</NuxtLink>
+                    <NuxtLink class="hover:text-blue-700" :to="'/verifications/individu/'+item.accountId" >
+                        <span @click="setStore">{{item.namaIndividu}}</span>
+                    </NuxtLink>
                 </template>
                 <template v-slot:statusVerification="{item}" class="font-semibold">
                     <ElementsDisplayStatusVerifikasi 
@@ -95,6 +98,9 @@ export default {
     props: ['model'],
     data() {
         return {
+            statusStore: false,
+            keyShow: 0,
+
             btnText: 'Download',
             prefixName: 'listind',
             loaderPage: false,
@@ -207,22 +213,27 @@ export default {
     },
     watch: {
         currentPage(val) {
-            this.$store.commit('setHalamanIndividu', val)
-            this.masterPoint()
+            // this.$store.commit('setHalamanIndividu', val)
+            if (!this.statusStore)  this.masterPoint()
         },
-
         'sorter.createdAt'() {
-            this.currentPage = 1
-            this.masterPoint()
+            if (!this.statusStore) {
+                this.currentPage = 1
+                this.masterPoint()
+            }
         },
-
         showRow(val) {
-            this.limit = val
-            this.masterPoint()  
+            if (!this.statusStore) {
+                this.currentPage = 1
+                this.limit = val
+                this.masterPoint()  
+            }
         },
         'filter.search'(val) {
-            this.currentPage = 1;
-            this.masterPoint()
+            if (!this.statusStore) {
+                this.currentPage = 1;
+                this.masterPoint()
+            }
         }
     },
     mounted() {
@@ -233,10 +244,21 @@ export default {
             this.btnText = 'Download'
             this.startExcel = false
             this.getLogUser()
-            this.selectKapsul(this.kapsul[0])
-            this.currentPage = this.halamanStore ? this.halamanStore : 1
+            if (this.halamanStore) {
+                this.statusStore = true
+                this.selectedKapsul = this.halamanStore.kapsul
+                this.filter.search = this.halamanStore.search
+                this.showRow = this.halamanStore.row
+                this.currentPage = this.halamanStore.page
+                this.keyShow+=1
+                this.$nextTick(() => {
+                    this.masterPoint();
+                })
 
-            // this.masterPoint()
+            } else {
+                this.statusStore = false
+                this.selectKapsul(this.kapsul[0])
+            }
         },
 
         keyUp(event) {
@@ -267,10 +289,23 @@ export default {
 
                 this.$nextTick(() => {
                     this.loaderPage = true
+                    this.$store.commit('setHalamanIndividu', null)
+                    this.statusStore = false;
+
                 })
             })
         },
+        setStore() {
 
+            const forStore = {
+                page: this.currentPage,
+                search: this.filter.search,
+                kapsul: this.selectedKapsul,
+                row: this.showRow
+            }
+            // console.log(forStore)
+            this.$store.commit('setHalamanIndividu', forStore)
+        },
         async getLogUser() {
             this.loaderLog = false
             await this.$apiPlatform.get('verificator/logIndividu/').then(res => {
@@ -319,7 +354,6 @@ export default {
             const limit = 100000
             const offset = 0
             await this.$apiPlatform.get('verificator/'+item.endpoint+'/?limit='+limit+'&offset='+offset+'&title='+this.filter.search+'&sortbycreatedat='+this.sorter.createdAt).then(res => {
-                console.log(res.data.results)
 
                 const forExcel = res.data.results.map(e => {
                     var statusnya = ''
