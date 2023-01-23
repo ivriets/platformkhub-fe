@@ -307,7 +307,7 @@
         </div>
         <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
-                <div @click="btnBack" class="button-standar-outline">{{ $t('Back') }}</div>
+                <button @click="btnBack" class="button-standar-outline">{{ $t('Back') }}</button>
                 <div class="flex gap-x-6  font-semibold">
                     <button 
                         @click="btnEdit" 

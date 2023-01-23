@@ -268,6 +268,8 @@ export default {
         async masterPoint() {
             const item = this.selectedKapsul
 
+            this.limit = this.showRow
+
             this.loaderPage = false
             this.startIndex = (this.currentPage - 1) * this.limit
 

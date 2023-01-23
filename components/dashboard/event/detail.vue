@@ -9,8 +9,10 @@
         </div>
         <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10 min-w-min">
             <div class="flex items-start justify-between mb-6">
+                <div class="w-4/5">
                     <div class="font-medium mb-4">{{ dataDetail.judulActivity[selectedFlag] }}</div>
                     <ElementsDisplayStatusSubmissionOval :submission="dataDetail.submission" />
+                </div>
                 <!-- BENDERA -->
                 <ElementsDisplayFlag 
                     v-model="selectedFlag"
