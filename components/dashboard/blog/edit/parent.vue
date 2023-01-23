@@ -15,9 +15,8 @@
                     <div class="mb-6">
                         <InputText 
                             v-model="form.judulArtikel[0]"
-                            placeholder="Tulis disini"
                             :name="prefixName+'titleid'"
-                            :label="'Title (Bahasa Indonesia)'"
+                            :label="$t('Title (Bahasa Indonesia)')"
                             :max="maxTitle"
                             :counter="true"
                         />
@@ -27,9 +26,8 @@
                     <div class="">
                         <InputText 
                             v-model="form.judulArtikel[1]"
-                            placeholder="Write here"
                             :name="prefixName+'titleen'"
-                            :label="'Title (English)'"
+                           :label="$t('Title (English)')"
                             :max="maxTitle"
                             :counter="true"
                         />
@@ -39,7 +37,7 @@
                     <hr class="border-warna-tujuh my-10">
 
                     <div>
-                        <div class="text-xl text-warna-utama mb-[28px]">Content</div>
+                        <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Content') }}</div>
                         <InputContentSectionBaru
                             v-if="deskripsi"
                             v-model="deskripsi"
@@ -360,8 +358,8 @@ export default {
                 this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
             } else {
                 this.btnText = 'Save'
+                this.$toast.show(this.$t('Blog')+ ' ' + this.$t('upadeted successfully'))
 
-                this.$toast.show('Blog updated successfuly')
                 this.initialize()
             }
 

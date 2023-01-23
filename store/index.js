@@ -8,7 +8,9 @@ export const state = () => {
       halamanResource: null,
       halamanEvent: null,
       halamanProgram: null,
-      selectedBahasa: 'en'
+      selectedBahasa: 'en',
+      halamanIndividu: null,
+      halamanOrganisasi: null
     }
   }
   export const mutations = {
@@ -32,7 +34,14 @@ export const state = () => {
     },
     setSelectedBahasa(state, selectedBahasa) {
       state.selectedBahasa = selectedBahasa
+    },
+    setHalamanIndividu(state, halamanIndividu) {
+      state.halamanIndividu = halamanIndividu
+    },
+    setHalamanOrganisasi(state, halamanOrganisasi) {
+      state.halamanOrganisasi = halamanOrganisasi
     }
+
 
   }
   export const actions = {

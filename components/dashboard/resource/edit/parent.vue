@@ -14,7 +14,7 @@
                         <InputText 
                             v-model="form.judulArtikel[0]"
                             :name="prefixName+'titleid'"
-                            :label="'Title (Bahasa Indonesia)'"
+                            :label="$t('Title (Bahasa Indonesia)')"
                             :max="maxTitle"
                             :counter="true"
                         />
@@ -24,7 +24,7 @@
                         <InputText 
                             v-model="form.judulArtikel[1]"
                             :name="prefixName+'titleen'"
-                            :label="'Title (English)'"
+                            :label="$t('Title (English)')"
                             :max="maxTitle"
                             :counter="true"
                         />
@@ -57,7 +57,7 @@
                                 />
                             </div>
                             <div class="flex items-center text-sm text-warna-sembilan">
-                                <div class="">Bookmark by: </div>
+                                <div class="">{{ $t('Bookmarked by:') }} </div>
                                 <div class="ml-1">-</div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
 
                     <div class="">
                         <InputImageUploadSingle 
-                            :label="'Thumbnail'"
+                            :label="$t('Thumbnail')"
                             v-model="imgThumbnail"
                             :accept="'.png, .jpg, .jpeg'"
                             :maxSize="1"
@@ -97,10 +97,8 @@
                         <InputAutocompleteMulti 
                             v-model="form.typeAudience"
                             :name="prefixName+'tipeaudience'"
-                            :placeholder="'Tulis disini'"
-                            :label="'Tipe Audience'"
+                             :label="$t('Audience Type')"
                             :opsi="typeAudience"
-                            :value="form.typeAudience"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="'tipeaudience'+keyMaster"
@@ -113,9 +111,8 @@
                         <InputAutocompleteMulti 
                             v-model="form.typeApproach"
                             :name="prefixName+'tipeapproach'"
-                            :label="'Tipe Approach'"
+                            :label="$t('Approach')"
                             :opsi="typeApproach"
-                            :value="form.typeApproach"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="'tipeapproach'+keyMaster"
@@ -128,9 +125,8 @@
                         <InputAutocompleteMulti 
                             v-model="form.typeIssues"
                             :name="prefixName+'topik'"
-                            :label="'Topik'"
+                            :label="$t('Issues')"
                             :opsi="typeIssues"
-                            :value="form.typeIssues"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="'typeIssues'+keyMaster"
@@ -159,11 +155,12 @@
         </div>
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
-                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div @click="simpan" class="button-standar">{{ $t(btnText) }}</div>
+                <button @click="btnBack" class="button-standar-outline">{{ $t('Back') }}</button>
+                <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
-        <!-- <pre>{{ form }}</pre> -->
+        {{imgThumbnail}}
+        <pre>{{ form }}</pre>
     </div>
 </template>
 
@@ -283,6 +280,7 @@ export default {
     },
     methods: {
         initialize() {
+            this.btnText = 'Save'
             this.opsiRadio = this.kategoriArtikel
             this.getTag();
             this.imageThumbnailLoader = false
@@ -336,8 +334,6 @@ export default {
                 this.deskripsi.list = this.form.deskripsi
                 this.imgThumbnail.displayImage = data.imgThumbnail
 
-
-                this.imgThumbnail = data.imgThumbnail
                 if (!data.deskripsi || data.deskripsi.length == 0){
                     forDeskripsi = []
                     forDeskripsi.push({"typeDeskripsi": 2,"imgDeskripsi": "","caption": ["-","-"],"paragraf": data.deskripsiPanjang, "sorter": 0})
@@ -353,14 +349,42 @@ export default {
                 console.log(err)
             })
         },
-        async putData(data) {
-            await this.$apiPlatform.put('moderator/resources/'+this.id+'/', data).then(res => {
+        simpan() {
+            this.putData()
+        },
+
+        async putData() {
+            this.btnText = 'Updating'
+            const forSimpan = _.cloneDeep(this.form)
+            forSimpan.kategoriArtikel = [forSimpan.kategoriArtikel]
+
+
+            await this.$apiPlatform.put('moderator/resources/'+this.id+'/', forSimpan).then(res => {
                 console.log(res)
+
+                if (this.imgThumbnail.file !== null) {
+                    this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
+                } else {
+                    this.$toast.show(this.$t('Resources')+ ' ' + this.$t('upadeted successfully'))
+                    this.initialize()
+                }
+
+
             })
         },
 
-        simpan() {
-            console.log(this.form)
+         async uploadImage(image, untuk, name) {
+            console.log('upload image')
+            if (image instanceof Blob){
+                var data = new FormData();
+                data.append(untuk, image, name);
+                await this.$apiPlatform.put('moderator/resources/'+this.id+'/', data).then(res => {
+                    this.$toast.show(this.$t('Resources')+ ' ' + this.$t('upadeted successfully'))
+                    this.initialize()
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
         },
         btnBack() {
             this.$router.push('/moderations/resource/'+this.id)

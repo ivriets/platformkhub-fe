@@ -269,7 +269,7 @@ export default {
                         file: inputedFiles,
                         displayImage: URL.createObjectURL(inputedFiles),
                         type: inputedFiles.type,
-                        name: inputedFiles.name
+                        name: _.kebabCase(inputedFiles.name)
                     }
 
               if (this.useCrop) {

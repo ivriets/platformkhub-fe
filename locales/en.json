@@ -79,7 +79,7 @@
     "Pilih File": "Choose File",
     "Kategori Publikasi": "Resource Category",
     "Event": "Event",
-    "Content": "Konten",
+    "Content": "Content",
     "Thumbnail": "Thumbnail",
     "Category": "Category",
     "Issue": "Issue",
@@ -118,7 +118,23 @@
     "Change Note": "Change Note",
     "Bookmarked by:" : "Bookmarked by:",
     "File": "File",
-    "Resource Category": "Resource Category"
+    "Resource Category": "Resource Category",
+    "upadeted successfully": "upadeted successfully",
+    "Registration Type": "Registration Type",
+    "Registration Date": "Registration Date",
+    "Start Date": "Start Date",
+    "End Date": "End Date",
+    "Event Date": "Event Date",
+    "Event Status": "Event Status",
+    "Kontak Acara": "Event Contact",
+    "Tipe Acara": "Event Type",
+    "Lokasi Online": "Online Location",
+    "Event Status will change when event is finished": "Event Status will change when event is finished",
+    "Image": "Gambar",
+    "Text": "Teks",
+    "Delete Section": "Delete Section",
+    "Date & Location": "Date & Location",
+    "Download": "Download"
 
 
 

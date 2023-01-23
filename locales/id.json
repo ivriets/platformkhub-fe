@@ -117,19 +117,27 @@
     "Change Note": "Mengubah Catatan",
     "Bookmarked by:" : "Bookmarked by:",
     "File": "File",
-    "Resource Category": "Kategori Publikasi"
+    "Resource Category": "Kategori Publikasi",
+    "upadeted successfully": "berhasil diupdate",
+    "Registration Type": "Tipe Registrasi",
+    "Registration Date": "Tanggal Registrasi",
+    "Start Date": "Tanggal Mulai",
+    "End Date": "Tanggal Akhir",
+    "Event Date": "Tanggal Acara",
+    "Event Status": "Status Acara",
+    "Kontak Acara": "Kontak Acara",
+    "Tipe Acara": "Tipe Acara",
+    "Lokasi Online": "Lokasi Online",
+    "Event Status will change when event is finished": "Event Status will change when event is finished",
+    "Image": "Gambar",
+    "Text": "Teks",
+    "Delete Section": "Delete Section",
+    "Date & Location": "Tanggal & Lokasi",
+    "Download": "Unduh"
 
 
 
-
-
-
-
-
-
-
-
-
+    
 
 
 

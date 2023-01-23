@@ -5,7 +5,7 @@
                 <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold text-center">View File</div>
             </slot>
         </button>
-
+<!-- {{source}} -->
         <ElementsModal
             v-model="modal.status"
             :title="modal.title"
@@ -20,6 +20,13 @@
                     :path="viewerFile"
                     :provider="provider"
                 />
+            </div>
+            <div v-else-if="viewerType==='audio'" class="bg-black flex items-center justify-center h-96">
+                <audio controls autoplay>
+                    <source :src="viewerFile" >
+                    Your browser does not support the audio element.
+                </audio>
+
             </div>
             <div v-else class="p-5 h-[150px]">
                 <div class="text-sm text-utama bg-gray-30">
@@ -118,7 +125,7 @@ export default {
                     this.viewerType = ''
                     window.open(this.newFile.embedLink, '_blank')
                 } else {
-                    this.viewerType = 'av'
+                    this.viewerType = 'audio'
                     this.viewerFile = this.basePath + this.newFile.binFile
                     this.modal.title = this.newFile.binFile.split('/').pop()
                     this.openModal()

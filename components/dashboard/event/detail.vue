@@ -34,31 +34,24 @@
                             </div>
                     </div>
 
-                    <div class="text-sm font-semibold mb-5">
-                        <div class="text-warna-delapan">{{ $t('Approach') }}</div>
-                        <div class="text-warna-sembilan" v-if="dataDetail.typeApproach">
-                            {{ dataDetail.typeApproach.map(e => e.nama[selectedFlag]).join(', ') }}
-                        </div>
-                    </div>
+                    <ElementsDisplayFieldBawah 
+                        :title="$t('Approach')"
+                        :content="dataDetail.typeApproach.map(e => e.nama[selectedFlag]).join(', ')"
+                    />
 
-                    <div class="text-sm font-semibold mb-5">
-                        <div class="text-warna-delapan">{{ $t('Issue') }}</div>
-                        <div class="text-warna-sembilan" v-if="dataDetail.typeIssues">
-                            {{ dataDetail.typeIssues.map(e => e.nama[selectedFlag]).join(', ') }}
-                        </div>
-                    </div>
+                    <ElementsDisplayFieldBawah 
+                        :title="$t('Issue')"
+                        :content="dataDetail.typeIssues.map(e => e.nama[selectedFlag]).join(', ')"
+                    />
+                    <ElementsDisplayFieldBawah 
+                        :title="$t('Tag')"
+                        :content="dataDetail.tag.map(e => e.pilihanTagId.nama[selectedFlag]).join(', ')"
+                    />
 
-                    <div class="text-sm font-semibold mb-5">
-                        <div class="text-warna-delapan">Tag</div>
-                        <div class="text-warna-sembilan" v-if="dataDetail.tag">
-                            {{ dataDetail.tag.map(e => e.pilihanTagId.nama[selectedFlag]).join(', ') }}
-                        </div>
-                    </div>
-
-                    <div class="mt-5 text-sm text-warna-delapan font-semibold">{{ $t('Moderation Notes') }}</div>
-                    <div class="text-sm text-warna-sembilan font-semibold">
-                        <div class="mb-4">{{ dataDetail.catatanModerasi }}</div>
-                    </div>
+                    <ElementsDisplayFieldBawah 
+                        :title="$t('Moderation Notes')"
+                        :content="dataDetail.catatanModerasi"
+                    />
 
                 </div>
                 <div v-if="dataDetail" class="col-span-12 lg:col-span-8">
@@ -70,7 +63,7 @@
                     <div class="grid grid-cols-8 gap-5">
                         <div class="col-span-4">
                             <div v-for="(item1, index1) in dataLabel" :key="'datalabel' + index1" v-show="item1.posisi==='kiri'" class="grid grid-cols-12 mb-4 break-words gap-1">
-                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ item1.label }}</div>
+                                <div class="col-span-12 md:col-span-4 lg:col-span-4 text-sm text-warna-delapan font-semibold">{{ $t(item1.label) }}</div>
                                 <div class="col-span-12 md:col-span-8 lg:col-span-8 text-sm text-warna-sembilan font-semibold">
                                     <div v-if="['createdAt', 'updatedAt'].includes(item1.value)" class="">
                                         {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY HH:mm') }}
@@ -174,15 +167,43 @@
         </div>
         <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
-                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
+                <button @click="btnBack" class="button-standar-outline">{{ $t('Back') }}</button>
                 <div class="flex gap-x-6  font-semibold">
-                    <div @click="btnEdit" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Edit</div>
-                    <div  @click="btnRevisi" v-if="[1, 3, 4].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-need-revision rounded-lg text-white border border-need-revision cursor-pointer hover:bg-orange-700 font-semibold">Need Revision</div>
-                    <div  @click="btnApprove" v-if="[1, 3].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white border border-approved-accepted cursor-pointer hover:bg-green-700 font-semibold">Approve</div>
+                    <button @click="btnEdit" class="button-standar-outline">{{ $t('Edit') }}</button>
+                    <button  @click="btnNeedRevision" v-if="[1, 3, 4].includes(dataDetail.submission)" class="button-revision">Need Revision</button>
+                    <button  @click="btnApprove" v-if="[1, 3].includes(dataDetail.submission)" class="button-approve">Approve</button>
                 </div>
             </div>
         </div>
-        <pre>{{dataDetail}}</pre>
+
+
+        <ElementsModal 
+            v-model="modalAction"
+            :title="modalTitle"
+            :width="modalWidth"
+            :key="keyModal+'revisiblog'"
+            :persistent="persistent"
+        >
+            <div class="p-5">
+                <InputTextArea 
+                    v-model="form.catatanModerasi"
+                    :max="500"
+                    :name="'catatanmoderasi'"
+                />
+            </div>
+            <template v-slot:footer >
+                <div class="border-t px-3 py-4 ">
+                    <button @click="btnRevisi" class="button-standar w-full">{{ $t('Save') }}</button>
+                </div>
+            </template>
+        </ElementsModal>
+
+
+
+
+
+
+        <!-- <pre>{{dataDetail}}</pre> -->
     </div>
 </template>
 
@@ -200,6 +221,9 @@ export default {
             color: '',
             namaModerator: '',
             // childBreadcrumb: [],
+            form: {
+                catatanModerasi: ''
+            },
             buttonSubmission: null,
             opsiButton: [
                 {
@@ -284,7 +308,16 @@ export default {
             ],
             dataDetail: null,
             gallery: [],
-            milestone: []
+            milestone: [],
+
+            // KEPERLUAN MODAL NEED REVISION //
+            modalAction: false,
+            modalTitle: 'Konfirmasi Revisi',
+            modalWidth: '',
+            keyModal: 0,
+            persistent: true,
+            // ========== //
+
         }
     },
     computed: {
@@ -315,9 +348,7 @@ export default {
 
     },
     watch: {
-        lang() {
-            this.initialize()
-        },
+
         buttonSubmission() {
             if (this.buttonSubmission === 1) {
                 this.color = 'bg-warna-under-review'
@@ -353,6 +384,7 @@ export default {
 
                 this.dataDetail = data
                 this.buttonSubmission = data.submission
+                this.form.catatanModerasi = data.catatanModerasi
                 // if (data.moderator) this.getNamaModerator(data.moderator)
                 this.$nextTick(() => {
                     this.loaderDetail = true
@@ -368,28 +400,38 @@ export default {
         },
 
         async btnApprove() {
-            var data = {
-                "submission": 4,
-                "eventId": this.id
+            var req = {
+                submission: 4,
+                eventId: this.id
             }
-            await this.$apiPlatform.post('moderator/events/', data).then(res => {                
-                this.$nextTick(() => {
-                    this.initialize()
-                })
+            await this.$apiPlatform.post('moderator/events/', req).then(res => { 
+                this.$toast.show(this.dataDetail.judulActivity[this.bahasa] + ' Updated ')
+                this.initialize()
+
+
             }).catch(err => {
                 console.log(err)
             })
         },
+        btnNeedRevision() {
+            this.modalAction = true
+            this.modalTitle = this.form.catatanModerasi ==='' || this.form.catatanModerasi === null ? this.$t('Revision Note') : this.$t('Change Note')
+            this.keyModal += 1
+        },
+
         async btnRevisi() {
-            var data = {
-                "submission": 3,
-                "eventId": this.id,
-                "catatanModerasi": "content memerlukan revisi"
+            const req = {
+                eventId: this.id,
+                submission: 3,
+                catatanModerasi: this.form.catatanModerasi
+
             }
-            await this.$apiPlatform.post('moderator/events/', data).then(res => {
-                this.$nextTick(() => {
-                    this.initialize()
-                })
+            await this.$apiPlatform.post('moderator/events/', req).then(res => {
+                this.$toast.show(this.dataDetail.judulActivity[this.bahasa] + ' Updated ')
+
+                this.modalAction = false
+                this.keyModal +=1
+                this.initialize()
             }).catch(err => {
                 console.log(err)
             })
@@ -404,32 +446,8 @@ export default {
             this.$router.push('/moderations/event/'+this.id+'/edit')
         },
 
-        toggleDrop() {
-            this.flagDrop = !this.flagDrop
-        },
 
-        closeDrop() {
-            this.flagDrop = false
-        },
 
-        pilihIndonesia() {
-            this.selectedFlag = 'indonesia'
-            this.closeDrop()
-        },
-
-        pilihInggris() {
-            this.selectedFlag = 'inggris'
-            this.closeDrop()
-        },
-
-        //  setBreadcrumb() {
-        //     this.childBreadcrumb = [
-        //         {
-        //             label: 'Detail',
-        //             link: ''
-        //         }
-        //     ]
-        // }
 
     },
 }

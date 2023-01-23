@@ -7,7 +7,7 @@
                 :child="childBreadcrumb"
             />
         </div>
-        <div v-if="loaderDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10 min-w-min">
+        <div  class="bg-white shadow-md rounded-xl py-8 px-6 mb-10 min-w-min">
             <div v-if="dataDetail" class="flex items-start justify-between mb-6">
                 <div>
                     <div class="font-medium mb-4">{{ dataDetail.judulActivity[selectedFlag] }}</div>
@@ -307,13 +307,13 @@
         </div>
         <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
-                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
+                <div @click="btnBack" class="button-standar-outline">{{ $t('Back') }}</div>
                 <div class="flex gap-x-6  font-semibold">
                     <button 
                         @click="btnEdit" 
-                        class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat  hover:bg-gray-100 font-semibold">Edit</button>
-                    <button v-if="[1, 3, 4].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-need-revision rounded-lg text-white border border-need-revision  hover:bg-orange-700 font-semibold" @click="needRevision">Need Revision</button>
-                    <button v-if="[1, 3].includes(dataDetail.submission)" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white border border-approved-accepted  hover:bg-green-700 font-semibold" @click="approving">Approve</button>
+                        class="button-standar-outline">{{ $t('Edit') }}</button>
+                    <button v-if="[1, 3, 4].includes(dataDetail.submission)" class="button-revision" @click="needRevision">Need Revision</button>
+                    <button v-if="[1, 3].includes(dataDetail.submission)" class="button-approve" @click="approving">Approve</button>
                     <!-- <div class="relative">
                         <select id="btnneedrevision" name="buttonneedrevision" v-model="buttonSubmission"
                             class="cursor-pointer appearance-none w-[180px] focus:outline-none border border-warna-tujuh rounded-lg px-4 py-2 text-white" :class="color">
@@ -474,9 +474,7 @@ export default {
 
     },
     watch: {
-        lang() {
-            this.initialize()
-        },
+
         buttonSubmission() {
             if (this.buttonSubmission === 1) {
                 this.color = 'bg-warna-under-review'
@@ -536,7 +534,7 @@ export default {
                 submission: 3,
                 catatanModerasi: this.form.catatanModerasi
             }
-            await this.$apiPlatform.put('moderator/programs/'+this.id+'/', data).then(res => {
+            await this.$apiPlatform.post('moderator/programs/', data).then(res => {
                 // console.log('Revision Moderation Blog')
                 // this.$t('Moderation')
                 // this.btnBack()
@@ -555,7 +553,7 @@ export default {
                 submission: 4,
                 catatanModerasi: ''
             }
-            await this.$apiPlatform.put('moderator/programs/'+this.id+'/', data).then(res => {
+            await this.$apiPlatform.post('moderator/programs/', data).then(res => {
                 // console.log('Revision Moderation Blog')
                 // this.$t('Moderation')
                 // this.btnBack()

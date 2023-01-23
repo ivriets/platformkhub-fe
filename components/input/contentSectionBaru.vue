@@ -38,17 +38,17 @@
             <div class="flex justify-end">
                 <button title="Delete Section" @click="deleteSection(item, index)" class="flex items-center p-2 border border-warna-empat rounded bg-white transition-all hover:bg-gray-200">
                     <img class="w-4 h-4" src="/icons/icon-delete-black.png" alt="icon-delete">
-                    <span class="text-sm text-warna-empat ml-2">Delete Section</span>
+                    <span class="text-sm text-warna-empat ml-2">{{ $t('Delete Section') }}</span>
                 </button>
             </div>
         </div>
 
         <div class="grid grid-cols-12 gap-5">
             <div class="col-span-12 lg:col-span-6">
-                <button title="+Image" @click="addSection(1)" type="button" class="text-center w-full bg-white border border-warna-tujuh hover:bg-gray-200 transition-all text-warna-empat rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto cursor-pointer">+ Image</button>
+                <button title="+Image" @click="addSection(1)" type="button" class="text-center w-full bg-white border border-warna-tujuh hover:bg-gray-200 transition-all text-warna-empat rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto cursor-pointer">+ {{ $t('Image') }}</button>
             </div>
             <div class="col-span-12 lg:col-span-6">
-                <button title="+Text" @click="addSection(2)" type="button" class="text-center w-full bg-white border border-warna-tujuh text-warna-empat hover:bg-gray-200 transition-all rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto cursor-pointer">+ Text</button>
+                <button title="+Text" @click="addSection(2)" type="button" class="text-center w-full bg-white border border-warna-tujuh text-warna-empat hover:bg-gray-200 transition-all rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto cursor-pointer">+ {{ $t('Text') }}</button>
             </div>
         </div>
       <!-- <pre>  {{ newVal }} </pre> -->

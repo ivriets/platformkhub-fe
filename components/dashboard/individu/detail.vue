@@ -1,6 +1,7 @@
 <template>
     <div class="py-[80px]">
         <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-10">
+            <!-- <ElementsDisplayStatusSubmissionOval :submission="dataDetail.statusVerification" /> -->
             <div class="flex items-center justify-between mb-6">
                 <div v-if="dataDetail.statusVerification === 1" class="px-6 py-2 bg-warna-need-verification rounded-3xl text-white ">Need Verification</div>
                 <div v-if="dataDetail.statusVerification === 2" class="px-6 py-2 bg-warna-rejected rounded-3xl text-white ">Rejected</div>

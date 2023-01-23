@@ -13,7 +13,6 @@
                     <div class="mb-6">
                         <InputText 
                             v-model="form.judulActivity[0]"
-                            placeholder="Tulis disini"
                             :name="prefixName+'titleid'"
                             :label="'Title (Bahasa Indonesia)'"
                             :max="maxTitle"
@@ -27,7 +26,7 @@
                             v-model="form.judulActivity[1]"
                             placeholder="Write here"
                             :name="prefixName+'titleen'"
-                            :label="'Title (English)'"
+                            :label="$t('Title (English)')"
                             :max="maxTitle"
                             :counter="true"
                         />
@@ -36,8 +35,7 @@
                     
                     <hr class="border-warna-tujuh my-10">
 
-                    <!-- <div class="text-warna-utama mb-[28px]">Registration Type</div> -->
-                    <div class="text-xl text-warna-utama mb-[28px]">Registration Type</div>
+                    <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Registration Type') }}</div>
                         <div class="mb-5">
                         <InputRadio 
                             v-model="form.tipeRegistrasi"
@@ -56,22 +54,24 @@
                         </div>
                     <hr class="border-warna-tujuh my-10">
 
-                    <div class="text-xl text-warna-utama mb-[28px]">Registration Date</div>
+                    <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Registration Date') }}</div>
                     <div class="grid grid-cols-12 gap-2">
                         <div  class="col-span-12 md:col-span-6 ">
                             <InputDate
                                 v-model="form.registrationStartDate"
-                                :label="'Start Date'"
-                                :name="prefixName+'tanggalmulai'"
+                                :label="$t('Start Date')"
+                                :name="prefixName+'registrationStartDate'"
+                                :key="'registrationStartDate'+keyTanggal1"
                             />
                         </div>
                         <div  class="col-span-12 md:col-span-6">
                             <InputDate
                                 v-model="form.registrationEndDate"
-                                :label="'End Date'"
-                                :name="prefixName+'tanggalselesai'"
+                                :label="$t('End Date')"
+                                :name="prefixName+'registrationEndDate'"
                                 :disabledBefore="true"
                                 :disabledDate="form.registrationStartDate"
+                                :key="'registrationEndDate'+keyTanggal1"
 
                             />
                         </div>
@@ -79,24 +79,25 @@
 
                     <hr class="border-warna-tujuh my-10">
 
-                    <div class="text-xl text-warna-utama mb-[28px]">Event Date</div>
+                    <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Event Date') }}</div>
                     <div class="grid grid-cols-12 gap-2">
                         <div  class="col-span-12 lg:col-span-6 mr-5 md:mr-0">
                             <InputDate
                                 v-model="form.tanggalMulai"
                                 :value="form.tanggalMulai"
-                                :label="'Start Date'"
-                                :name="prefixName+'tanggalmulai'"
+                                :label="$t('Start Date')"
+                                :name="prefixName+'tanggalMulai'"
+                                :key="'tanggalMulai'+keyTanggal2"
                             />
                         </div>
                         <div  class="col-span-12 lg:col-span-6 ml-5 md:ml-0">
                             <InputDate
                                 v-model="form.tanggalSelesai"
-                                :value="form.tanggalSelesai"
-                                :label="'End Date'"
-                                :name="prefixName+'tanggalselesai'"
+                                :label="$t('End Date')"
+                                :name="prefixName+'tanggalSelesai'"
                                 :disabledBefore="true"
                                 :disabledDate="form.tanggalMulai"
+                                :key="'tanggalSelesai'+keyTanggal2"
 
                             />
                         </div>
@@ -104,20 +105,14 @@
 
                     <hr class="border-warna-tujuh my-10">
 
-                    <div class="text-xl text-warna-utama mb-[28px]">Content</div>
+                    <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Content') }}</div>
                         <InputContentSectionBaru
                             v-if="deskripsi"
                             v-model="deskripsi"
                         />
-
-                    <!-- <InputContentSection 
-                        v-if="form.deskripsi"
-                        v-model="form.deskripsi"
-                        :list="form.deskripsi"
-                    /> -->
                     <hr class="border-warna-tujuh my-10">
 
-                    <div class="text-xl text-warna-utama mb-[28px]">Kontak Acara</div>
+                    <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Kontak Acara') }}</div>
 
                     <div class="grid grid-cols-12 gap-5 mb-10">
                         <div class="col-span-12 md:col-span-6">
@@ -137,7 +132,7 @@
                             />
                         </div>
                     </div>
-                    <div class="text-xl text-warna-utama mb-1">Tipe Acara</div>
+                    <div class="text-xl text-warna-utama mb-1">{{ $t('Tipe Acara') }}</div>
                         <div class="mb-8">
                             <InputSelect 
                                 v-model="tipeAcara"
@@ -145,7 +140,7 @@
                             />
                         </div>
                     <div v-if="[3,1].includes(tipeAcara)">
-                        <div class="text-xl text-warna-utama mb-1">Lokasi Online</div>
+                        <div class="text-xl text-warna-utama mb-1">{{ $t('Lokasi Online') }}</div>
                         <div class="mb-8">
                             <FormLokasiOnline 
                                 v-model="form.lokasiOnline[0]"
@@ -157,7 +152,7 @@
                     </div>
 
                     <div v-if="[2,1].includes(tipeAcara)">
-                        <div class="text-xl text-warna-utama mb-1">Lokasi Offline</div>
+                        <div class="text-xl text-warna-utama mb-1">{{ $t('Lokasi Offline') }}</div>
                         <FormLokasi 
                             v-model="form.lokasi[0]"
                             :prefixName="prefixName"
@@ -168,46 +163,7 @@
                         />
                     </div>
 
-
-                    <!-- <div class="text-xl text-warna-utama mb-[28px]">Event Location</div>
-                    <div class="grid grid-cols-12 gap-2 mb-10">
-                        <div class="col-span-12 lg:col-span-6 mr-5 md:mr-0">
-                        </div>
-                            <div class="col-span-12 lg:col-span-6 ml-5 md:ml-0">
-                            
-                            <div class="">
-                                <div v-if="opsiKota.length > 0">
-                                    <div class="font-medium mb-1"> Kota </div>
-                                    <div class="relative">
-                                        <select 
-                                            v-model="form.lokasi[0].kota" 
-                                            class="cursor-pointer appearance-none w-full focus:outline-none border border-warna-tujuh rounded-lg px-2 py-1.5 text-sm placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
-                                        >
-                                            <option selected disabled value="">{{form.lokasi[0].kota}}</option>
-                                            <option
-                                                v-for="(i, index2) in opsiKota" :key="index2" 
-                                                :value="i.id"
-                                            >
-                                            {{i.label[bahasa]}}
-                                            </option>
-                                        </select>
-                                        <div class="absolute top-0 right-0 h-[34px] items-center flex px-2 text-gray-500">                
-                                            <img src="/icons/icon-arrow-down-grey.png" alt="arrow-down" class="w-4 h-4">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <div class="mb-10">
-                        <!-- <InputText
-                            v-model="form.lokasi[0].jalan"
-                            placeholder="Tulis disini"
-                            :label="'Address'"
-                            :name="prefixName+'address'"
-                        /> -->
-                    </div>
+                    <hr class="border-warna-tujuh my-10">
 
                     <div class="my-10">
                         <InputGalleries 
@@ -227,16 +183,15 @@
                                 />
                             </div>
                             <div class="flex items-center text-sm text-warna-sembilan">
-                                <div class="">Bookmark by: </div>
+                                <div class="">{{ $t('Bookmarked by:') }} </div>
                                 <div class="ml-1">{{ totalBookmark }}</div>
                             </div>
                         </div>
-                        <button class="bg-warna-empat text-white rounded-lg w-full py-4 text-center mx-0 cursor-pointer hover:bg-blue-900">Submit</button>
                     </div>
 
                     <div class="">
                         <InputImageUploadSingle 
-                            :label="'Thumbnail'"
+                            :label="$t('Thumbnail')"
                             v-model="imgThumbnail"
                             :accept="'.png, .jpg, .jpeg'"
                             :maxSize="1"
@@ -252,8 +207,7 @@
                         <InputAutocompleteMulti 
                             v-model="form.typeAudience"
                             :name="prefixName+'tipeaudience'"
-                            :placeholder="'Tulis disini'"
-                            :label="'Tipe Audience'"
+                            :label="$t('Audience Type')"
                             :opsi="typeAudience"
                             :itemValue="'id'"
                             :itemLabel="'label'"
@@ -265,8 +219,7 @@
                         <InputAutocompleteMulti 
                             v-model="form.typeApproach"
                             :name="prefixName+'tipeapproach'"
-                            :placeholder="'Tulis disini'"
-                            :label="'Tipe Approach'"
+                            :label="$t('Approach')"
                             :opsi="typeApproach"
                             :itemValue="'id'"
                             :itemLabel="'label'"
@@ -279,8 +232,7 @@
                         <InputAutocompleteMulti 
                             v-model="form.typeIssues"
                             :name="prefixName+'topik'"
-                            :placeholder="'Tulis disini'"
-                            :label="'Topik'"
+                            :label="$t('Issues')"
                             :opsi="typeIssues"
                             :value="form.typeIssues"
                             :itemValue="'id'"
@@ -306,26 +258,26 @@
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
 
-                    <div class="mb-1">Event Status</div>
+                    <div class="mb-1">{{ $t('Event Status') }}</div>
                     <div>
                         <div v-if="form.statusActivity" class="flex items-center justify-center rounded-full text-white bg-warna-empat w-[147px] h-[34px] text-sm mb-2">{{form.statusActivity.nama[0]}}</div>
                     </div>
-                    <div class="text-xs text-warna-dua">Event Status will change when event is finished</div>
+                    <div class="text-xs text-warna-dua">{{ $t('Event Status will change when event is finished') }}</div>
                     
-                    <hr class="border-warna-tujuh my-[28px]">
-                    <button class="button-outline text-md py-3 w-full text-center mb-5">Download Report</button>
-                    <button class="button-outline text-md py-3 w-full text-center ">Export ke Program</button>
+                    <!-- <hr class="border-warna-tujuh my-[28px]"> -->
+                    <!-- <button class="button-outline text-md py-3 w-full text-center mb-5">Download Report</button>
+                    <button class="button-outline text-md py-3 w-full text-center ">Export ke Program</button> -->
 
                 </div>
             </div>
         </div>
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
-                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+                <button @click="btnBack" class="button-standar-outline">{{ $t('Back') }}</button>
+                <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
-        <pre> {{ form }}</pre>
+        <!-- <pre> {{ form }}</pre> -->
     </div>
 </template>
 
@@ -335,6 +287,7 @@ export default {
     data() {
         return {
             prefixName: 'event',
+            btnText: 'Save',
             maxTitle: 80,
             form: {
                 judulActivity: ['',''],
@@ -382,14 +335,14 @@ export default {
             opsiKota: [],
             imgThumbnail: null,
             lokasi: {
-                    lokasiId: '',
+                    // lokasiId: '',
                   provinsi: '',
                   kota: '',
                   jalan: '',
                   pinLocation: ''
             },
             lokasiOnline: {
-                lokasiOnlineId: '',
+                // lokasiOnlineId: '',
                 typeChannel: null,
                 url: '',
                 jadwal: '',
@@ -413,7 +366,9 @@ export default {
             ],
             loaderAll: false,
             keyMaster: 0,
-            imageThumbnailLoader: false
+            imageThumbnailLoader: false,
+            keyTanggal1: 0,
+            keyTanggal2: 0,
 
         }
     },
@@ -471,46 +426,17 @@ export default {
         }
     },
 
-    // watch: {
-    //     form : {
-    //         immediate: true,
-    //         deep: true,
-    //         handler(newValue, oldValue) {
-    //             if (oldValue && newValue){
-    //                 if (oldValue.lokasi && newValue.lokasi){
-    //                     let _this = this
-    //                     if (this.form.lokasi[0].provinsi !== this.provinsi){
-    //                         this.provinsi = this.form.lokasi[0].provinsi
-    //                         this.$apiBase.get('kotakab?provinsi='+ this.form.lokasi[0].provinsi).then(res => {
-    //                             _this.opsiKota = _.map(res.data, function(o){
-    //                                 return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
-    //                             })
-    //                         }) 
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // },
     mounted() {
         this.initialize()
     },
     methods: {
         initialize() {
+            this.btnText = 'Save'
             this.loaderAll = false
             this.masterPoint()
         },
 
         async masterPoint() {
-            // await this.$apiBase.get('provinsi/').then(res => {
-            //     const data = res.data
-            //     this.opsiProvinsi = _.map(data, function(o){
-            //         return {'id':o.provinsi, 'label':[o.provinsi, o.provinsi]}
-            //     })
-
-            // }).catch(err => {
-            //     console.log(err)
-            // })
 
             await this.$apiPlatform.get('verificator/listOrganisasi/').then(res => {
                 this.listOrganisasi = res.data
@@ -558,36 +484,102 @@ export default {
                     displayImage: data.imgThumbnail,
                     file: null
                 }
-                // this.provinsi = data.lokasi[0].provinsi
-                // this.$apiBase.get('kotakab?provinsi='+ this.provinsi).then(res => {
-                //     _this.opsiKota = _.map(res.data, function(o){
-                //         return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
-                //     })
-                // }) 
-                // console.log(this.opsiKota)
+
                 this.$nextTick(() => {
                     this.loaderAll = true
+                    this.keyTanggal1 +=1
+                    this.keyTanggal2 +=1
                     this.keyMaster +=1
                 })
             })
         },
 
-        // setBreadcrumb() {
-        //     this.childBreadcrumb = [
-        //         {
-        //             label: 'Detail',
-        //             link: '/moderations/event/'+this.id
-        //         },
-        //         {
-        //             label: 'Editor',
-        //             link: ''
-        //         }
-        //     ]
-        // },
-
+        errorNotif(msg) {
+            this.$toast.show({
+                type: 'danger',
+                title: 'Error',
+                message: msg,
+            })
+        },
+        focusField(id) {
+            document.getElementById(this.prefixName + id).focus()
+        },
+        errorField(msg, id) {
+            this.errorNotif(msg);
+            this.focusField(id)
+        },
         btnBack() {
             this.$router.push('/moderations/event/'+this.id)
-        }
+        },
+        simpan() {
+            //validasi disini
+            if (this.form.judulActivity[0] === '') {
+                this.errorField(this.$t('titleIdBlank'), 'titleid')
+            } else if (this.form.judulActivity[1] === '') {
+                this.errorField(this.$t('titleEnBlank'), 'titleen')
+            } else if (this.form.registrationStartDate === '') {
+                this.errorField(this.$t('registrationStartDateBlank'), 'registrationStartDate')
+            } else if (this.form.registrationEndDate === '') {
+                this.errorField(this.$t('registrationEndDateBlank'), 'registrationEndDate')
+            } else {
+                this.putData()
+            }
+
+
+            
+        },
+        async putData() {
+            this.btnText = 'Updating'
+            var forSimpan = _.cloneDeep(this.form)
+            forSimpan.registrationStartDate = new Date(forSimpan.registrationStartDate)
+            forSimpan.registrationEndDate = new Date(forSimpan.registrationEndDate)
+            forSimpan.tanggalMulai = new Date(forSimpan.tanggalMulai)
+            forSimpan.tanggalSelesai = new Date(forSimpan.tanggalSelesai)
+            forSimpan.statusActivity = forSimpan.statusActivity.id
+
+            await this.$apiPlatform.put('moderator/events/'+this.id+'/', forSimpan).then(res => {
+                console.log(res)
+
+                if (this.imgThumbnail.file !== null) {
+                    this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
+                } else {
+                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('upadeted successfully'))
+                    this.initialize()
+                }
+
+            })
+        },
+        async putData1() {
+            const forSimpan = {
+                lokasi: this.form.lokasi
+            }
+            await this.$apiPlatform.put('moderator/events/'+this.id+'/', forSimpan).then(res => {
+                console.log(res)
+
+                if (this.imgThumbnail.file !== null) {
+                    this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
+                } else {
+                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('upadeted successfully'))
+                    this.initialize()
+                }
+
+            })
+        },
+
+
+         async uploadImage(image, untuk, name) {
+            console.log('upload image')
+                var data = new FormData();
+                data.append(untuk, image, name);
+                await this.$apiPlatform.put('moderator/events/'+this.id+'/', data).then(res => {
+                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('upadeted successfully'))
+                    this.initialize()
+                }).catch(err => {
+                    console.log(err)
+                })
+        },
+
+
     }
 }
 </script>

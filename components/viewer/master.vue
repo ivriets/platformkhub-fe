@@ -18,8 +18,18 @@
                     :path="url"
                 />
             </div>
+            <div v-else-if="fileType==='audio'" class="bg-black flex items-center justify-center h-96">
+                <audio controls autoplay>
+                    <source :src="url" >
+                    Your browser does not support the audio element.
+                </audio>
 
-
+            </div>
+            <div v-else class="p-5 h-[150px]">
+                <div class="text-sm text-utama bg-gray-30">
+                    {{modal.title}}
+                </div>
+            </div>
         </ElementsModal>
     </div>
 </template>
@@ -37,7 +47,8 @@ export default {
             },
             ekstensi: {
                 pdf: ['pdf'],
-                av: ['mp4','mp3', 'm4a'] 
+                av: ['mp4'],
+                audio: ['mp3', 'm4a'] 
             }
         }
     },
@@ -63,6 +74,8 @@ export default {
                     this.fileType = 'pdf'
                 } else if (this.ekstensi.av.includes(ext)) {
                     this.fileType='av'
+                } else if (this.ekstensi.audio.includes(ext)) {
+                    this.fileType='audio'
                 }
             } 
         },

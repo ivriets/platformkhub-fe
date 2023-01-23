@@ -2,10 +2,11 @@
     <div>
         <div class="flex items-center mb-4">
             <div class="w-[240px] mr-4">
-                <ElementsSearchBarButton 
+                <ElementsSearchBar 
                     v-model="filter.search"
-                    :placeholder="$t('Search')"
+                    placeholder="Search"
                     :name="'searchtext'"
+                    @keyup="keyUp"
                 />
             </div>
             <div class="flex flex-grow">
@@ -17,73 +18,56 @@
                     />
                 </div>
             </div>
-            <button @click="downloadExcel" :disabled="btnText==='Download'? false: true" class="button-standar flex items-center gap-4">
+            <div class="px-3 py-[6px] bg-warna-empat rounded-lg text-white flex items-center cursor-pointer">
                 <img class="h-4 w-4" src="/icons/icon-button-download.png" alt="icon-download">
-                <div class="">{{ $t(btnText) }}</div>
-            </button>
+                <div class="ml-1">Download</div>
+            </div>
         </div>
         <div class="flex items-center justify-between border border-[#A1A2B7] rounded-lg bg-white mb-5">
             <div v-if="loaderLog" class="px-[14px] py-[9px] flex gap-x-3 pr-3 border-r border-[#A1A2B7]">
+                <!-- <ElementsKapsul 
+                    v-for="(item, index) in kapsul" :key="'kapsul' + index"
+                    :label="item.label"
+                    :jumlah="item.length"
+                    @click="selectKapsul(item)"
+                /> -->
                 <button 
                     v-for="(item, index) in kapsul" :key="'kapsul' + index"
                     @click="selectKapsul(item)"
-                    :disabled="selectedKapsul.id === item.id ||  item.length === 0"
-                    :class="selectedKapsul.id === item.id ? 'border-warna-empat' : ' border-warna-tujuh'"
-                    class="button-kapsul"
-
+                    class="text-sm font-semibold border border-warna-tujuh text-warna-empat rounded-2xl px-3 py-[6px] hover:bg-gray-50 cursor-pointer;"
                 >
                 {{item.label}} ({{item.length}})
                 </button>
             </div>
             <div class="px-[14px] py-[9px]">
                 <div class="flex items-center">
-                    <div class="text-sm font-semibold text-[#757575]">{{ $t('Sort by') }}:</div>
+                    <div class="text-sm font-semibold text-[#757575]">Sort by:</div>
                     <select v-model="sorter.createdAt" name="filtertotalpage" id="filtertotalpage" class="w-[120px] outline-none px-2 py-[6px] cursor-pointer">
-                        <option value="desc">{{ $t('Latest') }}</option>
-                        <option value="asc">{{ $t('Oldest') }}</option>
+                        <option value="desc">Latest</option>
+                        <option value="asc">Oldest</option>
                     </select>
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-xl shadow-md border border-gray-100 text-sm overflow-hidden relative">
-            <ElementsTable
-                :tableDetail="tableDetail"
-                v-model="dataTable"
-                :key="'keytable'+keyTable"
-            >
-                <template v-slot:name="{item}">
-                    <NuxtLink class="hover:text-blue-700" :to="'/verifications/individu/'+item.accountId" >{{item.namaIndividu}}</NuxtLink>
-                </template>
-                <template v-slot:statusVerification="{item}" class="font-semibold">
-                    <ElementsDisplayStatusVerifikasi 
-                        :status="item.statusVerification"
-                    />
-                </template>
-                <!-- <template v-slot:submission="{ item }">
-                    <ElementsDisplayStatusSubmission :submission="item.submission" />
-                </template> -->
-
-            </ElementsTable>
-            <div v-if="!loaderPage" class="absolute top-0 right-0 left-0 bottom-0 bg-white/80 flex items-center justify-center">
-                <img class=" w-10 h-10" src="/images/animated-loading.svg" alt="loading-animasi">
-            </div>
+        <div v-if="loaderPage" class="bg-white rounded-lg shadow-md border border-gray-100">
+            <ElementsTableFlat 
+                :masterTable="masterTable"
+                :dataTable="dataTable"
+                :path="'/verifications/individu/'"
+                :idValue="'accountId'"
+            />
         </div>
-        <div  class="pagination-area text-center mt-6">
+        <div v-if="!loaderPage" class="flex items-center justify-center mt-6">
+            <img class=" w-10 h-10" src="/images/animated-loading.svg" alt="loading-animasi">
+        </div>
+        <div v-if="loaderPage" class="pagination-area text-center mt-6">
             <ElementsPaginasiSpa 
                 v-model="currentPage"
                 :totalPage="totalPage"
                 :totalVisible="totalVisible"
-                :loaderPage="!loaderPage"
-                :key="'pageset'+keyPage"
+                :key="'pagset'+keyPage"
             />
         </div>
-
-                <ElementsExcel 
-                    :jsonData="excelListing"
-                    :fileName="excelFileName"
-                    v-if="startExcel"
-                />
-
     </div>
 </template>
 
@@ -92,16 +76,13 @@
 import listIndividu from '~/static/data/listindividu.json';
 
 export default {
-    props: ['model'],
     data() {
         return {
-            btnText: 'Download',
             prefixName: 'listind',
             loaderPage: false,
             loaderLog: false,
             selectedKapsul: null,
             showRow: 10,
-            keyTable: 0,
 
             // KEBUTUHAN PAGINASI
             startIndex: 0,
@@ -112,9 +93,6 @@ export default {
             totalPage: 1,
             currentPage: 1,
             //
-            excelListing: [],
-            excelFileName: 'List-of-verification-Individu',
-            startExcel: false,
 
             dataTable: [],
             kapsul: [
@@ -164,50 +142,43 @@ export default {
             sorter: {
                 createdAt: 'desc'
             },
-
-        }
-    },
-    computed: {
-        tableDetail() {
-            const list = [
+            masterTable: [
                 {
-                    header: this.$t('Name'),
-                    itemValue: 'name'
+                    header: 'Name',
+                    value: 'namaIndividu',
+                    tipe: 'string',
+                    display: true,
+                    klik: true
                 },
                 {
-                    header: this.$t('Email'),
-                    itemValue: 'email',
-                    itemClass: 'w-3/12'
+                    header: 'Email',
+                    value: 'email',
+                    tipe: 'string',
+                    display: true
                 },
-                // {
-                //     header: 'Email is Verified',
-                //     itemValue: 'emailIsVerified',
-                //     itemClass: 'w-2/12'
-                // },
+                {
+                    header: 'Email is Verified',
+                    value: 'emailIsVerified',
+                    tipe: 'boolean',
+                    display: true
+                },
                 {
                     header: 'Status',
-                    itemValue: 'statusVerification',
-                    itemClass: 'w-2/12'
+                    value: 'statusVerification',
+                    tipe: 'integer',
+                    display: true
                 },
                 {
-                    header: this.$t('Created'),
-                    itemValue: 'createdAt',
-                    type: 'date',
-                    format: 'DD MMM YYYY HH:mm',
-                    itemClass: 'w-2/12'
-                }
+                    header: 'Created',
+                    value: 'createdAt',
+                    tipe: 'date',
+                    display: true
+                },
             ]
-            return list;
-        },
-        halamanStore() {
-            return this.$store.state.halamanIndividu
-        },
-
-
+        }
     },
     watch: {
         currentPage(val) {
-            this.$store.commit('setHalamanIndividu', val)
             this.masterPoint()
         },
 
@@ -219,10 +190,6 @@ export default {
         showRow(val) {
             this.limit = val
             this.masterPoint()  
-        },
-        'filter.search'(val) {
-            this.currentPage = 1;
-            this.masterPoint()
         }
     },
     mounted() {
@@ -230,13 +197,9 @@ export default {
     },
     methods: {
         initialize() {
-            this.btnText = 'Download'
-            this.startExcel = false
             this.getLogUser()
             this.selectKapsul(this.kapsul[0])
-            this.currentPage = this.halamanStore ? this.halamanStore : 1
-
-            // this.masterPoint()
+            this.masterPoint()
         },
 
         keyUp(event) {
@@ -260,10 +223,20 @@ export default {
             await this.$apiPlatform.get('verificator/'+item.endpoint+'/?limit='+this.limit+'&offset='+this.startIndex+'&title='+this.filter.search+'&sortbycreatedat='+this.sorter.createdAt).then(res => {
                 // console.log(res.data)
 
-                this.dataTable = res.data.results
-                this.totalPage = Math.ceil(res.data.length / this.limit)
+                this.dataTable = res.data.results.map(e => {
+                    const data = {
+                        accountId: e.accountId,
+                        userId: e.userId,
+                        namaIndividu: e.namaIndividu !== '' ? e.namaIndividu : 'N/A',
+                        email: e.email,
+                        emailIsVerified: e.emailIsVerified,
+                        statusVerification: e.statusVerification,
+                        createdAt: e.createdAt
+                    }
+                    return data
+                })
+                this.totalPage = Math.ceil(res.data.count / this.limit)
                 this.keyPage += 1
-                this.keyTable+=1
 
                 this.$nextTick(() => {
                     this.loaderPage = true
@@ -273,8 +246,10 @@ export default {
 
         async getLogUser() {
             this.loaderLog = false
+
             await this.$apiPlatform.get('verificator/logIndividu/').then(res => {
                 // console.log(res.data)
+
                 const data = res.data
                 this.kapsul = [
                     {
@@ -310,47 +285,6 @@ export default {
                 ]
                 this.$nextTick(() => {
                     this.loaderLog = true
-                })
-            })
-        },
-        async downloadExcel() {
-            this.btnText = 'Downloading'
-            const item = this.selectedKapsul
-            const limit = 100000
-            const offset = 0
-            await this.$apiPlatform.get('verificator/'+item.endpoint+'/?limit='+limit+'&offset='+offset+'&title='+this.filter.search+'&sortbycreatedat='+this.sorter.createdAt).then(res => {
-                console.log(res.data.results)
-
-                const forExcel = res.data.results.map(e => {
-                    var statusnya = ''
-                    if (e.statusVerification === 1) {
-                        statusnya = 'Need Verification'
-                    } else if (e.statusVerification === 2) {
-                        statusnya = 'Rejected'
-                    } else if (e.statusVerification === 3) {
-                        statusnya = 'Accepted'
-                    } else if (e.statusVerification === 4) {
-                        statusnya = 'Suspended'
-                    }
-                    const data = {
-                        [this.$t('Name')]: e.namaIndividu,
-                        [this.$t('Email')]: e.email,
-                        'Status': statusnya,
-                        [this.$t('Created')]: this.$dayjs(e.createdAt).format('YYYY/MM/DD HH:mm')
-                    }
-                    return data;
-                });
-                this.excelListing = forExcel
-
-                this.$nextTick(() => {
-                    this.startExcel = true
-                    setTimeout(() => {
-                        this.btnText = 'Download'
-                        this.startExcel = false
-
-                    }, 2000)
-
-
                 })
             })
         }

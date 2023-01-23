@@ -66,7 +66,7 @@
                                 <InputDate
                                     v-model="form.tanggalMulai"
                                     :label="$t('Start Date')"
-                                    :name="prefixName+'tanggalmulai'"
+                                    :name="prefixName+'tanggalMulai'"
                                     :key="'tglmulai'+keyTanggal"
                                 />
                             </div>
@@ -74,7 +74,7 @@
                                 <InputDate
                                     v-model="form.tanggalSelesai"
                                     :label="$t('End Date')"
-                                    :name="prefixName+'tanggalselesai'"
+                                    :name="prefixName+'tanggalSelesai'"
                                     :key="'tglselesai'+keyTanggal"
                                     :disabledBefore="disBefore"
                                     :disabledDate="disDate"
@@ -205,22 +205,22 @@
 
                         />
                     </div>
-                    <div v-if="typeAudience && form.typeAudience" class="mb-6">
+                    <div  class="mb-6">
                         <InputAutocompleteMulti 
                             v-model="form.typeAudience"
-                            :name="prefixName+'tipeaudience'"
-                            :label="'Tipe Audience'"
+                            :name="prefixName+'typeAudience'"
+                            :label="$t('Audience Type')"
                             :opsi="typeAudience"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :multilang="true"
                         />
                     </div>
-                    <div v-if="typeApproach && form.typeApproach" class="mb-6">
+                    <div  class="mb-6">
                         <InputAutocompleteMulti 
                             v-model="form.typeApproach"
-                            :name="prefixName+'tipeapproach'"
-                            :label="'Tipe Approach'"
+                            :name="prefixName+'typeApproach'"
+                            :label="$t('Approach')"
                             :opsi="typeApproach"
                             :itemValue="'id'"
                             :itemLabel="'label'"
@@ -232,8 +232,7 @@
                         <InputAutocompleteMulti 
                             v-model="form.typeIssues"
                             :name="prefixName+'topik'"
-                            :placeholder="'Tulis disini'"
-                            :label="'Topik'"
+                            :label="$t('Issues')"
                             :opsi="typeIssues"
                             :itemValue="'id'"
                             :itemLabel="'label'"
@@ -261,7 +260,7 @@
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
                 <button @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">{{ $t('Back') }}</button>
-                <button @click="simpan" class="button-standar">{{ $t('Save') }}</button>
+                <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
 
@@ -276,6 +275,7 @@
 export default {
     data() {
         return {
+            btnText: 'Save',
             keyMaster: 0,
             keyTanggal: 0,
             disBefore: false,
@@ -484,6 +484,7 @@ export default {
     },
     methods: {
         initialize() {
+            this.btnText = 'Save'
             this.loaderMaster = false;
             this.imageLoader = false;
             // this.setBreadcrumb()
@@ -568,15 +569,19 @@ export default {
 
         },
         simpan() {
+            //validasi disini
             console.log(this.form)
             this.submitToApi()
         },
         async submitToApi() {
-            this.form.tanggalMulai = new Date(this.form.tanggalMulai)
-            this.form.tanggalSelesai = new Date(this.form.tanggalSelesai)
-            await this.$apiPlatform.put('moderator/programs/'+this.id+'/', this.form).then(res => {
+            this.btnText = 'Updating'
+            var forSimpan = _.cloneDeep(this.form)
+            forSimpan = new Date(this.form.tanggalMulai)
+            forSimpan = new Date(this.form.tanggalSelesai)
+
+            await this.$apiPlatform.put('moderator/programs/'+this.id+'/', forSimpan).then(res => {
                 console.log(res.data)
-                this.$toast.show('Program ' + this.form.judulActivity[this.bahasa] +' Updated')
+               this.$toast.show(this.$t('Program')+ ' ' + this.$t('upadeted successfully'))
 
             if (this.imgThumbnail.file !== null) {
                 this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
@@ -600,7 +605,7 @@ export default {
                 await this.$apiPlatform.put('moderator/programs/'+this.id+'/', data).then(res => {
                     this.btnText = 'Save'
 
-                    this.$toast.show('Blog updated successfuly')
+               this.$toast.show(this.$t('Program')+ ' ' + this.$t('upadeted successfully'))
                     this.initialize()
                 }).catch(err => {
                     console.log(err)
@@ -611,30 +616,7 @@ export default {
             this.$router.push('/moderations/program/'+this.id)
         },
 
-        // btnAddTestimony() {
-        //     this.modalAction = true
-        //     this.keyModal += 1
-        // },
 
-        // btnAddLokasi() {
-        //     this.modalActionLokasi = true
-        //     this.keyModalLokasi += 1
-        // },
-
-        // btnAddMilestone() {
-        //     this.modalActionMilestone = true
-        //     this.keyModalMilestone += 1
-        // },
-
-        // btnAddReport() {
-        //     this.modalActionReport = true
-        //     this.keyModalReport += 1
-        // },
-
-        // btnAddJourney() {
-        //     this.modalActionJourney = true
-        //     this.keyModalJourney += 1
-        // },
     }
 }
 </script>
