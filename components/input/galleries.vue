@@ -14,16 +14,15 @@
 
             <div class="flex flex-wrap items-center lg:gap-4 gap-2 mt-10">
                 <div 
-                    v-for="(item, index) in newVal" :key="'galleri'+index" 
+                    v-for="(item, index) in newVal.list" :key="'galleri'+index" 
                     class="relative bg-white shadow-none hover:shadow-md transition-all duration-200 ease-in-out overflow-hidden border border-gray-50 rounded-xl w-[115px] h-[64px]">
                     <img class="w-[115px] h-[64px] object-cover" :src="item.type && item.type !=='' ? item.imgGambar : basePath+item.imgGambar" alt="gallery-image">
 
-                    <button @click="deleteImage(index)" class="absolute top-0 right-0 bg-white rounded-full p-1 cursor-pointer flex items-center mr-2 mt-2 hover:bg-gray-100">
+                    <button @click="deleteImage(item,index)" class="absolute top-0 right-0 bg-white rounded-full p-1 cursor-pointer flex items-center mr-2 mt-2 hover:bg-gray-100">
                         <img class="w-[10px] h-[10px]" src="/icons/icon-close.png" alt="icon-delete">
                     </button>
                 </div>
             </div> 
-
     </div>
 </template>
 
@@ -32,14 +31,15 @@ export default {
     props: ['value'],
         data() {
             return {
-                disUpload: false,
+                disUpload: true,
                 newImages: [],
                 imageKey:0,
                 // maxTotalFiles: 5,
                 newImage: {
                     file: null,
                     displayImage: ''
-                }
+                },
+                defaultMaxImages: 5
             }
         },
         computed: {
@@ -58,30 +58,30 @@ export default {
                 return this.newImages.length
             },
             newValLength() {
-                return this.newVal.length
+                return this.newVal.list.length
             },
             maxTotalFiles() {
                 //5
-                const defaultMax = 5
-                return defaultMax - this.newVal.length 
+                return parseInt(this.defaultMaxImages) - parseInt(this.newVal.list.length) 
             }
     
     
         },
         watch: {
             itemsLength(val) {
-                const image = _.cloneDeep(this.newImages)
+                const image = this.newImages
                 const images = image.map((e,index) => {
-                    e.deskripsiGambar = ['khub' + index,'khub' + index],
-                    e.imgGambar = e.displayImage
+                    e.deskripsiGambar = ['khub' + index,'khub' + index]
+                    e.imgGambar= e.displayImage
+
                     return e;
                 })
-                this.newVal = this.newVal.concat(images)
+                this.newVal.list = this.newVal.list.concat(images)
                 this.newImages = [];
                 this.imageKey +=1
             },
             maxTotalFiles(val) {
-                if (val < 1 ) {
+                if (parseInt(val) < 1  ) {
                     this.disUpload = true
                 } else {
                     this.disUpload = false
@@ -95,9 +95,17 @@ export default {
             //     })
             // }
         },
+        mounted() {
+            if (this.newVal.list.length > (this.defaultMaxImages - 1)) {
+                this.disUpload = true 
+            } else {
+                this.disUpload = false
+            }
+        },
         methods: {
-            deleteImage(index) {
-                this.newVal.splice(index, 1)
+            deleteImage(item,index) {
+                if(item.pkGalleryId) this.newVal.deleted.push(item.pkGalleryId)
+                this.newVal.list.splice(index, 1)
             }
         }
 }

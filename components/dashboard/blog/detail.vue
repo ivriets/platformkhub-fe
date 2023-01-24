@@ -56,6 +56,7 @@
                     <ElementsDisplayFieldBawah 
                         :title="$t('Moderation Notes')"
                         :content="dataDetail.catatanModerasi"
+                        :classContent="'text-warna-sembilan'"
                     />
 
                 </div>

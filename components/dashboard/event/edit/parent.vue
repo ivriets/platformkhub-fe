@@ -277,7 +277,7 @@
                 <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
-        <!-- <pre> {{ form }}</pre> -->
+        <pre> {{ deskripsi }}</pre>
     </div>
 </template>
 
@@ -543,7 +543,7 @@ export default {
                 if (this.imgThumbnail.file !== null) {
                     this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
                 } else {
-                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('upadeted successfully'))
+                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
                     this.initialize()
                 }
 
@@ -559,7 +559,7 @@ export default {
                 if (this.imgThumbnail.file !== null) {
                     this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
                 } else {
-                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('upadeted successfully'))
+                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
                     this.initialize()
                 }
 
@@ -568,11 +568,17 @@ export default {
 
 
          async uploadImage(image, untuk, name) {
+
+            console.log('image', image)
+            console.log('untuk', untuk)
+            console.log('name', name)
+
+
             console.log('upload image')
                 var data = new FormData();
                 data.append(untuk, image, name);
                 await this.$apiPlatform.put('moderator/events/'+this.id+'/', data).then(res => {
-                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('upadeted successfully'))
+                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
                     this.initialize()
                 }).catch(err => {
                     console.log(err)

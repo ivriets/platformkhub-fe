@@ -364,7 +364,7 @@ export default {
                 if (this.imgThumbnail.file !== null) {
                     this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
                 } else {
-                    this.$toast.show(this.$t('Resources')+ ' ' + this.$t('upadeted successfully'))
+                    this.$toast.show(this.$t('Resources')+ ' ' + this.$t('updated successfully'))
                     this.initialize()
                 }
 
@@ -373,12 +373,14 @@ export default {
         },
 
          async uploadImage(image, untuk, name) {
-            console.log('upload image')
+            console.log('image', image)
+            console.log('untuk', untuk)
+            console.log('name', name)
             if (image instanceof Blob){
                 var data = new FormData();
                 data.append(untuk, image, name);
                 await this.$apiPlatform.put('moderator/resources/'+this.id+'/', data).then(res => {
-                    this.$toast.show(this.$t('Resources')+ ' ' + this.$t('upadeted successfully'))
+                    this.$toast.show(this.$t('Resources')+ ' ' + this.$t('updated successfully'))
                     this.initialize()
                 }).catch(err => {
                     console.log(err)

@@ -25,6 +25,7 @@ module.exports = {
           'lima': '#9E9E9E',
           'enam': '#B5B5B5',
           'tujuh': '#E0E0E0',
+          'delapan': '#757575',
           'sembilan': '#3D3D3D',
           '444': '#444444',
           'need-revision': '#C25D00',

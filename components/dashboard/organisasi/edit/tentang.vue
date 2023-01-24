@@ -220,6 +220,8 @@
                 <div @click="save" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
         </div>
+
+        {{ imgLogoOrganisasi }}
         <!-- <pre>{{ form }}</pre> -->
     </div>
 </template>
@@ -354,6 +356,12 @@ export default {
             this.loaderDetail = false
         },
         async uploadImage(image, untuk, name) {
+
+            console.log('image', image)
+            console.log('untuk', untuk)
+            console.log('name', name)
+
+
             if (image instanceof Blob){
                 var data = new FormData();
                 data.append(untuk, image, name);

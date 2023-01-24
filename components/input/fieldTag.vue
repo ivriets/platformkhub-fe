@@ -22,9 +22,7 @@
             >
             <div class="absolute top-0 right-0 h-[34px] items-center flex px-2 text-gray-500">
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" preserveAspectRatio="xMidYMid meet" viewBox="0 0 12 12"><path fill="currentColor" d="M5.214 10.541a.903.903 0 0 0 1.572 0l4.092-7.169C11.226 2.762 10.789 2 10.09 2H1.91c-.698 0-1.135.762-.787 1.372l4.092 7.17Z"/></svg> -->
-                <button @click="statusDropdown=!statusDropdown">
-                    <img :class="statusDropdown ? 'rotate-180 ' : '' " src="/icons/icon-arrow-down-grey.png" alt="arrow-down" class="w-4 h-4 transition-all opacity-100 hover:opacity-60">
-                </button>
+                <img :class="statusDropdown ? 'rotate-180 ' : '' " src="/icons/icon-arrow-down-grey.png" alt="arrow-down" class="w-4 h-4 transition-all">
             </div>
         </div>
         <div class="relative " v-if="statusDropdown">
@@ -45,12 +43,12 @@
             </div>
         </div>
         <div class="chip-container mt-2 flex items-center flex-wrap gap-2">
-            <div v-for="(item, index) in selectedValue" :key="'listSel'+name+index" @click="removeChip(index)">
-            <ElementsChip 
-                :item="item[parseLabel][bahasa]"
-            />
+            <div v-for="(item, index) in selectedValue" :key="'listSel'+name+index" @click="removeChip(item,index)">
+                <ElementsChip
+                :item="item.nama" />
             </div>
         </div>
+
     </div>
 </template>
 <script>
@@ -61,13 +59,20 @@ export default {
             statusDropdown: false,
             listing: [],
             newVal: '',
-            selectedValue: []
+            selectedValue: [],
+            deletedValue: [],
+            finalValue: {
+                list: [],
+                deleted: [],
+                api: []
+            }
         }
     },
     watch: {
         newVal(val) {
              this.getApi(val);
-        }
+        },
+
     },
     computed: {
         lang() {
@@ -81,7 +86,8 @@ export default {
         },
         parseId() {
             return this.itemValue ? this.itemValue : 'id'
-        }
+        },
+
     },
     mounted() {
         this.initialize()
@@ -89,18 +95,31 @@ export default {
     methods: {
         initialize() {
             this.listing = this.opsi
-            if (this.value && this.value.length > 0) {
-                const unik = _.uniq(this.value)
-                unik.every((e,index) => {
+            if (this.value) {
+                // const unik = _.uniq(this.value.list)
+                this.value.api.every((e,index) => {
                     // this.getItemApi(e)
-                    const cari = this.listing.filter(x => x[this.parseId]=== e)
-                    if (cari && cari.length > 0) this.selectedValue.push(cari[0])
-                    if (this.value.length === index + 1) {
-                        return false
+                    const cari = this.listing.filter(x => x[this.parseId]=== e.pilihanTagId.id)
+                    // const cari = 
+                    if (cari && cari.length > 0) this.selectedValue.push({
+                        pkTagId: e.pkTagId,
+                        id: e.pilihanTagId.id,
+                        nama:e.pilihanTagId.nama[this.bahasa]
+                        })
+                    if (this.value.api.length === index + 1) {
+
+                        this.updateValue()
+                        
+                        // return false
+                        console.log('dhfakfh')
+
                     } else {
                         return true;
                     }
-                })
+                });
+
+
+
             }
 
         },
@@ -144,8 +163,10 @@ export default {
             // }
             if (this.addNew && this.addNew === true) {
                 const addNew = {
-                    [this.parseId] : this.newVal,
-                    [this.parseLabel]: this.multilang && this.multilang === true ?  [this.newVal, this.newVal] : this.newVal
+                    // [this.parseId] : this.newVal,
+                    // [this.parseLabel]: this.multilang && this.multilang === true ?  [this.newVal, this.newVal] : this.newVal
+                    id:'',
+                    nama: this.newVal
                 }
                 this.selectedValue.push(addNew)
                 this.$nextTick(() => {
@@ -169,7 +190,11 @@ export default {
                 this.keyMaster +=1
             } else {
                 this.newVal = ''
-                this.selectedValue.push(item)
+                this.selectedValue.push({
+                        pkTagId: '',
+                        id: item.id,
+                        nama:item.label[this.bahasa]
+                })
                 this.updateValue()
                 // this.$emit('input',item.id)
             }
@@ -177,17 +202,25 @@ export default {
         },
 
         updateValue() {
-            const unikval = _.uniq(this.selectedValue.map(e=> e[this.itemValue]))
-             this.$emit('input', unikval)
+            // const unikList = _.uniq(this.selectedValue.map(e=> e[this.itemValue]))
+            // const unikDeleted = this.deletedValue
+            this.finalValue = {
+                list: this.selectedValue,
+                deleted: this.deletedValue,
+                api: this.value.api
+            }
+             this.$emit('input', this.finalValue)
         },
 
-        removeChip(index){
+        removeChip(item,index){
             // console.log(value)
             // const posisi = this.selectedValue.indexOf(value)
             // this.selectedValue.splice(posisi, 1)
             // this.$nextTick(() => {
             //     this.updateValue();
             // })
+            if (item.pkTagId && item.pkTagId !== '') this.deletedValue.push(item.pkTagId)
+            
            this.selectedValue.splice(index, 1);
             this.selectedValue = _.uniq(this.selectedValue)
             this.$nextTick(() => {

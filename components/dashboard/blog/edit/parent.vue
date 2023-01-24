@@ -49,6 +49,7 @@
                         <InputGalleries 
                             v-model="daftarGalleri"
                         />
+
                 </div>
                 <div class="col-span-12 lg:col-span-3">
                     <div class="bg-[#FAFAFA] p-5 rounded-lg mb-[28px]">
@@ -88,7 +89,7 @@
                             v-model="form.kategoriArtikel"
                             :label="$t('Blog Type')"
                             :opsiRadio="opsiRadio"
-                            :name="prefixName+'kategoriartikel'"
+                            :name="prefixName+'kategoriArtikel'"
                             :orientasi="'vertikal'"
                         />
                     </div>
@@ -98,24 +99,26 @@
                     <div v-if="typeAudience && form.typeAudience">
                         <InputAutocompleteMulti 
                             v-model="form.typeAudience"
-                            :name="prefixName+'tipeaudience'"
+                            :name="prefixName+'typeAudience'"
                             :label="$t('Audience Type')"
                             :opsi="typeAudience"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :multilang="true"
+                            :required="true"
                         />
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
                     <div v-if="typeApproach && form.typeApproach">
                         <InputAutocompleteMulti 
                             v-model="form.typeApproach"
-                            :name="prefixName+'tipeapproach'"
+                            :name="prefixName+'typeApproach'"
                             :label="$t('Approach')"
                             :opsi="typeApproach"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :multilang="true"
+                            :required="true"
 
                         />
                     </div>
@@ -123,18 +126,19 @@
                     <div v-if="typeIssues && form.typeIssues">
                         <InputAutocompleteMulti 
                             v-model="form.typeIssues"
-                            :name="prefixName+'topik'"
+                            :name="prefixName+'typeIssues'"
                             :label="$t('Issues')"
                             :opsi="typeIssues"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :multilang="true"
+                            :required="true"
 
                         />
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
-                    <div v-if="listTag && form.blogsTag">
-                        <InputAutocompleteMulti 
+                    <div >
+                        <!-- <InputAutocompleteMulti 
                             v-model="form.blogsTag"
                             :name="prefixName+'tag'"
                             :label="$t('Tag')"
@@ -144,20 +148,22 @@
                             :multilang="true"
                             :addNew="true"
 
-                        />
-                    </div>
-
-                        <!-- <InputAutocompleteApiMulti 
-                            v-model="form.blogsTag"
+                        /> -->
+                        <InputFieldTag
+                            v-model="formTag"
                             :name="prefixName+'tag'"
                             :label="$t('Tag')"
-                            :endPoint="'daftarList/tag/?limit=10&offset=0'"
-                            :itemEndPoint="'daftarList/tag/?id='"
-                            :searchQuery="'nama'"
+                            :opsi="listTag"
                             :itemValue="'id'"
-                            :itemLabel="'nama'"
-                            :key="'tag'+keyMaster"
-                        /> -->
+                            :itemLabel="'label'"
+                            :multilang="true"
+                            :addNew="true"
+
+                        />
+                       
+
+                    </div>
+
 
 
 
@@ -170,6 +176,25 @@
                 <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
+
+        <div class="ah">
+            <DashboardChildSimpanTag 
+                v-model="saving.tag"
+                :tag="formTag"
+                :model="'blog'"
+                :modelId="id"
+                v-if="saving.statusTag"
+            />
+            <DashboardChildSimpanGalleri 
+                v-model="saving.galleri"
+                :model="'blog'"
+                :modelId="id"
+                :galleri="daftarGalleri"
+                v-if="saving.statusGalleri"
+            />
+
+        </div>
+
     </div>
 </template>
 
@@ -180,7 +205,10 @@ export default {
         return {
             btnText: 'Save',
             prefixName: 'blog',
-            daftarGalleri: [],
+            daftarGalleri: {
+                list: [],
+                deleted: []
+            },
             maxTitle: 80,
             dataDetail: null,
             // childBreadcrumb: [],
@@ -199,6 +227,11 @@ export default {
                 typeIssues: undefined,
                 tag: undefined,
             },
+            formTag: {
+                list: [],
+                deleted: [],
+                api: []
+            },
             opsiRadio: [],
             imgThumbnail: {
                 file: null,
@@ -208,6 +241,19 @@ export default {
             imageThumbnailKey: 0,
             opsiTag: [],
             listTag: undefined, 
+            saving: {
+                tag: '',
+                statusTag: false,
+                galleri: '',
+                statusGalleri: false
+            },
+
+            checkSaving: {
+                root: false,
+                thumbnail: false,
+                // tag: false,
+                galleri: false
+            }
         }
     },
     computed: {
@@ -259,6 +305,26 @@ export default {
             return vA
         }
     },
+    watch: {
+        'saving.galleri' (val) {
+            if (val==='done') this.checkSaving.galleri = true
+        },
+        checkSaving: {
+            handler(val) {
+                if (
+                    val.root === true && 
+                    val.thumbnail === true && 
+                    val.galleri === true
+                    ) 
+                {
+                     this.$toast.show(this.$t('Blog')+ ' ' + this.$t('updated successfully'))
+                     this.initialize()
+                }
+
+            },
+            deep: true
+        }
+    },
     mounted() {
         this.initialize()
     },
@@ -266,6 +332,18 @@ export default {
         initialize() {
             // this.setBreadcrumb()
             this.btnText = 'Save'
+            this.checkSaving = {
+                root: false,
+                thumbnail: false,
+                // tag: false,
+                galleri: false
+            }
+            this.saving = {
+                // tag: '',
+                statusTag: false,
+                galleri: '',
+                statusGalleri: false
+            },
             this.imageThumbnailLoader = false
             
 
@@ -294,24 +372,20 @@ export default {
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
-                    blogsTag: _.flatMap(data.blogsTag, "pilihanTagId.id"),
+                    // blogsTag: _.flatMap(data.blogsTag, "pilihanTagId.id"),
                 }
+                // this.formTag.list = _.flatMap(data.blogsTag, "pilihanTagId.id")
+                this.formTag.api = data.blogsTag
+
                 this.imgThumbnail.displayImage = data.imgThumbnail
                 this.deskripsi.list = this.form.deskripsi
-                this.daftarGalleri = data.blogsGalleries
+                this.daftarGalleri.list = data.blogsGalleries
 
                 this.$nextTick(() => {
                     this.imageThumbnailLoader = true
                     this.imageThumbnailKey +=1
                 })
                 
-                // if (!data.deskripsi || data.deskripsi.length == 0){
-                //     forDeskripsi = []
-                //     forDeskripsi.push({"typeDeskripsi": 2,"imgDeskripsi": "","caption": ["-","-"],"paragraf": data.deskripsiPanjang, "sorter": 0})
-                //     this.form.deskripsi = forDeskripsi
-                // } else {
-                //     this.form.deskripsi = data.deskripsi
-                // }
             }).catch(err => {
                 console.log(err)
             })
@@ -331,14 +405,18 @@ export default {
             this.focusField(id)
         },
         simpan() {
+            this.form.judulArtikel[0] = this.form.judulArtikel[0] === '' ? 'N/A' : this.form.judulArtikel[0]
+            this.form.judulArtikel[1] = this.form.judulArtikel[1] === '' ? 'N/A' : this.form.judulArtikel[1]
 
 
-            console.log(this.form)
-            console.log(this.deskripsi)
-            if (this.form.judulArtikel[0] === '') {
-                this.errorField(this.$t('titleIdBlank'), 'titleid')
-            } else if (this.form.judulArtikel[1]==='') {
-                this.errorField(this.$t('titleEnBlank'), 'titleen')
+            if (this.form.typeAudience.length === 0) {
+                this.errorField(this.$t('typeAudienceBlank'), 'typeAudience')
+            
+            } else if (this.form.typeApproach.length === 0) {
+                this.errorField(this.$t('typeApproachBlank'), 'typeApproach')
+            } else if (this.form.typeIssues.length === 0) {
+                this.errorField(this.$t('typeIssuesBlank'), 'typeIssues')
+
             } else {
                 this.putData()
             }
@@ -354,14 +432,22 @@ export default {
 
             await this.$apiPlatform.put('moderator/blogs/'+this.id+'/', forSimpan).then(res => {
 
-            if (this.imgThumbnail.file !== null) {
-                this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
-            } else {
-                this.btnText = 'Save'
-                this.$toast.show(this.$t('Blog')+ ' ' + this.$t('upadeted successfully'))
+                this.checkSaving.root = true
 
-                this.initialize()
-            }
+                if (this.imgThumbnail.file !== null) {
+                    this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
+                } else {
+                    this.checkSaving.thumbnail = true
+                } 
+
+                this.savingGallery();
+
+                // else {
+                //     this.btnText = 'Save'
+                //     this.$toast.show(this.$t('Blog')+ ' ' + this.$t('updated successfully'))
+
+                //     this.initialize()
+                // }
 
 
 
@@ -374,10 +460,9 @@ export default {
                 var data = new FormData();
                 data.append(untuk, image, name);
                 await this.$apiPlatform.put('moderator/blogs/'+this.id+'/', data).then(res => {
-                    this.btnText = 'Save'
-
-                    this.$toast.show('Blog updated successfuly')
-                    this.initialize()
+                    // this.$toast.show('Blog updated successfuly')
+                    // this.initialize()
+                    this.checkSaving.thumbnail = true
                 }).catch(err => {
                     console.log(err)
                 })
@@ -385,6 +470,18 @@ export default {
         },
         btnBack() {
             this.$router.push('/moderations/blog/'+this.id)
+        },
+        savingGallery() {
+            this.saving.statusGalleri = true
+            setTimeout(() => {
+                this.saving.statusGalleri = false;
+            }, 2000)
+        },
+        savingTag() {
+            this.saving.statusTag = true
+            setTimeout(() => {
+                this.saving.statusTag = false
+            }, 500)
         }
     }
 }

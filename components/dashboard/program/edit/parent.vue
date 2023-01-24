@@ -580,7 +580,7 @@ export default {
 
             await this.$apiPlatform.put('moderator/programs/'+this.id+'/', forSimpan).then(res => {
                 console.log(res.data)
-                this.updateChild()
+                // this.updateChild()
                 if (this.imgMainImage.file !== null) {
                     this.uploadImage(this.imgMainImage.file, "imgMainImage", this.imgMainImage.name)
                 }
@@ -590,7 +590,7 @@ export default {
                 } 
 
                 this.btnText = 'Save'
-               this.$toast.show(this.$t('Program')+ ' ' + this.$t('upadeted successfully'))
+               this.$toast.show(this.$t('Program')+ ' ' + this.$t('updated successfully'))
 
                 this.$nextTick(() => {
                     this.initialize()
@@ -615,13 +615,15 @@ export default {
 
          async uploadImage(image, untuk, name) {
                 console.log('untuk', untuk)
+                console.log('image', image)
+                console.log('name', name)
             // if (image instanceof Blob){
                 var data = new FormData();
                 data.append(untuk, image, name);
                 await this.$apiPlatform.put('moderator/programs/'+this.id+'/', data).then(res => {
                     this.btnText = 'Save'
 
-                    this.$toast.show(this.$t('Program')+ ' ' + this.$t('upadeted successfully'))
+                    this.$toast.show(this.$t('Program')+ ' ' + this.$t('updated successfully'))
                     this.initialize()
                 }).catch(err => {
                     console.log(err)

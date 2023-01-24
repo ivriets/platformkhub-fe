@@ -891,3 +891,9 @@ input[type="radio"]:checked {
     border: 1px solid $warna-empat;
     accent-color: $warna-empat;
 }
+
+.vue-advanced-cropper__background, .vue-advanced-cropper__foreground {
+    background: url('/images/bc.jpg') !important;
+    height: 5px;
+    width: 5px;
+}

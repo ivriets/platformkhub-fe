@@ -159,7 +159,6 @@ export default {
           // }
 
           if (this.value && (this.value.displayImage !== '' && this.value.displayImage !== undefined)) {
-            console.log('satu')
             const forPath = this.value.displayImage.substring(0,1) === '/' ? this.basePath : ''
             this.dataImage.displayImage = forPath + this.value.displayImage
 
@@ -266,7 +265,7 @@ export default {
                         file: inputedFiles,
                         displayImage: URL.createObjectURL(inputedFiles),
                         type: inputedFiles.type,
-                        name: _.kebabCase(inputedFiles.name)
+                        name: inputedFiles.name
                     }
 
               if (this.useCrop) {

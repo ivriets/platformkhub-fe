@@ -119,7 +119,7 @@
     "Bookmarked by:" : "Bookmarked by:",
     "File": "File",
     "Resource Category": "Resource Category",
-    "upadeted successfully": "upadeted successfully",
+    "updated successfully": "updated successfully",
     "Registration Type": "Registration Type",
     "Registration Date": "Registration Date",
     "Start Date": "Start Date",
@@ -147,7 +147,13 @@
     "Organization Detail": "Organization Detail",
     "Organization Type": "Organization Type",
     "Tema Warna Latar Belakang": "Background Color Theme",
-    "Hierarki": "Hierarchy"
+    "Hierarki": "Hierarchy", 
+    "Blogs": "Blogs",
+
+
+    "typeAudienceBlank": "Audience Type is required!",
+    "typeApproachBlank": "Approach is required!",
+    "typeIssuesBlank": "Issues is required!"
 
 
 

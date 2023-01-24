@@ -118,7 +118,7 @@
     "Bookmarked by:" : "Bookmarked by:",
     "File": "File",
     "Resource Category": "Kategori Publikasi",
-    "upadeted successfully": "berhasil diupdate",
+    "updated successfully": "berhasil diupdate",
     "Registration Type": "Tipe Registrasi",
     "Registration Date": "Tanggal Registrasi",
     "Start Date": "Tanggal Mulai",
@@ -131,7 +131,7 @@
     "Event Status will change when event is finished": "Event Status will change when event is finished",
     "Image": "Gambar",
     "Text": "Teks",
-    "Delete Section": "Delete Section",
+    "Delete Section": "Hapus Bagian",
     "Date & Location": "Tanggal & Lokasi",
     "Download": "Unduh",
     "User ID": "User ID",
@@ -146,7 +146,16 @@
     "Organization Detail": "Organization Detail",
     "Organization Type": "Tipe Organisasi",
     "Tema Warna Latar Belakang": "Tema Warna Latar Belakang",
-    "Hierarki": "Hierarki"
+    "Hierarki": "Hierarki",
+    "Blogs": "Blog",
+
+
+    "typeAudienceBlank": "Tipe Audien wajib diisi",
+    "typeApproachBlank": "Pendekatan wajib diisi!",
+    "typeIssuesBlank": "Topik wajib diisi!"
+
+
+
 
 
 

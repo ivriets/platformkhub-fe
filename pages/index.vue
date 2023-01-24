@@ -5,6 +5,8 @@
         <div class="hidden">
             <div class="text-tujuh"></div>
             <div class="text-empat button-kapsul"></div>
+            <div class="text-sembilan button-kapsul"></div>
+            <div class="text-delapan"></div>
         </div>
     </div>
   </div>

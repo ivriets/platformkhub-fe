@@ -187,7 +187,6 @@ export default {
                     // this.countDownSession +=1
                     // this.updateValue()
                     if (index === inputedFiles.length - 1) {
-                        console.log('1', index)
                          if (this.useCrop && this.useCrop > 0) this.applyCrop()
                     } else {
                     }
@@ -320,7 +319,7 @@ export default {
 }
 
 .cropper-line {
-border-color: rgba(white, 0.8);
+border-color: rgba(#444444, 0.8);
 }
 
 .cropper-handler-wrapper {

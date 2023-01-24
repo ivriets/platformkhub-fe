@@ -9,7 +9,7 @@
             @selectionChange="handlerFunction"
             v-model="model"
         />
-        <div v-if="counter && counter === true && max && parseInt(max) > 0" class="text-xs text-warna-dua mt-1 ml-1">{{value.length}}/{{max}} (html tag included)</div>
+        <div v-if="counter && counter === true && max && parseInt(max) > 0" class="text-xs text-warna-dua mt-1 ml-1">{{value.length}}/{{max}} {{ $t('(html tag included)') }}</div>
 
     </div>
 </template>
