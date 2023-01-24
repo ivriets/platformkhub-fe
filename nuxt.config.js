@@ -1,7 +1,7 @@
 import webpack from 'webpack'
-import path from 'path'
+// import path from 'path'
 require('dotenv').config();
-import fs from 'fs'
+// import fs from 'fs'
 const _ = require('lodash')
 
 // const {BetaAnalyticsDataClient} = require('@google-analytics/data');
@@ -73,7 +73,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/google-analytics',
+    // '@nuxtjs/google-analytics',
     'nuxt-gsap-module'
   ],
   gsap: {
@@ -113,14 +113,10 @@ export default {
 
     }],
   ],
-  server: {
-    // https: {
-    //   key: fs.readFileSync(path.resolve(__dirname, '/etc/letsencrypt/live/api.k-hub.org/privkey.pem')),
-    //   cert: fs.readFileSync(path.resolve(__dirname, '/etc/letsencrypt/live/api.k-hub.org/fullchain.pem'))
-    // },
-    host: "0.0.0.0",
-    port: 3333,
-  },
+  // server: {
+  //   host: "0.0.0.0",
+  //   port: 3333,
+  // },
   dayjs: {
     locales: ['id'],
     defaultLocale: 'id',
@@ -158,9 +154,9 @@ export default {
   // router: {
   //   middleware: ['general']
   // },
-  googleAnalytics: {
-    id: "G-DTPETM8Z78"
-  },
+  // googleAnalytics: {
+  //   id: "G-DTPETM8Z78"
+  // },
   axios: {
     baseURL: 'https://base.api.k-hub.org',
     headers: {

@@ -161,7 +161,6 @@
 
 
 <script>
-import detailBlog from '~/static/data/detailblog.json';
 
 export default {
     data() {
