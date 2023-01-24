@@ -236,9 +236,6 @@ export default {
         this.dataImage.name = this.dataCrop.name
         this.dataImage.type = this.dataCrop.type
         canvas.toBlob(async blob => {
-              // await this.$apiBase.post('upload/media', formData).then(res => {
-              //     this.saveToCollection(res.data.result)
-              // })
               this.dataImage.file = blob
             }, this.dataCrop.type);
           this.closeModal()

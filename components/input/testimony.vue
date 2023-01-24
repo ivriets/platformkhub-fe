@@ -3,9 +3,9 @@
         <div class="">
             <div class="flex items-center justify-between mb-3">
                 <div class="text-xl">Testimony</div>
-                <button class="btn-tambah text-sm" @click="addTestimony">Add Testimony</button>
+                <button class="btn-tambah text-sm" @click="addTestimony">{{ $t('Add Testimony') }}</button>
             </div>
-            <div class="text-xs text-warna-delapan mb-4">Choose Testimony</div>
+            <div class="text-xs text-warna-delapan mb-4">{{ $t('Choose Testimony') }}</div>
             <div class="">
             <ElementsTable
                 :tableDetail="tableDetail"
@@ -38,7 +38,7 @@
             <div class="p-6">
                 <div class="mb-5">
                     <InputImageUploadSingle 
-                        :label="'Foto Profil'"
+                        :label="$t('Foto Profil')"
                         v-model="newImage"
                         :accept="'.png, .jpg, .jpeg'"
                         :maxSize="1"
@@ -52,22 +52,20 @@
                 <div class="mb-5">
                     <InputText 
                         v-model="form.nama"
-                        placeholder="Tulis disini"
                         :name="prefixName+'namatestimony'"
-                        :label="'Nama'"
+                        :label="$t('Nama')"
                     />
                 </div>
                 <div class="mb-5">
                     <InputTextArea 
                         v-model="form.deskripsi"
-                        :placeholder="'Tulis disini'"
                         :name="prefixName+'deskripsitestimoni'"
-                        :label="'Testimoni'"
+                        :label="$t('Testimoni')"
                     />
                 </div>
 
                 <div class="flex justify-end">
-                    <button @click="simpan" class="button-standar">{{ formMode==='post' ? 'Tambah' : 'Edit' }}</button>
+                    <button @click="simpan" class="button-standar">{{ formMode==='post' ? $t('Tambah') : $t('Edit') }}</button>
                 </div>
 
             </div>

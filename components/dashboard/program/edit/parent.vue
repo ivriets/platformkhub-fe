@@ -250,6 +250,7 @@
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :multilang="true"
+                            :addNew="true"
 
                         />
                     </div>
@@ -259,13 +260,10 @@
         </div>
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
-                <button @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">{{ $t('Back') }}</button>
+                <button @click="btnBack" class="button-standar-outline">{{ $t('Back') }}</button>
                 <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
-
-
-
         <!-- <pre>{{ form }}</pre> -->
     </div>
 </template>
@@ -288,14 +286,6 @@ export default {
             modalWidth: '',
             keyModal:0,
             persistent: true,
-            // kenapa gak dibuat object aja
-
-            //
-
-
-
-
-
             formEntry: {
                 milestone: {
                     status: 0,
@@ -489,6 +479,16 @@ export default {
             this.imageLoader = false;
             // this.setBreadcrumb()
 
+            this.imgThumbnail = {
+                file: null,
+                displayImage: ''
+            }
+            this.imgMainImage = {
+                file: null,
+                displayImage: ''
+            }
+
+
             this.masterPoint()
         },
 
@@ -570,47 +570,63 @@ export default {
         },
         simpan() {
             //validasi disini
-            console.log(this.form)
             this.submitToApi()
         },
         async submitToApi() {
             this.btnText = 'Updating'
-            var forSimpan = _.cloneDeep(this.form)
-            forSimpan = new Date(this.form.tanggalMulai)
-            forSimpan = new Date(this.form.tanggalSelesai)
+            const forSimpan = _.cloneDeep(this.form)
+            forSimpan.tanggalMulai = new Date(this.form.tanggalMulai)
+            forSimpan.tanggalSelesai = new Date(this.form.tanggalSelesai)
 
             await this.$apiPlatform.put('moderator/programs/'+this.id+'/', forSimpan).then(res => {
                 console.log(res.data)
+                this.updateChild()
+                if (this.imgMainImage.file !== null) {
+                    this.uploadImage(this.imgMainImage.file, "imgMainImage", this.imgMainImage.name)
+                }
+
+                if (this.imgThumbnail.file !== null) {
+                    this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
+                } 
+
+                this.btnText = 'Save'
                this.$toast.show(this.$t('Program')+ ' ' + this.$t('upadeted successfully'))
 
-            if (this.imgThumbnail.file !== null) {
-                this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
-            } else {
-                this.btnText = 'Save'
                 this.$nextTick(() => {
                     this.initialize()
                 })
-            }
-
-
-
 
             })
         },
+        async updateChild() {
+            const forSimpan = {
+                lokasi: [        {
+            "provinsi": "Jawa Barat",
+            "kota": "Bandung",
+            "jalan": "Soreang",
+            "pinLocation": "12345",
+            "typeVisibility": 1
+        }]
+            }
+                await this.$apiPlatform.put('moderator/programs/'+this.id+'/', forSimpan).then(res => {
+                    console.log('update child')
+                })
+        },
 
          async uploadImage(image, untuk, name) {
-            if (image instanceof Blob){
+                console.log('untuk', untuk)
+            // if (image instanceof Blob){
                 var data = new FormData();
                 data.append(untuk, image, name);
                 await this.$apiPlatform.put('moderator/programs/'+this.id+'/', data).then(res => {
                     this.btnText = 'Save'
 
-               this.$toast.show(this.$t('Program')+ ' ' + this.$t('upadeted successfully'))
+                    this.$toast.show(this.$t('Program')+ ' ' + this.$t('upadeted successfully'))
                     this.initialize()
                 }).catch(err => {
                     console.log(err)
                 })
-            }
+            // }
         },
         btnBack() {
             this.$router.push('/moderations/program/'+this.id)
