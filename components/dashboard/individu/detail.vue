@@ -33,9 +33,10 @@
                                     <div v-else-if="['emailIsVerified', 'accountIsVerified'].includes(item1.value)">
                                         {{ dataDetail[item1.value] === true ? 'Yes' : 'No' }}
                                     </div>
-                                    <div v-else-if="['namaIndividu'].includes(item1.value)">
+                                    <div v-else-if="['namaIndividu', 'userId'].includes(item1.value)">
                                         {{ dataDetail.individu[0][item1.value] }}
                                     </div>
+
                                     <div v-else>
                                         {{ dataDetail[item1.value] }}
                                     </div>
@@ -122,7 +123,6 @@
                         <InputTextArea 
                             v-model="form.alasanRejectOrSuspend"
                             :max="500"
-                            placeholder="Tulis disini"
                             :name="'alasanreject'"
                         />
                     </div>

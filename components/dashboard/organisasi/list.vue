@@ -132,27 +132,27 @@ export default {
                 {
                     id: 'needverification',
                     label: 'Need Verification',
-                    endpoint: 'pendingOrganizations'
+                    endpoint: 'pendingOrganisasi'
                 },
                 {
                     id: 'accepted',
                     label: 'Accepted',
-                    endpoint: 'verifiedOrganizations'
+                    endpoint: 'verifiedOrganisasi'
                 },
                 {
                     id: 'suspended',
                     label: 'Suspended',
-                    endpoint: 'suspendedOrganizations'
+                    endpoint: 'suspendedOrganisasi'
                 },
                 {
                     id: 'rejected',
                     label: 'Rejected',
-                    endpoint: 'rejectedOrganizations'
+                    endpoint: 'rejectedOrganisasi'
                 },
                 {
                     id: 'deleted',
                     label: 'Deleted',
-                    endpoint: 'deletedOrganizations'
+                    endpoint: 'deletedOrganisasi'
                 }
             ],
             opsiShowRow:[

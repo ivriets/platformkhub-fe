@@ -18,7 +18,7 @@
                     />
                 </div>
             </div>
-            <button @click="downloadExcel" :disabled="btnText==='Download'? false: true" class="button-standar flex items-center gap-4">
+            <button @click="downloadExcel" :disabled="btnText==='Download'? false: true" class="button-download flex items-center gap-4">
                 <img class="h-4 w-4" src="/icons/icon-button-download.png" alt="icon-download">
                 <div class="">{{ $t(btnText) }}</div>
             </button>

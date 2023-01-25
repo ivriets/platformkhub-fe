@@ -153,14 +153,21 @@
 
                     <div v-if="[2,1].includes(tipeAcara)">
                         <div class="text-xl text-warna-utama mb-1">{{ $t('Lokasi Offline') }}</div>
-                        <FormLokasi 
-                            v-model="form.lokasi[0]"
+                        <!-- <FormLokasi 
+                            v-model="formLokasi"
                             :prefixName="prefixName"
                             v-if="loaderAll"
                             :key="'lokasi'+keyMaster"
                             :map="false"
+                        /> -->
+                        <DashboardEventEditLokasiOffline 
+                            v-model="formLokasiOffline"
+                            :prefixName="prefixName"
+                            v-if="loaderAll"
+                            :key="'lokasi'+keyMaster"
 
                         />
+
                     </div>
 
                     <hr class="border-warna-tujuh my-10">
@@ -175,7 +182,7 @@
                 </div>
                 <div class="col-span-12 lg:col-span-3">
                     <div class="bg-[#FAFAFA] p-5 rounded-lg mb-[28px]">
-                        <div class="mb-6">
+                        <div class="">
                             <div class="flex items-center text-sm">
                                 <div class="text-warna-sembilan">Status:</div>
                                 <ElementsDisplayStatusSubmission 
@@ -185,6 +192,10 @@
                             <div class="flex items-center text-sm text-warna-sembilan">
                                 <div class="">{{ $t('Bookmarked by:') }} </div>
                                 <div class="ml-1">{{ totalBookmark }}</div>
+                            </div>
+                            <div class="flex items-center text-sm text-warna-sembilan mt-10">
+                                <div class="">{{ $t('Event Status') }}: </div>
+                                <div class="ml-1">{{ form.progress | capitalize({ onlyFirstLetter: true }) }}</div>
                             </div>
                         </div>
                     </div>
@@ -290,9 +301,21 @@
                 :galleri="daftarGalleri"
                 v-if="saving.statusGalleri"
             />
+            <DashboardChildSimpanLokasiOffline
+                v-model="saving.lokasiOffline" 
+                :lokasi="formLokasiOffline"
+                :model="'event'"
+                :modelId="id"
+                v-if="saving.statusLokasiOffline"
+                
+            />
+
         </div>
 
+        <button @click="savingLokasiOffline">simpan lokasi</button>
+        <button @click="savingGallery">simpan galleri</button>
 
+        <pre>{{formLokasiOffline}}</pre>
 
     </div>
 </template>
@@ -387,18 +410,24 @@ export default {
                 deleted: [],
                 api: []
             },
+            formLokasiOffline: {
+                list: [],
+                deleted: [],
+                api: []
+            },
 
             saving: {
                 tag: '',
                 statusTag: false,
                 galleri: '',
-                statusGalleri: false
+                statusGalleri: false,
+                lokasiOffline: '',
+                statusLokasiOffline: false
             },
 
             checkSaving: {
                 root: false,
                 thumbnail: false,
-                // tag: false,
                 galleri: false
             }
 
@@ -487,6 +516,23 @@ export default {
     methods: {
         initialize() {
             this.btnText = 'Save'
+
+            this.saving = {
+                tag: '',
+                statusTag: false,
+                galleri: '',
+                statusGalleri: false,
+                lokasiOffline: '',
+                statusLokasiOffline: ''
+            },
+
+            this.checkSaving= {
+                root: false,
+                thumbnail: false,
+                galleri: false
+            }
+
+
             this.loaderAll = false
             this.masterPoint()
         },
@@ -497,6 +543,7 @@ export default {
                 var data = res.data
                 this.form = {
                     submission: data.submission,
+                    progress: data.progress,
                     judulActivity: data.judulActivity,
                     deskripsi: data.deskripsi,
                     tanggalMulai: data.tanggalMulai,
@@ -506,7 +553,7 @@ export default {
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
                     // tag: _.flatMap(_.map(data.tag, function(o){return o.pilihanTagId}), "id"),
-                    lokasi:data.lokasi && data.lokasi.length > 0 ? data.lokasi : [_.cloneDeep(this.lokasi)],
+                    // lokasi:data.lokasi && data.lokasi.length > 0 ? data.lokasi : [_.cloneDeep(this.lokasi)],
                     lokasiOnline: data.lokasiOnline && data.lokasiOnline.length > 0 ? data.lokasiOnline : [_.cloneDeep(this.lokasiOnline)],
                     deskripsi: data.deskripsi,
                     registrationStartDate: data.registrationStartDate ? data.registrationStartDate : '',
@@ -520,8 +567,10 @@ export default {
 
 
                 },
+
                 this.daftarGalleri.list = data.galleries
                 this.formTag.api = data.tag
+                this.formLokasiOffline.api = data.lokasi ? data.lokasi : []
 
 
                 this.deskripsi.list = this.form.deskripsi
@@ -627,7 +676,14 @@ export default {
             setTimeout(() => {
                 this.saving.statusTag = false
             }, 500)
+        },
+        savingLokasiOffline() {
+            this.saving.statusLokasiOffline = true
+            setTimeout(() => {
+                this.saving.statusLokasiOffline = false
+            }, 500)
         }
+
 
     }
 }

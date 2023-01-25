@@ -100,6 +100,7 @@ export default {
     },
     methods: {
         initialize() {
+            console.log(this.value)
             this.loader = false
             // this.newVal = _.cloneDeep(this.value)
 
@@ -108,7 +109,7 @@ export default {
             if (this.value.kota !== '') {
                 this.getKota();
                 this.$nextTick(() => {
-
+                    this.newVal.kota = this.value.kota
                 })
             }
 

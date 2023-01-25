@@ -64,6 +64,7 @@ export default {
             
             const req = {
                 blog: this.modelId,
+                // events: this.modelId,
                 deskripsiGambar: ['khub','khub']
             }
             await this.$apiPlatform.post(this.endPointGalleri, req).then(res => {
