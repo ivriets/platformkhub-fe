@@ -34,7 +34,13 @@ export default {
                 this.endPointRoot = 'moderator/blogs/'+this.modelId+'/';
                 this.endPointGalleri = 'moderator/bloggalleries/'
                 this.fieldGalleri = 'blogsGalleries'
-            } 
+            } else if (this.model === 'event') {
+                this.endPointRoot = 'moderator/events/'+this.modelId+'/';
+                this.endPointGalleri = 'moderator/eventsgalleries/'
+                this.fieldGalleri = 'galleries'
+            } else if (this.model === 'program') {
+                
+            }
 
             if (this.galleri.deleted.length > 0) {
                 this.galleri.deleted.forEach(e => {

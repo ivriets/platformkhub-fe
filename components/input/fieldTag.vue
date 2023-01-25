@@ -21,7 +21,6 @@
                 @keydown.tab="keyTab"
             >
             <div class="absolute top-0 right-0 h-[34px] items-center flex px-2 text-gray-500">
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" preserveAspectRatio="xMidYMid meet" viewBox="0 0 12 12"><path fill="currentColor" d="M5.214 10.541a.903.903 0 0 0 1.572 0l4.092-7.169C11.226 2.762 10.789 2 10.09 2H1.91c-.698 0-1.135.762-.787 1.372l4.092 7.17Z"/></svg> -->
                 <img :class="statusDropdown ? 'rotate-180 ' : '' " src="/icons/icon-arrow-down-grey.png" alt="arrow-down" class="w-4 h-4 transition-all">
             </div>
         </div>
@@ -53,7 +52,7 @@
 </template>
 <script>
 export default {
-    props: ['value', 'label','required', 'name', 'disabled', 'placeholder', 'opsi', 'itemValue', 'itemLabel', 'multilang', 'addNew'],
+    props: ['value', 'label','required', 'name', 'disabled', 'placeholder',  'itemValue', 'itemLabel', 'multilang', 'addNew'],
     data() {
         return {
             statusDropdown: false,
@@ -65,7 +64,8 @@ export default {
                 list: [],
                 deleted: [],
                 api: []
-            }
+            },
+            opsi: []
         }
     },
     watch: {
@@ -94,9 +94,25 @@ export default {
     },
     methods: {
         initialize() {
-            this.listing = this.opsi
+            this.getOpsiTag();
+        },
+
+        async getOpsiTag() {
+            await this.$apiPlatform.get('daftarList/tag/').then(res => {
+                this.opsi = _.flatMap(res.data.results, function(o){
+                    return {"id":o.id, 'label':o.nama}
+                });
+                this.listing = this.opsi
+                this.$nextTick(() => {
+                    this.initValue()
+                })
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+
+        initValue() {
             if (this.value) {
-                // const unik = _.uniq(this.value.list)
                 this.value.api.every((e,index) => {
                     // this.getItemApi(e)
                     const cari = this.listing.filter(x => x[this.parseId]=== e.pilihanTagId.id)
@@ -117,12 +133,9 @@ export default {
                         return true;
                     }
                 });
-
-
-
             }
-
         },
+
 
         focusText() {
             this.getApi()
@@ -138,16 +151,7 @@ export default {
                     return e[this.itemLabel].toString().toLowerCase().includes(val.toLowerCase())
                 })
             }
-            // this.statusDropdown = listingFilter.length > 0 ? true : false
             this.statusDropdown = true
-            // if (this.addNew && this.addNew == true) {
-            //     const addNew = {
-            //         [this.parseId] : 'listbaru',
-            //         [this.parseLabel]: this.multilang && this.multilang === true ?  ['Baru', 'Baru'] : 'Baru'
-            //     }
-            //     listingFilter.unshift(addNew)
-            // }
-
             this.listing = listingFilter
         },
 
@@ -156,11 +160,7 @@ export default {
         },
 
         submitOpsi() {
-            // if (this.listing.length > 0) {
-            //     const pertama = this.listing[0]
-            //     const reduceListing = this.selectedValue.map(e=>e[this.parseId]).includes(pertama[this.parseId])
-            //     if (!reduceListing) this.pilihItem(pertama)
-            // }
+
             if (this.addNew && this.addNew === true) {
                 const addNew = {
                     // [this.parseId] : this.newVal,
@@ -202,8 +202,7 @@ export default {
         },
 
         updateValue() {
-            // const unikList = _.uniq(this.selectedValue.map(e=> e[this.itemValue]))
-            // const unikDeleted = this.deletedValue
+
             this.finalValue = {
                 list: this.selectedValue,
                 deleted: this.deletedValue,
@@ -213,12 +212,6 @@ export default {
         },
 
         removeChip(item,index){
-            // console.log(value)
-            // const posisi = this.selectedValue.indexOf(value)
-            // this.selectedValue.splice(posisi, 1)
-            // this.$nextTick(() => {
-            //     this.updateValue();
-            // })
             if (item.pkTagId && item.pkTagId !== '') this.deletedValue.push(item.pkTagId)
             
            this.selectedValue.splice(index, 1);
@@ -228,13 +221,7 @@ export default {
             })
         },
 
-        keyTab(event) {
-            // const newLabel = this.label && this.label !== '' ? this.label : 'isian '
-            // if (this.listing.length === 0) {
-            //     this.$toast.warning(newLabel + ' mohon diisi')
-            //     event.preventDefault()
-            // } 
-        }
+
     }
 }
 </script>

@@ -241,17 +241,16 @@
                         />
                     </div>
 
-                    <div v-if="listTag && form.tag" class="mb-6">
-                        <InputAutocompleteMulti 
-                            v-model="form.tag"
+                    <div  class="mb-6">
+                        <InputFieldTag
+                            v-model="formTag"
                             :name="prefixName+'tag'"
                             :label="$t('Tag')"
-                            :opsi="listTag"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :multilang="true"
                             :addNew="true"
-
+                            :key="'keytag'+keyMaster"
                         />
                     </div>
                     <!-- {{form.tag}} -->
@@ -264,6 +263,18 @@
                 <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
+
+        <div class="ah">
+            <DashboardChildSimpanTag 
+                v-model="saving.tag"
+                :tag="formTag"
+                :model="'program'"
+                :modelId="id"
+                v-if="saving.statusTag"
+            />
+
+        </div>
+
         <!-- <pre>{{ form }}</pre> -->
     </div>
 </template>
@@ -395,7 +406,10 @@ export default {
             ],
             tableMilestone: null,
             tableJourney: null,
-            daftarGalleri: [],
+            daftarGalleri: {
+                list: [],
+                deleted: []
+            },
             daftarJourney: [],
             totalBookmark: 0,
             listIndividu: undefined,
@@ -406,7 +420,23 @@ export default {
                 statusActivity: {
                     nama: ['','']
                 }
+            },
+            formTag: {
+                list: [],
+                deleted: [],
+                api: []
+            },
+            saving: {
+                tag: '',
+                statusTag: false,
+            },
+
+            checkSaving: {
+                root: false,
+                thumbnail: false,
+                mainImage: false
             }
+
         }
     },
     computed: {
@@ -466,7 +496,28 @@ export default {
                 this.disDate = ''
                 this.keyTanggal +=1
             }
+        },
+
+        // 'saving.galleri' (val) {
+        //     console.log('savegal', val)
+        //     if (val==='done') this.checkSaving.galleri = true
+        // },
+        checkSaving: {
+            handler(val) {
+                console.log('cheksaving',val)
+                if (
+                    val.root === true && 
+                    val.thumbnail === true && val.mainImage === true
+                    ) 
+                {
+                     this.$toast.show(this.$t('Program')+ ' ' + this.$t('updated successfully'))
+                     this.initialize()
+                }
+
+            },
+            deep: true
         }
+
     },
 
     mounted() {
@@ -541,7 +592,7 @@ export default {
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
-                    tag: _.flatMap(_.map(data.tag, function(o){return o.pilihanTagId}), "id"),
+                    // tag: _.flatMap(_.map(data.tag, function(o){return o.pilihanTagId}), "id"),
                     lokasi:data.lokasi,
                     retentionSaatProgramMen:'',
                     fase: data.fase,
@@ -549,9 +600,10 @@ export default {
                     testimoniNonUser: data.testimoniNonUser,
                     submission: data.submission
                 }
+                this.formTag.api = data.tag
                 this.imgMainImage.displayImage = data.imgMainImage;
                 this.imgThumbnail.displayImage = data.imgThumbnail
-                this.daftarGalleri = data.galleries ? data.galleries : []
+                 this.daftarGalleri.list = data.galleries
                 this.daftarReport = data.files ? data.files : [];
                 this.daftarJourney = data.journey ? data.journey : [];
                 this.activityResult = data.activityResult[0]
@@ -581,20 +633,28 @@ export default {
             await this.$apiPlatform.put('moderator/programs/'+this.id+'/', forSimpan).then(res => {
                 console.log(res.data)
                 // this.updateChild()
+                this.checkSaving.root = true
                 if (this.imgMainImage.file !== null) {
                     this.uploadImage(this.imgMainImage.file, "imgMainImage", this.imgMainImage.name)
+                } else {
+                    this.checkSaving.mainImage = true
                 }
 
                 if (this.imgThumbnail.file !== null) {
                     this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
-                } 
+                } else {
+                    this.checkSaving.thumbnail = true
+                }
 
-                this.btnText = 'Save'
-               this.$toast.show(this.$t('Program')+ ' ' + this.$t('updated successfully'))
+                this.savingTag()
+                // this.savingGallery();
 
-                this.$nextTick(() => {
-                    this.initialize()
-                })
+            //     this.btnText = 'Save'
+            //    this.$toast.show(this.$t('Program')+ ' ' + this.$t('updated successfully'))
+
+            //     this.$nextTick(() => {
+            //         this.initialize()
+            //     })
 
             })
         },
@@ -621,10 +681,17 @@ export default {
                 var data = new FormData();
                 data.append(untuk, image, name);
                 await this.$apiPlatform.put('moderator/programs/'+this.id+'/', data).then(res => {
-                    this.btnText = 'Save'
+                    if (untuk==='imgMainImage') {
+                        this.checkSaving.mainImage = true
+                    } else if (untuk==='imgThumbnail') {
+                        this.checkSaving.thumbnail = true
+                    }
 
-                    this.$toast.show(this.$t('Program')+ ' ' + this.$t('updated successfully'))
-                    this.initialize()
+
+                    // this.btnText = 'Save'
+
+                    // this.$toast.show(this.$t('Program')+ ' ' + this.$t('updated successfully'))
+                    // this.initialize()
                 }).catch(err => {
                     console.log(err)
                 })
@@ -634,6 +701,12 @@ export default {
             this.$router.push('/moderations/program/'+this.id)
         },
 
+        savingTag() {
+            this.saving.statusTag = true
+            setTimeout(() => {
+                this.saving.statusTag = false
+            }, 500)
+        }
 
     }
 }

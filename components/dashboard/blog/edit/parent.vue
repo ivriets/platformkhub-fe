@@ -138,30 +138,16 @@
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
                     <div >
-                        <!-- <InputAutocompleteMulti 
-                            v-model="form.blogsTag"
-                            :name="prefixName+'tag'"
-                            :label="$t('Tag')"
-                            :opsi="listTag"
-                            :itemValue="'id'"
-                            :itemLabel="'label'"
-                            :multilang="true"
-                            :addNew="true"
-
-                        /> -->
                         <InputFieldTag
                             v-model="formTag"
                             :name="prefixName+'tag'"
                             :label="$t('Tag')"
-                            :opsi="listTag"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :multilang="true"
                             :addNew="true"
 
                         />
-                       
-
                     </div>
 
 
@@ -192,7 +178,6 @@
                 :galleri="daftarGalleri"
                 v-if="saving.statusGalleri"
             />
-
         </div>
 
     </div>
@@ -352,13 +337,7 @@ export default {
         },
 
         async masterPoint() {
-            await this.$apiPlatform.get('daftarList/tag/').then(res => {
-                this.listTag = _.flatMap(res.data.results, function(o){
-                    return {"id":o.id, 'label':o.nama}
-                })
-            }).catch(err => {
-                console.log(err)
-            })
+
             await this.$apiPlatform.get('moderator/blogs/'+this.id+'/').then(res => {
                 const data = res.data
 
@@ -439,7 +418,7 @@ export default {
                 } else {
                     this.checkSaving.thumbnail = true
                 } 
-
+                this.savingTag()
                 this.savingGallery();
 
                 // else {

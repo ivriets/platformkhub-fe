@@ -242,18 +242,16 @@
                         />
                     </div>
 
-                    <div v-if="listTag && form.tag" class="mb-6">
-                        <InputAutocompleteMulti 
-                            v-model="form.tag"
+                    <div  class="mb-6">
+                        <InputFieldTag
+                            v-model="formTag"
                             :name="prefixName+'tag'"
-                            :placeholder="'Tulis disini'"
                             :label="$t('Tag')"
-                            :opsi="listTag"
                             :itemValue="'id'"
                             :itemLabel="'label'"
-                            :key="'tag'+keyMaster"
                             :multilang="true"
                             :addNew="true"
+                            :key="'keytag'+keyMaster"
                         />
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
@@ -277,7 +275,25 @@
                 <button @click="simpan" :disabled="btnText==='Updating'?true : false" class="button-standar">{{ $t(btnText) }}</button>
             </div>
         </div>
-        <pre> {{ deskripsi }}</pre>
+        <div class="ah">
+            <DashboardChildSimpanTag 
+                v-model="saving.tag"
+                :tag="formTag"
+                :model="'event'"
+                :modelId="id"
+                v-if="saving.statusTag"
+            />
+            <DashboardChildSimpanGalleri 
+                v-model="saving.galleri"
+                :model="'event'"
+                :modelId="id"
+                :galleri="daftarGalleri"
+                v-if="saving.statusGalleri"
+            />
+        </div>
+
+
+
     </div>
 </template>
 
@@ -324,15 +340,12 @@ export default {
                     label: ['Tautan Eksternal', 'External Link']
                 }
             ],
-            opsiTag: [],
-            daftarGalleri: [],
+            daftarGalleri: {
+                list: [],
+                deleted: []
+            },
             totalBookmark: 0,
-            listIndividu: undefined,
-            listOrganisasi: undefined,
-            listTag: undefined,
-            opsiProvinsi: [],
-            provinsi: [],
-            opsiKota: [],
+            listIndividu: null,
             imgThumbnail: null,
             lokasi: {
                     // lokasiId: '',
@@ -369,6 +382,26 @@ export default {
             imageThumbnailLoader: false,
             keyTanggal1: 0,
             keyTanggal2: 0,
+            formTag: {
+                list: [],
+                deleted: [],
+                api: []
+            },
+
+            saving: {
+                tag: '',
+                statusTag: false,
+                galleri: '',
+                statusGalleri: false
+            },
+
+            checkSaving: {
+                root: false,
+                thumbnail: false,
+                // tag: false,
+                galleri: false
+            }
+
 
         }
     },
@@ -423,7 +456,29 @@ export default {
                 this.form.lokasi = []
                 this.form.lokasiOnline = [_.cloneDeep(this.lokasiOnline)]
             }
+        },
+
+        'saving.galleri' (val) {
+            console.log('savegal', val)
+            if (val==='done') this.checkSaving.galleri = true
+        },
+        checkSaving: {
+            handler(val) {
+                console.log('cheksaving',val)
+                if (
+                    val.root === true && 
+                    val.thumbnail === true && 
+                    val.galleri === true
+                    ) 
+                {
+                     this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
+                     this.initialize()
+                }
+
+            },
+            deep: true
         }
+
     },
 
     mounted() {
@@ -438,18 +493,6 @@ export default {
 
         async masterPoint() {
 
-            await this.$apiPlatform.get('verificator/listOrganisasi/').then(res => {
-                this.listOrganisasi = res.data
-            }).catch(err => {
-                console.log(err)
-            })
-            await this.$apiPlatform.get('daftarList/tag/').then(res => {
-                this.listTag = _.flatMap(res.data.results, function(o){
-                    return {"id":o.id, 'label':o.nama}
-                })
-            }).catch(err => {
-                console.log(err)
-            })
             await this.$apiPlatform.get('moderator/events/'+this.id+'/').then(res => {
                 var data = res.data
                 this.form = {
@@ -462,7 +505,7 @@ export default {
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
-                    tag: _.flatMap(_.map(data.tag, function(o){return o.pilihanTagId}), "id"),
+                    // tag: _.flatMap(_.map(data.tag, function(o){return o.pilihanTagId}), "id"),
                     lokasi:data.lokasi && data.lokasi.length > 0 ? data.lokasi : [_.cloneDeep(this.lokasi)],
                     lokasiOnline: data.lokasiOnline && data.lokasiOnline.length > 0 ? data.lokasiOnline : [_.cloneDeep(this.lokasiOnline)],
                     deskripsi: data.deskripsi,
@@ -477,7 +520,10 @@ export default {
 
 
                 },
-                this.daftarGalleri = data.galleries
+                this.daftarGalleri.list = data.galleries
+                this.formTag.api = data.tag
+
+
                 this.deskripsi.list = this.form.deskripsi
                 
                 this.imgThumbnail= {
@@ -530,7 +576,7 @@ export default {
         },
         async putData() {
             this.btnText = 'Updating'
-            var forSimpan = _.cloneDeep(this.form)
+            const forSimpan = _.cloneDeep(this.form)
             forSimpan.registrationStartDate = new Date(forSimpan.registrationStartDate)
             forSimpan.registrationEndDate = new Date(forSimpan.registrationEndDate)
             forSimpan.tanggalMulai = new Date(forSimpan.tanggalMulai)
@@ -539,52 +585,49 @@ export default {
 
             await this.$apiPlatform.put('moderator/events/'+this.id+'/', forSimpan).then(res => {
                 console.log(res)
+                this.checkSaving.root = true
 
-                if (this.imgThumbnail.file !== null) {
+                if (this.imgThumbnail.status == 'belumUpload') {
                     this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
                 } else {
-                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
-                    this.initialize()
-                }
+                    this.checkSaving.thumbnail = true
+                } 
+                
 
-            })
-        },
-        async putData1() {
-            const forSimpan = {
-                lokasi: this.form.lokasi
-            }
-            await this.$apiPlatform.put('moderator/events/'+this.id+'/', forSimpan).then(res => {
-                console.log(res)
+                this.savingTag()
+                this.savingGallery();
 
-                if (this.imgThumbnail.file !== null) {
-                    this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
-                } else {
-                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
-                    this.initialize()
-                }
+                // {
+                //     this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
+                //     this.initialize()
+                // }
 
             })
         },
 
 
          async uploadImage(image, untuk, name) {
-
-            console.log('image', image)
-            console.log('untuk', untuk)
-            console.log('name', name)
-
-
-            console.log('upload image')
+                console.log('upload thumbnail')
                 var data = new FormData();
                 data.append(untuk, image, name);
                 await this.$apiPlatform.put('moderator/events/'+this.id+'/', data).then(res => {
-                    this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
-                    this.initialize()
+                    this.checkSaving.thumbnail = true
                 }).catch(err => {
                     console.log(err)
                 })
         },
-
+        savingGallery() {
+            this.saving.statusGalleri = true
+            setTimeout(() => {
+                this.saving.statusGalleri = false;
+            }, 2000)
+        },
+        savingTag() {
+            this.saving.statusTag = true
+            setTimeout(() => {
+                this.saving.statusTag = false
+            }, 500)
+        }
 
     }
 }

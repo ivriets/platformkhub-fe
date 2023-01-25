@@ -136,18 +136,30 @@
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
                     <div >
-                        <InputAutocompleteMulti 
+                        <!-- <InputAutocompleteMulti 
                             v-model="form.resourcesTag"
                             :name="prefixName+'tag'"
                             :label="$t('Tag')"
-                            :opsi="listTag"
+                            :opsi="opsiTag"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="'tag'+keyMaster"
                             :multilang="true"
                             :addNew="true"
 
+                        /> -->
+                        <InputFieldTag
+                            v-model="formTag"
+                            :name="prefixName+'tag'"
+                            :label="$t('Tag')"
+                            :itemValue="'id'"
+                            :itemLabel="'label'"
+                            :multilang="true"
+                            :addNew="true"
+                            :key="'keytag'+keyMaster"
                         />
+<!-- {{opsiTag}} -->
+
                     </div>
 
                 </div>
@@ -160,6 +172,17 @@
             </div>
         </div>
 
+        <div class="ah">
+            <DashboardChildSimpanTag 
+                v-model="saving.tag"
+                :tag="formTag"
+                :model="'resource'"
+                :modelId="id"
+                v-if="saving.statusTag"
+            />
+        </div>
+
+    <pre>{{ formTag }}</pre>
     </div>
 </template>
 
@@ -182,7 +205,7 @@ export default {
                 typeAudience: [],
                 typeApproach: [],
                 typeIssues: [],
-                resourcesTag: [],
+                // resourcesTag: [],
                 resourcesFiles: {
                         pkFileId: '',
                         typeResources: '',
@@ -191,19 +214,15 @@ export default {
                         typeVisibility: 1
                 }
             },
+            formTag: {
+                list: [],
+                deleted: [],
+                api: []
+            },
+
             opsiRadio: [],
             imgThumbnail: null, 
-            opsiTag: [
-                {
-                    id: 1,
-                    label: ['Pembelajaran', 'Pembelajaran']
-                },
-                {
-                    id: 2,
-                    label: ['Kekerasan', 'Kekerasan']
-                }
-            ],
-            listTag: null,
+            opsiTag: [],
             deskripsi: {
                 list: [],
                 deleted: [],
@@ -216,6 +235,16 @@ export default {
             },
             imageThumbnailLoader: false,
             imageThumbnailKey: 0,
+            saving: {
+                tag: '',
+                statusTag: false,
+            },
+            checkSaving: {
+                root: false,
+                thumbnail: false,
+            }
+
+
 
             
         }
@@ -281,23 +310,23 @@ export default {
         initialize() {
             this.btnText = 'Save'
             this.opsiRadio = this.kategoriArtikel
-            this.getTag();
+            // this.getTag();
             this.imageThumbnailLoader = false
             this.$nextTick(() => {
                 this.masterPoint()
             })
             
         },
-        async getTag() {
-            await this.$apiPlatform.get('daftarList/tag/').then(res => {
-                this.listTag = _.flatMap(res.data.results, function(o){
-                    return {"id":o.id, 'label':o.nama}
-                })
-            }).catch(err => {
-                console.log(err)
-            })
-        },
+
         async masterPoint() {
+            // await this.$apiPlatform.get('daftarList/tag/').then(res => {
+            //     this.opsiTag = _.flatMap(res.data.results, function(o){
+            //         return {"id":o.id, 'label':o.nama}
+            //     })
+            // }).catch(err => {
+            //     console.log(err)
+            // })
+
 
             await this.$apiPlatform.get('moderator/resources/'+this.id+'/').then(res => {
                 const data = res.data
@@ -313,7 +342,7 @@ export default {
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
-                    resourcesTag: _.flatMap(data.resourcesTag, "pilihanTagId.id"),
+                    // resourcesTag: _.flatMap(data.resourcesTag, "pilihanTagId.id"),
                     resourcesFiles: data.resourcesFiles ? {
                         pkFileId: data.resourcesFiles.pkFileId,
                         binFile: data.resourcesFiles.binFile === '/assets/file.pdf' ? '' : data.resourcesFiles.binFile,
@@ -330,6 +359,8 @@ export default {
                         typeVisibility: 1
                     }
                 }
+
+                this.formTag.api = data.resourcesTag
                 this.deskripsi.list = this.form.deskripsi
                 this.imgThumbnail.displayImage = data.imgThumbnail
 
@@ -361,12 +392,19 @@ export default {
             await this.$apiPlatform.put('moderator/resources/'+this.id+'/', forSimpan).then(res => {
                 console.log(res)
 
+                this.checkSaving.root = true
                 if (this.imgThumbnail.file !== null) {
                     this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
                 } else {
-                    this.$toast.show(this.$t('Resources')+ ' ' + this.$t('updated successfully'))
-                    this.initialize()
+                    this.checkSaving.thumbnail = true
+
                 }
+                this.savingTag()
+                
+                // else {
+                //     this.$toast.show(this.$t('Resources')+ ' ' + this.$t('updated successfully'))
+                //     this.initialize()
+                // }
 
 
             })
@@ -389,7 +427,15 @@ export default {
         },
         btnBack() {
             this.$router.push('/moderations/resource/'+this.id)
+        },
+
+        savingTag() {
+            this.saving.statusTag = true
+            setTimeout(() => {
+                this.saving.statusTag = false
+            }, 500)
         }
+
     }
 }
 </script>

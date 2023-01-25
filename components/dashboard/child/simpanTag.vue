@@ -1,7 +1,5 @@
 <template>
     <div>
-        {{tag}}
-
     </div>
 </template>
 <script>
@@ -11,6 +9,7 @@ export default {
         return {
             endPoint: '',
             fieldTag: '',
+            modelEndPoint: '',
             newTag: {
                 list: [],
                 deleted: []
@@ -25,6 +24,19 @@ export default {
             if (this.model === 'blog') {
                 this.endPoint = 'moderator/blogtags/'
                 this.fieldTag = 'blogsTag'
+                this.modelEndPoint = 'moderator/blogs/'
+            } else if (this.model === 'resource') {
+                this.endPoint = 'moderator/resourcestags/'
+                this.fieldTag = 'resourcesTag'
+                this.modelEndPoint = 'moderator/resources/'
+            } else if (this.model === 'event') {
+                this.endPoint = 'moderator/eventstag/'
+                this.fieldTag = 'tag'
+                this.modelEndPoint = 'moderator/events/'
+            } else if (this.model === 'program') {
+                this.endPoint = 'moderator/programstag/'
+                this.fieldTag = 'tag'
+                this.modelEndPoint = 'moderator/programs/'
             }
 
 
@@ -43,12 +55,14 @@ export default {
             const req = {
                 [this.fieldTag]: list
             }
-            await this.$apiPlatform.put('moderator/blogs/'+this.modelId+'/', req).then(res => {
+            await this.$apiPlatform.put(this.modelEndPoint+this.modelId+'/', req).then(res => {
                 console.log(res.data)
             })
         },
         async deleteTag(e) {
-            await this.$apiPlatform.delete(this.endPoint+ e + '/').then(res => {
+            console.log('e',e)
+            console.log(this.endPoint)
+            await this.$apiPlatform.delete(this.endPoint + e + '/').then(res => {
                 console.log(res.data)
             })
         }
