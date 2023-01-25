@@ -53,7 +53,7 @@ export default {
             
         },
         performSearch() {
-            console.log('this.value', this.newVal)
+            // console.log('this.value', this.newVal)
             this.$emit('input', this.newVal)
         },
         keyEsc(event) {

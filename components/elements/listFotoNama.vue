@@ -8,7 +8,7 @@
                     <div class="text-sm font-semibold">{{item.nama}}</div>
                 </div>
                 <div v-if="jumlah >= maxItem && index === maxItem">
-                    <div @click="goTo" class="underline text-sm font-semibold text-warna-empat cursor-pointer">More</div>
+                    <div @click="goTo" class="underline text-sm font-semibold text-empat cursor-pointer hover:text-empat/60">More</div>
                 </div>
             </div>
         </div>

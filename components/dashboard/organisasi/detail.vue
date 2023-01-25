@@ -293,9 +293,7 @@ export default {
         }
     },
     watch: {
-        lang() {
-            this.initialize()
-        }
+
     },
     mounted() {
         this.initialize()
