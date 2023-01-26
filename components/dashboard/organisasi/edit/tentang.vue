@@ -221,7 +221,6 @@
             </div>
         </div>
 
-        {{ imgLogoOrganisasi }}
         <!-- <pre>{{ form }}</pre> -->
     </div>
 </template>
@@ -357,11 +356,6 @@ export default {
         },
         async uploadImage(image, untuk, name) {
 
-            console.log('image', image)
-            console.log('untuk', untuk)
-            console.log('name', name)
-
-
             if (image instanceof Blob){
                 var data = new FormData();
                 data.append(untuk, image, name);
@@ -378,7 +372,6 @@ export default {
         async putData(data) {
             await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
                 const data = res.data
-                alert(data.message)
                     //imgLogoOrganisasi hehehe kuduna didieu
                     if (this.imgLogoOrganisasi.file !== null) {
                         this.uploadImage(this.imgLogoOrganisasi.file, "imgLogoOrganisasi", this.imgLogoOrganisasi.name)
@@ -387,6 +380,7 @@ export default {
                         this.uploadImage(this.imgMainImage.file, "imgMainImage", this.imgMainImage.name)
                     }
                     this.$nextTick(() => {
+                        this.$toast.show(this.$t('Organization') + ' ' + this.$t('updated successfully'))
                         //pas initialize kabeh bakal ka clear. jadi disimpen paling akhir
                         this.initialize()
                     })

@@ -897,3 +897,11 @@ input[type="radio"]:checked {
     height: 5px;
     width: 5px;
 }
+.button-table-delete {
+    background: url('/icons/icon-delete.png') no-repeat center center;
+    opacity: 1;
+    transition: all 0.35s ease-in-out;
+    &:hover {
+        opacity: 0.6;
+    }
+}

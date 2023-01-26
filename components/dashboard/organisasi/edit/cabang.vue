@@ -1,133 +1,18 @@
 <template>
     <div class="mt-[32px]">
-        <div>
-            <div class="tab-area flex items-center">
-                <div @click="btnTabTerkirim" class="px-8 py-3 cursor-pointer" :class="selectedTab === 'terkirim' ? 'border-b-[3px] border-warna-tiga text-warna-utama font-bold' : 'text-warna-dua'">
-                    <div>Terkirim</div>
-                </div>
-                <div @click="btnTabDiterima" class="px-8 py-3 cursor-pointer" :class="selectedTab === 'diterima' ? 'border-b-[3px] border-warna-tiga text-warna-utama font-bold' : 'text-warna-dua'">
-                    <div>Dikirim</div>
-                </div>
-            </div>
-            <hr class="border-[#c2c2c2] -mt-[1px] mb-10">
-        </div>
 
+        <ElementsTab 
+            v-model="selectedTab"
+            :listTab="listTab"
+            :selectedTab="selectedTab"
+            :landing="'spa'"
+        />
 
-        <div v-if="selectedTab === 'terkirim'">
-            <div class="flex justify-between mb-4">
-                <div>
-                    <div class="text-warna-dua mb-2">Cari Cabang</div>
-                    <div class="flex">
-                        <div class="w-[240px] mr-4">
-                            <ElementsSearchBarResponsive 
-                                v-model="filterTerkirim.search"
-                                :placeholder="'Nama Cabang'"
-                                :gaya="'icon'"
-                                :name="'searchtext'"
-                            />
-                        </div>
-                        <div class="px-8 py-1.5 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Cari</div>
-                    </div>
-                </div>
-                <div>
-                    <div class="text-warna-dua mb-2">Undang Cabang</div>
-                    <div class="flex">
-                        <div class="w-[240px] mr-4">
-                            <ElementsSearchBarResponsive 
-                                v-model="formTerkirim.cariOrganisasi"
-                                :placeholder="'Nama Cabang'"
-                                :gaya="'icon'"
-                                :name="'searchtext'"
-                                :list="namaOrganisasiList"
-                            />
-                        </div>
-                        <button @click="undangBranch" class="px-8 py-1.5 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Undang</button>
-                    </div>
-                </div>
-            </div>
-            <div class="relative overflow-x-auto">
-                <table class="w-full rounded-xl">
-                    <thead class="">
-                        <tr class="text-sm text-left text-warna-sembilan border-b border-warna-tujuh">
-                            <th v-for="(i, index) in masterTableTerkirim" :key="'th'+index" scope="col" class="font-normal py-5 px-5">{{ i.header }}</th>
-                            <th class="w-[250px]"></th>
-                            <th class="w-[70px]"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(item, index) in dataTableTerkirim" :key="'dt'+index" class="text-sm text-left text-warna-sembilan tr-striped-even">
-                            <td v-for="(x, index2) in masterTableTerkirim" :key="index+'dt'+index2" scope="row" class="font-normal p-5">
-                                <div class="flex items-center gap-2">
-                                    <div v-if="x.value === 'status'">
-                                        <div v-if="item[x.value] === 1" class="text-[#444]">Tertunda</div>
-                                        <div v-if="item[x.value] === 2" class="text-approved-accepted">Bergabung</div>
-                                        <div v-if="item[x.value] === 3" class="text-rejected">Menolak</div>
-                                    </div>
-                                    <div v-else>{{ item[x.value] }}</div>
-                                </div>
-                            </td>
-                            <td class="font-normal p-5">
-                                <div class="flex items-center justify-end gap-x-6">
-                                    <button @click="deleteBranch(item)" ><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <DashboardOrganisasiEditSubCabang 
+            :selectedTab="selectedTab"
+            :key="'keytab'+keyTable"
+        />
 
-
-        <div v-if="selectedTab === 'diterima'">
-            <div class="flex mb-4">
-                <div class="w-[240px] mr-4">
-                    <ElementsSearchBarResponsive 
-                        v-model="filterDiterima.search"
-                        :placeholder="'Cari Cabang'"
-                        :gaya="'icon'"
-                        :name="'searchtext'"
-                    />
-                </div>
-                <div class="px-8 py-1.5 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Cari</div>
-            </div>
-            <div class="relative overflow-x-auto">
-                <table class="w-full rounded-xl">
-                    <thead class="">
-                        <tr class="text-sm text-left text-warna-sembilan border-b border-warna-tujuh">
-                            <th v-for="(i, index) in masterTableDiterima" :key="'th'+index" scope="col" class="font-normal py-5 px-5">{{ i.header }}</th>
-                            <th class="w-[250px]"></th>
-                            <th class="w-[70px]"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(item, index) in dataTableDiterima" :key="'dt'+index" class="text-sm text-left text-warna-sembilan tr-striped-even">
-                            <td v-for="(x, index2) in masterTableDiterima" :key="index+'dt'+index2" scope="row" class="font-normal p-5">
-                                <div class="flex items-center gap-2">
-                                    <div v-if="x.value === 'status'">
-                                        <div v-if="item[x.value] === 1" class="text-[#444]">Tertunda</div>
-                                        <div v-if="item[x.value] === 2" class="text-approved-accepted">Bergabung</div>
-                                        <div v-if="item[x.value] === 3" class="text-rejected">Menolak</div>
-                                    </div>
-                                    <div v-else>{{ item[x.value] }}</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div v-if="item.status === 1" class="flex items-center gap-x-6">
-                                    <div @click="terimaBranch(item)" class="w-[99px] text-center bg-warna-empat hover:bg-blue-900 text-white rounded-lg py-2 cursor-pointer">Terima</div>
-                                    <div @click="tolakBranch(item)" class="w-[99px] text-center bg-warna-rejected hover:bg-red-700 text-white rounded-lg py-2 cursor-pointer">Tolak</div>
-                                </div>
-                                <div v-else></div>
-                            </td>
-                            <td class="font-normal p-5">
-                                <div class="flex items-center justify-end gap-x-6">
-                                    <button @click="deleteBranch(item)"><img class="" src="/icons/icon-delete.png" :alt="'icon-delete'"></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -137,6 +22,16 @@ export default {
     data() {
         return {
             selectedTab: 'terkirim',
+            listTab: [
+                {
+                    id: 'terkirim',
+                    label: 'Terkirim'
+                },
+                {
+                    id: 'diterima',
+                    label: 'Diterima'
+                }
+            ],
             filterTerkirim: {
                 search: ''
             },
@@ -167,6 +62,7 @@ export default {
                     }
                 }
             },
+
             masterTableTerkirim: [
                 {
                     header: 'Cabang',
@@ -213,12 +109,53 @@ export default {
             namaOrganisasiList : [] ,
             brachIdList: [],
             message: "",
+            paginasiTerkirim: {
+                startIndex: 0,
+                limit: 10,
+                offset: 0,
+                currentPage: 1,
+                totalPage:3,
+                start: 0,
+                end: 10,
+                key: 0
+            },
+            loaderDetailTerkirim: false,
+            keyTable:0
+
         }
     },    
     computed: {
         id() {
             return this.$route.params.id;
         }, 
+
+        tableDetail() {
+            const tableDetail = [
+                {
+                    header: this.$t('Branch'),
+                    itemValue: 'nama',
+                },
+               {
+                    header: this.$t('Kota'),
+                    itemValue: 'kota',
+                },
+                {
+                    header: 'Status',
+                    itemValue: 'status'
+                },
+                {
+                    header: '',
+                    itemValue: 'actions'
+                }
+            ]
+            return tableDetail
+        }
+
+    },
+    watch: {
+        selectedTab(val) {
+            this.keyTable +=1
+        }
     },
     mounted() {
         this.initialize()
@@ -234,22 +171,40 @@ export default {
             await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
                 this.dataOrganisasi = res.data
                 if (this.dataOrganisasi.organisasiCabangInternal.length > 0){
-                    this.dataTableTerkirim = _.map(this.dataOrganisasi.organisasiCabangInternal.filter(e => {return e.typePengiriman == 0}), function(o){
-                    if (o){
-                        return {
-                        "organisasiId": o.branch.organisasiId,
-                        "namaOrganisasi": o.branch.namaOrganisasi,
-                        "kota": _.map(o.branch.lokasiOrganisasi, "kota").toString(),
-                        "status": o.confirmed
-                    }}})
-                    this.dataTableDiterima = _.map(this.dataOrganisasi.organisasiCabangInternal.filter(e => {return e.typePengiriman == 1}), function(o){
-                    if (o){
-                        return {
-                        "organisasiId": o.branch.organisasiId,
-                        "namaOrganisasi": o.branch.namaOrganisasi,
-                        "kota": _.map(o.branch.lokasiOrganisasi, "kota").toString(),
-                        "status": o.confirmed
-                    }}})
+                    // this.dataTableTerkirim = _.map(this.dataOrganisasi.organisasiCabangInternal.filter(e => {return e.typePengiriman == 0}), function(o){
+                    // if (o){
+                    //     return {
+                    //     "organisasiId": o.branch.organisasiId,
+                    //     "namaOrganisasi": o.branch.namaOrganisasi,
+                    //     "kota": _.map(o.branch.lokasiOrganisasi, "kota").toString(),
+                    //     "status": o.confirmed
+                    // }}})
+                    this.dataTableTerkirim = this.dataOrganisasi.organisasiCabangInternal.filter(e => e.typePengiriman === 0 ).map(e => {
+                        const data = {
+                            id: e.branch.organisasiId,
+                            nama: e.branch.namaOrganisasi,
+                            kota: e.branch.lokasiOrganisasi.map( x => x.kota).join(', '),
+                            status: e.confirmed
+                        }
+                        return data;
+                    })
+                    this.dataTableDiterima = this.dataOrganisasi.organisasiCabangInternal.filter(e => e.typePengiriman ===1).map(e => {
+                        const data = {
+                            id: e.branch.organisasiId,
+                            nama: e.branch.namaOrganisasi,
+                            kota: e.branch.lokasiOrganisasi.map( x => x.kota).join(', '),
+                            status: e.confirmed
+                        }
+                        return data;
+                    })
+                    // this.dataTableDiterima = _.map(this.dataOrganisasi.organisasiCabangInternal.filter(e => {return e.typePengiriman == 1}), function(o){
+                    // if (o){
+                    //     return {
+                    //     "organisasiId": o.branch.organisasiId,
+                    //     "namaOrganisasi": o.branch.namaOrganisasi,
+                    //     "kota": _.map(o.branch.lokasiOrganisasi, "kota").toString(),
+                    //     "status": o.confirmed
+                    // }}})
                 }
             }).catch(err => {
                 console.log(err)

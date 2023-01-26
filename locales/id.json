@@ -22,6 +22,8 @@
     "Verifikasi Individu": "Verifikasi Individu",
     "Verifikasi Organisasi": "Verifikasi Organisasi",
     "Internal Branch": "Cabang Internal",
+    "Branch": "Cabang",
+
     "Request By Individu": "Permintaan Individu",
     "Team Member": "Member Organisasi",
     "Partner": "Mitra",
@@ -150,9 +152,12 @@
     "Blogs": "Blog",
     "(html tag included)": "(termasuk kode html)",
     "Events": "Acara",
-    
+
     "Tentang Organisasi": "About Organization",
     "Description": "Deskripsi",
+    "hapusBranch": "Cabang akan dihapus dari daftar, apakah anda yakin? ",
+    "Delete Branch": "Hapus Cabang",
+
 
 
 

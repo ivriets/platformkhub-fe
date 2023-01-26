@@ -6,10 +6,16 @@
     .button-standar {
         @apply px-8 py-2 bg-[#222659] rounded-lg text-white hover:bg-blue-900 font-semibold disabled:bg-gray-300 disabled:inset-5 disabled:text-gray-500 ;
     }
+    .button-standar-field {
+        @apply px-4 py-1.5 bg-[#222659] rounded-lg text-white hover:bg-blue-900 font-semibold disabled:bg-gray-300 disabled:inset-5 disabled:text-gray-500 ;
+    }
+
     .button-download {
         @apply px-8 py-2 bg-[#222659] rounded-lg text-white hover:bg-blue-900 font-semibold disabled:bg-gray-300 disabled:inset-5 disabled:text-gray-500 disabled:cursor-wait ;
     }
-
+    .button-standar-polos {
+        @apply px-8 py-2  rounded-lg opacity-100 hover:opacity-60 font-semibold disabled:bg-gray-300 disabled:inset-5 disabled:text-gray-500 ;
+    }
     .button-outline {
         @apply border-utama text-utama border rounded-md bg-white hover:bg-utama/30 transition-all duration-75 ;
     }

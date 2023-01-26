@@ -7,7 +7,7 @@
           <div class="text-[#DF4B61] ml-1">*</div>
       </div>
 
-      <div v-if="!dataImage" @click="$refs.inputfiles.click()" class="image-area cursor-pointer" @dragover="dragOver" @dragleave="dragLeave" @drop="drop">
+      <div v-if="!dataImage" class="image-area relative" @dragover="dragOver" @dragleave="dragLeave" @drop="drop">
           <div class="min-h-[150px] w-full border-dashed border-2 border-warna-tujuh rounded-lg pt-[9px] pb-[25px] flex items-center justify-center">
               <div class="text-center">
                   <div class="text-xs text-[#BABABA] mb-2 text-center">
@@ -15,15 +15,24 @@
                   </div>
                   <input type="file" ref="inputfiles" :accept="accept ? accept  : '*' "  name="inputfiles" id="inputfiles" class="hidden" @change="prosesFiles()">
 
-                  <button title="Upload Image"  class="mx-auto bg-white border border-warna-tujuh rounded-md hover:bg-gray-200 hover:shadow-md transition-all shadow shadow-[#45a6ff33] py-2 w-[145px] text-center mx-auto cursor-pointer">Pilih File</button>
+                  <button title="Upload Image"  @click="$refs.inputfiles.click()" class="button-upload">{{ $t('Pilih File') }}</button>
               </div>
           </div>
+        <button v-if="imageTrash !==null" title="Undo delete image" @click="undoDelete()" 
+          class="absolute top-0 right-0 mt-1 mr-1 bg-white rounded-full text-2xl opacity-70 hover:opacity-100 ">
+          <img src="/icons/undo.svg" height="50" width="50" class="w-[24px] h-[24px] m-1 p-1 rounded-full shadow object-cover border border-gray-300" /></button>
+
+
       </div>
       <div v-if="dataImage && dataImage.displayImage !== ''"
       class="min-h-[150px] relative w-full border-dashed border-2 border-warna-tujuh rounded-lg p-3 flex items-center justify-center"
       >
         <img class="w-full h-full object-contain" :src="dataImage.displayImage" alt="" />
-        <button title="Delete Image" @click="deleteImage()" class="absolute top-0 right-0 rounded-full text-xl opacity-70 hover:opacity-100 "><i class="ri-close-circle-fill"></i></button>
+        <button title="Delete Image" @click="deleteImage()" 
+          class="absolute top-0 right-0 mt-1 mr-1 bg-white rounded-full text-2xl opacity-70 hover:opacity-100 ">
+          <img src="/icons/close.svg" height="50" width="50" class="w-[24px] h-[24px] rounded-full shadow object-cover border border-gray-300" /></button>
+
+
 
       </div>
 
@@ -122,6 +131,7 @@ export default {
           },
           countDownFile: 0,
           displayReset: false,
+          imageTrash: null
 
       }
   },
@@ -182,9 +192,16 @@ export default {
           this.modal.key +=1
       },
       deleteImage() {
+          this.imageTrash = this.dataImage
           this.dataImage = null
           this.displayReset = false
           this.displayResetCounter = 0
+      },
+      undoDelete() {
+        this.dataImage = this.imageTrash
+        this.$nextTick(() => {
+          this.imageTrash = null
+        })
       },
 
 

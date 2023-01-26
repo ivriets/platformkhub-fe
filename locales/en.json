@@ -22,6 +22,7 @@
     "Verifikasi Individu": "Individual Verification",
     "Verifikasi Organisasi": "Organization Verification",
     "Internal Branch": "Internal Branch",
+    "Branch": "Branch",
     "Request By Individu": "Request By Individu",
     "Team Member": "Team Member",
     "Partner": "Partner",
@@ -154,6 +155,9 @@
 
     "Tentang Organisasi": "About Organization",
     "Description": "Description",
+    "hapusBranch": "This Branch will be deleted, are you sure? ",
+    "Delete Branch": "Delete Branch",
+
 
 
 
