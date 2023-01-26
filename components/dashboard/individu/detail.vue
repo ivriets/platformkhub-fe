@@ -373,7 +373,6 @@ export default {
                     }
                 })
             }
-
         },
         async applyActions(verifikasiId) {
             const data = {
@@ -399,7 +398,7 @@ export default {
 
             const data = {
                 accountId: this.id,
-                statusVerification: 2,
+                statusVerification: this.selectedVerificationId,
                 alasanRejectOrSuspend: this.form.alasanRejectOrSuspend
             }
 
