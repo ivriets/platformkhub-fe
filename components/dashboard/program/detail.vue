@@ -20,14 +20,14 @@
             </div>
             <div v-if="dataDetail" class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-4">
-                    <div class="w-full bg-white shadow-md border border-gray-50 rounded-xl ">
-                        <img :src="basePath+dataDetail.imgThumbnail" alt="main-image">
-                        <div class="mt-4 mb-4 text-center text-warna-sembilan font-semibold">{{ $t('Thumbnail') }}</div>
-                    </div>
-                    <div class="mt-10 w-full bg-white shadow-md border border-gray-50 rounded-xl mb-5">
-                        <img :src="basePath+dataDetail.imgMainImage" alt="main-image">
-                        <div class="mt-4 mb-4 text-center text-warna-sembilan font-semibold">{{ $t('Main Image') }}</div>
-                    </div>
+                    <ElementsDisplayImageDetail 
+                        :image="basePath+dataDetail.imgThumbnail"
+                        :label="$t('Thumbnail')"
+                    />
+                    <ElementsDisplayImageDetail 
+                        :image="basePath+dataDetail.imgMainImage"
+                        :label="$t('Main Image')"
+                    />
                     
                     <div class="grid grid-cols-12 gap-5">
                         <div class="col-span-12 lg:col-span-6">

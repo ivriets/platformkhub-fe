@@ -56,6 +56,7 @@ export default {
     { src: '~/plugins/date-picker', ssr: false },
     { src: '~/plugins/vue2-filters' },
     { src: '~/plugins/drag', ssr:false },
+    { src: '~/plugins/lightbox'},
     {
       src: "~/plugins/tinymce.js",
       mode: "client", 
