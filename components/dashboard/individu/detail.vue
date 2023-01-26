@@ -85,12 +85,35 @@
             <hr class="border-warna-tujuh my-5">
             <div class="text-sm text-warna-delapan display-deskripsi" v-html="dataDetail.individu[0].tentangSaya"></div>
         </div>
-        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-4 px-6">
+        <!-- <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
                 <div v-if="dataDetail.statusVerification.id === 1" class="flex gap-x-6  font-semibold">
                     <div @click="btnRejectIndividu" class="px-8 py-2 bg-warna-rejected rounded-lg text-white cursor-pointer hover:bg-red-700">Reject</div>
                     <div @click="btnAccept" class="px-8 py-2 bg-warna-approved-accepted rounded-lg text-white cursor-pointer hover:bg-green-700">Accept</div>
+                </div>
+            </div>
+        </div> -->
+        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-4 px-6">
+            <div class="flex items-center justify-between ">
+                <button @click="btnBack" class="button-standar-outline">{{ $t('Back') }}</button>
+                <div class="flex items-center gap-5">
+                    <button 
+                        @click="actionButton(5)"
+                        v-if="[3,4].includes(dataDetail.statusVerification.id)" 
+                        class="button-standar-polos bg-[#9E9E9E] text-white">Delete</button>
+                    <button 
+                        @click="actionButton(4)"
+                        v-if="[3,4].includes(dataDetail.statusVerification.id)" 
+                        class="button-standar-polos bg-[#1976D2] text-white">Suspend</button>
+                    <button 
+                        @click="actionButton(2)"
+                        v-if="[1].includes(dataDetail.statusVerification.id)" 
+                        class="button-standar-polos bg-[#D10D0D] text-white">Reject</button>
+                    <button 
+                        @click="actionButton(3)"
+                        v-if="[4,1].includes(dataDetail.statusVerification.id)" 
+                        class="button-standar-polos bg-[#129555] text-white">Accept</button>
                 </div>
             </div>
         </div>
@@ -103,7 +126,7 @@
             :persistent="persistent"
         >
             <div v-if="dataDetail" class="p-6">
-                <div class="grid grid-cols-12 gap-x-5 gap-y-3 mb-4">
+                <!-- <div class="grid grid-cols-12 gap-x-5 gap-y-3 mb-4">
                     <div class="col-span-12 md:col-span-3">
                         <div class="text-sm text-warna-delapan font-semibold">User ID</div>
                     </div>
@@ -126,10 +149,18 @@
                             :name="'alasanreject'"
                         />
                     </div>
-                </div>
+                </div> -->
+                    <div class="mb-8">
+                        <InputTextArea 
+                            v-model="form.alasanRejectOrSuspend"
+                            :max="500"
+                            :name="'alasanreject'"
+                        />
+                    </div>
+
                 <div class="flex items-center justify-end">
-                    <div @click="btnModalBatal" class="text-center bg-white border border-warna-empat hover:bg-blue-50 text-warna-empat rounded-lg py-1 px-4 cursor-pointer mr-4">Batal</div>
-                    <div @click="btnReject" class="text-center hover:bg-red-700 bg-warna-rejected border border-rejected hover:border-red-700 text-white rounded-lg py-1 px-4 cursor-pointer">Reject</div>
+                    <button @click="btnModalBatal" class="button-standar-polos bg-white text-444">Batal</button>
+                    <button @click="btnReject" class="button-standar">OK</button>
                 </div>
             </div>
         </ElementsModal>
@@ -225,6 +256,7 @@ export default {
             keyModal: 0,
             persistent: true,
             // ========== //
+            selectedVerificationId: null
         }
     },
     computed: {
@@ -260,6 +292,7 @@ export default {
     methods: {
         initialize() {
             this.$store.commit('setPageTitle', this.title)
+            this.selectedVerificationId =null
             this.masterPoint()
         },
 
@@ -289,36 +322,9 @@ export default {
             })
         },
         
-        async btnAccept() {
 
-            const data = {
-                accountId: this.id,
-                statusVerification: 3
-            }
 
-            await this.$apiPlatform.post('verificator/user/', data).then(res => {
-                console.log('Accept Verification User')
-                this.btnBack()
-            }).catch(err => {
-                console.log(err)
-            })
-        },
 
-        async btnReject() {
-
-            const data = {
-                accountId: this.id,
-                statusVerification: 2,
-                alasanRejectOrSuspend: this.form.alasanRejectOrSuspend
-            }
-
-            await this.$apiPlatform.post('verificator/user/', data).then(res => {
-                console.log('Reject Verification User')
-                this.btnBack()
-            }).catch(err => {
-                console.log(err)
-            })
-        },
 
         btnBack() {
             this.$router.push('/verifications/individu/user-list')
@@ -341,16 +347,90 @@ export default {
             this.modalAction = false
             this.keyModal += 1
         },
+        actionButton(verifikasiId) {
+            this.selectedVerificationId = verifikasiId
+        // <div v-if="status === 1" :class="status === 1 ? 'text-need-verification' : '' ">Need Verification</div>
+        // <div v-else-if="status === 2" :class="status === 2 ? 'text-rejected' : '' ">Rejected</div>
+        // <div v-else-if="status === 3" :class="status === 3 ? 'text-approved-accepted' : '' ">Accepted</div>
+        // <div v-else-if="status === 4" :class="status === 4 ? 'text-suspended' : '' ">Suspended</div>
 
-        pilihIndonesia() {
-            this.selectedFlag = 'indonesia'
-            this.closeDrop()
+            if ([2,4].includes(verifikasiId)) {
+                this.applyRejectOrSuspend(); 
+            } else {
+                this.$modal.show({
+                    type: 'warning',
+                    title: this.$t('Status Verifications Notification'),
+                    body: this.$t('notif-verifikasi-'+verifikasiId),
+                    primary: {
+                        label: 'OK',
+                        theme: 'green',
+                        action: () => this.applyActions(verifikasiId),
+                    },
+                    secondary: {
+                        label: this.$t('Cancel'),
+                        theme: 'white',
+                        action: () => {}
+                    }
+                })
+            }
+
         },
+        async applyActions(verifikasiId) {
+            const data = {
+                accountId: this.id,
+                statusVerification: verifikasiId
+            }
 
-        pilihInggris() {
-            this.selectedFlag = 'inggris'
-            this.closeDrop()
-        }
+            await this.$apiPlatform.post('verificator/user/', data).then(res => {
+                // console.log('Accept Verification User')
+                this.$toast.show('Individu ' + this.$t('updateSukses'))
+                this.initialize()
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+        applyRejectOrSuspend() {
+            this.form.alasanRejectOrSuspend = ''
+            this.modalTitle = this.$t('Reject or Suspend reason')
+            this.modalAction = true
+            this.keyModal += 1
+        },
+        async btnReject() {
+
+            const data = {
+                accountId: this.id,
+                statusVerification: 2,
+                alasanRejectOrSuspend: this.form.alasanRejectOrSuspend
+            }
+
+            await this.$apiPlatform.post('verificator/user/', data).then(res => {
+                console.log('Reject Verification User')
+                this.$toast.show('Individu ' + this.$t('updateSukses'))
+                this.modalAction = false
+                this.keyModal += 1
+
+                this.initialize()
+                // this.btnBack()
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+        // async btnAccept() {
+
+        //     const data = {
+        //         accountId: this.id,
+        //         statusVerification: 3
+        //     }
+
+        //     await this.$apiPlatform.post('verificator/user/', data).then(res => {
+        //         console.log('Accept Verification User')
+        //         this.btnBack()
+        //     }).catch(err => {
+        //         console.log(err)
+        //     })
+        // },
+
+
     },
 }
 </script>

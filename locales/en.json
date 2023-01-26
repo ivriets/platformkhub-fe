@@ -54,7 +54,7 @@
     "jpg or png no larger than": "jpg or png no larger than",
     "Save": "Save",
     "Updating": "Updating",
-    "Cancel": "Batal",
+    "Cancel": "Cancel",
     "provinsi": "pronvince",
     "Provinsi": "Pronvince",
     "Kota": "City", 
@@ -121,6 +121,7 @@
     "File": "File",
     "Resource Category": "Resource Category",
     "updated successfully": "updated successfully",
+    "updateSukses": "updated successfully",
     "Registration Type": "Registration Type",
     "Registration Date": "Registration Date",
     "Start Date": "Start Date",
@@ -158,6 +159,13 @@
     "hapusBranch": "This Branch will be deleted, are you sure? ",
     "Delete Branch": "Delete Branch",
 
+    "notif-verifikasi-1": "Individu will be set to Need Verification, Are you sure? click OK to continue",
+    "notif-verifikasi-2": "Individu will be set to Rejected, Are you sure? click OK to continue",
+    "notif-verifikasi-3": "Individu will be set to Accepted, Are you sure? click OK to continue",
+    "notif-verifikasi-4": "Individu will be set to Suspended, Are you sure? click OK to continue",
+    "notif-verifikasi-5": "Individu will be Deleted, Are you sure? click OK to continue",
+    "Status Verifications Notification": "Status Verifications Notification",
+    "Reject or Suspend reason": "Reject or Suspend reason",
 
 
 

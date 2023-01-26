@@ -121,6 +121,7 @@
     "File": "File",
     "Resource Category": "Kategori Publikasi",
     "updated successfully": "berhasil diupdate",
+    "updateSukses": "berhasil diupdate",
     "Registration Type": "Tipe Registrasi",
     "Registration Date": "Tanggal Registrasi",
     "Start Date": "Tanggal Mulai",
@@ -158,6 +159,13 @@
     "hapusBranch": "Cabang akan dihapus dari daftar, apakah anda yakin? ",
     "Delete Branch": "Hapus Cabang",
 
+    "notif-verifikasi-1": "Individu akan di set menjadi Need Verification, Apakah anda yakin? klik OK untuk melanjutkan",
+    "notif-verifikasi-2": "Individu akan di set menjadi Rejected, Apakah anda yakin? klik OK untuk melanjutkan",
+    "notif-verifikasi-3": "Individu akan di set menjadi Accepted, Apakah anda yakin? klik OK untuk melanjutkan",
+    "notif-verifikasi-4": "Individu akan di set menjadi Suspended, Apakah anda yakin? klik OK untuk melanjutkan",
+    "notif-verifikasi-5": "Individu akan dihapus, Apakah anda yakin? klik OK untuk melanjutkan",
+    "Status Verifications Notification": "Notifikasi Status Verifikasi",
+    "Reject or Suspend reason": "Alasan Reject atau Suspend",
 
 
 
