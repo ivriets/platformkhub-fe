@@ -117,7 +117,25 @@
                 </div>
             </div>
         </div>
-
+        <div v-if="dataDetail && developer" class="bg-white shadow-md rounded-xl py-4 px-6 mt-10">
+            <div class="flex items-center justify-between ">
+                <button @click="btnBack" class="button-standar-outline">{{ $t('Back') }}</button>
+                <div class="flex items-center gap-5">
+                    <button 
+                        @click="actionButton(5)"
+                        class="button-standar-polos bg-[#9E9E9E] text-white">Delete</button>
+                    <button 
+                        @click="actionButton(4)"
+                        class="button-standar-polos bg-[#1976D2] text-white">Suspend</button>
+                    <button 
+                        @click="actionButton(2)"
+                        class="button-standar-polos bg-[#D10D0D] text-white">Reject</button>
+                    <button 
+                        @click="actionButton(3)"
+                        class="button-standar-polos bg-[#129555] text-white">Accept</button>
+                </div>
+            </div>
+        </div>
         <ElementsModal 
             v-model="modalAction"
             :title="modalTitle"
@@ -174,6 +192,7 @@
 export default {
     data() {
         return {
+            developer: false,
             loaderDetail: false,
             flagDrop: false,
             selectedFlag: 0,
