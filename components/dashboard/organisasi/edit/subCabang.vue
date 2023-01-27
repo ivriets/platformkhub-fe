@@ -4,30 +4,31 @@
                 <div class="w-96 flex items-end gap-x-4 ">
                         <ElementsSearchBarButton 
                             v-model="filter.search"
-                            :placeholder="$t('Search')"
+                            :placeholder="$t('Nama Cabang')"
                             :gaya="'icon'"
                             :name="'searchtext'"
                             :label="$t('Cari Cabang')"
-                            @keyup="searchKeyUp"
                         />
-                        <button @click="searchCabang" class="button-standar-field" >{{ $t('Search') }}</button>
                 </div>
-                <div>
-                        <!-- <InputAutocompleteApi 
-                            v-model="cariProduk.model"
-                            :name="prefixName+'cariproduk'"
-                            :label="''"
-                            :placeholder="'Insert command here'"
-                            :itemValue="'kodeProduk'"
-                            :itemLabel="'label'"
-                            :searchLabel="'combo'"
+                <div class="w-96 ">
+                    <div class="w-full flex items-end gap-x-4" v-if="selectedTab==='terkirim'">
+                        <InputAutocompleteApi 
+                            v-model="cariCabang.model"
+                            :name="'cariCabang'"
+                            :label="$t('Undang Cabang')"
+                            :placeholder="$t('Nama Cabang')" 
+                            :itemValue="'accountId'"
+                            :itemLabel="'namaOrganisasi'"
+                            :searchQuery="'title'"
                             :addNew="false"
-                            :displayLabel="false"
-                            :request="cariProduk.request"
-                            :endPoint="cariProduk.endPoint"
-                            :key="cariProduk.key"
-                        /> -->
-
+                            :displayLabel="true"
+                            :endPoint="cariCabang.endPoint"
+                            :key="cariCabang.key"
+                            :output="'obj'"
+                        />
+                        <button :disabled="cariCabang.model === null || cariCabang.model === '' ? true : false" 
+                            @click="undangCabang" class="button-standar-field" >{{ $t('Undang') }}</button>
+                    </div>
                 </div>
             </div>
             <div class="table-area text-sm">
@@ -66,6 +67,14 @@ export default {
     props: ['selectedTab'],
     data() {
         return {
+
+            cariCabang: {
+                model: null,
+                key: 0,
+                endPoint: 'verificator/listOrganisasi/',
+                searchQuery: 'title'
+            },
+
             listing: [],
             listingPage: [],
             paginasi: {
@@ -119,11 +128,11 @@ export default {
         'paginasi.currentPage'(val) {
             this.runPaginasi()
         },
-        // 'filter.search'(val) {
-        //     // console.log(val)
-        //     this.paginasi.currentPage = 1
-        //     this.runPaginasi()
-        // }
+        'filter.search'(val) {
+            // console.log(val)
+            this.paginasi.currentPage = 1
+            this.runPaginasi()
+        }
 
     },
     mounted() {
@@ -166,11 +175,11 @@ export default {
             }).catch(err => {
                 console.log(err)
             })
-            await this.$apiPlatform.get('verificator/listOrganisasi/').then(res => {
-                console.log(res.data)
-            }).catch(err => {
-                console.log(err)
-            })
+        //     await this.$apiPlatform.get('verificator/listOrganisasi/').then(res => {
+        //         console.log(res.data)
+        //     }).catch(err => {
+        //         console.log(err)
+        //     })
         },
 
         runPaginasi() {
@@ -217,6 +226,10 @@ export default {
         },
         searchKeyUp(e) {
             if (e.key === 'Enter' || e.key==='Escape') this.runPaginasi()
+        },
+        undangCabang() {
+            this.updateData({"inviteBranch":this.cariCabang.model.organisasiId})
+
         }
 
 

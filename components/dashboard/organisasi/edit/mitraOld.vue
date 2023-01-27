@@ -46,7 +46,7 @@
                             /> -->
                             
                             <div class="">
-                                <InputImageUploadSingle 
+                                <InputImageCrop 
                                     :label="'Main Image'"
                                     v-model="tableMitra.imgLogoPartner"
                                     :accept="'.png, .jpg, .jpeg'"
@@ -193,8 +193,6 @@ export default {
     },
     methods: {
         initialize() {
-            this.modalAction = false
-            this.keyModal+=1
             this.masterPoint()
         },
         isEmail(data) {
@@ -224,8 +222,9 @@ export default {
         async updateData(form) {           
             await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', form).then(res => {
                 const data = res.data     
-                this.$toast.show(this.$t('Partner') + ' ' + this.$t('updateSukses'))
-                this.initialize()
+                this.message = data.message
+                alert(this.message)
+                this.masterPoint()
             }).catch(err => {
                 console.log(err)
             })

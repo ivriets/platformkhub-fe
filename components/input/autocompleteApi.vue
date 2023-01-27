@@ -189,7 +189,7 @@ export default {
                 if (this.output && this.output === 'obj') {
                     this.$emit('input', item)
                 } else {
-                    this.$emit('input', this.newVal)
+                    this.$emit('input', item[this.parseId])
                 }
             }
             this.$nextTick(() => {

@@ -185,7 +185,6 @@ export default {
             this.runPaginasi()
         },
         'filter.search'(val) {
-            console.log(val)
             this.paginasi.currentPage = 1
             this.runPaginasi()
         }
