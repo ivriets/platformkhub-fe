@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="w-full">
         <div v-if="label" class="font-medium mb-1">
             {{label}}
         </div>
@@ -32,10 +32,18 @@ export default {
     props: ['value','name', 'placeholder', 'label', 'max','disabled'],
     data() {
         return {
-            newVal: ''
+            newVal: '',
+            debounceTimeout:null
         }
     },
-
+    watch: {
+        newVal(val) {
+            if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
+            this.debounceTimeout = setTimeout(() => {
+                this.$emit('input',val)
+            },300)
+        }
+    },
     mounted() {
         this.newVal = this.value
     },

@@ -399,7 +399,7 @@ export default {
                 statusVerification: verifikasiId
             }
 
-            await this.$apiPlatform.post('verificator/user/', data).then(res => {
+            await this.$apiPlatform.post('verificator/verificationProcess/', data).then(res => {
                 // console.log('Accept Verification User')
                 this.$toast.show('Individu ' + this.$t('updateSukses'))
                 this.initialize()
@@ -421,7 +421,7 @@ export default {
                 alasanRejectOrSuspend: this.form.alasanRejectOrSuspend
             }
 
-            await this.$apiPlatform.post('verificator/user/', data).then(res => {
+            await this.$apiPlatform.post('verificator/verificationProcess/', data).then(res => {
                 console.log('Reject Verification User')
                 this.$toast.show('Individu ' + this.$t('updateSukses'))
                 this.modalAction = false

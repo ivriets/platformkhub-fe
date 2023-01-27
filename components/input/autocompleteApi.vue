@@ -1,6 +1,6 @@
 <template>
     <div v-click-outside="closeDropdown" class="w-full">
-        <div v-if="label && label !== ''" class="text-sm text-black font-medium  cursor-pointer">
+        <div v-if="label && label !== ''" class="font-medium mb-1">
             {{label}}
         </div>
         <div class="relative w-full">
@@ -10,7 +10,7 @@
                 :id="name" 
                 :ref="name"
                 class="focus:outline-none w-full border border-warna-tujuh rounded-lg px-2 py-1.5 text-sm placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
-                :placeholder="placeholder"
+                :placeholder="placeholder ? placeholder : $t('tulisDisini')"
                 v-model="newVal"
                 autocomplete="off"
                 :disabled="disabled?disabled:false"
@@ -71,7 +71,22 @@
 </template>
 <script>
 export default {
-    props: ['value','label','name', 'disabled', 'placeholder','opsi', 'itemValue', 'itemLabel',  'multilang', 'output'],
+    props: [
+        'value', // v-model string
+        'label', // opt string
+        'name', //req, takut double dengan yg lain string
+        'disabled', // opt boolean
+        'placeholder', //opt string
+        // 'opsi', 
+        'itemValue', // req string
+        'itemLabel', // req string
+        'multilang', // opt boolean | belum dicoba dengan res api multilang
+        'endPoint',  // req string
+        'searchQuery', // req string | 
+        'itemEndPoint', //opt string | endpoint untuk ngambil detail. kalau tidak maka akan mensplice dari endPoint, 
+        'output' //opt string | kalau obj, maka akan dikeluarkan object yang dipilih
+    ],
+    
     data() {
         return {
             statusDropdown: false,
@@ -96,14 +111,7 @@ export default {
 
     },
 
-    // watch: {
-    //     newVal() {
-    //         if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
-    //         this.debounceTimeout = setTimeout(() => {
-    //             this.getApi();
-    //         },300)
-    //     }
-    // },
+
     created() {
         this.$nuxt.$on('closeModalMaster', () => {
                 this.modalMaster = false
@@ -113,9 +121,10 @@ export default {
 
     watch: {
         newVal(val) {
-            if (val!=='') {
-             this.getApi(val);
-            }
+            if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
+            this.debounceTimeout = setTimeout(() => {
+                this.getApi(val);
+            },300)
         }
     },
     mounted() {
@@ -146,23 +155,12 @@ export default {
 
         async getApi(val) {
 
-            var listingFilter = []
-            if (val === '' || val === undefined) {
-                listingFilter = this.opsi
-            } else {
-                if (this.multilang && this.multilang === true) {
-                    listingFilter = this.opsi.filter(e => e[this.parseLabel][this.bahasa].toLowerCase().includes(val.toLowerCase()))
-                } else {
-                    listingFilter = this.opsi.filter(e => e[this.parseLabel].toLowerCase().includes(val.toLowerCase()))
-                }
-            }
-            this.listing = listingFilter
+            const endPoint = this.endPoint + '?limit=10&offset=0&' + this.searchQuery + '=' + this.newVal
+            this.$apiPlatform.get(endPoint).then(res => {
+                this.listing = res.data
+            })
+            if (this.newVal === '') this.$emit('input', '')
 
-            if (listingFilter.length > 0) {
-                this.statusDropdown = listingFilter.length > 0 ? true : false
-            } else {
-                // this.
-            }
         },
         closeDropdown() {
             this.statusDropdown = false

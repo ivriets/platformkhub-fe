@@ -346,7 +346,7 @@ export default {
                 var forDeskripsi = data.deskripsi
                 this.form = {
                     judulArtikel: data.judulArtikel,
-                    deskripsi: data.deskripsi,
+                    // deskripsi: data.deskripsi,
                     kategoriArtikel: _.flatMap(data.kategoriArtikel, "id")[0],
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),

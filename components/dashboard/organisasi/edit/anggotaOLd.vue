@@ -347,7 +347,7 @@ export default {
                 console.log(err)
             })
             
-            await this.$apiPlatform.get('verificator/listIndividu/').then(res => {
+            await this.$apiPlatform.get('verificator/listIndividu/?limit=10&offset=0').then(res => {
                 this.namaIndividuList = _.flatMap(res.data, "namaIndividu")
                 this.idIndividuList = _.flatMap(res.data, "userId")
                 this.emailIndividuList = _.flatMap(res.data, "email")

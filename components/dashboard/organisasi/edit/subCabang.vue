@@ -12,7 +12,23 @@
                         />
                         <button @click="searchCabang" class="button-standar-field" >{{ $t('Search') }}</button>
                 </div>
-                <div></div>
+                <div>
+                        <!-- <InputAutocompleteApi 
+                            v-model="cariProduk.model"
+                            :name="prefixName+'cariproduk'"
+                            :label="''"
+                            :placeholder="'Insert command here'"
+                            :itemValue="'kodeProduk'"
+                            :itemLabel="'label'"
+                            :searchLabel="'combo'"
+                            :addNew="false"
+                            :displayLabel="false"
+                            :request="cariProduk.request"
+                            :endPoint="cariProduk.endPoint"
+                            :key="cariProduk.key"
+                        /> -->
+
+                </div>
             </div>
             <div class="table-area text-sm">
                 <ElementsTable

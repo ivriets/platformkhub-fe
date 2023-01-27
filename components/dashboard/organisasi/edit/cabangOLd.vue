@@ -255,7 +255,7 @@ export default {
             }).catch(err => {
                 console.log(err)
             })
-            await this.$apiPlatform.get('verificator/listOrganisasi/').then(res => {
+            await this.$apiPlatform.get('verificator/listOrganisasi/?limit=10&offset=0').then(res => {
                 this.namaOrganisasiList = _.flatMap(res.data, "namaOrganisasi")
                 this.brachIdList = _.flatMap(res.data, "organisasiId")
             }).catch(err => {
