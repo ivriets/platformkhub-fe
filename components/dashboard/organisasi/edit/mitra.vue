@@ -1,211 +1,179 @@
 <template>
     <div>
-        <div class="flex justify-between mb-[36px]">
-            <div>
-                <div class="text-warna-dua mb-2">Cari Mitra</div>
-                <div class="flex">
-                    <div class="w-[240px] mr-4">
-                        <ElementsSearchBarResponsive 
-                            v-model="filter.search"
-                            :placeholder="'Search'"
-                            :gaya="'icon'"
-                            :name="'searchtext'"
-                        />
-                    </div>
-                    <div class="px-8 py-1.5 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Cari</div>
+            <div class="filter-area flex justify-between">
+                <div class="w-full md:w-96 flex items-end gap-x-4 ">
+                    <ElementsSearchBarButton 
+                        v-model="filter.search"
+                        :placeholder="$t('Nama Mitra')"
+                        :gaya="'icon'"
+                        :name="'searchtext'"
+                        :label="$t('Cari Mitra')"
+                    />
                 </div>
+                <button @click="tambahMitra" class="btn-tambah">{{ $t('Tambah Mitra') }}</button>
             </div>
-            <div @click="btnTambahPartner" class="font-medium cursor-pointer underline text-warna-empat">+ Tambah Mitra</div>
-        </div>
-        <div v-if="dataTable">
-            <ElementsTableStriped 
-                :masterTable="masterTable"
-                :dataTable="dataTable"
-                :title="'Mitra'"
-                v-model="tableMitra"
-                :actions="actions"
+
+
+            <div class="table-area text-sm">
+                <ElementsTable
+                    v-model="listingPage"
+                    :tableDetail="tableDetail"
+                >
+                    <template v-slot:namaOrganisasi="{ item }">
+                        <div class="w-full flex items-center gap-5">
+                            <img :src="basePath+item.image" height="100" width="100" class="w-10 h-10 rounded-full overflow-hidden object-cover" />
+                            <div class="fda"> {{item.namaOrganisasi}}</div>
+                        </div>
+                       
+                    </template>
+                    <template v-slot:actions="{ item }" >
+                        <div class="w-full flex items-center justify-end gap-5">
+                            <button @click="editItem(item)" class="button-table-edit w-10 h-10"></button>
+                            <button @click="deleteItem(item)" class="button-table-delete w-10 h-10"></button>
+                        </div>
+
+                    </template>
+                </ElementsTable>
+            </div>
+            <div  class="pagination-area text-center mt-6">
+                <ElementsPaginasiSpa 
+                    v-model="paginasi.currentPage"
+                    :totalPage="paginasi.totalPage"
+                    :totalVisible="7"
+                    :loaderPage="!loaderDetail"
+                    :key="'pageset'+paginasi.key"
+                />
+            </div>
+
+        <ElementsModal
+            v-model="modal.status"
+            :title="modal.title"
+            :persistent="true"
+            :key="'dfaf'+modal.key"
             >
-                <template v-slot:edit >
                     <div class="p-6">
                         <div class="mb-5">
                             <InputText 
-                                v-model="tableMitra.namaOrganisasi"
-                                placeholder="Tulis disini"
-                                :name="prefixName+'editnamaorganisasi'"
+                                v-model="form.namaOrganisasi"
+                                :name="'nama'"
                                 :label="'Nama Partner'"
                             />
                         </div>
                         <div class="mb-5">
-                            <!-- <InputFileUpload 
-                                :label="'Logo Partner'"
-                                v-model="tableMitra.image"
-                                :accept="'.png, .jpg, .jpeg'"
-                                :value="tableMitra.image"
-                                :multiple="false"
-                                :maxSize="5"
-                            /> -->
-                            
+                           
                             <div class="">
                                 <InputImageUploadSingle 
-                                    :label="'Main Image'"
-                                    v-model="tableMitra.imgLogoPartner"
+                                    :label="'Logo/Simbol/Foto'"
+                                    v-model="form.imgLogoPartner"
                                     :accept="'.png, .jpg, .jpeg'"
-                                    :maxSize="5"
+                                    :useCrop="true"
+                                    :cropRatio="1"
+                                    :previewClass="'w-1/2'"
+                                    :useCircle="true"
+                                    :maxSize="1"
                                 />
                             </div>
                         </div>
                         <div class="flex justify-end">
-                            <div @click="editPartner(tableMitra)" class="px-[28px] py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Simpan</div>
+                            <button @click="simpan" class="button-standar">{{ $t(btnText) }}</button>
                         </div>
                     </div>
-                </template>
-            </ElementsTableStriped>
-        </div>
-        <ElementsModal 
-            v-model="modalAction"
-            :title="modalTitle"
-            :width="modalWidth"
-            :key="keyModal+'tambahpartner'"
-            :persistent="persistent"
-        >
-            <div class="p-6">
-                <div class="mb-5">
-                    <InputText 
-                        v-model="form.namaOrganisasi"
-                        placeholder="Tulis disini"
-                        :name="prefixName+'tambahnamaorganisasi'"
-                        :label="'Nama Partner'"
-                    />
-                </div>
-                <!-- <div class="mb-5">
-                    <div class="font-medium mb-1">Logo/Simbol/Foto</div>
-                    <div class="border-dashed border-2 border-warna-tujuh pt-[9px] pb-[25px] rounded-lg text-center">
-                        <div class="text-xs text-[#BABABA] mb-2">
-                            <div>288x288 px (square)<br>JPG, GIF or PNG maksimum 1MB.</div>
-                        </div>
-                        <div class="bg-white border border-warna-tujuh rounded-md shadow shadow-[#45a6ff33] py-2 w-[145px] mx-auto cursor-pointer">Select File</div>
-                    </div>
-                </div> -->
-                
-                <!-- <div class="mb-5">
-                    <div class="">
-                        <InputImageCrop 
-                            :label="'Logo/Simbol/Foto'"
-                            v-model="form.imgLogoPartner"
-                            :accept="'.png, .jpg, .jpeg'"
-                            :maxSize="5"
-                        />
-                    </div>
-                </div> -->
-                <div class="flex justify-end">
-                    <div @click="tambahPartner" class="px-[28px] py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Tambah</div>
-                </div>
-            </div>
-        </ElementsModal>
-        <!-- <pre>{{tableMitra}}</pre> -->
+            </ElementsModal>
+
+
     </div>
 </template>
-
-
 <script>
 export default {
     data() {
         return {
-            tableMitra: undefined,
-            prefixName: 'partner',
-
-            // KEPERLUAN MODAL TAMBAH PARTNER //
-            modalAction: false,
-            modalTitle: 'Tambah Mitra',
-            modalWidth: '',
-            keyModal: 0,
-            persistent: true,
-            // ========== //
-
+            formMode: 'post',
+            listing: [],
+            listingPage: [],
             form: {
                 namaOrganisasi: '',
                 imgLogoPartner: {
-                    displayImage: '/assets/image.png',
+                    displayImage: '',
                     file: null
-                },
-            },
-            actions: {
-                status: true,
-                button: {
-                    edit: {
-                        status: true,
-                        tipe: 'modal',
-                        path: ''
-                    },
-                    // path: this.fullUrl+'/edit'
-                    delete: {
-                        status: true,
-                        tipe: 'modal',
-                        path: ''
-                    },
-                    print: {
-                        status: false,
-                        tipe: 'page',
-                        path: ''
-                    }
                 }
             },
+            modal: {
+                status: false,
+                key: 0,
+                title: ''
+            },
+            paginasi: {
+                startIndex: 0,
+                limit: 12,
+                offset: 0,
+                currentPage: 1,
+                totalPage:3,
+                start: 0,
+                end: 12,
+                key: 0
+            },
+            loaderDetail: false,
             filter: {
                 search: ''
-            },
-            masterTable: [
-                {
-                    header: 'Partner',
-                    value: 'namaOrganisasi',
-                    foto: 'image',
-                    tipe: 'string',
-                    display: true
-                }
-            ],
-            dataTable: undefined,
+            }
+
         }
-    },    
+    },
     computed: {
         id() {
-            return this.$route.params.id;
-        }, 
+            return this.$route.params.id
+        },
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
+        },
         basePath() {
             return process.env.BASE_URL
-        }
-    },
-    watch : {
-        tableMitra : {
-            immediate: true,
-            deep: true,
-            handler(newValue, oldValue) {
-                if (oldValue && newValue){
-                        if (oldValue.imgLogoPartner && newValue.imgLogoPartner){
-                        //     if (this.oldImgLogoOrganisasi.displayImage !== this.imgLogoOrganisasi.displayImage){
-                                this.uploadImage(this.tableMitra.id, newValue.imgLogoPartner.file)
-                        //     }
-                        }
+        },
+        btnText() {
+            return this.formMode === 'post' ? 'Tambah' : 'Sunting'
+        },
+
+        tableDetail() {
+            const tableDetail = [
+                {
+                    header: this.$t('Partner'),
+                    itemValue: 'namaOrganisasi',
+                },
+
+                {
+                    header: '',
+                    itemValue: 'actions',
+                    itemClass: 'text-right'
                 }
-            }
+            ]
+            return tableDetail
+        }
+
+    },
+    watch: {
+        'paginasi.currentPage'(val) {
+            this.runPaginasi()
+        },
+        'filter.search'(val) {
+            // console.log(val)
+            this.paginasi.currentPage = 1
+            this.runPaginasi()
         }
     },
+
     mounted() {
         this.initialize()
     },
     methods: {
         initialize() {
-            this.modalAction = false
-            this.keyModal+=1
+            this.loaderDetail = false
+            this.paginasi.currentPage = 1
             this.masterPoint()
-        },
-        isEmail(data) {
-            var re = /\S+@\S+\.\S+/;
-            return re.test(data);
         },
 
         async masterPoint() {
-            this.dataTable = []
             await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
-                this.dataTable = _.map(res.data.partnerOrganisasiEksternal, function(o){
+                this.listing = _.map(res.data.partnerOrganisasiEksternal, function(o){
                     return {
                             id: o.pkPartnerEksternalId,
                             namaOrganisasi: o.namaPartner,
@@ -216,53 +184,142 @@ export default {
                             image:  o.imgLogoPartner,
                     }
                 })
+                this.$nextTick(() => {
+                    this.runPaginasi()
+                })
             }).catch(err => {
                 console.log(err)
             })
         },
+        runPaginasi() {
+            const listing = this.listing.filter(e => e.namaOrganisasi.toLowerCase().includes(this.filter.search.toLowerCase()))
+            // const listing = this.listing
+            this.paginasi.totalPage = Math.ceil(listing.length / this.paginasi.limit)
 
-        async updateData(form) {           
-            await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', form).then(res => {
-                const data = res.data     
-                this.$toast.show(this.$t('Partner') + ' ' + this.$t('updateSukses'))
-                this.initialize()
-            }).catch(err => {
-                console.log(err)
+            this.paginasi.start = (this.paginasi.currentPage - 1) * this.paginasi.limit
+            this.paginasi.end = this.paginasi.start + this.paginasi.limit
+            this.paginasi.startIndex = this.paginasi.start
+
+            this.listingPage = listing.slice(this.paginasi.start, this.paginasi.end)
+            this.$nextTick(() => {
+                    this.loaderDetail = true
+                    this.paginasi.key +=1
             })
+
         },
-        async uploadImage (id, image){
-            if (image instanceof Blob){
-                var dataImage = new FormData();
-                dataImage.append('imgLogoPartner', image);
-                await this.$apiBase.put('organizations/partnerorganisasieksternal/'+id+'/', dataImage).then(res2 => {
-                    console.clear()
-                }).catch(err => {
-                    console.clear()
-                })
-            }
-        },
-        
-        editPartner (data){
-            this.updateData({"update_partner":{"id":data.id, "namaOrganisasi":data.namaOrganisasi}})
-        },
-        async deletePartner(data){
-            if (confirm('tolak '+ data.namaOrganisasi+' sebagai cabang?')) {
-                await this.$apiBase.delete('organizations/partnerorganisasieksternal/'+data.id+'/').then(res => {
-                    this.masterPoint()
-                })
+        tambahMitra() {
+            this.formMode = 'post'
+            this.form = {
+                namaOrganisasi: '',
+                imgLogoPartner: {
+                    displayImage: '',
+                    file: null
+                }
             }
             
+            this.modal.title = this.$t('Tambah Mitra')
+            this.modal.status = true
+            this.modal.key+=1
         },
-        tambahPartner (){
-            this.updateData({"partner":this.form.namaOrganisasi})
+        editItem(item) {
+            this.formMode = 'put'
+            this.form = item
+            
+            this.modal.title = this.$t('Sunting Mitra')
+            this.modal.status = true
+            this.modal.key+=1
+        },
 
-            this.modalAction = false
-            this.keyModal += 1
+        simpan() {
+            if (this.form.namaOrganisasi === '') {
+                this.$toast.show('Nama masih kosong')
+            } else {
+                if (this.formMode === 'post') {
+                    this.simpanPost()
+                } else {
+                    this.simpanPut()
+                }
+            }
         },
-        btnTambahPartner() {
-            this.modalAction = true
-            this.keyModal += 1
+        async simpanPost() {
+            const simpan = {
+                partner:this.form.namaOrganisasi
+            }
+            await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', simpan).then(res => {
+                console.log(res.data)
+                const resId = res.data.data.pkPartnerEksternalId
+                if (this.form.imgLogoPartner.file !== null) {
+                     this.uploadImage(resId, this.form.imgLogoPartner)
+                } else {
+                    this.modal.status=false;
+                    this.modal.key +=1
+                    this.initialize()
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+
+        async simpanPut() {
+            // this.updateData({"update_partner":{"id":data.id, "namaOrganisasi":data.namaOrganisasi}})
+
+            const simpan = {
+                // partner:this.form.namaOrganisasi
+                update_partner: {
+                    id: this.form.id,
+                    namaOrganisasi: this.form.namaOrganisasi
+                }
+            }
+            await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', simpan).then(res => {
+                // const resId = res.data.data.pkPartnerEksternalId
+                if (this.form.imgLogoPartner.file !== null) {
+                     this.uploadImage(this.form.id, this.form.imgLogoPartner)
+                } else {
+                    this.modal.status=false;
+                    this.modal.key +=1
+                    this.initialize()
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+
+        },
+
+
+        async uploadImage (id, file){
+            // if (image instanceof Blob){
+                var dataImage = new FormData();
+                dataImage.append('imgLogoPartner', file.file, file.name);
+                await this.$apiBase.put('organizations/partnerorganisasieksternal/'+id+'/', dataImage).then(res => {
+                    // console.clear()
+                    this.modal.status=false;
+                    this.modal.key +=1
+                    this.initialize()
+                }).catch(err => {
+                    // console.clear()
+                })
+            // }
+        },
+        deleteItem(item) {
+            this.$modal.show({
+                type: 'warning',
+                title: this.$t("Deletion Notification"),
+                body: this.$t('konfirmasiDeletePartner'),
+                primary: {
+                    label: 'OK',
+                    theme: 'red',
+                    action: () => this.realDeleteItem(item)
+                }
+            })
+        },
+        async realDeleteItem(item) {
+            await this.$apiBase.delete('organizations/partnerorganisasieksternal/'+item.id+'/').then(res => {
+
+                this.initialize()
+
+            })
         }
-    },
+
+    }
 }
 </script>

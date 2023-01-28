@@ -2,8 +2,8 @@
     <div>
 
         <div class="flex items-center justify-between mb-3">
-            <div class="text-xl">Milestone</div>
-            <button class="btn-tambah text-sm" @click="addMilestone">Add Milestone</button>
+            <div class="text-xl">{{ $t('Milestone') }}</div>
+            <button class="btn-tambah text-sm" @click="addMilestone">{{ $t('Add Milestone') }}</button>
         </div>
             <div class="">
 
@@ -108,18 +108,7 @@ export default {
                 isDone: false,
                 nomorUrut: 0,
             },
-            tableDetail: [
-                {
-                    header: '',
-                    itemValue: 'deskripsi',
-                    type: 'string',
-                },
-                {
-                    header: '',
-                    itemValue: 'actions',
-                    itemClass: 'w-3/12'
-                }
-            ],
+
             opsiStatusMilestone: [
                 {
                     id: 0,
@@ -146,7 +135,22 @@ export default {
         },
         btnText() {
             return this.formMode === 'post' ? 'Tambah' : 'Edit'
+        },
+        tableDetail() {
+           return [
+                {
+                    header: '',
+                    itemValue: this.$t('deskripsi'),
+                    type: 'string',
+                },
+                {
+                    header: '',
+                    itemValue: 'actions',
+                    itemClass: 'w-3/12'
+                }
+            ]
         }
+
     },
     methods: {
         addMilestone() {

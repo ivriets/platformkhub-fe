@@ -31,6 +31,7 @@
         </transition>
     </div>
     </template>
+    
     <script>
     export default {
         props:['value','title', 'persistent', 'width'],

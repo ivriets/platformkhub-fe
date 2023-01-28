@@ -214,12 +214,12 @@
             </div>
         </div>
         
-        <div class="bg-white shadow-md rounded-xl py-4 px-6 mt-10">
+        <!-- <div class="bg-white shadow-md rounded-xl py-4 px-6 mt-10">
             <div class="flex items-center justify-between">
                 <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
                 <div @click="save" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
-        </div>
+        </div> -->
 
         <!-- <pre>{{ form }}</pre> -->
     </div>
@@ -229,7 +229,7 @@
 <script>
 
 export default {
-    // props: ['dataOrganisasi'],
+    props: ['value'],
     data() {
         return {
             loaderDetail: true,
@@ -277,9 +277,19 @@ export default {
         bahasa() {
             return this.$i18n.locale === 'id' ? 0 : 1
         }
+        
     },
     
     watch: {
+        value(val) {
+            console.log(val)
+            if (val === true) {
+                this.save();
+                setTimeout(() => {
+                    this.$emit('input', false)
+                },500)
+            }
+        }
     },
     created() {
         this.initialize()

@@ -158,6 +158,9 @@
     "Description": "Description",
     "hapusBranch": "This Branch will be deleted, are you sure? ",
     "Delete Branch": "Delete Branch",
+    "Pusat": "Headquarter",
+    "Organisasi Pusat": "Headquarter Organization",
+
 
     "notif-verifikasi-1": "Individu will be set to Need Verification, Are you sure? click OK to continue",
     "notif-verifikasi-2": "Individu will be set to Rejected, Are you sure? click OK to continue",
@@ -180,6 +183,24 @@
     "Permintaan": "Request",
     "Position": "Position",
     "Cari Cabang": "Find Branch",
+    "Branch telar terdaftar": "Branch has already registered",
+    "konfirmasiAcceptPusat": "By being a Branch of one of organization, you cannot become a branch of another organization.",
+    "konfirmasiTolakPusat": "This action will reject of being one of organization, are your sure",
+    "Accepted Notification":"Accepted Notification",
+    "Organisasi hanya dapat memiliki 1 Pusat": "Organization only have 1 Headquarter",
+    "Reject Notification": "Rejected Notification",
+    "Keluar dari Pusat": "Leave from Headquarter",
+    "konfirmasiKeluarPusat": "You will leave from this Headquarter, are you sure?",
+    "Deletion Notification": "Deletion Notification",
+    "konfirmasiDeletePartner": "this partner will be removed from your partner, are you sure?",
+    "Milestone": "Milestone",
+    "Tambah": "Add",
+    "Sunting": "Edit",
+    "konfirmasiDeleteMilestone": "This current milestone will be removed from your list, are you sure?",
+    "Jika tidak mengetahui tanggal spesifik, silahkan pilih rentang tanggal terdekat": "If you do not know a specific date, please select the closest date range",
+
+
+
 
     
 
@@ -189,7 +210,9 @@
 
     "typeAudienceBlank": "Audience Type is required!",
     "typeApproachBlank": "Approach is required!",
-    "typeIssuesBlank": "Issues is required!"
+    "typeIssuesBlank": "Issues is required!",
+    "emailBlank": "Email is required!",
+    "emailFormatBlank": "Email format is not valid!"
 
 
 

@@ -28,7 +28,9 @@
             </div>
             <hr v-if="!['cabang', 'anggota', 'pusat'].includes(kategorisasi)" class="border-warna-tujuh my-10">
             <div v-if="kategorisasi === 'tentang'">
-                <DashboardOrganisasiEditTentang />
+                <DashboardOrganisasiEditTentang 
+                    v-model="saving.tentang"
+                />
             </div>
             <div v-else-if="kategorisasi === 'cabang'">
                 <DashboardOrganisasiEditCabang />
@@ -46,12 +48,26 @@
                 <DashboardOrganisasiEditPencapaian />
             </div>
             <div v-else-if="kategorisasi === 'kontaklokasi'">
-                <DashboardOrganisasiEditKontakLokasi />
+                <DashboardOrganisasiEditKontakLokasi 
+                    v-model="saving.kontaklokasi"
+                />
             </div>
             <div v-else-if="kategorisasi === 'mediasosial'">
-                <DashboardOrganisasiEditMediaSosial />
+                <DashboardOrganisasiEditMediaSosial 
+                    v-model="saving.mediasosial"
+                />
             </div>
         </div>
+
+        <div class="bg-white shadow-md rounded-xl py-4 px-6 mt-10">
+            <div class="flex items-center justify-between">
+                <button @click="btnBack" class="button-standar-outline">{{ $t('Back') }}</button>
+                <button 
+                    v-if="['tentang', 'kontaklokasi', 'mediasosial'].includes(kategorisasi)"
+                    @click="simpan" class="button-standar">{{ $t('Save') }}</button>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -62,7 +78,12 @@ export default {
     data() {
         return {
             kategorisasi: 'tentang',
-            dataOrganisasi: null
+            dataOrganisasi: null,
+            saving: {
+                tentang: false,
+                kontaklokasi: false,
+                mediasosial: false,
+            }
         }
     },
     computed: {
@@ -106,6 +127,13 @@ export default {
                 console.log(err)
             })
         },
+        btnBack() {
+            this.$router.push('/verifications/organisasi/'+this.dataOrganisasi.accountId)
+        },
+        simpan() {
+            this.saving[this.kategorisasi] = true
+        }
+
     },
 }
 </script>

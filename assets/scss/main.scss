@@ -891,14 +891,30 @@ input[type="radio"]:checked {
     border: 1px solid $warna-empat;
     accent-color: $warna-empat;
 }
-
-.vue-advanced-cropper__background, .vue-advanced-cropper__foreground {
+.vue-preview__wrapper {
     background: url('/images/bc.jpg') !important;
-    height: 5px;
-    width: 5px;
+    opacity: 1 !important;
+
+
+}
+.vue-advanced-cropper__background {
+    background: url('/images/bc.jpg') !important;
+
+}
+.vue-advanced-cropper__cropper-wrapper {
+    background: rgba(0, 0, 0, 0.9) !important;
 }
 .button-table-delete {
     background: url('/icons/icon-delete.png') no-repeat center center;
+    opacity: 1;
+    transition: all 0.35s ease-in-out;
+    &:hover {
+        opacity: 0.6;
+    }
+}
+
+.button-table-edit {
+    background: url('/icons/icon-edit.png') no-repeat center center;
     opacity: 1;
     transition: all 0.35s ease-in-out;
     &:hover {

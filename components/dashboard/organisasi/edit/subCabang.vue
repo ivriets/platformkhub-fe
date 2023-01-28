@@ -133,7 +133,6 @@ export default {
             this.paginasi.currentPage = 1
             this.runPaginasi()
         }
-
     },
     mounted() {
         this.initialize()
@@ -141,6 +140,8 @@ export default {
     methods: {
         initialize() {
             this.loaderDetail = false
+            this.cariCabang.model = ''
+            this.cariCabang.key +=1
             this.masterPoint()
         },
 
@@ -199,6 +200,7 @@ export default {
 
         },
         deleteBranch(item) {
+            console.log(item)
         this.$modal.show({
                 type: 'warning',
                 title: this.$t('Delete Branch'),
@@ -210,11 +212,14 @@ export default {
                 }
         })
         },
-        realDeleteBranch() {
-            this.updateData({"deleteBranch":data.organisasiId})
+        realDeleteBranch(data) {
+            this.updateData({"deleteBranch":data.id})
         },
-        async updateData(data) {           
+        async updateData(data) {     
+            console.log(data)      
             await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
+                const msg = res.data.message && res.data.message !== '' ? res.data.message : ''
+                this.$toast.show(this.$t(msg))
                 this.initialize()
             }).catch(err => {
                 console.log(err)

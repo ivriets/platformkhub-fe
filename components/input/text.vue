@@ -1,7 +1,8 @@
 <template>
     <div>
         <div v-if="label" class="font-medium mb-1">
-            {{label}}
+            {{label}} <span class="text-[#DF4B61] font-semibold" v-if="required && required === true">*</span>
+
         </div>
         <input 
             type="text" 
@@ -27,7 +28,7 @@
 
 <script>
 export default {
-    props: ['value','name', 'placeholder', 'label', 'max','disabled', 'counter'],
+    props: ['value','name', 'placeholder', 'label', 'max','disabled', 'counter','required'],
     data() {
         return {
             

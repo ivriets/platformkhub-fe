@@ -180,6 +180,31 @@
     "Permintaan": "Permintaan",
     "Position": "Posisi",
     "Cari Cabang": "Cari Cabang",
+    "Branch telar terdaftar": "Cabang sudah terdaftar",
+    "Pusat": "Pusat",
+    "Organisasi Pusat": "Organisasi Pusat",
+    "konfirmasiAcceptPusat": "Dengan menjadi cabang dari suatu organisasi, Anda tidak dapat menjadi cabang dari organisasi lain.",
+    "konfirmasiTolakPusat": "Aksi ini akan menolak undangan sebagai cabang organisasi lain, apakah anda yakin?",
+    "Accepted Notification":"Notifikasi Penerimaan",
+    "Organisasi hanya dapat memiliki 1 Pusat": "Organisasi hanya dapat memiliki 1 Pusat",
+    "Reject Notification": "Notifikasi Penolakan",
+    "Keluar dari Pusat": "Keluar dari Pusat",
+    "konfirmasiKeluarPusat": "Anda akan keluar dari Pusat, apakah anda yakin?",
+    "Deletion Notification": "Notifikasi penghapusan",
+    "konfirmasiDeletePartner": "Mitra ini akan dihapus dari daftar mitra, apakah Anda yakin?",
+    "Milestone": "Pencapaian",
+    "Tambah": "Tambah",
+    "Sunting": "Sunting",
+    "konfirmasiDeleteMilestone": "Aksi ini akan menghapus pencapaian dari daftar pencapaian, apakah anda yakin?",
+    "Jika tidak mengetahui tanggal spesifik, silahkan pilih rentang tanggal terdekat": "Jika tidak mengetahui tanggal spesifik, silahkan pilih rentang tanggal terdekat",
+
+
+
+
+
+
+
+
 
 
 
@@ -189,7 +214,10 @@
 
     "typeAudienceBlank": "Tipe Audien wajib diisi",
     "typeApproachBlank": "Pendekatan wajib diisi!",
-    "typeIssuesBlank": "Topik wajib diisi!"
+    "typeIssuesBlank": "Topik wajib diisi!",
+    "emailBlank": "Email wajib diisi!",
+    "emailFormatBlank": "Format surel tidak dikenali!"
+
 
 
 

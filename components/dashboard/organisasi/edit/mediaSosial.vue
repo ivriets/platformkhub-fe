@@ -12,17 +12,18 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white shadow-md rounded-xl py-4 px-6 mt-10">
+        <!-- <div class="bg-white shadow-md rounded-xl py-4 px-6 mt-10">
             <div class="flex items-center justify-end">
                 <div @click="save" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
 
 <script>
 export default {
+    props: ['value'],
     data() {
         return {
             prefixName: 'mediasosial',
@@ -38,6 +39,18 @@ export default {
             return process.env.BASE_URL
         }
     },
+    watch: {
+        value(val) {
+            // console.log(val)
+            if (val === true) {
+                this.save();
+                setTimeout(() => {
+                    this.$emit('input', false)
+                },500)
+            }
+        }
+    },
+
     created() {
         this.initialize()
     },
@@ -58,9 +71,8 @@ export default {
         async updateData(data) {           
             await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
                 const data = res.data         
-                this.message = data.message
-                alert(this.message)
-                this.masterPoint()
+                this.$toast.show(data.message)
+                this.initialize()
             }).catch(err => {
                 console.log(err)
             })

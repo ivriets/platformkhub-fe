@@ -4,7 +4,6 @@
           <div v-if="label" class="font-medium mb-1">
               {{label}}
           </div>
-          <div class="text-[#DF4B61] ml-1">*</div>
       </div>
 
       <div v-if="!dataImage" class="image-area relative" @dragover="dragOver" @dragleave="dragLeave" @drop="drop">
