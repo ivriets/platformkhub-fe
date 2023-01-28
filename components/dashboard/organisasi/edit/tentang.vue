@@ -13,8 +13,9 @@
                 <div class="mb-2">
                     <InputText 
                         v-model="form.namaOrganisasi"
-                        :name="prefixName+'namaorganisasi'"
+                        :name="prefixName+'namaOrganisasi'"
                         :label="$t('Organization Name')"
+                        :required="true"
                     />
                 </div>
             </div>
@@ -138,7 +139,7 @@
             <div v-for="(lokasi, index) in form.lokasiOrganisasi" :key="index" class="">
 
             <InputLokasiOrganisasi 
-                v-model = "form.lokasiOrganisasi[index]"
+                v-model=form.lokasiOrganisasi[index]
                 :prefixName="prefixName+index"
             />
             </div>
@@ -146,11 +147,13 @@
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
                         <div class="">
-                            <InputImageCrop 
-                                :label="'Logo Organisasi'"
+                            <InputImageUploadSingle 
+                                :label="$t('Logo Organisasi')"
                                 v-model="imgLogoOrganisasi"
                                 :accept="'.png, .jpg, .jpeg'"
-                                :maxSize="5"
+                                :maxSize="1"
+                                :useCrop="true"
+                                :cropRatio="1"
                             /> 
                         </div>
                     </div>
@@ -158,11 +161,13 @@
                 <div class="col-span-12 md:col-span-6">
                     <div class="">
                         <div class="">
-                            <InputImageCrop 
-                                :label="'Main Image'"
+                            <InputImageUploadSingle 
+                                :label="$t('Main Image')"
                                 v-model="imgMainImage"
                                 :accept="'.png, .jpg, .jpeg'"
                                 :maxSize="5"
+                                :useCrop="true"
+                                :cropRatio="4/3"
                             />
                         </div>
                     </div>
@@ -366,7 +371,7 @@ export default {
         },
         async uploadImage(image, untuk, name) {
 
-            if (image instanceof Blob){
+            // if (image instanceof Blob){
                 var data = new FormData();
                 data.append(untuk, image, name);
                 await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
@@ -374,12 +379,40 @@ export default {
                 }).catch(err => {
                     console.log(err)
                 })
-            }
+            // }
         },
+
+        errorNotif(msg) {
+            this.$toast.show({
+                type: 'danger',
+                title: 'Error',
+                message: msg,
+            })
+        },
+        focusField(id) {
+            document.getElementById(this.prefixName + id).focus()
+        },
+        errorField(msg, id) {
+            this.errorNotif(msg);
+            this.focusField(id)
+        },
+
         save() {
-            this.putData(this.form) 
+            if (this.form.namaOrganisasi === '') {
+                this.errorField(this.$t('namaOrganisasiBlank'),'namaOrganisasi' )
+            } else {
+                 this.putData(this.form) 
+            }   
+
+           
         },
         async putData(data) {
+            data.highlight[0] = data.highlight[0] === '' ? 'N/A' : data.highlight[0] 
+            data.highlight[1] = data.highlight[1] === '' ? 'N/A' : data.highlight[1] 
+
+            data.deskripsi[0] = data.deskripsi[0] === '' ? 'N/A' : data.deskripsi[0] 
+            data.deskripsi[1] = data.deskripsi[1] === '' ? 'N/A' : data.deskripsi[1] 
+
             await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
                 const data = res.data
                     //imgLogoOrganisasi hehehe kuduna didieu

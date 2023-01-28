@@ -212,7 +212,8 @@
     "typeApproachBlank": "Approach is required!",
     "typeIssuesBlank": "Issues is required!",
     "emailBlank": "Email is required!",
-    "emailFormatBlank": "Email format is not valid!"
+    "emailFormatBlank": "Email format is not valid!",
+    "namaOrganisasiBlank": "Organization name is required!"
 
 
 

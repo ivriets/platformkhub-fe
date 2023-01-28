@@ -216,7 +216,9 @@
     "typeApproachBlank": "Pendekatan wajib diisi!",
     "typeIssuesBlank": "Topik wajib diisi!",
     "emailBlank": "Email wajib diisi!",
-    "emailFormatBlank": "Format surel tidak dikenali!"
+    "emailFormatBlank": "Format surel tidak dikenali!",
+    "namaOrganisasiBlank": "Nama Organisasi wajib diisi!"
+
 
 
 

@@ -6,7 +6,7 @@
           </div>
       </div>
 
-      <div  v-if="dataImage && dataImage.displayImage === ''"  class="image-area cursor-pointer" @dragover="dragOver" @dragleave="dragLeave" @drop="drop">
+      <div  v-if="dataImage && dataImage.displayImage === ''"  class="image-area relative" @dragover="dragOver" @dragleave="dragLeave" @drop="drop">
           <div class="min-h-[150px] w-full border-dashed border-2 border-warna-tujuh rounded-lg pt-[9px] pb-[25px] flex items-center justify-center">
               <div class="text-center">
                   <div class="text-xs text-[#BABABA] mb-2 text-center">
@@ -20,12 +20,20 @@
                   <button @click="$refs.inputfiles.click()" title="Upload Image"  class="button-upload">{{ $t('Pilih File') }}</button>
               </div>
           </div>
+        <button v-if="imageTrash !==null" title="Undo delete image" @click="undoDelete()" 
+          class="absolute top-0 right-0 mt-1 mr-1 bg-white rounded-full text-2xl opacity-70 hover:opacity-100 ">
+          <img src="/icons/undo.svg" height="50" width="50" class="w-[24px] h-[24px] m-1 p-1 rounded-full shadow object-cover border border-gray-300" /></button>
+
+
       </div>
       <div v-if="dataImage && dataImage.displayImage !== ''"
       class="min-h-[150px] relative w-full border-dashed border-2 border-warna-tujuh rounded-lg p-3 flex items-center justify-center"
       >
         <img :class="previewClass?previewClass:'w-full'" class="h-full object-contain" :src="dataImage.displayImage" alt="" />
-        <button title="Delete Image" @click="deleteImage()" class="absolute top-0 right-0 rounded-full text-xl opacity-70 hover:opacity-100 "><i class="ri-close-circle-fill"></i></button>
+        <!-- <button title="Delete Image" @click="deleteImage()" class="absolute top-0 right-0 rounded-full text-xl opacity-70 hover:opacity-100 "><i class="ri-close-circle-fill"></i></button> -->
+        <button title="Delete Image" @click="deleteImage()" 
+          class="absolute top-0 right-0 mt-1 mr-1 bg-white rounded-full text-2xl opacity-70 hover:opacity-100 ">
+          <img src="/icons/close.svg" height="50" width="50" class="w-[24px] h-[24px] rounded-full shadow object-cover border border-gray-300" /></button>
 
       </div>
 
@@ -109,6 +117,8 @@ export default {
           dataCrop: null,
           countDownFile: 0,
           displayReset: false,
+          imageTrash: null,
+
           stencilProps: {
                       previewClass: 'preview',
                       movable: false,
@@ -198,10 +208,13 @@ export default {
           this.modal.key +=1
       },
       deleteImage() {
+          this.imageTrash = this.dataImage
+
           this.dataImage = {
             displayImage: '',
             file: null
           }
+
           this.displayReset = false
           this.displayResetCounter = 0
           this.updateValue()
@@ -243,6 +256,13 @@ export default {
           })
 
       },  
+      undoDelete() {
+        this.dataImage = this.imageTrash
+        this.$nextTick(() => {
+          this.imageTrash = null
+        })
+      },
+
       updateValue() {
         this.$emit('input', this.dataImage)
       },
