@@ -4,23 +4,30 @@
             {{label}} <span class="text-[#DF4B61] font-semibold" v-if="required && required === true">*</span>
 
         </div>
-        <input 
-            type="text" 
-            :name="name" 
-            :id="name" 
-            :ref="name"
-            class="focus:outline-none w-full border border-warna-tujuh rounded-lg px-2 py-1.5 text-sm text-warna-utama placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
-            :placeholder="placeholder ? placeholder : $t('tulisDisini') "
-            @input="handleInput"
-            @change="handleInput"
-            :value="value"
-            :maxlength="max ? max : 1000"
-            autocomplete="chrome-off"
-            :disabled="disabled?disabled:false"
-            @keyup.enter="keyEnter"
-            @keyup.esc="keyEsc"
-            @keyup="keyup"
-        >
+        <div class="relative">
+            <div 
+                v-if="prefix && prefix !==''"
+                class=" absolute top-0 left-0 py-1.5 bg-gray-100 border rounded-l-lg text-sm text-utama pl-2 pr-2"
+            >{{prefix}}</div>
+            <input 
+                type="text" 
+                :name="name" 
+                :id="name" 
+                :ref="name"
+                class="focus:outline-none w-full border border-tujuh rounded-lg pr-2 py-1.5 text-sm text-utama placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
+                :style="prefix && prefix !== '' ? ' padding-left:'+ ((prefix.length * 6)+32) +'px; ' : ' padding-left:0.5rem; '"
+                :placeholder="placeholder ? placeholder : $t('tulisDisini') "
+                @input="handleInput"
+                @change="handleInput"
+                :value="value"
+                :maxlength="max ? max : 1000"
+                autocomplete="chrome-off"
+                :disabled="disabled?disabled:false"
+                @keyup.enter="keyEnter"
+                @keyup.esc="keyEsc"
+                @keyup="keyup"
+            >
+        </div>
         <div v-if="counter && counter === true && max && parseInt(max) > 0" class="text-xs text-warna-dua mt-1 ml-1">{{value.length}}/{{max}}</div>
     </div>
 </template>
@@ -28,7 +35,7 @@
 
 <script>
 export default {
-    props: ['value','name', 'placeholder', 'label', 'max','disabled', 'counter','required'],
+    props: ['value','name', 'placeholder', 'label', 'max','disabled', 'counter','required', 'prefix'],
     data() {
         return {
             
@@ -37,6 +44,14 @@ export default {
 
     mounted() {
 
+    },
+    computed: {
+        ukuranPrefix() {
+            if (this.prefix && this.prefix !=='') {
+                const totalKarakter = this.prefix.length
+                return parseInt(totalKarakter) * 1.5;
+            }
+        }
     },
 
     methods: {

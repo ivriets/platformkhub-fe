@@ -10,7 +10,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.heroTitle[0]"
-                                    placeholder="Tulis disini"
                                     :name="prefixName+'judul'"
                                     :label="'Judul'"
                                 />
@@ -20,7 +19,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.heroSubtitleTop[0]"
-                                    placeholder="Tulis disini"
                                     :name="prefixName+'subjudulatas'"
                                     :label="'Sub Judul Atas'"
                                 />
@@ -30,7 +28,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.heroSubtitleBottom[0]"
-                                    placeholder="Tulis disini"
                                     :name="prefixName+'subjudulbawah'"
                                     :label="'Sub Judul Bawah'"
                                 />
@@ -45,7 +42,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.heroTitle[1]"
-                                    placeholder="Write here"
                                     :name="prefixName+'judul'"
                                     :label="'Title'"
                                 />
@@ -55,7 +51,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.heroSubtitleTop[1]"
-                                    placeholder="Write here"
                                     :name="prefixName+'subtitletop'"
                                     :label="'Sub Title Top'"
                                 />
@@ -65,7 +60,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.heroSubtitleBottom[1]"
-                                    placeholder="Write here"
                                     :name="prefixName+'subtitlebottom'"
                                     :label="'Sub Title Bottom'"
                                 />
@@ -76,18 +70,19 @@
                 <div class="">
                     <div class="grid grid-cols-12 gap-x-6 gap-y-[28px]">
                         <div class="col-span-12 md:col-span-6">
-                            <InputImageCrop 
+                            <InputImageUploadSingle 
                                 :label="'Background'"
                                 v-model="heroBackground"
-                                :accept="'.png, .jpg, .jpeg'"
-                                :maxSize="5"
+                                :accept="'.png, .jpg, .jpeg,'"
+                                :maxSize="10"
+                                :useCrop="true"
+                                :cropRatio="16/9"
                             />
                         </div>
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
                                     v-model="form.heroAltBackground"
-                                    placeholder="Write here"
                                     :name="prefixName+'altbackground'"
                                     :label="'Alt Background'"
                                 />
@@ -97,7 +92,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.heroButtonText[1]"
-                                    placeholder="Write here"
                                     :name="prefixName+'textbuttonen'"
                                     :label="'Button Text (Eng)'"
                                 />
@@ -107,7 +101,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.heroButtonText[0]"
-                                    placeholder="Tulis disini"
                                     :name="prefixName+'textbuttonid'"
                                     :label="'Tombol Text (Bahasa)'"
                                 />
@@ -117,7 +110,7 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.heroActionLink"
-                                    placeholder="Write here"
+                                    :prefix="webUrl"
                                     :name="prefixName+'actionlink'"
                                     :label="'Call to Action Link'"
                                 />
@@ -138,7 +131,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.invitationTitle[0]"
-                                    placeholder="Tulis disini"
                                     :name="prefixName+'invjudulid'"
                                     :label="'Judul'"
                                 />
@@ -148,7 +140,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.invitationSubtitleBottom[0]"
-                                    placeholder="Tulis disini"
                                     :name="prefixName+'invsubjudulid'"
                                     :label="'Sub Judul'"
                                 />
@@ -158,7 +149,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.invitationButtonText[0]"
-                                    placeholder="Tulis disini"
                                     :name="prefixName+'invbuttontextid'"
                                     :label="'Tombol Teks (Bahasa)'"
                                 />
@@ -173,7 +163,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.invitationTitle"
-                                    placeholder="Write here"
                                     :name="prefixName+'invjudulen'"
                                     :label="'Title'"
                                 />
@@ -183,7 +172,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.invitationSubtitleBottom"
-                                    placeholder="Write here"
                                     :name="prefixName+'invsubjudulen'"
                                     :label="'Sub Title'"
                                 />
@@ -193,7 +181,6 @@
                             <div class="">
                                 <InputText 
                                     v-model="form.invitationButtonText"
-                                    placeholder="Write here"
                                     :name="prefixName+'invbuttontexten'"
                                     :label="'Button Text (Eng)'"
                                 />
@@ -204,12 +191,21 @@
                 <div class="">
                     <div class="grid grid-cols-12 gap-x-6 gap-y-[28px]">
                         <div class="col-span-12 md:col-span-6">
-                            <InputImageCrop 
+                            <!-- <InputImageCrop 
                                 :label="'Background'"
                                 v-model="invitationBackground"
                                 :accept="'.png, .jpg, .jpeg'"
                                 :maxSize="5"
+                            /> -->
+                            <InputImageUploadSingle 
+                                :label="'Background'"
+                                v-model="invitationBackground"
+                                :accept="'.png, .jpg, .jpeg,'"
+                                :maxSize="5"
+                                :useCrop="true"
+                                :cropRatio="3/2"
                             />
+
                         </div>
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
@@ -230,7 +226,7 @@
             <div class="flex items-center justify-between">
                 <div></div>
                 <!-- <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div> -->
-                <div @click="putData(form)" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+                <button @click="putData(form)" class="button-standar">{{ $t('Save') }}</button>
             </div>
         </div>
     </div>
@@ -256,6 +252,9 @@ export default {
         },
         basePath() {
             return process.env.BASE_URL
+        },
+        webUrl() {
+            return process.env.WEB_URL
         }
     },
     mounted() {
@@ -298,8 +297,7 @@ export default {
         },
         async putData(data) {
             await this.$apiBase.put('homepages/', data).then(res => {
-                const data = res.data
-                alert(data.message)
+                
                 if (this.heroBackground.file !== null) {
                     this.uploadImage(this.heroBackground.file, "heroBackground", this.heroBackground.name)
                 }
@@ -307,6 +305,7 @@ export default {
                     this.uploadImage(this.invitationBackground.file, "invitationBackground", this.invitationBackground.name)
                 }
                 this.$nextTick(() => {
+                    this.$toast.show('Homepage ' + this.$t('updateSukses'))
                     this.initialize()
                 })
 

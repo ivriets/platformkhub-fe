@@ -250,6 +250,7 @@ export default {
                 this.filter.search = this.halamanStore.search
                 this.showRow = this.halamanStore.row
                 this.currentPage = this.halamanStore.page
+                this.sorter = this.halamanStore.sorter
                 this.keyShow+=1
                 this.$nextTick(() => {
                     this.masterPoint();
@@ -301,7 +302,8 @@ export default {
                 page: this.currentPage,
                 search: this.filter.search,
                 kapsul: this.selectedKapsul,
-                row: this.showRow
+                row: this.showRow,
+                sorter: this.sorter
             }
             // console.log(forStore)
             this.$store.commit('setHalamanIndividu', forStore)
