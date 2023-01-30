@@ -8,28 +8,43 @@
                     <div class="grid grid-cols-12 gap-x-6 gap-y-[28px]">
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
-                                <InputText 
+                                <InputTextArea 
                                     v-model="form.heroTitle[0]"
                                     :name="prefixName+'judul'"
                                     :label="'Judul'"
+                                    :rows="1"
+                                    :max="500"
+                                    :autoHeight="true"
+                                    :counter="true"
                                 />
                             </div>
                         </div>
+                        <div class="col-span-12 md:col-span-6"></div>
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
-                                <InputText 
+                                <InputTextArea 
                                     v-model="form.heroSubtitleTop[0]"
                                     :name="prefixName+'subjudulatas'"
                                     :label="'Sub Judul Atas'"
+                                    :rows="1"
+                                    :max="500"
+                                    :autoHeight="true"
+                                    :counter="true"
+
                                 />
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
-                                <InputText 
+                                <InputTextArea 
                                     v-model="form.heroSubtitleBottom[0]"
                                     :name="prefixName+'subjudulbawah'"
                                     :label="'Sub Judul Bawah'"
+                                    :rows="1"
+                                    :max="500"
+                                    :autoHeight="true"
+                                    :counter="true"
+
                                 />
                             </div>
                         </div>
@@ -40,28 +55,45 @@
                     <div class="grid grid-cols-12 gap-x-6 gap-y-[28px]">
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
-                                <InputText 
+                                <InputTextArea 
                                     v-model="form.heroTitle[1]"
                                     :name="prefixName+'judul'"
                                     :label="'Title'"
+                                    :rows="1"
+                                    :max="500"
+                                    :autoHeight="true"
+                                    :counter="true"
+
                                 />
                             </div>
                         </div>
+                        <div class="col-span-12 md:col-span-6"></div>
+
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
-                                <InputText 
+                                <InputTextArea 
                                     v-model="form.heroSubtitleTop[1]"
                                     :name="prefixName+'subtitletop'"
                                     :label="'Sub Title Top'"
+                                    :rows="1"
+                                    :max="500"
+                                    :autoHeight="true"
+                                    :counter="true"
+
                                 />
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
-                                <InputText 
+                                <InputTextArea 
                                     v-model="form.heroSubtitleBottom[1]"
                                     :name="prefixName+'subtitlebottom'"
                                     :label="'Sub Title Bottom'"
+                                    :rows="1"
+                                    :max="500"
+                                    :autoHeight="true"
+                                    :counter="true"
+
                                 />
                             </div>
                         </div>
@@ -129,19 +161,29 @@
                     <div class="grid grid-cols-12 gap-x-6 gap-y-[28px]">
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
-                                <InputText 
+                                <InputTextArea 
                                     v-model="form.invitationTitle[0]"
                                     :name="prefixName+'invjudulid'"
                                     :label="'Judul'"
+                                    :rows="1"
+                                    :max="500"
+                                    :autoHeight="true"
+                                    :counter="true"
+
                                 />
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
-                                <InputText 
+                                <InputTextArea 
                                     v-model="form.invitationSubtitleBottom[0]"
                                     :name="prefixName+'invsubjudulid'"
                                     :label="'Sub Judul'"
+                                    :rows="1"
+                                    :max="500"
+                                    :autoHeight="true"
+                                    :counter="true"
+
                                 />
                             </div>
                         </div>
@@ -165,6 +207,11 @@
                                     v-model="form.invitationTitle"
                                     :name="prefixName+'invjudulen'"
                                     :label="'Title'"
+                                    :rows="1"
+                                    :max="500"
+                                    :autoHeight="true"
+                                    :counter="true"
+
                                 />
                             </div>
                         </div>
@@ -174,6 +221,11 @@
                                     v-model="form.invitationSubtitleBottom"
                                     :name="prefixName+'invsubjudulen'"
                                     :label="'Sub Title'"
+                                    :rows="1"
+                                    :max="500"
+                                    :autoHeight="true"
+                                    :counter="true"
+
                                 />
                             </div>
                         </div>

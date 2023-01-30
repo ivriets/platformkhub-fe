@@ -2,7 +2,7 @@
     <div>
         <div class="grid grid-cols-12 gap-6">
             <div v-for="(item, index) in dataCard" :key="'fp'+index" class="col-span-12 lg:col-span-3">
-                <div class="bg-white border border-warna-tujuh rounded-xl p-3">
+                <div class="bg-white border border-tujuh rounded-xl p-3">
                     <div class="mb-3 relative">
                         <img class="w-full rounded-lg" :class="tipeKonten === 'Event' ? 'h-[220px]' : 'h-[135px]'" :src="basePath+item.imgThumbnail" alt="thumbnail">
                         <div v-if="toggleEdit" @click="btnDeleteSatuan(item)" class="absolute top-0 right-0 bg-white rounded-full p-3 cursor-pointer flex items-center mr-2 mt-2 hover:bg-gray-100">
