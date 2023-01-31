@@ -751,11 +751,14 @@ body {
         display: inline-block;
         text-decoration: none;
         font-weight: 700;
-        vertical-align: middle;
+        vertical-align: baseline;
         margin-right: 3px;
     }
     &:hover {
         color: lighten($warna-empat, 50%);
+    }
+    &:disabled {
+        color:rgba(0, 0, 0, 0.2);
     }
 }
 .table-standar {

@@ -9,8 +9,8 @@
             <div v-click-outside="persistentAction" :class="width ? width : 'w-full md:w-1/2' " class="fixed p-4 z-20    md:h-auto " >
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow ">
-                    <div class="text-center p-4 rounded-t  " :class="title && title !=='' ? ' border-b ' : '' ">
-                        <h3 v-if="title && title !==''" class="text-lg text-center font-semibold text-warna-empat w-10/12 mx-auto break-words ">
+                    <div class="text-center p-4 rounded-t border-b ">
+                        <h3 class="text-lg text-center font-semibold text-warna-empat w-10/12 mx-auto break-words ">
                             {{title}}
                         </h3>
                         <div class="absolute top-0 right-0 mr-2 mt-3 items-center">
@@ -30,56 +30,53 @@
         </div>
         </transition>
     </div>
-</template>
-
-<script>
-export default {
-    props:['value','title', 'persistent', 'width'],
-    data() {
-        return {
-
-        }
-    },
-    computed: {
-        statModal: {
-            get() {
-                if (this.value === true) {
-                    document.body.classList.add('overflow-hidden')
-                } else {
-                    document.body.classList.remove('overflow-hidden')
-                }
-                return this.value
-            },
-            set(value) {
-                this.$emit('input',value)
-            }
-        }
-    },
-    methods: {
-        initialize() {
-            // this.statModal = this.value
-
-        },
-        tutupModal() {
-            this.statModal = false
-            // this.$emit('input', false)
-        },
-        doNothing() {
-
-        },
-        persistentAction() {
-            if (this.persistent && this.persistent === true) {
-
-            } else {
-                this.tutupModal()
-            }
-        },
-        handleKey(event) {
-            console.log(event)
-        },
-
-    }
-
-}
-</script>
+    </template>
     
+    <script>
+    export default {
+        props:['value','title', 'persistent', 'width'],
+        data() {
+            return {
+                statModal: false
+            }
+        },
+
+        created() {
+            window.addEventListener("keydown", e => {
+                if (e.code === 'Escape') {
+                    this.persistentAction()
+                } else if (e.code ==='Enter') {
+                    this.$emit('keyup',e)
+                }
+            });
+        },
+        mounted() {
+            this.initialize();
+        },
+
+    
+        methods: {
+            initialize() {
+                this.statModal = this.value
+            },
+            tutupModal() {
+                this.statModal = false
+                this.$emit('input', false)
+            },
+            doNothing() {
+    
+            },
+            persistentAction() {
+                if (this.persistent && this.persistent === true) {
+    
+                } else {
+                    this.tutupModal()
+                }
+            },
+            handleKey(event) {
+                console.log(event)
+            },
+    
+        }
+    }
+    </script>

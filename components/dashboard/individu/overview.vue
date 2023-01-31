@@ -157,7 +157,9 @@ export default {
                     page: 1,
                     search: '',
                     kapsul: null,
-                    row: 10
+                    row: 10,
+                    sorter: {createdAt: 'desc'}
+
             }
             if (item === 'accountVerified') {
                 forStore.kapsul = this.kapsul[2]

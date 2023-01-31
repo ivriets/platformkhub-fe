@@ -8,12 +8,47 @@
                 :landing="'spa'"
             />
         </div>
-        <div class="main-area">
             <DashboardFeaturedContentItem 
                 :selectedTab="selectedTab"
-                :key="'ketab'+keyTab"
+                v-model="form.featuredProgram"
+                :key="'ketab1'+keyTab"
+                :masterEndPoint="'moderator/programs/?submission=4'"
+                :targetId="'programId'"
+                :targetJudul="'judulActivity'"
+                v-if="selectedTab==='program'"
             />
-        </div>
+            <DashboardFeaturedContentItem 
+                :selectedTab="selectedTab"
+                v-model="form.featuredEvent"
+                :key="'ketab2'+keyTab"
+                v-if="selectedTab==='event'"
+                :masterEndPoint="'moderator/events/?submission=4'"
+                :targetId="'eventId'"
+                :targetJudul="'judulActivity'"
+
+
+            />
+            <DashboardFeaturedContentItem 
+                :selectedTab="selectedTab"
+                v-model="form.featuredResource"
+                :key="'ketab3'+keyTab"
+                v-if="selectedTab==='resources'"
+                :masterEndPoint="'moderator/resources/?submission=4'"
+                :targetId="'resourceId'"
+                :targetJudul="'judulArtikel'"
+
+            />
+            <DashboardFeaturedContentItem 
+                :selectedTab="selectedTab"
+                v-model="form.featuredBlog"
+                :key="'ketab4'+keyTab"
+                v-if="selectedTab==='blog'"
+                :masterEndPoint="'moderator/blogs/?submission=4'"
+                :targetId="'blogId'"
+                :targetJudul="'judulArtikel'"
+
+            />
+
 
     </div>
 </template>
@@ -26,37 +61,43 @@ export default {
     data() {
         return {
             selectedTab: 'program',
+            list: [],
             keyTab: 0,
+            form : {
+                featuredProgram: [],
+                featuredEvent: [],
+                featuredResource: [],
+                featuredBlog: [],
+            },
+
+
             listTab: [
                 {
                     id: 'program',
-                    label: 'Program'
+                    label: 'Program',
+                    field: 'featuredProgram'
                 },
                 {
                     id: 'event',
-                    label: 'Event'
+                    label: 'Event',
+                    field: 'featuredEvent'
                 },
                 {
                     id: 'resources',
-                    label:'Resources'
+                    label:'Resources',
+                    field: 'featuredResource'
                 },
                 {
                     id: 'blog',
-                    label: 'Blog'
+                    label: 'Blog',
+                    field: 'featuredBlog'
                 },
-                {
-                    id: 'outlook',
-                    label: 'Outlook'
-                }
+                // {
+                //     id: 'outlook',
+                //     label: 'Outlook',
+                //     field: 'outlook'
+                // }
             ],
-
-            filter: {
-                searchProgram: '',
-                searchEvent: '',
-                searchResource: '',
-                searchBlog: '',
-            },
-
 
         }
     },
@@ -69,11 +110,23 @@ export default {
         },
         basePath() {
             return process.env.BASE_URL
+        },
+        modelField() {
+            const sc = this.selectedTab === 'resources' ? 'Resource' : _.startCase(this.selectedTab)
+            return 'featured'+ sc
         }
+
     },
+    created() {
+        this.$nuxt.$on('updateFeatured', (val) => {
+            this.updateFeatureContent()
+        })
+    },
+
     watch: {
         selectedTab() {
             this.keyTab +=1
+            // this.splitFields()
         }
     },
     mounted() {
@@ -81,37 +134,41 @@ export default {
     },
     methods: {
         initialize() {
+            this.masterPoint()
         },
 
         async masterPoint() {
-            this.dataTable = []
-            await this.$apiBase.get('featuredcontent//').then(res => {
+            await this.$apiPlatform.get('featuredcontent/').then(res => {
                 var featuredContent = res.data
-                this.featuredProgram = featuredContent.featuredProgram
-                this.featuredEvent = featuredContent.featuredEvent
-                this.featuredResource = featuredContent.featuredResource
-                this.featuredBlog = featuredContent.featuredBlog
+                this.form.featuredProgram = featuredContent.featuredProgram
+                this.form.featuredEvent = featuredContent.featuredEvent
+                this.form.featuredResource = featuredContent.featuredResource
+                this.form.featuredBlog = featuredContent.featuredBlog
+
             }).catch(err => {
                 console.log(err)
             })
         },
+        splitFields() {
+            this.list = this.dataDetail[this.modelField]
+            this.keyTab +=1
+
+        },
 
         async updateData(data) {           
-            await this.$apiBase.put('featuredcontent/', data).then(res => {
-                const data = res.data         
-                this.message = data.message
-                alert("Data berhasil disimpan.")
-                this.masterPoint()
+            await this.$apiPlatform.put('featuredcontent/', data).then(res => {
+                // this.$toast.show('Featured Content ' + this.$t('updateSukses'))
+                this.initialize()
             }).catch(err => {
                 console.log(err)
             })
         }, 
         updateFeatureContent () {
-            var dataUpdate = {
-                featuredProgram: this.featuredProgram,
-                featuredEvent: this.featuredEvent,
-                featuredResource: this.featuredResource,
-                featuredBlog: this.featuredBlog
+            const dataUpdate = {
+                featuredProgram: this.form.featuredProgram.map(e => e.programId),
+                featuredEvent: this.form.featuredEvent.map(e => e.eventId),
+                featuredResource: this.form.featuredResource.map(e => e.resourceId),
+                featuredBlog: this.form.featuredBlog.map(e => e.blogId)
             }
             this.updateData(dataUpdate)
         },

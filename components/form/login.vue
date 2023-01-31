@@ -1,8 +1,8 @@
 <template>
-    <div class="rounded-3xl shadow-md bg-white">
+    <div class="rounded-3xl shadow-md bg-white overflow-hidden">
         <div class="grid grid-cols-4">
-            <div class="col-span-2">
-                <img src="/images/img-login.png" alt="image-login" width="400" class="rounded-l-3xl">
+            <div class="col-span-2 bg-empat">
+                <img src="/images/featured-login.png" alt="image-login" width="400" class="w-[350px] h-auto object-cover" >
             </div>
             <div class="col-span-2 p-6">
                 <div class="mb-[35px] text-warna-utama">

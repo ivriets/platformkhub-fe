@@ -1,5 +1,5 @@
 <template>
-    <button @click="$emit('click')"  class="button-gede">
+    <button @click="$emit('click')" :disabled="content===0"  class="button-gede">
         <div class="flex items-center justify-around">
             <div class="flex items-center justify-center">
                 <img class="h-[102px] w-[102px]" :src="icon"  alt="icon-verified">
