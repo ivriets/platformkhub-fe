@@ -4,10 +4,10 @@
         <!-- button -->
         <div class="bg-[#212121] h-[calc(100vh-64px)] z-10 w-[256px] overflow-y-auto drawer-none-scrolling">
             <div class="flex flex-col justify-between h-full">
-                <div class="py-2 mr-6 pl-4">
+                <div class="py-2 ">
                     <div v-for="(item, index) in listDrawer" :key="'drawer' + index" class="block">
                         <nuxt-link :to="item.path" :title="item.label">
-                            <div v-if="item.children.length === 0" class="cursor-pointer hover:bg-white/20">
+                            <div v-if="item.children.length === 0" class="cursor-pointer hover:bg-white/20 px-7" :class="kelasAktif(item)">
                                 <div class="flex items-center py-[10px]">
                                     <img class="h-[24px] w-[24px]" :src="item.icon" alt="icon-menu">
                                     <div class="ml-3">{{$t(item.label)}}</div>
@@ -16,10 +16,15 @@
                         </nuxt-link>
                         <div v-if="item.children.length > 0" class="">
                             <!-- <client-only> -->
-                                <ElementsCollaps :icon="item.icon" :title="$t(item.label)" :classTambahan="'cursor-pointer hover:bg-white/20'" :isDrawer="statusDrawer">
+                                <ElementsCollaps 
+                                    :icon="item.icon" 
+                                    :title="$t(item.label)" 
+                                    :classTambahan="kelasAktifParent(item)" 
+                                    :isDrawer="statusDrawer"
+                                >
                                     <div v-for="(item2, index2) in item.children" :key="'childrendrawer' + index2" class="">
                                         <nuxt-link :to="item2.path" :title="item2.label">
-                                            <div @click="clearHalamanStore" class="hover:bg-white/20">
+                                            <div @click="clearHalamanStore" class="hover:bg-white/20 pl-7" :class="kelasAktif(item2)">
                                                 <div class="py-2 pl-[36px]">{{$t(item2.label)}}</div>
                                             </div>
                                         </nuxt-link>
@@ -32,11 +37,12 @@
                 <div class="py-2">
                     <div v-if="statusDrawer" class="flex items-center justify-center px-4 py-[10px] cursor-pointer hover:bg-white/20">
                         <img class="h-[24px] w-[24px]" src="/icons/icon-logout.png" alt="icon-logout">
-                        <button class="ml-3" @click="btnLogout">Logout</button>
+                        <button class="ml-3" @click="btnLogout">Logout {{ currentPath }}</button>
                     </div>
                 </div>
             </div>
         </div>
+        
         <div class="absolute top-0 right-0 mt-[100px] z-20 h-[24px] w-[24px] mr-[3px]" :style="statusDrawer ? 'margin-left:'+styleOpen : 'margin-left:'+styleClose">
             <button class="">
                 <img @click="btnToggle" class="flex items-center justify-end h-[24px] w-[25px] cursor-pointer transition-all" alt="" src="/icons/icon-toggle-open.png" :class="statusDrawer ? 'rotate-180 origin-center' : ''">
@@ -60,7 +66,7 @@ export default {
                 {
                     icon: '/icons/icon-verification.png',
                     label: 'List Verifikasi',
-                    path: '',
+                    path: '/verifications',
                     children: [
                         {
                             label: 'Individu',
@@ -75,7 +81,7 @@ export default {
                 {
                     icon: '/icons/icon-moderation.png',
                     label: 'List Moderasi',
-                    path: '',
+                    path: '/moderations',
                     children: [
                         {
                             label: 'Program',
@@ -98,7 +104,7 @@ export default {
                 {
                     icon: '/icons/icon-career.png',
                     label: 'Karir',
-                    path: '',
+                    path: '/career',
                     children: [
                         {
                             label: 'Slider',
@@ -162,6 +168,9 @@ export default {
         styleClose() {
             const widthDrawer = this.$store.state.drawerClose;
             return widthDrawer +'px'
+        },
+        currentPath() {
+            return this.$route.path
         }
     },
     mounted() {
@@ -171,6 +180,15 @@ export default {
         initialize() {
             // console.log(this.statusDrawer)
             // this.$store.commit('setDrawer', false)
+        },
+        kelasAktif(item) {
+           return this.currentPath === item.path ? 'bg-empat' : ''
+        },
+        kelasAktifParent(item) {
+            const defClass ='cursor-pointer hover:bg-white/20 px-7 '
+            const pecah = this.currentPath.split('/')
+            const aktif = '/' + pecah[1] === item.path ? 'bg-empat' : ''
+            return defClass + aktif
         },
 
         btnToggle() {
