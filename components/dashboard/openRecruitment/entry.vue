@@ -8,7 +8,7 @@
                         placeholder="Write Here"
                         :name="prefixName+'titleid'"
                         :label="'Indonesia Title'"
-                        v-model="form.title[0]"
+                        v-model="form.judul[0]"
                     />
                 </div>
                 <div class="col-span-12 md:col-span-6">
@@ -16,12 +16,12 @@
                         placeholder="Write here"
                         :name="prefixName+'titleen'"
                         :label="'English Title'"
-                        v-model="form.title[1]"
+                        v-model="form.judul[1]"
                     />
                 </div>
                 <div class="col-span-12 md:col-span-6">
                     <InputAutocompleteMulti 
-                        v-model="form.department"
+                        v-model="form.kategori"
                         :name="prefixName+'department'"
                         :placeholder="'Search or Add'"
                         :label="'Department'"
@@ -61,8 +61,10 @@
 
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
-                <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
+                <!-- <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
+                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div> -->
+                <button class="button-standar-outline" @click="btnBack"> {{$t('Back')}} </button>
+                <button disabled class="button-standar" @click="simpan"> {{$t('Save')}} </button>
             </div>
         </div>
         <!-- <pre>{{form}}</pre> -->
@@ -76,8 +78,8 @@ export default {
         return {
             prefixName: 'newopenrec',
             form: {
-                title: ['', ''],
-                department: [],
+                judul: ['', ''],
+                kategori: [],
                 status: '',
                 deskripsi: ['', '']
             },
@@ -103,7 +105,33 @@ export default {
     methods: {
         btnBack() {
             this.$router.push('/career/open-recruitment/')
+        },
+        simpan() {
+            this.realSimpan()
+        },
+        async realSimpan() {
+            await this.$apiBase.post('daftarloker/', this.form).then(res => {
+                console.log(res.data)
+            }).catch(err => {
+                console.log(err)
+            })
         }
     },
+// {
+//   "title": [
+//     "indonesia",
+//     "english"
+//   ],
+//   "department": [
+//     1
+//   ],
+//   "status": 3,
+//   "deskripsi": [
+//     "<p>deskripsi Indonesia</p>",
+//     "<p>deskripsi English</p>"
+//   ]
+// }
+
+    
 }
 </script>

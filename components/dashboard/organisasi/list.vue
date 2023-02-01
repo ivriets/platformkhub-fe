@@ -152,7 +152,7 @@ export default {
                 {
                     id: 'deleted',
                     label: 'Deleted',
-                    endpoint: 'deletedOrganisasi'
+                    endpoint: 'deleted_organizations'
                 }
             ],
             opsiShowRow:[

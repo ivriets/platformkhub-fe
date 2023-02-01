@@ -13,7 +13,9 @@
                 v-model="dataTable"
                 :headClass="'hidden'"
                 :customClass="'table-vertical-top'"
+                :drag="true"
                 :key="'keytable'+keyTable"
+                :dragChange="'sorter'"
 
             >
                 <template v-slot:deskripsi="{item}">
@@ -85,7 +87,7 @@
                         </div>
                     </div>
         </ElementsModal>
-
+    <pre>{{ dataTable }}</pre>
     </div>
 </template>
 
@@ -160,7 +162,8 @@ export default {
                     return {
                         id: o.pkMilestoneId,
                         tanggal: o.tanggal,
-                        deskripsi: o.deskripsi
+                        deskripsi: o.deskripsi,
+                        sorter: o.sorter
                 }}})
             }).catch(err => {
                 console.log(err)

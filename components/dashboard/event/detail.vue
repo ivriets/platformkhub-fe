@@ -74,7 +74,7 @@
                                         {{ $dayjs(dataDetail[item1.value]).format('DD MMM YYYY HH:mm') }}
                                     </div>
                                     <div v-else-if="item1.value==='url'">
-                                        <span v-if="dataDetail.activityOrganizing && dataDetail.activityOrganizing[0].urlRegistrasiEksternal">{{dataDetail.activityOrganizing[0].urlRegistrasiEksternal}}</span>
+                                        <span v-if="dataDetail.activityOrganizing.length > 0 && dataDetail.activityOrganizing[0].urlRegistrasiEksternal">{{dataDetail.activityOrganizing[0].urlRegistrasiEksternal}}</span>
                                     </div>
                                     <div v-else-if="item1.value==='registration'">
                                         <span v-if="dataDetail.registrationStartDate">
@@ -85,7 +85,7 @@
                                         </span>
                                     </div>
                                     <div v-else-if="item1.value==='participant'">
-                                        <span v-if="dataDetail.activityOrganizing && dataDetail.activityOrganizing[0].participantSeat">{{dataDetail.activityOrganizing[0].participantSeat}}</span>
+                                        <span v-if="dataDetail.activityOrganizing.length > 0 && dataDetail.activityOrganizing[0].participantSeat">{{dataDetail.activityOrganizing[0].participantSeat}}</span>
 
                                     </div>
                                     <div v-else>

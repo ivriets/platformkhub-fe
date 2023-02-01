@@ -37,7 +37,7 @@
                 <div class="py-2">
                     <div v-if="statusDrawer" class="flex items-center justify-center px-4 py-[10px] cursor-pointer hover:bg-white/20">
                         <img class="h-[24px] w-[24px]" src="/icons/icon-logout.png" alt="icon-logout">
-                        <button class="ml-3" @click="btnLogout">Logout {{ currentPath }}</button>
+                        <button class="ml-3" @click="btnLogout">Logout</button>
                     </div>
                 </div>
             </div>

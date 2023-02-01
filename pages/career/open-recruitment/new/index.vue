@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto">
         <div class="px-6 py-10">
-            <DashboardNewOpenRecruitment />
+            <DashboardOpenRecruitmentEntry />
         </div>
     </div>
 </template>

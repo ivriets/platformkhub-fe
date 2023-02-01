@@ -1,17 +1,5 @@
 <template>
     <div>
-        <!-- <div v-if="form" class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9">
-            <div v-for="(i, index) in form" :key="index" class="col-span-12 md:col-span-6">
-                <div class="mb-2">
-                    <InputText 
-                        v-model="i.linkSosialMedia"
-                        :name="prefixName+listSosialMedia[i.kategoriSosialMedia-1]"
-                        :label="'Tautan '+listSosialMedia[i.kategoriSosialMedia-1]"
-                    />
-                </div>
-            </div>
-        </div> -->
-
         <div v-if="form" class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9">
             <div v-for="(i, index) in form" :key="index" class="col-span-12 md:col-span-6">
                 <div class="mb-2">
@@ -24,12 +12,7 @@
             </div>
         </div>
 
-
-        <!-- <div class="bg-white shadow-md rounded-xl py-4 px-6 mt-10">
-            <div class="flex items-center justify-end">
-                <div @click="save" class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div>
-            </div>
-        </div> -->
+<pre>{{ form }}</pre>
     </div>
 </template>
 
@@ -85,7 +68,7 @@ export default {
                         // pkSosialMediaId: hasil.pkSosialMediaId ? hasil.pkSosialMediaId : '',
                         kategoriSosialMedia: index + 1,
                         linkSosialMedia: hasil.linkSosialMedia ? hasil.linkSosialMedia : '',
-                        organisasiId: hasil.organisasiId ? hasil.organisasiId : ''
+                        organisasiId: this.id
                     }
                     if (hasil) {
                         data.pkSosialMediaId = hasil.pkSosialMediaId
@@ -103,7 +86,7 @@ export default {
         async updateData(data) {           
             await this.$apiPlatform.put('verificator/organisasi/'+this.id+'/', data).then(res => {
                 const data = res.data         
-                this.$toast.show(data.message)
+                this.$toast.show(this.$t('Social Media') + ' ' + this.$t('updateSukses'))
                 this.initialize()
             }).catch(err => {
                 this.$toast.show(err)

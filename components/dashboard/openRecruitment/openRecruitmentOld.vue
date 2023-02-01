@@ -13,12 +13,16 @@
                     </div>
                 </div>
             </div>
-            <a href="/career/open-recruitment/new/">
+            <!-- <a href="/career/open-recruitment/new/">
                 <button class="px-3 py-[6px] bg-warna-empat rounded-lg text-white flex items-center cursor-pointer">
                     <img src="/icons/icon-button-download.png" alt="icon-download">
                     <div class="ml-1">New Loker</div>
                 </button>
-            </a>
+            </a> -->
+            <NuxtLink to="/career/open-recruitment/new/" class="button-standar flex gap-3 items-center">
+                    <img src="/icons/icon-button-download.png" alt="icon-download">
+                    <div class="ml-1">New Loker</div>
+            </NuxtLink>
         </div>
         <div>
             <div class="flex items-center justify-end border border-[#A1A2B7] rounded-lg bg-white mb-5">
@@ -109,7 +113,7 @@ export default {
         },
 
         async deleteData(id) {           
-            await this.$apiBase.delete('sliderloker/'+id).then(res => {
+            await this.$apiBase.delete('daftarloker/'+id).then(res => {
                 data = res.data
                 this.message = data.message
                 alert("Data berhasil disimpan.")

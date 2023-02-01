@@ -343,7 +343,14 @@ export default {
                         label: 'Rejected',
                         length: data.totalRejectedIndividu,
                         endpoint: 'rejectedIndividu'
+                    },
+                    {
+                        id: 'deleted',
+                        label: 'Deleted',
+                        length: data.totalDeletedIndividu,
+                        endpoint: 'deletedIndividu'
                     }
+
                 ]
                 this.$nextTick(() => {
                     this.loaderLog = true
