@@ -21,6 +21,7 @@
                             :name="'paragrafid'+index"
                             :max="2500"
                             :counter="true"
+                            :key="'kyefadf0'+index+keyText"
                         />
                     </div>
                     <div>
@@ -30,6 +31,7 @@
                             :name="'paragrafen'+index"
                             :max="2500"
                             :counter="true"
+                            :key="'kyefadf1'+index+keyText"
 
                         />
                     </div>
@@ -65,15 +67,18 @@ export default {
     props: ['value'],
     data() {
         return {
+            loader: false,
             keyImage: 0,
+            keyText: 0,
             newVal: {
                 list: [],
                 new: [],
                 deleted: [],
                 updated: [],
+
+            },
                 debounceTimeout: null,
 
-            }
         }
     },
 
@@ -96,8 +101,19 @@ export default {
     },
     methods: {
         initialize() {
+            this.loader = false
             this.newVal = this.value
+
+            //init sorter
+            this.newVal.list = _.orderBy(this.newVal.list, 'sorter')
+            this.newVal.new = _.orderBy(this.newVal.new, 'sorter')
+
+            this.$nextTick(() => {
             this.keyImage+=1
+            this.keyText+=1
+
+                this.loader = true
+            })
         },
 
         deleteSection(item, index) {
@@ -112,19 +128,16 @@ export default {
             }
             this.newVal.deleted = _.uniq(this.newVal.deleted)
             this.newVal.list.splice(index,1)
+            this.$nextTick(() => {
+                this.keyImage+=1
+            })
         }, 
         addSection(typeDeskripsi) {
-            // const indexAkhir = this.newVal.list.length - 1
-            // this.newVal.list[indexAkhir].caption = ['N/A', 'N/A']
-            // this.newVal.list[indexAkhir].paragraf[0] = this.newVal.list[indexAkhir].paragraf[0] === '' ? 'N/A' : this.newVal.list[indexAkhir].paragraf[0]
-            // this.newVal.list[indexAkhir].paragraf[1] = this.newVal.list[indexAkhir].paragraf[1] === '' ? 'N/A' : this.newVal.list[indexAkhir].paragraf[1]
-
-
 
             const vA = {
                 typeDeskripsi: typeDeskripsi,
                 imgDeskripsi: '',
-                caption: ['',''],
+                caption: ['khub','khub'],
                 paragraf: ['',''],
                 sorter: 0,
                 tipe: 'new'
@@ -148,7 +161,8 @@ export default {
             })
 
             const newDesk = this.newVal.list.filter(e => e.tipe === 'new');
-            const updatedDesk = this.newVal.list.filter(e => !e.tipe)
+            const updatedDesk = this.newVal.list.filter(e => !e.tipe && e.txtDeskripsi === 1 )
+            const updateImg = this.newVal.list.filter(e => e.imgDeskripsi && e.imgDeskripsi.file !== null)
 
             this.newVal.new = newDesk
             this.newVal.updated = updatedDesk

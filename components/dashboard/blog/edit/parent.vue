@@ -41,6 +41,7 @@
                         <InputContentSectionBaru
                             v-if="deskripsi"
                             v-model="deskripsi"
+                            :key="'desk'+keyMaster"
                         />
                       <!-- <pre> diluar:  {{ deskripsi }} </pre> -->
                     </div>
@@ -178,8 +179,15 @@
                 :galleri="daftarGalleri"
                 v-if="saving.statusGalleri"
             />
+            <DashboardChildSimpanContentSection 
+                v-model="saving.deskripsi"
+                :model="'blog'"
+                :modelId="id"
+                :deskripsi="deskripsi"
+                v-if="saving.statusDeskripsi"
+            />
         </div>
-
+<!-- <pre>{{deskripsi}}</pre> -->
     </div>
 </template>
 
@@ -194,6 +202,7 @@ export default {
                 list: [],
                 deleted: []
             },
+            keyMaster: 0,
             maxTitle: 80,
             dataDetail: null,
             // childBreadcrumb: [],
@@ -230,14 +239,17 @@ export default {
                 tag: '',
                 statusTag: false,
                 galleri: '',
-                statusGalleri: false
+                statusGalleri: false,
+                deskripsi: '',
+                statusDeskripsi: false,
             },
 
             checkSaving: {
                 root: false,
                 thumbnail: false,
                 // tag: false,
-                galleri: false
+                galleri: false,
+                deskripsi: false
             }
         }
     },
@@ -294,16 +306,24 @@ export default {
         'saving.galleri' (val) {
             if (val==='done') this.checkSaving.galleri = true
         },
+        'saving.deskripsi' (val) {
+            if (val==='done') this.checkSaving.deskripsi = true
+        },
+
         checkSaving: {
             handler(val) {
                 if (
-                    val.root === true && 
-                    val.thumbnail === true && 
-                    val.galleri === true
+                    val.root === true &&  val.thumbnail === true && 
+                    val.galleri === true 
+                    // && val.deskripsi === true
                     ) 
                 {
                      this.$toast.show(this.$t('Blog')+ ' ' + this.$t('updated successfully'))
-                     this.initialize()
+                        this.initialize()
+
+                    //  setTimeout(() => {
+                    //     this.initialize()
+                    //  },1000)
                 }
 
             },
@@ -316,18 +336,30 @@ export default {
     methods: {
         initialize() {
             // this.setBreadcrumb()
+            console.log('baru')
             this.btnText = 'Save'
+
+            this.deskripsi = {
+                list: [],
+                deleted: [],
+                updated: [],
+                new: []
+            },
+
             this.checkSaving = {
                 root: false,
                 thumbnail: false,
                 // tag: false,
-                galleri: false
+                galleri: false,
+                deskripsi: false,
             }
             this.saving = {
                 // tag: '',
                 statusTag: false,
                 galleri: '',
-                statusGalleri: false
+                statusGalleri: false,
+                deskripsi: '',
+                statusDeskripsi: false,
             },
             this.imageThumbnailLoader = false
             
@@ -343,7 +375,7 @@ export default {
 
                 this.dataDetail = data
                 this.form.judulArtikel = data.judulArtikel
-                var forDeskripsi = data.deskripsi
+                // var forDeskripsi = data.deskripsi
                 this.form = {
                     judulArtikel: data.judulArtikel,
                     // deskripsi: data.deskripsi,
@@ -357,12 +389,13 @@ export default {
                 this.formTag.api = data.blogsTag
 
                 this.imgThumbnail.displayImage = data.imgThumbnail
-                this.deskripsi.list = this.form.deskripsi
+                this.deskripsi.list = data.deskripsi
                 this.daftarGalleri.list = data.blogsGalleries
 
                 this.$nextTick(() => {
                     this.imageThumbnailLoader = true
                     this.imageThumbnailKey +=1
+                    this.keyMaster+=1
                 })
                 
             }).catch(err => {
@@ -418,6 +451,7 @@ export default {
                 } else {
                     this.checkSaving.thumbnail = true
                 } 
+                this.savingDeskripsi()
                 this.savingTag()
                 this.savingGallery();
 
@@ -461,7 +495,14 @@ export default {
             setTimeout(() => {
                 this.saving.statusTag = false
             }, 500)
+        },
+        savingDeskripsi() {
+            this.saving.statusDeskripsi = true
+            setTimeout(() => {
+                this.saving.statusDeskripsi = false
+            }, 500)
         }
+
     }
 }
 </script>

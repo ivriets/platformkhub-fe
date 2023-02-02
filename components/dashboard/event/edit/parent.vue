@@ -307,15 +307,20 @@
                 :model="'event'"
                 :modelId="id"
                 v-if="saving.statusLokasiOffline"
-                
             />
-
+            <DashboardChildSimpanContentSection 
+                v-model="saving.deskripsi"
+                :model="'events'"
+                :modelId="id"
+                :deskripsi="deskripsi"
+                v-if="saving.statusDeskripsi"
+            />
         </div>
 
         <button @click="savingLokasiOffline">simpan lokasi</button>
         <button @click="savingGallery">simpan galleri</button>
 
-        <pre>{{formLokasiOffline}}</pre>
+        <!-- <pre>{{formLokasiOffline}}</pre> -->
 
     </div>
 </template>
@@ -422,7 +427,9 @@ export default {
                 galleri: '',
                 statusGalleri: false,
                 lokasiOffline: '',
-                statusLokasiOffline: false
+                statusLokasiOffline: false,
+                deskripsi: '',
+                statusDeskripsi: false
             },
 
             checkSaving: {
@@ -454,7 +461,7 @@ export default {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
         title() {
-            return this.$t('Blog')
+            return this.$t('Events')
         },
         id() {
             return this.$route.params.id;
@@ -641,7 +648,7 @@ export default {
                 } else {
                     this.checkSaving.thumbnail = true
                 } 
-                
+                this.savingDeskripsi()
 
                 this.savingTag()
                 this.savingGallery();
@@ -682,7 +689,14 @@ export default {
             setTimeout(() => {
                 this.saving.statusLokasiOffline = false
             }, 500)
+        },
+        savingDeskripsi() {
+            this.saving.statusDeskripsi = true
+            setTimeout(() => {
+                this.saving.statusDeskripsi = false
+            }, 500)
         }
+
 
 
     }

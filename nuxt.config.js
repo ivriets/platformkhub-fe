@@ -103,7 +103,7 @@ export default {
       modal: true,
       toast: { 
         defaultProps: { 
-            timeout: 5,
+            timeout: 3,
             classToast: 'bg-utama z-50',
             classTitle: 'text-white',
             classMessage: 'text-white',

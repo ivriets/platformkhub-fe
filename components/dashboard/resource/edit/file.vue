@@ -7,7 +7,6 @@
                 :opsiRadio="opsiTypeResources"
                 :name="'resourcetype'"
                 :orientasi="'horizontal'"
-                :disabled="disRoot"
                 :key="'keyfda'+keyMaster"
             />
         </div>
@@ -27,7 +26,6 @@
                 v-model="newVal.binFile"
                 :maxSize="10"
                 :accept="acceptFile"
-                :key="'uploadfile'+keyMaster"
                 :disabled="newVal.embedLink === '' ? false:true "
 
             />
@@ -41,15 +39,7 @@ export default {
         return {
             resourceType: '',
             keyMaster: 0,
-            // acceptFile: ''
-            // newVal: {
-            //     pkFileId: '',
-            //     typeResources: '',
-            //     embedLink: '',
-            //     deskripsiFile: ['',''],
-            //     typeVisibility: 1
 
-            // }
         }
     },
     computed: {

@@ -167,11 +167,17 @@ export default {
           //   file:null, 
           //   status: ''
           // }
-
-          if (this.value && (this.value.displayImage !== '' && this.value.displayImage !== undefined)) {
+          console.log('val', this.value)
+          console.log('object', _.isObject(this.value) )
+          if (_.isObject(this.value)  && (this.value.displayImage !== '' && this.value.displayImage !== undefined)) {
             const forPath = this.value.displayImage.substring(0,1) === '/' ? this.basePath : ''
             this.dataImage.displayImage = forPath + this.value.displayImage
 
+          } else if ( _.isString(this.value) && this.value !== '' ) {
+            // console.log('kadieu')
+            const forPath = this.value.substring(0,1) === '/' ? this.basePath : ''
+
+            this.dataImage.displayImage = forPath + this.value
           } else {
             this.dataImage = {
               displayImage: '',
@@ -293,6 +299,7 @@ export default {
                 this.openModal()
               } else {
                 this.dataImage = data
+                this.dataImage.status = 'belumUpload'
                 this.updateValue()
               }
 

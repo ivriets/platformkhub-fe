@@ -10,6 +10,7 @@
 </template>
 <script>
 export default {
+    // bug blob
     props: ['path', 'provider'],
     data() {
         return {
@@ -27,7 +28,8 @@ export default {
                 width: '640',
                 sources: [
                     {
-                        src: 'https://www.youtube-nocookie.com/embed/' + this.path,
+                        src: this.path,
+                        // src: 'https://www.youtube-nocookie.com/embed/' + this.path,
                         // type: 'video/mp4'
                     }
                 ]

@@ -13,9 +13,7 @@
                 v-model="dataTable"
                 :headClass="'hidden'"
                 :customClass="'table-vertical-top'"
-                :drag="true"
                 :key="'keytable'+keyTable"
-                :dragChange="'sorter'"
 
             >
                 <template v-slot:deskripsi="{item}">
@@ -87,7 +85,7 @@
                         </div>
                     </div>
         </ElementsModal>
-    <pre>{{ dataTable }}</pre>
+    <!-- <pre>{{ dataTable }}</pre> -->
     </div>
 </template>
 
@@ -165,6 +163,17 @@ export default {
                         deskripsi: o.deskripsi,
                         sorter: o.sorter
                 }}})
+                // const parseSort = _.orderBy(res.data.milestoneOrganisasi, 'tanggal')
+                // this.dataTable = parseSort.map((o,index) => {
+                //     const data = {
+                //         id: o.pkMilestoneId,
+                //         tanggal: o.tanggal,
+                //         deskripsi: o.deskripsi,
+                //         sorter: o.sorter ? o.sorter : index
+                //     }
+                //     return data;
+                // });
+                // this.datatable = _.orderBy(this.dataTable, 'sorter')
             }).catch(err => {
                 console.log(err)
             })

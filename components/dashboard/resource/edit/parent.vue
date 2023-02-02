@@ -7,7 +7,7 @@
                 :child="childBreadcrumb"
             />
         </div>
-        <div  class="bg-white shadow-md rounded-xl py-8 px-6 mb-[28px]">
+        <div v-if="dataDetail" class="bg-white shadow-md rounded-xl py-8 px-6 mb-[28px]">
             <div class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 lg:col-span-9">
                     <div class="mb-6">
@@ -32,7 +32,7 @@
 
                     <hr class="border-warna-tujuh my-10">
                         <DashboardResourceEditFile 
-                            v-model="form.resourcesFiles"
+                            v-model="resourcesFiles"
                             :key="'resourcetype'+keyMaster"
                         />
 
@@ -40,10 +40,10 @@
 
                     <div>
                         <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Content') }}</div>
-                        <InputContentSectionBaru 
+                        <!-- <InputContentSectionBaru 
                             v-if="deskripsi"
                             v-model="deskripsi"
-                        />
+                        /> -->
                     </div>
 
                 </div>
@@ -96,13 +96,14 @@
                     <div >
                         <InputAutocompleteMulti 
                             v-model="form.typeAudience"
-                            :name="prefixName+'tipeaudience'"
+                            :name="prefixName+'typeAudience'"
                              :label="$t('Audience Type')"
                             :opsi="typeAudience"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="'tipeaudience'+keyMaster"
                             :multilang="true"
+                            :required="true"
 
                         />
                     </div>
@@ -110,13 +111,14 @@
                     <div >
                         <InputAutocompleteMulti 
                             v-model="form.typeApproach"
-                            :name="prefixName+'tipeapproach'"
+                            :name="prefixName+'typeApproach'"
                             :label="$t('Approach')"
                             :opsi="typeApproach"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="'tipeapproach'+keyMaster"
                             :multilang="true"
+                            :required="true"
 
                         />
                     </div>
@@ -124,30 +126,19 @@
                     <div >
                         <InputAutocompleteMulti 
                             v-model="form.typeIssues"
-                            :name="prefixName+'topik'"
+                            :name="prefixName+'typeIssues'"
                             :label="$t('Issues')"
                             :opsi="typeIssues"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="'typeIssues'+keyMaster"
                             :multilang="true"
+                            :required="true"
 
                         />
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
                     <div >
-                        <!-- <InputAutocompleteMulti 
-                            v-model="form.resourcesTag"
-                            :name="prefixName+'tag'"
-                            :label="$t('Tag')"
-                            :opsi="opsiTag"
-                            :itemValue="'id'"
-                            :itemLabel="'label'"
-                            :key="'tag'+keyMaster"
-                            :multilang="true"
-                            :addNew="true"
-
-                        /> -->
                         <InputFieldTag
                             v-model="formTag"
                             :name="prefixName+'tag'"
@@ -156,7 +147,6 @@
                             :itemLabel="'label'"
                             :multilang="true"
                             :addNew="true"
-                            :key="'keytag'+keyMaster"
                         />
 <!-- {{opsiTag}} -->
 
@@ -172,7 +162,7 @@
             </div>
         </div>
 
-        <div class="ah">
+        <div class="ah hidden">
             <DashboardChildSimpanTag 
                 v-model="saving.tag"
                 :tag="formTag"
@@ -180,9 +170,14 @@
                 :modelId="id"
                 v-if="saving.statusTag"
             />
+            <DashboardChildSimpanResourcesFiles 
+                v-model="saving.resourcesFiles"
+                :resourcesFiles="resourcesFiles"
+                :modelId="id"
+                v-if="saving.statusResourcesFiles"
+            />
         </div>
 
-    <pre>{{ formTag }}</pre>
     </div>
 </template>
 
@@ -206,14 +201,16 @@ export default {
                 typeApproach: [],
                 typeIssues: [],
                 // resourcesTag: [],
+
+            },
                 resourcesFiles: {
                         pkFileId: '',
                         typeResources: '',
                         embedLink: '',
                         deskripsiFile: ['',''],
                         typeVisibility: 1
-                }
-            },
+                },
+
             formTag: {
                 list: [],
                 deleted: [],
@@ -238,10 +235,13 @@ export default {
             saving: {
                 tag: '',
                 statusTag: false,
+                resourcesFiles: '',
+                statusResourcesFiles: false
             },
             checkSaving: {
                 root: false,
                 thumbnail: false,
+                resourcesFiles: false
             }
 
 
@@ -301,13 +301,45 @@ export default {
     watch: {
         imageThumbnailLoader() {
             this.imageThumbnailKey +=1
+        },
+        'saving.resourcesFiles'(val) {
+            if (val === 'done') this.checkSaving.resourcesFiles = true
+        },
+
+        checkSaving: {
+            handler(val) {
+                if (
+                    val.root === true && 
+                    val.thumbnail === true && val.resourcesFiles === true
+                    ) 
+                {
+                     this.$toast.show(this.$t('Resources')+ ' ' + this.$t('updated successfully'))
+                     this.initialize()
+                }
+
+            },
+            deep: true
         }
+
     },
     mounted() {
         this.initialize()
     },
     methods: {
         initialize() {
+            console.log('inisial')
+            this.saving = {
+                tag: '',
+                statusTag: false,
+                resourcesFiles: '',
+                statusResourcesFiles: false
+            },
+
+            this.checkSaving = {
+                root: false,
+                thumbnail: false,
+                resourcesFiles: false,
+            }
             this.btnText = 'Save'
             this.opsiRadio = this.kategoriArtikel
             // this.getTag();
@@ -337,38 +369,34 @@ export default {
                 this.form = {
                     submission: data.submission,
                     judulArtikel: data.judulArtikel,
-                    deskripsi: data.deskripsi,
+                    // deskripsi: data.deskripsi,
                     kategoriArtikel: _.flatMap(data.kategoriArtikel, "id")[0],
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
                     // resourcesTag: _.flatMap(data.resourcesTag, "pilihanTagId.id"),
-                    resourcesFiles: data.resourcesFiles ? {
-                        pkFileId: data.resourcesFiles.pkFileId,
-                        binFile: data.resourcesFiles.binFile === '/assets/file.pdf' ? '' : data.resourcesFiles.binFile,
-                        typeResources: data.resourcesFiles.typeResources.id,
-                        embedLink: data.resourcesFiles.embedLink === 'https://' ? '' : data.resourcesFiles.embedLink,
-                        deskripsiFile: data.resourcesFiles.deskripsiFile,
-                        typeVisibility: data.resourcesFiles.typeVisibility
-                    } : {
-                        pkFileId: '',
-                        binFile: '',
-                        typeResources: '',
-                        embedLink: '',
-                        deskripsiFile: ['',''],
-                        typeVisibility: 1
-                    }
-                }
 
+                }
+                this.resourcesFiles = data.resourcesFiles ? {
+                    pkFileId: data.resourcesFiles.pkFileId,
+                    binFile: data.resourcesFiles.binFile === '/assets/file.pdf' ? '' : data.resourcesFiles.binFile,
+                    typeResources: data.resourcesFiles.typeResources.id,
+                    embedLink: data.resourcesFiles.embedLink === 'https://' ? '' : data.resourcesFiles.embedLink,
+                    deskripsiFile: data.resourcesFiles.deskripsiFile,
+                    typeVisibility: data.resourcesFiles.typeVisibility
+                } : {
+                    pkFileId: '',
+                    binFile: '',
+                    typeResources: '',
+                    embedLink: '',
+                    deskripsiFile: ['',''],
+                    typeVisibility: 1
+                }
                 this.formTag.api = data.resourcesTag
                 this.deskripsi.list = this.form.deskripsi
                 this.imgThumbnail.displayImage = data.imgThumbnail
 
-                if (!data.deskripsi || data.deskripsi.length == 0){
-                    forDeskripsi = []
-                    forDeskripsi.push({"typeDeskripsi": 2,"imgDeskripsi": "","caption": ["-","-"],"paragraf": data.deskripsiPanjang, "sorter": 0})
-                    this.form.deskripsi = forDeskripsi
-                }
+
 
                 this.$nextTick(() => {
                     this.imageThumbnailLoader = true
@@ -379,8 +407,36 @@ export default {
                 console.log(err)
             })
         },
+        errorNotif(msg) {
+            this.$toast.show({
+                type: 'danger',
+                title: 'Error',
+                message: msg,
+            })
+        },
+        focusField(id) {
+            document.getElementById(this.prefixName + id).focus()
+        },
+        errorField(msg, id) {
+            this.errorNotif(msg);
+            this.focusField(id)
+        },
+
         simpan() {
-            this.putData()
+            this.form.judulArtikel[0] = this.form.judulArtikel[0] === '' ? 'N/A' : this.form.judulArtikel[0]
+            this.form.judulArtikel[1] = this.form.judulArtikel[1] === '' ? 'N/A' : this.form.judulArtikel[1]
+
+            if (this.form.typeAudience.length === 0) {
+                this.errorField(this.$t('typeAudienceBlank'), 'typeAudience')
+            
+            } else if (this.form.typeApproach.length === 0) {
+                this.errorField(this.$t('typeApproachBlank'), 'typeApproach')
+            } else if (this.form.typeIssues.length === 0) {
+                this.errorField(this.$t('typeIssuesBlank'), 'typeIssues')
+
+            } else {
+                this.putData()
+            }
         },
 
         async putData() {
@@ -400,6 +456,7 @@ export default {
 
                 }
                 this.savingTag()
+                this.savingResourcesFiles()
                 
                 // else {
                 //     this.$toast.show(this.$t('Resources')+ ' ' + this.$t('updated successfully'))
@@ -434,6 +491,13 @@ export default {
             setTimeout(() => {
                 this.saving.statusTag = false
             }, 500)
+        },
+        savingResourcesFiles() {
+            this.saving.statusResourcesFiles = true
+            setTimeout(() => {
+                this.saving.statusResourcesFiles = false
+            }, 500)
+
         }
 
     }

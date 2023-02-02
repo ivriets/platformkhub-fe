@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="loader">
         <button @click="openModal" class="hover:text-blue-700"  title="View file"> 
             <slot>{{ label }}</slot>
         </button>
@@ -38,6 +38,7 @@ export default {
     props: ['label','url','provider'],
     data() {
         return {
+            loader: false,
             fileType : '',
             modal: {
                 status: false,
@@ -67,17 +68,26 @@ export default {
 
     methods: {
         initialize() {
+            this.loader = false
             if (this.label !=='') {
                 this.modal.title = this.label
                 const ext = this.label.split('.').pop().toLowerCase();
                 if (this.ekstensi.pdf.includes(ext)) {
                     this.fileType = 'pdf'
                 } else if (this.ekstensi.av.includes(ext)) {
+                    // if (this.url.substring(0,4)==='blob'){ 
+                    //     console.log('kadieu?')
+                    //     this.url = URL.createObjectURL(this.url)
+                    // }
+
                     this.fileType='av'
                 } else if (this.ekstensi.audio.includes(ext)) {
                     this.fileType='audio'
                 }
             } 
+            this.$nextTick(() => {
+                this.loader = true
+            })
         },
         openModal() {
             this.modal.status = true

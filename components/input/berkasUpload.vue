@@ -78,7 +78,6 @@ export default {
     },
     methods: {
         initialize() {
-            console.log(this.value)
             const tipeFile = typeof this.value
             if (tipeFile === 'string' && this.value !== '') {
                 this.listFiles = [
@@ -87,6 +86,10 @@ export default {
                         name: this.value.length > 0 ? this.value.split('/').pop() : ''
                     }
                 ]
+            } else if (this.value && this.value.fileUrl) {
+                this.listFiles = [this.value]
+            } else {
+                this.listFile = this.value
             }
         },
         prosesFiles() {
@@ -103,6 +106,8 @@ export default {
 
                 } else if (panjangNama > 99) {
                     this.$toast.show('nama berkas image terlalu panjang, mohon diperpendek ' )
+                    // this.$refs.inputfiles.value = null
+
                 } else {
                     const data = {
                         file: e,
@@ -114,6 +119,8 @@ export default {
                     this.countDownSession +=1
                     // this.updateValue()
                 }
+                    this.$refs.inputfiles.value = null
+
             })
         },
         dragOver(event) {
