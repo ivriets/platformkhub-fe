@@ -167,8 +167,6 @@ export default {
           //   file:null, 
           //   status: ''
           // }
-          console.log('val', this.value)
-          console.log('object', _.isObject(this.value) )
           if (_.isObject(this.value)  && (this.value.displayImage !== '' && this.value.displayImage !== undefined)) {
             const forPath = this.value.displayImage.substring(0,1) === '/' ? this.basePath : ''
             this.dataImage.displayImage = forPath + this.value.displayImage

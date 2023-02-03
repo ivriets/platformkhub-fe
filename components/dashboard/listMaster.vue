@@ -1,26 +1,27 @@
 <template>
     <div class="py-10 px-6">
         <div class="flex items-center mb-4">
-            <div class="w-[240px] mr-4">
+            <div v-if="loaderPage" class="w-[240px] mr-4">
                 <ElementsSearchBarButton 
                     v-model="filter.search"
                     :placeholder="$t('Search')"
                     :name="'searchtext'"
                 />
             </div>
-            <div class="flex flex-grow">
-                <div class="w-[180px]">
-                    <InputSelect 
-                        v-model="showRow"
-                        :opsi="opsiShowRow"
-                        :name="prefixName+'showrow'"
-                        :key="'ks'+keyShow"
-                    />
-                </div>
+            <div v-if="!loaderPage" class="w-[240px] h-[34px] mr-4 animate-pulse bg-gray-200 rounded-md"></div>
+            <div v-if="loaderPage" class="w-[180px]">
+                <InputSelect 
+                    v-model="showRow"
+                    :opsi="opsiShowRow"
+                    :name="prefixName+'showrow'"
+                    :key="'ks'+keyShow"
+                />
             </div>
+            <div v-if="!loaderPage" class="w-[180px] h-[34px] mr-4 animate-pulse bg-gray-200 rounded-md"></div>
+
         </div>
 
-        <div class="flex items-center justify-between border border-[#A1A2B7] rounded-lg bg-white mb-5">
+        <div v-if="loaderPage" class="flex items-center justify-between border border-[#A1A2B7] rounded-lg bg-white mb-5">
             <div v-if="loaderLog" class="px-[14px] py-[9px] flex gap-x-3 pr-3 border-r border-[#A1A2B7]">
                 <button 
                     v-for="(item, index) in kapsul" :key="'kapsul' + index"
@@ -42,11 +43,32 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-xl shadow-md border border-gray-100 text-sm overflow-hidden relative">
+        <div v-if="!loaderPage"
+            class="flex items-center justify-between border border-[#A1A2B7] rounded-lg bg-white mb-5"
+        >
+            <div class="px-[14px] py-[9px] flex gap-x-3 pr-3 border-r border-[#A1A2B7] animate-pulse">
+            <button 
+                    v-for="(item, index) in kapsul" :key="'kapsul' + index"
+                    class="button-kapsul bg-gray-200 text-gray-200"
+                    disabled
+                >
+                {{item.label}} ({{item.length}})
+                </button>
+            </div>
+            <div class="px-[14px] py-[9px]">
+                <div class="flex items-center animate-pulse">
+                    <div class="h-[20px] w-[50px] bg-gray-200 "></div>
+                    <div class="h-[20px] w-[90px] bg-gray-200 mx-2 my-[6px]"></div>
+                </div>
+            </div>
+        
+        </div>
+        <div class="bg-white rounded-xl shadow-md border border-gray-100 text-sm overflow-hidden relative min-h-[150px]">
             <ElementsTable
                 :tableDetail="tableDetail"
                 v-model="dataTable"
                 :key="'keytable'+keyTable"
+
             >
                 <template v-slot:title="{item}">
                     <NuxtLink class="hover:text-blue-700" :to="'/moderations/'+ model +'/'+item.id" >

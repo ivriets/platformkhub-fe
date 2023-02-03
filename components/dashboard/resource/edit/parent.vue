@@ -40,11 +40,13 @@
 
                     <div>
                         <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Content') }}</div>
-                        <!-- <InputContentSectionBaru 
+                        <InputContentSectionBaru 
                             v-if="deskripsi"
                             v-model="deskripsi"
-                        /> -->
+                            :key="'keydesc'+keyMaster"
+                        />
                     </div>
+                    <!-- <pre>{{ deskripsi }}</pre> -->
 
                 </div>
                 <div class="col-span-12 lg:col-span-3">
@@ -176,8 +178,15 @@
                 :modelId="id"
                 v-if="saving.statusResourcesFiles"
             />
-        </div>
+            <DashboardChildSimpanContentSection 
+                v-model="saving.deskripsi"
+                :model="'resource'"
+                :modelId="id"
+                :deskripsi="deskripsi"
+                v-if="saving.statusDeskripsi"
+            />
 
+        </div>
     </div>
 </template>
 
@@ -236,12 +245,15 @@ export default {
                 tag: '',
                 statusTag: false,
                 resourcesFiles: '',
-                statusResourcesFiles: false
+                statusResourcesFiles: false,
+                deskirpsi: '',
+                statusDeskripsi: false
             },
             checkSaving: {
                 root: false,
                 thumbnail: false,
-                resourcesFiles: false
+                resourcesFiles: false,
+                deskripsi: false
             }
 
 
@@ -305,13 +317,14 @@ export default {
         'saving.resourcesFiles'(val) {
             if (val === 'done') this.checkSaving.resourcesFiles = true
         },
+        'saving.deskripsi' (val) {
+            if (val==='done') this.checkSaving.deskripsi = true
+        },
 
         checkSaving: {
             handler(val) {
-                if (
-                    val.root === true && 
-                    val.thumbnail === true && val.resourcesFiles === true
-                    ) 
+                console.log('va',val)
+                if ( val.root === true && val.thumbnail === true && val.deskripsi === true && val.resourcesFiles === true) 
                 {
                      this.$toast.show(this.$t('Resources')+ ' ' + this.$t('updated successfully'))
                      this.initialize()
@@ -328,19 +341,23 @@ export default {
     methods: {
         initialize() {
             console.log('inisial')
+            this.btnText = 'Save'
+
             this.saving = {
                 tag: '',
                 statusTag: false,
                 resourcesFiles: '',
-                statusResourcesFiles: false
+                statusResourcesFiles: false,
+                deskripsi: '',
+                statusDeskripsi: false
             },
 
             this.checkSaving = {
                 root: false,
                 thumbnail: false,
                 resourcesFiles: false,
+                deskripsi: false
             }
-            this.btnText = 'Save'
             this.opsiRadio = this.kategoriArtikel
             // this.getTag();
             this.imageThumbnailLoader = false
@@ -365,7 +382,6 @@ export default {
 
                 this.dataDetail = data
                 this.form.judulArtikel = data.judulArtikel
-                var forDeskripsi = data.deskripsi
                 this.form = {
                     submission: data.submission,
                     judulArtikel: data.judulArtikel,
@@ -393,7 +409,7 @@ export default {
                     typeVisibility: 1
                 }
                 this.formTag.api = data.resourcesTag
-                this.deskripsi.list = this.form.deskripsi
+                this.deskripsi.list = _.orderBy(data.deskripsi, 'sorter')
                 this.imgThumbnail.displayImage = data.imgThumbnail
 
 
@@ -449,38 +465,32 @@ export default {
                 console.log(res)
 
                 this.checkSaving.root = true
-                if (this.imgThumbnail.file !== null) {
+                if (this.imgThumbnail.status === 'belumUpload') {
                     this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
                 } else {
                     this.checkSaving.thumbnail = true
-
                 }
-                this.savingTag()
-                this.savingResourcesFiles()
-                
-                // else {
-                //     this.$toast.show(this.$t('Resources')+ ' ' + this.$t('updated successfully'))
-                //     this.initialize()
-                // }
+
+                // simpanChild
+                this.saving.statusTag = true
+                this.saving.statusDeskripsi = true
+                this.saving.statusResourcesFiles = true
+
 
 
             })
         },
 
          async uploadImage(image, untuk, name) {
-            console.log('image', image)
-            console.log('untuk', untuk)
-            console.log('name', name)
-            if (image instanceof Blob){
+            // if (image instanceof Blob){
                 var data = new FormData();
                 data.append(untuk, image, name);
                 await this.$apiPlatform.put('moderator/resources/'+this.id+'/', data).then(res => {
                     this.$toast.show(this.$t('Resources')+ ' ' + this.$t('updated successfully'))
-                    this.initialize()
                 }).catch(err => {
                     console.log(err)
                 })
-            }
+            // }
         },
         btnBack() {
             this.$router.push('/moderations/resource/'+this.id)
@@ -488,15 +498,15 @@ export default {
 
         savingTag() {
             this.saving.statusTag = true
-            setTimeout(() => {
-                this.saving.statusTag = false
-            }, 500)
+            // setTimeout(() => {
+            //     this.saving.statusTag = false
+            // }, 500)
         },
         savingResourcesFiles() {
             this.saving.statusResourcesFiles = true
-            setTimeout(() => {
-                this.saving.statusResourcesFiles = false
-            }, 500)
+            // setTimeout(() => {
+            //     this.saving.statusResourcesFiles = false
+            // }, 500)
 
         }
 

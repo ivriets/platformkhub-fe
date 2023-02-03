@@ -9,21 +9,20 @@ export default {
             endPoint: '',
             imgEndPoint: '',
             totalImageBaru: 0,
-            counterImage: 0
+            totalImageUpdate: 0,
+            counterImage: 0,
+            checkSimpan: {
+                imageBaru: false,
+                imageUpdate: false
+            }
         }
     },
     watch: {
-        counterImage(val) {
-                console.log('img baru',this.totalImageBaru)
-                console.log('counter',val)
-
-            if (this.totalImageBaru > 0) {
-
-                if (this.totalImageBaru === parseInt(val)) {
-                    console.log('beres woy')
-                    this.$emit('input', 'done')
-                }
-            }
+        checkSimpan: {
+            handler(val) {
+                if (val.imageBaru === true && val.imageUpdate === true) this.$emit('input', 'done')
+            },
+            deep: true
         }
     },
     mounted() {
@@ -36,30 +35,47 @@ export default {
             if (this.model === 'blog') {
                 this.endPoint = 'moderator/blogs/'
                 this.imgEndPoint = 'moderator/blogdeskripsiimg/'
+            } else if (this.model === 'event') {
+                this.endPoint = 'moderator/events/'
+                this.imgEndPoint = 'moderator/eventsdeskripsiimg/'
+            } else if (this.model === 'resource') {
+                this.endPoint = 'moderator/resources/'
+                this.imgEndPoint = 'moderator/resourcesdeskripsiimg/'
             }
 
 
             this.simpan()
         },
         async simpan() {
-                console.log('simpann')
             const forSimpan = {
                 deleted: this.deskripsi.deleted,
-                updated: this.deskripsi.updated,
+                updated: this.deskripsi.list.filter(e => e.txtDeskripsiId !== '' ),
                 new: this.deskripsi.new
             }
+            const forImageUpdate = this.deskripsi.list.filter(e=> (e.imgDeskripsi && e.imgDeskripsi.status === 'belumUpload'))
+            this.totalImageUpdate = forImageUpdate.length
+
+            const listImages = this.deskripsi.new.filter( e => e.typeDeskripsi === 1)
+            this.totalImageBaru = listImages.length
+            
 
             await this.$apiPlatform.put(this.endPoint+ this.modelId + '/', {deskripsi:forSimpan}).then(res => {
-                const listImages = this.deskripsi.new.filter( e => e.typeDeskripsi === 1)
-                this.totalImageBaru = listImages.length
+
                 if (listImages.length > 0) {
-                    this.counterImage = 0
                     listImages.forEach((e,index) => {
                        this.uploadImage(e.imgDeskripsi.file, res.data.imgDeskripsiId[index], e.imgDeskripsi.name, index )
                     })
                 } else {
-                    this.$emit('input','done')
+                    this.checkSimpan.imageBaru = true
                 }
+                if (forImageUpdate.length > 0) {
+                    forImageUpdate.forEach((e, index) => {
+                        this.uploadImage(e.imgDeskripsi.file, e.imgDeskripsiId, e.imgDeskripsi.name, index)
+                    })
+                } else {
+                    this.checkSimpan.imageUpdate = true
+                }
+
 
 
             })
@@ -71,7 +87,11 @@ export default {
                 data.append('imgDeskripsi', image, name);
                 await this.$apiPlatform.put(this.imgEndPoint+ id +'/', data).then(res => {
                     if (this.totalImageBaru === (index + 1)) {
-                     this.$emit('input', 'done')
+                    //  this.$emit('input', 'done')
+                        this.checkSimpan.imageBaru = true
+                    }
+                    if (this.totalImageUpdate === (index + 1)) {
+                        this.checkSimpan.imageUpdate = true
                     }
                 }).catch(err => {
                     console.log(err)

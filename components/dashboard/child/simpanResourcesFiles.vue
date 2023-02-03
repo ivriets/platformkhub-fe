@@ -11,11 +11,13 @@ export default {
     },
     methods: {
         initialize() {
-            if (this.resourcesFiles.binFile !== '') {
+            console.log(this.resourcesFiles)
+            if (this.resourcesFiles.binFile === '' && this.resourcesFiles.embedLink === '') {
+                this.$emit('input','done')
+            } else if (this.resourcesFiles.binFile !== '') {
                 this.simpanFile()
             } else {
-            this.simpan()
-
+                this.simpan()
             }
         },
         async simpan() {

@@ -187,7 +187,6 @@
                 v-if="saving.statusDeskripsi"
             />
         </div>
-<!-- <pre>{{checkSaving}}</pre> -->
     </div>
 </template>
 
@@ -214,12 +213,12 @@ export default {
             },
             form: {
                 judulArtikel: ['',''],
-                deskripsi: undefined,
-                kategoriArtikel: undefined,
-                typeAudience: undefined,
-                typeApproach: undefined,
-                typeIssues: undefined,
-                tag: undefined,
+                deskripsi: null,
+                kategoriArtikel: [],
+                typeAudience: [],
+                typeApproach: [],
+                typeIssues: [],
+                tag: [],
             },
             formTag: {
                 list: [],

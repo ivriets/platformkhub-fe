@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="flex justify-end">
-                <button title="Delete Section" @click="deleteSection(item, index)" class="flex items-center p-2 border border-warna-empat rounded bg-white transition-all hover:bg-gray-200">
+                <button title="Delete Section" @click="deleteSection(item, index)" class="flex items-center p-2 border border-empat rounded bg-white transition-all hover:bg-gray-200">
                     <img class="w-4 h-4" src="/icons/icon-delete-black.png" alt="icon-delete">
                     <span class="text-sm text-warna-empat ml-2">{{ $t('Delete Section') }}</span>
                 </button>
@@ -47,10 +47,10 @@
 
         <div class="grid grid-cols-12 gap-5">
             <div class="col-span-12 lg:col-span-6">
-                <button title="+Image" @click="addSection(1)" type="button" class="text-center w-full bg-white border border-warna-tujuh hover:bg-gray-200 transition-all text-warna-empat rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto cursor-pointer">+ {{ $t('Image') }}</button>
+                <button title="+Image" @click="addSection(1)" type="button" class="text-center w-full bg-white border border-tujuh hover:bg-gray-200 transition-all text-empat rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto ">+ {{ $t('Image') }}</button>
             </div>
             <div class="col-span-12 lg:col-span-6">
-                <button title="+Text" @click="addSection(2)" type="button" class="text-center w-full bg-white border border-warna-tujuh text-warna-empat hover:bg-gray-200 transition-all rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto cursor-pointer">+ {{ $t('Text') }}</button>
+                <button title="+Text" @click="addSection(2)" type="button" class="text-center w-full bg-white border border-tujuh text-empat hover:bg-gray-200 transition-all rounded-md shadow shadow-[#45a6ff33] py-2 mx-auto ">+ {{ $t('Text') }}</button>            
             </div>
         </div>
       <!-- <pre>  {{ newVal }} </pre> -->
@@ -77,6 +77,7 @@ export default {
                 updated: [],
 
             },
+            firstRun: true,
                 debounceTimeout: null,
 
         }
@@ -88,29 +89,27 @@ export default {
     watch: {
         'newVal.list' : {
             handler(val) {
-
-                if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
-                this.debounceTimeout = setTimeout(() => {
-                    this.detailChanges();
-                },700)
-
-                
+                // if(this.firstRun === false) this.detailChanges();
+                this.updateValue()
             },
             deep: true
         }
     },
     methods: {
         initialize() {
+            this.firstRun = true
             this.loader = false
             this.newVal = this.value
+            
 
             //init sorter
-            this.newVal.list = _.orderBy(this.newVal.list, 'sorter')
-            this.newVal.new = _.orderBy(this.newVal.new, 'sorter')
+            this.newVal.list = _.orderBy(this.value.list, 'sorter')
+            this.newVal.new = _.orderBy(this.value.new, 'sorter')
 
             this.$nextTick(() => {
             this.keyImage+=1
             this.keyText+=1
+            this.firstRun = false
 
                 this.loader = true
             })
@@ -155,17 +154,17 @@ export default {
             this.$emit('input', this.newVal)
         },
         detailChanges() {
-            this.newVal.list = this.newVal.list.map((e,index) => {
-                e.sorter = index 
-                return e    
-            })
+            // this.newVal.list = this.newVal.list.map((e,index) => {
+            //     e.sorter = index 
+            //     return e    
+            // })
 
-            const newDesk = this.newVal.list.filter(e => e.tipe === 'new');
-            const updatedDesk = this.newVal.list.filter(e => !e.tipe && e.txtDeskripsi === 1 )
-            const updateImg = this.newVal.list.filter(e => e.imgDeskripsi && e.imgDeskripsi.file !== null)
+            // const newDesk = this.newVal.list.filter(e => e.tipe === 'new');
+            // const updatedDesk = this.newVal.list.filter(e => !e.tipe && e.txtDeskripsi === 1 )
+            // const updateImg = this.newVal.list.filter(e => e.imgDeskripsi && e.imgDeskripsi.file !== null)
 
-            this.newVal.new = newDesk
-            this.newVal.updated = updatedDesk
+            // this.newVal.new = newDesk
+            // this.newVal.updated = updatedDesk
         }
 
 

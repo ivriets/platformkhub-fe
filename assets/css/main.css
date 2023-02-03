@@ -25,6 +25,8 @@
     .button-kapsul {
         @apply text-sm font-semibold border text-empat rounded-2xl px-3 py-[6px] hover:bg-gray-50;
     }
+
+
     .button-standar-outline {
         @apply px-8 py-2 bg-white rounded-lg text-empat border border-empat  hover:bg-gray-100 font-semibold;
     }

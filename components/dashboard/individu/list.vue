@@ -1,15 +1,17 @@
 <template>
     <div>
         <div class="flex items-center mb-4">
-            <div class="w-[240px] mr-4">
+            <div v-if="loaderPage" class="w-[240px] mr-4">
                 <ElementsSearchBarButton 
                     v-model="filter.search"
                     :placeholder="$t('Search')"
                     :name="'searchtext'"
                 />
             </div>
+            <div v-if="!loaderPage" class="w-[240px] h-[34px] mr-4 animate-pulse bg-gray-200 rounded-md"></div>
+
             <div class="flex flex-grow">
-                <div class="w-[180px]">
+                <div v-if="loaderPage" class="w-[180px]">
                     <InputSelect 
                         v-model="showRow"
                         :opsi="opsiShowRow"
@@ -17,13 +19,18 @@
                         :key="'adf'+keyShow"
                     />
                 </div>
+                <div v-if="!loaderPage" class="w-[180px] h-[34px] mr-4 animate-pulse bg-gray-200 rounded-md"></div>
+
             </div>
-            <button @click="downloadExcel" :disabled="btnText==='Download'? false: true" class="button-download flex items-center gap-4">
+            <button v-if="loaderPage" @click="downloadExcel" :disabled="btnText==='Download'? false: true" class="button-download flex items-center gap-4">
                 <img class="h-4 w-4" src="/icons/icon-button-download.png" alt="icon-download">
                 <div class="">{{ $t(btnText) }}</div>
             </button>
+            <div  v-if="!loaderPage" class="w-[170.02px] h-[38.39px] bg-gray-200 rounded-lg animate-pulse"></div>
+
+
         </div>
-        <div class="flex items-center justify-between border border-[#A1A2B7] rounded-lg bg-white mb-5">
+        <div v-if="loaderPage" class="flex items-center justify-between border border-[#A1A2B7] rounded-lg bg-white mb-5">
             <div v-if="loaderLog" class="px-[14px] py-[9px] flex gap-x-3 pr-3 border-r border-[#A1A2B7]">
                 <button 
                     v-for="(item, index) in kapsul" :key="'kapsul' + index"
@@ -46,7 +53,28 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-xl shadow-md border border-gray-100 text-sm overflow-hidden relative">
+
+        <div v-if="!loaderPage"
+            class="flex items-center justify-between border border-[#A1A2B7] rounded-lg bg-white mb-5"
+        >
+            <div class="px-[14px] py-[9px] flex gap-x-3 pr-3 border-r border-[#A1A2B7] animate-pulse">
+            <button 
+                    v-for="(item, index) in kapsul" :key="'kapsul' + index"
+                    class="button-kapsul bg-gray-200 text-gray-200"
+                    disabled
+                >
+                {{item.label}} ({{item.length}})
+                </button>
+            </div>
+            <div class="px-[14px] py-[9px]">
+                <div class="flex items-center animate-pulse">
+                    <div class="h-[20px] w-[50px] bg-gray-200 "></div>
+                    <div class="h-[20px] w-[90px] bg-gray-200 mx-2 my-[6px]"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md border border-gray-100 text-sm overflow-hidden relative min-h-[150px]">
             <ElementsTable
                 :tableDetail="tableDetail"
                 v-model="dataTable"
@@ -62,9 +90,6 @@
                         :status="item.statusVerification"
                     />
                 </template>
-                <!-- <template v-slot:submission="{ item }">
-                    <ElementsDisplayStatusSubmission :submission="item.submission" />
-                </template> -->
 
             </ElementsTable>
             <div v-if="!loaderPage" class="absolute top-0 right-0 left-0 bottom-0 bg-white/80 flex items-center justify-center">
