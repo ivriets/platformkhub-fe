@@ -69,7 +69,7 @@ export default {
             await this.$apiPlatform.put(this.endPointRoot  , req).then(res => {
                 console.log(res.data)
                 // this.uploadImage(item.file, item.name, res.data.pkGalleryId)
-                this.putLokasi(item, res.data.pkLokasiActivityId)
+                // this.putLokasi(item, res.data.pkLokasiActivityId)
             })
         },
         async putLokasi(item,pkLokasiActivityId) {

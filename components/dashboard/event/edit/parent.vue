@@ -35,14 +35,15 @@
                     
                     <hr class="border-warna-tujuh my-10">
 
-                    <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Registration Type') }}</div>
+                    <!-- <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Registration Type') }}</div> -->
                         <div class="mb-5">
                         <InputRadio 
-                            v-model="form.tipeRegistrasi"
-                            :label="''"
+                            v-model="form.typeRegistrasi"
+                            :label="$t('Registration Type')"
                             :opsiRadio="opsiTipeRegistransi"
-                            :name="prefixName+'tipeRegistrasi'"
+                            :name="prefixName+'typeRegistrasi'"
                             :orientasi="'horizontal'"
+                            :required="true"
                         />
                         </div>
                         <div>
@@ -117,25 +118,25 @@
                     <div class="grid grid-cols-12 gap-5 mb-10">
                         <div class="col-span-12 md:col-span-6">
                             <InputText 
-                                v-model="form.kontakEmail"
+                                v-model="form.email"
                                 :label="'Surel'"
                                 :placeholder="'Tulis di sini'"
-                                :name="prefixName+'kontakemail'"
+                                :name="prefixName+'email'"
                             />
                         </div>
                         <div class="col-span-12 md:col-span-6">
                             <InputText 
-                                v-model="form.kontakNama"
+                                v-model="form.kontak"
                                 :label="'Kontak'"
                                 :placeholder="'Tulis di sini'"
-                                :name="prefixName+'kontaknama'"
+                                :name="prefixName+'kontak'"
                             />
                         </div>
                     </div>
                     <div class="text-xl text-warna-utama mb-1">{{ $t('Tipe Acara') }}</div>
                         <div class="mb-8">
                             <InputSelect 
-                                v-model="tipeAcara"
+                                v-model="form.tipeAcara"
                                 :opsi="opsiTipeAcara"
                             />
                         </div>
@@ -143,7 +144,7 @@
                         <div class="text-xl text-warna-utama mb-1">{{ $t('Lokasi Online') }}</div>
                         <div class="mb-8">
                             <FormLokasiOnline 
-                                v-model="form.lokasiOnline[0]"
+                                v-model="lokasiOnline"
                                 :prefixName="prefixName"
                                 v-if="loaderAll"
                                 :key="'lokasionline'+keyMaster"
@@ -301,6 +302,13 @@
                 :galleri="daftarGalleri"
                 v-if="saving.statusGalleri"
             />
+            <DashboardChildSimpanLokasiOnline 
+                v-model="saving.lokasiOnline"
+                :lokasiOnline="lokasiOnline"
+                :modelId="id"
+                v-if="saving.statusLokasiOnline"
+            />
+
             <DashboardChildSimpanLokasiOffline
                 v-model="saving.lokasiOffline" 
                 :lokasi="formLokasiOffline"
@@ -308,17 +316,17 @@
                 :modelId="id"
                 v-if="saving.statusLokasiOffline"
             />
-            <DashboardChildSimpanContentSection 
+            <!-- <DashboardChildSimpanContentSection 
                 v-model="saving.deskripsi"
                 :model="'events'"
                 :modelId="id"
                 :deskripsi="deskripsi"
                 v-if="saving.statusDeskripsi"
-            />
+            /> -->
         </div>
 
-        <button @click="savingLokasiOffline">simpan lokasi</button>
-        <button @click="savingGallery">simpan galleri</button>
+        <!-- <button @click="savingLokasiOffline">simpan lokasi</button>
+        <button @click="savingGallery">simpan galleri</button> -->
 
         <!-- <pre>{{formLokasiOffline}}</pre> -->
 
@@ -346,8 +354,8 @@ export default {
                 lokasi: '',
                 registrationStartDate: '',
                 registrationEndDate: '',
-                kontakEmail: '',
-                kontakNama: '',
+                email: '',
+                kontak: '',
                 registrasiExternalLink: ''
                 
             },
@@ -429,7 +437,9 @@ export default {
                 lokasiOffline: '',
                 statusLokasiOffline: false,
                 deskripsi: '',
-                statusDeskripsi: false
+                statusDeskripsi: false,
+                lokasiOnline: '',
+                statusLokasiOnline: false
             },
 
             checkSaving: {
@@ -552,7 +562,7 @@ export default {
                     submission: data.submission,
                     progress: data.progress,
                     judulActivity: data.judulActivity,
-                    deskripsi: data.deskripsi,
+                    // deskripsi: data.deskripsi,
                     tanggalMulai: data.tanggalMulai,
                     tanggalSelesai: data.tanggalSelesai,
                     statusActivity: data.statusActivity,
@@ -561,14 +571,14 @@ export default {
                     typeIssues: _.flatMap(data.typeIssues, "id"),
                     // tag: _.flatMap(_.map(data.tag, function(o){return o.pilihanTagId}), "id"),
                     // lokasi:data.lokasi && data.lokasi.length > 0 ? data.lokasi : [_.cloneDeep(this.lokasi)],
-                    lokasiOnline: data.lokasiOnline && data.lokasiOnline.length > 0 ? data.lokasiOnline : [_.cloneDeep(this.lokasiOnline)],
-                    deskripsi: data.deskripsi,
+                    // lokasiOnline: data.lokasiOnline && data.lokasiOnline.length > 0 ? data.lokasiOnline : [_.cloneDeep(this.lokasiOnline)],
+                    // deskripsi: data.deskripsi,
                     registrationStartDate: data.registrationStartDate ? data.registrationStartDate : '',
                     registrationEndDate: data.registrationEndDate ? data.registrationEndDate: '',
 
-                    tipeRegistrasi: '',
-                    kontakEmail: '',
-                    kontakNama: '',
+                    typeRegistrasi: data.typeRegistrasi ? data.typeRegistrasi : '',
+                    email: data.email ? data.email : '',
+                    kontak: data.kontak ? data.kontak : '',
                     registrasiExternalLink: ''
 
 
@@ -578,9 +588,10 @@ export default {
                 this.daftarGalleri.list = data.galleries
                 this.formTag.api = data.tag
                 this.formLokasiOffline.api = data.lokasi ? data.lokasi : []
+                this.lokasiOnline = data.lokasiOnline && data.lokasiOnline.length > 0 ? data.lokasiOnline[0] : [{typeChannel:0, url: ''}]
 
 
-                this.deskripsi.list = this.form.deskripsi
+                this.deskripsi.list = data.deskripsi
                 
                 this.imgThumbnail= {
                     displayImage: data.imgThumbnail,
@@ -615,14 +626,13 @@ export default {
         },
         simpan() {
             //validasi disini
-            if (this.form.judulActivity[0] === '') {
-                this.errorField(this.$t('titleIdBlank'), 'titleid')
-            } else if (this.form.judulActivity[1] === '') {
-                this.errorField(this.$t('titleEnBlank'), 'titleen')
-            } else if (this.form.registrationStartDate === '') {
-                this.errorField(this.$t('registrationStartDateBlank'), 'registrationStartDate')
-            } else if (this.form.registrationEndDate === '') {
-                this.errorField(this.$t('registrationEndDateBlank'), 'registrationEndDate')
+            if (this.form.typeRegistrasi === '') {
+                this.errorNotif(this.$t('typeRegistrasiBlank'))
+
+            // } else if (this.form.registrationStartDate === '') {
+            //     this.errorField(this.$t('registrationStartDateBlank'), 'registrationStartDate')
+            // } else if (this.form.registrationEndDate === '') {
+            //     this.errorField(this.$t('registrationEndDateBlank'), 'registrationEndDate')
             } else {
                 this.putData()
             }
@@ -649,6 +659,8 @@ export default {
                     this.checkSaving.thumbnail = true
                 } 
                 this.savingDeskripsi()
+                this.savingLokasiOnline()
+                this.savingLokasiOffline()
 
                 this.savingTag()
                 this.savingGallery();
@@ -695,6 +707,12 @@ export default {
             setTimeout(() => {
                 this.saving.statusDeskripsi = false
             }, 500)
+        },
+        savingLokasiOnline() {
+            this.saving.statusLokasiOnline = true
+            setTimeout(() => {
+                this.saving.statusLokasiOnline = false
+            },500)
         }
 
 

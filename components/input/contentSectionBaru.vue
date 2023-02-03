@@ -120,10 +120,10 @@ export default {
             // console.log(item)
             if (item.typeDeskripsi === 1) {
                 if (item.imgDeskripsiId && item.imgDeskripsiId !== '') this.newVal.deleted.push(item.imgDeskripsiId)
-                this.$toast.show('Image Deleted')
+                // this.$toast.show('Image Deleted')
             } else if (item.typeDeskripsi === 2) {
                 if (item.txtDeskripsiId && item.txtDeskripsiId !=='') this.newVal.deleted.push(item.txtDeskripsiId)
-                this.$toast.show('Text Deleted')
+                // this.$toast.show('Text Deleted')
 
             }
             this.newVal.deleted = _.uniq(this.newVal.deleted)

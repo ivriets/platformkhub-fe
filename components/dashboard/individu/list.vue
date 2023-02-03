@@ -156,12 +156,12 @@ export default {
                     label: ['10 baris per halaman', '10 row per page']
                 },
                 {
-                    id: 20,
-                    label: ['20 baris per halaman', '20 row per page']
-                },
-                {
                     id: 50,
                     label: ['50 baris per halaman', '50 row per page']
+                },
+                {
+                    id: 100,
+                    label: ['100 baris per halaman', '100 row per page']
                 }
             ],
             filter: {

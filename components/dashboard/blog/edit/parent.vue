@@ -187,7 +187,7 @@
                 v-if="saving.statusDeskripsi"
             />
         </div>
-<!-- <pre>{{deskripsi}}</pre> -->
+<!-- <pre>{{checkSaving}}</pre> -->
     </div>
 </template>
 
@@ -315,7 +315,7 @@ export default {
                 if (
                     val.root === true &&  val.thumbnail === true && 
                     val.galleri === true 
-                    // && val.deskripsi === true
+                    && val.deskripsi === true
                     ) 
                 {
                      this.$toast.show(this.$t('Blog')+ ' ' + this.$t('updated successfully'))
@@ -486,21 +486,21 @@ export default {
         },
         savingGallery() {
             this.saving.statusGalleri = true
-            setTimeout(() => {
-                this.saving.statusGalleri = false;
-            }, 2000)
+            // setTimeout(() => {
+            //     this.saving.statusGalleri = false;
+            // }, 2000)
         },
         savingTag() {
             this.saving.statusTag = true
-            setTimeout(() => {
-                this.saving.statusTag = false
-            }, 500)
+            // setTimeout(() => {
+            //     this.saving.statusTag = false
+            // }, 500)
         },
         savingDeskripsi() {
             this.saving.statusDeskripsi = true
-            setTimeout(() => {
-                this.saving.statusDeskripsi = false
-            }, 500)
+            // setTimeout(() => {
+            //     this.saving.statusDeskripsi = false
+            // }, 2000)
         }
 
     }

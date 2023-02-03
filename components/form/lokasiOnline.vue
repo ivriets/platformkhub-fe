@@ -4,7 +4,7 @@
             <InputSelectNonBahasa 
                 v-model="newVal.typeChannel"
                 :name="prefixName+'channel'"
-                :label="'Kanal'"
+                :label="$t('Channel')"
                 :opsi="opsiChannel"
             />
         </div>
@@ -15,7 +15,6 @@
                 :label="'Url'"
             />
         </div>
-
     </div>
 </template>
 <script>
@@ -23,14 +22,14 @@ export default {
     props: ['value', 'prefixName'],
     data() {
         return {
-
+            // newVal: null,
             opsiChannel: [
                 {
-                    id: 44327576,
+                    id: 1,
                     label: 'Zoom'
                 },
                 {
-                    id: 87344509,
+                    id: 2,
                     label: 'Google Meet'
                 }
             ]
@@ -39,10 +38,24 @@ export default {
     computed: {
         newVal: {
             get() {
-                return this.value
+                var baru = this.value
+                baru.typeChannel = this.value && this.value.typeChannel && this.value.typeChannel.id ? this.value.typeChannel.id : baru.typeChannel
+                return baru
             },
             set(value) {
                 this.$emit('input',value)
+            }
+        }
+    },
+    mounted() {
+        // this.initialize()
+    },
+    methods: {
+        initialize() {
+            if (this.value && this.value !== null) {
+                this.newVal = this.value
+                this.newVal.typeChannel = this.value && this.value.typeChannel && this.value.typeChannel.id ? this.value.typeChannel.id : this.value
+
             }
         }
     }

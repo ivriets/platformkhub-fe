@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="label" class="font-medium mb-3">
-            {{label}}
+            {{label}} <span class="text-[#DF4B61] font-semibold" v-if="required && required === true">*</span>
         </div>
         <div :class="orientasi==='horizontal'? 'flex items-center' : ''">
             <div v-for="(i, index) in opsiRadio" :key="'jk'+name+index" class="flex items-center mr-5 mb-2">
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-    props: ['label', 'opsiRadio', 'value', 'name', 'orientasi', 'disabled'],
+    props: ['label', 'opsiRadio', 'value', 'name', 'orientasi', 'disabled', 'required'],
     data() {
         return {
             valRadio: '',
