@@ -10,7 +10,7 @@
     "deploy": "pm2 deploy ecosystem.config.js production"
   },
   "dependencies": {
-    "@google-analytics/data": "^3.1.1",
+    "@google-analytics/data": "^3.2.0",
     "@nuxtjs/auth-next": "5.0.0-1667386184.dfbbb54",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/dayjs": "^1.4.1",

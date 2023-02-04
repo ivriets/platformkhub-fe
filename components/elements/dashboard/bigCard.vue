@@ -36,16 +36,7 @@
 <script>
 export default {
     props: ['logData', 'title', 'landingPage'],
-    data() {
-        return {
-
-        }
-    },
     computed: {
-        defaultWarna() {
-            return this.$store.state.def.chartLegendColor
-        },
-
         seriesData() {
             const convert = Object.entries(this.logData);
             const convert2 = convert.map(e => {
@@ -62,9 +53,10 @@ export default {
             return '<span style="font-size:14px;">Total</span><br><span style="font-size:30px;font-weight:600;">'+ total +'</span>'
         },
         chartLegend() {
+            const defaultWarna = this.$store.state.def.chartLegendColor
             const all = this.logData.all
             return this.seriesData.map((e,index) => {
-                e.color = this.defaultWarna[index];
+                e.color = defaultWarna[index];
                 e.persen = ((e.y/all) * 100).toFixed()
                 return e;
             })

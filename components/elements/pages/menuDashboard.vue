@@ -14,7 +14,7 @@
             <div class="col-span-2 " :class="cardClass">
                 <div class="">
                     <div class="text-center text-base mb-5">
-                        Individual Need<br/> Verification
+                        <span class="font-bold text-utama ">{{ $t('Individual') }}</span> <span class="text-delapan">Need Verification</span>
                     </div>
                     <div class="bg-tiga rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-5">
                         <div class="text-3xl">{{ totalIndividuNeedVerification }}</div>
@@ -44,7 +44,8 @@
             <div class="col-span-2" :class="cardClass">
                 <div class="">
                     <div class="text-center text-base mb-5">
-                        Organization Need<br/> Verification
+                        <span class="font-bold text-utama ">{{ $t('Organization') }}</span> <span class="text-delapan">Need Verification</span>
+
                     </div>
                     <div class="bg-warna-tiga rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-5">
                         <div class="text-3xl">{{ totalOrganisasiNeedVerification }}</div>
@@ -73,7 +74,7 @@
         </div>
         <hr class="border-[#9E9E9E] my-[35px] mx-3">
 
-        <DashboardAnalytics />
+        <!-- <ElementsDashboardAnalytics /> -->
     </div>
 </div>
 </template>

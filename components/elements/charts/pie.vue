@@ -42,7 +42,9 @@ export default {
                     enabled: false
                 },
                 tooltip: {
-                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                    pointFormat: '<b>{point.name}</b>:{point.percentage:.0f}% ({point.y})',
+                    split:true
+                    // pointFormat: '{series.name}: <b>{point.y}</b>'
                 },
                 colors: this.$store.state.def.chartLegendColor,
                 plotOptions: {

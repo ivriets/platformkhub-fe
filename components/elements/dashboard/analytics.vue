@@ -97,8 +97,48 @@
 </template>
 
 <script>
+// /**
+//  * TODO(developer): Uncomment this variable and replace with your
+//  *   Google Analytics 4 property ID before running the sample.
+//  */
+// // propertyId = 'YOUR-GA4-PROPERTY-ID';
+
+// // Imports the Google Analytics Data API client library.
 // const {BetaAnalyticsDataClient} = require('@google-analytics/data');
-// import { BetaAnalyticsDataClient } from '@google-analytics/data';
+
+// // Using a default constructor instructs the client to use the credentials
+// // specified in GOOGLE_APPLICATION_CREDENTIALS environment variable.
+// const analyticsDataClient = new BetaAnalyticsDataClient();
+
+// // Runs a simple report.
+// async function runReport() {
+//   const [response] = await analyticsDataClient.runReport({
+//     property: `properties/${propertyId}`,
+//     dateRanges: [
+//       {
+//         startDate: '2020-03-31',
+//         endDate: 'today',
+//       },
+//     ],
+//     dimensions: [
+//       {
+//         name: 'city',
+//       },
+//     ],
+//     metrics: [
+//       {
+//         name: 'activeUsers',
+//       },
+//     ],
+//   });
+
+//   console.log('Report result:');
+//   response.rows.forEach(row => {
+//     console.log(row.dimensionValues[0], row.metricValues[0]);
+//   });
+// }
+
+// runReport();
 
 
 // const analyticsDataClient = new BetaAnalyticsDataClient();
@@ -106,37 +146,38 @@ export default {
 
 
     mounted() {
-        this.initialize()
+        // this.initialize()
     },
     methods: {
         initialize() {
             this.getAnalytics()
         },
         async getAnalytics() {
-            // const propertyId = 'G-XZNG8PQKQG';
+            const propertyId = 'G-XZNG8PQKQG';
+            const analyticsDataClient = new BetaAnalyticsDataClient();
             // const analyticsDataClient = new analyticsDataClient()
 
-            // const result = await analyticsDataClient.runReport({
-            //     property: `properties/${propertyId}`,
-            //     dateRanges: [
-            //         {
-            //         startDate: '2020-03-31',
-            //         endDate: 'today',
-            //         },
-            //     ],
-            //     dimensions: [
-            //         {
-            //         name: 'city',
-            //         },
-            //     ],
-            //     metrics: [
-            //         {
-            //         name: 'activeUsers',
-            //         },
-            //     ],
-            // });
+            const result = await analyticsDataClient.runReport({
+                property: `properties/${propertyId}`,
+                dateRanges: [
+                    {
+                    startDate: '2020-03-31',
+                    endDate: 'today',
+                    },
+                ],
+                dimensions: [
+                    {
+                    name: 'city',
+                    },
+                ],
+                metrics: [
+                    {
+                    name: 'activeUsers',
+                    },
+                ],
+            });
 
-            // console.log('Report result:', result);
+            console.log('Report result:', result);
         }
     }
 

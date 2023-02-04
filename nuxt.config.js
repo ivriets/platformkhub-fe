@@ -57,6 +57,7 @@ export default {
     { src: '~/plugins/vue2-filters' },
     { src: '~/plugins/drag', ssr:false },
     { src: '~/plugins/lightbox'},
+    { src: '~/plugins/apiGa.js', mode: 'client' },
     {
       src: "~/plugins/tinymce.js",
       mode: "client", 
@@ -118,6 +119,10 @@ export default {
     host: "0.0.0.0",
     port: 3333,
   },
+  serverMiddleware: [
+    { path: "/ga", handler: "~/ga/report.js" },
+  ],
+
   dayjs: {
     locales: ['id'],
     defaultLocale: 'id',
@@ -234,6 +239,14 @@ export default {
       /^gmap-vue($|\/)/, 
       // /^vue2-gmap-custom-marker($|\/)/
     ],
+    resolve: {
+      extensions: [".ts", ".js"],
+      fallback: {
+        "child_process": false,
+        // and also other packages that are not found
+      }
+    },
+
     postcss: {
       plugins: {
         tailwindcss: {},
