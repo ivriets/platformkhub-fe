@@ -44,13 +44,14 @@
                             :name="prefixName+'typeRegistrasi'"
                             :orientasi="'horizontal'"
                             :required="true"
+                            :key="'registrasitipe'+keyMaster"
                         />
                         </div>
                         <div>
                             <InputText 
-                                v-model="form.registrasiExternalLink"
+                                v-model="form.urlRegistrasiEksternal"
                                 :label="''"
-                                :name="prefixName+'registrasiExtrenalLink'"
+                                :name="prefixName+'urlRegistrasiEksternal'"
                             />
                         </div>
                     <hr class="border-warna-tujuh my-10">
@@ -178,7 +179,10 @@
                             v-model="daftarGalleri"
                         />
                     </div>
-
+                    <InputTestimony 
+                        v-model="testimony"
+                        v-if="form.progress === 'completed'"
+                    />
 
                 </div>
                 <div class="col-span-12 lg:col-span-3">
@@ -196,7 +200,7 @@
                             </div>
                             <div class="flex items-center text-sm text-warna-sembilan mt-10">
                                 <div class="">{{ $t('Event Status') }}: </div>
-                                <div class="ml-1">{{ form.progress | capitalize({ onlyFirstLetter: true }) }}</div>
+                                <div class="ml-1">{{ $t('event-'+form.progress) | capitalize({ onlyFirstLetter: true }) }}</div>
                             </div>
                         </div>
                     </div>
@@ -218,32 +222,34 @@
                     <div v-if="typeAudience && form.typeAudience" class="mb-6">
                         <InputAutocompleteMulti 
                             v-model="form.typeAudience"
-                            :name="prefixName+'tipeaudience'"
+                            :name="prefixName+'typeAudience'"
                             :label="$t('Audience Type')"
                             :opsi="typeAudience"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="'tipeaufda'+keyMaster"
                             :multilang="true"
+                            :required="true"
                         />
                     </div>
                     <div v-if="typeApproach && form.typeApproach" class="mb-6">
                         <InputAutocompleteMulti 
                             v-model="form.typeApproach"
-                            :name="prefixName+'tipeapproach'"
+                            :name="prefixName+'typeApproach'"
                             :label="$t('Approach')"
                             :opsi="typeApproach"
                             :itemValue="'id'"
                             :itemLabel="'label'"
                             :key="'tipeapproach'+keyMaster"
                             :multilang="true"
+                            :required="true"
                             
                         />
                     </div>
                     <div v-if="typeIssues && form.typeIssues" class="mb-6">
                         <InputAutocompleteMulti 
                             v-model="form.typeIssues"
-                            :name="prefixName+'topik'"
+                            :name="prefixName+'typeIssues'"
                             :label="$t('Issues')"
                             :opsi="typeIssues"
                             :value="form.typeIssues"
@@ -251,6 +257,8 @@
                             :itemLabel="'label'"
                             :key="'topik'+keyMaster"
                             :multilang="true"
+                            :required="true"
+
                         />
                     </div>
 
@@ -316,13 +324,13 @@
                 :modelId="id"
                 v-if="saving.statusLokasiOffline"
             />
-            <!-- <DashboardChildSimpanContentSection 
+            <DashboardChildSimpanContentSection 
                 v-model="saving.deskripsi"
-                :model="'events'"
+                :model="'event'"
                 :modelId="id"
                 :deskripsi="deskripsi"
                 v-if="saving.statusDeskripsi"
-            /> -->
+            />
         </div>
 
         <!-- <button @click="savingLokasiOffline">simpan lokasi</button>
@@ -356,7 +364,7 @@ export default {
                 registrationEndDate: '',
                 email: '',
                 kontak: '',
-                registrasiExternalLink: ''
+                urlRegistrasiEksternal: ''
                 
             },
             deskripsi: {
@@ -365,6 +373,7 @@ export default {
                 updated: [],
                 new: []
             },
+            testimony: [],
 
             opsiTipeRegistransi: [
                 {
@@ -445,7 +454,8 @@ export default {
             checkSaving: {
                 root: false,
                 thumbnail: false,
-                galleri: false
+                galleri: false,
+                deskripsi: false
             }
 
 
@@ -508,13 +518,17 @@ export default {
             console.log('savegal', val)
             if (val==='done') this.checkSaving.galleri = true
         },
+        'saving.deskripsi' (val) {
+            if (val==='done') this.checkSaving.deskripsi = true
+        },
         checkSaving: {
             handler(val) {
-                console.log('cheksaving',val)
+                // console.log('cheksaving',val)
                 if (
                     val.root === true && 
                     val.thumbnail === true && 
-                    val.galleri === true
+                    val.galleri === true && 
+                    val.deskripsi === true
                     ) 
                 {
                      this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
@@ -540,7 +554,9 @@ export default {
                 galleri: '',
                 statusGalleri: false,
                 lokasiOffline: '',
-                statusLokasiOffline: ''
+                statusLokasiOffline: '',
+                deskripsi: '',
+                statusDeskripsi: false
             },
 
             this.checkSaving= {
@@ -576,10 +592,11 @@ export default {
                     registrationStartDate: data.registrationStartDate ? data.registrationStartDate : '',
                     registrationEndDate: data.registrationEndDate ? data.registrationEndDate: '',
 
+                    // typeRegistrasi: data.typeRegistrasi ? data.typeRegistrasi : '',
                     typeRegistrasi: data.typeRegistrasi ? data.typeRegistrasi : '',
                     email: data.email ? data.email : '',
                     kontak: data.kontak ? data.kontak : '',
-                    registrasiExternalLink: ''
+                    urlRegistrasiEksternal: ''
 
 
 
@@ -604,6 +621,8 @@ export default {
                     this.keyTanggal2 +=1
                     this.keyMaster +=1
                 })
+            }).catch(error => {
+                this.$toast.show('Error dari sisi server')
             })
         },
 
@@ -621,18 +640,26 @@ export default {
             this.errorNotif(msg);
             this.focusField(id)
         },
+        scroll(kelas) {
+            this.$scrollTo(kelas, 250, {easing: 'ease-in-out', offset: -80})
+        },
         btnBack() {
             this.$router.push('/moderations/event/'+this.id)
         },
         simpan() {
             //validasi disini
-            if (this.form.typeRegistrasi === '') {
-                this.errorNotif(this.$t('typeRegistrasiBlank'))
+            this.form.judulActivity[0] = this.form.judulActivity[0] === '' ? 'N/A' : this.form.judulActivity[0]
+            this.form.judulActivity[1] = this.form.judulActivity[1] === '' ? 'N/A' : this.form.judulActivity[1]
 
-            // } else if (this.form.registrationStartDate === '') {
-            //     this.errorField(this.$t('registrationStartDateBlank'), 'registrationStartDate')
-            // } else if (this.form.registrationEndDate === '') {
-            //     this.errorField(this.$t('registrationEndDateBlank'), 'registrationEndDate')
+            if (this.form.typeRegistrasi === '') {
+                this.errorField(this.$t('typeRegistrasiBlank'), 'typeRegistrasi1')
+
+            } else if (this.form.typeAudience.length === 0) {
+                this.errorField(this.$t('typeAudienceBlank'), 'typeAudience')
+            } else if (this.form.typeApproach.length === 0) {
+                this.errorField(this.$t('typeApproachBlank'), 'typeApproach')
+            } else if (this.form.typeIssues.length === 0) {
+                this.errorField(this.$t('typeIssuesBlank'), 'typeIssues')
             } else {
                 this.putData()
             }
@@ -658,18 +685,34 @@ export default {
                 } else {
                     this.checkSaving.thumbnail = true
                 } 
-                this.savingDeskripsi()
-                this.savingLokasiOnline()
-                this.savingLokasiOffline()
 
-                this.savingTag()
-                this.savingGallery();
+                //simpan child
+                // this.saving.statusDeskripsi = true
+                // this.saving.statusLokasiOnline = true
+                this.saving.statusGalleri = true
+                this.saving.statusLokasiOffline = true
+                this.saving.statusLokasiOnline = true
+                this.saving.statusTag = true
+
+
+                //handling error endpoint dulu
+                this.checkSaving.deskripsi = true //supaya gak error aja
+
+
+
+                // this.savingDeskripsi()
+                // this.savingLokasiOnline()
+                // this.savingLokasiOffline()
+                // this.savingTag()
+                // this.savingGallery();
 
                 // {
                 //     this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
                 //     this.initialize()
                 // }
 
+            }).catch(error => {
+                this.$toast.show('Error dari sisi server')
             })
         },
 

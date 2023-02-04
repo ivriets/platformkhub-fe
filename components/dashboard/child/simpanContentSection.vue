@@ -41,6 +41,9 @@ export default {
             } else if (this.model === 'resource') {
                 this.endPoint = 'moderator/resources/'
                 this.imgEndPoint = 'moderator/resourcesdeskripsiimg/'
+            } else if (this.model === 'program') {
+                this.endPoint = 'moderator/programs/'
+                this.imgEndPoint = 'moderator/programsdeskripsiimg/'
             }
 
 

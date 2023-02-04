@@ -7,6 +7,8 @@
     "Program": "Program",
     "Acara": "Acara",
     "Publikasi": "Publikasi",
+    "Resource": "Publikasi",
+
     "Blog": "Blog",
     "Karir": "Karir",
     "Slider": "Slider",
@@ -202,12 +204,18 @@
     "event-completed": "Acara Selesai",
     "event-ongoing": "Acara Berjalan",
     "event-upcoming": "Acara Mendatang",
+    "event-undefined": "",
+    "Channel": "Kanal",
+
+
     "Oleh": "Oleh",
     "Published": "Diterbitkan",
     "Empty Program List": "Kosongkan Daftar Program",
     "Edit Program List": "Sunting Daftar Program",
     "Remove": "Hapus",
     "Add Program List": "Tambah Daftar Program",
+    "See List": "Lihat Daftar",
+
 
 
 
@@ -229,6 +237,7 @@
     "typeAudienceBlank": "Tipe Audien wajib diisi",
     "typeApproachBlank": "Pendekatan wajib diisi!",
     "typeIssuesBlank": "Topik wajib diisi!",
+    "tipeRegistrasiBlank": "Tipe Registrasi wajib diisi!",
     "emailBlank": "Email wajib diisi!",
     "emailFormatBlank": "Format surel tidak dikenali!",
     "namaOrganisasiBlank": "Nama Organisasi wajib diisi!"

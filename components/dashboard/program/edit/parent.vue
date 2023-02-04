@@ -51,9 +51,9 @@
                     <div>
                         <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Content') }}</div>                       
                         <InputContentSection 
-                            v-if="form.deskripsi"
-                            v-model="form.deskripsi"
-                            :list="form.deskripsi"
+                            v-if="deskripsi"
+                            v-model="deskripsi"
+                            :list="deskripsi"
                         />
                     </div>
 
@@ -265,6 +265,15 @@
         </div>
 
         <div class="ah">
+
+            <DashboardChildSimpanContentSection 
+                v-model="saving.deskripsi"
+                :model="'program'"
+                :modelId="id"
+                :deskripsi="deskripsi"
+                v-if="saving.statusDeskripsi"
+            />
+
             <DashboardChildSimpanTag 
                 v-model="saving.tag"
                 :tag="formTag"
@@ -357,10 +366,15 @@ export default {
                     systemRowId: "sFlsjzvO"
                 }
             ],
+            deskripsi: {
+                list: [],
+                deleted: [],
+                updated: [],
+                new: []
+            },
             form: {
                 judulActivity: ['',''],
                 // deskripsiPanjang: ['',''],
-                deskripsi:undefined,
                 tanggalMulai: '',
                 tanggalSelesai: '',
                 officer:undefined,
@@ -429,12 +443,15 @@ export default {
             saving: {
                 tag: '',
                 statusTag: false,
+                deskripsi: '',
+                statusDeskripsi: false
             },
 
             checkSaving: {
                 root: false,
                 thumbnail: false,
-                mainImage: false
+                mainImage: false,
+                deskripsi: false
             }
 
         }
@@ -502,12 +519,16 @@ export default {
         //     console.log('savegal', val)
         //     if (val==='done') this.checkSaving.galleri = true
         // },
+        'saving.deskripsi'(val) {
+            if (val==='done') this.checkSaving.deskripsi = true
+        },
         checkSaving: {
             handler(val) {
                 console.log('cheksaving',val)
                 if (
                     val.root === true && 
-                    val.thumbnail === true && val.mainImage === true
+                    val.thumbnail === true && val.mainImage === true &&
+                    val.deskripsi === true
                     ) 
                 {
                      this.$toast.show(this.$t('Program')+ ' ' + this.$t('updated successfully'))
@@ -544,38 +565,31 @@ export default {
         },
 
         async masterPoint() {
-            await this.$apiBase.get('provinsi/').then(res => {
-                const data = res.data
-                this.opsiProvinsi = _.map(data, function(o){
-                    return {'id':o.provinsi, 'label':[o.provinsi, o.provinsi]}
-                })
+            // await this.$apiBase.get('provinsi/').then(res => {
+            //     const data = res.data
+            //     this.opsiProvinsi = _.map(data, function(o){
+            //         return {'id':o.provinsi, 'label':[o.provinsi, o.provinsi]}
+            //     })
 
-            }).catch(err => {
-                console.log(err)
-            })
-
-
-            // await this.$apiPlatform.get('verificator/listIndividu/?limit=10&offset=0').then(res => {
-            //     this.listIndividu = res.data
             // }).catch(err => {
             //     console.log(err)
             // })
 
 
-            await this.$apiPlatform.get('verificator/listOrganisasi/').then(res => {
-                this.listOrganisasi = res.data
-            }).catch(err => {
-                console.log(err)
-            })
+            // await this.$apiPlatform.get('verificator/listOrganisasi/').then(res => {
+            //     this.listOrganisasi = res.data
+            // }).catch(err => {
+            //     console.log(err)
+            // })
 
 
-            await this.$apiPlatform.get('daftarList/tag/').then(res => {
-                this.listTag = _.flatMap(res.data.results, function(o){
-                    return {"id":o.id, 'label':o.nama}
-                })
-            }).catch(err => {
-                console.log(err)
-            })
+            // await this.$apiPlatform.get('daftarList/tag/').then(res => {
+            //     this.listTag = _.flatMap(res.data.results, function(o){
+            //         return {"id":o.id, 'label':o.nama}
+            //     })
+            // }).catch(err => {
+            //     console.log(err)
+            // })
 
 
             await this.$apiPlatform.get('moderator/programs/'+this.id+'/').then(res => {
@@ -584,7 +598,7 @@ export default {
                 // console.log(data)
                 this.form = {
                     judulActivity: data.judulActivity,
-                    deskripsi: data.deskripsi,
+                    // deskripsi: data.deskripsi,
                     tanggalMulai: data.tanggalMulai,
                     tanggalSelesai: data.tanggalSelesai,
                     officer: data.officer.map(e=> e.userId),
@@ -600,6 +614,7 @@ export default {
                     testimoniNonUser: data.testimoniNonUser,
                     submission: data.submission
                 }
+                this.deskripsi.list = data.deskripsi
                 this.formTag.api = data.tag
                 this.imgMainImage.displayImage = data.imgMainImage;
                 this.imgThumbnail.displayImage = data.imgThumbnail
@@ -646,7 +661,12 @@ export default {
                     this.checkSaving.thumbnail = true
                 }
 
-                this.savingTag()
+                //saving child
+                this.saving.statusDeskripsi = true
+                this.saving.statusTag = true
+
+
+                // this.savingTag()
                 // this.savingGallery();
 
             //     this.btnText = 'Save'

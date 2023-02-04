@@ -41,7 +41,7 @@ export default {
             return process.env.BASE_URL
         },
         callBackUrl() {
-            return process.env.NODE_ENV === 'dev' ? 'http://localhost:3333/callback' : 'https://superadmin.k-hub.org/callback'
+            return process.env.NODE_ENV === 'development' ? 'http://localhost:3333/callback' : 'https://superadmin.k-hub.org/callback'
         }
     },
     mounted() {
@@ -57,6 +57,7 @@ export default {
             const req = {
                 code: this.codeToken,
                 redirect_uri: this.callBackUrl
+                // redirect_uri: 'http://localhost:3333/callback'
             }
             await this.$axios.post('https://base.api.k-hub.org/a3/authGoogle/',req).then(res => {
                 this.showError = false

@@ -68,7 +68,20 @@ export default {
                     const tokenCookiz = res.data.token
                     this.$cookies.set('jtoken', tokenCookiz)
                     window.location.href="/signed"
-                })
+                }).catch(error => {
+               
+                const dataError = {...error.response}
+                // console.log(dataError)
+                const errorMasuk = dataError.data.nonFieldErrors ? dataError.data.nonFieldErrors[0] : 'Chek email dan password!' ;
+                // this.$toast.show(this.$t(errorMasuk))
+              this.$toast.show({
+                    type: 'danger',
+                    title: 'Error',
+                    message: errorMasuk,
+                });
+                // this.loaderButton = false
+                // this.switchPersistanceState(null)
+            })
             } catch (err) {
                 console.log(err)
             }

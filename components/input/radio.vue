@@ -5,15 +5,21 @@
         </div>
         <div :class="orientasi==='horizontal'? 'flex items-center' : ''">
             <div v-for="(i, index) in opsiRadio" :key="'jk'+name+index" class="flex items-center mr-5 mb-2">
+                <label
+                    class="text-sm  flex items-center"
+                    :class="disabled?' text-gray-400 ' : 'cursor-pointer text-sembilan'"
+                >
                 <input 
                     type="radio" 
-                    :id="'cc'+name+i.id" 
+                    :id="name+i.id" 
                     v-model="valRadio"
                     :value="i.id"  
                     class="w-4 h-4 text-warna-empat bg-gray-100 border-gray-300 focus:ring-warna-empat focus:ring-0 "
                     :disabled="disabled?disabled:false"
                 >
-                <label :for="'cc'+name+i.id" class="ml-2 text-sm text-warna-sembilan " :class="disabled?'' : 'cursor-pointer'" >{{ i.label[bahasa] }}</label>
+                    <span class="ml-2">{{ i.label[bahasa] }}</span>
+                </label>
+                <!-- <label :for="'cc'+name+i.id" class="ml-2 text-sm text-warna-sembilan " :class="disabled?'' : 'cursor-pointer'" >{{ i.label[bahasa] }}</label> -->
             </div>
         </div>
     </div>

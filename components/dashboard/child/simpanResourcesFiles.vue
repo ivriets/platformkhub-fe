@@ -1,6 +1,6 @@
 <template>
     <div>
-        {{resourcesFiles}}
+        <!-- {{resourcesFiles}} -->
     </div>
 </template>
 <script>
@@ -14,7 +14,7 @@ export default {
             console.log(this.resourcesFiles)
             if (this.resourcesFiles.binFile === '' && this.resourcesFiles.embedLink === '') {
                 this.$emit('input','done')
-            } else if (this.resourcesFiles.binFile !== '') {
+            } else if (this.resourcesFiles.binFile && this.resourcesFiles.binFile.file) {
                 this.simpanFile()
             } else {
                 this.simpan()
@@ -26,7 +26,6 @@ export default {
             })
         },
          async simpanFile() {
-            this
             // if (image instanceof Blob){
                 var data = new FormData();
                 data.append('binFile', this.resourcesFiles.binFile.file, this.resourcesFiles.binFile.name);

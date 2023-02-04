@@ -20,7 +20,7 @@
                         <div class="text-3xl">{{ totalIndividuNeedVerification }}</div>
                     </div>
                     <div @click="$router.push('/verifications/individu')" class="border border-warna-empat rounded-lg py-2 cursor-pointer hover:bg-gray-50 text-center">
-                        <button class="font-semibold">See List</button>
+                        <button class="font-semibold">{{ $t('See List') }}</button>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                             Program
                         </div>
                         <div @click="$router.push('/moderations/program')" class="border border-warna-empat rounded-lg py-2 px-5 cursor-pointer hover:bg-gray-50 text-center">
-                            <button class="font-semibold">See List</button>
+                            <button class="font-semibold">{{ $t('See List') }}</button>
                         </div>
                     </div>
                     <div class="flex items-center justify-around">

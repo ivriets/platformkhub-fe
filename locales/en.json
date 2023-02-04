@@ -7,6 +7,7 @@
     "Program": "Program",
     "Acara": "Event",
     "Publikasi": "Resource",
+    "Resource": "Resource",
     "Blog": "Blog",
     "Karir": "Career",
     "Slider": "Slider",
@@ -200,15 +201,19 @@
     "Jika tidak mengetahui tanggal spesifik, silahkan pilih rentang tanggal terdekat": "If you do not know a specific date, please select the closest date range",
     "program-completed": "Completed",
     "program-ongoing": "Ongoing",
-    "event-completed": "Completed Event",
-    "event-ongoing": "Ongoing Event",
-    "event-upcoming": "Upcoming Event",
+    "event-completed": "Completed",
+    "event-ongoing": "Ongoing",
+    "event-upcoming": "Upcoming",
+    "event-undefined": "",
+    "Channel": "Channel",
+
     "Oleh": "By",
     "Published": "Published",
     "Empty Program List": "Empty Program List",
     "Edit Program List": "Edit Program List",
     "Remove": "Remove",
     "Add Program List": "Add Program List",
+    "See List": "See List",
 
 
 
@@ -223,6 +228,7 @@
     "typeAudienceBlank": "Audience Type is required!",
     "typeApproachBlank": "Approach is required!",
     "typeIssuesBlank": "Issues is required!",
+    "tipeRegistrasiBlank": "Registration Type is required!",
     "emailBlank": "Email is required!",
     "emailFormatBlank": "Email format is not valid!",
     "namaOrganisasiBlank": "Organization name is required!"
