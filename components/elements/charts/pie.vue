@@ -35,6 +35,7 @@ export default {
                     height: this.ukuran ? this.ukuran : '100%',
                     // width: this.ukuran ? this.ukuran : '100%',
                 },
+
                 exporting: {
                     enabled: false
                 },
@@ -42,6 +43,7 @@ export default {
                     enabled: false
                 },
                 tooltip: {
+                    headerFormat: '',
                     pointFormat: '<b>{point.name}</b>:{point.percentage:.0f}% ({point.y})',
                     split:true
                     // pointFormat: '{series.name}: <b>{point.y}</b>'

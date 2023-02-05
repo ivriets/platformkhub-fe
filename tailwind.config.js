@@ -19,7 +19,7 @@ module.exports = {
         colors: {
           'bc': '#FEF7E4',
           'utama': '#212121',
-          'dua': '#00600F',
+          'dua': '#616161',
           'tiga': '#FDCE07',
           'empat': '#222659',
           'lima': '#9E9E9E',

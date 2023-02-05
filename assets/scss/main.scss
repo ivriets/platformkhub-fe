@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
 $warna-body: #FAFAFA;
 $warna-utama: #212121;
 $warna-dua: #616161;
@@ -34,6 +36,8 @@ $warna-latar-tujuh: #4B4B9D;
 body {
     background-color: $warna-body;
     margin: 0 !important;
+    font-family: 'Lato';
+        // font-family: ;
 }
 
 .bg-warna-utama {
@@ -923,4 +927,22 @@ input[type="radio"]:checked {
     &:hover {
         opacity: 0.6;
     }
+}
+
+.barchart-persen-dashboard {
+    .highcharts-axis-line {
+        fill: transparent !important;
+        stroke-width: 0 !important;
+    }
+    .highcharts-xaxis-labels text{
+        transform: translate(60px, -28px) !important;
+        font-size: 16px !important;
+        font-family: 'Lato';
+    }
+    .highcharts-data-labels {
+        position: absolute !important;
+        right: 0 !important;
+    }
+
+
 }

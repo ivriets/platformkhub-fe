@@ -2,7 +2,12 @@
  * TODO(developer): Uncomment this variable and replace with your
  *   Google Analytics 4 property ID before running the sample.
  */
-propertyId = 'G-XZNG8PQKQG';
+ import express from 'express';
+
+ const app = express();
+ app.use(express.json());
+
+const propertyId = 'G-XZNG8PQKQG';
 
 // Imports the Google Analytics Data API client library.
 const {BetaAnalyticsDataClient} = require('@google-analytics/data');
@@ -38,5 +43,11 @@ async function runReport() {
     console.log(row.dimensionValues[0], row.metricValues[0]);
   });
 }
+app.get('/report', async(req, res) => {
+    const respon = runReport();
+    console.log(respon)
+    res.json(respon);
 
-runReport();
+})
+
+module.exports = app
