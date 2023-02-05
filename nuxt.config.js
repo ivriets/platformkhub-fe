@@ -80,7 +80,8 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     // '@nuxtjs/google-analytics',
-    'nuxt-gsap-module'
+    'nuxt-gsap-module',
+    '@nuxtjs/google-fonts'
   ],
   gsap: {
     extraPlugins: {
@@ -103,6 +104,7 @@ export default {
     'nuxt-highcharts',
     // ['cookie-universal-nuxt', { alias: 'cookiz' }],
     'cookie-universal-nuxt',
+    '@nuxtjs/google-fonts',
     'vue-scrollto/nuxt',
     ['nuxt-tailvue', {
       modal: true,
@@ -119,6 +121,13 @@ export default {
 
     }],
   ],
+
+  googleFonts: {
+    families: {
+      Lato: true,
+    }
+  },
+
   server: {
     host: "0.0.0.0",
     port: 3333,

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 $warna-body: #FAFAFA;
 $warna-utama: #212121;
@@ -36,7 +36,7 @@ $warna-latar-tujuh: #4B4B9D;
 body {
     background-color: $warna-body;
     margin: 0 !important;
-    font-family: 'Lato';
+    font-family: 'Lato', sans-serif !important;
         // font-family: ;
 }
 
