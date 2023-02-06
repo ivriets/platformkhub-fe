@@ -64,7 +64,7 @@ export default {
     computed: {
         model: {
             get() {
-                return this.value
+                return this.value ? this.value : ''
             },
             set(value) {
                 this.$emit('input', value)

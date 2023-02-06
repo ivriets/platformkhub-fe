@@ -687,7 +687,7 @@ export default {
                 } 
 
                 //simpan child
-                // this.saving.statusDeskripsi = true
+                this.saving.statusDeskripsi = true
                 // this.saving.statusLokasiOnline = true
                 this.saving.statusGalleri = true
                 this.saving.statusLokasiOffline = true
@@ -696,7 +696,7 @@ export default {
 
 
                 //handling error endpoint dulu
-                this.checkSaving.deskripsi = true //supaya gak error aja
+                // this.checkSaving.deskripsi = true //supaya gak error aja
 
 
 

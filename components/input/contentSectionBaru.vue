@@ -129,6 +129,7 @@ export default {
             this.newVal.list.splice(index,1)
             this.$nextTick(() => {
                 this.keyImage+=1
+                this.keyText+=1
             })
         }, 
         addSection(typeDeskripsi) {

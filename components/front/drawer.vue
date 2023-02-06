@@ -24,7 +24,7 @@
                                 >
                                     <div v-for="(item2, index2) in item.children" :key="'childrendrawer' + index2" class="">
                                         <nuxt-link :to="item2.path" :title="item2.label">
-                                            <div @click="clearHalamanStore" class="hover:bg-white/20 pl-7" :class="kelasAktif(item2)">
+                                            <div @click="clearHalamanStore" class="hover:bg-white/20 pl-7" :class="kelasAktifChildren(item2)">
                                                 <div class="py-2 pl-[36px]">{{$t(item2.label)}}</div>
                                             </div>
                                         </nuxt-link>
@@ -189,6 +189,10 @@ export default {
             const pecah = this.currentPath.split('/')
             const aktif = '/' + pecah[1] === item.path ? 'bg-empat' : ''
             return defClass + aktif
+        },
+        kelasAktifChildren(item) {
+            // console.log(item)
+            return this.currentPath.includes(item.path) ? 'bg-empat' : ''
         },
 
         btnToggle() {

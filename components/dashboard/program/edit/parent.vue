@@ -20,7 +20,6 @@
                             :max="maxTitle"
                             :counter="true"
                         />
-                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[0].length}}/{{maxTitle}}</div> -->
                     </div>
 
                     <div class="mb-6">
@@ -31,7 +30,6 @@
                             :max="maxTitle"
                             :counter="true"
                         />
-                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[1].length}}/{{maxTitle}}</div> -->
                     </div>
 
                     <div>
@@ -388,36 +386,9 @@ export default {
                 retentionSaatProgramMen:'',
                 submission: 1
             },
-            opsiTag: [
-                {
-                    id: 1,
-                    label: ['Pembelajaran', 'Pembelajaran']
-                },
-                {
-                    id: 2,
-                    label: ['Kekerasan', 'Kekerasan']
-                }
-            ],
-            officer: [
-                {
-                    id: 1,
-                    label: ['Pembelajaran', 'Pembelajaran']
-                },
-                {
-                    id: 2,
-                    label: ['Kekerasan', 'Kekerasan']
-                }
-            ],
-            partner: [
-                {
-                    id: 1,
-                    label: ['Pembelajaran', 'Pembelajaran']
-                },
-                {
-                    id: 2,
-                    label: ['Kekerasan', 'Kekerasan']
-                }
-            ],
+            opsiTag: [],
+            officer: [],
+            partner: [],
             tableMilestone: null,
             tableJourney: null,
             daftarGalleri: {
@@ -565,32 +536,6 @@ export default {
         },
 
         async masterPoint() {
-            // await this.$apiBase.get('provinsi/').then(res => {
-            //     const data = res.data
-            //     this.opsiProvinsi = _.map(data, function(o){
-            //         return {'id':o.provinsi, 'label':[o.provinsi, o.provinsi]}
-            //     })
-
-            // }).catch(err => {
-            //     console.log(err)
-            // })
-
-
-            // await this.$apiPlatform.get('verificator/listOrganisasi/').then(res => {
-            //     this.listOrganisasi = res.data
-            // }).catch(err => {
-            //     console.log(err)
-            // })
-
-
-            // await this.$apiPlatform.get('daftarList/tag/').then(res => {
-            //     this.listTag = _.flatMap(res.data.results, function(o){
-            //         return {"id":o.id, 'label':o.nama}
-            //     })
-            // }).catch(err => {
-            //     console.log(err)
-            // })
-
 
             await this.$apiPlatform.get('moderator/programs/'+this.id+'/').then(res => {
                 var data = res.data
@@ -662,19 +607,13 @@ export default {
                 }
 
                 //saving child
-                this.saving.statusDeskripsi = true
+                // this.saving.statusDeskripsi = true
                 this.saving.statusTag = true
 
 
-                // this.savingTag()
-                // this.savingGallery();
+                //supaya tidak error yg endpointnya butut
+                this.checkSaving.deskripsi = true
 
-            //     this.btnText = 'Save'
-            //    this.$toast.show(this.$t('Program')+ ' ' + this.$t('updated successfully'))
-
-            //     this.$nextTick(() => {
-            //         this.initialize()
-            //     })
 
             })
         },
