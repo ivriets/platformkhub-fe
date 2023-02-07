@@ -1,5 +1,4 @@
 <template>
-    <div>
     <div v-click-outside="closeDropdown">
         <div v-if="label" class="font-medium mb-1">
             {{label}} <span class="text-[#DF4B61] font-semibold" v-if="required && required === true">*</span>
@@ -42,16 +41,14 @@
                     </button>
             </div>
         </div>
-
-    </div>
-    <div class="chip-container mt-2 flex items-center flex-wrap gap-2">
+        <div class="chip-container mt-2 flex items-center flex-wrap gap-2">
             <div v-for="(item, index) in selectedValue" :key="'listSel'+name+index" @click="removeChip(item,index)">
                 <ElementsChip
                 :item="item.nama" />
             </div>
         </div>
 
-</div>
+    </div>
 </template>
 <script>
 export default {
@@ -68,18 +65,12 @@ export default {
                 deleted: [],
                 api: []
             },
-            opsi: [],
-            debounceTimeout: null
-
+            opsi: []
         }
     },
     watch: {
         newVal(val) {
-            if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
-            this.debounceTimeout = setTimeout(() => {
-                this.getApi(val);
-            },300)
-
+             this.getApi(val);
         },
 
     },
@@ -91,7 +82,7 @@ export default {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
         parseLabel() {
-            return this.itemLabel ? this.itemLabel : 'nama'
+            return this.itemLabel ? this.itemLabel : 'label'
         },
         parseId() {
             return this.itemValue ? this.itemValue : 'id'
@@ -103,44 +94,46 @@ export default {
     },
     methods: {
         initialize() {
-            this.selectedValue = []
-            // this.getOpsiTag();
-            this.initValue()
+            this.getOpsiTag();
         },
 
-        // async getOpsiTag() {
-        //     await this.$apiPlatform.get('daftarList/tag/').then(res => {
-        //         this.opsi = _.flatMap(res.data.results, function(o){
-        //             return {"id":o.id, 'label':o.nama}
-        //         });
-        //         this.listing = this.opsi
-        //         this.$nextTick(() => {
-        //             this.initValue()
-        //         })
-        //     }).catch(err => {
-        //         console.log(err)
-        //     })
-        // },
+        async getOpsiTag() {
+            await this.$apiPlatform.get('daftarList/tag/').then(res => {
+                this.opsi = _.flatMap(res.data.results, function(o){
+                    return {"id":o.id, 'label':o.nama}
+                });
+                this.listing = this.opsi
+                this.$nextTick(() => {
+                    this.initValue()
+                })
+            }).catch(err => {
+                console.log(err)
+            })
+        },
 
         initValue() {
             if (this.value) {
-                this.value.api.forEach((e,index) => {
-                    this.getItemApi(e.pilihanTagId.id)
+                this.value.api.every((e,index) => {
+                    // this.getItemApi(e)
+                    const cari = this.listing.filter(x => x[this.parseId]=== e.pilihanTagId.id)
+                    // const cari = 
+                    if (cari && cari.length > 0) this.selectedValue.push({
+                        pkTagId: e.pkTagId,
+                        id: e.pilihanTagId.id,
+                        nama:e.pilihanTagId.nama[this.bahasa]
+                        })
+                    if (this.value.api.length === index + 1) {
+
+                        this.updateValue()
+                        
+                        // return false
+                        console.log('dhfakfh')
+
+                    } else {
+                        return true;
+                    }
                 });
             }
-        },
-
-        async getItemApi(id) {
-            await this.$apiPlatform.get('daftarList/tag/?id='+id ).then(res => {
-                // console.log(res.data)
-                const hasil = res.data.results.map(e => {
-                    return  {
-                        id: e.id,
-                        nama: this.multilang && this.multilang === true ? e[this.parseLabel][this.bahasa] : e[this.parseLabel]
-                    }
-                })
-                if (hasil && hasil.length > 0) this.selectedValue.push(hasil[0])
-            })
         },
 
 
@@ -150,22 +143,16 @@ export default {
         },
         
         async getApi(val) {
-            await this.$apiPlatform.get('daftarList/tag/?limit=10&offset=0&nama='+this.newVal).then(res => {
-                console.log(res.data)
-                this.listing = res.data.results
-            })
-
-
-            // var listingFilter = []
-            // if (val === '' || val === undefined) {
-            //     listingFilter = this.listing
-            // } else {
-            //     listingFilter = this.opsi.filter(e => { 
-            //         return e[this.itemLabel].toString().toLowerCase().includes(val.toLowerCase())
-            //     })
-            // }
-            // this.statusDropdown = true
-            // this.listing = listingFilter
+            var listingFilter = []
+            if (val === '' || val === undefined) {
+                listingFilter = this.listing
+            } else {
+                listingFilter = this.opsi.filter(e => { 
+                    return e[this.itemLabel].toString().toLowerCase().includes(val.toLowerCase())
+                })
+            }
+            this.statusDropdown = true
+            this.listing = listingFilter
         },
 
         closeDropdown() {
@@ -206,7 +193,7 @@ export default {
                 this.selectedValue.push({
                         pkTagId: '',
                         id: item.id,
-                        nama:item[this.parseLabel][this.bahasa]
+                        nama:item.label[this.bahasa]
                 })
                 this.updateValue()
                 // this.$emit('input',item.id)

@@ -144,14 +144,25 @@
                             :name="prefixName+'tag'"
                             :label="$t('Tag')"
                             :itemValue="'id'"
-                            :itemLabel="'label'"
+                            :itemLabel="'nama'"
                             :multilang="true"
                             :addNew="true"
 
                         />
                     </div>
-
-
+                    <!-- <InputAutocompleteApiMulti 
+                            v-model="formTag"
+                            :name="prefixName+'tag'"
+                            :label="$t('Tag')"
+                            :endPoint="'daftarList/tag/?limit=10&offset=0'"
+                            :searchQuery="'nama'"
+                            :itemValue="'id'"
+                            :itemLabel="'nama'"
+                            :key="'tag'+keyMaster"
+                            :keyRespon="'res.data.results'"
+                            :multilang="true"
+                        /> -->
+<!-- {{ formTag }} -->
 
 
                 </div>

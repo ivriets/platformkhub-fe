@@ -268,7 +268,7 @@
                             :name="prefixName+'tag'"
                             :label="$t('Tag')"
                             :itemValue="'id'"
-                            :itemLabel="'label'"
+                            :itemLabel="'nama'"
                             :multilang="true"
                             :addNew="true"
                             :key="'keytag'+keyMaster"
@@ -562,7 +562,8 @@ export default {
             this.checkSaving= {
                 root: false,
                 thumbnail: false,
-                galleri: false
+                galleri: false,
+                deskripsi: false
             }
 
 
@@ -689,7 +690,7 @@ export default {
                 //simpan child
                 this.saving.statusDeskripsi = true
                 // this.saving.statusLokasiOnline = true
-                this.saving.statusGalleri = true
+                // this.saving.statusGalleri = true
                 this.saving.statusLokasiOffline = true
                 this.saving.statusLokasiOnline = true
                 this.saving.statusTag = true
@@ -697,6 +698,7 @@ export default {
 
                 //handling error endpoint dulu
                 // this.checkSaving.deskripsi = true //supaya gak error aja
+                this.checkSaving.galleri = true
 
 
 

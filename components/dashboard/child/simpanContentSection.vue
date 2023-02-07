@@ -50,21 +50,39 @@ export default {
             this.simpan()
         },
         async simpan() {
-            const forSimpan = {
+            var bawaan = []
+            // bawaan = this.deskripsi.list.filter(e => !e.txtDeskripsiId  && !e.imgDeskripsiId )
+            const preForSimpan = {
                 deleted: this.deskripsi.deleted,
-                updated: this.deskripsi.list.filter(e => e.txtDeskripsiId !== '' ),
-                new: this.deskripsi.new
+                updated: this.deskripsi.list.filter(e => e.txtDeskripsiId && e.txtDeskripsiId !== '' ),
+                new: this.deskripsi.list.filter(e => e.tipe=='new')
             }
-            const forImageUpdate = this.deskripsi.list.filter(e=> (e.imgDeskripsi && e.imgDeskripsi.status === 'belumUpload'))
+            const forSimpan = {
+                deleted: preForSimpan.deleted,
+                updated: preForSimpan.updated.map(e => {
+                    e.paragraf[0] = e.paragraf[0] === '' ? 'N/A' : e.paragraf[0]
+                    e.paragraf[1] = e.paragraf[1] === '' ? 'N/A' : e.paragraf[1]
+                    return e;
+                }),
+                new: preForSimpan.new.map(e => {
+                    e.paragraf[0] = e.paragraf[0] === '' ? 'N/A' : e.paragraf[0]
+                    e.paragraf[1] = e.paragraf[1] === '' ? 'N/A' : e.paragraf[1]
+                    return e;
+                })
+            }
+
+            console.log('deskripris', forSimpan)
+            const forImageUpdate = this.deskripsi.list.filter(e=> (e.imgDeskripsiId && e.imgDeskripsi && e.imgDeskripsi.status === 'belumUpload'))
             this.totalImageUpdate = forImageUpdate.length
 
-            const listImages = this.deskripsi.new.filter( e => e.typeDeskripsi === 1)
+            const listImages = forSimpan.new.filter( e => e.typeDeskripsi === 1)
             this.totalImageBaru = listImages.length
-            
+            console.log('li',listImages)
 
             await this.$apiPlatform.put(this.endPoint+ this.modelId + '/', {deskripsi:forSimpan}).then(res => {
 
                 if (listImages.length > 0) {
+                    console.log('img baru')
                     listImages.forEach((e,index) => {
                        this.uploadImage(e.imgDeskripsi.file, res.data.imgDeskripsiId[index], e.imgDeskripsi.name, index )
                     })

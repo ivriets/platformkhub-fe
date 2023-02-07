@@ -43,9 +43,11 @@
         <div class="chip-container mt-2 flex items-center flex-wrap gap-2">
             <ElementsChip 
                 v-for="(item, index) in selectedValue" :key="'listSel'+name+index"
-                :item="item[parseLabel]"
+                :item="multilang && multilang===true ? item[parseLabel][bahasa]:item[parseLabel]"
                 @click="removeChip"
             />
+            <!-- {{ listing }} -->
+            <!-- {{ selectedValue }} -->
         </div>
        <!-- <pre> {{selectedValue}} </pre> -->
     </div>
@@ -65,6 +67,7 @@ export default {
         'endPoint',  // req string
         'searchQuery', // req string | 
         'itemEndPoint', //opt string | endpoint untuk ngambil detail. kalau tidak maka akan mensplice dari endPoint, 
+        'keyRespon'
         ],
     data() {
         return {
@@ -143,7 +146,8 @@ export default {
             // this.listing = listingFilter
             const endPoint = this.endPoint + '&' + this.searchQuery + '=' + this.newVal
             this.$apiPlatform.get(endPoint).then(res => {
-                this.listing = res.data
+                console.log(eval(this.keyRespon))
+                this.listing = eval(this.keyRespon)
             })
 
         },

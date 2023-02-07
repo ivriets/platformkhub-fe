@@ -383,7 +383,7 @@ export default {
                 tag: undefined,
                 tambahTestimony:[],
                 namaTestimony:[],
-                retentionSaatProgramMen:'',
+                retentionSaatProgramMen:null,
                 submission: 1
             },
             opsiTag: [],

@@ -146,7 +146,7 @@
                             :name="prefixName+'tag'"
                             :label="$t('Tag')"
                             :itemValue="'id'"
-                            :itemLabel="'label'"
+                            :itemLabel="'nama'"
                             :multilang="true"
                             :addNew="true"
                         />

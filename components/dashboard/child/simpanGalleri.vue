@@ -12,7 +12,8 @@ export default {
             endPointRoot: '',
             endPointGalleri: '',
             fieldGalleri: '',
-            counterBaru: 0
+            counterBaru: 0,
+            inputField: ''
         }
     },
     mounted() {
@@ -34,10 +35,12 @@ export default {
                 this.endPointRoot = 'moderator/blogs/'+this.modelId+'/';
                 this.endPointGalleri = 'moderator/bloggalleries/'
                 this.fieldGalleri = 'blogsGalleries'
+                this.inputField = 'blog'
             } else if (this.model === 'event') {
                 this.endPointRoot = 'moderator/events/'+this.modelId+'/';
                 this.endPointGalleri = 'moderator/eventsgalleries/'
                 this.fieldGalleri = 'galleries'
+                this.inputField = 'events'
             } else if (this.model === 'program') {
                 
             }
@@ -63,8 +66,7 @@ export default {
         async postDeskripsi(item) {
             
             const req = {
-                blog: this.modelId,
-                // events: this.modelId,
+                [this.inputField]: this.modelId,
                 deskripsiGambar: ['khub','khub']
             }
             await this.$apiPlatform.post(this.endPointGalleri, req).then(res => {
@@ -73,7 +75,7 @@ export default {
             })
         },
          async uploadImage(image, name, id) {
-            if (image instanceof Blob){
+            // if (image instanceof Blob){
                 var data = new FormData();
                 data.append('imgGambar', image, name);
                 await this.$apiPlatform.put(this.endPointGalleri + id +'/'   , data).then(res => {
@@ -82,7 +84,7 @@ export default {
                 }).catch(err => {
                     console.log(err)
                 })
-            }
+            // }
         },
         async deleteGallery(item) {
             await this.$apiPlatform.delete(this.endPointGalleri + item).then(res => {
