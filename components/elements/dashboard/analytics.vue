@@ -101,6 +101,28 @@ export default {
         totalPageView() {
             return _.sumBy(this.pageView, 'value')
         }
+    },
+    mounted() {
+        // this.ambilData()
+    },
+    methods: {
+        async ambilData() {
+
+            const req = {
+                currencyCode: 'IDR',
+                "dateRanges": [{ "startDate": "29daysAgo", "endDate": "today" }],
+                "metrics": [{ "name": "sessions" }]
+
+            }
+            const endPoint = 'https://analyticsdata.googleapis.com/v1beta/properties/266892916:runReport'
+            await this.$axios.post(endPoint,req,{
+                headers: {
+                    Authorization: 'Bearer ' + this.$cookies.get('atoken')
+                }
+            }).then(res => {
+                console.log(res.data)
+            })
+        }
     }
 }
 </script>

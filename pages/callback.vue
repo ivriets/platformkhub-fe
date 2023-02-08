@@ -60,9 +60,11 @@ export default {
                 // redirect_uri: 'http://localhost:3333/callback'
             }
             await this.$axios.post('https://base.api.k-hub.org/a3/authGoogle/',req).then(res => {
+                // console.log(res.data)
                 this.showError = false
                     const tokenCookiz = res.data.token
                     this.$cookies.set('jtoken', tokenCookiz)
+                    this.$cookies.set('atoken', res.data.accessToken)
                     window.location.href="/"
             }).catch(err => 
                 this.showError = true

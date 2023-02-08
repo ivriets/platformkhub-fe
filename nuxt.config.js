@@ -229,6 +229,7 @@ export default {
       { src: "~/plugins/apiBase", mode: "client" },
       { src: "~/plugins/apiPlatform", mode: "client" },
       { src: "~/plugins/api1", mode: "client" },
+      { src: "~/plugins/apiGoogle", mode: "client" },
       // { src: "~/plugins/axios", mode: "client" },
     ],
     cookie: {

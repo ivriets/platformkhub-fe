@@ -11,7 +11,7 @@
                     <div class="bg-tiga rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-5">
                         <div class="text-3xl">{{ totalIndividuNeedVerification }}</div>
                     </div>
-                    <button @click="$router.push('/verifications/individu')" class="button-standar-outline w-full">
+                    <button @click="$router.push('/verifications/individu')" class="button-outline px-2 py-2 font-semibold  w-full">
                         {{ $t('See List') }}
                     </button>
                 </div>
@@ -42,7 +42,7 @@
                     <div class="bg-warna-tiga rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-5">
                         <div class="text-3xl">{{ totalOrganisasiNeedVerification }}</div>
                     </div>
-                    <button @click="$router.push('/verifications/organisasi')" class="button-standar-outline w-full">
+                    <button @click="$router.push('/verifications/organisasi')" class="button-outline px-2 py-2 font-semibold  w-full">
                         {{ $t('See List') }}
                     </button>
 
