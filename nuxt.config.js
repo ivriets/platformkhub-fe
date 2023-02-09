@@ -132,9 +132,9 @@ export default {
     host: "0.0.0.0",
     port: 3333,
   },
-  serverMiddleware: [
-    { path: "/ga", handler: "~/ga/report.js" },
-  ],
+  // serverMiddleware: [
+  //   { path: "/ga", handler: "~/ga/report.js" },
+  // ],
 
   dayjs: {
     locales: ['id'],

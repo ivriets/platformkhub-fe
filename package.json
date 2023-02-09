@@ -23,7 +23,6 @@
     "core-js": "^3.25.3",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2",
     "gmap-vue": "^3.5.4",
     "nuxt": "^2.15.8",
     "nuxt-gmaps": "^1.2.10",

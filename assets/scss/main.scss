@@ -29,7 +29,14 @@ $warna-latar-enam: #BC185D;
 $warna-latar-tujuh: #4B4B9D;
 
 
-
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
 
 
 /// BACKGROUND COLOR ///
@@ -947,14 +954,7 @@ input[type="radio"]:checked {
 
 }
 
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.3s;
-}
-.page-enter,
-.page-leave-to {
-  opacity: 0;
-}
+
 
 .input-overide-filter {
     input, select {
