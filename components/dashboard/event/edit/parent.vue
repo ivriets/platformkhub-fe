@@ -139,6 +139,7 @@
                             <InputSelect 
                                 v-model="form.tipeAcara"
                                 :opsi="opsiTipeAcara"
+                                :multilang="true"
                             />
                         </div>
                     <div v-if="[3,1].includes(tipeAcara)">

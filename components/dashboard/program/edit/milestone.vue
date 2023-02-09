@@ -63,6 +63,7 @@
                         :label="'Status'"
                         :opsi="opsiStatusMilestone"
                         :placeholder="'Pilih status'"
+                        :multilang="true"
                     />
                 </div>
                 <div class="mb-5">

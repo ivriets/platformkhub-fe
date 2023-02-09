@@ -8,6 +8,7 @@
                         :name="'filterwaktu'"
                         :opsi="opsiFilterWaktu"
                         :placeholder="'All Time'"
+                        :multilang="true"
                     />
                 </div>
 
@@ -33,6 +34,7 @@
                         :name="'filteraction'"
                         :opsi="opsiFilterAction"
                         :placeholder="'Action'"
+                        :multilang="true"
                     />
                 </div>
             </div>

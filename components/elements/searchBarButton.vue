@@ -10,7 +10,7 @@
                 :name="name" 
                 :id="name" 
                 :ref="name"
-                class="focus:outline-none w-full border border-warna-tujuh rounded px-2 py-1.5 text-sm text-warna-utama placeholder-[#9E9E9E] focus:border-warna-tujuh/50"
+                class="cursor-pointer appearance-none w-full focus:outline-none border border-tujuh rounded-lg px-2 py-1.5 text-sm placeholder-[#9E9E9E] focus:border-tujuh/50 disabled:bg-gray-200"
                 :placeholder="placeholder"
                 :maxlength="max ? max : 1000"
                 autocomplete="chrome-off"

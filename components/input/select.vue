@@ -10,7 +10,7 @@
                 v-model="valueSelect" 
                 :disabled="disabled && disabled === true ? true : false" 
                 :placeholder="placeholder ? placeholder : this.$t('Pilih')"
-                class="cursor-pointer appearance-none w-full focus:outline-none border border-warna-tujuh rounded-lg px-2 py-1.5 text-sm placeholder-[#9E9E9E] focus:border-warna-tujuh/50 disabled:bg-gray-200">
+                class="cursor-pointer appearance-none w-full focus:outline-none border border-tujuh rounded-lg px-2 py-1.5 text-sm placeholder-[#9E9E9E] focus:border-tujuh/50 disabled:bg-gray-200">
                     <option selected disabled value="" >{{placeholder ? placeholder : this.$t('Pilih')}}</option>
                     <option
                         v-for="(i, index) in opsi" :key="name+'opsi'+index" 

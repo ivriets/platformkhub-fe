@@ -9,12 +9,13 @@
                 />
             </div>
             <div v-if="!loaderPage" class="w-[240px] h-[34px] mr-4 animate-pulse bg-gray-200 rounded-md"></div>
-            <div v-if="loaderPage" class="w-[180px]">
+            <div v-if="loaderPage" class="w-[180px] input-overide-show">
                 <InputSelect 
                     v-model="showRow"
                     :opsi="opsiShowRow"
                     :name="prefixName+'showrow'"
                     :key="'ks'+keyShow"
+                    :multilang="true"
                 />
             </div>
             <div v-if="!loaderPage" class="w-[180px] h-[34px] mr-4 animate-pulse bg-gray-200 rounded-md"></div>
