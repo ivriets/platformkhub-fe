@@ -9,6 +9,7 @@
                             :name="prefixName+'provinsi'"
                             :opsi="opsiProvinsi"
                             :key="'prov'+keyProvinsi"
+                            :multilang="true"
                         />
                     </div>
                 </div>
@@ -20,6 +21,8 @@
                         :opsi="opsiKotaKab"
                         :key="'kota'+keyKota"
                         :disabled="newVal.provinsi===''?true:false"
+                        :multilang="true"
+
                     />
                 </div>
                 <div class="col-span-12 ">
