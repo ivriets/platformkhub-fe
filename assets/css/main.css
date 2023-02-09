@@ -18,7 +18,7 @@
         @apply px-8 py-2  rounded-lg opacity-100 hover:opacity-60 font-semibold disabled:bg-gray-300 disabled:inset-5 disabled:text-gray-500 ;
     }
     .button-outline {
-        @apply border-utama text-utama border rounded-md bg-white hover:bg-utama/30 transition-all duration-75 ;
+        @apply border-utama text-utama border rounded-md bg-white hover:bg-utama/30 transition-all duration-75 disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-100 ;
     }
     .button-upload {
         @apply bg-white text-[#45A6FF] font-semibold text-[16px] border rounded-md hover:bg-gray-200 hover:shadow-md transition-all shadow shadow-[#45a6ff33] py-2 w-[145px] text-center mx-auto disabled:bg-gray-300 disabled:inset-5 disabled:text-gray-500 disabled:cursor-not-allowed disabled:hover:shadow-none;
