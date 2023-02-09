@@ -181,7 +181,7 @@
             </div> -->
         </div>
 
-        <ElementsModal 
+        <!-- <ElementsModal 
             v-model="modalAction"
             :title="modalTitle"
             :width="modalWidth"
@@ -195,9 +195,9 @@
                     <div @click="btnYakinKeluar" class="w-full text-center bg-warna-rejected hover:bg-red-700 text-white rounded-lg py-3 cursor-pointer">Keluar</div>
                 </div>
             </div>
-        </ElementsModal>
+        </ElementsModal> -->
 
-        <ElementsModal 
+        <!-- <ElementsModal 
             v-model="modalActionJoin"
             :title="modalTitleJoin"
             :width="modalWidthJoin"
@@ -212,7 +212,7 @@
                     <div @click="btnYakinBergabung" class="w-full text-center hover:bg-blue-900 bg-warna-empat text-white rounded-lg py-3 cursor-pointer">Bergabung</div>
                 </div>
             </div>
-        </ElementsModal>
+        </ElementsModal> -->
     </div>
 </template>
 

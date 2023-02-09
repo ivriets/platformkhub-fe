@@ -146,12 +146,12 @@ export default {
                     path: '/category-list',
                     children: []
                 },
-                {
-                    icon: '/icons/icon-tutorial.png',
-                    label: 'Tutorial',
-                    path: '/tutorial',
-                    children: []
-                }
+                // {
+                //     icon: '/icons/icon-tutorial.png',
+                //     label: 'Tutorial',
+                //     path: '/tutorial',
+                //     children: []
+                // }
             ]
         }
     },

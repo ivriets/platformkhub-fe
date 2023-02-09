@@ -103,7 +103,7 @@ export default {
         }
     },
     mounted() {
-        // this.ambilData()
+        this.ambilData()
     },
     methods: {
         async ambilData() {

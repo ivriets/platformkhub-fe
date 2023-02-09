@@ -124,7 +124,9 @@
     "File": "File",
     "Resource Category": "Resource Category",
     "updated successfully": "updated successfully",
-    "updateSukses": "updated successfully",
+    "updateSukses": "updated successfuly",
+    "addedSukses": "added successfully",
+
     "Registration Type": "Registration Type",
     "Registration Date": "Registration Date",
     "Start Date": "Start Date",
@@ -219,14 +221,24 @@
     "User in last 30 days": "User in last 30 days",
     "New List" : "New List",
     "Apply": "Apply",
-
-
-
-
-
-
-
-    
+    "Logo Organisasi": "Organization Logo",
+    "Nama Mitra": "Partner Name",
+    "Cari Mitra": "Find Partner",
+    "Tambah Mitra": "Add Partner",
+    "Add Milestone": "Add Milestone",
+    "deskripsi": "description",
+    "Date": "Date",
+    "Twitter link": "Twitter link",
+    "Instagram link": "Instagram link",
+    "Youtube link": "Youtube link",
+    "Facebook link": "Facebook link",
+    "LinkedIn link": "LinkedIn link",
+    "Tentang": "About",
+    "Mitra": "Partner",
+    "Pencapaian": "Milestone",
+    "Kontak & Lokasi" : "Contant & Location",
+    "Media Sosial": "Social Media",
+    "Cabang": "Branch",
 
 
 
@@ -238,7 +250,11 @@
     "tipeRegistrasiBlank": "Registration Type is required!",
     "emailBlank": "Email is required!",
     "emailFormatBlank": "Email format is not valid!",
-    "namaOrganisasiBlank": "Organization name is required!"
+    "namaOrganisasiBlank": "Organization name is required!",
+    "indonesiaTitleBlank": "Indonesian title is required!",
+    "englishTitleBlank": "English title is required!",
+    "indonesiaDescBlank": "Indonesian Description is required!",
+    "englishDescBlank": "English Description is required!"
 
 
 

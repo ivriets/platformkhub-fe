@@ -30,13 +30,13 @@
                         />
                     </div>
 
-                    <hr class="border-warna-tujuh my-10">
+                    <hr class="border-tujuh my-10">
                         <DashboardResourceEditFile 
                             v-model="resourcesFiles"
                             :key="'resourcetype'+keyMaster"
                         />
 
-                    <hr class="border-warna-tujuh my-10">
+                    <hr class="border-tujuh my-10">
 
                     <div>
                         <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Content') }}</div>
@@ -80,7 +80,7 @@
 
                     
 
-                    <hr class="border-warna-tujuh my-[28px]">
+                    <hr class="border-tujuh my-[28px]">
 
                     <div>
                         <InputRadio 
@@ -93,53 +93,48 @@
                         />
                     </div>
 
-                    <hr class="border-warna-tujuh my-[28px]">
+                    <hr class="border-tujuh my-[28px]">
 
                     <div >
-                        <InputAutocompleteMulti 
+                        <InputFieldKategoriMulti 
                             v-model="form.typeAudience"
                             :name="prefixName+'typeAudience'"
-                             :label="$t('Audience Type')"
-                            :opsi="typeAudience"
-                            :itemValue="'id'"
-                            :itemLabel="'label'"
-                            :key="'tipeaudience'+keyMaster"
+                            :label="$t('Audience Type')"
+                            :key="keyMaster+'typeAudience'"
                             :multilang="true"
+                            :kategori="'typeAudience'"
                             :required="true"
-
                         />
+
                     </div>
-                    <hr class="border-warna-tujuh my-[28px]">
+                    <hr class="border-tujuh my-[28px]">
                     <div >
-                        <InputAutocompleteMulti 
+                        <InputFieldKategoriMulti 
                             v-model="form.typeApproach"
                             :name="prefixName+'typeApproach'"
                             :label="$t('Approach')"
-                            :opsi="typeApproach"
-                            :itemValue="'id'"
-                            :itemLabel="'label'"
-                            :key="'tipeapproach'+keyMaster"
+                            :key="keyMaster+'typeApproach'"
                             :multilang="true"
+                            :kategori="'typeApproach'"
                             :required="true"
-
                         />
+
+
                     </div>
-                    <hr class="border-warna-tujuh my-[28px]">
+                    <hr class="border-tujuh my-[28px]">
                     <div >
-                        <InputAutocompleteMulti 
+                        <InputFieldKategoriMulti 
                             v-model="form.typeIssues"
                             :name="prefixName+'typeIssues'"
                             :label="$t('Issues')"
-                            :opsi="typeIssues"
-                            :itemValue="'id'"
-                            :itemLabel="'label'"
-                            :key="'typeIssues'+keyMaster"
+                            :key="keyMaster+'typeIssues'"
                             :multilang="true"
+                            :kategori="'typeIssues'"
                             :required="true"
-
                         />
+
                     </div>
-                    <hr class="border-warna-tujuh my-[28px]">
+                    <hr class="border-tujuh my-[28px]">
                     <div >
                         <InputFieldTag
                             v-model="formTag"
@@ -262,24 +257,11 @@ export default {
         }
     },
     computed: {
-        async typeOrganisasi() {
-            return this.$store.state.daftarlist.typeOrganisasi
-        },
+
         kategoriArtikel() {
             return this.$store.state.opsi.kategoriArtikel
         },
 
-        typeAudience() {
-            return this.$store.state.opsi.typeAudience
-        },
-
-        typeApproach() {
-            return this.$store.state.opsi.typeApproach
-        },
-
-        typeIssues() {
-            return this.$store.state.opsi.typeIssues
-        },
 
         lang() {
             return this.$i18n.locale

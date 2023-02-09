@@ -29,10 +29,11 @@
                         :itemValue="'id'"
                         :itemLabel="'label'"
                         :key="prefixName+'dept'"
+                        :multilang="true"
                     />
                 </div>
                 <div class="col-span-12 md:col-span-6 w-full">
-                    <InputDropdown 
+                    <InputSelect 
                         v-model="form.status"
                         :label="'Status'"
                         :name="'status'"

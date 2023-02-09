@@ -20,7 +20,6 @@
                             :max="maxTitle"
                             :counter="true"
                         />
-                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulArtikel[0].length}}/{{maxTitle}}</div> -->
                     </div>
 
                     <div class="">
@@ -31,10 +30,9 @@
                             :max="maxTitle"
                             :counter="true"
                         />
-                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulArtikel[1].length}}/{{maxTitle}}</div> -->
                     </div>
 
-                    <hr class="border-warna-tujuh my-10">
+                    <hr class="border-tujuh my-10">
 
                     <div>
                         <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Content') }}</div>
@@ -43,10 +41,9 @@
                             v-model="deskripsi"
                             :key="'desk'+keyMaster"
                         />
-                      <!-- <pre> diluar:  {{ deskripsi }} </pre> -->
                     </div>
 
-                    <hr class="border-warna-tujuh my-10">
+                    <hr class="border-tujuh my-10">
                         <InputGalleries 
                             v-model="daftarGalleri"
                         />
@@ -83,7 +80,7 @@
 
                     </div>
 
-                    <hr class="border-warna-tujuh my-[28px]">
+                    <hr class="border-tujuh my-[28px]">
 
                     <div>
                         <InputRadio 
@@ -95,9 +92,9 @@
                         />
                     </div>
 
-                    <hr class="border-warna-tujuh my-[28px]">
+                    <hr class="border-tujuh my-[28px]">
 
-                    <div v-if="typeAudience && form.typeAudience">
+                    <!-- <div v-if="typeAudience && form.typeAudience">
                         <InputAutocompleteMulti 
                             v-model="form.typeAudience"
                             :name="prefixName+'typeAudience'"
@@ -108,9 +105,33 @@
                             :multilang="true"
                             :required="true"
                         />
+                    </div> -->
+                    <div class="fda">
+                        <InputFieldKategoriMulti 
+                            v-model="form.typeAudience"
+                            :name="prefixName+'typeAudience'"
+                            :label="$t('Audience Type')"
+                            :key="keyMaster+'typeAudience'"
+                            :multilang="true"
+                            :kategori="'typeAudience'"
+                            :required="true"
+                        />
                     </div>
-                    <hr class="border-warna-tujuh my-[28px]">
-                    <div v-if="typeApproach && form.typeApproach">
+
+                    <hr class="border-tujuh my-[28px]">
+                    <div class="huhuy">
+                        <InputFieldKategoriMulti 
+                            v-model="form.typeApproach"
+                            :name="prefixName+'typeApproach'"
+                            :label="$t('Approach')"
+                            :key="keyMaster+'typeApproach'"
+                            :multilang="true"
+                            :kategori="'typeApproach'"
+                            :required="true"
+                        />
+                    </div>
+
+                    <!-- <div v-if="typeApproach && form.typeApproach">
                         <InputAutocompleteMulti 
                             v-model="form.typeApproach"
                             :name="prefixName+'typeApproach'"
@@ -120,11 +141,23 @@
                             :itemLabel="'label'"
                             :multilang="true"
                             :required="true"
+                        />
+                    </div> -->
 
+                    <hr class="border-tujuh my-[28px]">
+                    <div class="fh">
+                        <InputFieldKategoriMulti 
+                            v-model="form.typeIssues"
+                            :name="prefixName+'typeIssues'"
+                            :label="$t('Issues')"
+                            :key="keyMaster+'typeIssues'"
+                            :multilang="true"
+                            :kategori="'typeIssues'"
+                            :required="true"
                         />
                     </div>
-                    <hr class="border-warna-tujuh my-[28px]">
-                    <div v-if="typeIssues && form.typeIssues">
+
+                    <!-- <div v-if="typeIssues && form.typeIssues">
                         <InputAutocompleteMulti 
                             v-model="form.typeIssues"
                             :name="prefixName+'typeIssues'"
@@ -136,8 +169,8 @@
                             :required="true"
 
                         />
-                    </div>
-                    <hr class="border-warna-tujuh my-[28px]">
+                    </div> -->
+                    <hr class="border-tujuh my-[28px]">
                     <div >
                         <InputFieldTag
                             v-model="formTag"
@@ -264,23 +297,9 @@ export default {
         }
     },
     computed: {
-        async typeOrganisasi() {
-            return this.$store.state.daftarlist.typeOrganisasi
-        },
+
         kategoriArtikel() {
             return this.$store.state.opsi.kategoriArtikel
-        },
-
-        typeAudience() {
-            return this.$store.state.opsi.typeAudience
-        },
-
-        typeApproach() {
-            return this.$store.state.opsi.typeApproach
-        },
-
-        typeIssues() {
-            return this.$store.state.opsi.typeIssues
         },
 
         lang() {

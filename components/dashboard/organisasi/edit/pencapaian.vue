@@ -131,7 +131,7 @@ export default {
            return [
                 {
                     header: '',
-                    itemValue: this.$t('deskripsi'),
+                    itemValue: 'deskripsi',
                     type: 'string',
                 },
                 {

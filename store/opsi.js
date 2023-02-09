@@ -298,7 +298,19 @@ export const state = () => ({
         },
         {
             id: 2,
-            label: ['Akuntansi', 'Accounting']
+            label: ['Finance', 'Finance']
+        },
+        {
+            id:3,
+            label:['Business Design', 'Business Design']
+        },
+        {
+            id:4,
+            label: ['Program', 'Program']
+        },
+        {
+            id:5,
+            label:['Lainnya', 'Lainnya']
         }
     ],
     statusOpenRec: [

@@ -7,21 +7,21 @@
                     <div class="w-full grid grid-cols-12 gap-5 items-end">
                         <div class="col-span-5">
                             <InputText 
-                                v-model="form.newItem[0]"
+                                v-model="form.nama[0]"
                                 :name="selectedTab+'newItem'"
                                 :label="'Bahasa Indonesia'"
                             />
                         </div>
                         <div class="col-span-5">
                             <InputText 
-                                v-model="form.newItem[1]"
+                                v-model="form.nama[1]"
                                 :name="selectedTab+'newItem'"
                                 :label="'English'"
                             />
                         </div>
                         <div class="col-span-2">
                             <button 
-                                :disabled="form.newItem[0] === '' || form.newItem[1] === '' ? true : false" 
+                                :disabled="form.nama[0] === '' || form.nama[1] === '' ? true : false" 
                                 @click="addItem"
                                 class="button-outline py-1 px-2">
                                 + Add
@@ -95,13 +95,14 @@
             return {
                 defaultList: [],
                 form: {
-                    newItem: ['','']
+                    nama: ['','']
                 },
                 list: []
             }
         },
         computed: {
             kategoriName() {
+                // return this.selectedTab === 'topic' ? 'Type_Issues' : 'Type_Approach'
                 return this.selectedTab === 'topic' ? 'typeIssues' : 'typeApproach'
             },
             kategoriLabel() {
@@ -131,6 +132,9 @@
 
                 ]
                 return table;
+            },
+            endPoint() {
+                return 'daftarList/kategori/?kategori1='+this.kategoriName;
             }
         },  
         mounted() {
@@ -141,8 +145,11 @@
                 this.masterPoint()
             },
             async masterPoint() {
-                await this.$apiPlatform.get('daftarList/kategori?kategori1='+this.kategoriName).then(res => {
-                    const list = res.data.results.map(e => {
+                await this.$apiPlatform.get(this.endPoint).then(res => {
+
+                    const dataRes = res.data
+
+                    const list = dataRes.map(e => {
                         e.editMode = false
                         return e
                     })
@@ -152,8 +159,12 @@
 
                 })
             },
-            addItem() {
+            async addItem() {
 
+                await this.$apiPlatform.post(this.endPoint, this.form).then(res => {
+                    this.$toast.show(this.kategoriLabel + ' ' + this.$t('addedSukses'))
+                    this.initialize()
+                })
             },
             editItem(item, index) {
                 // console.log(item)
@@ -168,8 +179,12 @@
 
 
             },
-            applyItem(item, index) {
-
+            async applyItem(item, index) {
+                console.log(item)
+                await this.$apiPlatform.put('/daftarList/kategori/'+item.id+'/?kategori1='+this.kategoriName, item).then(res => {
+                    this.$toast.show(this.kategoriLabel+' '+this.$t('updateSukses'));
+                    this.initialize()
+                })
             }
         }
     }

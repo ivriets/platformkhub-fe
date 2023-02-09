@@ -6,6 +6,7 @@
                 <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
             </svg>
         </div>
+
     </div>
     <div v-else>
         <div class="grid grid-cols-12 gap-x-6 gap-y-5 md:gap-y-9 mb-5 md:mb-10">
@@ -30,35 +31,64 @@
             </div>
             <div class="col-span-12 md:col-span-6">
                 <div class="">
-                    <InputAutocompleteMulti 
+                    <InputFieldKategoriMulti 
+                        v-model="form.typeOrganisasi"
+                        :name="prefixName+'typeOrganisasi'"
+                        :label="$t('Organization Type')"
+                        :key="keyMaster+'typeOrganisasi'"
+                        :multilang="true"
+                        :kategori="'typeOrganisasi'"
+                    />
+
+                    <!-- <InputAutocompleteMulti 
                         v-model="form.typeOrganisasi"
                         :name="prefixName+'tipeorganisasi'"
                         :label="$t('Organization Type')"
                         :opsi="typeOrganisasi"
                         :itemValue="'id'"
-                        :itemLabel="'label'"
+                        :itemLabel="'nama'"
                         :key="prefixName+'tipeorganisasi'"
                         :multilang="true"
-                    />
+                    /> -->
                 </div>
             </div>
             <div class="col-span-12 md:col-span-6">
                 <div class="">
-                    <InputAutocompleteMulti 
+                    <InputFieldKategoriSingle 
+                        v-model="form.hierarki"
+                        :name="prefixName+'hierarki'"
+                        :label="$t('Hierarki')"
+                        :key="keyMaster+'hierarki'"
+                        :multilang="true"
+                        :kategori="'pilihanHierarchy'"
+                    />
+
+
+                    <!-- <InputAutocompleteMulti 
                         v-model="form.typeAudience"
                         :name="prefixName+'tipeaudience'"
                         :label="$t('Audience Type')"
                         :opsi="typeAudience"
                         :itemValue="'id'"
-                        :itemLabel="'label'"
+                        :itemLabel="'nama'"
                         :key="prefixName+'tipeaudience'"
                         :multilang="true"
-                    />
+                    /> -->
                 </div>
             </div>
             <div class="col-span-12 md:col-span-6">
                 <div class="">
-                    <InputAutocompleteMulti 
+
+                    <InputFieldKategoriMulti 
+                        v-model="form.typeApproach"
+                        :name="prefixName+'typeApproach'"
+                        :label="$t('Approach')"
+                        :key="keyMaster+'typeApproach'"
+                        :multilang="true"
+                        :kategori="'typeApproach'"
+                    />
+
+                    <!-- <InputAutocompleteMulti 
                         v-model="form.typeApproach"
                         :name="prefixName+'tipeapproach'"
                         :label="$t('Approach')"
@@ -67,12 +97,22 @@
                         :itemLabel="'label'"
                         :key="prefixName+'tipeapproach'"
                         :multilang="true"
-                    />
+                    /> -->
                 </div>
             </div>
             <div class="col-span-12 md:col-span-6">
                 <div class="">
-                    <InputAutocompleteMulti 
+                    <InputFieldKategoriMulti 
+                        v-model="form.typeIssues"
+                        :name="prefixName+'typeIssues'"
+                        :label="$t('Issues')"
+                        :key="keyMaster+'typeIssues'"
+                        :multilang="true"
+                        :kategori="'typeIssues'"
+                    />
+
+
+                    <!-- <InputAutocompleteMulti 
                         v-model="form.typeIssues"
                         :name="prefixName+'topik'"
                         :label="$t('Issues')"
@@ -81,57 +121,46 @@
                         :itemLabel="'label'"
                         :key="prefixName+'topik'"
                         :multilang="true"
-
-                    />
+                    /> -->
                 </div>
             </div>
             <div class="col-span-12 md:col-span-6">
                 <div class="">
-                    <InputSelect 
+                    <InputFieldKategoriMulti 
+                        v-model="form.typeAudience"
+                        :name="prefixName+'typeAudience'"
+                        :label="$t('Audience Type')"
+                        :key="prefixName+'typeAudience'"
+                        :multilang="true"
+                        :kategori="'typeAudience'"
+                    />
+
+                    <!-- <InputSelect 
                         v-model="form.hierarki"
                         disabled
                         :name="prefixName+'hierarki'"
                         :label="$t('Hierarki')"
                         :opsi="opsiHierarki"
-                    />
+                    /> -->
                 </div>
             </div>
             <div class="col-span-12 md:col-span-6">
                 <div class="font-medium mb-2">{{ $t('Tema Warna Latar Belakang') }}</div>
                 <div class="flex items-center gap-x-3">
-                    <!-- #222222 -->
-                    <div @click="btnWarnaSatu" class="bg-white border rounded-full" :class="form.tampilan === '#222222' ? 'border-latar-satu' : 'border-white'">
-                        <div class="w-5 h-5 m-1 bg-latar-satu rounded-full cursor-pointer"></div>
-                    </div>
-                    <!-- #176988 -->
-                    <div @click="btnWarnaDua" class="bg-white border rounded-full" :class="form.tampilan === '#176988' ? 'border-latar-dua' : 'border-white'">
-                        <div class="w-5 h-5 m-1 bg-latar-dua rounded-full cursor-pointer"></div>
-                    </div>
-                    <!-- #1E784B -->
-                    <div @click="btnWarnaTiga" class="bg-white border rounded-full" :class="form.tampilan === '#1E784B' ? 'border-latar-tiga' : 'border-white'">
-                        <div class="w-5 h-5 m-1 bg-latar-tiga rounded-full cursor-pointer"></div>
-                    </div>
-                    <!-- #753A00 -->
-                    <div @click="btnWarnaEmpat" class="bg-white border rounded-full" :class="form.tampilan === '#753A00' ? 'border-latar-empat' : 'border-white'">
-                        <div class="w-5 h-5 m-1 bg-latar-empat rounded-full cursor-pointer"></div>
-                    </div>
-                    <!-- #DB4339 -->
-                    <div @click="btnWarnaLima" class="bg-white border rounded-full" :class="form.tampilan === '#DB4339' ? 'border-latar-lima' : 'border-white'">
-                        <div class="w-5 h-5 m-1 bg-latar-lima rounded-full cursor-pointer"></div>
-                    </div>
-                    <!-- #BC185D -->
-                    <div @click="btnWarnaEnam" class="bg-white border rounded-full" :class="form.tampilan === '#BC185D' ? 'border-latar-enam' : 'border-white'">
-                        <div class="w-5 h-5 m-1 bg-latar-enam rounded-full cursor-pointer"></div>
-                    </div>
-                    <!-- #4B4B9D -->
-                    <div @click="btnWarnaTujuh" class="bg-white border rounded-full" :class="form.tampilan === '#4B4B9D' ? 'border-latar-tujuh' : 'border-white'">
-                        <div class="w-5 h-5 m-1 bg-latar-tujuh rounded-full cursor-pointer"></div>
-                    </div>
+                    <button
+                        v-for="(item,index) in opsiWarna" :key="'warna'+index" 
+                        class="bg-white border  rounded-full transition-all duration-200"
+                        :class="form.tampilan === item ? 'border-[#222222]' : ' hover:border-gray-400 '"
+                        @click="pilihWarna(item)"
+                    >
+                        <div class="w-5 h-5 m-1 rounded-full " :style="'background:'+item+';'" ></div>
+                    </button>
                 </div>
+
             </div>
         </div>
         
-        <hr class="border-warna-tujuh my-10">
+        <hr class="border-tujuh my-10">
         
         <div v-if="form" class="">
             <div class="text-xl font-semibold mb-10">{{ $t('Tentang Organisasi') }}</div>
@@ -239,37 +268,17 @@ export default {
         return {
             loaderDetail: true,
             prefixName: 'tentang',
-            typeApproachId: [],
-            typeOrganisasiId: [],
-            typeAudienceId: [],
-            typeIssuesId: [],
             form: {
                 lokasiOrganisasi:undefined
             },
-            opsiProvinsi: [],
             typeInModule: [],
-            typeOrganisasi: [],
-            typeAudience: [],
-            typeApproach: [],
-            typeIssues: [],
-            opsiHierarki: [],
+            opsiWarna: ['#222222','#176988','#1E784B', '#753A00', '#DB4339', '#BC185D', '#4B4B9D' ],
             organisasiId: "",
             accountId: "", 
             imgLogoOrganisasi: undefined,
             oldImgLogoOrganisasi: undefined,
             imgMainImage: "",
-            oldImgMainImage: "",
-            currentLocation: {},
-            locationsVisibleOnMap: "",
-            locations: [
-                {
-                lat: -6.2642904,
-                lng: 106.802237,
-                name: "Zagreb",
-                },
-            ],
-            provinsi: [],
-            opsiKota: []
+            keyMaster: 0,
         }
     },
     computed: {
@@ -301,21 +310,18 @@ export default {
     },
     methods: {
         initialize() {
+            // this.getOption()
             this.masterPoint() 
         },
+
         
         async masterPoint() {
 
-            await this.$apiPlatform.get('daftarList/kategori?kategori1=typeOrganisasi').then(res => {this.typeOrganisasi = _.map(res.data.results, function(o){return {'id':parseInt(o.id), 'label':o.nama}})}).catch(err => {console.log(err)})
-            await this.$apiPlatform.get('daftarList/kategori?kategori1=typeAudience').then(res => {this.typeAudience = _.map(res.data.results, function(o){return {'id':parseInt(o.id), 'label':o.nama}})}).catch(err => {console.log(err)})
-            await this.$apiPlatform.get('daftarList/kategori?kategori1=typeApproach').then(res => {this.typeApproach = _.map(res.data.results, function(o){return {'id':parseInt(o.id), 'label':o.nama}})}).catch(err => {console.log(err)})
-            await this.$apiPlatform.get('daftarList/kategori?kategori1=typeIssues').then(res => {this.typeIssues = _.map(res.data.results, function(o){return {'id':parseInt(o.id), 'label':o.nama}})}).catch(err => {console.log(err)})
-            await this.$apiPlatform.get('daftarList/kategori?kategori1=pilihanHierarchy').then(res => {this.opsiHierarki = _.map(res.data.results, function(o){return {'id':parseInt(o.id), 'label':o.nama}})}).catch(err => {console.log(err)})
             await this.$apiPlatform.get('verificator/organisasi/'+this.id+'/').then(res => {
                 const data = res.data
                 this.accountId = data.accountId
                 this.organisasiId = data.organisasiId
-                console.log(data)
+                // console.log(data)
                 this.form = {
                     namaOrganisasi: data.namaOrganisasi,
                     websiteOrganisasi: data.websiteOrganisasi,
@@ -336,33 +342,36 @@ export default {
                 if (data.deskripsi && data.deskripsi.length > 0){
                     this.form.deskripsi = [data.deskripsi[0], data.deskripsi[1]]
                 }
-                this.provinsi =  _.flatMap(data.lokasiOrganisasi, "provinsi")
-                const _this = this;
-                if (this.provinsi.length > 0){
-                    this.provinsi.forEach(o => {
-                        this.$apiBase.get('kotakab?provinsi='+ o).then(res => {
-                            _this.opsiKota.push(_.map(res.data, function(o){
-                                return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
-                            }))
-                        }) 
-                    })
-                }
+                // this.provinsi =  _.flatMap(data.lokasiOrganisasi, "provinsi")
+                // const _this = this;
+                // if (this.provinsi.length > 0){
+                //     this.provinsi.forEach(o => {
+                //         this.$apiBase.get('kotakab?provinsi='+ o).then(res => {
+                //             _this.opsiKota.push(_.map(res.data, function(o){
+                //                 return {'id':o.kotakab, 'label':[o.kotakab, o.kotakab]}
+                //             }))
+                //         }) 
+                //     })
+                // }
                 this.imgLogoOrganisasi= {
                     displayImage: data.imgLogoOrganisasi,
                     file: null
                 }
-                this.oldImgLogoOrganisasi= {
-                    displayImage: data.imgLogoOrganisasi,
-                    file: null
-                }
+                // this.oldImgLogoOrganisasi= {
+                //     displayImage: data.imgLogoOrganisasi,
+                //     file: null
+                // }
                 this.imgMainImage= {
                     displayImage: data.imgMainImage,
                     file: null
                 }
-                this.oldimgMainImage= {
-                    displayImage: data.imgMainImage,
-                    file: null
-                }
+                // this.oldimgMainImage= {
+                //     displayImage: data.imgMainImage,
+                //     file: null
+                // }
+                this.$nextTick(() => {
+                    this.keyMaster+=1
+                })
                 
             }).catch(err => {
                 console.log(err)
@@ -432,34 +441,10 @@ export default {
                 console.log(err)
             })
         },
-        btnWarnaSatu() {
-            this.form.tampilan = '#222222'
-        },
-
-        btnWarnaDua() {
-            this.form.tampilan = '#176988'
-        },
-
-        btnWarnaTiga() {
-            this.form.tampilan = '#1E784B'
-        },
-
-        btnWarnaEmpat() {
-            this.form.tampilan = '#753A00'
-        },
-
-        btnWarnaLima() {
-            this.form.tampilan = '#DB4339'
-        },
-
-        btnWarnaEnam() {
-            this.form.tampilan = '#BC185D'
-        },
-
-        btnWarnaTujuh() {
-            this.form.tampilan = '#4B4B9D'
-        },
-        
+        pilihWarna(warna) {
+            this.form.tampilan = warna
+        },  
+       
         btnBack() {
             this.$router.push('/verifications/organisasi/'+this.accountId)
         }

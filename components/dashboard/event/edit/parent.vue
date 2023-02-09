@@ -219,46 +219,37 @@
                     </div>
 
                     <hr class="border-warna-tujuh my-[28px]">
-                    <div v-if="typeAudience && form.typeAudience" class="mb-6">
-                        <InputAutocompleteMulti 
+                    <div class="mb-6">
+                        <InputFieldKategoriMulti 
                             v-model="form.typeAudience"
                             :name="prefixName+'typeAudience'"
                             :label="$t('Audience Type')"
-                            :opsi="typeAudience"
-                            :itemValue="'id'"
-                            :itemLabel="'label'"
-                            :key="'tipeaufda'+keyMaster"
+                            :key="keyMaster+'typeAudience'"
                             :multilang="true"
+                            :kategori="'typeAudience'"
                             :required="true"
                         />
                     </div>
-                    <div v-if="typeApproach && form.typeApproach" class="mb-6">
-                        <InputAutocompleteMulti 
+                    <div class="mb-6">
+                        <InputFieldKategoriMulti 
                             v-model="form.typeApproach"
                             :name="prefixName+'typeApproach'"
                             :label="$t('Approach')"
-                            :opsi="typeApproach"
-                            :itemValue="'id'"
-                            :itemLabel="'label'"
-                            :key="'tipeapproach'+keyMaster"
+                            :key="keyMaster+'typeApproach'"
                             :multilang="true"
+                            :kategori="'typeApproach'"
                             :required="true"
-                            
                         />
                     </div>
-                    <div v-if="typeIssues && form.typeIssues" class="mb-6">
-                        <InputAutocompleteMulti 
+                    <div class="mb-6">
+                        <InputFieldKategoriMulti 
                             v-model="form.typeIssues"
                             :name="prefixName+'typeIssues'"
                             :label="$t('Issues')"
-                            :opsi="typeIssues"
-                            :value="form.typeIssues"
-                            :itemValue="'id'"
-                            :itemLabel="'label'"
-                            :key="'topik'+keyMaster"
+                            :key="keyMaster+'typeIssues'"
                             :multilang="true"
+                            :kategori="'typeIssues'"
                             :required="true"
-
                         />
                     </div>
 

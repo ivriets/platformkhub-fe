@@ -4,7 +4,7 @@
             {{label}} <span class="text-[#DF4B61] font-semibold" v-if="required && required === true">*</span>
         </div>
         <div :class="orientasi==='horizontal'? 'flex items-center' : ''">
-            <div v-for="(i, index) in opsiRadio" :key="'jk'+name+index" class="flex items-center mr-5 mb-2">
+            <div v-for="(i, index) in newOpsi" :key="'jk'+name+index" class="flex items-center mr-5 mb-2">
                 <label
                     class="text-sm  flex items-center"
                     :class="disabled?' text-gray-400 ' : 'cursor-pointer text-sembilan'"
@@ -14,7 +14,7 @@
                     :id="name+i.id" 
                     v-model="valRadio"
                     :value="i.id"  
-                    class="w-4 h-4 text-warna-empat bg-gray-100 border-gray-300 focus:ring-warna-empat focus:ring-0 "
+                    class="w-4 h-4 text--empat bg-gray-100 border-gray-300 focus:ring-empat focus:ring-0 "
                     :disabled="disabled?disabled:false"
                 >
                     <span class="ml-2">{{ i.label[bahasa] }}</span>
@@ -45,6 +45,9 @@ export default {
         },
         bahasa() {
             return this.$i18n.locale === 'id' ? 0 : 1
+        },
+        newOpsi() {
+            return _.orderBy(this.opsiRadio, 'label['+this.bahasa+']')
         }
     },
     mounted() {

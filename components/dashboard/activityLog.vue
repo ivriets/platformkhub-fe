@@ -1,33 +1,43 @@
 <template>
     <div>
-        <div class="flex items-center justify-between border border-[#A1A2B7] rounded-lg bg-white mb-5">
-            <div class="px-[14px] py-[9px] flex gap-x-3 pr-3 border-r border-[#A1A2B7]">
-                <div class="w-[150px]">
+        <div class="grid grid-cols-12 border border-[#A1A2B7] rounded-lg bg-white mb-5">
+            <div class="col-span-6 flex items-center gap-3 px-[14px] py-[9px] border-r border-[#A1A2B7]">
+                <div class="w-3/12 input-overide-filter">
                     <InputSelect 
                         v-model="filter.waktu"
-                        :name="prefixName+'filterwaktu'"
+                        :name="'filterwaktu'"
                         :opsi="opsiFilterWaktu"
                         :placeholder="'All Time'"
                     />
                 </div>
-                <div class="w-[150px]">
-                    <InputSelect 
-                        v-model="filter.organisasi"
-                        :name="prefixName+'filterorganisasi'"
-                        :opsi="opsiFilterOrganisasi"
-                        :placeholder="'All Organization'"
-                    />
+
+                <div class="w-6/12 input-overide-filter">
+                    <InputAutocompleteApi 
+                            v-model="cariOrganisasi.model"
+                            :name="'cariMember'"
+                            :label="''"
+                            :placeholder="$t('All Organization')" 
+                            :itemValue="'accountId'"
+                            :itemLabel="'namaOrganisasi'"
+                            :searchQuery="'title'"
+                            :addNew="false"
+                            :displayLabel="false"
+                            :endPoint="cariOrganisasi.endPoint"
+                            :key="cariOrganisasi.key"
+                            :resultKey="'res.data.results'"
+                        />
                 </div>
-                <div class="w-[150px]">
+                <div class="w-3/12 input-overide-filter">
                     <InputSelect 
                         v-model="filter.action"
-                        :name="prefixName+'filteraction'"
+                        :name="'filteraction'"
                         :opsi="opsiFilterAction"
-                        :placeholder="'All Action'"
+                        :placeholder="'Action'"
                     />
                 </div>
             </div>
-            <div class="px-[14px] py-[9px]">
+            <div class="col-span-6 flex items-center justify-between px-[14px] py-[9px]">
+                <button class="button-standar-field text-sm" @click="applyFilter">{{ $t('Apply') }}</button>
                 <div class="flex items-center">
                     <div class="text-sm font-semibold text-[#757575]">Sort by:</div>
                     <select name="filtertotalpage" id="filtertotalpage" class="w-[120px] outline-none px-2 py-[6px] cursor-pointer">
@@ -37,144 +47,148 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white shadow-md rounded-xl pb-9">
-            <div class="relative overflow-x-auto">
-                <table class="w-full rounded-xl">
-                    <thead class="">
-                        <tr class="text-sm text-left text-warna-sembilan border-b border-warna-tujuh">
-                            <th v-for="(i, index) in masterTable" :key="'th'+index" scope="col" class="font-normal py-5 px-5">{{ i.header }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(item, index) in dataTable" :key="'dt'+index" class="text-sm text-left text-warna-sembilan tr-striped-even">
-                            <td v-for="(x, index2) in masterTable" :key="index+'dt'+index2" scope="row" class="font-normal p-5">
-                                <div class="flex items-center gap-2">
-                                    <div v-if="x.value === 'createdAt'">{{ $dayjs(item[x.value]).format('DD MMM YYYY HH:mm') }}</div>
-                                    <div v-else-if="x.value === 'nama'">
-                                        <div v-if="item.myIndividu === null">{{item.myOrganisasi.namaOrganisasi}}</div>
-                                        <div v-if="item.myOrganisasi === null">{{item.myIndividu.namaIndividu}}</div>
-                                    </div>
-                                    <div v-else-if="x.value === 'tipeAccount'">
-                                        <div v-if="item.myIndividu === null">Organisasi</div>
-                                        <div v-if="item.myOrganisasi === null">Individu</div>
-                                    </div>
-                                    <div v-else>{{ item[x.value] }}</div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+
+
+
+        <div class="table-area my-10 rounded-xl shadow-lg overflow-hidden text-sm">
+            <ElementsTable
+                v-model="list"
+                :tableDetail="tableDetail"
+            >
+                <template v-slot:name="{ item }">
+                    {{ item.myIndividu !== null ? item.myIndividu.namaIndividu : item.myOrganisasi.namaOrganisasi  }}
+                </template>
+                <template v-slot:accountType="{ item }">
+                    {{ item.myIndividu !== null ? $t('Organization') : $t('Individu')  }}
+                </template>
+                <template v-slot:aksi="{ item }">
+                    {{ item.request  }}
+                </template>
+            </ElementsTable>
         </div>
+
+        <div  class="pagination-area text-center mt-6 mb-20">
+            <ElementsPaginasiSpa 
+                v-model="paginasi.currentPage"
+                :totalPage="paginasi.totalPage"
+                :totalVisible="paginasi.totalVisible"
+                :key="'pageset'+paginasi.key"
+            />
+        </div>
+
     </div>
 </template>
 
-
 <script>
-export default {
-    data() {
-        return {
-            prefixName: 'log',
-            filter: {
-                waktu: '',
-                organisasi: '',
-                action: ''
-            },
-            opsiFilterWaktu: [
-                {
-                    id: 1,
-                    label: 'All Time'
+    export default {
+        data() {
+            return {
+                paginasi: {
+                    currentPage: 1,
+                    totalVisible: 7,
+                    totalPage: 1,
+                    limit:10,
+                    key: 0
                 },
-                {
-                    id: 2,
-                    label: 'All Time'
-                }
-            ],
-            opsiFilterOrganisasi: [
-                {
-                    id: 1,
-                    label: 'All Time'
+                filter: {
+                    waktu: 1,
+                    organisasi: '',
+                    action: ''
                 },
-                {
-                    id: 2,
-                    label: 'All Time'
-                }
-            ],
-            opsiFilterAction: [
-                {
-                    id: 1,
-                    label: 'LOGIN'
-                },
-                {
-                    id: 2,
-                    label: 'PUT'
-                }
-            ],
-            masterTable: [
-                {
-                    header: 'Name',
-                    value: 'nama',
-                    tipe: 'string',
-                    display: true
-                },
-                {
-                    header: 'Account Type',
-                    value: 'tipeAccount',
-                    tipe: 'string',
-                    display: true
-                },
-                {
-                    header: 'Action',
-                    value: 'request',
-                    tipe: 'string',
-                    display: true
-                },
-                {
-                    header: 'Date',
-                    value: 'createdAt',
-                    tipe: 'date',
-                    display: true
-                }
-            ],
-            dataTable: [
-                {
-                    pkLogId: 77085816,
-                    endpoint: "/a1/auth/",
-                    request: "LOGIN",
-                    createdAt: "2022-11-23T10:40:13.050004",
-                    myOrganisasi: null,
-                    myIndividu: {
-                        userId: 37231942,
-                        namaIndividu: "Fawwaz Ibrahim",
-                        imgFotoProfile: "/assets/Individu/37231942/images/Fawwaz_Ibrahim-Fawwaz_Ibrahim_4x6.jpeg"
+                opsiFilterWaktu: [
+                    {
+                        id: 1,
+                        label: ['All Time', 'All Time']
+                    },
+
+                    ],
+                cariOrganisasi: {
+                        endPoint: 'verificator/katalogOrganisasi/?limit=10&offset=0',
+                        key: '',
+                        searchLabel: 'title'
+                    },
+                opsiFilterAction: [
+                    {
+                        id: '',
+                        label: ['All Action', 'All Action']
+                    },
+                    {
+                        id: 'LOGIN',
+                        label: ['LOGIN', 'LOGIN']
+                    },
+                    {
+                        id: 'PUT',
+                        label: ['PUT','PUT']
+                    },
+                    {
+                        id: 'POST',
+                        label: ['POST','POST']
+                    },
+                    {
+                        id: 'DELETED',
+                        label: ['DELETED','DELETED']
                     }
-                },
-                {
-                    pkLogId: 84699673,
-                    endpoint: "a1/events/<event_id>",
-                    request: "PUT",
-                    createdAt: "2022-11-22T16:42:53.503579",
-                    myOrganisasi: {
-                        organisasiId: 47963824,
-                        namaOrganisasi: "Infia Consulting",
-                        imgLogoOrganisasi: "/assets/image.png"
+
+
+                ],
+                list: []
+            }
+        },
+        computed: {
+            tableDetail() {
+                const table = [
+                    {
+                        header: this.$t('Name'),
+                        itemValue: 'name'
                     },
-                    myIndividu: null
-                },
-                {
-                    pkLogId: 19363988,
-                    endpoint: "a1/events/<event_id>",
-                    request: "PUT",
-                    createdAt: "2022-11-22T16:20:50.463143",
-                    myOrganisasi: {
-                        organisasiId: 47963824,
-                        namaOrganisasi: "Infia Consulting",
-                        imgLogoOrganisasi: "/assets/image.png"
+                    {
+                        header: this.$t('Account Type'),
+                        itemValue: 'accountType'
                     },
-                    myIndividu: null
-                }
-            ]
+                    {
+                        header: 'Action',
+                        itemValue: 'aksi'
+                    },
+                    {
+                        header: this.$t('Date'),
+                        itemValue: 'createdAt',
+                        type: 'date',
+                        format: 'DD MMM YYYY HH:mm'
+                    }
+                ]
+                return table
+            }
+        },  
+        mounted() {
+            this.initialize()
+        },
+        watch: {
+            'paginasi.currentPage'() {
+                this.masterPoint()
+            }
+        },  
+        methods: {
+            initialize() {
+                this.masterPoint()
+            },
+            applyFilter() {
+                this.paginasi.currentPage = 1
+                this.masterPoint()
+            },
+            async masterPoint() {
+
+                const offset = (this.paginasi.currentPage - 1) * this.paginasi.limit
+
+                const filterAction = this.filter.action === '' ? '' : '&request='+ this.filter.action
+
+
+                await this.$apiLog.get('/log_user/?limit=10&offset='+offset+filterAction).then(res => {
+                    this.list = res.data.results
+                    this.paginasi.totalPage = Math.ceil(res.data.length / this.paginasi.limit)
+                    this.paginasi.key+=1
+                })
+            }
         }
-    },
-}
+    }
 </script>
+

@@ -146,8 +146,8 @@ export default {
             // this.listing = listingFilter
             const endPoint = this.endPoint + '&' + this.searchQuery + '=' + this.newVal
             this.$apiPlatform.get(endPoint).then(res => {
-                console.log(eval(this.keyRespon))
-                this.listing = eval(this.keyRespon)
+                // console.log(eval(this.keyRespon))
+                this.listing = this.keyRespon === undefined ? res.data : eval(this.keyRespon)
             })
 
         },
@@ -191,7 +191,7 @@ export default {
         },
 
         removeChip(value){
-            // console.log(value)
+            console.log(value)
             const posisi = this.selectedValue.indexOf(value)
             this.selectedValue.splice(posisi, 1)
             this.$nextTick(() => {

@@ -179,7 +179,7 @@
                     <div  class="mb-6">
                         <InputAutocompleteApiMulti 
                             v-model="form.officer"
-                            :name="prefixName+'partner'"
+                            :name="prefixName+'officer'"
                             :label="$t('Officer')"
                             :endPoint="'verificator/listIndividu/?limit=10&offset=0'"
                             :searchQuery="'title'"
@@ -192,7 +192,18 @@
                     </div>
                     <!-- {{listOrganisasi}} -->
                     <div  class="mb-6">
-                        <InputAutocompleteMulti 
+                        <InputAutocompleteApiMulti 
+                            v-model="form.partner"
+                            :name="prefixName+'partner'"
+                            :label="$t('Partner')"
+                            :endPoint="'verificator/listOrganisasi/?limit=10&offset=0'"
+                            :searchQuery="'title'"
+                            :itemValue="'organisasiId'"
+                            :itemLabel="'namaOrganisasi'"
+                            :key="'formorganisasi'+keyMaster"
+                        />
+<!-- 
+                        <InputAutocompleteApiMulti 
                             v-model="form.partner"
                             :name="prefixName+'partner'"
                             :label="$t('Partner')"
@@ -200,42 +211,39 @@
                             :itemValue="'organisasiId'"
                             :itemLabel="'namaOrganisasi'"
                             :multilang="false"
-
-                        />
+                        /> -->
                     </div>
-                    <div  class="mb-6">
-                        <InputAutocompleteMulti 
+                    <div class="mb-6">
+                        <InputFieldKategoriMulti 
                             v-model="form.typeAudience"
                             :name="prefixName+'typeAudience'"
                             :label="$t('Audience Type')"
-                            :opsi="typeAudience"
-                            :itemValue="'id'"
-                            :itemLabel="'label'"
+                            :key="keyMaster+'typeAudience'"
                             :multilang="true"
+                            :kategori="'typeAudience'"
+                            :required="true"
                         />
                     </div>
-                    <div  class="mb-6">
-                        <InputAutocompleteMulti 
+                    <div class="mb-6">
+                        <InputFieldKategoriMulti 
                             v-model="form.typeApproach"
                             :name="prefixName+'typeApproach'"
                             :label="$t('Approach')"
-                            :opsi="typeApproach"
-                            :itemValue="'id'"
-                            :itemLabel="'label'"
+                            :key="keyMaster+'typeApproach'"
                             :multilang="true"
-
+                            :kategori="'typeApproach'"
+                            :required="true"
                         />
                     </div>
-                    <div v-if="typeIssues && form.typeIssues" class="mb-6">
-                        <InputAutocompleteMulti 
+                    <div class="mb-6">
+                        <InputFieldKategoriMulti 
                             v-model="form.typeIssues"
-                            :name="prefixName+'topik'"
+                            :name="prefixName+'typeIssues'"
                             :label="$t('Issues')"
-                            :opsi="typeIssues"
-                            :itemValue="'id'"
-                            :itemLabel="'label'"
+                            :key="keyMaster+'typeIssues'"
                             :multilang="true"
-
+                            :kategori="'typeIssues'"
+                            :required="true"
                         />
                     </div>
 

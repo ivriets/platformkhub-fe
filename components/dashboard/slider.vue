@@ -5,15 +5,18 @@
             <div class="col-span-12 md:col-span-6">
                 <InputText 
                     v-model="form.judul[0]"
-                    :name="prefixName+'titleid'"
+                    :name="prefixName+'titleId'"
                     :label="'Indonesia Title'"
+                    :required="true"
                 />
             </div>
             <div class="col-span-12 md:col-span-6">
                 <InputText 
                     v-model="form.judul[1]"
-                    :name="prefixName+'titleen'"
+                    :name="prefixName+'titleEn'"
                     :label="'English Title'"
+                    :required="true"
+
                 />
             </div>
             <div class="col-span-12 md:col-span-6">
@@ -21,7 +24,9 @@
                     v-model="form.deskripsi[0]"
                     :max="500"
                     :label="'Indonesia Description'"
-                    :name="prefixName+'deskripsiid'"
+                    :name="prefixName+'descId'"
+                    :required="true"
+
                     />
             </div>
             <div class="col-span-12 md:col-span-6">
@@ -29,7 +34,9 @@
                     v-model="form.deskripsi[1]"
                     :max="500"
                     :label="'English Description'"
-                    :name="prefixName+'deskripsiid'"
+                    :name="prefixName+'descEn'"
+                    :required="true"
+
                 />
             </div>
             <div class="col-span-12 md:col-span-6">
@@ -111,8 +118,35 @@ export default {
                 console.log(err)
             })
         },
+        errorNotif(msg) {
+            this.$toast.show({
+                type: 'danger',
+                title: 'Error',
+                message: msg,
+            })
+        },
+        focusField(id) {
+            document.getElementById(this.prefixName + id).focus()
+        },
+        errorField(msg, id) {
+            this.errorNotif(msg);
+            this.focusField(id)
+        },
+        save() {
+            if (this.form.judul[0]==='') {
+                this.errorField(this.$t('indonesiaTitleBlank'), 'titleId')
+            } else if (this.form.judul[1]==='') {
+                this.errorField(this.$t('indonesiaTitleBlank'), 'titleEn')
+            } else if (this.form.deskripsi[0] === '') {
+                this.errorField(this.$t('indonesiaDescBlank', 'descId')) 
+            } else if (this.form.deskripsi[1]==='1') {
+                this.errorField(this.$t('englishDescBlank', 'descEn')) 
 
-        async save() {          
+            } else {
+                this.simpan()
+            }
+        },  
+        async simpan() {          
             const simpan = {
                 judul: this.form.judul,
                 deskripsi: this.form.deskripsi

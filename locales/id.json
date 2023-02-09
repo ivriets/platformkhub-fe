@@ -126,6 +126,7 @@
     "Resource Category": "Kategori Publikasi",
     "updated successfully": "berhasil diupdate",
     "updateSukses": "berhasil diupdate",
+    "addedSukses": "berhasil ditambahkan",
     "Registration Type": "Tipe Registrasi",
     "Registration Date": "Tanggal Registrasi",
     "Start Date": "Tanggal Mulai",
@@ -220,17 +221,24 @@
     "User in last 30 days": "User in last 30 days",
     "New List" : "Daftar Baru",
     "Apply": "Terapkan",
-
-
-
-
-
-
-
-
-
-
-
+    "Logo Organisasi": "Logo Organisasi",
+    "Nama Mitra": "Nama Mitra",
+    "Cari Mitra": "Cari Mitra",
+    "Tambah Mitra": "Tambah Mitra",
+    "Add Milestone": "Tambah Pencapaian",
+    "deskripsi": "deskripsi",
+    "Date": "Tanggal",
+    "Twitter link": "Tautan Twitter",
+    "Instagram link": "Tautan Instagram",
+    "Youtube link": "Tautan Youtube",
+    "Facebook link": "Tautan Facebook",
+    "LinkedIn link": "Tautan LinkedIn",
+    "Tentang": "Tentang",
+    "Mitra": "Mitra",
+    "Pencapaian": "Pencapaian",
+    "Kontak & Lokasi" : "Kontak & Lokasi",
+    "Media Sosial": "Media Sosial",
+    "Cabang": "Cabang",
 
 
 
@@ -245,8 +253,11 @@
     "tipeRegistrasiBlank": "Tipe Registrasi wajib diisi!",
     "emailBlank": "Email wajib diisi!",
     "emailFormatBlank": "Format surel tidak dikenali!",
-    "namaOrganisasiBlank": "Nama Organisasi wajib diisi!"
-
+    "namaOrganisasiBlank": "Nama Organisasi wajib diisi!",
+    "indonesiaTitleBlank": "Judul Bahasa Indonesia wajib diisi!",
+    "englishTitleBlank": "Judul Bahasa Inggris wajib diisi!",
+    "indonesiaDescBlank": "Deskripsi Bahasa Indonesia wajib diisi!",
+    "englishDescBlank": "Deskripsi Bahasa Inggris wajib diisi!"
 
 
 

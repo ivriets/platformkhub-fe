@@ -16,7 +16,10 @@
                         v-for="(i, index) in opsi" :key="name+'opsi'+index" 
                         :value="i[itemValue] ? i[itemValue] : i.id"
                     >
-                    {{i[itemLabel] ? i[itemLabel][bahasa]: i.label[bahasa]}}
+                    <span v-if="multilang && multilang===true">{{i[parseLabel] ? i[parseLabel][bahasa]: i[parseLabel][bahasa]}}</span>
+                    <span v-else>{{i[parseLabel] }}</span>
+                    <span></span>
+                    
                     </option>
             </select>
             <div class="absolute top-0 right-0 h-[34px] items-center flex px-2 text-gray-500">                
@@ -27,7 +30,7 @@
 </template>
 <script>
 export default {
-    props: ['value','name', 'placeholder', 'label', 'opsi', 'itemValue', 'itemLabel', 'disabled'],
+    props: ['value','name', 'placeholder', 'label', 'opsi', 'itemValue', 'itemLabel', 'disabled', 'multilang'],
     data() {
         return {
             valueSelect: '',
@@ -39,7 +42,15 @@ export default {
         },
         bahasa() {
             return this.$i18n.locale === 'id' ? 0 : 1
+        },
+        parseLabel() {
+            return this.itemLabel ? this.itemLabel : 'label'
+        },
+        parseId() {
+            return this.itemValue ? this.itemValue : 'id'
         }
+
+
     },
     watch: {
         valueSelect(val) {

@@ -26,7 +26,7 @@
                     />
                 </div>
             </div>
-            <hr v-if="!['cabang', 'anggota', 'pusat'].includes(kategorisasi)" class="border-warna-tujuh my-10">
+            <hr v-if="!['cabang', 'anggota', 'pusat'].includes(kategorisasi)" class="border-tujuh my-10">
             <div v-if="kategorisasi === 'tentang'">
                 <DashboardOrganisasiEditTentang 
                     v-model="saving.tentang"
@@ -88,10 +88,20 @@ export default {
     },
     computed: {
         kategorisasiProfileOrganisasiPusat() {
-            return this.$store.state.opsi.kategorisasiProfileOrganisasiPusat
+            return this.$store.state.opsi.kategorisasiProfileOrganisasiPusat.map(e => {
+                return {
+                    id: e.id,
+                    label: this.$t(e.label)
+                }
+            })
         },
         kategorisasiProfileOrganisasiCabang() {
-            return this.$store.state.opsi.kategorisasiProfileOrganisasiCabang
+            return this.$store.state.opsi.kategorisasiProfileOrganisasiCabang.map(e => {
+                return {
+                    id: e.id,
+                    label: this.$t(e.label)
+                }
+            })
         },
         id() {
             return this.$route.params.id;

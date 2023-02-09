@@ -9,6 +9,7 @@
                             :name="prefixName+'provinsi'"
                             :opsi="opsiProvinsi"
                             :key="'prov'+keyProvinsi"
+                            :multilang="true"
                         />
                     </div>
                 </div>
@@ -21,6 +22,7 @@
                         :key="'kota'+keyKota"
                         :disabled="opsiProvinsi===''?true:false"
                         :placeholder="$t('Pilih Kota / Kabupaten')"
+                        :multilang="true"
                     />
                 </div>
                 <div class="col-span-12 md:col-span-6">
