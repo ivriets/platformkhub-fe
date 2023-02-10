@@ -28,7 +28,7 @@
 
 <script>
 export default {
-    props: ['label', 'opsiRadio', 'value', 'name', 'orientasi', 'disabled', 'required'],
+    props: ['label', 'opsiRadio', 'value', 'name', 'orientasi', 'disabled', 'required', 'order'],
     data() {
         return {
             valRadio: '',
@@ -47,7 +47,7 @@ export default {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
         newOpsi() {
-            return _.orderBy(this.opsiRadio, 'label['+this.bahasa+']')
+            return this.order ? _.orderBy(this.opsiRadio, this.order) : _.orderBy(this.opsiRadio, 'label['+this.bahasa+']')
         }
     },
     mounted() {

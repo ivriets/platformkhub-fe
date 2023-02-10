@@ -454,17 +454,6 @@ export default {
         }
     },
     computed: {
-        typeAudience() {
-            return this.$store.state.opsi.typeAudience
-        },
-
-        typeApproach() {
-            return this.$store.state.opsi.typeApproach
-        },
-
-        typeIssues() {
-            return this.$store.state.opsi.typeIssues
-        },
 
         lang() {
             return this.$i18n.locale
@@ -598,7 +587,7 @@ export default {
                 this.daftarGalleri.list = data.galleries
                 this.formTag.api = data.tag
                 this.formLokasiOffline.api = data.lokasi ? data.lokasi : []
-                this.lokasiOnline = data.lokasiOnline && data.lokasiOnline.length > 0 ? data.lokasiOnline[0] : [{typeChannel:0, url: ''}]
+                this.lokasiOnline = data.lokasiOnline && data.lokasiOnline.length > 0 ? data.lokasiOnline[0] : {typeChannel:0, url: ''}
 
 
                 this.deskripsi.list = data.deskripsi
@@ -712,7 +701,7 @@ export default {
 
 
          async uploadImage(image, untuk, name) {
-                console.log('upload thumbnail')
+                // console.log('upload thumbnail')
                 var data = new FormData();
                 data.append(untuk, image, name);
                 await this.$apiPlatform.put('moderator/events/'+this.id+'/', data).then(res => {
@@ -721,36 +710,7 @@ export default {
                     console.log(err)
                 })
         },
-        savingGallery() {
-            this.saving.statusGalleri = true
-            setTimeout(() => {
-                this.saving.statusGalleri = false;
-            }, 2000)
-        },
-        savingTag() {
-            this.saving.statusTag = true
-            setTimeout(() => {
-                this.saving.statusTag = false
-            }, 500)
-        },
-        savingLokasiOffline() {
-            this.saving.statusLokasiOffline = true
-            setTimeout(() => {
-                this.saving.statusLokasiOffline = false
-            }, 500)
-        },
-        savingDeskripsi() {
-            this.saving.statusDeskripsi = true
-            setTimeout(() => {
-                this.saving.statusDeskripsi = false
-            }, 500)
-        },
-        savingLokasiOnline() {
-            this.saving.statusLokasiOnline = true
-            setTimeout(() => {
-                this.saving.statusLokasiOnline = false
-            },500)
-        }
+ 
 
 
 

@@ -3,7 +3,7 @@
         <div class="rounded-b-md overflow-hidden ">
             <img :src="image" width="500" height="500" alt="main-image" class="object-contain w-full h-full ">
         </div>
-        <div class="mt-4 mb-4 text-center text-warna-sembilan font-semibold">{{ $t('Thumbnail') }}</div>
+        <div class="mt-4 mb-4 text-center text-warna-sembilan font-semibold">{{ label }}</div>
     </div>
 </template>
 <script>

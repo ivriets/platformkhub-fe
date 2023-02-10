@@ -1,7 +1,7 @@
 <template>
     <div class="grid grid-cols-12 gap-5">
         <div class="col-span-12 md:col-span-6">
-            <InputSelectNonBahasa 
+            <InputSelect
                 v-model="newVal.typeChannel"
                 :name="prefixName+'channel'"
                 :label="$t('Channel')"
@@ -24,6 +24,10 @@ export default {
         return {
             // newVal: null,
             opsiChannel: [
+                // {
+                //     id: 0,
+                //     label: 'None'
+                // },
                 {
                     id: 1,
                     label: 'Zoom'

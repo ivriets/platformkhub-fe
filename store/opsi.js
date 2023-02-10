@@ -338,21 +338,25 @@ export const state = () => ({
     typeResources: [
         {
             id: 3,
-            label: ['PDF', 'PDF']
+            label: ['PDF', 'PDF'],
+            sorter: 1
         },
         {
             id: 4,
-            label: ['Video', 'Video']
+            label: ['Video', 'Video'],
+            sorter:2
         },
         {
             id: 5,
-            label: ['Audio', 'Audio']
+            label: ['Audio', 'Audio'],
+            sorter:3
 
         },
 
         {
             id: 2,
-            label: ['File Lainnya', 'Other FIles']
+            label: ['File Lainnya', 'Other FIles'],
+            sorter:4
         },
         // {
         //     id:1,

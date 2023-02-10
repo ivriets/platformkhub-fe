@@ -8,6 +8,7 @@
                 :name="'resourcetype'"
                 :orientasi="'horizontal'"
                 :key="'keyfda'+keyMaster"
+                :order="'sorter'"
             />
         </div>
         <div class="mb-5">
