@@ -10,7 +10,7 @@
                 />
             </div>
 
-            <NuxtLink to="/career/open-recruitment/new/" class="button-standar flex gap-3 items-center">
+            <NuxtLink to="/career/open-recruitment/entry/" class="button-standar flex gap-3 items-center">
                     <img src="/icons/icon-button-download.png" alt="icon-download">
                     <div class="ml-1">New Loker</div>
             </NuxtLink>
@@ -32,7 +32,16 @@
                 v-model="list"
                 :tableDetail="tableDetail"
             >
+                <template v-slot:judul="{item}">
+                    {{ item.judul[bahasa] }}
+                </template>
+                <template v-slot:kategori="{item}">
+                    {{ item.kategori.map(e => e[bahasa]).join(', ') }}
+                </template>
+
+
                 <template v-slot:actions="{ item }">
+                        <button @click="editItem(item)" class="button-table-edit w-10 h-10"></button>
                         <button @click="deleteItem(item)" class="button-table-delete w-10 h-10"></button>
                 </template>
             </ElementsTable>
@@ -52,6 +61,9 @@ export default {
         }
     },
     computed: {
+        bahasa() {
+            return this.$i18n.locale === 'id' ? 0 : 1
+        },
         basePath() {
             return process.env.BASE_URL
         },
@@ -83,8 +95,11 @@ export default {
         },
 
         async masterPoint() {
-            await this.$apiBase.get('daftarloker/').then(res => {
-                this.list = res.data.results
+            await this.$apiBase.get('daftarloker/?limit=10&offset=0').then(res => {
+                this.list = res.data.results.map(e => {
+                    e.kategori = e.kategori.map(x => x.kategori.nama)
+                    return e;
+                })
             }).catch(err => {
                 console.log(err)
             })
@@ -100,6 +115,9 @@ export default {
                     action: () => this.deleteData(item.pkDaftarLoker)
                 }
             })
+        },
+        editItem(item) {
+            this.$router.push('/career/open-recruitment/entry?id='+item.pkDaftarLoker)
         },
         async deleteData(id) {           
             await this.$apiBase.delete('daftarloker/'+id).then(res => {

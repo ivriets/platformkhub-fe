@@ -54,6 +54,8 @@
                         v-model="form.nama"
                         :name="prefixName+'namatestimony'"
                         :label="$t('Nama')"
+                        :max="255"
+                        :counter="true"
                     />
                 </div>
                 <div class="mb-5">
@@ -61,6 +63,8 @@
                         v-model="form.deskripsi"
                         :name="prefixName+'deskripsitestimoni'"
                         :label="$t('Testimoni')"
+                        :max="1000"
+                        :counter="true"
                     />
                 </div>
 

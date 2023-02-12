@@ -18,7 +18,7 @@
                 @input="handleInput"
                 @keyup.enter="submitOpsi"
                 @keyup.esc="clearOpsi"
-                @keydown.tab="keyTab"
+                @keyup="keyUp"
             >
             <div class="absolute top-0 right-0 h-[34px] items-center flex px-2 text-gray-500">
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" preserveAspectRatio="xMidYMid meet" viewBox="0 0 12 12"><path fill="currentColor" d="M5.214 10.541a.903.903 0 0 0 1.572 0l4.092-7.169C11.226 2.762 10.789 2 10.09 2H1.91c-.698 0-1.135.762-.787 1.372l4.092 7.17Z"/></svg> -->
@@ -35,7 +35,7 @@
                         :key="name+'list'+index"
                         class="list-options block w-full text-left text-sm py-0.5 px-2 bg-white  hover:bg-blue-500  hover:text-white disabled:hover:bg-white disabled:hover:text-gray-400 disabled:text-gray-400 cursor-pointer disabled:cursor-default"
                         @click="pilihItem(i)"
-                        :class="i[parseId]==='listbaru' ? 'text-blue-500' : 'text-black' "
+                        :class="kelasRow(i)"
                         :disabled="selectedValue.map(e=>e[parseId]).includes(i[parseId])"
                         >
                             <span v-if="multilang && multilang === true">{{i[parseLabel][bahasa]}}</span>
@@ -44,10 +44,11 @@
                     </button>
             </div>
         </div>
-        <div class="chip-container mt-2 flex items-center flex-wrap gap-2">
+        <div v-if="selectedValue.length>0" class="chip-container mt-2 flex items-center flex-wrap gap-2">
             <div v-for="(item, index) in selectedValue" :key="'listSel'+name+index" @click="removeChip(index)">
             <ElementsChip 
                 :item="item[parseLabel][bahasa]"
+                v-if="item[parseLabel]"
             />
             </div>
         </div>
@@ -61,7 +62,8 @@ export default {
             statusDropdown: false,
             listing: [],
             newVal: '',
-            selectedValue: []
+            selectedValue: [],
+            selectedIndex: null
         }
     },
     watch: {
@@ -113,23 +115,18 @@ export default {
         async getApi(val) {
             var listingFilter = []
             if (val === '' || val === undefined) {
-                listingFilter = this.listing
+                listingFilter = this.opsi
             } else {
-                listingFilter = this.opsi.filter(e => { 
-                    return e[this.itemLabel].toString().toLowerCase().includes(val.toLowerCase())
-                })
+                if (this.multilang && this.multilang===true) {
+                    listingFilter = this.opsi.filter(e => e[this.parseLabel][this.bahasa].toLowerCase().includes(val.toLowerCase()))
+                } else {
+                    listingFilter = this.opsi.filter(e => e[this.parseLabel].toLowerCase().includes(val.toLowerCase()))
+                }
             }
             // this.statusDropdown = listingFilter.length > 0 ? true : false
             this.statusDropdown = true
-            // if (this.addNew && this.addNew == true) {
-            //     const addNew = {
-            //         [this.parseId] : 'listbaru',
-            //         [this.parseLabel]: this.multilang && this.multilang === true ?  ['Baru', 'Baru'] : 'Baru'
-            //     }
-            //     listingFilter.unshift(addNew)
-            // }
-
             this.listing = listingFilter
+
         },
 
         closeDropdown() {
@@ -137,12 +134,15 @@ export default {
         },
 
         submitOpsi() {
-            // if (this.listing.length > 0) {
-            //     const pertama = this.listing[0]
-            //     const reduceListing = this.selectedValue.map(e=>e[this.parseId]).includes(pertama[this.parseId])
-            //     if (!reduceListing) this.pilihItem(pertama)
-            // }
-            if (this.addNew && this.addNew === true) {
+            //check di list sebelumnya ada gak
+            var listingFilter = []
+            if (this.multilang && this.multilang===true) {
+                    listingFilter = this.opsi.filter(e => e[this.parseLabel][this.bahasa].includes(this.newVal))
+            } else {
+                listingFilter = this.opsi.filter(e => e[this.parseLabel].includes(this.newVal))
+            }
+            
+            if (this.addNew && this.addNew === true && listingFilter.length === 0) {
                 const addNew = {
                     [this.parseId] : this.newVal,
                     [this.parseLabel]: this.multilang && this.multilang === true ?  [this.newVal, this.newVal] : this.newVal
@@ -151,8 +151,12 @@ export default {
                 this.$nextTick(() => {
                     this.newVal = ''
                     this.updateValue()
+                   
                 })
             }
+            setTimeout(() => {
+                this.closeDropdown()
+            },500)
         },
 
         handleInput(event) {
@@ -164,15 +168,9 @@ export default {
         },
 
         pilihItem(item) {
-            if (item.id ==='new-item') {
-                this.modalMaster = true
-                this.keyMaster +=1
-            } else {
-                this.newVal = ''
-                this.selectedValue.push(item)
-                this.updateValue()
-                // this.$emit('input',item.id)
-            }
+            this.newVal = ''
+            this.selectedValue.push(item)
+            this.updateValue()
             this.closeDropdown()
         },
 
@@ -182,25 +180,19 @@ export default {
         },
 
         removeChip(index){
-            // console.log(value)
-            // const posisi = this.selectedValue.indexOf(value)
-            // this.selectedValue.splice(posisi, 1)
-            // this.$nextTick(() => {
-            //     this.updateValue();
-            // })
            this.selectedValue.splice(index, 1);
             this.selectedValue = _.uniq(this.selectedValue)
             this.$nextTick(() => {
                 this.updateValue()
             })
         },
+        keyUp(event) {
+            if (event.key==='ArrowDown') {
 
-        keyTab(event) {
-            // const newLabel = this.label && this.label !== '' ? this.label : 'isian '
-            // if (this.listing.length === 0) {
-            //     this.$toast.warning(newLabel + ' mohon diisi')
-            //     event.preventDefault()
-            // } 
+            }
+        },  
+        kelasRow(item) {
+            return item[this.parseId]==='listbaru' ? 'text-blue-500' : 'text-black' 
         }
     }
 }

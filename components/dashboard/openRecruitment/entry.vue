@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="bg-white p-5 shadow-md">
-            <div class="text-xl font-semibold text-warna-utama mb-[28px]">Recruitment Editor</div>
+            <div class="text-xl font-semibold text-warna-utama mb-[28px]">{{ title }}</div>
             <div class="grid grid-cols-12 gap-x-4 gap-y-[28px] mb-7">
                 <div class="col-span-12 md:col-span-6">
                     <InputText 
@@ -27,17 +27,22 @@
                         :label="'Department'"
                         :opsi="opsiDepartment"
                         :itemValue="'id'"
-                        :itemLabel="'label'"
-                        :key="prefixName+'dept'"
+                        :itemLabel="'nama'"
+                        :key="keyMaster+'dept'"
                         :multilang="true"
+                        :addNew="true"
                     />
                 </div>
                 <div class="col-span-12 md:col-span-6 w-full">
                     <InputSelect 
-                        v-model="form.status"
+                        v-model="form.statusKarir"
                         :label="'Status'"
                         :name="'status'"
                         :opsi="opsiStatusOpenRec"
+                        :itemValue="'id'"
+                        :itemLabel="'nama'"
+                        :multilang="true"
+                        :key="'statuskarir'+keyMaster"
                     />
                 </div>
             </div>
@@ -62,61 +67,111 @@
 
         <div class="bg-white shadow-md rounded-xl py-4 px-6">
             <div class="flex items-center justify-between">
-                <!-- <div @click="btnBack" class="px-8 py-2 bg-white rounded-lg text-warna-empat border border-warna-empat cursor-pointer hover:bg-gray-100 font-semibold">Back</div>
-                <div class="px-8 py-2 bg-warna-empat rounded-lg text-white cursor-pointer hover:bg-blue-900 font-semibold">Save</div> -->
                 <button class="button-standar-outline" @click="btnBack"> {{$t('Back')}} </button>
-                <button disabled class="button-standar" @click="simpan"> {{$t('Save')}} </button>
+                <button class="button-standar" @click="simpan"> {{$t('Save')}} </button>
             </div>
         </div>
-        <!-- <pre>{{form}}</pre> -->
+
     </div>
 </template>
 
 
 <script>
 export default {
-    data() {
+    data() { 
         return {
             prefixName: 'newopenrec',
             form: {
                 judul: ['', ''],
                 kategori: [],
-                status: '',
+                statusKarir: '',
                 deskripsi: ['', '']
             },
+            opsiDepartment: [],
+            opsiStatusOpenRec: [],
+            keyMaster: 100
         }
     },
     computed: {
-        opsiDepartment() {
-            return this.$store.state.opsi.department
+        formMode() {
+            return this.$route.query.id ? 'put' : 'post'
         },
-
-        opsiStatusOpenRec() {
-            return this.$store.state.opsi.statusOpenRec
-        },
-
         lang() {
             return this.$i18n.locale
+        },
+        id() {
+            return this.$route.query.id
         },
 
         bahasa() {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
+        title() {
+            return this.$route.query.id ? this.$t('Edit Recruitment Editor') : this.$t('Recruitment Editor')
+        }
+    },
+    mounted() {
+        this.initialize()
     },
     methods: {
+        initialize() {
+            this.getKategori()
+        },
+        async getKategori() {
+            await this.$apiPlatform('/daftarList/kategori').then(res=> {
+                console.log(res.data.results)
+                const dataRes = res.data.results
+                this.opsiDepartment = dataRes.Pilihan_Kat_Karir
+                this.opsiStatusOpenRec = _.orderBy(dataRes.Status_Karir, 'id')
+                this.$nextTick(() => {
+                    this.keyMaster+=1
+                    if (this.formMode === 'put') this.initPut()
+                })
+            })
+        },
+        async initPut() {
+            await this.$apiPlatform.get('daftarloker/' + this.id + '/').then(res => {
+                console.log(res.data.results)
+                const dataRes = res.data.results
+                this.form = {
+                    judul: dataRes.judul,
+                    kategori: _.flatMap(dataRes.kategori, 'kategori.id'),
+                    statusKarir: dataRes.statusKarir.id,
+                    deskripsi: dataRes.deskripsi
+                }
+                this.$nextTick(() => {
+                    this.keyMaster+=1
+                })
+            })
+        },  
+
         btnBack() {
             this.$router.push('/career/open-recruitment/')
         },
         simpan() {
-            this.realSimpan()
+            if (this.formMode === 'post') {
+             this.realSimpan()
+            } else {
+                this.realUpdate()
+            }
         },
         async realSimpan() {
-            await this.$apiBase.post('daftarloker/', this.form).then(res => {
-                console.log(res.data)
+            await this.$apiPlatform.post('daftarloker/', this.form).then(res => {
+                this.$toast.show(this.$t('Karir') + ' ' + this.$t('addedSukses'))
+                this.initialize()
+            }).catch(err => {
+                console.log(err)
+            })
+        },
+        async realUpdate() {
+            await this.$apiPlatform.put('daftarloker/'+this.id+'/', this.form).then(res => {
+                this.$toast.show(this.$t('Karir') + ' ' + this.$t('updateSukses'))
+                this.initialize()
             }).catch(err => {
                 console.log(err)
             })
         }
+
     },
 // {
 //   "title": [

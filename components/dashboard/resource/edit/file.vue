@@ -52,6 +52,7 @@ export default {
                 return this.value
             },
             set(value) {
+                value.deskripsiFile = ['khub', 'khub']
                 this.$emit('input',value)
             }
         },

@@ -4,9 +4,7 @@
             v-model="form"
             :prefixName="prefixName"
             :map="false"
-            v-if="loader"
         />
-
     </div>
 </template>
 <script>
@@ -15,7 +13,7 @@ export default {
     data() {
         return {
             loader: false,
-            form: {
+            form1: {
                 provinsi: '',
                 kota: '',
                 jalan: '',
@@ -23,43 +21,17 @@ export default {
             }
         }
     },
-    mounted() {
-        this.initialize()
-    },
-    watch: {
+    computed: {
         form: {
-            handler(val) {
-                this.updateValue()
+            get() {
+                return this.value
             },
-            deep:true
+            set(value) {
+                this.$emit('input', value)
+            }
         }
     },
-    methods: {
-        initialize() {
-            this.loader = false
-            if (this.value.api.length > 0) {
-                this.form = this.value.api[0]
-            } else {
-                this.form = {
-                    provinsi: '',
-                    kota: '',
-                    jalan: '',
-                    pinLocation: ''
-                }
-            }
-            this.$nextTick(() => {
-                this.loader=true;
-            })
-        },
-        updateValue() {
-            const buatUpdate = {
-                list: [this.form],
-                deleted: [],
-                api: this.value.api
-            }
-            this.$emit('input',buatUpdate)
-        }
-    }
+
 
 }
 </script>

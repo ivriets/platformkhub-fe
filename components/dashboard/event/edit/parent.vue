@@ -18,7 +18,6 @@
                             :max="maxTitle"
                             :counter="true"
                         />
-                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[0].length}}/{{maxTitle}}</div> -->
                     </div>
 
                     <div class="">
@@ -30,13 +29,11 @@
                             :max="maxTitle"
                             :counter="true"
                         />
-                        <!-- <div class="text-xs text-warna-dua mt-1">{{form.judulActivity[1].length}}/{{maxTitle}}</div> -->
                     </div>
                     
                     <hr class="border-warna-tujuh my-10">
 
-                    <!-- <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Registration Type') }}</div> -->
-                        <div class="mb-5">
+                   <div class="mb-5">
                         <InputRadio 
                             v-model="form.typeRegistrasi"
                             :label="$t('Registration Type')"
@@ -45,6 +42,7 @@
                             :orientasi="'horizontal'"
                             :required="true"
                             :key="'registrasitipe'+keyMaster"
+                            :order="'id'"
                         />
                         </div>
                         <div>
@@ -137,8 +135,9 @@
                     <div class="text-xl text-warna-utama mb-1">{{ $t('Tipe Acara') }}</div>
                         <div class="mb-8">
                             <InputSelect 
-                                v-model="form.tipeAcara"
+                                v-model="tipeAcara"
                                 :opsi="opsiTipeAcara"
+                                :key="'tipeacara'+keyMaster"
                                 :multilang="true"
                             />
                         </div>
@@ -156,19 +155,11 @@
 
                     <div v-if="[2,1].includes(tipeAcara)">
                         <div class="text-xl text-warna-utama mb-1">{{ $t('Lokasi Offline') }}</div>
-                        <!-- <FormLokasi 
-                            v-model="formLokasi"
-                            :prefixName="prefixName"
-                            v-if="loaderAll"
-                            :key="'lokasi'+keyMaster"
-                            :map="false"
-                        /> -->
                         <DashboardEventEditLokasiOffline 
                             v-model="formLokasiOffline"
                             :prefixName="prefixName"
                             v-if="loaderAll"
                             :key="'lokasi'+keyMaster"
-
                         />
 
                     </div>
@@ -180,11 +171,14 @@
                             v-model="daftarGalleri"
                         />
                     </div>
-                    <InputTestimony 
+                    <!-- <InputTestimony 
                         v-model="testimony"
                         v-if="form.progress === 'completed'"
+                    /> -->
+                    <InputFieldTestimony 
+                        v-model="testimony"
                     />
-
+<!-- {{ testimony }} -->
                 </div>
                 <div class="col-span-12 lg:col-span-3">
                     <div class="bg-[#FAFAFA] p-5 rounded-lg mb-[28px]">
@@ -323,6 +317,15 @@
                 :deskripsi="deskripsi"
                 v-if="saving.statusDeskripsi"
             />
+            <DashboardChildSimpanTestimony 
+                v-model="saving.testimony"
+                :model="'event'"
+                :modelId="id"
+                :testimony="testimony"
+                v-if="saving.testimony"
+            />
+
+
         </div>
 
         <!-- <button @click="savingLokasiOffline">simpan lokasi</button>
@@ -359,13 +362,19 @@ export default {
                 urlRegistrasiEksternal: ''
                 
             },
+            dataDetail: null,
             deskripsi: {
                 list: [],
                 deleted: [],
                 updated: [],
                 new: []
             },
-            testimony: [],
+            testimony: {
+                list: [],
+                deleted: [],
+                new: [],
+                updated: []
+            },
 
             opsiTipeRegistransi: [
                 {
@@ -424,11 +433,7 @@ export default {
                 deleted: [],
                 api: []
             },
-            formLokasiOffline: {
-                list: [],
-                deleted: [],
-                api: []
-            },
+            formLokasiOffline: null,
 
             saving: {
                 tag: '',
@@ -440,14 +445,17 @@ export default {
                 deskripsi: '',
                 statusDeskripsi: false,
                 lokasiOnline: '',
-                statusLokasiOnline: false
+                statusLokasiOnline: false,
+                testimony: '',
+                statusTestimony:false
             },
 
             checkSaving: {
                 root: false,
                 thumbnail: false,
                 galleri: false,
-                deskripsi: false
+                deskripsi: false,
+                testimony: false
             }
 
 
@@ -485,15 +493,15 @@ export default {
         
     },
     watch: {
-        tipeAcara(val) {
-            if (val === 2) {
-                this.form.lokasiOnline = [];
-                this.form.lokasi = [_.cloneDeep(this.lokasi)]
-            } else if (val === 3) {
-                this.form.lokasi = []
-                this.form.lokasiOnline = [_.cloneDeep(this.lokasiOnline)]
-            }
-        },
+        // tipeAcara(val) {
+        //     if (val === 2) {
+        //         this.form.lokasiOnline = [];
+        //         this.form.lokasi = [_.cloneDeep(this.lokasi)]
+        //     } else if (val === 3) {
+        //         this.form.lokasi = []
+        //         this.form.lokasiOnline = [_.cloneDeep(this.lokasiOnline)]
+        //     }
+        // },
 
         'saving.galleri' (val) {
             console.log('savegal', val)
@@ -509,7 +517,8 @@ export default {
                     val.root === true && 
                     val.thumbnail === true && 
                     val.galleri === true && 
-                    val.deskripsi === true
+                    val.deskripsi === true &&
+                    val.testimony === true
                     ) 
                 {
                      this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
@@ -537,14 +546,17 @@ export default {
                 lokasiOffline: '',
                 statusLokasiOffline: '',
                 deskripsi: '',
-                statusDeskripsi: false
+                statusDeskripsi: false,
+                testimony: '',
+                statusTestimony: false
             },
 
             this.checkSaving= {
                 root: false,
                 thumbnail: false,
                 galleri: false,
-                deskripsi: false
+                deskripsi: false,
+                testimony: false
             }
 
 
@@ -556,6 +568,7 @@ export default {
 
             await this.$apiPlatform.get('moderator/events/'+this.id+'/').then(res => {
                 var data = res.data
+                this.dataDetail = _.cloneDeep(data)
                 this.form = {
                     submission: data.submission,
                     progress: data.progress,
@@ -567,18 +580,13 @@ export default {
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
-                    // tag: _.flatMap(_.map(data.tag, function(o){return o.pilihanTagId}), "id"),
-                    // lokasi:data.lokasi && data.lokasi.length > 0 ? data.lokasi : [_.cloneDeep(this.lokasi)],
-                    // lokasiOnline: data.lokasiOnline && data.lokasiOnline.length > 0 ? data.lokasiOnline : [_.cloneDeep(this.lokasiOnline)],
-                    // deskripsi: data.deskripsi,
                     registrationStartDate: data.registrationStartDate ? data.registrationStartDate : '',
                     registrationEndDate: data.registrationEndDate ? data.registrationEndDate: '',
 
-                    // typeRegistrasi: data.typeRegistrasi ? data.typeRegistrasi : '',
                     typeRegistrasi: data.typeRegistrasi ? data.typeRegistrasi : '',
                     email: data.email ? data.email : '',
                     kontak: data.kontak ? data.kontak : '',
-                    urlRegistrasiEksternal: ''
+                    urlRegistrasiEksternal: data.urlRegistrasiEksternal
 
 
 
@@ -586,8 +594,19 @@ export default {
 
                 this.daftarGalleri.list = data.galleries
                 this.formTag.api = data.tag
-                this.formLokasiOffline.api = data.lokasi ? data.lokasi : []
+                // this.formLokasiOffline.api = data.lokasi ? data.lokasi : []
+                this.formLokasiOffline = data.lokasi && data.lokasi.length > 0 ? data.lokasi[0] : this.lokasi
+                this.testimony.list = data.testimoniNonUser
                 this.lokasiOnline = data.lokasiOnline && data.lokasiOnline.length > 0 ? data.lokasiOnline[0] : {typeChannel:0, url: ''}
+                if (data.lokasi.length > 0 && data.lokasiOnline.length > 0) {
+                    this.tipeAcara = 1
+                } else if (data.lokasi.length > 0 && data.lokasiOnline.length === 0 ) {
+                    this.tipeAcara = 2
+                } else {
+                    this.tipeAcara = 3
+                }
+
+
 
 
                 this.deskripsi.list = data.deskripsi
@@ -659,7 +678,7 @@ export default {
             forSimpan.statusActivity = forSimpan.statusActivity.id
 
             await this.$apiPlatform.put('moderator/events/'+this.id+'/', forSimpan).then(res => {
-                console.log(res)
+                // console.log(res)
                 this.checkSaving.root = true
 
                 if (this.imgThumbnail.status == 'belumUpload') {
@@ -669,30 +688,33 @@ export default {
                 } 
 
                 //simpan child
+                if (this.tipeAcara === 1) {
+                    this.saving.statusLokasiOffline = true
+                    this.saving.statusLokasiOnline = true
+                } else if (this.tipeAcara === 2) {
+                    this.saving.statusLokasiOffline = true
+                    //delete semua online
+                    this.deleteAllLokasiOnline()
+
+                } else if (this.tipeAcara === 3) {
+                    this.saving.statusLokasiOnline = true
+                    //delete semua offline
+                    this.deleteAllLokasiOffline()
+
+                }
+
                 this.saving.statusDeskripsi = true
-                // this.saving.statusLokasiOnline = true
-                // this.saving.statusGalleri = true
-                this.saving.statusLokasiOffline = true
-                this.saving.statusLokasiOnline = true
+                this.saving.statusGalleri = true
+                this.saving.statusTestimony = true
                 this.saving.statusTag = true
 
 
                 //handling error endpoint dulu
                 // this.checkSaving.deskripsi = true //supaya gak error aja
-                this.checkSaving.galleri = true
+                // this.checkSaving.galleri = true
 
 
 
-                // this.savingDeskripsi()
-                // this.savingLokasiOnline()
-                // this.savingLokasiOffline()
-                // this.savingTag()
-                // this.savingGallery();
-
-                // {
-                //     this.$toast.show(this.$t('Event')+ ' ' + this.$t('updated successfully'))
-                //     this.initialize()
-                // }
 
             }).catch(error => {
                 this.$toast.show('Error dari sisi server')
@@ -710,6 +732,26 @@ export default {
                     console.log(err)
                 })
         },
+        deleteAllLokasiOnline() {
+            if (this.dataDetail.lokasiOnline.filter(e => e.pkLokasiOnlineId && e.pkLokasiOnlineId !=='').length > 0) {
+                this.dataDetail.lokasiOnline.forEach(e => {
+                    this.deleteLokasiOnline(e.pkLokasiOnlineId)
+                })
+            }
+        },
+        async deleteLokasiOnline(id) {
+            await this.$apiPlatform.delete('moderator/eventslokasionline/'+id+'/')
+        },
+        deleteAllLokasiOffline() {
+            if (this.dataDetail.lokasi.filter(e => e.pkLokasiActivityId && e.pkLokasiActivityId !=='').length > 0) {
+                this.dataDetail.lokasi.forEach(e => {
+                    this.deleteLokasiOffline(e.pkLokasiActivityId)
+                })
+            }
+        },
+        async deleteLokasiOffline(id) {
+            await this.$apiPlatform.delete('moderator/eventslokasi/'+id+'/')
+        }
  
 
 

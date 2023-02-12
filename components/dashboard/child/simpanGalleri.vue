@@ -40,7 +40,7 @@ export default {
                 this.endPointRoot = 'moderator/events/'+this.modelId+'/';
                 this.endPointGalleri = 'moderator/eventsgalleries/'
                 this.fieldGalleri = 'galleries'
-                this.inputField = 'events'
+                this.inputField = 'activity'
             } else if (this.model === 'program') {
                 
             }

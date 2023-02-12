@@ -11,14 +11,6 @@ export default {
     },
     methods: {
         initialize() {
-            console.log(this.resourcesFiles)
-            // if (this.resourcesFiles.binFile === '' && this.resourcesFiles.embedLink === '') {
-            //     this.$emit('input','done')
-            // } else if (this.resourcesFiles.binFile && this.resourcesFiles.binFile.file && this.resourcesFiles.pkFileId) {
-            //     this.simpanFile()
-            // } else {
-            //     this.simpan()
-            // }
             if (this.resourcesFiles.pkFileId) {
                 this.edit()
             } else {
@@ -26,12 +18,12 @@ export default {
             }
         },
         async simpan() {
-            // this.$apiPlatform.put('moderator/resourcesfiles/' + this.resourcesFiles.pkFileId + '/', this.resourcesFiles).then(res => {
-            //     this.$emit('input','done')
-            // })
-            this.$apiPlatform.put('moderator/resources/'+this.modelId+'/', this.resourcesFiles).then(res => {
+            const forSimpan = this.resourcesFiles
+            forSimpan.deskripsiFile = ['khub', 'khub']
+
+            this.$apiPlatform.put('moderator/resources/'+this.modelId+'/', {resourcesFiles: forSimpan}).then(res => {
                 if (this.resourcesFiles.binFile && this.resourcesFiles.binFile.file )  {
-                    this.simpanFile(id)
+                    this.simpanFile(res.data.pkFileId)
                 } else {
                     this.$emit('input','done')
                 }

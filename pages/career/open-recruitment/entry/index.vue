@@ -24,7 +24,8 @@ export default {
         },
         title() {
             return this.$t('Open Recruitment')
-        }
+        },
+
     },
     watch: {
         lang() {
