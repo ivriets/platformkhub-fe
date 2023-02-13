@@ -158,7 +158,8 @@ export default {
         async realSimpan() {
             await this.$apiPlatform.post('daftarloker/', this.form).then(res => {
                 this.$toast.show(this.$t('Karir') + ' ' + this.$t('addedSukses'))
-                this.initialize()
+                // this.initialize()
+                this.$router.push('/career/open-recruitment/')
             }).catch(err => {
                 console.log(err)
             })
@@ -166,7 +167,9 @@ export default {
         async realUpdate() {
             await this.$apiPlatform.put('daftarloker/'+this.id+'/', this.form).then(res => {
                 this.$toast.show(this.$t('Karir') + ' ' + this.$t('updateSukses'))
-                this.initialize()
+                this.$router.push('/career/open-recruitment/')
+
+                // this.initialize()
             }).catch(err => {
                 console.log(err)
             })
