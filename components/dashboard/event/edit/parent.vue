@@ -177,8 +177,9 @@
                     /> -->
                     <InputFieldTestimony 
                         v-model="testimony"
+                        v-if="form.progress === 'completed'"
+                        :key="'key'+keyMaster"
                     />
-<!-- {{ testimony }} -->
                 </div>
                 <div class="col-span-12 lg:col-span-3">
                     <div class="bg-[#FAFAFA] p-5 rounded-lg mb-[28px]">
@@ -322,7 +323,7 @@
                 :model="'event'"
                 :modelId="id"
                 :testimony="testimony"
-                v-if="saving.testimony"
+                v-if="saving.statusTestimony"
             />
 
 
@@ -372,8 +373,7 @@ export default {
             testimony: {
                 list: [],
                 deleted: [],
-                new: [],
-                updated: []
+
             },
 
             opsiTipeRegistransi: [
@@ -510,6 +510,9 @@ export default {
         'saving.deskripsi' (val) {
             if (val==='done') this.checkSaving.deskripsi = true
         },
+        'saving.testimony'(val) {
+            if (val==='done') this.checkSaving.testimony = true
+        },
         checkSaving: {
             handler(val) {
                 // console.log('cheksaving',val)
@@ -559,7 +562,10 @@ export default {
                 testimony: false
             }
 
-
+            this.testimony = {
+                list: [],
+                deleted: [],
+            }
             this.loaderAll = false
             this.masterPoint()
         },
