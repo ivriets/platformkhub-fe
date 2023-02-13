@@ -3,7 +3,7 @@ module.exports = {
     apps : [
         {
             name: 'superadmin',
-            exec_mode: 'cluster',
+            // exec_mode: 'cluster',
             script: './node_modules/nuxt/bin/nuxt.js',
             args: 'start'
         }
