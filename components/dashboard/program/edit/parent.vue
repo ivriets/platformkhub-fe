@@ -48,10 +48,10 @@
 
                     <div>
                         <div class="text-xl text-warna-utama mb-[28px]">{{ $t('Content') }}</div>                       
-                        <InputContentSection 
+                        <InputContentSectionBaru
                             v-if="deskripsi"
                             v-model="deskripsi"
-                            :list="deskripsi"
+                            :key="'desk'+keyMaster"
                         />
                     </div>
 
@@ -83,7 +83,7 @@
 
                     <div>
                         <DashboardProgramEditLokasi 
-                            v-model="form.lokasi"
+                            v-model="lokasi"
                             :prefixName="prefixName"
                             :key="'eyfda'+keyMaster"
                         />
@@ -96,18 +96,16 @@
 
                     <hr class="border-warna-tujuh my-10">
 
-                    <InputTestimony 
-                        v-model="form.testimoniNonUser"
+                    <InputFieldTestimony 
+                        v-model="testimony"
                         :prefixName="prefixName"
                     />
-
                     <hr class="border-warna-tujuh my-10">
                     <div class="">
                         <DashboardProgramEditMilestone 
-                            v-model="form.fase"
+                            v-model="fase"
                             :prefixName="prefixName"
                         />
-
                     </div>
 
                     <hr class="border-warna-tujuh my-10">
@@ -190,8 +188,19 @@
 
 
                     </div>
-                    <!-- {{listOrganisasi}} -->
                     <div  class="mb-6">
+                        <!-- <InputAutocompleteApiMulti 
+                            v-model="form.partner"
+                            :name="prefixName+'partner'"
+                            :label="$t('Partner')"
+                            :endPoint="'verificator/katalogOrganisasi/?limit=10&offset=0'"
+                            :searchQuery="'title'"
+                            :itemValue="'organisasiId'"
+                            :itemLabel="'namaOrganisasi'"
+                            :keyRespon="'res.data.results'"
+                            :key="'formorganisasi'+keyMaster"
+                        /> -->
+
                         <InputAutocompleteApiMulti 
                             v-model="form.partner"
                             :name="prefixName+'partner'"
@@ -202,16 +211,8 @@
                             :itemLabel="'namaOrganisasi'"
                             :key="'formorganisasi'+keyMaster"
                         />
-<!-- 
-                        <InputAutocompleteApiMulti 
-                            v-model="form.partner"
-                            :name="prefixName+'partner'"
-                            :label="$t('Partner')"
-                            :opsi="listOrganisasi"
-                            :itemValue="'organisasiId'"
-                            :itemLabel="'namaOrganisasi'"
-                            :multilang="false"
-                        /> -->
+
+<!-- {{ form.partner }} -->
                     </div>
                     <div class="mb-6">
                         <InputFieldKategoriMulti 
@@ -259,7 +260,6 @@
                             :key="'keytag'+keyMaster"
                         />
                     </div>
-                    <!-- {{form.tag}} -->
                 </div>
             </div>
         </div>
@@ -279,13 +279,40 @@
                 :deskripsi="deskripsi"
                 v-if="saving.statusDeskripsi"
             />
-
+            <DashboardChildSimpanGalleri 
+                v-model="saving.galleri"
+                :model="'program'"
+                :modelId="id"
+                :galleri="daftarGalleri"
+                v-if="saving.statusGalleri"
+            />
             <DashboardChildSimpanTag 
                 v-model="saving.tag"
                 :tag="formTag"
                 :model="'program'"
                 :modelId="id"
                 v-if="saving.statusTag"
+            />
+            <DashboardChildSimpanProgramLokasi 
+                v-model="saving.lokasi"
+                :lokasi="lokasi"
+                :model="'program'"
+                :modelId="id"
+                v-if="saving.statusLokasi"
+            />
+            <DashboardChildSimpanTestimony 
+                v-model="saving.testimony"
+                :model="'program'"
+                :modelId="id"
+                :testimony="testimony"
+                v-if="saving.statusTestimony"
+            />
+            <DashboardChildSimpanProgramMilestone 
+                v-model="saving.milestone"
+                :model="'program'"
+                :modelId="id"
+                :fase="fase"
+                v-if="saving.statusMilestone"
             />
 
         </div>
@@ -307,22 +334,8 @@ export default {
             loaderMaster: false,
 
             // MODAL TESTIMONI
-            modalAction: false,
-            modalTitle: 'Testimoni',
-            modalWidth: '',
-            keyModal:0,
-            persistent: true,
-            formEntry: {
-                milestone: {
-                    status: 0,
-                    judul: ['', '']
-                },
-                journey: {
-                    judul: ['', ''],
-                    deskripsi: ['', ''],
-                    image: ''
-                }
-            },
+
+
             imgMainImage: {
                 file: null,
                 displayImage: ''
@@ -336,42 +349,10 @@ export default {
             imageThumbnailLoader: false,
             imageThumbnailKey: false,
 
-            opsiProvinsi: [],
-            opsiKota: [],
-            opsiStatusMilestone: [
-                {
-                    id: 1,
-                    label: ['Selesai', 'Completed']
-                },
-                {
-                    id: 2,
-                    label: ['Belum Selesai', 'Incompleted']
-                }
-            ],
-
 
             prefixName: 'program',
             maxTitle: 80,
-            tableLokasiProgram: null,
             activityResult: undefined,
-            dataTable: [
-                {
-                    pkLokasiActivityId: "LyFYfUVW",
-                    provinsi: "DKI Jakarta",
-                    kota: "Jakarta Pusat",
-                    jalan: "jalan sudirman no 80",
-                    pinLocation: "VW25+RP",
-                    systemRowId: "sFlsjzvO"
-                },
-                {
-                    pkLokasiActivityId: "LyFYfUVW",
-                    provinsi: "Jawa Barat",
-                    kota: "Bandung",
-                    jalan: "Jalan Oto Iskandar Dinata no 15",
-                    pinLocation: "VW25+RP",
-                    systemRowId: "sFlsjzvO"
-                }
-            ],
             deskripsi: {
                 list: [],
                 deleted: [],
@@ -389,30 +370,29 @@ export default {
                 typeApproach: undefined,
                 typeIssues: undefined,
                 tag: undefined,
-                tambahTestimony:[],
-                namaTestimony:[],
                 retentionSaatProgramMen:null,
                 submission: 1
             },
-            opsiTag: [],
-            officer: [],
-            partner: [],
-            tableMilestone: null,
-            tableJourney: null,
+            daftarReport: [],
+            daftarJourney: [],
             daftarGalleri: {
                 list: [],
                 deleted: []
             },
-            daftarJourney: [],
+
+            testimony: {
+                list: [],
+                deleted: [],
+            },
+            fase: {
+                list: [],
+                deleted: []
+            },
+
             totalBookmark: 0,
-            listIndividu: undefined,
-            listOrganisasi: undefined,
-            listTag: undefined, 
-            daftarReport: [],
-            originalResult: {
-                statusActivity: {
-                    nama: ['','']
-                }
+            lokasi: {
+                list: [],
+                deleted: [],
             },
             formTag: {
                 list: [],
@@ -423,31 +403,30 @@ export default {
                 tag: '',
                 statusTag: false,
                 deskripsi: '',
-                statusDeskripsi: false
+                statusDeskripsi: false,
+                lokasi: '',
+                statusLokasi: false,
+                galleri: '',
+                statusGalleri: false,
+                testimony: '',
+                statusTestimony: false,
+                milestone: '',
+                statusMilestone: false
             },
 
             checkSaving: {
                 root: false,
                 thumbnail: false,
                 mainImage: false,
-                deskripsi: false
+                deskripsi: false,
+                lokasi: false,
+                galleri: false,
+                testimony: false
             }
 
         }
     },
     computed: {
-        typeAudience() {
-            return this.$store.state.opsi.typeAudience
-        },
-
-        typeApproach() {
-            return this.$store.state.opsi.typeApproach
-        },
-
-        typeIssues() {
-            return this.$store.state.opsi.typeIssues
-        },
-
         lang() {
             return this.$i18n.locale
         },
@@ -494,23 +473,33 @@ export default {
             }
         },
 
-        // 'saving.galleri' (val) {
-        //     console.log('savegal', val)
-        //     if (val==='done') this.checkSaving.galleri = true
-        // },
+        'saving.galleri' (val) {
+            console.log('savegal', val)
+            if (val==='done') this.checkSaving.galleri = true
+        },
         'saving.deskripsi'(val) {
             if (val==='done') this.checkSaving.deskripsi = true
+        },
+        'saving.lokasi'(val) {
+            if (val==='done') this.checkSaving.lokasi = true
+        },
+        'saving.testimony'(val) {
+            if (val==='done') this.checkSaving.testimony = true
         },
         checkSaving: {
             handler(val) {
                 console.log('cheksaving',val)
                 if (
-                    val.root === true && 
-                    val.thumbnail === true && val.mainImage === true &&
-                    val.deskripsi === true
+                    val.root === true 
+                    && val.thumbnail === true 
+                    && val.mainImage === true 
+                    && val.deskripsi === true 
+                    && val.lokasi === true
+                    && val.galleri === true
+                    && val.testimony === true
                     ) 
                 {
-                     this.$toast.show(this.$t('Program')+ ' ' + this.$t('updated successfully'))
+                     this.$toast.show(this.$t('Program')+ ' ' + this.$t('updateSukses'))
                      this.initialize()
                 }
 
@@ -530,27 +519,31 @@ export default {
                 tag: '',
                 statusTag: false,
                 deskripsi: '',
-                statusDeskripsi: false
+                statusDeskripsi: false,
+                lokasi: '',
+                statusLokasi: false,
+                galleri: '',
+                statusGalleri: false,
+                testimony: '',
+                statusTestimony: false,
+                milestone: '',
+                statusMilestone: false
             },
 
             this.checkSaving = {
                 root: false,
                 thumbnail: false,
                 mainImage: false,
-                deskripsi: false
+                deskripsi: false,
+                lokasi:false,
+                galleri: false,
+                testimony: false
             }
-
-
-
 
             this.btnText = 'Save'
             this.loaderMaster = false;
             this.imageLoader = false;
             // this.setBreadcrumb()
-
-
-
-
 
             this.imgThumbnail = {
                 file: null,
@@ -560,8 +553,6 @@ export default {
                 file: null,
                 displayImage: ''
             }
-
-
             this.masterPoint()
         },
 
@@ -577,20 +568,25 @@ export default {
                     tanggalMulai: data.tanggalMulai,
                     tanggalSelesai: data.tanggalSelesai,
                     officer: data.officer.map(e=> e.userId),
-                    partner: _.map(data.partnerActivityInternal, function(o){return o.partner}),
+                    // partner: _.map(data.partnerActivityInternal, function(o){return o.partner}),
+                    partner: data.partnerActivityInternal.map(e => e.partner.organisasiId),
                     typeAudience: _.flatMap(data.typeAudience, "id"),
                     typeApproach: _.flatMap(data.typeApproach, "id"),
                     typeIssues: _.flatMap(data.typeIssues, "id"),
                     // tag: _.flatMap(_.map(data.tag, function(o){return o.pilihanTagId}), "id"),
-                    lokasi:data.lokasi,
+                    // lokasi:data.lokasi,
                     // retentionSaatProgramMen:data.retentionSaatProgramMen ? data.retentionSaatProgramMen : null,
-                    fase: data.fase,
                     typeActivity: _.flatMap(data.typeActivity, "id"),
                     // journey : data.journey,
                     // testimoniNonUser: data.testimoniNonUser,
                     submission: data.submission
                 }
                 this.deskripsi.list = data.deskripsi
+                this.deskripsi.new = data.deskripsi.filter(e => !e.txtDeskripsiId && !e.imgDeskripsiId)
+                this.lokasi.list = data.lokasi
+                this.testimony.list = data.testimoniNonUser
+                this.fase.list = data.fase
+
                 this.formTag.api = data.tag
                 this.imgMainImage.displayImage = data.imgMainImage;
                 this.imgThumbnail.displayImage = data.imgThumbnail
@@ -633,15 +629,8 @@ export default {
                 retentionSaatProgramMen: 30,
                 officer: this.form.officer,
                 partnerActivityInternal: [],
-                // testimoniNonUser: {
-                //     "nama": "Rere",
-                //     "deskripsi": "Programnya lumayan lah..."
-                // }
+
             }
-
-
-            // forSimpan.tanggalMulai = new Date(this.form.tanggalMulai)
-            // forSimpan.tanggalSelesai = new Date(this.form.tanggalSelesai)
 
             await this.$apiPlatform.put('moderator/programs/'+this.id+'/', forSimpan).then(res => {
                 console.log(res.data)
@@ -660,35 +649,24 @@ export default {
                 }
 
                 //saving child
-                // this.saving.statusDeskripsi = true
+                this.saving.statusMilestone = true
+                this.saving.statusGalleri = true
+                this.saving.statusDeskripsi = true
                 this.saving.statusTag = true
+                this.saving.statusLokasi = true
+                this.saving.statusTestimony = true
 
 
+
+                
                 //supaya tidak error yg endpointnya butut
-                this.checkSaving.deskripsi = true
+                // this.checkSaving.deskripsi = true
 
 
             })
         },
-        async updateChild() {
-            const forSimpan = {
-                lokasi: [        {
-            "provinsi": "Jawa Barat",
-            "kota": "Bandung",
-            "jalan": "Soreang",
-            "pinLocation": "12345",
-            "typeVisibility": 1
-        }]
-            }
-                await this.$apiPlatform.put('moderator/programs/'+this.id+'/', forSimpan).then(res => {
-                    console.log('update child')
-                })
-        },
-
          async uploadImage(image, untuk, name) {
-                console.log('untuk', untuk)
-                console.log('image', image)
-                console.log('name', name)
+
             // if (image instanceof Blob){
                 var data = new FormData();
                 data.append(untuk, image, name);

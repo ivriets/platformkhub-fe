@@ -42,7 +42,10 @@ export default {
                 this.fieldGalleri = 'galleries'
                 this.inputField = 'activity'
             } else if (this.model === 'program') {
-                
+                this.endPointRoot = 'moderator/programs/'+this.modelId+'/';
+                this.endPointGalleri = 'moderator/programsgalleries/'
+                this.fieldGalleri = 'galleries'
+                this.inputField = 'activity'
             }
 
             if (this.galleri.deleted.length > 0) {

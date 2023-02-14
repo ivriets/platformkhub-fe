@@ -263,7 +263,10 @@
     "indonesiaTitleBlank": "Judul Bahasa Indonesia wajib diisi!",
     "englishTitleBlank": "Judul Bahasa Inggris wajib diisi!",
     "indonesiaDescBlank": "Deskripsi Bahasa Indonesia wajib diisi!",
-    "englishDescBlank": "Deskripsi Bahasa Inggris wajib diisi!"
+    "englishDescBlank": "Deskripsi Bahasa Inggris wajib diisi!",
+    "provinsiBlank": "Pronvisi wajib diisi!",
+    "kotaBlank": "Kota wajib diisi!",
+    "jalanBlank": "Jalan wajib diisi!"
 
 
 

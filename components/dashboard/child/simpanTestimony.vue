@@ -28,7 +28,7 @@
         watch: {
             statusSimpan: {
                 handler(val) {
-                    console.log(val)
+                    console.log('statusSimpant',val)
                     if (val.baru === true && val.delete === true && val.edit === true) {
                         this.$emit('input','done')
                     }
@@ -47,7 +47,13 @@
                     this.endPointRoot = 'moderator/events/' + this.modelId +'/'
                     this.endPointTestimony = 'moderator/testimoninonuser/'
                     this.inputField = 'testimoniNonUser'
+                } else if (this.model === 'program') {
+                    this.endPointRoot = 'moderator/programs/' + this.modelId +'/'
+                    this.endPointTestimony = 'moderator/testimoninonuser/'
+                    this.inputField = 'testimoniNonUser'
                 }
+
+
                 this.listNew = this.testimony.list.filter(e => e.tipe ==='new')
                 this.listUpdated = this.testimony.list.filter(e => e.tipe ==='update')
                 this.listDeleted = this.testimony.deleted

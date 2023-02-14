@@ -16,7 +16,7 @@
 
             <ElementsTable
                 :tableDetail="tableDetail"
-                v-model="newVal"
+                v-model="newVal.list"
                 :headClass="'hidden'"
             >
                 <template v-slot:ck="{ index }">
@@ -71,7 +71,8 @@ export default {
                 provinsi: '',
                 kota: '',
                 jalan: '',
-                pinLocation: ''
+                pinLocation: '',
+                typeVisibility: 1
             },
             newVal: [],
             tableDetail: [
@@ -126,38 +127,14 @@ export default {
         this.initialize()
     },
     watch: {
-        // selectedLokasi: {
-        //     deep: true,
-        //     handler(val) {
-        //         if (this.formMode === 'post') {
-        //             if (val && val.provinsi !== '') {
-        //                 // this.closeModal()
-        //                 this.newVal.push(val)
-        //                 this.$nextTick(() => {
-        //                     this.updatevalue()
-        //                 })
-        //             }
-        //         } else {
-        //             console.log('val',val)
-        //             console.log('index', this.selectedIndex)
-        //             this.newVal[this.selectedIndex] = val;
-        //                 // this.closeModal()
-        //                 this.$nextTick(() => {
-        //                     this.updatevalue()
-        //                 })
 
-        //         }
-
-
-        //     }
-        // },
         ckTable(val) {
             if (this.newVal.length > 0) {
-                this.newVal = this.newVal.map(e => {
+                this.newVal.list = this.newVal.list.map(e => {
                     e.aktif = false;
                     return e;
                 })
-                this.newVal[val].aktif = true
+                this.newVal.list[val].aktif = true
                     this.$nextTick(() => {
                         this.updatevalue()
                     })
@@ -176,7 +153,8 @@ export default {
                 provinsi: '',
                 kota: '',
                 jalan: '',
-                pinLocation: ''
+                pinLocation: '',
+                typeVisibility: 1
             }
         },
         btnAddLokasi() {
@@ -194,13 +172,15 @@ export default {
             this.selectedIndex = index
 
             this.modal.status = true
-            this.modal.title = 'Edit lokasi'
+            this.modal.title = this.$t('Edit') + ' ' + this.$t('Location')
             this.modal.key +=1 
             this.formMode = 'put'
             this.selectedLokasi = item
         },
         deleteItem(item, index) {
-            this.newVal.splice(index, 1)
+            if (item.pkLokasiActivityId && item.pkLokasiActivityId !=='') this.newVal.deleted.push(item.pkLokasiActivityId)
+            this.newVal.list.splice(index, 1)
+
             this.updatevalue()
         },
         updatevalue() {
@@ -208,21 +188,21 @@ export default {
         },
         simpan() {
             if (this.selectedLokasi.provinsi === '') {
-                this.$toast.show('Provinsi masih kosong')
+                this.$toast.show('provinsiBlank')
             } else if (this.selectedLokasi.kota === '') {
-                this.$toast.show('Kota masih kosong')
+                this.$toast.show('kotaBlank')
             } else if (this.selectedLokasi.jalan === '') {
-                this.$toast.show('Jalan masih kosong')
+                this.$toast.show('jalanBlank')
             } else {
                 if (this.formMode === 'post') {
                     this.closeModal()
-                    this.newVal.push(this.selectedLokasi)
+                    this.newVal.list.push(this.selectedLokasi)
                     this.$nextTick(() => {
                         this.updatevalue()
                     })
                 } else if (this.formMode === 'put') {
                     this.closeModal()
-                    this.newVal[this.selectedIndex] = this.selectedLokasi
+                    this.newVal.list[this.selectedIndex] = this.selectedLokasi
                     this.$nextTick(()=> this.updatevalue())
                 }
             }

@@ -6,13 +6,12 @@
             <button class="btn-tambah text-sm" @click="addMilestone">{{ $t('Add Milestone') }}</button>
         </div>
             <div class="">
-
             <ElementsTable
                 :tableDetail="tableDetail"
-                v-model="newVal"
+                v-model="newVal.list"
                 :headClass="'hidden'"
                 :customClass="'table-vertical-top'"
-                :key="'keytable'+keyTable"
+                :key="'tablefase'+keyTable"
                 :drag="true"
                 :dragChange="'nomorUrut'"
             >
@@ -108,6 +107,7 @@ export default {
                 deskripsi: ['',''],
                 isDone: false,
                 nomorUrut: 0,
+                resources:null
             },
 
             opsiStatusMilestone: [
@@ -126,7 +126,8 @@ export default {
     computed: {
         newVal: {
             get() {
-                const vA = _.orderBy(this.value, 'nomorUrut')
+                const vA = this.value
+                vA.list = _.orderBy(this.value.list, 'nomorUrut')
                 // return vA
                 return vA
             },
@@ -141,7 +142,7 @@ export default {
            return [
                 {
                     header: '',
-                    itemValue: this.$t('deskripsi'),
+                    itemValue:'deskripsi',
                     type: 'string',
                 },
                 {
@@ -157,7 +158,7 @@ export default {
         addMilestone() {
             this.form.deskripsi = ['','']
             this.statusMilestone = 1
-            this.form.nomorUrut = this.newVal.length + 1;
+            this.form.nomorUrut = this.newVal.list.length + 1;
             this.formMode = 'post'
 
             this.modal.status = true
@@ -166,16 +167,17 @@ export default {
         simpan() {
             this.form.isDone = this.statusMilestone === 0 ? true : false
             if (this.formMode === 'post') {
-                this.newVal.push(this.form)
+                this.newVal.list.push(this.form)
             } else {
-                this.newVal[this.selectedIndex] = this.form
+                this.newVal.list[this.selectedIndex] = this.form
             }
             this.modal.status = false;
             this.modal.key +=1
             this.keyTable+=1
         },
         deleteItem(item,index) {
-            this.newVal.splice(index,1)
+            if (item.faseId && item.faseId !== '') this.newVal.deleted.push(item.faseId)
+            this.newVal.list.splice(index,1)
             this.keyTable +=1
         },
         editItem(item,index) {

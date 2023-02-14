@@ -263,7 +263,11 @@
     "indonesiaTitleBlank": "Indonesian title is required!",
     "englishTitleBlank": "English title is required!",
     "indonesiaDescBlank": "Indonesian Description is required!",
-    "englishDescBlank": "English Description is required!"
+    "englishDescBlank": "English Description is required!",
+    "provinsiBlank": "Province is required!",
+    "kotaBlank": "City is required!",
+    "jalanBlank": "Street is required!"
+
 
 
 
