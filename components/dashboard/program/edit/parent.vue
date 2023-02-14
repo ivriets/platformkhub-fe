@@ -253,7 +253,7 @@
                             :name="prefixName+'tag'"
                             :label="$t('Tag')"
                             :itemValue="'id'"
-                            :itemLabel="'label'"
+                            :itemLabel="'nama'"
                             :multilang="true"
                             :addNew="true"
                             :key="'keytag'+keyMaster"
@@ -525,10 +525,32 @@ export default {
     },
     methods: {
         initialize() {
+
+            this.saving = {
+                tag: '',
+                statusTag: false,
+                deskripsi: '',
+                statusDeskripsi: false
+            },
+
+            this.checkSaving = {
+                root: false,
+                thumbnail: false,
+                mainImage: false,
+                deskripsi: false
+            }
+
+
+
+
             this.btnText = 'Save'
             this.loaderMaster = false;
             this.imageLoader = false;
             // this.setBreadcrumb()
+
+
+
+
 
             this.imgThumbnail = {
                 file: null,
@@ -547,7 +569,7 @@ export default {
 
             await this.$apiPlatform.get('moderator/programs/'+this.id+'/').then(res => {
                 var data = res.data
-                this.originalResult = data
+                this.originalResult = _.cloneDeep(data)
                 // console.log(data)
                 this.form = {
                     judulActivity: data.judulActivity,
@@ -561,10 +583,11 @@ export default {
                     typeIssues: _.flatMap(data.typeIssues, "id"),
                     // tag: _.flatMap(_.map(data.tag, function(o){return o.pilihanTagId}), "id"),
                     lokasi:data.lokasi,
-                    retentionSaatProgramMen:'',
+                    // retentionSaatProgramMen:data.retentionSaatProgramMen ? data.retentionSaatProgramMen : null,
                     fase: data.fase,
+                    typeActivity: _.flatMap(data.typeActivity, "id"),
                     // journey : data.journey,
-                    testimoniNonUser: data.testimoniNonUser,
+                    // testimoniNonUser: data.testimoniNonUser,
                     submission: data.submission
                 }
                 this.deskripsi.list = data.deskripsi
@@ -594,9 +617,31 @@ export default {
         },
         async submitToApi() {
             this.btnText = 'Updating'
-            const forSimpan = _.cloneDeep(this.form)
-            forSimpan.tanggalMulai = new Date(this.form.tanggalMulai)
-            forSimpan.tanggalSelesai = new Date(this.form.tanggalSelesai)
+            // const forSimpan = _.cloneDeep(this.form)
+            console.log(this.form)
+            const forSimpan = {
+                judulActivity: this.form.judulActivity,
+                tanggalMulai: new Date(this.form.tanggalMulai),
+                tanggalSelesai: new Date(this.form.tanggalSelesai),
+                cancelReason: null,
+                archieved: [],
+                typeActivity: this.form.typeActivity, 
+                statusActivity: 1,
+                typeAudience: this.form.typeAudience,
+                typeApproach: this.form.typeApproach,
+                typeIssues: this.form.typeIssues,
+                retentionSaatProgramMen: 30,
+                officer: this.form.officer,
+                partnerActivityInternal: [],
+                // testimoniNonUser: {
+                //     "nama": "Rere",
+                //     "deskripsi": "Programnya lumayan lah..."
+                // }
+            }
+
+
+            // forSimpan.tanggalMulai = new Date(this.form.tanggalMulai)
+            // forSimpan.tanggalSelesai = new Date(this.form.tanggalSelesai)
 
             await this.$apiPlatform.put('moderator/programs/'+this.id+'/', forSimpan).then(res => {
                 console.log(res.data)
@@ -668,12 +713,7 @@ export default {
             this.$router.push('/moderations/program/'+this.id)
         },
 
-        savingTag() {
-            this.saving.statusTag = true
-            setTimeout(() => {
-                this.saving.statusTag = false
-            }, 500)
-        }
+
 
     }
 }
