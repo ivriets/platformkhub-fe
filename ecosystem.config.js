@@ -5,7 +5,8 @@ module.exports = {
             name: 'superadmin',
             // exec_mode: 'cluster',
             script: './node_modules/nuxt/bin/nuxt.js',
-            args: 'start'
+            args: 'start',
+            max_memory_restart: '300M'
         }
     ],
     deploy : {
