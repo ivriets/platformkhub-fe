@@ -214,7 +214,7 @@
 
 
 <script>
-import detailEvent from '~/static/data/detailevent.json';
+// import detailEvent from '~/static/data/detailevent.json';
 
 export default {
     data() {

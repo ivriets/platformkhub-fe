@@ -218,7 +218,7 @@
 
 
 <script>
-import detailOrganisasi from '~/static/data/detailorganisasi.json';
+// import detailOrganisasi from '~/static/data/detailorganisasi.json';
 
 export default {
     data() {

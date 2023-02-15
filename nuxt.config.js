@@ -262,7 +262,9 @@ export default {
         // and also other packages that are not found
       }
     },
-
+    extend (config, ctx) {
+      config.performance.maxAssetSize = 700 * 1024
+    },
     postcss: {
       plugins: {
         tailwindcss: {},

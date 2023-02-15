@@ -118,7 +118,7 @@
 
 
 <script>
-import listIndividu from '~/static/data/listindividu.json';
+// import listIndividu from '~/static/data/listindividu.json';
 
 export default {
     props: ['model'],
