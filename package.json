@@ -52,6 +52,7 @@
     "@nuxtjs/google-fonts": "^2.0.0",
     "@nuxtjs/tailwindcss": "^5.3.3",
     "nuxt-gsap-module": "^1.7.2",
+    "nuxt-webpack-optimisations": "^2.2.8",
     "postcss": "^8.4.17"
   },
   "main": "index.js",

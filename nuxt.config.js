@@ -81,7 +81,8 @@ export default {
     '@nuxtjs/tailwindcss',
     // '@nuxtjs/google-analytics',
     'nuxt-gsap-module',
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
+    'nuxt-webpack-optimisations',
   ],
   gsap: {
     extraPlugins: {
