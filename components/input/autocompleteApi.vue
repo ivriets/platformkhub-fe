@@ -155,7 +155,6 @@ export default {
         async getApi(val) {
 
             const endPoint = this.endPoint + '?limit=10&offset=0&' + this.searchQuery + '=' + this.newVal
-            console.log('endpoint',endPoint)
             this.$apiPlatform.get(endPoint).then(res => {
                 this.listing = this.resultKey === undefined  ? res.data :  eval(this.resultKey)
                 // console.log('resData',res.data)

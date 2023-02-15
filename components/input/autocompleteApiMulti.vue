@@ -124,7 +124,6 @@ export default {
             const gabung = potong.join('/') + '/'
             const endPoint = this.itemEndPoint ? this.itemEndPoint : gabung
             this.$apiPlatform.get(endPoint + e +'/').then(res => {
-                console.log('didieu', res.data)
                 this.selectedValue.push(res.data)
             })
         },

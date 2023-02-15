@@ -6,7 +6,7 @@
         </div>
             <ElementsTable
                 :tableDetail="tableDetail"
-                v-model="newVal"
+                v-model="newVal.list"
                 :headClass="'hidden'"
                 :customClass="'table-vertical-top'"
                 :key="'keytable'+keyTable"
@@ -111,7 +111,8 @@ export default {
                 judulJourney: ['',''],
                 deskripsi: ['',''],
                 nomorUrut: 0,
-                imgThumbnailJourney: ''
+                imgThumbnailJourney: null,
+                tipe: ''
             },
             tableDetail: [
                 {
@@ -136,7 +137,12 @@ export default {
     computed: {
         newVal: {
             get() {
-                const vA = _.orderBy(this.value, 'nomorUrut') 
+                const vA = this.value
+                const newList = _.orderBy(vA.list, 'nomorUrut') 
+                vA.list = newList.map((e,index) => {
+                    e.nomorUrut = index
+                    return e
+                })
                 return vA
             },
             set(value) {
@@ -151,7 +157,7 @@ export default {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
         btnText() {
-            return this.formMode === 'post' ? 'Tambah' : 'Edit'
+            return this.formMode === 'post' ? this.$t('Add') : this.$t('Edit')
         }
 
 
@@ -162,6 +168,11 @@ export default {
             this.form.judulJourney = ['','']
             this.form.deskripsi = ['',''],
             this.form.imgThumbnailJourney = ''
+            this.newImage = {
+                file: null,
+                displayImage: ''
+            },
+
             this.modal.status = true
             this.modal.key+=1
         },
@@ -186,23 +197,27 @@ export default {
             })  
         },
         deleteItem(item,index) {
-            this.newVal.splice(index, 1)
+            if (item.pkJourneyId && item.pkJourneyId !=='') this.newVal.deleted.push(item.pkJourneyId)
+            this.newVal.list.splice(index, 1)
         },
         simpan() {
             if (this.form.judulJourney[0] === '') {
-                this.$toast.show('Judul Journey Bahasa masih kosong')
+                this.$toast.show(this.$t('indonesiaTitleBlank'))
             } else if (this.form.judulJourney[1] === '') {
-                this.$toast.show('Judul Journey English masih kosong')
+                this.$toast.show(this.$t('englishTitleBlank'))
             } else {
                 this.form.imgThumbnailJourney = this.newImage && this.newImage.displayImage !== '' ? this.newImage.displayImage : this.form.imgThumbnailJourney
                 if (this.formMode === 'post') {
-                    this.form.file = this.newImage
-                    this.form.deskripsi[0] = this.form.deskripsi[0] === '' ? 'N/A' : ''
-                    this.form.deskripsi[1] = this.form.deskripsi[1] === '' ? 'N/A' : ''
-                    this.newVal.push(this.form)
+                    this.form.file = this.newImage && this.newImage.status === 'belumUpload' ? this.newImage : ''
+                    this.form.deskripsi[0] = this.form.deskripsi[0] === '' ? 'N/A' : this.form.deskripsi[0]
+                    this.form.deskripsi[1] = this.form.deskripsi[1] === '' ? 'N/A' : this.form.deskripsi[1]
+                    this.form.nomorUrut = this.newVal.list.length + 1
+                    this.form.tipe = 'new'
+                    this.newVal.list.push(this.form)
 
                 } else {
-                    this.newVal[this.selectedIndex] = this.form
+                    this.form.file = this.newImage && this.newImage.status === 'belumUpload' ? this.newImage : ''
+                    this.newVal.list[this.selectedIndex] = this.form
                 }
                     this.modal.status = false
                     this.modal.key +=1

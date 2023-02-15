@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="text-xl mb-8 text-warna-utama">Penerimaan Manfaat</div>
+        <div class="text-xl mb-8 text-warna-utama">{{ $t('Penerimaan Manfaat') }}</div>
+        {{ newVal }}
         <DashboardProgramEditArPenerimaManfaat 
             v-model="newVal"
             :prefixName="prefixName"
@@ -8,10 +9,10 @@
         <hr class="border-warna-tujuh my-10">
 
         <div class="text-xl my-8 text-warna-utama">{{ $t('Dampak') }}</div>
-        <DashboardProgramEditArBes 
+        <!-- <DashboardProgramEditArBes 
             v-model="newVal.baselineEndlineSurvey"
             :prefixName="prefixName"
-        />
+        /> -->
         <hr class="border-warna-tujuh my-10">
         <div class="text-xl mt-8 mb-3 text-warna-utama">Skor Pengukuran</div>
         <DashboardProgramEditArSkorPengukuran 

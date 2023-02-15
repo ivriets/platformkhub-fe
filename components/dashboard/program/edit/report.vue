@@ -1,20 +1,20 @@
 <template>
     <div>
         <div class="flex items-center justify-between mb-3">
-            <div class="text-lg">Report</div>
-            <button class="btn-tambah text-sm" @click="addReport">Add Report</button>
+            <div class="text-lg">{{ $t('Report') }}</div>
+            <button class="btn-tambah text-sm" @click="addReport">{{$t('Add')}} {{ $t('Report') }}</button>
         </div>
         <div class="table-area">
             <ElementsTable
                 :tableDetail="tableDetail"
-                v-model="newVal"
+                v-model="newVal.list"
                 :headClass="'hidden'"
                 :customClass="'table-vertical-top'"
                 :key="'keyreporttable'+keyTable"
             >
                 <template v-slot:name="{item,index}">
                     <div class="text-sm text-[#212121]">#{{index + 1}}</div>
-                    <button class="text-[#212121] hover:text-[#212121] hover:underline " @click="viewFile(item.binFile, item)">{{displayNamaFile(item)}}</button>
+                    <button class="text-[#212121] hover:text-[#212121] hover:underline text-left" @click="viewFile(item.binFile, item)">{{displayNamaFile(item)}}</button>
                 </template>
                 <template v-slot:actions="{item, index}">
                     <div class="w-full flex items-center justify-end gap-x-3">
@@ -71,8 +71,9 @@ export default {
             form: {
                 binFile: '',
                 file: '',
-                deskripsiFile: ['',''],
-                isLimitedaccess: 1
+                deskripsiFile: ['N/A','N/A'],
+                isLimitedaccess: 1,
+                tipe: ''
             },
             modal: {
                 status: false,
@@ -114,7 +115,7 @@ export default {
             }
         },
         btnText() {
-            return this.formMode === 'post' ? 'Tambah' : 'Edit'
+            return this.formMode === 'post' ? this.$t('Add') : this.$t('Edit')
         },
         basePath() {
             return process.env.BASE_URL
@@ -122,11 +123,18 @@ export default {
     },
     methods: {
         addReport() {
+            this.formMode = 'post'
             this.modal.status = true;
-            this.form.binFile = ''
             this.modal.type = 'form'
             this.modal.title = 'Report'
-            this.form.file = ''
+            this.fileTemp = ''
+            this.form = {
+                binFile: '',
+                file: '',
+                deskripsiFile: ['N/A','N/A'],
+                isLimitedaccess: 1,
+                tipe: 'new'
+            }
             this.modal.key+=1
         },
         editItem(item,index) {
@@ -140,7 +148,8 @@ export default {
             this.modal.key +=1
         },
         deleteItem(item, index) {
-            this.newVal.splice(index,1)
+            if (item.pkFileId && item.pkFileId !=='') this.newVal.deleted.push(item.pkFileId)
+            this.newVal.list.splice(index,1)
             this.keyTable +=1
         },
         displayNamaFile(item) {
@@ -161,15 +170,20 @@ export default {
             this.modal.key+=1
         },
         simpan() {
-            if (this.fileTemp == '') {
+            if (this.fileTemp === '') {
                 this.$toast.show('Report file belum diisi')
+            } else if (!this.fileTemp.file) {
+                    this.modal.status = false;
+                    this.modal.key +=1
             } else {
                 this.form.file = this.fileTemp
                 this.form.binFile = this.form.file.fileUrl
+                this.form.tipe = this.form.pkFileId ? 'update' :  'new'
+
                 if (this.formMode === 'post') {
-                    this.newVal.push(this.form)
+                    this.newVal.list.push(this.form)
                 } else {
-                    this.newVal[this.selectedIndex] = this.form
+                    this.newVal.list[this.selectedIndex] = this.form
                 }
                 this.$nextTick(() => {
                     this.modal.status = false;

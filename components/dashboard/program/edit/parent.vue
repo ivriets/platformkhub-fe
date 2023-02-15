@@ -125,13 +125,14 @@
                         />
                     </div>
                     <hr class="border-warna-tujuh my-10">
-
-
-                    <DashboardProgramEditActivityResult 
-                        v-model="activityResult"
-                        :prefixName="prefixName"
-                        v-if="activityResult"
-                    />
+                        <DashboardProgramEditActivityResult 
+                            v-model="activityResult"
+                            :prefixName="prefixName"
+                            v-if="activityResult"
+                        />
+                        <!-- <pre>
+                            {{ activityResult }}
+                        </pre> -->
                     <hr class="border-warna-tujuh my-10">
 
 
@@ -205,11 +206,12 @@
                             v-model="form.partner"
                             :name="prefixName+'partner'"
                             :label="$t('Partner')"
-                            :endPoint="'verificator/listOrganisasi/?limit=10&offset=0'"
+                            :endPoint="'verificator/listOrganisasiPartner/?limit=10&offset=0'"
                             :searchQuery="'title'"
                             :itemValue="'organisasiId'"
                             :itemLabel="'namaOrganisasi'"
                             :key="'formorganisasi'+keyMaster"
+                            :keyRespon="'res.data.results'"
                         />
 
 <!-- {{ form.partner }} -->
@@ -314,7 +316,20 @@
                 :fase="fase"
                 v-if="saving.statusMilestone"
             />
-
+            <DashboardChildSimpanProgramReport
+                v-model="saving.report"
+                :model="'program'"
+                :modelId="id"
+                :report="daftarReport"
+                v-if="saving.statusReport"
+            />
+            <DashboardChildSimpanProgramJourney
+                v-model="saving.journey"
+                :model="'program'"
+                :modelId="id"
+                :journey="daftarJourney"
+                v-if="saving.statusJourney"
+            />
         </div>
 
         <!-- <pre>{{ form }}</pre> -->
@@ -352,7 +367,7 @@ export default {
 
             prefixName: 'program',
             maxTitle: 80,
-            activityResult: undefined,
+            activityResult: null,
             deskripsi: {
                 list: [],
                 deleted: [],
@@ -373,8 +388,14 @@ export default {
                 retentionSaatProgramMen:null,
                 submission: 1
             },
-            daftarReport: [],
-            daftarJourney: [],
+            daftarReport: {
+                list: [],
+                deleted: []
+            },
+            daftarJourney: {
+                list: [],
+                deleted: []
+            },
             daftarGalleri: {
                 list: [],
                 deleted: []
@@ -411,7 +432,11 @@ export default {
                 testimony: '',
                 statusTestimony: false,
                 milestone: '',
-                statusMilestone: false
+                statusMilestone: false,
+                report: '',
+                statusReport: false,
+                journey: '',
+                statusJourney: false
             },
 
             checkSaving: {
@@ -421,7 +446,9 @@ export default {
                 deskripsi: false,
                 lokasi: false,
                 galleri: false,
-                testimony: false
+                testimony: false,
+                report: false,
+                journey: false
             }
 
         }
@@ -486,6 +513,12 @@ export default {
         'saving.testimony'(val) {
             if (val==='done') this.checkSaving.testimony = true
         },
+        'saving.report'(val) {
+            if (val==='done') this.checkSaving.report = true
+        },
+        'saving.journey'(val) {
+            if (val==='done') this.checkSaving.journey = true
+        },
         checkSaving: {
             handler(val) {
                 console.log('cheksaving',val)
@@ -497,6 +530,8 @@ export default {
                     && val.lokasi === true
                     && val.galleri === true
                     && val.testimony === true
+                    && val.report === true
+                    && val.journey === true
                     ) 
                 {
                      this.$toast.show(this.$t('Program')+ ' ' + this.$t('updateSukses'))
@@ -527,7 +562,11 @@ export default {
                 testimony: '',
                 statusTestimony: false,
                 milestone: '',
-                statusMilestone: false
+                statusMilestone: false,
+                report: '',
+                statusReport: false,
+                journey: '',
+                statusJourney: false 
             },
 
             this.checkSaving = {
@@ -537,7 +576,9 @@ export default {
                 deskripsi: false,
                 lokasi:false,
                 galleri: false,
-                testimony: false
+                testimony: false,
+                report: false,
+                journey:  false
             }
 
             this.btnText = 'Save'
@@ -581,19 +622,38 @@ export default {
                     // testimoniNonUser: data.testimoniNonUser,
                     submission: data.submission
                 }
-                this.deskripsi.list = data.deskripsi
-                this.deskripsi.new = data.deskripsi.filter(e => !e.txtDeskripsiId && !e.imgDeskripsiId)
-                this.lokasi.list = data.lokasi
-                this.testimony.list = data.testimoniNonUser
-                this.fase.list = data.fase
+                this.deskripsi = {
+                    list: data.deskripsi,
+                    new: data.deskripsi.filter(e => !e.txtDeskripsiId && !e.imgDeskripsiId),
+                    deleted: [],
+                    updated: []
+                }
+                this.lokasi = {
+                    list: data.lokasi,
+                    deleted: []
+                }
+                this.testimony = {
+                    list:  data.testimoniNonUser,
+                    deleted: []
+                }
+                this.fase = {
+                    list: data.fase,
+                    deleted: []
+                }
+                this.daftarReport = {
+                    list: data.files,
+                    deleted: []
+                }
+                this.daftarJourney = {
+                    list: data.journey,
+                    deleted: []
+                }
 
                 this.formTag.api = data.tag
                 this.imgMainImage.displayImage = data.imgMainImage;
                 this.imgThumbnail.displayImage = data.imgThumbnail
                  this.daftarGalleri.list = data.galleries
-                this.daftarReport = data.files ? data.files : [];
-                this.daftarJourney = data.journey ? data.journey : [];
-                this.activityResult = data.activityResult[0]
+                this.activityResult = data.activityResult
                 this.totalBookmark = data.totalBookmark
                 this.$nextTick(() => {
                     this.imageLoader = true;
@@ -650,7 +710,9 @@ export default {
 
                 //saving child
                 this.saving.statusMilestone = true
+                this.saving.statusReport = true
                 this.saving.statusGalleri = true
+                this.saving.statusJourney = true
                 this.saving.statusDeskripsi = true
                 this.saving.statusTag = true
                 this.saving.statusLokasi = true
