@@ -1,7 +1,6 @@
 <template>
     <div>
         <div class="text-xl mb-8 text-warna-utama">{{ $t('Penerimaan Manfaat') }}</div>
-        {{ newVal }}
         <DashboardProgramEditArPenerimaManfaat 
             v-model="newVal"
             :prefixName="prefixName"
