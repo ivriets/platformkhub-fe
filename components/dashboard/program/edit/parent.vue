@@ -130,9 +130,9 @@
                             :prefixName="prefixName"
                             v-if="activityResult"
                         />
-                        <!-- <pre>
+                        <pre>
                             {{ activityResult }}
-                        </pre> -->
+                        </pre>
                     <hr class="border-warna-tujuh my-10">
 
 
@@ -332,7 +332,7 @@
             />
         </div>
 
-        <!-- <pre>{{ form }}</pre> -->
+        <!-- <pre>{{ deskripsi }}</pre> -->
     </div>
 </template>
 
@@ -622,12 +622,11 @@ export default {
                     // testimoniNonUser: data.testimoniNonUser,
                     submission: data.submission
                 }
-                this.deskripsi = {
-                    list: data.deskripsi,
-                    new: data.deskripsi.filter(e => !e.txtDeskripsiId && !e.imgDeskripsiId),
-                    deleted: [],
-                    updated: []
-                }
+
+                this.deskripsi.list = data.deskripsi.map(e => {
+                    e.tipe = !e.txtDeskripsiId && !e.imgDeskripsiId ? 'new': ''
+                    return e;
+                })
                 this.lokasi = {
                     list: data.lokasi,
                     deleted: []
@@ -652,7 +651,11 @@ export default {
                 this.formTag.api = data.tag
                 this.imgMainImage.displayImage = data.imgMainImage;
                 this.imgThumbnail.displayImage = data.imgThumbnail
-                 this.daftarGalleri.list = data.galleries
+                 this.deskripsi.list = data.deskripsi.map(e => {
+                    e.tipe = !e.txtDeskripsiId && !e.imgDeskripsiId ? 'new': ''
+                    return e;
+                })
+
                 this.activityResult = data.activityResult
                 this.totalBookmark = data.totalBookmark
                 this.$nextTick(() => {

@@ -103,7 +103,11 @@ export default {
             
 
             //init sorter
-            this.newVal.list = _.orderBy(this.value.list, 'sorter')
+            const newList = _.orderBy(this.value.list, 'sorter')
+            this.newVal.list = newList.map((e,index) => {
+                e.sorter = index
+                return e;
+            })
             this.newVal.new = _.orderBy(this.value.new, 'sorter')
 
             this.$nextTick(() => {
@@ -139,7 +143,7 @@ export default {
                 imgDeskripsi: '',
                 caption: ['khub','khub'],
                 paragraf: ['',''],
-                sorter: 0,
+                sorter: this.newVal.list.length + 1,
                 tipe: 'new'
             }
 

@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         initialize() {
-            this.$router.push('/')
+            this.$router.push('/dashboard')
         }
     }
 }

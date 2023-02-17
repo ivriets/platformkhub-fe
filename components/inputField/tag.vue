@@ -108,35 +108,22 @@ export default {
             this.initValue()
         },
 
-        // async getOpsiTag() {
-        //     await this.$apiPlatform.get('daftarList/tag/').then(res => {
-        //         this.opsi = _.flatMap(res.data.results, function(o){
-        //             return {"id":o.id, 'label':o.nama}
-        //         });
-        //         this.listing = this.opsi
-        //         this.$nextTick(() => {
-        //             this.initValue()
-        //         })
-        //     }).catch(err => {
-        //         console.log(err)
-        //     })
-        // },
-
         initValue() {
             if (this.value) {
                 this.value.api.forEach((e,index) => {
-                    this.getItemApi(e.pilihanTagId.id)
+                    this.getItemApi(e.pilihanTagId.id, e.pkTagId)
                 });
             }
         },
 
-        async getItemApi(id) {
+        async getItemApi(id, pkTagId) {
             await this.$apiPlatform.get('daftarList/tag/?id='+id ).then(res => {
                 // console.log(res.data)
                 const hasil = res.data.results.map(e => {
                     return  {
                         id: e.id,
-                        nama: this.multilang && this.multilang === true ? e[this.parseLabel][this.bahasa] : e[this.parseLabel]
+                        nama: this.multilang && this.multilang === true ? e[this.parseLabel][this.bahasa] : e[this.parseLabel],
+                        pkTagId: pkTagId
                     }
                 })
                 if (hasil && hasil.length > 0) this.selectedValue.push(hasil[0])
@@ -154,18 +141,6 @@ export default {
                 console.log(res.data)
                 this.listing = res.data.results
             })
-
-
-            // var listingFilter = []
-            // if (val === '' || val === undefined) {
-            //     listingFilter = this.listing
-            // } else {
-            //     listingFilter = this.opsi.filter(e => { 
-            //         return e[this.itemLabel].toString().toLowerCase().includes(val.toLowerCase())
-            //     })
-            // }
-            // this.statusDropdown = true
-            // this.listing = listingFilter
         },
 
         closeDropdown() {

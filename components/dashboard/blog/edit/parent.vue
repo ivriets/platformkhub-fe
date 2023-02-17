@@ -418,7 +418,10 @@ export default {
                 this.formTag.api = data.blogsTag
 
                 this.imgThumbnail.displayImage = data.imgThumbnail
-                this.deskripsi.list = data.deskripsi
+                this.deskripsi.list = data.deskripsi.map(e => {
+                    e.tipe = !e.txtDeskripsiId && !e.imgDeskripsiId ? 'new': ''
+                    return e;
+                })
                 this.daftarGalleri.list = data.blogsGalleries
 
                 this.$nextTick(() => {

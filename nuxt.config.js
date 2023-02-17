@@ -67,6 +67,7 @@ export default {
       mode: "client", 
     },
     {src: '~/plugins/gmap', mode: 'client'},
+    { src: '~/plugins/vueslickcarousel' },
 
     // {  src: "~/plugins/gaReport.js"}
   ],

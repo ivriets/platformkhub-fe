@@ -60,7 +60,7 @@ export default {
                 {
                     icon: '/icons/icon-dashboard.png',
                     label: 'Dasbor',
-                    path: '/',
+                    path: '/dashboard',
                     children: []
                 },
                 {

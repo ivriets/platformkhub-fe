@@ -1,23 +1,25 @@
 <template>
   <div>
-    <div class="container mx-auto">
-        <ElementsPagesMenuDashboard />
-        <div class="hidden">
-            <div class="text-tujuh"></div>
-            <div class="text-empat button-kapsul"></div>
-            <div class="text-sembilan button-kapsul"></div>
-            <div class="text-delapan"></div>
+    <div v-if="payload==='final'" class="fds">
+        <div v-if="statusAuth" class="container mx-auto">
+            <!-- <ElementsPagesMenuDashboard /> -->
+        </div>
+        <div v-else>
+            <ElementsPagesFrontPage />
         </div>
     </div>
+
   </div>
 </template>
 
 <script>
 export default {
-    middleware: ['general'],
+    // middleware: ['general'],
+    layout: 'blank',
     data() {
         return {
-
+            payload: 'start',
+            statusAuth: false
         }
     },
     computed: {
@@ -53,8 +55,26 @@ export default {
     },
     methods: {
         initialize() {
+            this.statusAuth = false
+            this.payload = 'start'
             this.$store.commit('setPageTitle', this.title)
+            this.getAccounts()
         },
+        async getAccounts() {
+            await this.$apiBase.get('accounts/').then(res => {
+                console.log(res.data)
+                // this.statusAuth = true
+                this.payload = 'final'
+                this.$router.push('/dashboard')
+            }).catch(err => {
+                this.statusAuth = false
+                this.$nextTick(() => {
+                    this.payload = 'final'
+                })
+
+            })
+
+        }
 
         // handleResize() {
         //     this.window.width = window.innerWidth;

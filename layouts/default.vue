@@ -16,7 +16,6 @@
 
 <script>
 export default {
-    // middleware: ['general'],
     data() {
         return {
             loader: false,

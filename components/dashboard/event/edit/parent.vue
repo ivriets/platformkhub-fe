@@ -613,9 +613,11 @@ export default {
                 }
 
 
+                this.deskripsi.list = data.deskripsi.map(e => {
+                    e.tipe = !e.txtDeskripsiId && !e.imgDeskripsiId ? 'new': ''
+                    return e;
+                })
 
-
-                this.deskripsi.list = data.deskripsi
                 
                 this.imgThumbnail= {
                     displayImage: data.imgThumbnail,

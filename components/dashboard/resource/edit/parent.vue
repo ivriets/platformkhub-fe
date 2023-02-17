@@ -391,9 +391,14 @@ export default {
                     typeVisibility: 1
                 }
                 this.formTag.api = data.resourcesTag
-                this.deskripsi.list = _.orderBy(data.deskripsi, 'sorter')
-                this.imgThumbnail.displayImage = data.imgThumbnail
 
+                this.imgThumbnail.displayImage = data.imgThumbnail
+                 this.daftarGalleri.list = data.galleries
+
+                this.deskripsi.list = data.deskripsi.map(e => {
+                    e.tipe = !e.txtDeskripsiId && !e.imgDeskripsiId ? 'new': ''
+                    return e;
+                })
 
 
                 this.$nextTick(() => {
