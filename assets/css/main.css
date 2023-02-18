@@ -43,7 +43,9 @@
     .button-download-gede {
         @apply  bg-empat hover:bg-empat/80 rounded-3xl text-white shadow-md border border-gray-100 py-6 px-8 flex items-center disabled:bg-gray-100 disabled:shadow-none hover:shadow-inner transition-all duration-300 ease-in-out disabled:text-gray-500 disabled:cursor-wait justify-around;
     }
-    
+    .btn-prev-next {
+        @apply bg-white border border-utama hover:border-gray-300 transition-all duration-200 rounded-full w-11 h-11;
+    }
 
 }
 

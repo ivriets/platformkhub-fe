@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
         <section>
            <div 
             class=" w-full  pt-40 pb-28 md:pb-40" 
@@ -10,7 +10,7 @@
                 </div>    
             </div>
         </section>
-        <div class="fixed top-0 left-0 right-0 w-full bg-white">
+        <div class="fixed top-0 left-0 right-0 w-full bg-white z-20 shadow">
             <div class="container mx-auto py-4 flex items-center justify-between">
                 <NuxtLink to="/">
                     <nuxt-img src="/images/logo.png" height="45" />
@@ -20,8 +20,16 @@
                 </div>
             </div>
         </div>
-        <section>
-            <!-- <ElementsPagesHomeSectionProgram /> -->
+        <section class="py-10">
+            <ElementsPagesHomeSectionProgram />
+        </section>
+        <hr class="container mx-auto border-gray-300 mt-10 md:mb-20 mb-10">
+        <section >
+            <ElementsPagesHomeSectionBlog />
+        </section>
+        <hr class="container mx-auto border-gray-300 mt-10 md:mb-20 mb-10">
+        <section >
+            <ElementsPagesHomeSectionPublikasi />
         </section>
     </div>
 </template>

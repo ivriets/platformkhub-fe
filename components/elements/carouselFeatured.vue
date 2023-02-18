@@ -4,7 +4,7 @@
                 <div class="carousel-default w-full md:w-10/12 mb-6">
                     <VueSlickCarousel ref="carousel" v-bind="slickOptions">
                         <div v-for="(item, index) in dataCard" :key="'card'+index" class="px-2">
-                            <div @click="path && idValue ? goto(item) : doNothing()" class="bg-white rounded-xl px-3 pt-3 pb-5 cursor-pointer">
+                            <div class="bg-white rounded-xl px-3 pt-3 pb-5">
                                 <div 
                                     class="w-full h-[150px] bg-no-repeat bg-cover bg-center rounded mb-3 lg:mb-4 p-2 shadow"
                                     :style="'background-image: url('+basePath+item.imgThumbnail+');'"

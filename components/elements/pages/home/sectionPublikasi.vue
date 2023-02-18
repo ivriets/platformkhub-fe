@@ -10,9 +10,9 @@
                             <div class="text-center mr-2 md:mr-4 text-xs md:text-base whitespace-nowrap">{{$t('Lihat Semua Publikasi')}}</div>
                             <img src="/icons/icon-arrow-right-hitam.png" alt="arrow-right" width="16" height="16">
                         </NuxtLink> -->
-                        <NuxtLink to="/resource" class="btn-readmore-home text-xs md:text-base py-2 md:py-3 px-2 md:px-4">
+                        <!-- <NuxtLink to="/resource" class="btn-readmore-home text-xs md:text-base py-2 md:py-3 px-2 md:px-4">
                             {{$t('Lihat Semua Publikasi')}}
-                        </NuxtLink>
+                        </NuxtLink> -->
 
                     </div>
                 </div>

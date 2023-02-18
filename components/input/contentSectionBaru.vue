@@ -15,7 +15,7 @@
             <div v-else-if="item.typeDeskripsi === 2">
                 <div class="mb-7">
                     <div class="mb-7">
-                        <div class="font-medium mb-1">{{$t('Deskripsi')}} (English)</div>
+                        <div class="font-medium mb-1">{{$t('Deskripsi')}} (Indonesia)</div>
                         <InputTextEditor 
                             v-model="newVal.list[index].paragraf[0]"
                             :name="'paragrafid'+index"
@@ -25,7 +25,8 @@
                         />
                     </div>
                     <div>
-                        <div class="font-medium mb-1">{{$t('Deskripsi')}} (Indonesia)</div>
+                        
+                        <div class="font-medium mb-1">{{$t('Deskripsi')}} (English)</div>
                         <InputTextEditor 
                             v-model="newVal.list[index].paragraf[1]"
                             :name="'paragrafen'+index"

@@ -5,12 +5,12 @@
                 <h2 class="font-bold text-2xl md:text-4xlplus">{{$t('Blog')}}</h2>
                 <div class="lg:flex lg:items-center gap-x-[20px] lg:gap-x-[60px]">
                     <div class="w-6/12 text-xs md:text-base">{{ $t('Banner Blog') }}</div>
-                    <div class="max-w-fit mt-5 lg:mt-0">
+                    <!-- <div class="max-w-fit mt-5 lg:mt-0">
                         <a href="/blog" class="py-2 md:py-3 px-2 md:px-4     rounded-lg border border-warna-utama bg-umum flex items-center">
                             <div class="text-center mr-2 md:mr-4 text-xs md:text-base">{{$t('Lihat Semua Blog')}}</div>
                             <img src="/icons/icon-arrow-right-hitam.png" alt="arrow-right" width="16" height="16">
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div v-if="loaderBlog">

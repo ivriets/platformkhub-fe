@@ -997,3 +997,12 @@ input[type="radio"]:checked {
         color: #212121 !important;
       }
 }
+
+.carousel-default {
+    .slick-slider {
+        .slick-list {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+    }
+}
