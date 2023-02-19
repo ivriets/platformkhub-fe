@@ -31,19 +31,25 @@ $warna-latar-tujuh: #4B4B9D;
 
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 0.3s;
+  transition: opacity 0.15s;
 }
 .page-enter,
 .page-leave-to {
-  opacity: 0;
+  opacity: 0.02;
 }
 
 /// BACKGROUND COLOR ///
 body {
     background-color: $warna-body;
     margin: 0 !important;
-    font-family: 'Lato', sans-serif !important;
+    font-family: 'Lato', sans-serif ;
         // font-family: ;
+}
+.font-open {
+    font-family: 'Open Sans', sans-serif;
+}
+.font-open-important {
+    font-family: 'Open Sans', sans-serif !important;
 }
 
 .bg-warna-utama {

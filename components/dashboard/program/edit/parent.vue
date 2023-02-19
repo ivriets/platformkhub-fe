@@ -128,10 +128,10 @@
                         <DashboardProgramEditActivityResult 
                             v-model="activityResult"
                             :prefixName="prefixName"
-                            v-if="activityResult"
+                            :key="'activityResult'+keyMaster"
                         />
                         <pre>
-                            {{ activityResult }}
+                          <!-- front:  {{ activityResult }} -->
                         </pre>
                     <hr class="border-warna-tujuh my-10">
 
@@ -330,6 +330,14 @@
                 :journey="daftarJourney"
                 v-if="saving.statusJourney"
             />
+            <DashboardChildSimpanProgramActivityResult
+                v-model="saving.activityResult"
+                :model="'program'"
+                :modelId="id"
+                :activityResult="activityResult"
+                v-if="saving.statusActivityResult"
+            />
+
         </div>
 
         <!-- <pre>{{ deskripsi }}</pre> -->
@@ -436,7 +444,9 @@ export default {
                 report: '',
                 statusReport: false,
                 journey: '',
-                statusJourney: false
+                statusJourney: false,
+                activityResult: '',
+                statusActivityResult: false
             },
 
             checkSaving: {
@@ -448,7 +458,8 @@ export default {
                 galleri: false,
                 testimony: false,
                 report: false,
-                journey: false
+                journey: false,
+                activityResult: false
             }
 
         }
@@ -535,7 +546,8 @@ export default {
                     ) 
                 {
                      this.$toast.show(this.$t('Program')+ ' ' + this.$t('updateSukses'))
-                     this.initialize()
+                    //  this.initialize()
+                    this.btnBack()
                 }
 
             },
@@ -566,7 +578,10 @@ export default {
                 report: '',
                 statusReport: false,
                 journey: '',
-                statusJourney: false 
+                statusJourney: false,
+                activityResult: '',
+                statusActivityResult: false
+                
             },
 
             this.checkSaving = {
@@ -578,7 +593,8 @@ export default {
                 galleri: false,
                 testimony: false,
                 report: false,
-                journey:  false
+                journey:  false,
+                activityResult: false
             }
 
             this.btnText = 'Save'
@@ -656,7 +672,8 @@ export default {
                     return e;
                 })
 
-                this.activityResult = data.activityResult
+                // this.activityResult = data.activityResult && data.activityResult.length > 0 ? data.activityResult[0] : null 
+                this.activityResult = data.activityResult 
                 this.totalBookmark = data.totalBookmark
                 this.$nextTick(() => {
                     this.imageLoader = true;
@@ -712,6 +729,8 @@ export default {
                 }
 
                 //saving child
+                this.saving.statusActivityResult = true
+
                 this.saving.statusMilestone = true
                 this.saving.statusReport = true
                 this.saving.statusGalleri = true

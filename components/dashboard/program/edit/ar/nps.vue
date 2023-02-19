@@ -11,8 +11,7 @@
                             v-model="nps[item.itemValue]"
                             :name="prefixName+item.itemValue"
                             :label="''"
-                            :step="0.1"
-                            :decimal="1"
+                            :step="1"
                             :key="'kepusan'+index+item.itemValue+keyNumber"
                         />
 

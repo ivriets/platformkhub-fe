@@ -246,6 +246,9 @@
     "Testimoni": "Testimoni",
     "Add Testimony": "Tambah Testimoni",
     "Report": "Laporan",
+    "Programs": "Programs",
+    "Penerima Manfaat": "Penerima Manfaat",
+    "Penerimaan Manfaat": "Penerimaan Manfaat",
 
 
     "Banner Organisasi": "Platform untuk Organisasi Masyarakat Sipil untuk terhubung, berbagi data dan informasi, serta berkolaborasi berbagai inisiatif terkait PCVE di Indonesia.",
@@ -256,6 +259,11 @@
     "Virtual Exhibition": "Virtual Exhibition",
     "virtualExhibitionText": "Pameran Virtual yang menyuguhkan pengetahuan tentang pencegahan  dan penanggulangan ekstremisme kekerasan (PCVE) melalui visual imersif dan Interaktif. Telah diluncurkan pada 14 Juni 2021.",
     "Kunjungi": "Kunjungi",
+    "Kepuasan": "Kepuasan",
+    "Skor Pengukuran": "Skor Pengukuran",
+    "CAC = Total Biaya program/total penerima manfaat": "CAC = Total Biaya program/total penerima manfaat",
+    "Laki-Laki": "Laki-Laki",
+    "Perempuan":"Perempuan",
 
 
     "Narasi Footer": "Wahana, Cerita, dan Data Upaya Bina Damai di Indonesia",
@@ -265,6 +273,8 @@
     "Kontak Kami": "Kontak Kami",
     "Kebijakan": "Kebijakan Privasi & Penggunaan",
     "Saya ingin tahu tentang": "Saya ingin tahu tentang...",
+    "Berdasarkan Gender Difabel": "Berdasarkan Gender Difabel",
+    "Berdasarkan Gender": "Berdasarkan Gender",
 
 
     "typeAudienceBlank": "Tipe Audien wajib diisi",

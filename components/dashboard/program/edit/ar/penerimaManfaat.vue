@@ -2,9 +2,9 @@
     <div>
         <div class="grid grid-cols-12 gap-5">
             <div class="col-span-12 md:col-span-6 gap-y-5">
-                <div class="mb-10 font-semibold">Berdasarkan Gender</div>
+                <div class="mb-10 font-semibold">{{ $t('Berdasarkan Gender') }}</div>
                 <div class="grid grid-cols-12 items-center mb-5">
-                    <div class="col-span-6 ">Laki-Laki</div>
+                    <div class="col-span-6 ">{{ $t('Laki-Laki') }}</div>
                     <div class="col-span-6">
                         <InputNumber
                             v-model="newVal.beneficiariesMen"
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-12 items-center">
-                    <div class="col-span-6 ">Perempuan</div>
+                    <div class="col-span-6 ">{{ $t('Perempuan') }}</div>
                     <div class="col-span-6">
                         <InputNumber
                             v-model="newVal.beneficiariesWomen"
@@ -27,10 +27,10 @@
                 </div>
             </div>
             <div class="col-span-12 md:col-span-6 gap-y-5">
-                <div class="mb-10 font-semibold">Berdasarkan Gender Difabel</div>
+                <div class="mb-10 font-semibold">{{ $t('Berdasarkan Gender Difabel') }}</div>
 
                 <div class="grid grid-cols-12 items-center mb-5">
-                    <div class="col-span-6 ">Laki-Laki</div>
+                    <div class="col-span-6 ">{{ $t('Laki-Laki') }}</div>
                     <div class="col-span-6">
                         <InputNumber
                             v-model="newVal.beneficiariesMenDifable"
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-12  items-center">
-                    <div class="col-span-6 ">Perempuan</div>
+                    <div class="col-span-6 ">{{ $t('Perempuan') }}</div>
                     <div class="col-span-6">
                         <InputNumber
                             v-model="newVal.beneficiariesWomenDifable"

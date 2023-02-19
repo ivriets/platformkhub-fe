@@ -247,6 +247,14 @@
     "Testimoni": "Testimony",
     "Add Testimony": "Add Testimony",
     "Report": "Report",
+    "Programs": "Programs",
+    "Penerima Manfaat": "Beneficier",
+    "Penerimaan Manfaat": "Beneficiaries",
+
+    "Laki-Laki": "Male",
+    "Perempuan":"Female",
+    "Berdasarkan Gender Difabel": "by Gender Disabled",
+    "Berdasarkan Gender": "by Gender",
     
 
     "Banner Organisasi": "K-HUB is a platform for civil society organizations to connect, share data and information, and collaborate on various initiatives related to PCVE in Indonesia.",
@@ -257,6 +265,12 @@
     "Virtual Exhibition": "Virtual Exhibition",
     "virtualExhibitionText": "Virtual Exhibition that presents knowledge about preventing and countering violent extremism (PCVE) through immersive and interactive visuals. Has been launched on June 14, 2021.",
     "Kunjungi": "Visit",
+
+
+    "Kepuasan": "Satisfaction",
+    "Skor Pengukuran": "Retention",
+    "CAC = Total Biaya program/total penerima manfaat": "CAC = Total Biaya program/total penerima manfaat",
+
     
     "Narasi Footer": "Modes, Stories, and Data for Peace Building Efforts in Indonesia",
     "Tentang K-Hub": "About K-Hub",

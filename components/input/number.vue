@@ -17,6 +17,7 @@
                 v-model="newVal"
                 autocomplete="chrome-off"
                 :disabled="disabled?disabled:false"
+                @input="handleInput"
                 @keyup.enter="keyEnter"
                 @keyup.esc="keyEsc"
             >
@@ -41,7 +42,12 @@ export default {
         newVal(val) {
             //convert 2 decimal
             // const vA = isNaN(val) || val === undefined ? 0 : parseFloat(val).toFixed(2)
-            this.$emit('input',parseFloat(this.round(parseFloat(val))))
+            if (this.decimal) {
+                this.$emit('input',parseFloat(this.round(parseFloat(val))))
+
+            } else {
+                this.$emit('input', parseInt(val))
+            }
         }
     },
     mounted() {
@@ -50,7 +56,14 @@ export default {
 
     methods: {
         handleInput(event) {
-            this.$emit('input', event.target.value)
+            console.log(event)
+            if (!this.decimals) {
+                if (['.',','].includes(event.data)) {
+                    this.newVal = parseInt(this.newVal)
+                }
+            }
+
+            // this.$emit('input', event.target.value)
         },
 
         keyEnter(event) {

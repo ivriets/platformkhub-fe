@@ -130,6 +130,7 @@ export default {
   googleFonts: {
     families: {
       Lato: true,
+      'Open+Sans':true
     }
   },
 

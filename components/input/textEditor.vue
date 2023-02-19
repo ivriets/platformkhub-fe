@@ -17,16 +17,16 @@
 <script>
 import Editor from '@tinymce/tinymce-vue';
 import "tinymce/skins/ui/oxide/skin.min.css"
-import "tinymce/skins/ui/oxide/content.min.css"
-import "tinymce/skins/content/default/content.css"
+// import "tinymce/skins/ui/oxide/content.min.css"
 import "tinymce/skins/ui/oxide/skin.min.css"
-import "tinymce/skins/ui/oxide/content.min.css"
-import "tinymce/skins/content/default/content.css"
-import "tinymce/skins/ui/oxide/skin.min.css"
-import "tinymce/skins/ui/oxide/content.min.css"
-import "tinymce/skins/content/default/content.css"
-import "tinymce/skins/ui/oxide/skin.min.css"
-import "tinymce/skins/ui/oxide/content.min.css"
+// import "~/static/skins/khub/content.min.css"
+// import "tinymce/skins/ui/oxide/content.min.css"
+
+// import "tinymce/skins/content/default/content.css"
+// import "tinymce/skins/ui/oxide/skin.min.css"
+// import "tinymce/skins/ui/oxide/content.min.css"
+// import "tinymce/skins/ui/oxide/skin.min.css"
+// import "tinymce/skins/ui/oxide/content.min.css"
 
 
 export default {

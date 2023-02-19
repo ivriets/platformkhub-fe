@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="flex items-center justify-between mb-3">
-            <div class="text-lg font-semibold">Baseline-Endline Survey</div>
+            <div class="text-[16px] font-semibold ">Baseline-Endline Survey</div>
             <button class="btn-tambah text-sm" @click="addVariable">{{ $t('Add') }} {{ $t('Variable') }}</button>
         </div>
-        <div>
-            <div v-for="(item, index) in besItems" :key="'dataperubahan'+index" class="border rounded-md p-3">
+        <div class="border rounded-md p-3 mb-5">
+            <div v-for="(item, index) in besItems" :key="'dataperubahan'+index" class="">
                 <div  class="flex items-center justify-between mb-3">
                     <div class="font-semibold">Variable Pengukuran</div>
                     <button class="btn-tambah text-sm" @click="addData(item)">{{ $t('Add') }} Data</button>

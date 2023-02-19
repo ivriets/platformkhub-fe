@@ -507,7 +507,6 @@ export default {
             this.loaderDetail = false
 
             await this.$apiPlatform.get('moderator/programs/'+this.id+'/').then(res => {
-                console.log(res.data)
                 const data = res.data
 
                 this.dataDetail = data
