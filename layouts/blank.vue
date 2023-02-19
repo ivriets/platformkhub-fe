@@ -1,10 +1,13 @@
 <template>
     <div class="flex flex-col min-h-screen">
-        <div class="flex-grow">
+
+        <FrontHeaderLuar />
+
+        <div class="flex-grow pb-20">
             <Nuxt />
         </div>
-        <footer class="relative bg-tujuh w-full z-0 min-h-[100px] mt-10">
-
+        <footer class="">
+            <FrontFooter />
         </footer>
     </div>
 </template>

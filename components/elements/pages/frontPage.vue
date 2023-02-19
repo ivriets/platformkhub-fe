@@ -10,16 +10,7 @@
                 </div>    
             </div>
         </section>
-        <div class="fixed top-0 left-0 right-0 w-full bg-white z-20 shadow">
-            <div class="container mx-auto py-4 flex items-center justify-between">
-                <NuxtLink to="/">
-                    <nuxt-img src="/images/logo.png" height="45" />
-                </NuxtLink>
-                <div>
-                    <Nuxt-link to="/login" class="button-standar">LOGIN</Nuxt-link>
-                </div>
-            </div>
-        </div>
+
         <section class="py-10">
             <ElementsPagesHomeSectionProgram />
         </section>

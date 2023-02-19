@@ -1,14 +1,13 @@
 <template>
   <div>
-    <div v-if="payload==='final'" class="fds">
+    <!-- <div v-if="payload==='final'" class="fds">
         <div v-if="statusAuth" class="container mx-auto">
-            <!-- <ElementsPagesMenuDashboard /> -->
         </div>
         <div v-else>
             <ElementsPagesFrontPage />
         </div>
-    </div>
-
+    </div> -->
+    <ElementsPagesFrontPage />
   </div>
 </template>
 
@@ -30,7 +29,7 @@ export default {
             return this.$i18n.locale === 'id' ? 0 : 1
         },
         title() {
-            return this.$t('Dasbor')
+            return 'KHUB'
         }
     },
     // created() {
@@ -65,7 +64,7 @@ export default {
                 console.log(res.data)
                 // this.statusAuth = true
                 this.payload = 'final'
-                this.$router.push('/dashboard')
+                // this.$router.push('/dashboard')
             }).catch(err => {
                 this.statusAuth = false
                 this.$nextTick(() => {
