@@ -130,9 +130,7 @@
                             :prefixName="prefixName"
                             :key="'activityResult'+keyMaster"
                         />
-                        <pre>
-                          front:  {{ activityResult }}
-                        </pre>
+
                     <hr class="border-warna-tujuh my-10">
 
 
