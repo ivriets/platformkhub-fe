@@ -46,7 +46,6 @@
                             :key="'keydesc'+keyMaster"
                         />
                     </div>
-                    <!-- <pre>{{ deskripsi }}</pre> -->
 
                 </div>
                 <div class="col-span-12 lg:col-span-3">
@@ -249,6 +248,10 @@ export default {
                 thumbnail: false,
                 resourcesFiles: false,
                 deskripsi: false
+            },
+            daftarGalleri: {
+                list: [],
+                deleted: []
             }
 
 
@@ -309,7 +312,8 @@ export default {
                 if ( val.root === true && val.thumbnail === true && val.deskripsi === true && val.resourcesFiles === true) 
                 {
                      this.$toast.show(this.$t('Resources')+ ' ' + this.$t('updated successfully'))
-                     this.initialize()
+                    //  this.initialize()
+                    this.btnBack()
                 }
 
             },
@@ -393,7 +397,7 @@ export default {
                 this.formTag.api = data.resourcesTag
 
                 this.imgThumbnail.displayImage = data.imgThumbnail
-                 this.daftarGalleri.list = data.galleries
+                //  this.daftarGalleri.list = data.galleries
 
                 this.deskripsi.list = data.deskripsi.map(e => {
                     e.tipe = !e.txtDeskripsiId && !e.imgDeskripsiId ? 'new': ''

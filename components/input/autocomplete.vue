@@ -15,7 +15,6 @@
                 autocomplete="off"
                 :disabled="disabled?disabled:false"
                 @focus="focusText"
-                @input="handleInput"
                 @keyup.enter="submitOpsi"
                 @keyup.esc="clearOpsi"
                 @keydown.tab="keyTab"
@@ -47,7 +46,7 @@
                     >
                         <div>
                             <slot :name="parseId" v-bind:item="item" v-bind:index="index">
-                            <span v-if="multilang && multilang === true">{{item[parseId][bahasa]}}</span>
+                            <span v-if="multilang && multilang === true">{{item[parseLabel][bahasa]}}</span>
                             <span v-else>{{item[parseLabel]}}</span>
                             </slot>
                         </div>
@@ -96,14 +95,14 @@ export default {
 
     },
 
-    // watch: {
-    //     newVal() {
-    //         if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
-    //         this.debounceTimeout = setTimeout(() => {
-    //             this.getApi();
-    //         },300)
-    //     }
-    // },
+    watch: {
+        newVal() {
+            if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
+            this.debounceTimeout = setTimeout(() => {
+                this.getApi();
+            },300)
+        }
+    },
     created() {
         this.$nuxt.$on('closeModalMaster', () => {
                 this.modalMaster = false
@@ -161,7 +160,7 @@ export default {
             if (listingFilter.length > 0) {
                 this.statusDropdown = listingFilter.length > 0 ? true : false
             } else {
-                // this.
+                this.$emit('input',val)
             }
         },
         closeDropdown() {
@@ -171,9 +170,9 @@ export default {
             if (this.listing.length > 0) {
                 this.pilihItem(this.listing[0])
             } else {
-                this.$toast.warning('Pilihan tidak ada dalam list')
-                this.newVal = ''
-                this.$emit('input', '')
+                // this.$toast.warning('Pilihan tidak ada dalam list')
+                // this.newVal = ''
+                this.$emit('input', this.newVal)
             }
         },
         handleInput(event) {
@@ -183,17 +182,24 @@ export default {
             this.newVal = ''
         },
         pilihItem(item) {
-            if (item[this.itemValue] ==='new-item') {
-                this.modalMaster = true
-                this.keyMaster +=1
-            } else {
-                this.newVal = this.multilang && this.multilang===true ? item[this.parseLabel][this.bahasa] : item[this.parseLabel]
+            // if (item[this.itemValue] ==='new-item') {
+            //     this.modalMaster = true
+            //     this.keyMaster +=1
+            // } else {
+            //     this.newVal = this.multilang && this.multilang===true ? item[this.parseLabel][this.bahasa] : item[this.parseLabel]
+            //     if (this.output && this.output === 'obj') {
+            //         this.$emit('input', item)
+            //     } else {
+            //         this.$emit('input', item[this.parseId])
+            //     }
+            // }
+            this.newVal = this.multilang && this.multilang===true ? item[this.parseLabel][this.bahasa] : item[this.parseLabel]
                 if (this.output && this.output === 'obj') {
                     this.$emit('input', item)
                 } else {
-                    this.$emit('input', this.newVal)
+                    this.$emit('input', item[this.parseId])
                 }
-            }
+
             this.$nextTick(() => {
                 this.closeDropdown()
             })

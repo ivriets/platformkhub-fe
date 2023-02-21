@@ -348,7 +348,8 @@ export default {
                     ) 
                 {
                      this.$toast.show(this.$t('Blog')+ ' ' + this.$t('updated successfully'))
-                        this.initialize()
+                        // this.initialize()
+                        this.btnBack()
 
                     //  setTimeout(() => {
                     //     this.initialize()

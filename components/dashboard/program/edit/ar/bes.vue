@@ -4,34 +4,35 @@
             <div class="text-[16px] font-semibold ">Baseline-Endline Survey</div>
             <button class="btn-tambah text-sm" @click="addVariable">{{ $t('Add') }} {{ $t('Variable') }}</button>
         </div>
-        <div class="border rounded-md p-3 mb-5">
-            <div v-for="(item, index) in besItems" :key="'dataperubahan'+index" class="">
+        <div class="">
+            <div v-for="(item, index) in besItems" :key="'dataperubahan'+index" class="border rounded-md p-5 mb-5">
                 <div  class="flex items-center justify-between mb-3">
                     <div class="font-semibold">Variable Pengukuran</div>
                     <button class="btn-tambah text-sm" @click="addData(item)">{{ $t('Add') }} Data</button>
                 </div>
                 <div class="w-full">
                     <div class="w-full md:w-5/12">
-                        <InputAutocomplete 
+                        <!-- <InputAutocomplete 
                             v-model="searchKategori"
                             :label="''"
                             :opsi="opsiPerubahan"
-                            :itemValue="'kategori'"
+                            :itemValue="'id'"
                             :itemLabel="'kategori'"
                             :multilang="true"
                             :name="'kategorires'"
                             :placeholder="'Contoh: Empati'"
-                            :output="'obj'"
 
                         >
-                            <template v-slot:kategori="{item}">
-                                {{item.kategori[bahasa]}} - {{item.nama[bahasa]}}
-                            </template>
-                        </InputAutocomplete>
+                        </InputAutocomplete> -->
+                        <InputText 
+                            v-model="kategori"
+                            :label="''"
+                            :placeholder="'Contoh: Empati'"
+                        />
                     </div>
                 </div>
 
-                <div class="grid grid-cols-12 mt-5 gap-5">
+                <div class="grid grid-cols-12 mt-5 gap-5 px-2">
                     <div class="col-span-6">
                         <InputText 
                             v-model="nama"
@@ -41,11 +42,22 @@
                         />
                     </div>
                     <div class="col-span-6">
-                        <InputNumber2 
-                            v-model="pretest"
-                            :suffix="'%'"
-                            :label="''"
-                        />
+                        <div class="mb-5">
+                            <InputNumber2 
+                                v-model="pretest"
+                                :suffix="'%'"
+                                :label="''"
+                                :max="100"
+                            />
+                        </div>
+                        <div class="mb-5">
+                            <InputNumber2 
+                                v-model="posttest"
+                                :suffix="'%'"
+                                :label="''"
+                                :max="100"
+                            />
+                        </div>
                     </div>
                 </div>
                 <!-- {{item}} -->
@@ -53,6 +65,9 @@
                     v-model="item"
                 /> -->
             </div>
+            {{ searchKategori }}
+            <pre>{{ besItems }}</pre>
+            <pre> {{ newVal }} </pre>
             <!-- <pre> {{ newVal }} </pre>
            <pre> {{value}} </pre> -->
         </div>
@@ -67,6 +82,7 @@ export default {
             nama: '',
             pretest: 0,
             posttest: 0,
+            kategori: '',
             besItems: [],
             opsiPerubahan: [],
             formInput: {
@@ -117,7 +133,11 @@ export default {
         async getOpsi() {
 
             await this.$apiPlatform.get('daftarList/variable_perubahan/').then(res => {
-                this.opsiPerubahan = res.data.results
+                const unik = _.uniqBy(res.data.results, 'kategori['+this.bahasa+']') 
+                this.opsiPerubahan = _.orderBy(unik, 'kategori['+this.bahasa+']')
+                this.$nextTick(() => {
+                    this.initPut()
+                })
             }).catch(err => {
                 console.log(err)
             })
@@ -127,7 +147,28 @@ export default {
         },
         addData(item) {
 
+        },
+        initPut() {
+
         }
     }
 }
 </script>
+
+{
+    "pkBaselineEndlineSurveyId": "bbDuFDUW",
+    "variablePerubahan": {
+      "id": 111,
+      "kategori": [
+        "Empati",
+        "Empati"
+      ],
+
+    },
+    "nama": [
+        "Orang",
+        "Orang"
+    ].
+    "pretest": 1000,
+    "posttest": 2000
+  },

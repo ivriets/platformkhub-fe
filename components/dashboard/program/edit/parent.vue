@@ -131,7 +131,7 @@
                             :key="'activityResult'+keyMaster"
                         />
                         <pre>
-                          <!-- front:  {{ activityResult }} -->
+                          front:  {{ activityResult }}
                         </pre>
                     <hr class="border-warna-tujuh my-10">
 
