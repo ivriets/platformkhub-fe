@@ -7,12 +7,12 @@
             :key="'arpm'+keyMaster"
         />
 
-        <div class="text-[20px] my-8 text-utama">{{ $t('Dampak') }}</div>
-        <DashboardProgramEditArBes 
+        <!-- <div class="text-[20px] my-8 text-utama">{{ $t('Dampak') }}</div> -->
+        <!-- <DashboardProgramEditArBes 
             v-model="newVal.baselineEndlineSurvey"
             :prefixName="prefixName"
             :key="'bes'+keyMaster"
-        />
+        /> -->
 
         <DashboardProgramEditArSkorPengukuran 
             v-model="newVal"
