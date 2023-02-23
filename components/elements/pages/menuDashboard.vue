@@ -132,6 +132,9 @@ export default {
                 this.logEvent = res.data.logEvent
                 this.logResources = res.data.logResource
                 this.logBlog = res.data.logBlog
+            }).catch(err => {
+                this.$toast.show('Only Super Admin can access this page')
+                this.$router.push('/clear')
             })
             
             await this.$apiPlatform.get('verificator/logOrganisasi/').then(res => {

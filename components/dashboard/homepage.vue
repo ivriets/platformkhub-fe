@@ -204,7 +204,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.invitationTitle"
+                                    v-model="form.invitationTitle[1]"
                                     :name="prefixName+'invjudulen'"
                                     :label="'Title'"
                                     :rows="1"
@@ -218,7 +218,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.invitationSubtitleBottom"
+                                    v-model="form.invitationSubtitleBottom[1]"
                                     :name="prefixName+'invsubjudulen'"
                                     :label="'Sub Title'"
                                     :rows="1"
@@ -232,7 +232,7 @@
                         <div class="col-span-12 md:col-span-6">
                             <div class="">
                                 <InputText 
-                                    v-model="form.invitationButtonText"
+                                    v-model="form.invitationButtonText[1]"
                                     :name="prefixName+'invbuttontexten'"
                                     :label="'Button Text (Eng)'"
                                 />
@@ -281,6 +281,7 @@
                 <button @click="putData(form)" class="button-standar">{{ $t('Save') }}</button>
             </div>
         </div>
+        <!-- <pre>{{ form }}</pre> -->
     </div>
 </template>
 

@@ -65,6 +65,7 @@ export default {
         async userLogin() {
             try {
                 await this.$auth.loginWith('local', { data: this.form }).then(res => {
+                    console.log(res.data)
                     const tokenCookiz = res.data.token
                     this.$cookies.set('jtoken', tokenCookiz)
                     window.location.href="/signed"
