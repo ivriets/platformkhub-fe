@@ -47,7 +47,7 @@
         <div v-if="selectedValue.length>0" class="chip-container mt-2 flex items-center flex-wrap gap-2">
             <div v-for="(item, index) in selectedValue" :key="'listSel'+name+index" @click="removeChip(index)">
             <ElementsChip 
-                :item="item[parseLabel][bahasa]"
+                :item="multilang && multilang === true ? item[parseLabel][bahasa] : item[parseLabel]"
                 v-if="item[parseLabel]"
             />
             </div>

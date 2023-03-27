@@ -1,7 +1,7 @@
 <template>
     <div class="w-full">
         <div v-if="label" class="font-medium mb-1">
-            {{label}}
+            {{label}} 
         </div>
         <div class="flex items-center relative">
             <input 
@@ -10,7 +10,7 @@
                 :name="name" 
                 :id="name" 
                 :ref="name"
-                class="cursor-pointer appearance-none w-full focus:outline-none border border-tujuh rounded-lg px-2 py-1.5 text-sm placeholder-[#9E9E9E] focus:border-tujuh/50 disabled:bg-gray-200"
+                class="appearance-none w-full focus:outline-none border border-tujuh rounded-lg px-2 py-1.5 text-sm placeholder-[#9E9E9E] focus:border-tujuh/50 disabled:bg-gray-200"
                 :placeholder="placeholder"
                 :maxlength="max ? max : 1000"
                 autocomplete="chrome-off"
@@ -41,7 +41,7 @@ export default {
             if (this.debounceTimeout) clearTimeout(this.debounceTimeout)
             this.debounceTimeout = setTimeout(() => {
                 this.$emit('input',val)
-            },300)
+            },400)
         }
     },
     mounted() {
@@ -50,7 +50,7 @@ export default {
 
     methods: {
         handleInput(event) {
-            this.$emit('input', event.target.value)
+            // this.$emit('input', event.target.value)
         },
 
         keyEnter(event) {

@@ -442,7 +442,11 @@ export default {
             gallery: [],
             milestone: [],
             report: [],
-            journey: []
+            journey: [],
+            btnText: {
+                approve: 'Approve',
+                needRevision: ''
+            }
         }
     },
     computed: {

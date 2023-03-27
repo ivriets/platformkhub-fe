@@ -23,7 +23,7 @@
         </div>
 
         <div v-if="loaderPage" class="flex items-center justify-between border border-[#A1A2B7] rounded-lg bg-white mb-5">
-            <div v-if="loaderLog" class="px-[14px] py-[9px] flex gap-x-3 pr-3 border-r border-[#A1A2B7]">
+            <div  class="px-[14px] py-[9px] flex gap-x-3 pr-3 border-r border-[#A1A2B7]">
                 <button 
                     v-for="(item, index) in kapsul" :key="'kapsul' + index"
                     @click="selectKapsul(item)"
@@ -257,7 +257,7 @@ export default {
     methods: {
         initialize() {
             this.dataTable = []
-            this.getLogBlog()
+            // this.getLogBlog()
             if (this.halamanStore) {
                 this.statusStore = true
                 this.selectedKapsul = this.halamanStore.kapsul
@@ -309,7 +309,8 @@ export default {
                     }
                     return data
                 })
-                this.totalPage = Math.ceil(res.data.length / this.limit)
+                this.totalPage = Math.ceil(res.data.length / this.limit);
+                this.getLog(res.data.logSubmission);
                 this.keyPage += 1
 
                 this.$nextTick(() => {
@@ -332,6 +333,42 @@ export default {
             // console.log(forStore)
             this.$store.commit(this.storeCommit, forStore)
         },
+
+        getLog(data) {
+            this.kapsul= [
+                    {
+                        id: 'all',
+                        label: 'All',
+                        length: data.all,
+                        endpoint: ''
+                    },
+                    {
+                        id: 'draft',
+                        label: 'Draft',
+                        length: data.draft,
+                        endpoint: '2'
+                    },
+                    {
+                        id: 'underreview',
+                        label: 'Under Review',
+                        length: data.underReview,
+                        endpoint: '1'
+                    },
+                    {
+                        id: 'approved',
+                        label: 'Approved',
+                        length: data.approved,
+                        endpoint: '4'
+                    },
+                    {
+                        id: 'needrevision',
+                        label: 'Need Revision',
+                        length: data.needRevision,
+                        endpoint: '3'
+                    }
+                ]
+        },
+
         async getLogBlog() {
             this.loaderLog = false;
             

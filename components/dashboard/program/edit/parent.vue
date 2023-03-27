@@ -174,7 +174,7 @@
                     
 
                     <div  class="mb-6">
-                        <InputAutocompleteApiMulti 
+                        <!-- <InputAutocompleteApiMulti 
                             v-model="form.officer"
                             :name="prefixName+'officer'"
                             :label="$t('Officer')"
@@ -183,24 +183,32 @@
                             :itemValue="'userId'"
                             :itemLabel="'namaIndividu'"
                             :key="'formoficer'+keyMaster"
+                        /> -->
+                        <InputAutocompleteMulti 
+                            v-model="form.officer"
+                            :name="prefixName+'officer'"
+                            :label="$t('Officer')"
+                            :opsi="opsiOfficer"
+                            :itemValue="'userId'"
+                            :itemLabel="'namaIndividu'"
+                            :key="'formoficer'+keyMaster"
+                            :multilang="false"
                         />
-
-
                     </div>
                     <div  class="mb-6">
-                        <!-- <InputAutocompleteApiMulti 
+                        <InputAutocompleteApiMulti 
                             v-model="form.partner"
                             :name="prefixName+'partner'"
                             :label="$t('Partner')"
                             :endPoint="'verificator/katalogOrganisasi/?limit=10&offset=0'"
-                            :searchQuery="'title'"
+                            :opsi="opsiPartner"
                             :itemValue="'organisasiId'"
                             :itemLabel="'namaOrganisasi'"
                             :keyRespon="'res.data.results'"
+                            :multilang="false"
                             :key="'formorganisasi'+keyMaster"
-                        /> -->
-
-                        <InputAutocompleteApiMulti 
+                        />
+                        <!-- <InputAutocompleteApiMulti 
                             v-model="form.partner"
                             :name="prefixName+'partner'"
                             :label="$t('Partner')"
@@ -210,7 +218,7 @@
                             :itemLabel="'namaOrganisasi'"
                             :key="'formorganisasi'+keyMaster"
                             :keyRespon="'res.data.results'"
-                        />
+                        /> -->
 
 <!-- {{ form.partner }} -->
                     </div>
@@ -353,6 +361,8 @@ export default {
             disBefore: false,
             disDate: '',
             loaderMaster: false,
+            opsiPartner: [],
+            opsiOfficer: [],
 
             // MODAL TESTIMONI
 
@@ -510,7 +520,7 @@ export default {
         },
 
         'saving.galleri' (val) {
-            console.log('savegal', val)
+            // console.log('savegal', val)
             if (val==='done') this.checkSaving.galleri = true
         },
         'saving.deskripsi'(val) {
@@ -613,6 +623,8 @@ export default {
 
         async masterPoint() {
 
+
+
             await this.$apiPlatform.get('moderator/programs/'+this.id+'/').then(res => {
                 var data = res.data
                 this.originalResult = _.cloneDeep(data)
@@ -673,6 +685,19 @@ export default {
                 // this.activityResult = data.activityResult && data.activityResult.length > 0 ? data.activityResult[0] : null 
                 this.activityResult = data.activityResult 
                 this.totalBookmark = data.totalBookmark
+                this.getOrganisasi(data.myOrganisasi.organisasiId)
+
+
+            })
+
+        },
+
+        async getOrganisasi(id) {
+            await this.$apiPlatform.get('verificator/organisasi/'+id+'/').then(res => {
+                console.log(res.data.result)
+                this.opsiOfficer = res.data.teamMember.map(e => e.individu);
+                this.opsiPartner = res.data.partnerOrganisasiEksternal; 
+
                 this.$nextTick(() => {
                     this.imageLoader = true;
                     this.imageThumbnailLoader = true
@@ -683,7 +708,6 @@ export default {
                     this.imageThumbnailKey +=1
                 })
             })
-
         },
         simpan() {
             //validasi disini
@@ -692,7 +716,7 @@ export default {
         async submitToApi() {
             this.btnText = 'Updating'
             // const forSimpan = _.cloneDeep(this.form)
-            console.log(this.form)
+            // console.log(this.form)
             const forSimpan = {
                 judulActivity: this.form.judulActivity,
                 tanggalMulai: new Date(this.form.tanggalMulai),
@@ -714,17 +738,28 @@ export default {
                 console.log(res.data)
                 // this.updateChild()
                 this.checkSaving.root = true
-                if (this.imgMainImage.file !== null) {
-                    this.uploadImage(this.imgMainImage.file, "imgMainImage", this.imgMainImage.name)
-                } else {
-                    this.checkSaving.mainImage = true
-                }
+                // if (this.imgMainImage.file !== null) {
+                //     this.uploadImage(this.imgMainImage.file, "imgMainImage", this.imgMainImage.name)
+                // } else {
+                //     this.checkSaving.mainImage = true
+                // }
 
-                if (this.imgThumbnail.file !== null) {
-                    this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
-                } else {
-                    this.checkSaving.thumbnail = true
+                // if (this.imgThumbnail.file !== null) {
+                //     this.uploadImage(this.imgThumbnail.file, "imgThumbnail", this.imgThumbnail.name)
+                // } else {
+                //     this.checkSaving.thumbnail = true
+                // }
+                const forMainImage = {
+                    untuk: 'imgMainImage',
+                    image: this.imgMainImage.file ? this.imgMainImage.file : null,
+                    name: this.imgMainImage.name ? this.imgMainImage.name : null
                 }
+                const forThumbnail = {
+                    untuk: 'imgThumbnail',
+                    image: this.imgThumbnail.file ? this.imgThumbnail.file : null,
+                    name: this.imgMainImage.name ? this.imgMainImage.name : null
+                }
+                this.uploadImageNeo(forMainImage, forThumbnail)
 
                 //saving child
                 this.saving.statusActivityResult = true
@@ -747,6 +782,26 @@ export default {
 
             })
         },
+        async uploadImageNeo(forMainImage, forThumbnail) {
+        // if (image instanceof Blob){
+            var data = new FormData();
+            
+            if (forMainImage.image !== null) data.append(forMainImage.untuk, forMainImage.image, forMainImage.name);
+            if (forThumbnail.image !== null) data.append(forThumbnail.untuk, forThumbnail.image, forThumbnail.name);
+            
+            if (forMainImage.image !== null && forThumbnail.image !==null) {
+                await this.$apiPlatform.put('moderator/programs/'+this.id+'/', data).then(res => {
+                this.checkSaving.thumbnail = true
+                this.checkSaving.mainImage = true
+
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+
+        // }
+        },
+
          async uploadImage(image, untuk, name) {
 
             // if (image instanceof Blob){

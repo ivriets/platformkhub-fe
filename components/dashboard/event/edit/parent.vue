@@ -262,6 +262,15 @@
                         />
                     </div>
                     <hr class="border-warna-tujuh my-[28px]">
+                    <hr class="my-7 border-lima">
+
+                    <div class="mb-7">
+                        <DashboardEventEditFiles 
+                            v-model="files"
+                            :key="'eventfiles'+keyMaster"
+                        />
+                    </div>
+                    <hr class="my-7 border-lima">
 
                     <div class="mb-1">{{ $t('Event Status') }}</div>
                     <div>
@@ -325,10 +334,15 @@
                 :testimony="testimony"
                 v-if="saving.statusTestimony"
             />
-
+            <DashboardChildSimpanFiles 
+                v-model="saving.files"
+                :modelId="id"
+                :files="files"
+                v-if="saving.statusFiles"
+            />
 
         </div>
-
+<!-- <pre>{{ form }}</pre> -->
         <!-- <button @click="savingLokasiOffline">simpan lokasi</button>
         <button @click="savingGallery">simpan galleri</button> -->
 
@@ -374,6 +388,11 @@ export default {
                 list: [],
                 deleted: [],
 
+            },
+            files: {
+                file: null,
+                binFile: '',
+                deskripsiFile: ['khub', 'khub']
             },
 
             opsiTipeRegistransi: [
@@ -447,7 +466,9 @@ export default {
                 lokasiOnline: '',
                 statusLokasiOnline: false,
                 testimony: '',
-                statusTestimony:false
+                statusTestimony:false,
+                files: '',
+                statusFiles: false
             },
 
             checkSaving: {
@@ -455,7 +476,8 @@ export default {
                 thumbnail: false,
                 galleri: false,
                 deskripsi: false,
-                testimony: false
+                testimony: false,
+                files: false
             }
 
 
@@ -552,7 +574,9 @@ export default {
                 deskripsi: '',
                 statusDeskripsi: false,
                 testimony: '',
-                statusTestimony: false
+                statusTestimony: false,
+                files: '',
+                statusFiles: false
             },
 
             this.checkSaving= {
@@ -598,6 +622,18 @@ export default {
 
 
                 },
+
+                this.files = data.files && data.files.length > 0 ? {
+                    pkFileId: data.files[0].pkFileId,
+                    binFile: data.files[0].binFile === '/assets/file.pdf' ? '' : data.files[0].binFile,
+                    deskripsiFile: data.files[0].deskripsiFile,
+                    isLimitedaccess: data.files[0].isLimitedaccess
+                } : {
+                    pkFileId: '',
+                    binFile: '',
+                    deskripsiFile: ['',''],
+                    isLimitedaccess: 1
+                }
 
                 this.daftarGalleri.list = data.galleries
                 this.formTag.api = data.tag
@@ -711,7 +747,7 @@ export default {
                     this.deleteAllLokasiOffline()
 
                 }
-
+                this.saving.statusFiles = true
                 this.saving.statusDeskripsi = true
                 this.saving.statusGalleri = true
                 this.saving.statusTestimony = true
