@@ -2,7 +2,7 @@
     <div class="">
         <div class="h-screen flex justify-center items-center" v-if="!showError">
             <div class="bg-utama px-5 text-white rounded text-center">
-                verifing ....
+                verifing .....
             </div>
         </div>
         <div class="h-screen flex justify-center items-center" v-else>
