@@ -72,7 +72,7 @@ export default {
             } else if (this.newVal.typeResources === 5) {
                 return 'audio/*'
             } else {
-                return '.doc, .docx, .xls, .xlsx, .ppt, .pptx, .txt'
+                return '.doc, .docx'
             }
         }
     },

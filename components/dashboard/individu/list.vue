@@ -88,7 +88,7 @@
                 </template>
                 <template v-slot:statusVerification="{item}" class="font-semibold">
                     <ElementsDisplayStatusVerifikasi 
-                        :status="item.statusVerification"
+                        :status="item.email.split('.').pop() === 'delete' ? 0 : item.statusVerification"
                     />
                 </template>
 

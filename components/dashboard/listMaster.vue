@@ -369,49 +369,49 @@ export default {
                 ]
         },
 
-        async getLogBlog() {
-            this.loaderLog = false;
+        // async getLogBlog() {
+        //     this.loaderLog = false;
             
-            await this.$apiPlatform.get('moderator/').then(res => {
-                const data = res.data[this.targetLog]
-                this.kapsul= [
-                    {
-                        id: 'all',
-                        label: 'All',
-                        length: data.all,
-                        endpoint: ''
-                    },
-                    {
-                        id: 'draft',
-                        label: 'Draft',
-                        length: data.draft,
-                        endpoint: '2'
-                    },
-                    {
-                        id: 'underreview',
-                        label: 'Under Review',
-                        length: data.underReview,
-                        endpoint: '1'
-                    },
-                    {
-                        id: 'approved',
-                        label: 'Approved',
-                        length: data.approved,
-                        endpoint: '4'
-                    },
-                    {
-                        id: 'needrevision',
-                        label: 'Need Revision',
-                        length: data.needRevision,
-                        endpoint: '3'
-                    }
-                ]
+        //     await this.$apiPlatform.get('moderator/').then(res => {
+        //         const data = res.data[this.targetLog]
+        //         this.kapsul= [
+        //             {
+        //                 id: 'all',
+        //                 label: 'All',
+        //                 length: data.all,
+        //                 endpoint: ''
+        //             },
+        //             {
+        //                 id: 'draft',
+        //                 label: 'Draft',
+        //                 length: data.draft,
+        //                 endpoint: '2'
+        //             },
+        //             {
+        //                 id: 'underreview',
+        //                 label: 'Under Review',
+        //                 length: data.underReview,
+        //                 endpoint: '1'
+        //             },
+        //             {
+        //                 id: 'approved',
+        //                 label: 'Approved',
+        //                 length: data.approved,
+        //                 endpoint: '4'
+        //             },
+        //             {
+        //                 id: 'needrevision',
+        //                 label: 'Need Revision',
+        //                 length: data.needRevision,
+        //                 endpoint: '3'
+        //             }
+        //         ]
 
-                this.$nextTick(() => {
-                    this.loaderLog = true
-                })
-            })
-        }
+        //         this.$nextTick(() => {
+        //             this.loaderLog = true
+        //         })
+        //     })
+        // }
     }
 }
 </script>

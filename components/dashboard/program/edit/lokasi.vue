@@ -43,6 +43,7 @@
                     :prefixName="prefixName"
                     :colClass="'md:col-span-12'"
                     :btnText="formMode==='post'? 'Tambah' : 'Edit'"
+                    :map="true"
                 >
                 </FormLokasi>
             </div>
@@ -175,7 +176,7 @@ export default {
             this.modal.title = this.$t('Edit') + ' ' + this.$t('Location')
             this.modal.key +=1 
             this.formMode = 'put'
-            this.selectedLokasi = item
+            this.selectedLokasi = _.cloneDeep(item)
         },
         deleteItem(item, index) {
             if (item.pkLokasiActivityId && item.pkLokasiActivityId !=='') this.newVal.deleted.push(item.pkLokasiActivityId)
@@ -196,13 +197,13 @@ export default {
             } else {
                 if (this.formMode === 'post') {
                     this.closeModal()
-                    this.newVal.list.push(this.selectedLokasi)
+                    this.newVal.list.push(_.cloneDeep(this.selectedLokasi))
                     this.$nextTick(() => {
                         this.updatevalue()
                     })
                 } else if (this.formMode === 'put') {
                     this.closeModal()
-                    this.newVal.list[this.selectedIndex] = this.selectedLokasi
+                    this.newVal.list[this.selectedIndex] = _.cloneDeep(this.selectedLokasi)
                     this.$nextTick(()=> this.updatevalue())
                 }
             }

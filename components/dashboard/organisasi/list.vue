@@ -90,7 +90,7 @@
                 </template>
                 <template v-slot:statusVerification="{item}" class="font-semibold">
                     <ElementsDisplayStatusVerifikasi 
-                        :status="item.statusVerification"
+                    :status="item.email.split('.').pop() === 'delete' ? 0 : item.statusVerification"
                     />
                 </template>
                 <!-- <template v-slot:submission="{ item }">
@@ -218,11 +218,11 @@ export default {
                     itemValue: 'email',
                     itemClass: 'w-3/12'
                 },
-                {
-                    header: 'Email is Verified',
-                    itemValue: 'emailIsVerified',
-                    itemClass: 'w-2/12'
-                },
+                // {
+                //     header: 'Email is Verified',
+                //     itemValue: 'emailIsVerified',
+                //     itemClass: 'w-2/12'
+                // },
                 {
                     header: 'Status',
                     itemValue: 'statusVerification',

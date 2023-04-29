@@ -79,6 +79,10 @@ export default {
             this.totalImageBaru = listImages.length
             console.log('li',listImages)
 
+            //list tanpa upload image
+            const forImageUploadSorter = this.deskripsi.list.filter(e=> (e.imgDeskripsiId && e.typeDeskripsi=== 1 && e.tipe === ''));
+            console.log('forImg', forImageUploadSorter)
+
             await this.$apiPlatform.put(this.endPoint+ this.modelId + '/', {deskripsi:forSimpan}).then(res => {
 
                 if (listImages.length > 0) {
@@ -96,11 +100,26 @@ export default {
                 } else {
                     this.checkSimpan.imageUpdate = true
                 }
-
-
+                forImageUploadSorter.forEach(x => {
+                    console.log('fdagf')
+                    this.updateImageSorter(x)
+                })
 
             })
+
+            //update image selain upload
+            
         },
+        async updateImageSorter(data) {
+            const newData = {
+                imgDeskripsiId: data.imgDeskripsiId,
+                sorter: data.sorter
+            }
+            await this.$apiPlatform.put(this.imgEndPoint+ data.imgDeskripsiId +'/', newData).then(res => {
+                console.log(res.data)
+            })
+        },
+
          async uploadImage(image, id, name, index) {
 
             // if (image instanceof Blob){

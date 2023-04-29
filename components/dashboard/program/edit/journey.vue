@@ -188,7 +188,7 @@ export default {
         editItem(item,index) {
             this.formMode = 'put'
             this.selectedIndex = index;
-            this.form = item
+            this.form = _.cloneDeep(item)
             this.newImage.displayImage =this.form.imgThumbnailJourney
             this.modal.status = true
             this.$nextTick(() => {
@@ -213,11 +213,11 @@ export default {
                     this.form.deskripsi[1] = this.form.deskripsi[1] === '' ? 'N/A' : this.form.deskripsi[1]
                     this.form.nomorUrut = this.newVal.list.length + 1
                     this.form.tipe = 'new'
-                    this.newVal.list.push(this.form)
+                    this.newVal.list.push(_.cloneDeep(this.form))
 
                 } else {
                     this.form.file = this.newImage && this.newImage.status === 'belumUpload' ? this.newImage : ''
-                    this.newVal.list[this.selectedIndex] = this.form
+                    this.newVal.list[this.selectedIndex] = _.cloneDeep(this.form)
                 }
                     this.modal.status = false
                     this.modal.key +=1

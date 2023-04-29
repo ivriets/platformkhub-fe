@@ -73,7 +73,6 @@
 
             </div>
         </ElementsModal>
-        <!-- <pre>{{ newVal }}</pre> -->
     </div>
 </template>
 <script>
@@ -153,10 +152,10 @@ export default {
 
                     return e;
                 })
-                return this.value
+                return baru
             },
             set(value) {
-                return this.$emit('input', value)
+                return value
             }
         },
         basePath() {
@@ -187,13 +186,13 @@ export default {
             } else {
                 // this.form.imgTestimoni = this.newImage
                 this.form.imgTestimoni = this.newImage 
-                if (this.formMode === 'post') {
-                    this.newVal.list.push(_.cloneDeep(this.form));
+                if (this.formMode == 'post') {
+                    this.newVal.list.push(this.form);
                     // this.newVal.new.push(this.form)
 
                 } else {
 
-                    this.newVal.list[this.selectedIndex] = _.cloneDeep(this.form)
+                    this.newVal.list[this.selectedIndex] = this.form
 
                 }
 

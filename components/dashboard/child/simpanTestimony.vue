@@ -86,11 +86,38 @@
                     nama: item.nama,
                     deskripsi: item.deskripsi
                 }
+                console.log('item', item)
                 await this.$apiPlatform.put(this.endPointRoot, { [this.inputField] : forSimpan}).then(res => {
                     // console.log(res.data)
-                    if (this.listNew.length === (index + 1)) this.statusSimpan.baru = true
+                    // if (this.listNew.length === (index + 1)) {
+                    //     this.statusSimpan.baru = true
+                    // } else {
+                    //     this.updateImage(res.data.pkTestimoniNonUserId, item, index)
+                    // }
+                    console.log('res', res.data)
+                    this.updateImage(res.data.pkTestimoniNonUserId, item, index)
                 })
             },
+
+            async updateImage(id, item, index) {
+                console.log('updateImage', id)
+                var newForm = new FormData();
+                newForm.append('nama', item.nama)
+                newForm.append('deskripsi', item.deskripsi)
+
+                if (item.imgTestimoni && item.imgTestimoni.status === 'belumUpload') {
+                    newForm.append('imgTestimoni', item.imgTestimoni.file, item.imgTestimoni.name);
+                }
+                await this.$apiPlatform.put(this.endPointTestimony  + id + '/' , newForm).then(res => {
+                    // this.btnText = 'Save'
+                    // this.counterBaru +=1
+                    if (this.listUpdated.length === (index + 1)) this.statusSimpan.edit = true
+
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+
             async updateTestimoni(item, index) {
                 var newForm = new FormData();
                 newForm.append('nama', item.nama)

@@ -167,9 +167,9 @@ export default {
         simpan() {
             this.form.isDone = this.statusMilestone === 0 ? true : false
             if (this.formMode === 'post') {
-                this.newVal.list.push(this.form)
+                this.newVal.list.push(_.cloneDeep(this.form))
             } else {
-                this.newVal.list[this.selectedIndex] = this.form
+                this.newVal.list[this.selectedIndex] = _.cloneDeep(this.form)
             }
             this.modal.status = false;
             this.modal.key +=1
@@ -182,7 +182,7 @@ export default {
         },
         editItem(item,index) {
             this.selectedIndex = index
-            this.form = item
+            this.form = _.cloneDeep(item)
             this.formMode = 'put'
             this.statusMilestone = this.form.isDone === true ? 0 : 1
 
