@@ -17,7 +17,7 @@ module.exports = {
             user: 'root',
             host: ['172.104.77.135'],
             ref: 'origin/main',
-            repo: 'git@github.com:ivriets/platformkhub-fe.git',
+            repo: 'ggit@github.com:steven1218026/platformkhub-fe.git',
             ssh_options: ['ForwardAgent=yes'],
             path: '/var/www/superadmin.k-hub.org',
             'post-deploy' : 'yarn && yarn build && pm2 startOrRestart ecosystem.config.js --env production'
